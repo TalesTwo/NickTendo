@@ -6,6 +6,30 @@ using UnityEngine;
 public static class Types
 {
     /* ----------------- ACTIVITY TYPES ----------------- */
+
+    public enum RoomType
+    {
+        Spawn,
+        Combat,
+        Puzzle,
+        Treasure,
+        Boss,
+        
+    }
+
+    public enum RoomData
+    {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /* ----------------- OLD TYPES ----------------- */
     
     /// <summary> Enum for various types of activities. </summary>
     public enum ActivityType

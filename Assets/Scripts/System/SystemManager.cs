@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 /// <summary>
@@ -13,8 +14,7 @@ public class SystemManager : Singleton<SystemManager>
     private void Start()
     {
         CreateManagers();
-        DebugUtils.ClearConsole();
-        DebugUtils.LogSuccess("All managers FAILED.");
+        DebugUtils.LogSuccess("All managers built successfully.");
     }
 
 
@@ -25,7 +25,6 @@ public class SystemManager : Singleton<SystemManager>
     {
         // New managers should be added here in this method:
         // gameObject.AddComponent<ManagerClassName>();
-        gameObject.AddComponent<DungeonGeneratorManager>();
         gameObject.AddComponent<PlayerManager>();
     }
 }
