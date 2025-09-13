@@ -26,5 +26,6 @@ public class SystemManager : Singleton<SystemManager>
         // New managers should be added here in this method:
         // gameObject.AddComponent<ManagerClassName>();
         gameObject.AddComponent<PlayerManager>();
+        gameObject.AddComponent<SceneSwapManager>();
     }
 }
