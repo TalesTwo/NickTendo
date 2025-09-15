@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Development/Noah/Noah_Development.unity
     guid: 2c3ffe97d48545c4b8519fd1bbb070ee
+  - enabled: 1
+    path: Assets/Scenes/Main/MainMenu.unity
+    guid: 2b681577d48ebc74185e173e68142b79
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
