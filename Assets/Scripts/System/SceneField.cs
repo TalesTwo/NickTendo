@@ -27,8 +27,24 @@ public class SceneField
     /// </summary>
     public string SceneName
     {
-        get { return _sceneName; }
+        get
+        {
+#if UNITY_EDITOR
+            if (_sceneAsset != null)
+            {
+                // Always resolve from asset in the Editor
+                return (_sceneAsset as SceneAsset)?.name ?? _sceneName;
+            }
+#endif
+            // In build, fallback to serialized name
+            if (string.IsNullOrEmpty(_sceneName))
+            {
+                Debug.LogError("SceneField: scene name is empty! Did you assign it in the Inspector?");
+            }
+            return _sceneName;
+        }
     }
+
     
     /// <summary>
     /// Implicitly converts a <see cref="SceneField"/> to its scene name string.
@@ -37,7 +53,7 @@ public class SceneField
     /// <param name="sceneField">The <see cref="SceneField"/> instance.</param>
     public static implicit operator string(SceneField sceneField)
     {
-        return sceneField._sceneName;
+        return sceneField != null ? sceneField.SceneName : "";
     }
 }
 
@@ -81,7 +97,11 @@ public class SceneFieldPropertyDrawer : PropertyDrawer
             // If a valid SceneAsset is assigned, update the stored scene name
             if (sceneAsset.objectReferenceValue != null)
             {
-                sceneName.stringValue = (sceneAsset.objectReferenceValue as SceneAsset)?.name;
+                sceneName.stringValue = (sceneAsset.objectReferenceValue as SceneAsset)?.name ?? "";
+            }
+            else
+            {
+                sceneName.stringValue = ""; // Clear scene name if no asset is assigned
             }
         }
         
