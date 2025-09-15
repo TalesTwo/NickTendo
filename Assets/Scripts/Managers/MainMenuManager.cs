@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Scene References")]
-    [SerializeField] private SceneField initialGameScene;
-    //[SerializeField] private SceneField TEMP_sceneToLoadAddatively; // TEMP
+    [SerializeField] private SceneField _initialGameScene;
     
     [Header("UI References")]
     [SerializeField] private Image _loadingBarImage;
@@ -24,8 +23,8 @@ public class MainMenuManager : MonoBehaviour
         _loadingBarImage.gameObject.SetActive(true);
         
         // start loading the game the scenes we need
-        _scenesToLoad.Add(SceneManager.LoadSceneAsync("SpawnRoom"));
-        //_scenesToLoad.Add(SceneManager.LoadSceneAsync(TEMP_sceneToLoadAddatively, LoadSceneMode.Additive)); // TEMP
+        _scenesToLoad.Add(SceneManager.LoadSceneAsync(_initialGameScene));
+        
         
         StartCoroutine(ProgressLoadingBar());
         
