@@ -1,3 +1,6 @@
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace System
 {
     /// <summary>
@@ -50,6 +53,11 @@ namespace System
         public delegate void PlayerDamagedHandler(float damageAmount);
         public static event PlayerDamagedHandler PlayerDamaged;
         public static void Broadcast_PlayerDamaged(float damageAmount) { PlayerDamaged?.Invoke(damageAmount); }
+        
+        // Start Dialogue Broadcaster
+        public delegate void StartDialogueHandler(string[] message, Image sprite, string name);
+        public static event StartDialogueHandler StartDialogue;
+        public static void Broadcast_StartDialogue(string[] message, Image sprite, string name) { StartDialogue?.Invoke(message, sprite, name); }
     
         /* Define the delegate for the ActivityCompleted event */
         //public delegate void ActivityCompletedHandler(BaseActivity activity);
