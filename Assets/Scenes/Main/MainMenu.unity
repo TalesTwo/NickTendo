@@ -664,7 +664,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Across the Network
+  m_Text: 'Searching...
+
+'
 --- !u!222 &1727331179
 CanvasRenderer:
   m_ObjectHideFlags: 0
