@@ -92,6 +92,15 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
             return;
         }
         
+        // the door actually has a child called Spawn_Location, that is where we want to spawn the player
+        // if that is not present, we will default to the center of the door collider
+        Transform spawnLocation = _doorCollider.transform.Find("Spawn_Location");
+        if (spawnLocation != null)
+        {
+            _playerSpawnPosition = spawnLocation.position;
+            return;
+        }
+        
         Vector3 doorPosition = _doorCollider.bounds.center;
         Vector3 playerOffset = new Vector3(0, 0, 0); // Slightly above the door
         _playerSpawnPosition = doorPosition + playerOffset;

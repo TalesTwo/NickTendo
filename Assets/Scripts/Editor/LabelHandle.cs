@@ -25,7 +25,7 @@ public class LabelHandle : Editor
         if (!door) { return; }
         
         Handles.BeginGUI();
-        Handles.Label(door.transform.position + new Vector3(0f, 2f, 0f), door.CurrentDoorPosition.ToString(), _labelStyle);
+        Handles.Label(door.transform.position + new Vector3(0f, 1f, 0f), door.CurrentDoorPosition.ToString(), _labelStyle);
         Handles.EndGUI();
     }
 }
