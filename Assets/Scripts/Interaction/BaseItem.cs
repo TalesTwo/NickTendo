@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseItem : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    public string Name;
+    public string Description;
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
