@@ -1,108 +1,110 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwapManager : Singleton<SceneSwapManager>
+namespace Managers
 {
-    
-    private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
-    
-    private static bool _loadFromDoor;
-    
-    private GameObject _player;
-    private Collider2D _playerCollider;
-    private Collider2D _doorCollider;
-    private Vector3 _playerSpawnPosition;
-    
-    
-    private void Awake()
+    public class SceneSwapManager : Singleton<SceneSwapManager>
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerCollider = _player.GetComponent<Collider2D>();
-    }
     
-    public static void SwapSceneFromDoorUse(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
-    {
-        _loadFromDoor = true;
-        Instance.StartCoroutine(Instance.FadeOutThenChangeScene(sceneToLoad, doorToSpawnAt));
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoad;
-    }
+        private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
     
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoad;
-    }
+        private static bool _loadFromDoor;
     
-    private IEnumerator FadeOutThenChangeScene(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
-    {
-        // Start fade out animation here (you'll need to implement this)
-        SceneFadeManager.Instance.StartFadeOut();
-        while(SceneFadeManager.Instance.IsFadingOut)
+        private GameObject _player;
+        private Collider2D _playerCollider;
+        private Collider2D _doorCollider;
+        private Vector3 _playerSpawnPosition;
+    
+    
+        private void Awake()
         {
-            yield return null; // Wait until fade out is complete
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _playerCollider = _player.GetComponent<Collider2D>();
         }
+    
+        public static void SwapSceneFromDoorUse(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
+        {
+            _loadFromDoor = true;
+            Instance.StartCoroutine(Instance.FadeOutThenChangeScene(sceneToLoad, doorToSpawnAt));
+        }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoad;
+        }
+    
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoad;
+        }
+    
+        private IEnumerator FadeOutThenChangeScene(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
+        {
+            // Start fade out animation here (you'll need to implement this)
+            SceneFadeManager.Instance.StartFadeOut();
+            while(SceneFadeManager.Instance.IsFadingOut)
+            {
+                yield return null; // Wait until fade out is complete
+            }
 
         
-        DebugUtils.LogSuccess("Faded out, now changing scene to: " + sceneToLoad);
-        // Load the new scene
-        _doorToSpawnAt = doorToSpawnAt;
-        SceneManager.LoadScene(sceneToLoad);
-    }
-    
-    private void OnSceneLoad(Scene scene, LoadSceneMode mode)
-    {
-        DebugUtils.LogSuccess("Scene loaded: " + scene.name);
-        // Start fade in animation here (you'll need to implement this)
-        SceneFadeManager.Instance.StartFadeIn();
-        if (_loadFromDoor)
-        {
-            // warp the player to the correct door position
-            FindDoor(_doorToSpawnAt);
-            _player.transform.position = _playerSpawnPosition;
-            _loadFromDoor = false;
+            DebugUtils.LogSuccess("Faded out, now changing scene to: " + sceneToLoad);
+            // Load the new scene
+            _doorToSpawnAt = doorToSpawnAt;
+            SceneManager.LoadScene(sceneToLoad);
         }
-    }
     
-    private void FindDoor(DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
-    {
-        DoorTriggerInteraction[] doorsInScene = FindObjectsOfType<DoorTriggerInteraction>();
-        foreach (var door in doorsInScene)
+        private void OnSceneLoad(Scene scene, LoadSceneMode mode)
         {
-            if (door.CurrentDoorPosition == doorToSpawnAt)
+            DebugUtils.LogSuccess("Scene loaded: " + scene.name);
+            // Start fade in animation here (you'll need to implement this)
+            SceneFadeManager.Instance.StartFadeIn();
+            if (_loadFromDoor)
             {
-                _doorCollider = door.GetComponent<Collider2D>();
-                CalculatePlayerSpawnPosition();
-                return;
+                // warp the player to the correct door position
+                FindDoor(_doorToSpawnAt);
+                _player.transform.position = _playerSpawnPosition;
+                _loadFromDoor = false;
             }
         }
-        DebugUtils.LogError("No door found in scene with DoorToSpawnAt: " + doorToSpawnAt);
-    }
     
-    private void CalculatePlayerSpawnPosition()
-    {
-        if (_playerCollider == null || _doorCollider == null)
+        private void FindDoor(DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
         {
-            DebugUtils.LogError("Player or Door collider is null, cannot calculate spawn position.");
-            return;
+            DoorTriggerInteraction[] doorsInScene = FindObjectsOfType<DoorTriggerInteraction>();
+            foreach (var door in doorsInScene)
+            {
+                if (door.CurrentDoorPosition == doorToSpawnAt)
+                {
+                    _doorCollider = door.GetComponent<Collider2D>();
+                    CalculatePlayerSpawnPosition();
+                    return;
+                }
+            }
+            DebugUtils.LogError("No door found in scene with DoorToSpawnAt: " + doorToSpawnAt);
         }
-        
-        // the door actually has a child called Spawn_Location, that is where we want to spawn the player
-        // if that is not present, we will default to the center of the door collider
-        Transform spawnLocation = _doorCollider.transform.Find("Spawn_Location");
-        if (spawnLocation != null)
+    
+        private void CalculatePlayerSpawnPosition()
         {
-            _playerSpawnPosition = spawnLocation.position;
-            return;
-        }
+            if (_playerCollider == null || _doorCollider == null)
+            {
+                DebugUtils.LogError("Player or Door collider is null, cannot calculate spawn position.");
+                return;
+            }
         
-        Vector3 doorPosition = _doorCollider.bounds.center;
-        Vector3 playerOffset = new Vector3(0, 0, 0); // Slightly above the door
-        _playerSpawnPosition = doorPosition + playerOffset;
+            // the door actually has a child called Spawn_Location, that is where we want to spawn the player
+            // if that is not present, we will default to the center of the door collider
+            Transform spawnLocation = _doorCollider.transform.Find("Spawn_Location");
+            if (spawnLocation != null)
+            {
+                _playerSpawnPosition = spawnLocation.position;
+                return;
+            }
+        
+            Vector3 doorPosition = _doorCollider.bounds.center;
+            Vector3 playerOffset = new Vector3(0, 0, 0); // Slightly above the door
+            _playerSpawnPosition = doorPosition + playerOffset;
+        }
     }
 }

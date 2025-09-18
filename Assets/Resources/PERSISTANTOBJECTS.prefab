@@ -111,6 +111,7 @@ Transform:
   - {fileID: 1177819135723587669}
   - {fileID: 6474970054822900709}
   - {fileID: 8155786978227721242}
+  - {fileID: 4144576820266627899}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5600389237815453387
@@ -216,11 +217,11 @@ Transform:
   m_GameObject: {fileID: 5773557713025776495}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19410229, y: -0.25022215, z: -3.2796018}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalPosition: {x: -2.032307, y: 0.5393335, z: -9.838805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1177819135723587669}
+  m_Father: {fileID: 8941348631461493627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1342044550961848855
 Camera:
@@ -520,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: interactPrompt
+      value: 
+      objectReference: {fileID: 9073592175185535417, guid: e18ff40a4a42abf4fb51dd7c3ca15c6b, type: 3}
     - target: {fileID: 6628337633361703188, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -664,10 +669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5072391782927799072, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4144576820266627899}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
 --- !u!4 &1177819135723587669 stripped

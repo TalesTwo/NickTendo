@@ -5250,6 +5250,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 102903502743516252, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_Name
+      value: AnimatedEButton_Prefab
+      objectReference: {fileID: 0}
     - target: {fileID: 2262425917105696889, guid: df57c6019a1888c46bffd210810447bd, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -5400,6 +5404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1fea01c0c1f8947b862a0bd02f1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractPrompt: 1
+  interactPromptInstance: {fileID: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5555,6 +5561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1fea01c0c1f8947b862a0bd02f1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractPrompt: 1
+  interactPromptInstance: {fileID: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5710,6 +5718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1fea01c0c1f8947b862a0bd02f1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractPrompt: 1
+  interactPromptInstance: {fileID: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5804,6 +5814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1fea01c0c1f8947b862a0bd02f1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractPrompt: 1
+  interactPromptInstance: {fileID: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
