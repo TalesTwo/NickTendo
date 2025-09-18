@@ -7,14 +7,17 @@ public class PlayerController : MonoBehaviour
     // stats
     [Header("Player Stats")]
     public float speed;
+    public float dashSpeed = 10.0f;
     public float attackCooldown = 1.0f;
     public float dashCooldown = 5.0f;
+    public float dashMovingCooldown = 0.5f;
     
     
     // input variables
     [Header("inputs")]
     public float horizontalInput;
     public float verticalInput;
+    private Vector3 mouseDirection;
     
     // attack animations
     [Header("Attack Animations")]
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
     
     // dashing boolean
     private bool _isDashing = false;
+    private bool _isDashMoving = false;
     private bool _isAttacking = false;
     
     // Start is called before the first frame update
@@ -51,9 +55,17 @@ public class PlayerController : MonoBehaviour
         // press left shift to perform a dash attack
         else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
         {
+            // start dash
             StartDash();
             _isDashing = true;
+            _isDashMoving = true;
+            // get dash direction
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+            mouseDirection = (mousePosition - transform.position).normalized;
+            // invoke dash cooldown
             Invoke(nameof(ResetDash), dashCooldown);
+            Invoke(nameof(DashMovingStop), dashMovingCooldown);
         }
     }
 
@@ -62,8 +74,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // move player based on input
-        Vector2 update = new Vector2(horizontalInput, verticalInput);
-        rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime);
+        if (_isDashMoving)
+        {
+            rb.MovePosition(rb.position + new Vector2(mouseDirection.x, mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+        }
+        else
+        {
+            Vector2 update = new Vector2(horizontalInput, verticalInput);
+            rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime); 
+        }
+
     }
     
     // starts base attack animation
@@ -88,5 +108,11 @@ public class PlayerController : MonoBehaviour
     private void ResetAttack()
     {
         _isAttacking = false;
+    }
+
+    // stop the dash
+    private void DashMovingStop()
+    {
+        _isDashMoving = false;
     }
 }

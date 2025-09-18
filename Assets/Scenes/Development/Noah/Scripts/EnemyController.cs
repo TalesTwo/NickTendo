@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int health = 3;
+    public int health = 10;
     
     // Start is called before the first frame update
     void Start()
@@ -22,11 +22,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // reduce health on damage from a PlayerAttack
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerAttack"))
         {
-            health -= 1;
+            AttackDamageController controller = collision.gameObject.GetComponent<AttackDamageController>();
+            health -= controller.damage;
         }
     }
 }

@@ -106,8 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  dashSpeed: 10
   attackCooldown: 0.5
   dashCooldown: 5
+  dashMovingCooldown: 0.5
   horizontalInput: 0
   verticalInput: 0
   attackAnimation: {fileID: 2473233302387310917}
