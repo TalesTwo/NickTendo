@@ -10,11 +10,17 @@ public class PlayerController : MonoBehaviour
     // input variables
     public float horizontalInput;
     public float verticalInput;
-
-    public static float directionAngle;
+    
+    // attack animations
+    [Header("Attack Animations")]
+    public GameObject attackAnimation;
+    public GameObject dashAnimation;
 
     // rigidbody
     private Rigidbody2D rb;
+    
+    // dashing boolean
+    private bool _isDashing = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -27,14 +33,16 @@ public class PlayerController : MonoBehaviour
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        /*
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
         
-        Vector2 direction = mousePos - transform.position;
-        
-        directionAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        */
+        // press the space bar to perform a slash attack
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartAttack();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartDash();
+        }
     }
 
     // Update is called once per frame
@@ -44,5 +52,17 @@ public class PlayerController : MonoBehaviour
         // move player based on input
         Vector2 update = new Vector2(horizontalInput, verticalInput);
         rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime);
+    }
+    
+    // starts base attack animation
+    private void StartAttack()
+    {
+        attackAnimation.SetActive(true);
+    }
+    
+    // starts base dash attack
+    private void StartDash()
+    {
+        dashAnimation.SetActive(true);
     }
 }

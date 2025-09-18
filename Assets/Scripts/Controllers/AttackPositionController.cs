@@ -6,7 +6,8 @@ public class AttackPositionController : MonoBehaviour
 {
     public Transform attacker;
     public float radius = 0.2f;
-    public float verticalEdit = 0.2f;
+    public float verticalEdit = 0.2f;  // adjust vertical position of animation to account for animation wonkiness
+    public float angleEdit; // adjust rotation of object to account for animation wonkiness
 
     // Update is called once per frame
     void Update()
@@ -32,7 +33,7 @@ public class AttackPositionController : MonoBehaviour
         transform.position = attacker.position + direction * radius + edit * verticalEdit;
 
         // Rotate to face the mouse
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleEdit;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
