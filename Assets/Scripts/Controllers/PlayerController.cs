@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
 
+    public static float directionAngle;
+
     // rigidbody
     private Rigidbody2D rb;
     
@@ -25,6 +27,14 @@ public class PlayerController : MonoBehaviour
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        /*
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        
+        Vector2 direction = mousePos - transform.position;
+        
+        directionAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        */
     }
 
     // Update is called once per frame

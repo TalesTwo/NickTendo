@@ -7,6 +7,8 @@ using UnityEngine;
 public class AnimatedPlayerAttack : AnimatedEntity
 {
     public GameObject animation;
+
+    private bool _nextLoop;
     
     // Start is called before the first frame update
     void Start()
@@ -25,8 +27,12 @@ public class AnimatedPlayerAttack : AnimatedEntity
         AnimationUpdate();
         if (index == DefaultAnimationCycle.Count - 1)
         {
-            index = 0;
+            _nextLoop = true;
+        }
+        else if (_nextLoop)
+        {
             animation.SetActive(false);
+            _nextLoop = false;
         }
     }
 }
