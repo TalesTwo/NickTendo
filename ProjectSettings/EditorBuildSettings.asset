@@ -8,4 +8,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Generation/RoomData/SpawnRoom/SpawnRoom.unity
+    guid: 308e4921bfa18d148b058a91c0e646ca
+  - enabled: 1
+    path: Assets/Generation/RoomData/AIRoom/AIRoom.unity
+    guid: c3299d5277878434e9642ca5ae16a1a2
+  - enabled: 1
+    path: Assets/Scenes/Development/Noah/Noah_Development.unity
+    guid: 2c3ffe97d48545c4b8519fd1bbb070ee
+  - enabled: 1
+    path: Assets/Scenes/Main/MainMenu.unity
+    guid: 2b681577d48ebc74185e173e68142b79
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
