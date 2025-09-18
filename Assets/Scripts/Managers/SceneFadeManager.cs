@@ -13,6 +13,10 @@ public class SceneFadeManager : Singleton<SceneFadeManager>
     
     [SerializeField] private Color fadeOutStartColor = Color.clear;
     
+    // sounds effects for fade in and fade out
+    [SerializeField] private AudioClip _fadeOutSFX;
+    [SerializeField] private AudioClip _fadeInSFX;
+    
     public bool IsFadingOut { get; private set; } = false;
     public bool IsFadingIn { get; private set; } = false;
 
@@ -54,6 +58,11 @@ public class SceneFadeManager : Singleton<SceneFadeManager>
     
     public void StartFadeOut()
     {
+        if (_fadeOutSFX )
+        {
+            // play the fade out sound effect
+            AudioManager.Instance.PlaySFX(_fadeOutSFX, 5);
+        }
         _fadeOutImage.color = fadeOutStartColor;
         IsFadingOut = true;
         
@@ -62,6 +71,10 @@ public class SceneFadeManager : Singleton<SceneFadeManager>
     {
         if (_fadeOutImage.color.a >= 1f)
         {
+            if (_fadeInSFX )
+            {
+                AudioManager.Instance.PlaySFX(_fadeInSFX, 5);
+            }
             _fadeOutImage.color = fadeOutStartColor;
             IsFadingIn = true;
         }
