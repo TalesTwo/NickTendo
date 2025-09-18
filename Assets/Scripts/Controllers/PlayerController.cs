@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // player speed
+    // stats
+    [Header("Player Stats")]
     public float speed;
+    public float attackCooldown = 1.0f;
+    public float dashCooldown = 5.0f;
+    
     
     // input variables
+    [Header("inputs")]
     public float horizontalInput;
     public float verticalInput;
     
@@ -21,6 +26,7 @@ public class PlayerController : MonoBehaviour
     
     // dashing boolean
     private bool _isDashing = false;
+    private bool _isAttacking = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -35,13 +41,19 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         
         // press the space bar to perform a slash attack
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
         {
             StartAttack();
+            _isAttacking = true;
+            Invoke(nameof(ResetAttack), attackCooldown);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        
+        // press left shift to perform a dash attack
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
         {
             StartDash();
+            _isDashing = true;
+            Invoke(nameof(ResetDash), dashCooldown);
         }
     }
 
@@ -64,5 +76,17 @@ public class PlayerController : MonoBehaviour
     private void StartDash()
     {
         dashAnimation.SetActive(true);
+    }
+
+    // reset the dash attack after the cooldown
+    private void ResetDash()
+    {
+        _isDashing = false;
+    }
+
+    // reset the standard attack after the cooldown
+    private void ResetAttack()
+    {
+        _isAttacking = false;
     }
 }

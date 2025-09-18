@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  attackCooldown: 0.5
+  dashCooldown: 5
   horizontalInput: 0
   verticalInput: 0
   attackAnimation: {fileID: 2473233302387310917}
@@ -284,10 +286,6 @@ PrefabInstance:
     - target: {fileID: 2407103696244724232, guid: 5d12879e9f121ae4885584d2e23e374f, type: 3}
       propertyPath: m_Name
       value: SlashAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407103696244724232, guid: 5d12879e9f121ae4885584d2e23e374f, type: 3}
-      propertyPath: m_TagString
-      value: PlayerAttack
       objectReference: {fileID: 0}
     - target: {fileID: 3471283427815167059, guid: 5d12879e9f121ae4885584d2e23e374f, type: 3}
       propertyPath: attacker
