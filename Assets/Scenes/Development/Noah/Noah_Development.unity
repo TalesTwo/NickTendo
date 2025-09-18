@@ -962,6 +962,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!212 &215702519 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9025026997518922508, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+  m_PrefabInstance: {fileID: 1284377249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &221957521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,7 +3125,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &1478670836
+--- !u!1001 &1284377249
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3128,17 +3133,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 482612092328866660, guid: df57c6019a1888c46bffd210810447bd, type: 3}
-      propertyPath: npcName
-      value: NPC Duck
-      objectReference: {fileID: 0}
-    - target: {fileID: 482612092328866660, guid: df57c6019a1888c46bffd210810447bd, type: 3}
-      propertyPath: npcDialogue
-      value: 
-      objectReference: {fileID: 4900000, guid: 9932ff33ac8fbaa4081d02463538d125, type: 3}
     - target: {fileID: 2262425917105696889, guid: df57c6019a1888c46bffd210810447bd, type: 3}
       propertyPath: m_Name
-      value: NPC (1)
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 7430475512040792004, guid: df57c6019a1888c46bffd210810447bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3180,6 +3177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7665089897869249543, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: SpriteRenderer
+      value: 
+      objectReference: {fileID: 215702519}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3388,4 +3389,4 @@ SceneRoots:
   - {fileID: 1716940187}
   - {fileID: 1521456744}
   - {fileID: 221957524}
-  - {fileID: 1478670836}
+  - {fileID: 1284377249}

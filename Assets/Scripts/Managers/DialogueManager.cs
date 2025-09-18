@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public GameObject dialogueBox;
+    public GameObject spaceButton;
     public Text dialogueText;
     public Text nameText;
     public Image sprite;
@@ -40,12 +41,14 @@ public class DialogueManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && canContinue)
             {
                 NextLine();
+                spaceButton.SetActive(false);
             }
 
             // checking if current line of dialogue is finished
             if (dialogueText.text == dialogue[index])
             {
                 canContinue = true;
+                spaceButton.SetActive(true);
             }
 
             yield return null;            
