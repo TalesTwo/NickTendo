@@ -13,11 +13,12 @@ public class NPCTriggerInteraction : TriggerInteractBase
     public string npcName;
     
     // Start is called before the first frame update
-    private void Start()
+    protected override void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
         dialogue = npcDialogue.text.Split('\n');
+        base.Start();
     }
+
 
     public override void Interact()
     {

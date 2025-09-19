@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class DoorTriggerInteraction : TriggerInteractBase
 {
 
+    [SerializeField] private Types.DoorConfiguration currentConfiguration;
     public enum DoorToSpawnAt
     {
         None,
@@ -14,6 +16,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         Three,
         Four
     }
+    
     
     [Header("Spawn To")]
     [SerializeField] private SceneField _sceneToLoad;

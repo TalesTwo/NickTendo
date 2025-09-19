@@ -398,7 +398,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MV Icons Keyboard - ALL_0: 21199610812816227
+      MV Icons Keyboard - ALL_1: 3773594069315819697
+      MV Icons Keyboard - ALL_2: -3888421965457456898
+      MV Icons Keyboard - ALL_3: -459535889971435055
+      MV Icons Keyboard - ALL_4: -6854142558965948074
+      MV Icons Keyboard - ALL_5: 8730407193308321243
+      MV Icons Keyboard - ALL_6: -4827748194513838190
+      MV Icons Keyboard - ALL_7: 7754031511009601637
+      MV Icons Keyboard - ALL_8: 7998234016148961481
+      MV Icons Keyboard - ALL_9: -5915751343628301990
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

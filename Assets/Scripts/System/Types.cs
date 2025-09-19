@@ -22,6 +22,15 @@ public static class Types
         
     }
     
+    [Serializable]
+    public struct DoorConfiguration
+    {
+        public bool doorOneActive;
+        public bool doorTwoActive;
+        public bool doorThreeActive;
+        public bool doorFourActive;
+    }
+    
     
     
     

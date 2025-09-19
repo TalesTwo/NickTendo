@@ -27,6 +27,6 @@ public class SystemManager : Singleton<SystemManager>
         // gameObject.AddComponent<ManagerClassName>();
         gameObject.AddComponent<PlayerManager>();
         gameObject.AddComponent<SceneSwapManager>();
-        //gameObject.AddComponent<MainMenuManager>(); the menu will hold its own manager
+        gameObject.AddComponent<AudioManager>();
     }
 }
