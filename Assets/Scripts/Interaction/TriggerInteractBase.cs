@@ -14,7 +14,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     // bool to handle if we have an interact prompt or not
     [Header("Interact Prompt Settings")]
     [SerializeField] private bool hasInteractPrompt = true;
-    [SerializeField] private Vector3 interactPromptOffset = new Vector3(0, 0.1f, 0);
+    [SerializeField] private Vector3 interactPromptOffset = new Vector3(0, 1f, 0);
     
     // Offset for the interact prompt
     private GameObject interactPromptInstance;
