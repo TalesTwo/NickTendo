@@ -5254,9 +5254,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimatedEButton_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 102903502743516252, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 482612092328866660, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: interactPromptOffset.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2262425917105696889, guid: df57c6019a1888c46bffd210810447bd, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262425917105696889, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430475512040792004, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430475512040792004, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430475512040792004, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7430475512040792004, guid: df57c6019a1888c46bffd210810447bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5306,8 +5330,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 999
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8669226813074039785, guid: df57c6019a1888c46bffd210810447bd, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 102903502743516252, guid: df57c6019a1888c46bffd210810447bd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df57c6019a1888c46bffd210810447bd, type: 3}
@@ -5405,7 +5431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptInstance: {fileID: 0}
+  interactPromptOffset: {x: 0, y: 0.1, z: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5562,7 +5588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptInstance: {fileID: 0}
+  interactPromptOffset: {x: 0, y: 0.1, z: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5719,7 +5745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptInstance: {fileID: 0}
+  interactPromptOffset: {x: 0, y: 0.1, z: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0
@@ -5815,7 +5841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptInstance: {fileID: 0}
+  interactPromptOffset: {x: 0, y: 1.2, z: 0}
   currentConfiguration:
     doorOneActive: 0
     doorTwoActive: 0

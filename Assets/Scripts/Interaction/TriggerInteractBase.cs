@@ -14,17 +14,37 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     // bool to handle if we have an interact prompt or not
     [Header("Interact Prompt Settings")]
     [SerializeField] private bool hasInteractPrompt = true;
+    [SerializeField] private Vector3 interactPromptOffset = new Vector3(0, 0.1f, 0);
     
     // Offset for the interact prompt
-    [SerializeField]  private GameObject interactPromptInstance;
+    private GameObject interactPromptInstance;
     
     
     
     public virtual void Interact() { }
 
-    private void Start()
+    protected virtual void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        var promptPrefab = DialogueManager.Instance.GetInteractPrompt;
+        if (promptPrefab != null)
+        {
+            // Instantiate in world space
+            interactPromptInstance = Instantiate(promptPrefab);
+
+            // Set its scale to prefab's original
+            interactPromptInstance.transform.localScale = promptPrefab.transform.localScale;
+
+            // Set initial position
+            interactPromptInstance.transform.position = transform.position + interactPromptOffset;
+
+            // Ensure it renders on top
+            var sr = interactPromptInstance.GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.sortingOrder = 999;
+
+            interactPromptInstance.SetActive(false);
+        }
     }
 
     private void Update()
@@ -66,3 +86,5 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     }
     
 }
+
+

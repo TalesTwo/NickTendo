@@ -524,7 +524,7 @@ PrefabInstance:
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: interactPrompt
       value: 
-      objectReference: {fileID: 9073592175185535417, guid: e18ff40a4a42abf4fb51dd7c3ca15c6b, type: 3}
+      objectReference: {fileID: 5973309152076792836, guid: 3bdb0f025ff9e1645bf6954517e99148, type: 3}
     - target: {fileID: 6628337633361703188, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_Pivot.x
       value: 0
