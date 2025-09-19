@@ -6,17 +6,15 @@ using UnityEngine;
 public class PickupItem : BaseItem
 {
     private GameObject Player;
-    private Inventory PInventory;
     public AudioSource PickupSFX;
     public bool CanAutoPickup = true;
     private bool CanInteract;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        PInventory = Player.GetComponent<Inventory>();
         PickupSFX.playOnAwake = false;
         CanInteract = false;
     }
@@ -29,7 +27,6 @@ public class PickupItem : BaseItem
         {
             Pickup();
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,7 +48,6 @@ public class PickupItem : BaseItem
     {
         //DebugUtils.Log("The Player touched " + this.name);
 
-        PInventory.AddItem(this);
         PickupSFX.Play();
         //sprite is destoryed first because delete the entire object skips the playing of the sfx
         Destroy(GetComponent<SpriteRenderer>());
