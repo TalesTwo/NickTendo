@@ -2,56 +2,69 @@ using System;
 using System.Collections.Generic;
 using Generation.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
+    
+    
+    // 2D representation of the dungeon layout
+    
+    
+    
     public class DungeonGeneratorManager : Singleton<DungeonGeneratorManager>
     {
-        
         public GenerationData generationData;
-        
+
         void Start()
         {
-            DebugUtils.LogSuccess("Successfully started.");
+            DebugUtils.LogSuccess("Successfully started the Dungeon Generator Manager.");
+            // pick a random Spawn room to start with
+            
+            
         }
-
-        // Update is called once per frame
-        void Update()
+        
+        void Awake()
         {
-            if(Input.GetKeyDown(KeyCode.G))
-            {
-                // pick a random spawn room from the list
-                //GenerateRoomFromType(Types.RoomType.Spawn, Vector3.zero);
-                GenerateRoomFromClass(generationData.RoomDict[Types.RoomType.Spawn][0], Vector3.zero);
-            }
+            //int randomIndex = UnityEngine.Random.Range(0, generationData.RoomDict[Types.RoomType.Spawn].Count);
+            //GenerateRoomFromScene(generationData.RoomDict[Types.RoomType.Spawn][randomIndex]);
         }
 
         
-        private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position)
+        
+        
+        
+        
+
+
+        /// <summary>
+        /// Loads a given room scene additively.
+        /// </summary>
+        private static void GenerateRoomFromScene(SceneField scene)
         {
-            if (roomPrefab == null)
+            if (scene == null || string.IsNullOrEmpty(scene.SceneName))
             {
-                DebugUtils.LogError("Tried to generate a room, but prefab was null.");
-                return null;
+                DebugUtils.LogError("Tried to generate a room, but scene was null or empty.");
+                return;
             }
 
-            Room roomInstance = Instantiate(roomPrefab, position, Quaternion.identity);
-            roomInstance.InitializeRoom();
-            return roomInstance;
+            DebugUtils.LogSuccess($"Loading room scene: {scene.SceneName}");
+            SceneManager.LoadScene(scene, LoadSceneMode.Additive); 
         }
 
-        
-        private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position)
+        /// <summary>
+        /// Picks a random room of a given type and loads it additively.
+        /// </summary>
+        private static void GenerateRoomFromType(Types.RoomType roomType)
         {
-            if (!Instance.generationData.RoomDict.TryGetValue(roomType, out List<Room> possibleRooms) || possibleRooms.Count == 0)
+            if (!Instance.generationData.RoomDict.TryGetValue(roomType, out List<SceneField> possibleScenes) || possibleScenes.Count == 0)
             {
-                DebugUtils.LogError($"No room prefabs found for type {roomType}");
-                return null;
+                DebugUtils.LogError($"No room scenes found for type {roomType}");
+                return;
             }
 
-            int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
-            return GenerateRoomFromClass(possibleRooms[randomIndex], position);
+            int randomIndex = UnityEngine.Random.Range(0, possibleScenes.Count);
+            GenerateRoomFromScene(possibleScenes[randomIndex]);
         }
-        
     }
 }
