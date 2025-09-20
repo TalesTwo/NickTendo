@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomEntries:
   - roomType: 0
-    roomScenes:
-    - _sceneAsset: {fileID: 102900000, guid: 308e4921bfa18d148b058a91c0e646ca, type: 3}
-      _sceneName: SpawnRoom
+    roomPrefabs:
+    - {fileID: 5438623199603459301, guid: 06c8dc81a7034514db63058fb39df6ae, type: 3}
   - roomType: 1
-    roomScenes: []
+    roomPrefabs: []
   - roomType: 2
-    roomScenes: []
+    roomPrefabs: []
   - roomType: 3
-    roomScenes: []
+    roomPrefabs: []
   - roomType: 3
-    roomScenes: []
+    roomPrefabs: []
