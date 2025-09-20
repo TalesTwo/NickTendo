@@ -15,7 +15,7 @@ MonoBehaviour:
   roomEntries:
   - roomType: 0
     roomPrefabs:
-    - {fileID: 5438623199603459301, guid: 06c8dc81a7034514db63058fb39df6ae, type: 3}
+    - {fileID: 4328904834969820885, guid: c6d2382fb2aa63b489303d4e602364aa, type: 3}
   - roomType: 1
     roomPrefabs: []
   - roomType: 2

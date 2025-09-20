@@ -28,6 +28,8 @@ public class Room : MonoBehaviour
     {
         // Initialize room logic here
         ApplyDoorConfiguration();
+        // Disable the room by default
+        DisableRoom();
     }
 
     
@@ -111,6 +113,15 @@ public class Room : MonoBehaviour
 
         return config;
         
+    }
+    public int GetActiveDoorCount()
+    {
+        int count = 0;
+        if (configuration.NorthDoorActive) count++;
+        if (configuration.EastDoorActive) count++;
+        if (configuration.SouthDoorActive) count++;
+        if (configuration.WestDoorActive) count++;
+        return count;
     }
     
     public Types.RoomType GetRoomType()
