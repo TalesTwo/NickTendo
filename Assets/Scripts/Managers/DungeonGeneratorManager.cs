@@ -62,6 +62,7 @@ namespace Managers
 
         private void GeneratePhaseOne()
         {
+            // Always start with the room above the start room
             BuildRoomAtCords(startPos.x-1, startPos.y);
         }
 
@@ -180,6 +181,42 @@ namespace Managers
             // Now we have the total number of doors we need, we can start building the door configuration
             // debug print the number of required doors count
             DebugUtils.Log($"Building room at ({row}, {col}) with {numOptionalDoorsToAdd} optional doors.");
+            // Randomly select n optional doors to add
+            List<Types.DoorClassification> availableOptionalDoors = new List<Types.DoorClassification>();
+            if (optionalConnections.NorthDoorActive) availableOptionalDoors.Add(Types.DoorClassification.North);
+            if (optionalConnections.EastDoorActive) availableOptionalDoors.Add(Types.DoorClassification.East);
+            if (optionalConnections.SouthDoorActive) availableOptionalDoors.Add(Types.DoorClassification.South);
+            if (optionalConnections.WestDoorActive) availableOptionalDoors.Add(Types.DoorClassification.West);
+            List<Types.DoorClassification> selectedOptionalDoors = new List<Types.DoorClassification>();
+            for (int i = 0; i < numOptionalDoorsToAdd && availableOptionalDoors.Count > 0; i++)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, availableOptionalDoors.Count);
+                selectedOptionalDoors.Add(availableOptionalDoors[randomIndex]);
+                availableOptionalDoors.RemoveAt(randomIndex); // Ensure we don't pick the same door again
+            }
+            
+            // Now update the requiredConnections to include the selected optional doors
+            foreach (var door in selectedOptionalDoors)
+            {
+                switch (door)
+                {
+                    case Types.DoorClassification.North:
+                        requiredConnections.NorthDoorActive = true;
+                        break;
+                    case Types.DoorClassification.East:
+                        requiredConnections.EastDoorActive = true;
+                        break;
+                    case Types.DoorClassification.South:
+                        requiredConnections.SouthDoorActive = true;
+                        break;
+                    case Types.DoorClassification.West:
+                        requiredConnections.WestDoorActive = true;
+                        break;
+                }
+            }
+            
+            // FINALLY, we have the final connections that this room needs to have
+            DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
             
             

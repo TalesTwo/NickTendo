@@ -15,7 +15,6 @@ public static class Types
         S,
         W,
         End,
-        
     }
     
     [Serializable]
