@@ -112,4 +112,9 @@ public class Room : MonoBehaviour
         return config;
         
     }
+    
+    public Types.RoomType GetRoomType()
+    {
+        return roomType;
+    }
 }

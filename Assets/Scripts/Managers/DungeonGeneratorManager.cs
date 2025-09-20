@@ -9,48 +9,73 @@ namespace Managers
     
     
     // 2D representation of the dungeon layout
+
     
     
     
     public class DungeonGeneratorManager : Singleton<DungeonGeneratorManager>
     {
+        private Room CurrentRoom;
         public GenerationData generationData;
 
         void Start()
         {
             DebugUtils.LogSuccess("Successfully started the Dungeon Generator Manager.");
             // pick a random Spawn room to start with
-            
+            GenerateDungeonLayout();
             
         }
         
-        void Awake()
+        
+        void Update()
         {
-            //int randomIndex = UnityEngine.Random.Range(0, generationData.RoomDict[Types.RoomType.Spawn].Count);
-            //GenerateRoomFromScene(generationData.RoomDict[Types.RoomType.Spawn][randomIndex]);
-        }
-
-        
-        
-        
-        
-        
-
-
-        /// <summary>
-        /// Loads a given room scene additively.
-        /// </summary>
-        private static void GenerateRoomFromScene(SceneField scene)
-        {
-            if (scene == null || string.IsNullOrEmpty(scene.SceneName))
+            // if we press G
+            if (Input.GetKeyDown(KeyCode.G))
             {
-                DebugUtils.LogError("Tried to generate a room, but scene was null or empty.");
-                return;
+                if (CurrentRoom )
+                {
+                    DebugUtils.Log($"Current Room Type: {CurrentRoom.GetRoomType()}");
+                } else
+                {
+                    DebugUtils.LogWarning("Current Room is null.");
+                }
             }
 
-            DebugUtils.LogSuccess($"Loading room scene: {scene.SceneName}");
-            SceneManager.LoadScene(scene, LoadSceneMode.Additive); 
         }
+
+        
+        private void GenerateDungeonLayout()
+        {
+            int randomIndex = UnityEngine.Random.Range(0, generationData.RoomDict[Types.RoomType.Spawn].Count);
+            SceneField sceneField = generationData.RoomDict[Types.RoomType.Spawn][randomIndex];
+
+            // Subscribe to sceneLoaded so we can grab the room after Unity finishes loading
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+            SceneManager.LoadScene(sceneField.SceneName);
+            
+            // there is more i need to do here, but i need to ensure that the room is fully loaded first
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // Unsubscribe so this only runs once
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            GameObject[] rootObjects = scene.GetRootGameObjects();
+            foreach (GameObject obj in rootObjects)
+            {
+                Room roomComponent = obj.GetComponent<Room>();
+                if (roomComponent != null)
+                {
+                    DebugUtils.LogSuccess($"Spawn room of type {roomComponent.GetRoomType()} loaded successfully.");
+                    CurrentRoom = roomComponent;
+                }
+            }
+            
+        }
+        
+
 
         /// <summary>
         /// Picks a random room of a given type and loads it additively.
@@ -64,7 +89,7 @@ namespace Managers
             }
 
             int randomIndex = UnityEngine.Random.Range(0, possibleScenes.Count);
-            GenerateRoomFromScene(possibleScenes[randomIndex]);
+            //GenerateRoomFromScene(possibleScenes[randomIndex]);
         }
     }
 }
