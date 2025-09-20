@@ -28,6 +28,8 @@ public class Room : MonoBehaviour
     {
         // Initialize room logic here
         ApplyDoorConfiguration();
+        // Disable the room by default
+        DisableRoom();
     }
 
     
@@ -58,24 +60,72 @@ public class Room : MonoBehaviour
         
         // get a list of all of the children of the doors object
         List<DoorTriggerInteraction> doorObjects = new List<DoorTriggerInteraction>(doors.GetComponentsInChildren<DoorTriggerInteraction>());
-        
-        for (int i = 0; i < doorObjects.Count; i++)
+        foreach (var door in doorObjects)
         {
-            switch (i)
+            switch (door.CurrentDoorPosition)
             {
-                case 0:
-                    doorObjects[i].gameObject.SetActive(configuration.doorOneActive);
+                case Types.DoorClassification.North:
+                    door.gameObject.SetActive(configuration.NorthDoorActive);
                     break;
-                case 1:
-                    doorObjects[i].gameObject.SetActive(configuration.doorTwoActive);
+                case Types.DoorClassification.East:
+                    door.gameObject.SetActive(configuration.EastDoorActive);
                     break;
-                case 2:
-                    doorObjects[i].gameObject.SetActive(configuration.doorThreeActive);
+                case Types.DoorClassification.South:
+                    door.gameObject.SetActive(configuration.SouthDoorActive);
                     break;
-                case 3:
-                    doorObjects[i].gameObject.SetActive(configuration.doorFourActive);
+                case Types.DoorClassification.West:
+                    door.gameObject.SetActive(configuration.WestDoorActive);
+                    break;
+                default:
+                    Debug.LogWarning("Door has no classification set.");
                     break;
             }
         }
+    }
+
+    public Types.DoorConfiguration GetRequiredConnections()
+    {
+        // this will return a door configuration based on the current room type.
+        // for example, if the current room is a North room, it will return a configuration with the South door active.
+        // because a North room can only be entered from the South.
+        // East room -> West door active
+        // if a room has East and South doors, it will return a configuration with the West and North doors active... and so fourth
+        Types.DoorConfiguration config = new Types.DoorConfiguration
+        {
+            NorthDoorActive = false,
+            EastDoorActive = false,
+            SouthDoorActive = false,
+            WestDoorActive = false
+        };
+
+        // Look at this room’s doors and flip them to the opposite side
+        if (configuration.NorthDoorActive)
+            config.SouthDoorActive = true;
+
+        if (configuration.SouthDoorActive)
+            config.NorthDoorActive = true;
+
+        if (configuration.EastDoorActive)
+            config.WestDoorActive = true;
+
+        if (configuration.WestDoorActive)
+            config.EastDoorActive = true;
+
+        return config;
+        
+    }
+    public int GetActiveDoorCount()
+    {
+        int count = 0;
+        if (configuration.NorthDoorActive) count++;
+        if (configuration.EastDoorActive) count++;
+        if (configuration.SouthDoorActive) count++;
+        if (configuration.WestDoorActive) count++;
+        return count;
+    }
+    
+    public Types.RoomType GetRoomType()
+    {
+        return roomType;
     }
 }

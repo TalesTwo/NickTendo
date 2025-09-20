@@ -7,24 +7,14 @@ using UnityEngine;
 public class DoorTriggerInteraction : TriggerInteractBase
 {
 
-    [SerializeField] private Types.DoorConfiguration currentConfiguration;
-    public enum DoorToSpawnAt
-    {
-        None,
-        One,
-        Two,
-        Three,
-        Four
-    }
-    
     
     [Header("Spawn To")]
     [SerializeField] private SceneField _sceneToLoad;
-    [SerializeField] private DoorToSpawnAt DoorToSpawnTo= DoorToSpawnAt.None;
+    [SerializeField] private Types.DoorClassification DoorToSpawnTo= Types.DoorClassification.None;
     
     [Space(10f)]
     [Header("Door Settings")]
-    [SerializeField] public DoorToSpawnAt CurrentDoorPosition = DoorToSpawnAt.None;
+    [SerializeField] public Types.DoorClassification CurrentDoorPosition = Types.DoorClassification.None;
 
     public override void Interact()
     {

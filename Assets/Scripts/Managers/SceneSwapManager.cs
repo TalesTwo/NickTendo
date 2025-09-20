@@ -8,7 +8,7 @@ namespace Managers
     public class SceneSwapManager : Singleton<SceneSwapManager>
     {
     
-        private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
+        private Types.DoorClassification _doorClassification = Types.DoorClassification.None;
     
         private static bool _loadFromDoor;
     
@@ -24,10 +24,10 @@ namespace Managers
             _playerCollider = _player.GetComponent<Collider2D>();
         }
     
-        public static void SwapSceneFromDoorUse(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
+        public static void SwapSceneFromDoorUse(SceneField sceneToLoad, Types.DoorClassification doorClassification = Types.DoorClassification.None)
         {
             _loadFromDoor = true;
-            Instance.StartCoroutine(Instance.FadeOutThenChangeScene(sceneToLoad, doorToSpawnAt));
+            Instance.StartCoroutine(Instance.FadeOutThenChangeScene(sceneToLoad, doorClassification));
         }
 
         private void OnEnable()
@@ -40,7 +40,7 @@ namespace Managers
             SceneManager.sceneLoaded -= OnSceneLoad;
         }
     
-        private IEnumerator FadeOutThenChangeScene(SceneField sceneToLoad, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
+        private IEnumerator FadeOutThenChangeScene(SceneField sceneToLoad, Types.DoorClassification doorClassification = Types.DoorClassification.None)
         {
             // Start fade out animation here (you'll need to implement this)
             SceneFadeManager.Instance.StartFadeOut();
@@ -52,7 +52,7 @@ namespace Managers
         
             DebugUtils.LogSuccess("Faded out, now changing scene to: " + sceneToLoad);
             // Load the new scene
-            _doorToSpawnAt = doorToSpawnAt;
+            _doorClassification = doorClassification;
             SceneManager.LoadScene(sceneToLoad);
         }
     
@@ -64,25 +64,25 @@ namespace Managers
             if (_loadFromDoor)
             {
                 // warp the player to the correct door position
-                FindDoor(_doorToSpawnAt);
+                FindDoor(_doorClassification);
                 _player.transform.position = _playerSpawnPosition;
                 _loadFromDoor = false;
             }
         }
     
-        private void FindDoor(DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
+        private void FindDoor(Types.DoorClassification doorClassification)
         {
             DoorTriggerInteraction[] doorsInScene = FindObjectsOfType<DoorTriggerInteraction>();
             foreach (var door in doorsInScene)
             {
-                if (door.CurrentDoorPosition == doorToSpawnAt)
+                if (door.CurrentDoorPosition == doorClassification)
                 {
                     _doorCollider = door.GetComponent<Collider2D>();
                     CalculatePlayerSpawnPosition();
                     return;
                 }
             }
-            DebugUtils.LogError("No door found in scene with DoorToSpawnAt: " + doorToSpawnAt);
+            DebugUtils.LogError("No door found in scene with DoorToSpawnAt: " + doorClassification);
         }
     
         private void CalculatePlayerSpawnPosition()
