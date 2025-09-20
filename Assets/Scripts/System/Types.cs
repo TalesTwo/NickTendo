@@ -14,6 +14,7 @@ public static class Types
         E,
         S,
         W,
+        End,
         
     }
     
@@ -24,6 +25,20 @@ public static class Types
         public bool EastDoorActive;
         public bool SouthDoorActive;
         public bool WestDoorActive;
+        
+        public override string ToString()
+        {
+            return $"N:{NorthDoorActive}, E:{EastDoorActive}, S:{SouthDoorActive}, W:{WestDoorActive}";
+        }
+        public int ActiveDoorCount()
+        {
+            int count = 0;
+            if (NorthDoorActive) count++;
+            if (EastDoorActive) count++;
+            if (SouthDoorActive) count++;
+            if (WestDoorActive) count++;
+            return count;
+        }
     }
     
     public enum DoorClassification
