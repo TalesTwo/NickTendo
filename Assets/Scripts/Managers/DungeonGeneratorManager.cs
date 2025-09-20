@@ -107,6 +107,11 @@ namespace Managers
         private static void BuildRoomAtCords(int row, int col)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
+            // check all of the adjacent rooms for doors. we will have two different sets of connections
+            // REQUIRED connections - doors that must be present (i.e. if the room to the north has a south door, this room must have a north door)
+            // OPTIONAL connections - doors that can be present, but are not required (i.e. if the room to the east is empty, this room can have an east door, but it doesn't have to)
+            
+            // Step1. get the required connections
         }
         
         
