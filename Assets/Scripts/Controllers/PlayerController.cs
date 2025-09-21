@@ -5,20 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // stats
-    [Header("Player Stats")]
-    public float speed;
-    public float dashSpeed = 10.0f;
-    public float attackCooldown = 1.0f;
-    public float dashCooldown = 5.0f;
-    public float dashMovingCooldown = 0.5f;
-    
-    
     // input variables
     [Header("inputs")]
     public float horizontalInput;
     public float verticalInput;
-    private Vector3 mouseDirection;
+    private Vector3 _mouseDirection;
     
     // attack animations
     [Header("Attack Animations")]
@@ -26,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject dashAnimation;
 
     // rigidbody
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
     
     // dashing boolean
     private bool _isDashing = false;
@@ -37,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
@@ -54,7 +45,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartAttack();
                 _isAttacking = true;
-                Invoke(nameof(ResetAttack), attackCooldown);
+                Invoke(nameof(ResetAttack), PlayerStats.Instance.GetAttackCooldown());
             }
             
             // press left shift to perform a dash attack
@@ -67,10 +58,10 @@ public class PlayerController : MonoBehaviour
                 // get dash direction
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePosition.z = 0;
-                mouseDirection = (mousePosition - transform.position).normalized;
+                _mouseDirection = (mousePosition - transform.position).normalized;
                 // invoke dash cooldown
-                Invoke(nameof(ResetDash), dashCooldown);
-                Invoke(nameof(DashMovingStop), dashMovingCooldown);
+                Invoke(nameof(ResetDash), PlayerStats.Instance.GetDashCooldown());
+                Invoke(nameof(DashMovingStop), PlayerStats.Instance.GetDashDistance());
             }            
         }
 
@@ -85,12 +76,14 @@ public class PlayerController : MonoBehaviour
             // move player based on input
             if (_isDashMoving)
             {
-                rb.MovePosition(rb.position + new Vector2(mouseDirection.x, mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+                float dashSpeed = PlayerStats.Instance.GetDashSpeed();
+                _rb.MovePosition(_rb.position + new Vector2(_mouseDirection.x, _mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
             }
             else
             {
                 Vector2 update = new Vector2(horizontalInput, verticalInput);
-                rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime); 
+                float speed = PlayerStats.Instance.GetMovementSpeed();
+                _rb.MovePosition(_rb.position + update * (speed * Time.fixedDeltaTime)); 
             }            
         }
     }
