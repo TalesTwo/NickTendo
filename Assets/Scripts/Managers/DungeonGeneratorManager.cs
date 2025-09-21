@@ -64,6 +64,68 @@ namespace Managers
         {
             // Always start with the room above the start room
             BuildRoomAtCords(startPos.x-1, startPos.y);
+            
+            // Start the random walk
+            
+            // move left, right, or up, untill we are row-1
+            int currentRow = startPos.x - 1;
+            int currentCol = startPos.y;
+            // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
+            while (currentRow > 1)
+            {
+                // determine the possible directions we can move
+                List<string> possibleDirections = new List<string>();
+                // we can always move up
+                possibleDirections.Add("Up");
+                // we can move left if we are not in the first column
+                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null)
+                {
+                    possibleDirections.Add("Left");
+                }
+                // we can move right if we are not in the last column
+                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null)
+                {
+                    possibleDirections.Add("Right");
+                }
+                // now we randomly select a direction to move
+                int randomIndex = UnityEngine.Random.Range(0, possibleDirections.Count);
+                string selectedDirection = possibleDirections[randomIndex];
+                DebugUtils.Log($"Current Position: ({currentRow}, {currentCol}). Moving {selectedDirection}.");
+                switch (selectedDirection)
+                {
+                    case "Up":
+                        currentRow--;
+                        break;
+                    case "Left":
+                        currentCol--;
+                        break;
+                    case "Right":
+                        currentCol++;
+                        break;
+                }
+                // Now build the room at the new position if it doesn't already exist
+                if (dungeonRooms[currentRow][currentCol] == null)
+                {
+                    BuildRoomAtCords(currentRow, currentCol);
+                }
+            }
+            
+            // now build rooms directly across to the end room
+            while (currentCol != endPos.y)
+            {
+                if (currentCol < endPos.y)
+                {
+                    currentCol++;
+                }
+                else
+                {
+                    currentCol--;
+                }
+                if (dungeonRooms[currentRow][currentCol] == null)
+                {
+                    BuildRoomAtCords(currentRow, currentCol);
+                }
+            }
         }
 
         private void InitializeStartAndEndRoom()
@@ -218,6 +280,13 @@ namespace Managers
             // FINALLY, we have the final connections that this room needs to have
             DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
+            //TODO: Temporarily, just generate a spawn room, and place it inside the grid
+            Vector3 position = new Vector3(col * 20, 0, row * 20);
+            Room newRoom = GenerateRoomFromType(Types.RoomType.Spawn, position);
+            if (newRoom != null)
+            {
+                Instance.dungeonRooms[row][col] = newRoom;
+            }
             
             
         }
