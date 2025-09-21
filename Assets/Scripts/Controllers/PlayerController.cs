@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,11 +32,13 @@ public class PlayerController : MonoBehaviour
     private bool _isDashing = false;
     private bool _isDashMoving = false;
     private bool _isAttacking = false;
+    private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
     
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
     private void Update()
@@ -43,47 +46,53 @@ public class PlayerController : MonoBehaviour
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        
-        // press the space bar to perform a slash attack
-        if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
+
+        if (_isActive)
         {
-            StartAttack();
-            _isAttacking = true;
-            Invoke(nameof(ResetAttack), attackCooldown);
+            // press the space bar to perform a slash attack
+            if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
+            {
+                StartAttack();
+                _isAttacking = true;
+                Invoke(nameof(ResetAttack), attackCooldown);
+            }
+            
+            // press left shift to perform a dash attack
+            else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
+            {
+                // start dash
+                StartDash();
+                _isDashing = true;
+                _isDashMoving = true;
+                // get dash direction
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePosition.z = 0;
+                mouseDirection = (mousePosition - transform.position).normalized;
+                // invoke dash cooldown
+                Invoke(nameof(ResetDash), dashCooldown);
+                Invoke(nameof(DashMovingStop), dashMovingCooldown);
+            }            
         }
-        
-        // press left shift to perform a dash attack
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
-        {
-            // start dash
-            StartDash();
-            _isDashing = true;
-            _isDashMoving = true;
-            // get dash direction
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            mouseDirection = (mousePosition - transform.position).normalized;
-            // invoke dash cooldown
-            Invoke(nameof(ResetDash), dashCooldown);
-            Invoke(nameof(DashMovingStop), dashMovingCooldown);
-        }
+
     }
 
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()
     {
-        // move player based on input
-        if (_isDashMoving)
+        if (_isActive)
         {
-            rb.MovePosition(rb.position + new Vector2(mouseDirection.x, mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+            // move player based on input
+            if (_isDashMoving)
+            {
+                rb.MovePosition(rb.position + new Vector2(mouseDirection.x, mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+            }
+            else
+            {
+                Vector2 update = new Vector2(horizontalInput, verticalInput);
+                rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime); 
+            }            
         }
-        else
-        {
-            Vector2 update = new Vector2(horizontalInput, verticalInput);
-            rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime); 
-        }
-
     }
     
     // starts base attack animation
@@ -114,5 +123,17 @@ public class PlayerController : MonoBehaviour
     private void DashMovingStop()
     {
         _isDashMoving = false;
+    }
+
+    private void ToggleStartStop()
+    {
+        if (_isActive)
+        {
+            _isActive = false;
+        }
+        else
+        {
+            _isActive = true;
+        }
     }
 }
