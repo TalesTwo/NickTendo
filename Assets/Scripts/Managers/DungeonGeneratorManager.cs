@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using Generation.ScriptableObjects;
 using UnityEngine;
 
+/*
+ * NOTE TO SELF:
+ * pick the door in the direction we want to travel, and then add in the rooms, to guarantee that we always have a door to travel through
+ */
+
 namespace Managers
 {
     public class DungeonGeneratorManager : Singleton<DungeonGeneratorManager>
@@ -62,6 +67,10 @@ namespace Managers
 
         private void GeneratePhaseOne()
         {
+            /*
+             * WE NEED TO ENSURE THAT THE PROBABILITY TO SPAWN A SECOND DOOR IS ALWAYS 100% IN THIS PHASE
+             */
+            
             // Always start with the room above the start room
             BuildRoomAtCords(startPos.x-1, startPos.y);
             
@@ -76,20 +85,27 @@ namespace Managers
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
                 // we can always move up
+
                 possibleDirections.Add("Up");
-                // we can move left if we are not in the first column
-                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null)
+                
+                // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
+                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null && dungeonRooms[currentRow][currentCol].configuration.WestDoorActive)
                 {
                     possibleDirections.Add("Left");
                 }
                 // we can move right if we are not in the last column
-                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null)
+                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null && dungeonRooms[currentRow][currentCol].configuration.EastDoorActive)
                 {
                     possibleDirections.Add("Right");
                 }
                 // now we randomly select a direction to move
                 int randomIndex = UnityEngine.Random.Range(0, possibleDirections.Count);
+                
+                // This needs to be fixed, so that we only move in a direction that we have a door pointing to
+                
                 string selectedDirection = possibleDirections[randomIndex];
+                
+                //
                 DebugUtils.Log($"Current Position: ({currentRow}, {currentCol}). Moving {selectedDirection}.");
                 switch (selectedDirection)
                 {
@@ -106,7 +122,7 @@ namespace Managers
                 // Now build the room at the new position if it doesn't already exist
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
-                    BuildRoomAtCords(currentRow, currentCol);
+                    BuildRoomAtCords(currentRow, currentCol, true);
                 }
             }
             
@@ -123,9 +139,11 @@ namespace Managers
                 }
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
-                    BuildRoomAtCords(currentRow, currentCol);
+                    BuildRoomAtCords(currentRow, currentCol, true);
                 }
             }
+
+            DebugPrintDungeonLayout();
         }
 
         private void InitializeStartAndEndRoom()
@@ -138,7 +156,7 @@ namespace Managers
                 startPos = new Vector2Int(rows - 1, randomCol);
             }
 
-            Vector3 startPosition = new Vector3(startPos.y * 20, 0, startPos.x * 20);
+            Vector3 startPosition = new Vector3(startPos.y * 20,-startPos.x * 20, 0);
             Room startRoom = GenerateRoomFromType(Types.RoomType.Spawn, startPosition);
 
             // Make sure dungeonRooms has been initialized
@@ -152,7 +170,7 @@ namespace Managers
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
             }
-            Vector3 endPosition = new Vector3(endPos.y * 20, 0, endPos.x * 20);
+            Vector3 endPosition = new Vector3(endPos.y * 20,-endPos.x * 20, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
             if (dungeonRooms[endPos.x][endPos.y] == null)
             {
@@ -202,7 +220,7 @@ namespace Managers
         }
 
 
-        private void BuildRoomAtCords(int row, int col)
+        private void BuildRoomAtCords(int row, int col, bool PhaseOne = false)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
             // check all of the adjacent rooms for doors. we will have two different sets of connections
@@ -223,11 +241,13 @@ namespace Managers
              *
              * Once we determine the number of doors, we will randomly select from the optional doors that are available
              */
-            DebugUtils.Log($"Building room at ({row}, {col}) with {requiredDoorCount} total doors (NOT including optional).");
+            DebugUtils.LogSuccess($"Required connections for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
+            DebugUtils.LogSuccess($"Optional connections for room at ({row}, {col}): N:{optionalConnections.NorthDoorActive}, E:{optionalConnections.EastDoorActive}, S:{optionalConnections.SouthDoorActive}, W:{optionalConnections.WestDoorActive}");
+            
             
             int numOptionalDoorsToAdd = requiredDoorCount;
             float randomValue = UnityEngine.Random.value; // Random value between 0 and 1
-            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor)
+            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor || PhaseOne)
             {
                 numOptionalDoorsToAdd += 1;
             }
@@ -280,16 +300,8 @@ namespace Managers
             // FINALLY, we have the final connections that this room needs to have
             DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
-            //TODO: Temporarily, just generate a spawn room, and place it inside the grid
-            
-            Vector3 position = new Vector3(col * 100, 0, row * 100);
-            /*
-            Room newRoom = GenerateRoomFromType(Types.RoomType.Spawn, position);
-            if (newRoom != null)
-            {
-                Instance.dungeonRooms[row][col] = newRoom;
-            }
-            */
+            Vector3 position = new Vector3(col * 20, (-row * 20), 0);
+
             Types.RoomType roomTypeToSpawn = GenerateRoomTypeFromConfiguration(requiredConnections);
             Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position);
             if (newRoom != null)
@@ -446,7 +458,7 @@ namespace Managers
 
         private void DebugPrintDungeonLayout()
         {
-            DebugUtils.ClearConsole();
+            //DebugUtils.ClearConsole();
             if (dungeonRooms == null || dungeonRooms.Count == 0)
             {
                 DebugUtils.Log("Dungeon is empty.");
