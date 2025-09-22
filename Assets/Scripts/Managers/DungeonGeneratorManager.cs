@@ -27,6 +27,9 @@ namespace Managers
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int startPos = new Vector2Int(-1, -1);
         [SerializeField] private Vector2Int endPos = new Vector2Int(-1, -1);
+        
+        
+        private int Seed = 6; // for future use, if we want to have seeded generation
 
         
         void Start()
@@ -55,6 +58,11 @@ namespace Managers
 
         private void DungeonGeneration()
         {
+            if (Seed != 0)
+            {
+                UnityEngine.Random.InitState(Seed);
+            }
+            
             InitializeStartAndEndRoom();
             // Now we move onto the two phase generation
             // Phase 1: Create a "weighted random walk" from the start room to the end room
@@ -72,16 +80,21 @@ namespace Managers
              */
             
             // Always start with the room above the start room
-            BuildRoomAtCords(startPos.x-1, startPos.y); ///TODO: we might need to move this to after we determine the direction we want to move, to ensure we have a door pointing in the right direction
+            //BuildRoomAtCords(startPos.x-1, startPos.y); ///TODO: we might need to move this to after we determine the direction we want to move, to ensure we have a door pointing in the right direction
             
             // Start the random walk
             
             // move left, right, or up, untill we are row-1
-            int currentRow = startPos.x - 1;
+            
+            //on turn one, we can ONLY go up
+            bool firstTurn = true;
+            
+            int currentRow = startPos.x;
             int currentCol = startPos.y;
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 1)
             {
+                Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
                 // we can always move up
@@ -89,16 +102,16 @@ namespace Managers
                 possibleDirections.Add("Up");
                 
                 // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
-                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null && dungeonRooms[currentRow][currentCol].configuration.WestDoorActive)
+                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null && !firstTurn)
                 {
                     possibleDirections.Add("Left");
                 }
                 // we can move right if we are not in the last column
-                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null && dungeonRooms[currentRow][currentCol].configuration.EastDoorActive)
+                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null && !firstTurn)
                 {
                     possibleDirections.Add("Right");
                 }
-                // now we randomly select a direction to move
+
                 int randomIndex = UnityEngine.Random.Range(0, possibleDirections.Count);
                 
                 // This needs to be fixed, so that we only move in a direction that we have a door pointing to
@@ -111,35 +124,44 @@ namespace Managers
                 {
                     case "Up":
                         currentRow--;
+                        AdditionalConnections.SouthDoorActive = true; // we are moving up, so we need a south door
                         break;
                     case "Left":
+                        AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
                         currentCol--;
                         break;
                     case "Right":
+                        AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
                         currentCol++;
                         break;
                 }
+                DebugUtils.LogSuccess($"(based on direction of travel) ({currentRow}, {currentCol}): N:{AdditionalConnections.NorthDoorActive}, E:{AdditionalConnections.EastDoorActive}, S:{AdditionalConnections.SouthDoorActive}, W:{AdditionalConnections.WestDoorActive}");
                 // Now build the room at the new position if it doesn't already exist
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
-                    BuildRoomAtCords(currentRow, currentCol, true);
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
                 }
+                firstTurn = false; // after the first turn, we can move in any direction
             }
             
             // now build rooms directly across to the end room
             while (currentCol != endPos.y)
             {
+                Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 if (currentCol < endPos.y)
                 {
+                    AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
                     currentCol++;
                 }
                 else
                 {
+                    AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
                     currentCol--;
                 }
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
-                    BuildRoomAtCords(currentRow, currentCol, true);
+                    
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
                 }
             }
 
@@ -220,7 +242,7 @@ namespace Managers
         }
 
 
-        private void BuildRoomAtCords(int row, int col, bool PhaseOne = false)
+        private void BuildRoomAtCords(int row, int col, Types.DoorConfiguration additionalRequirements, bool PhaseOne = false)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
             // check all of the adjacent rooms for doors. we will have two different sets of connections
@@ -229,6 +251,13 @@ namespace Managers
             
             // Step1. get the required connections
             Types.DoorConfiguration requiredConnections = GenerateRequiredConnections(row, col);
+            
+            // add in any additional requirements
+            if (additionalRequirements.NorthDoorActive) requiredConnections.NorthDoorActive = true;
+            if (additionalRequirements.EastDoorActive) requiredConnections.EastDoorActive = true;
+            if (additionalRequirements.SouthDoorActive) requiredConnections.SouthDoorActive = true;
+            if (additionalRequirements.WestDoorActive) requiredConnections.WestDoorActive = true;
+            
             // Step2. determine the optional connections
             Types.DoorConfiguration optionalConnections = GenerateOptionalConnections(row, col);
             // Get a count of the total number of doors we currently have

@@ -38,6 +38,15 @@ public static class Types
         public bool SouthDoorActive;
         public bool WestDoorActive;
         
+        
+        // A constructor to easily create configurations
+        public DoorConfiguration(bool north, bool east, bool south, bool west)
+        {
+            NorthDoorActive = north;
+            EastDoorActive = east;
+            SouthDoorActive = south;
+            WestDoorActive = west;
+        }
         public override string ToString()
         {
             return $"N:{NorthDoorActive}, E:{EastDoorActive}, S:{SouthDoorActive}, W:{WestDoorActive}";
