@@ -202,7 +202,7 @@ namespace Managers
         }
 
 
-        private static void BuildRoomAtCords(int row, int col)
+        private void BuildRoomAtCords(int row, int col)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
             // check all of the adjacent rooms for doors. we will have two different sets of connections
@@ -281,13 +281,80 @@ namespace Managers
             DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
             //TODO: Temporarily, just generate a spawn room, and place it inside the grid
-            Vector3 position = new Vector3(col * 20, 0, row * 20);
+            
+            Vector3 position = new Vector3(col * 100, 0, row * 100);
+            /*
             Room newRoom = GenerateRoomFromType(Types.RoomType.Spawn, position);
             if (newRoom != null)
             {
                 Instance.dungeonRooms[row][col] = newRoom;
             }
+            */
+            Types.RoomType roomTypeToSpawn = GenerateRoomTypeFromConfiguration(requiredConnections);
+            Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position);
+            if (newRoom != null)
+            {
+                Instance.dungeonRooms[row][col] = newRoom;
+            }
+            // add it to the dungeon grid
             
+        }
+        
+        private static Types.RoomType GenerateRoomTypeFromConfiguration(Types.DoorConfiguration configuration)
+        {
+            /*
+             * The patern this will ALWAYS follow is:
+             * North, East, South, West
+             *
+             * MEANING: if a room has a North and East door, it will be classified as a "NE" room
+             *          or if a room is South and West, it will be classified as a "SW" room
+             *          East will never appear before North, and South will never appear before East.. ect.
+             */
+            
+            // Create a string mapping to Transfer the door configuration to the correct order
+            string doorPattern = "";
+            if (configuration.NorthDoorActive) doorPattern += "N";
+            if (configuration.EastDoorActive) doorPattern += "E";
+            if (configuration.SouthDoorActive) doorPattern += "S";
+            if (configuration.WestDoorActive) doorPattern += "W";
+            
+            // Now create all the possible room types
+            List<string> possibleRoomTypes = new List<string>
+            {
+                "N", "E", "S", "W",
+                "NE", "NS", "NW", "ES", "EW", "SW",
+                "NES", "NEW", "NSW", "ESW",
+                "NESW"
+            };
+            // Now we can match the doorPattern to the possibleRoomTypes
+            if (possibleRoomTypes.Contains(doorPattern))
+            {
+                DebugUtils.LogSuccess($"Room configuration {doorPattern} is valid.");
+                // Now we can generate the room based on the door pattern
+                Types.RoomType roomTypeToSpawn = doorPattern switch
+                {
+                    "N" => Types.RoomType.N,
+                    "E" => Types.RoomType.E,
+                    "S" => Types.RoomType.S,
+                    "W" => Types.RoomType.W,
+                    "NE" => Types.RoomType.NE,
+                    "NS" => Types.RoomType.NS,
+                    "NW" => Types.RoomType.NW,
+                    "ES" => Types.RoomType.ES,
+                    "EW" => Types.RoomType.EW,
+                    "SW" => Types.RoomType.SW,
+                    "NES" => Types.RoomType.NES,
+                    "NEW" => Types.RoomType.NEW,
+                    "NSW" => Types.RoomType.NSW,
+                    "ESW" => Types.RoomType.ESW,
+                    "NESW" => Types.RoomType.NESW,
+                    _ => Types.RoomType.DEFAULT
+                };
+                return roomTypeToSpawn;
+                
+            }
+            
+            return Types.RoomType.DEFAULT;
             
         }
 

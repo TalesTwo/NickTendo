@@ -14,8 +14,21 @@ public static class Types
         E,
         S,
         W,
+        NE,
+        NS,
+        NW,
+        ES,
+        EW,
+        SW,
+        NES,
+        NEW,
+        NSW,
+        ESW,
+        NESW,
         End,
+        DEFAULT,
     }
+
     
     [Serializable]
     public struct DoorConfiguration

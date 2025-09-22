@@ -75,8 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2fee122be8f044882e6414baf8624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 30
-  cols: 30
+  rows: 5
+  cols: 5
   probabilityToAddOptionalDoor_OneRequiredDoor: 0.75
   probabilityToAddOptionalDoor_TwoRequiredDoors: 0.5
   probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.25
@@ -571,7 +571,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1050309879799609352, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.0110073
+      value: 1.0110054
       objectReference: {fileID: 0}
     - target: {fileID: 1289894082174871329, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_Name
