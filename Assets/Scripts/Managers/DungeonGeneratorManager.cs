@@ -72,7 +72,7 @@ namespace Managers
              */
             
             // Always start with the room above the start room
-            BuildRoomAtCords(startPos.x-1, startPos.y);
+            BuildRoomAtCords(startPos.x-1, startPos.y); ///TODO: we might need to move this to after we determine the direction we want to move, to ensure we have a door pointing in the right direction
             
             // Start the random walk
             
