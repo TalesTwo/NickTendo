@@ -29,7 +29,7 @@ public class Room : MonoBehaviour
         // Initialize room logic here
         ApplyDoorConfiguration();
         // Disable the room by default
-        DisableRoom();
+        //DisableRoom();
     }
 
     
