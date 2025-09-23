@@ -8,6 +8,7 @@ public class FollowerEnemyController : MonoBehaviour
     public int health = 10;
     public float speed = 2;
     public float knockBackSpeed = 10;
+    private float _particleKnockBackSpeed;
     public float knockBackTime = 0.15f;
     public float hitFlashDuration = 0.1f;
 
@@ -30,6 +31,7 @@ public class FollowerEnemyController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _color = _renderer.color;
         _player = GameObject.Find("Player");
+        _particleKnockBackSpeed = knockBackSpeed / 40;
     }
 
     // Update is called once per frame
@@ -77,14 +79,14 @@ public class FollowerEnemyController : MonoBehaviour
         }
     }
 
-    // todo 
-    // add particles
+    // Sets knockback and adds particle effect
     private void SetKnockBack()
     {
         _isKnockback = true;
         _rb.AddForce(new Vector2(-_direction.x, -_direction.y) * knockBackSpeed, ForceMode2D.Impulse);
         StartCoroutine(HitFlash());
-        Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, Quaternion.identity);
+        GameObject thing = Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, Quaternion.identity);
+        thing.GetComponent<Rigidbody2D>().AddForce(new Vector2(-_direction.x, -_direction.y) * _particleKnockBackSpeed, ForceMode2D.Impulse);
         Invoke(nameof(ResetKnockBack), knockBackTime);
     }
 
