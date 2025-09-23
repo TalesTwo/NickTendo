@@ -8,6 +8,11 @@ using UnityEngine;
  * pick the door in the direction we want to travel, and then add in the rooms, to guarantee that we always have a door to travel through
  */
 
+/*
+ * Note to self, we need to artificially move foreward, get our required cnnection, and another required based on the direction of travel,
+ * and then build the room
+ */
+
 namespace Managers
 {
     public class DungeonGeneratorManager : Singleton<DungeonGeneratorManager>
@@ -94,6 +99,7 @@ namespace Managers
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 1)
             {
+                DebugUtils.Log($"Current Position: ({currentRow}, {currentCol})");
                 Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
@@ -118,8 +124,7 @@ namespace Managers
                 
                 string selectedDirection = possibleDirections[randomIndex];
                 
-                //
-                DebugUtils.Log($"Current Position: ({currentRow}, {currentCol}). Moving {selectedDirection}.");
+                
                 switch (selectedDirection)
                 {
                     case "Up":
@@ -135,10 +140,12 @@ namespace Managers
                         currentCol++;
                         break;
                 }
+                DebugUtils.Log($"Moving {selectedDirection}.");
                 DebugUtils.LogSuccess($"(based on direction of travel) ({currentRow}, {currentCol}): N:{AdditionalConnections.NorthDoorActive}, E:{AdditionalConnections.EastDoorActive}, S:{AdditionalConnections.SouthDoorActive}, W:{AdditionalConnections.WestDoorActive}");
                 // Now build the room at the new position if it doesn't already exist
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
+                    DebugUtils.Log($"Building room at ({currentRow}, {currentCol})");
                     BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
                 }
                 firstTurn = false; // after the first turn, we can move in any direction
