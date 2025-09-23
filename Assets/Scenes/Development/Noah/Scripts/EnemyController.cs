@@ -25,10 +25,12 @@ public class EnemyController : MonoBehaviour
     // reduce health on damage from a PlayerAttack
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PlayerAttack"))
+        if (collision.gameObject.CompareTag("DashAttack"))
         {
-            AttackDamageController controller = collision.gameObject.GetComponent<AttackDamageController>();
-            health -= controller.damage;
+            health -= (int)PlayerStats.Instance.GetDashDamage();
+        } else if (collision.gameObject.CompareTag("PlayerAttack"))
+        {
+            health -= (int)PlayerStats.Instance.GetAttackDamage();
         }
     }
 }
