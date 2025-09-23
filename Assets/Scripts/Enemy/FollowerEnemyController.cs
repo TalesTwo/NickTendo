@@ -16,6 +16,9 @@ public class FollowerEnemyController : MonoBehaviour
     private SpriteRenderer _renderer;
     private Color _color;
     
+    public GameObject hitEffect;
+    public float hitEffectDistance;
+    
     private bool _isKnockback = false;
 
     private Vector3 _direction;
@@ -81,6 +84,7 @@ public class FollowerEnemyController : MonoBehaviour
         _isKnockback = true;
         _rb.AddForce(new Vector2(-_direction.x, -_direction.y) * knockBackSpeed, ForceMode2D.Impulse);
         StartCoroutine(HitFlash());
+        Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, Quaternion.identity);
         Invoke(nameof(ResetKnockBack), knockBackTime);
     }
 

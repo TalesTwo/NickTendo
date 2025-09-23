@@ -489,6 +489,8 @@ MonoBehaviour:
   knockBackSpeed: 1500
   knockBackTime: 0.2
   hitFlashDuration: 0.1
+  hitEffect: {fileID: 5646512874974776348, guid: 94c983157ac966847b7d85e71ae0921f, type: 3}
+  hitEffectDistance: 0.3
 --- !u!212 &1761631618
 SpriteRenderer:
   m_ObjectHideFlags: 0
