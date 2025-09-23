@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Generation.ScriptableObjects;
 using UnityEngine;
@@ -30,23 +31,40 @@ namespace Managers
         [Space(10f)]
         [Header("Start/End Positions (Row, Col)")]
         [Header("If set to -1, -1, will randomize")]
-        [SerializeField] private Vector2Int startPos = new Vector2Int(-1, -1);
-        [SerializeField] private Vector2Int endPos = new Vector2Int(-1, -1);
+        [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
+        [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
         
+        private Vector2Int startPos = new Vector2Int(-1, -1);
+        private Vector2Int endPos = new Vector2Int(-1, -1);
         
-        private int Seed = 6; // for future use, if we want to have seeded generation
-
+        [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
+        private float waitTime = 2f;
         
         void Start()
         {
-            InitializeDungeonGrid(rows, cols);
+            //InitializeDungeonGrid(rows, cols);
+            // create a function, that will be called every n seconds, to initalize and print a new dungeon
+            StartCoroutine(WaitAndGenerateDungeon());
             
+        }
+        private IEnumerator WaitAndGenerateDungeon()
+        {
+            while (true)
+            {
+                // wait for n seconds
+                yield return new WaitForSeconds(waitTime);
+
+                // only run if not paused
+   
+                InitializeDungeonGrid(rows, cols);
+                DungeonGeneration();
+            
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-
             if (Input.GetKeyDown(KeyCode.G))
             {
                 DungeonGeneration();
@@ -64,6 +82,7 @@ namespace Managers
             }
         }
 
+        
 
 
         private void DungeonGeneration()
@@ -81,6 +100,10 @@ namespace Managers
             // the random walk will never move "backward":
             // Directions of movement: North (up), East (right), West (left)
             GeneratePhaseOne();
+            // build a room directly below the end room
+            //BuildRoomAtCords(endPos.x + 1, endPos.y, new Types.DoorConfiguration(false, false, true, false));
+            
+            DebugPrintDungeonLayout();
         }
 
         private void GeneratePhaseOne()
@@ -96,10 +119,7 @@ namespace Managers
             
             // move left, right, or up, untill we are row-1
             
-            //on turn one, we can ONLY go up
-            bool firstTurn = true;
-            
-            int currentRow = startPos.x;
+            int currentRow = startPos.x-1;
             int currentCol = startPos.y;
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 1)
@@ -113,12 +133,12 @@ namespace Managers
                 possibleDirections.Add("Up");
                 
                 // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
-                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null && !firstTurn)
+                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null)
                 {
                     possibleDirections.Add("Left");
                 }
                 // we can move right if we are not in the last column
-                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null && !firstTurn)
+                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null)
                 {
                     possibleDirections.Add("Right");
                 }
@@ -133,16 +153,13 @@ namespace Managers
                 switch (selectedDirection)
                 {
                     case "Up":
-                        currentRow--;
-                        AdditionalConnections.SouthDoorActive = true; // we are moving up, so we need a south door
+                        AdditionalConnections.NorthDoorActive = true;
                         break;
                     case "Left":
-                        AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
-                        currentCol--;
+                        AdditionalConnections.WestDoorActive = true; 
                         break;
                     case "Right":
-                        AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
-                        currentCol++;
+                        AdditionalConnections.EastDoorActive = true;
                         break;
                 }
                 DebugUtils.Log($"Moving {selectedDirection}.");
@@ -151,9 +168,22 @@ namespace Managers
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
                     DebugUtils.Log($"Building room at ({currentRow}, {currentCol})");
-                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections);
                 }
-                firstTurn = false; // after the first turn, we can move in any direction
+                
+                switch (selectedDirection)
+                {
+                    case "Up":
+                        currentRow--;
+                        break;
+                    case "Left":
+                        currentCol--;
+                        break;
+                    case "Right":
+                        currentCol++;
+                        break;
+                }
+                
             }
             
             // now build rooms directly across to the end room
@@ -162,31 +192,45 @@ namespace Managers
                 Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 if (currentCol < endPos.y)
                 {
-                    AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
-                    currentCol++;
+                    AdditionalConnections.EastDoorActive = true; // we are moving right, so we need a west door
+                    //currentCol++;
                 }
                 else
                 {
-                    AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
-                    currentCol--;
+                    AdditionalConnections.WestDoorActive = true; // we are moving left, so we need an east door
+                    //currentCol--;
                 }
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
                     
-                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections);
+                }
+                
+                // Now we increment or decrement the column
+                if(AdditionalConnections.EastDoorActive)
+                {
+                    currentCol++;
+                }
+                if(AdditionalConnections.WestDoorActive)
+                {
+                    currentCol--;
                 }
             }
-
-            DebugPrintDungeonLayout();
+            // no we need to buid the last room, which is the room directly below the end room
+            if (dungeonRooms[currentRow][currentCol] == null)
+            {
+                BuildRoomAtCords(currentRow, currentCol, new Types.DoorConfiguration(false, false, false, false));
+            }
         }
 
         private void InitializeStartAndEndRoom()
         {
             // Spawn in a random SpawnRoom at the start position. If startPos is -1, -1, randomize it
             // Note: random spawns will always be on the Bottom row
-            if (startPos.x == -1 && startPos.y == -1)
+            if (_startPos.x == -1 && _startPos.y == -1)
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
+                DebugUtils.Log($"Randomized Start Position: ({rows - 1}, {randomCol})");
                 startPos = new Vector2Int(rows - 1, randomCol);
             }
 
@@ -199,7 +243,7 @@ namespace Managers
                 dungeonRooms[startPos.x][startPos.y] = startRoom;
             }
             // Set up the ending room, with the same logic as above
-            if (endPos.x == -1 && endPos.y == -1)
+            if (_endPos.x == -1 && _endPos.y == -1)
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
@@ -224,6 +268,18 @@ namespace Managers
                     row.Add(null); // Initialize with nulls
                 }
                 dungeonRooms.Add(row);
+            }
+            // I also want to clear all "room" objects from the world
+            Room[] existingRooms = FindObjectsOfType<Room>();
+            foreach (Room room in existingRooms)
+            {
+                DestroyImmediate(room.gameObject);
+            }
+            // destroy all animated buttons
+            AnimatedButton[] existingButtons = FindObjectsOfType<AnimatedButton>();
+            foreach (AnimatedButton button in existingButtons)
+            {
+                DestroyImmediate(button.gameObject);
             }
         }
         
@@ -254,7 +310,7 @@ namespace Managers
         }
 
 
-        private void BuildRoomAtCords(int row, int col, Types.DoorConfiguration additionalRequirements, bool PhaseOne = false)
+        private void BuildRoomAtCords(int row, int col, Types.DoorConfiguration additionalRequirements)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
             // check all of the adjacent rooms for doors. we will have two different sets of connections
@@ -288,7 +344,7 @@ namespace Managers
             
             int numOptionalDoorsToAdd = requiredDoorCount;
             float randomValue = UnityEngine.Random.value; // Random value between 0 and 1
-            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor || PhaseOne)
+            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor)
             {
                 numOptionalDoorsToAdd += 1;
             }
