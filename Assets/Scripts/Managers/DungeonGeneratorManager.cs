@@ -40,6 +40,11 @@ namespace Managers
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         private float waitTime = 2f;
         
+        // list of cords where we need to PCG
+        private List<(int row, int col)> alteredRoomCoords = new List<(int row, int col)>();
+        
+        private bool bPhaseOneComplete = false;
+        
         void Start()
         {
             //InitializeDungeonGrid(rows, cols);
@@ -67,7 +72,14 @@ namespace Managers
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
+                InitializeDungeonGrid(rows, cols);
                 DungeonGeneration();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                Room tempRoom = dungeonRooms[1][0];
+                PCG(dungeonRooms, tempRoom, 1, 0);
             }
             if(Input.GetKeyDown(KeyCode.H))
             {
@@ -100,10 +112,102 @@ namespace Managers
             // the random walk will never move "backward":
             // Directions of movement: North (up), East (right), West (left)
             GeneratePhaseOne();
+            bPhaseOneComplete = true;
             // build a room directly below the end room
             //BuildRoomAtCords(endPos.x + 1, endPos.y, new Types.DoorConfiguration(false, false, true, false));
             
+            // Temporarily, we will hardcode phase 2 to ensure it works
+            // we will do this on row 1, col 0
+
+            //Phase 2: Loop through the alteredRoomCoords, and PCG from each of those rooms
+            foreach (var (row, col) in alteredRoomCoords)
+            {
+                Room currentRoom = dungeonRooms[row][col];
+                PCG(dungeonRooms, currentRoom, row, col);
+            }
+            
             DebugPrintDungeonLayout();
+        }
+        
+        
+        private void PCG(List<List<Room>> dungeonMap, Room currentRoom, int currentRow, int currentCol)
+        {
+            // This will be the recursive depth first search algorithm to generate the dungeon
+            // prevent infinite recursion
+            if (currentRoom == null || currentRoom.bIsFinalized) { return;}
+            // mark as visited
+            currentRoom.bIsFinalized= true;
+            DebugUtils.Log($"PCG: Visiting room at ({currentRow}, {currentCol})");
+            
+            // ensure we are within bounds
+            if (currentRow < 0 || currentCol < 0 || currentRow >= dungeonMap.Count || currentCol >= dungeonMap[currentRow].Count) return;
+            
+            // Get access to the connections of the current room
+            Types.DoorConfiguration connections = currentRoom.configuration;
+            
+            // we will go in a north, east, south, west order
+            
+            // North
+            if(connections.NorthDoorActive && currentRow - 1 >= 0)
+            {
+                // get the room to the north
+                Room northRoom = dungeonMap[currentRow - 1][currentCol];
+                
+                // ensure the room has not been visited
+                if (northRoom == null)
+                {
+                    // PCG a new room at this location
+                    BuildRoomAtCords(currentRow - 1, currentCol, new Types.DoorConfiguration(false, false, false, false));
+                    northRoom = dungeonMap[currentRow - 1][currentCol]; 
+                    PCG(dungeonMap, northRoom, currentRow - 1, currentCol);
+                }
+            }
+            
+            // east
+            if(connections.EastDoorActive && currentCol + 1 < dungeonMap[currentRow].Count)
+            {
+                // get the room to the east
+                Room eastRoom = dungeonMap[currentRow][currentCol + 1];
+                // ensure the room has not been visited
+                if (eastRoom == null)
+                {
+                    // PCG a new room at this location
+                    BuildRoomAtCords(currentRow, currentCol + 1, new Types.DoorConfiguration(false, false, false, false));
+                    eastRoom = dungeonMap[currentRow][currentCol + 1];
+                    PCG(dungeonMap, eastRoom, currentRow, currentCol + 1);
+                }
+            }
+            
+            // South
+            if(connections.SouthDoorActive && currentRow + 1 < dungeonMap.Count)
+            {
+                // get the room to the south
+                Room southRoom = dungeonMap[currentRow + 1][currentCol];
+                // ensure the room has not been visited
+                if (southRoom == null )
+                {
+                    // PCG a new room at this location
+                    BuildRoomAtCords(currentRow + 1, currentCol, new Types.DoorConfiguration(false, false, false, false));
+                    southRoom = dungeonMap[currentRow + 1][currentCol];
+                    PCG(dungeonMap, southRoom, currentRow + 1, currentCol);
+                }
+            }
+            
+            // West
+            if(connections.WestDoorActive && currentCol - 1 >= 0)
+            {
+                // get the room to the west
+                Room westRoom = dungeonMap[currentRow][currentCol - 1];
+                // ensure the room has not been visited
+                if (westRoom == null)
+                {
+                    // PCG a new room at this location
+                    BuildRoomAtCords(currentRow, currentCol - 1, new Types.DoorConfiguration(false, false, false, false));
+                    westRoom = dungeonMap[currentRow][currentCol - 1];
+                    PCG(dungeonMap, westRoom, currentRow, currentCol - 1);
+                }
+            }
+            
         }
 
         private void GeneratePhaseOne()
@@ -404,9 +508,13 @@ namespace Managers
             if (newRoom != null)
             {
                 Instance.dungeonRooms[row][col] = newRoom;
+                if (!bPhaseOneComplete)
+                {
+                    alteredRoomCoords.Add((row, col));
+                }
+                
             }
             // add it to the dungeon grid
-            
         }
         
         private static Types.RoomType GenerateRoomTypeFromConfiguration(Types.DoorConfiguration configuration)
