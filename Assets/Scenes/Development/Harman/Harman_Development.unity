@@ -1042,6 +1042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestItem
       objectReference: {fileID: 0}
+    - target: {fileID: 2879190298918606515, guid: 7769da88332817240afc87975036addb, type: 3}
+      propertyPath: CoinValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7407245164999261273, guid: 7769da88332817240afc87975036addb, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -3396,6 +3400,14 @@ PrefabInstance:
     - target: {fileID: 2689061246238724195, guid: 7769da88332817240afc87975036addb, type: 3}
       propertyPath: m_Name
       value: Rowlet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879190298918606515, guid: 7769da88332817240afc87975036addb, type: 3}
+      propertyPath: IsKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879190298918606515, guid: 7769da88332817240afc87975036addb, type: 3}
+      propertyPath: IsCoin
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879190298918606515, guid: 7769da88332817240afc87975036addb, type: 3}
       propertyPath: CanAutoPickup
