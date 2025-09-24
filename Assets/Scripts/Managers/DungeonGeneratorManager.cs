@@ -49,7 +49,7 @@ namespace Managers
         {
             //InitializeDungeonGrid(rows, cols);
             // create a function, that will be called every n seconds, to initalize and print a new dungeon
-            StartCoroutine(WaitAndGenerateDungeon());
+            //StartCoroutine(WaitAndGenerateDungeon());
             
         }
         private IEnumerator WaitAndGenerateDungeon()
@@ -75,12 +75,7 @@ namespace Managers
                 InitializeDungeonGrid(rows, cols);
                 DungeonGeneration();
             }
-
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                Room tempRoom = dungeonRooms[1][0];
-                PCG(dungeonRooms, tempRoom, 1, 0);
-            }
+            
             if(Input.GetKeyDown(KeyCode.H))
             {
                 DebugPrintDungeonLayout();
@@ -120,10 +115,24 @@ namespace Managers
             // we will do this on row 1, col 0
 
             //Phase 2: Loop through the alteredRoomCoords, and PCG from each of those rooms
+            /*
             foreach (var (row, col) in alteredRoomCoords)
             {
                 Room currentRoom = dungeonRooms[row][col];
                 PCG(dungeonRooms, currentRoom, row, col);
+            }
+            */
+            // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
+            for (int r = 0; r < dungeonRooms.Count; r++)
+            {
+                for (int c = 0; c < dungeonRooms[r].Count; c++)
+                {
+                    Room currentRoom = dungeonRooms[r][c];
+                    if (currentRoom != null)
+                    {
+                        PCG(dungeonRooms, currentRoom, r, c);
+                    }
+                }
             }
             
             DebugPrintDungeonLayout();
