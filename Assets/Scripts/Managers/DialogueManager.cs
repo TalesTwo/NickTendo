@@ -60,6 +60,8 @@ namespace Managers
 
         private void ActivateDialogue(string[] npcDialogue, Image npcSprite, string npcName)
         {
+            EventBroadcaster.Broadcast_StartStopAction(); // stop player inputs
+            
             ZeroText();
         
             dialogue = npcDialogue;
@@ -107,6 +109,7 @@ namespace Managers
             else
             {
                 isReading = false;
+                EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
                 ZeroText();
             }
         }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 650848207791582978}
   - component: {fileID: 3471283427815167059}
   - component: {fileID: 5201756706622150685}
-  - component: {fileID: 5497293211984391949}
   m_Layer: 0
   m_Name: SlashAttack
   m_TagString: PlayerAttack
@@ -166,16 +165,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0.24402711, y: -0.13478597}
   m_Size: {x: 0.81053966, y: 0.9738461}
   m_Direction: 0
---- !u!114 &5497293211984391949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2407103696244724232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2623c6ec455ba047b6ad0023594b565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2

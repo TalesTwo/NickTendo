@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using Generation.ScriptableObjects;
 using UnityEngine;
 
+/*
+ * NOTE TO SELF:
+ * pick the door in the direction we want to travel, and then add in the rooms, to guarantee that we always have a door to travel through
+ */
+
+/*
+ * Note to self, we need to artificially move foreward, get our required cnnection, and another required based on the direction of travel,
+ * and then build the room
+ */
+
 namespace Managers
 {
     public class DungeonGeneratorManager : Singleton<DungeonGeneratorManager>
@@ -22,17 +32,25 @@ namespace Managers
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int startPos = new Vector2Int(-1, -1);
         [SerializeField] private Vector2Int endPos = new Vector2Int(-1, -1);
+        
+        
+        private int Seed = 6; // for future use, if we want to have seeded generation
 
         
         void Start()
         {
             InitializeDungeonGrid(rows, cols);
-            DungeonGeneration();
+            
         }
 
         // Update is called once per frame
         void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                DungeonGeneration();
+            }
             if(Input.GetKeyDown(KeyCode.H))
             {
                 DebugPrintDungeonLayout();
@@ -50,6 +68,11 @@ namespace Managers
 
         private void DungeonGeneration()
         {
+            if (Seed != 0)
+            {
+                UnityEngine.Random.InitState(Seed);
+            }
+            
             InitializeStartAndEndRoom();
             // Now we move onto the two phase generation
             // Phase 1: Create a "weighted random walk" from the start room to the end room
@@ -62,8 +85,99 @@ namespace Managers
 
         private void GeneratePhaseOne()
         {
+            /*
+             * WE NEED TO ENSURE THAT THE PROBABILITY TO SPAWN A SECOND DOOR IS ALWAYS 100% IN THIS PHASE
+             */
+            
             // Always start with the room above the start room
-            BuildRoomAtCords(startPos.x-1, startPos.y);
+            //BuildRoomAtCords(startPos.x-1, startPos.y); ///TODO: we might need to move this to after we determine the direction we want to move, to ensure we have a door pointing in the right direction
+            
+            // Start the random walk
+            
+            // move left, right, or up, untill we are row-1
+            
+            //on turn one, we can ONLY go up
+            bool firstTurn = true;
+            
+            int currentRow = startPos.x;
+            int currentCol = startPos.y;
+            // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
+            while (currentRow > 1)
+            {
+                DebugUtils.Log($"Current Position: ({currentRow}, {currentCol})");
+                Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
+                // determine the possible directions we can move
+                List<string> possibleDirections = new List<string>();
+                // we can always move up
+
+                possibleDirections.Add("Up");
+                
+                // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
+                if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null && !firstTurn)
+                {
+                    possibleDirections.Add("Left");
+                }
+                // we can move right if we are not in the last column
+                if (currentCol < cols - 1 && dungeonRooms[currentRow][currentCol + 1] == null && !firstTurn)
+                {
+                    possibleDirections.Add("Right");
+                }
+
+                int randomIndex = UnityEngine.Random.Range(0, possibleDirections.Count);
+                
+                // This needs to be fixed, so that we only move in a direction that we have a door pointing to
+                
+                string selectedDirection = possibleDirections[randomIndex];
+                
+                
+                switch (selectedDirection)
+                {
+                    case "Up":
+                        currentRow--;
+                        AdditionalConnections.SouthDoorActive = true; // we are moving up, so we need a south door
+                        break;
+                    case "Left":
+                        AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
+                        currentCol--;
+                        break;
+                    case "Right":
+                        AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
+                        currentCol++;
+                        break;
+                }
+                DebugUtils.Log($"Moving {selectedDirection}.");
+                DebugUtils.LogSuccess($"(based on direction of travel) ({currentRow}, {currentCol}): N:{AdditionalConnections.NorthDoorActive}, E:{AdditionalConnections.EastDoorActive}, S:{AdditionalConnections.SouthDoorActive}, W:{AdditionalConnections.WestDoorActive}");
+                // Now build the room at the new position if it doesn't already exist
+                if (dungeonRooms[currentRow][currentCol] == null)
+                {
+                    DebugUtils.Log($"Building room at ({currentRow}, {currentCol})");
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
+                }
+                firstTurn = false; // after the first turn, we can move in any direction
+            }
+            
+            // now build rooms directly across to the end room
+            while (currentCol != endPos.y)
+            {
+                Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
+                if (currentCol < endPos.y)
+                {
+                    AdditionalConnections.WestDoorActive = true; // we are moving right, so we need a west door
+                    currentCol++;
+                }
+                else
+                {
+                    AdditionalConnections.EastDoorActive = true; // we are moving left, so we need an east door
+                    currentCol--;
+                }
+                if (dungeonRooms[currentRow][currentCol] == null)
+                {
+                    
+                    BuildRoomAtCords(currentRow, currentCol, AdditionalConnections, true);
+                }
+            }
+
+            DebugPrintDungeonLayout();
         }
 
         private void InitializeStartAndEndRoom()
@@ -76,7 +190,7 @@ namespace Managers
                 startPos = new Vector2Int(rows - 1, randomCol);
             }
 
-            Vector3 startPosition = new Vector3(startPos.y * 20, 0, startPos.x * 20);
+            Vector3 startPosition = new Vector3(startPos.y * 20,-startPos.x * 20, 0);
             Room startRoom = GenerateRoomFromType(Types.RoomType.Spawn, startPosition);
 
             // Make sure dungeonRooms has been initialized
@@ -90,7 +204,7 @@ namespace Managers
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
             }
-            Vector3 endPosition = new Vector3(endPos.y * 20, 0, endPos.x * 20);
+            Vector3 endPosition = new Vector3(endPos.y * 20,-endPos.x * 20, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
             if (dungeonRooms[endPos.x][endPos.y] == null)
             {
@@ -140,7 +254,7 @@ namespace Managers
         }
 
 
-        private static void BuildRoomAtCords(int row, int col)
+        private void BuildRoomAtCords(int row, int col, Types.DoorConfiguration additionalRequirements, bool PhaseOne = false)
         {
             // this function will check what its required doors are, and then build a room that fits those requirements
             // check all of the adjacent rooms for doors. we will have two different sets of connections
@@ -149,6 +263,13 @@ namespace Managers
             
             // Step1. get the required connections
             Types.DoorConfiguration requiredConnections = GenerateRequiredConnections(row, col);
+            
+            // add in any additional requirements
+            if (additionalRequirements.NorthDoorActive) requiredConnections.NorthDoorActive = true;
+            if (additionalRequirements.EastDoorActive) requiredConnections.EastDoorActive = true;
+            if (additionalRequirements.SouthDoorActive) requiredConnections.SouthDoorActive = true;
+            if (additionalRequirements.WestDoorActive) requiredConnections.WestDoorActive = true;
+            
             // Step2. determine the optional connections
             Types.DoorConfiguration optionalConnections = GenerateOptionalConnections(row, col);
             // Get a count of the total number of doors we currently have
@@ -161,11 +282,13 @@ namespace Managers
              *
              * Once we determine the number of doors, we will randomly select from the optional doors that are available
              */
-            DebugUtils.Log($"Building room at ({row}, {col}) with {requiredDoorCount} total doors (NOT including optional).");
+            DebugUtils.LogSuccess($"Required connections for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
+            DebugUtils.LogSuccess($"Optional connections for room at ({row}, {col}): N:{optionalConnections.NorthDoorActive}, E:{optionalConnections.EastDoorActive}, S:{optionalConnections.SouthDoorActive}, W:{optionalConnections.WestDoorActive}");
+            
             
             int numOptionalDoorsToAdd = requiredDoorCount;
             float randomValue = UnityEngine.Random.value; // Random value between 0 and 1
-            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor)
+            if (numOptionalDoorsToAdd == 1 && randomValue < Instance.probabilityToAddOptionalDoor_OneRequiredDoor || PhaseOne)
             {
                 numOptionalDoorsToAdd += 1;
             }
@@ -218,7 +341,73 @@ namespace Managers
             // FINALLY, we have the final connections that this room needs to have
             DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
+            Vector3 position = new Vector3(col * 20, (-row * 20), 0);
+
+            Types.RoomType roomTypeToSpawn = GenerateRoomTypeFromConfiguration(requiredConnections);
+            Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position);
+            if (newRoom != null)
+            {
+                Instance.dungeonRooms[row][col] = newRoom;
+            }
+            // add it to the dungeon grid
             
+        }
+        
+        private static Types.RoomType GenerateRoomTypeFromConfiguration(Types.DoorConfiguration configuration)
+        {
+            /*
+             * The patern this will ALWAYS follow is:
+             * North, East, South, West
+             *
+             * MEANING: if a room has a North and East door, it will be classified as a "NE" room
+             *          or if a room is South and West, it will be classified as a "SW" room
+             *          East will never appear before North, and South will never appear before East.. ect.
+             */
+            
+            // Create a string mapping to Transfer the door configuration to the correct order
+            string doorPattern = "";
+            if (configuration.NorthDoorActive) doorPattern += "N";
+            if (configuration.EastDoorActive) doorPattern += "E";
+            if (configuration.SouthDoorActive) doorPattern += "S";
+            if (configuration.WestDoorActive) doorPattern += "W";
+            
+            // Now create all the possible room types
+            List<string> possibleRoomTypes = new List<string>
+            {
+                "N", "E", "S", "W",
+                "NE", "NS", "NW", "ES", "EW", "SW",
+                "NES", "NEW", "NSW", "ESW",
+                "NESW"
+            };
+            // Now we can match the doorPattern to the possibleRoomTypes
+            if (possibleRoomTypes.Contains(doorPattern))
+            {
+                DebugUtils.LogSuccess($"Room configuration {doorPattern} is valid.");
+                // Now we can generate the room based on the door pattern
+                Types.RoomType roomTypeToSpawn = doorPattern switch
+                {
+                    "N" => Types.RoomType.N,
+                    "E" => Types.RoomType.E,
+                    "S" => Types.RoomType.S,
+                    "W" => Types.RoomType.W,
+                    "NE" => Types.RoomType.NE,
+                    "NS" => Types.RoomType.NS,
+                    "NW" => Types.RoomType.NW,
+                    "ES" => Types.RoomType.ES,
+                    "EW" => Types.RoomType.EW,
+                    "SW" => Types.RoomType.SW,
+                    "NES" => Types.RoomType.NES,
+                    "NEW" => Types.RoomType.NEW,
+                    "NSW" => Types.RoomType.NSW,
+                    "ESW" => Types.RoomType.ESW,
+                    "NESW" => Types.RoomType.NESW,
+                    _ => Types.RoomType.DEFAULT
+                };
+                return roomTypeToSpawn;
+                
+            }
+            
+            return Types.RoomType.DEFAULT;
             
         }
 
@@ -310,7 +499,7 @@ namespace Managers
 
         private void DebugPrintDungeonLayout()
         {
-            DebugUtils.ClearConsole();
+            //DebugUtils.ClearConsole();
             if (dungeonRooms == null || dungeonRooms.Count == 0)
             {
                 DebugUtils.Log("Dungeon is empty.");
