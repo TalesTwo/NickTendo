@@ -75,11 +75,19 @@ public class EnemyControllerBase : MonoBehaviour
     private void SetKnockBack()
     {
         _isKnockback = true;
-        _rb.AddForce(new Vector2(-_direction.x, -_direction.y) * knockBackSpeed, ForceMode2D.Impulse);
+        Vector2 knockBack = getKnockBackDirection();
+        _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
         StartCoroutine(HitFlash());
         Quaternion angle = getEffectAngle();
         Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, angle);
         Invoke(nameof(ResetKnockBack), knockBackTime);
+    }
+
+    // find the direction of knockback
+    private Vector2 getKnockBackDirection()
+    {
+        Vector3 direction = (_player.transform.position - transform.position).normalized;
+        return new Vector2(-direction.x, -direction.y);
     }
     
     // flash the sprite white to indicate a hit
