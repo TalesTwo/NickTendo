@@ -17,6 +17,8 @@ public class Room : MonoBehaviour
     [Header("Room Type")]
     [SerializeField] private Types.RoomType roomType;
     
+    public bool bIsFinalized = false; // has the player been in this room before?
+    
 
 
     public void Awake()
@@ -29,6 +31,9 @@ public class Room : MonoBehaviour
         // Initialize room logic here
         ApplyDoorConfiguration();
         // Disable the room by default
+        // mark the room as visited, since we built it
+        //TODO: Rename this to initalized
+        bIsFinalized = false;
         //DisableRoom();
     }
 
