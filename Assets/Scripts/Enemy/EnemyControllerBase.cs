@@ -5,22 +5,33 @@ using UnityEngine;
 
 public class EnemyControllerBase : MonoBehaviour
 {
-    public int health = 10;
-    public float speed = 2;
-    public float knockBackSpeed = 10;
-    public float knockBackTime = 0.15f;
-    public float hitFlashDuration = 0.1f;
+    [Header("Stats & difficulty")]
+    public TextAsset statLineCSV;
+    public int difficulty;
+    public int difficultyScalingFactor;
     
+    [Header("stats")]
+    protected float health = 10;
+    protected float speed = 2;
+    protected float knockBackSpeed = 10;
+    protected float knockBackTime = 0.15f;
+    protected float damage = 1f;
+    
+    [Header("Game Components & objects")]
     private Rigidbody2D _rb;
     protected GameObject _player;
     private SpriteRenderer _renderer;
     private Color _color;
     
+    [Header("Hit Effects")]
     public GameObject hitEffect;
     public float hitEffectDistance;
+    public float hitFlashDuration = 0.1f;
     
+    [Header("state Bools")]
     private bool _isKnockback = false;
 
+    [Header("direction of movement")]
     protected Vector3 _direction;
     
     // Start is called before the first frame update
@@ -30,6 +41,7 @@ public class EnemyControllerBase : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _color = _renderer.color;
         _player = GameObject.Find("Player");
+        ParseStatsText();
     }
 
     // Update is called once per frame
@@ -117,6 +129,21 @@ public class EnemyControllerBase : MonoBehaviour
         
         // Step 3: return the direction as Quaternion
         return Quaternion.Euler(0, 0, angle);
+    }
+
+    // splits the stats on a line
+    private void ParseStatsText()
+    {
+        string[] lines = statLineCSV.text.Split('\n');
+        double lineNumber = (double)difficulty/difficultyScalingFactor;
+        lineNumber = Math.Ceiling(lineNumber);
+        GetStats(lines[(int)lineNumber]);
+    }
+
+    // method MUST be overriden in child class
+    protected virtual void GetStats(string statLine)
+    {
+        return;
     }
 
     // class MUST be overidden by child to move

@@ -10,4 +10,14 @@ public class FollowerEnemyController : EnemyControllerBase
     {
         return (_player.transform.position - transform.position).normalized;
     }
+    
+    protected override void GetStats(string statLine)
+    {
+        string[] stats = statLine.Split(',');
+        health = float.Parse(stats[0]);
+        speed = float.Parse(stats[1]);
+        damage = float.Parse(stats[2]);
+        knockBackSpeed = float.Parse(stats[3]);
+        knockBackTime = float.Parse(stats[4]);
+    }
 }

@@ -484,8 +484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a772a885c7282b4594886cbd6afd6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  speed: 2
+  statLineCSV: {fileID: 4900000, guid: f86cfba758150214eac87f6bbd7bf664, type: 3}
+  difficulty: 7
+  difficultyScalingFactor: 5
   knockBackSpeed: 1500
   knockBackTime: 0.2
   hitFlashDuration: 0.1
@@ -703,8 +704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c5bf92a193e9e4f815aab4b62d6d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  speed: 2
+  statLineCSV: {fileID: 4900000, guid: 241eb12d8b2b01c4aab5ffbf8e59500f, type: 3}
+  difficulty: 4
+  difficultyScalingFactor: 5
   knockBackSpeed: 1500
   knockBackTime: 0.2
   hitFlashDuration: 0.1
