@@ -21,7 +21,7 @@ public class EnemyControllerBase : MonoBehaviour
     
     private bool _isKnockback = false;
 
-    private Vector3 _direction;
+    protected Vector3 _direction;
     
     // Start is called before the first frame update
     private void Start()
