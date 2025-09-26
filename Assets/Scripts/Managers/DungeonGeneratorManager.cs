@@ -349,6 +349,7 @@ namespace Managers
 
             Vector3 startPosition = new Vector3(startPos.y * 20,-startPos.x * 20, 0);
             Room startRoom = GenerateRoomFromType(Types.RoomType.Spawn, startPosition);
+            startRoom.SetRoomDifficulty(0);
 
             // Make sure dungeonRooms has been initialized
             if (dungeonRooms[startPos.x][startPos.y] == null)
@@ -363,6 +364,9 @@ namespace Managers
             }
             Vector3 endPosition = new Vector3(endPos.y * 20,-endPos.x * 20, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
+            
+            endRoom.SetRoomDifficulty(CalculateRoomDifficulty((endPos.x, endPos.y)));
+            
             if (dungeonRooms[endPos.x][endPos.y] == null)
             {
                 dungeonRooms[endPos.x][endPos.y] = endRoom;

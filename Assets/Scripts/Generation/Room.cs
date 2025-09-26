@@ -26,6 +26,15 @@ public class Room : MonoBehaviour
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     public (int row, int col) RoomCoords = (-1, -1);
     
+    
+    public void SetRoomDifficulty(int difficulty)
+    {
+        roomDifficulty = difficulty;
+    }
+    public void SetRoomCoords(int row, int col)
+    {
+        RoomCoords = (row, col);
+    }
 
 
     public void Awake()
