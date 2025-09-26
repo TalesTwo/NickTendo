@@ -19,6 +19,13 @@ public class Room : MonoBehaviour
     
     public bool bIsFinalized = false; // has the player been in this room before?
     
+    
+    
+    // what is the difficulty rating of this room?
+    public int roomDifficulty = 1;
+    // What are the coordinates of this room in the grid? (-1, -1) if not set
+    public (int row, int col) RoomCoords = (-1, -1);
+    
 
 
     public void Awake()
@@ -26,15 +33,18 @@ public class Room : MonoBehaviour
         InitializeRoom();
     }
     
-    public void InitializeRoom()
+    public void InitializeRoom(int difficulty = 1, (int row, int col)? coords = null)
     {
+        roomDifficulty = difficulty;
+        if (coords.HasValue)
+            RoomCoords = coords.Value;
+        
         // Initialize room logic here
         ApplyDoorConfiguration();
-        // Disable the room by default
-        // mark the room as visited, since we built it
         //TODO: Rename this to initalized
         bIsFinalized = false;
-        //DisableRoom();
+
+        
     }
 
     

@@ -396,7 +396,7 @@ namespace Managers
             }
         }
         
-        private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position)
+        private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position, int row = -1, int col = -1)
         {
             if (roomPrefab == null)
             {
@@ -405,12 +405,69 @@ namespace Managers
             }
 
             Room roomInstance = Instantiate(roomPrefab, position, Quaternion.identity);
-            roomInstance.InitializeRoom();
+            // Calculate room difficulty
+            // get the room coordinates in the grid
+            
+            int roomDifficulty = Instance.CalculateRoomDifficulty((row, col));
+            roomInstance.InitializeRoom(roomDifficulty, (row, col));
             return roomInstance;
         }
-
         
-        private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position)
+        private IEnumerable<(int, int)> GetNeighbors((int row, int col) node)
+        {
+            int[][] dirs = new int[][]
+            {
+                new[] { 1, 0 }, new[] { -1, 0 },
+                new[] { 0, 1 }, new[] { 0, -1 }
+            };
+
+            foreach (var d in dirs)
+            {
+                int nr = node.row + d[0];
+                int nc = node.col + d[1];
+
+                if (nr >= 0 && nr < dungeonRooms.Count &&
+                    nc >= 0 && nc < dungeonRooms[0].Count)
+                {
+                    // only allow through nulls or valid rooms
+                    if (dungeonRooms[nr][nc] == null)
+                        yield return (nr, nc);
+                }
+            }
+        }
+        private int CalculateRoomDifficulty((int row, int col) roomCoords)
+        {
+            var start = (row: startPos.y, col: startPos.x);
+            var goal = roomCoords;
+
+            var visited = new HashSet<(int, int)>();
+            var queue = new Queue<((int, int) pos, int dist)>();
+
+            queue.Enqueue((start, 0));
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                var (pos, dist) = queue.Dequeue();
+
+                if (pos == goal)
+                    return dist;
+
+                foreach (var neighbor in GetNeighbors(pos))
+                {
+                    if (!visited.Contains(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue((neighbor, dist + 1));
+                    }
+                }
+            }
+
+            // No path
+            return int.MaxValue;
+        }
+        
+        private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position, int row = -1, int col = -1)
         {
             if (!Instance.generationData.RoomDict.TryGetValue(roomType, out List<Room> possibleRooms) || possibleRooms.Count == 0)
             {
@@ -419,7 +476,7 @@ namespace Managers
             }
 
             int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
-            return GenerateRoomFromClass(possibleRooms[randomIndex], position);
+            return GenerateRoomFromClass(possibleRooms[randomIndex], position, row, col);
         }
 
 
@@ -513,7 +570,7 @@ namespace Managers
             Vector3 position = new Vector3(col * 20, (-row * 20), 0);
 
             Types.RoomType roomTypeToSpawn = GenerateRoomTypeFromConfiguration(requiredConnections);
-            Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position);
+            Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position, row, col);
             if (newRoom != null)
             {
                 Instance.dungeonRooms[row][col] = newRoom;
