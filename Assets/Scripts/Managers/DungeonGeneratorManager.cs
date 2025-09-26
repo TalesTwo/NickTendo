@@ -79,18 +79,7 @@ namespace Managers
             {
                 InitializeDungeonGrid(rows, cols);
                 DungeonGeneration();
-                // teleport the player inside the start room (temporary)
-                gameObject.transform.position = new Vector3(startPos.y * 20, -startPos.x * 20, 0);
-                // get access to the player
-                PlayerController player = FindObjectOfType<PlayerController>();
-                if (player != null)
-                {
-                    player.transform.position = new Vector3(startPos.y * 20, -startPos.x * 20, 0);
-                }
-                else
-                {
-                    DebugUtils.LogError("No player found in the scene.");
-                }
+                PlayerManager.Instance.TeleportPlayer(new Vector3(startPos.y * 20, -startPos.x * 20, 0));
             }
             
             if(Input.GetKeyDown(KeyCode.H))
