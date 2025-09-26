@@ -21,6 +21,11 @@ namespace Managers
         // a 2d array to hold the rooms
         List<List<Room>> dungeonRooms = new List<List<Room>>();
         
+        public List<List<Room>> GetDungeonRooms()
+        {
+            return dungeonRooms;
+        }
+        
         [Header("Generation Data")]
         [SerializeField] private  int rows = 5;
         [SerializeField] private  int cols = 5;
@@ -74,6 +79,18 @@ namespace Managers
             {
                 InitializeDungeonGrid(rows, cols);
                 DungeonGeneration();
+                // teleport the player inside the start room (temporary)
+                gameObject.transform.position = new Vector3(startPos.y * 20, -startPos.x * 20, 0);
+                // get access to the player
+                PlayerController player = FindObjectOfType<PlayerController>();
+                if (player != null)
+                {
+                    player.transform.position = new Vector3(startPos.y * 20, -startPos.x * 20, 0);
+                }
+                else
+                {
+                    DebugUtils.LogError("No player found in the scene.");
+                }
             }
             
             if(Input.GetKeyDown(KeyCode.H))
@@ -131,6 +148,23 @@ namespace Managers
                     if (currentRoom != null)
                     {
                         PCG(dungeonRooms, currentRoom, r, c);
+                    }
+                }
+            }
+            
+            
+            // Update all the rooms to hold their cords
+            for (int r = 0; r < dungeonRooms.Count; r++)
+            {
+                for (int c = 0; c < dungeonRooms[r].Count; c++)
+                {
+                    Room currentRoom = dungeonRooms[r][c];
+                    if (currentRoom != null)
+                    {
+                        currentRoom.SetRoomCoords(r, c);
+                        // also set the room difficulty
+                        int roomDifficulty = CalculateRoomDifficulty((r, c));
+                        currentRoom.SetRoomDifficulty(roomDifficulty);
                     }
                 }
             }

@@ -25,6 +25,8 @@ public class Room : MonoBehaviour
     public int roomDifficulty = 1;
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     public (int row, int col) RoomCoords = (-1, -1);
+    public int row;
+    public int col;
     
     
     public void SetRoomDifficulty(int difficulty)
@@ -35,6 +37,10 @@ public class Room : MonoBehaviour
     {
         RoomCoords = (row, col);
     }
+    public (int row, int col) GetRoomCoords(int row, int col)
+    {
+        return RoomCoords;
+    }
 
 
     public void Awake()
@@ -44,6 +50,11 @@ public class Room : MonoBehaviour
     
     public void InitializeRoom(int difficulty = 1, (int row, int col)? coords = null)
     {
+        DebugUtils.Log("Initializing Room: " + gameObject.name);
+        DebugUtils.Log("Room Type: " + roomType);
+        DebugUtils.Log("Door Configuration: " + configuration.ToString());
+        DebugUtils.Log("Room Difficulty: " + difficulty);
+        DebugUtils.Log("Room Coords: " + (coords.HasValue ? coords.Value.ToString() : "Not Set"));
         roomDifficulty = difficulty;
         if (coords.HasValue)
             RoomCoords = coords.Value;
@@ -56,7 +67,12 @@ public class Room : MonoBehaviour
         
     }
 
-    
+    public void Update()
+    {
+        row = RoomCoords.row;
+        col = RoomCoords.col;
+    }
+
     public void SetRoomEnabled(bool bEnabled)
     {
         Action action = bEnabled ? EnableRoom : DisableRoom;
