@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2fee122be8f044882e6414baf8624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 3
+  rows: 5
   cols: 3
   probabilityToAddOptionalDoor_OneRequiredDoor: 0.5
   probabilityToAddOptionalDoor_TwoRequiredDoors: 0.25
