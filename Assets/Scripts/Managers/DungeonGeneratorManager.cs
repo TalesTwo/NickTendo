@@ -32,72 +32,40 @@ namespace Managers
         [SerializeField] private float probabilityToAddOptionalDoor_OneRequiredDoor = 0.75f;
         [SerializeField] private float probabilityToAddOptionalDoor_TwoRequiredDoors = 0.5f;
         [SerializeField] private float probabilityToAddOptionalDoor_ThreeRequiredDoors = 0.25f;
-        public GenerationData generationData;
+        [SerializeField] private GenerationData generationData;
         [Space(10f)]
         [Header("Start/End Positions (Row, Col)")]
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
-        [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
-        
         private Vector2Int startPos = new Vector2Int(-1, -1);
+        [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
         private Vector2Int endPos = new Vector2Int(-1, -1);
+        
+        
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         private float waitTime = 2f;
         
-        // list of cords where we need to PCG
-        private List<(int row, int col)> alteredRoomCoords = new List<(int row, int col)>();
-        
-        private bool bPhaseOneComplete = false;
-        
-        void Start()
-        {
-            //InitializeDungeonGrid(rows, cols);
-            // create a function, that will be called every n seconds, to initalize and print a new dungeon
-            //StartCoroutine(WaitAndGenerateDungeon());
-            
-        }
-        private IEnumerator WaitAndGenerateDungeon()
-        {
-            while (true)
-            {
-                // wait for n seconds
-                yield return new WaitForSeconds(waitTime);
-
-                // only run if not paused
-   
-                InitializeDungeonGrid(rows, cols);
-                DungeonGeneration();
-            
-            }
-        }
-
         // Update is called once per frame
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
-                InitializeDungeonGrid(rows, cols);
-                DungeonGeneration();
-                PlayerManager.Instance.TeleportPlayer(new Vector3(startPos.y * 20, -startPos.x * 20, 0));
-            }
-            
-            if(Input.GetKeyDown(KeyCode.H))
-            {
-                DebugPrintDungeonLayout();
-            }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                Types.DoorConfiguration requiredConnections = GenerateRequiredConnections(startPos.x - 1, startPos.y);
-                Debug.Log($"Required Connections for room above start: N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
-                Types.DoorConfiguration optionalConnections = GenerateOptionalConnections(startPos.x - 1, startPos.y);
-                Debug.Log($"Optional Connections for room above start: N:{optionalConnections.NorthDoorActive}, E:{optionalConnections.EastDoorActive}, S:{optionalConnections.SouthDoorActive}, W:{optionalConnections.WestDoorActive}");
+                LoadIntoDungeon();
             }
         }
 
+        private void LoadIntoDungeon()
+        {
+            // initialize the dungeon
+            InitializeDungeonGrid(rows, cols);
+            // generate the dungeon
+            DungeonGeneration();
+            // teleport the player into the dungeom
+            PlayerManager.Instance.TeleportPlayer(new Vector3(startPos.y * 20, -startPos.x * 20, 0));
+        }
         
-
-
+        // ReSharper disable Unity.PerformanceAnalysis
         private void DungeonGeneration()
         {
             if (Seed != 0)
@@ -106,28 +74,8 @@ namespace Managers
             }
             
             InitializeStartAndEndRoom();
-            // Now we move onto the two phase generation
-            // Phase 1: Create a "weighted random walk" from the start room to the end room
-            // if we reach the row -1 before the end room, we will force the generator to create the optimal path to the end room
-            // the end room will always be entered from the south, so the room before it must have a north door
-            // the random walk will never move "backward":
-            // Directions of movement: North (up), East (right), West (left)
-            GeneratePhaseOne();
-            bPhaseOneComplete = true;
-            // build a room directly below the end room
-            //BuildRoomAtCords(endPos.x + 1, endPos.y, new Types.DoorConfiguration(false, false, true, false));
             
-            // Temporarily, we will hardcode phase 2 to ensure it works
-            // we will do this on row 1, col 0
-
-            //Phase 2: Loop through the alteredRoomCoords, and PCG from each of those rooms
-            /*
-            foreach (var (row, col) in alteredRoomCoords)
-            {
-                Room currentRoom = dungeonRooms[row][col];
-                PCG(dungeonRooms, currentRoom, row, col);
-            }
-            */
+            GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
@@ -157,8 +105,6 @@ namespace Managers
                     }
                 }
             }
-            
-            DebugPrintDungeonLayout();
         }
         
         
@@ -169,7 +115,6 @@ namespace Managers
             if (currentRoom == null || currentRoom.bIsFinalized) { return;}
             // mark as visited
             currentRoom.bIsFinalized= true;
-            DebugUtils.Log($"PCG: Visiting room at ({currentRow}, {currentCol})");
             
             // ensure we are within bounds
             if (currentRow < 0 || currentCol < 0 || currentRow >= dungeonMap.Count || currentCol >= dungeonMap[currentRow].Count) return;
@@ -260,7 +205,6 @@ namespace Managers
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 1)
             {
-                DebugUtils.Log($"Current Position: ({currentRow}, {currentCol})");
                 Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
@@ -298,12 +242,9 @@ namespace Managers
                         AdditionalConnections.EastDoorActive = true;
                         break;
                 }
-                DebugUtils.Log($"Moving {selectedDirection}.");
-                DebugUtils.LogSuccess($"(based on direction of travel) ({currentRow}, {currentCol}): N:{AdditionalConnections.NorthDoorActive}, E:{AdditionalConnections.EastDoorActive}, S:{AdditionalConnections.SouthDoorActive}, W:{AdditionalConnections.WestDoorActive}");
                 // Now build the room at the new position if it doesn't already exist
                 if (dungeonRooms[currentRow][currentCol] == null)
                 {
-                    DebugUtils.Log($"Building room at ({currentRow}, {currentCol})");
                     BuildRoomAtCords(currentRow, currentCol, AdditionalConnections);
                 }
                 
@@ -352,7 +293,7 @@ namespace Managers
                     currentCol--;
                 }
             }
-            // no we need to buid the last room, which is the room directly below the end room
+            // now we need to buid the last room, which is the room directly below the end room
             if (dungeonRooms[currentRow][currentCol] == null)
             {
                 BuildRoomAtCords(currentRow, currentCol, new Types.DoorConfiguration(false, false, false, false));
@@ -366,7 +307,6 @@ namespace Managers
             if (_startPos.x == -1 && _startPos.y == -1)
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
-                DebugUtils.Log($"Randomized Start Position: ({rows - 1}, {randomCol})");
                 startPos = new Vector2Int(rows - 1, randomCol);
             }
 
@@ -535,8 +475,6 @@ namespace Managers
              *
              * Once we determine the number of doors, we will randomly select from the optional doors that are available
              */
-            DebugUtils.LogSuccess($"Required connections for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
-            DebugUtils.LogSuccess($"Optional connections for room at ({row}, {col}): N:{optionalConnections.NorthDoorActive}, E:{optionalConnections.EastDoorActive}, S:{optionalConnections.SouthDoorActive}, W:{optionalConnections.WestDoorActive}");
             
             
             int numOptionalDoorsToAdd = requiredDoorCount;
@@ -556,7 +494,6 @@ namespace Managers
             numOptionalDoorsToAdd -= requiredDoorCount; // we only want the number of optional doors to add
             // Now we have the total number of doors we need, we can start building the door configuration
             // debug print the number of required doors count
-            DebugUtils.Log($"Building room at ({row}, {col}) with {numOptionalDoorsToAdd} optional doors.");
             // Randomly select n optional doors to add
             List<Types.DoorClassification> availableOptionalDoors = new List<Types.DoorClassification>();
             if (optionalConnections.NorthDoorActive) availableOptionalDoors.Add(Types.DoorClassification.North);
@@ -592,7 +529,6 @@ namespace Managers
             }
             
             // FINALLY, we have the final connections that this room needs to have
-            DebugUtils.LogSuccess($"Final door configuration for room at ({row}, {col}): N:{requiredConnections.NorthDoorActive}, E:{requiredConnections.EastDoorActive}, S:{requiredConnections.SouthDoorActive}, W:{requiredConnections.WestDoorActive}");
             
             Vector3 position = new Vector3(col * 20, (-row * 20), 0);
 
@@ -601,13 +537,7 @@ namespace Managers
             if (newRoom != null)
             {
                 Instance.dungeonRooms[row][col] = newRoom;
-                if (!bPhaseOneComplete)
-                {
-                    alteredRoomCoords.Add((row, col));
-                }
-                
             }
-            // add it to the dungeon grid
         }
         
         private static Types.RoomType GenerateRoomTypeFromConfiguration(Types.DoorConfiguration configuration)
@@ -639,7 +569,6 @@ namespace Managers
             // Now we can match the doorPattern to the possibleRoomTypes
             if (possibleRoomTypes.Contains(doorPattern))
             {
-                DebugUtils.LogSuccess($"Room configuration {doorPattern} is valid.");
                 // Now we can generate the room based on the door pattern
                 Types.RoomType roomTypeToSpawn = doorPattern switch
                 {
@@ -756,10 +685,9 @@ namespace Managers
 
         private void DebugPrintDungeonLayout()
         {
-            //DebugUtils.ClearConsole();
+            
             if (dungeonRooms == null || dungeonRooms.Count == 0)
             {
-                DebugUtils.Log("Dungeon is empty.");
                 return;
             }
 
