@@ -40,11 +40,15 @@ namespace Managers
         private Vector2Int startPos = new Vector2Int(-1, -1);
         [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
         private Vector2Int endPos = new Vector2Int(-1, -1);
-        
+
+
+        private static bool bPhaseOne = true;
         
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         private float waitTime = 2f;
+
+        private int RoomDifficultyDuringGeneration = 0;
         
         // Update is called once per frame
         void Update()
@@ -77,6 +81,7 @@ namespace Managers
             
             GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
+            bPhaseOne = false; // we are now in phase two
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
@@ -89,7 +94,6 @@ namespace Managers
                 }
             }
             
-            
             // Update all the rooms to hold their cords
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
@@ -99,9 +103,6 @@ namespace Managers
                     if (currentRoom != null)
                     {
                         currentRoom.SetRoomCoords(r, c);
-                        // also set the room difficulty
-                        int roomDifficulty = CalculateRoomDifficulty((r, c));
-                        currentRoom.SetRoomDifficulty(roomDifficulty);
                     }
                 }
             }
@@ -328,12 +329,13 @@ namespace Managers
             Vector3 endPosition = new Vector3(endPos.y * 20,-endPos.x * 20, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
             
-            endRoom.SetRoomDifficulty(CalculateRoomDifficulty((endPos.x, endPos.y)));
+            endRoom.SetRoomDifficulty(0);
             
             if (dungeonRooms[endPos.x][endPos.y] == null)
             {
                 dungeonRooms[endPos.x][endPos.y] = endRoom;
             }
+            Instance.RoomDifficultyDuringGeneration = 0; // reset the room difficulty counter
         }
 
 
@@ -375,8 +377,15 @@ namespace Managers
             // Calculate room difficulty
             // get the room coordinates in the grid
             
-            int roomDifficulty = Instance.CalculateRoomDifficulty((row, col));
-            roomInstance.InitializeRoom(roomDifficulty, (row, col));
+            // if we are in phase one
+            
+            // this will start at 0, and increment each time we build a room in phase one
+            if(bPhaseOne)
+            {
+                Instance.RoomDifficultyDuringGeneration +=1;
+            }
+            roomInstance.InitializeRoom(Instance.RoomDifficultyDuringGeneration, (row, col));
+            roomInstance.SetRoomDifficulty(Instance.RoomDifficultyDuringGeneration);
             return roomInstance;
         }
         
@@ -402,37 +411,7 @@ namespace Managers
                 }
             }
         }
-        private int CalculateRoomDifficulty((int row, int col) roomCoords)
-        {
-            var start = (row: startPos.y, col: startPos.x);
-            var goal = roomCoords;
 
-            var visited = new HashSet<(int, int)>();
-            var queue = new Queue<((int, int) pos, int dist)>();
-
-            queue.Enqueue((start, 0));
-            visited.Add(start);
-
-            while (queue.Count > 0)
-            {
-                var (pos, dist) = queue.Dequeue();
-
-                if (pos == goal)
-                    return dist;
-
-                foreach (var neighbor in GetNeighbors(pos))
-                {
-                    if (!visited.Contains(neighbor))
-                    {
-                        visited.Add(neighbor);
-                        queue.Enqueue((neighbor, dist + 1));
-                    }
-                }
-            }
-
-            // No path
-            return int.MaxValue;
-        }
         
         private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position, int row = -1, int col = -1)
         {

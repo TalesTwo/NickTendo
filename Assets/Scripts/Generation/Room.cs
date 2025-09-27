@@ -20,13 +20,14 @@ public class Room : MonoBehaviour
     public bool bIsFinalized = false; // has the player been in this room before?
     
     
+    // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
+    
+    
     
     // what is the difficulty rating of this room?
     public int roomDifficulty = 1;
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     public (int row, int col) RoomCoords = (-1, -1);
-    public int row;
-    public int col;
     
     
     public void SetRoomDifficulty(int difficulty)
@@ -63,15 +64,10 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         //TODO: Rename this to initalized
         bIsFinalized = false;
-
+        
         
     }
-
-    public void Update()
-    {
-        row = RoomCoords.row;
-        col = RoomCoords.col;
-    }
+    
 
     public void SetRoomEnabled(bool bEnabled)
     {
