@@ -17,6 +17,31 @@ public class Room : MonoBehaviour
     [Header("Room Type")]
     [SerializeField] private Types.RoomType roomType;
     
+    public bool bIsFinalized = false; // has the player been in this room before?
+    
+    
+    // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
+    
+    
+    
+    // what is the difficulty rating of this room?
+    public int roomDifficulty = 1;
+    // What are the coordinates of this room in the grid? (-1, -1) if not set
+    public (int row, int col) RoomCoords = (-1, -1);
+    
+    
+    public void SetRoomDifficulty(int difficulty)
+    {
+        roomDifficulty = difficulty;
+    }
+    public void SetRoomCoords(int row, int col)
+    {
+        RoomCoords = (row, col);
+    }
+    public (int row, int col) GetRoomCoords(int row, int col)
+    {
+        return RoomCoords;
+    }
 
 
     public void Awake()
@@ -24,15 +49,26 @@ public class Room : MonoBehaviour
         InitializeRoom();
     }
     
-    public void InitializeRoom()
+    public void InitializeRoom(int difficulty = 1, (int row, int col)? coords = null)
     {
+        DebugUtils.Log("Initializing Room: " + gameObject.name);
+        DebugUtils.Log("Room Type: " + roomType);
+        DebugUtils.Log("Door Configuration: " + configuration.ToString());
+        DebugUtils.Log("Room Difficulty: " + difficulty);
+        DebugUtils.Log("Room Coords: " + (coords.HasValue ? coords.Value.ToString() : "Not Set"));
+        roomDifficulty = difficulty;
+        if (coords.HasValue)
+            RoomCoords = coords.Value;
+        
         // Initialize room logic here
         ApplyDoorConfiguration();
-        // Disable the room by default
-        //DisableRoom();
+        //TODO: Rename this to initalized
+        bIsFinalized = false;
+        
+        
     }
-
     
+
     public void SetRoomEnabled(bool bEnabled)
     {
         Action action = bEnabled ? EnableRoom : DisableRoom;

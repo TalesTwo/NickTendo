@@ -5604,6 +5604,10 @@ MonoBehaviour:
     WestDoorActive: 0
   doors: {fileID: 4544804470217660477}
   roomType: 0
+  bIsFinalized: 0
+  roomDifficulty: 1
+  row: 0
+  col: 0
 --- !u!1001 &2666819155788606910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5617,12 +5621,16 @@ PrefabInstance:
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 2100729230353331918, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100729230353331918, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.59
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4082912210083187588, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.58
+      value: 6.08
       objectReference: {fileID: 0}
     - target: {fileID: 4082912210083187588, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_LocalPosition.y

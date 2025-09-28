@@ -68,6 +68,10 @@ MonoBehaviour:
     WestDoorActive: 0
   doors: {fileID: 4514494738008003055}
   roomType: 0
+  bIsFinalized: 0
+  roomDifficulty: 1
+  row: 0
+  col: 0
 --- !u!1 &3010964554042203876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5655,9 +5659,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2100729230353331918, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100729230353331918, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4082912210083187588, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.51
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 4082912210083187588, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_LocalPosition.y
