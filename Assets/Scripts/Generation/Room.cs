@@ -20,6 +20,20 @@ public class Room : MonoBehaviour
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
     
+    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>();
+    private List<GameObject> trapsInRoom = new List<GameObject>();
+    private List<BaseItem> lootInRoom = new List<BaseItem>();
+    public List<GameObject> enemySpawnPoints = new List<GameObject>();
+
+    private RoomSpawnController roomSpawnController;//TODO: this is not good lol
+
+    public List<EnemyControllerBase> GetEnemiesInRoom() { return enemiesInRoom; }
+    public List<GameObject> GetTrapsInRoom() { return trapsInRoom; }
+    public List<BaseItem> GetLootInRoom() { return lootInRoom; }
+    public List<GameObject> GetEnemySpawnPoints() { return enemySpawnPoints; }
+    public RoomSpawnController GetRoomSpawnController() { return roomSpawnController; }
+
+    
     
     // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
     
@@ -28,7 +42,7 @@ public class Room : MonoBehaviour
     // what is the difficulty rating of this room?
     public int roomDifficulty = int.MaxValue; // default to max value, so we can tell if it has been set or not.
     // What are the coordinates of this room in the grid? (-1, -1) if not set
-    public (int row, int col) RoomCoords = (-1, -1);
+    private (int row, int col) RoomCoords = (-1, -1);
     
     
     public void SetRoomDifficulty(int difficulty)
@@ -56,21 +70,20 @@ public class Room : MonoBehaviour
     
     public void InitializeRoom(int difficulty = 1, (int row, int col)? coords = null)
     {
-        DebugUtils.Log("Initializing Room: " + gameObject.name);
-        DebugUtils.Log("Room Type: " + roomType);
-        DebugUtils.Log("Door Configuration: " + configuration.ToString());
-        DebugUtils.Log("Room Difficulty: " + difficulty);
-        DebugUtils.Log("Room Coords: " + (coords.HasValue ? coords.Value.ToString() : "Not Set"));
+
         roomDifficulty = difficulty;
         if (coords.HasValue)
             RoomCoords = coords.Value;
         
         // Initialize room logic here
         ApplyDoorConfiguration();
-        //TODO: Rename this to initalized
+        
         bIsFinalized = false;
         
-        
+        if(roomSpawnController) roomSpawnController.Initialize();
+
+
+
     }
     
 
