@@ -18,6 +18,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Types.RoomType roomType;
     
     public bool bIsFinalized = false; // has the player been in this room before?
+    public bool bIsDifficultySet = false; // has the difficulty been set for this room?
     
     
     // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
@@ -25,7 +26,7 @@ public class Room : MonoBehaviour
     
     
     // what is the difficulty rating of this room?
-    public int roomDifficulty = 1;
+    public int roomDifficulty = int.MaxValue; // default to max value, so we can tell if it has been set or not.
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     public (int row, int col) RoomCoords = (-1, -1);
     
@@ -33,6 +34,10 @@ public class Room : MonoBehaviour
     public void SetRoomDifficulty(int difficulty)
     {
         roomDifficulty = difficulty;
+    }
+    public int GetRoomDifficulty()
+    {
+        return roomDifficulty;
     }
     public void SetRoomCoords(int row, int col)
     {
