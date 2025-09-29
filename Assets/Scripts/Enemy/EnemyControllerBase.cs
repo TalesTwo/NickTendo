@@ -155,6 +155,8 @@ public class EnemyControllerBase : MonoBehaviour
     // ovverideing this metod is optional if the enemy has a different movement algorithm
     protected virtual void Move()
     {
-        transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
+        //transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
+        Vector2 direction = new Vector2(_direction.x, _direction.y);
+        _rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
     }
 }
