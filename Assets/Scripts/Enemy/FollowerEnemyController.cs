@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class FollowerEnemyController : EnemyControllerBase
@@ -9,13 +10,20 @@ public class FollowerEnemyController : EnemyControllerBase
     // ignore layermask
     [Header("RayCasting")]
     public LayerMask ignoreLayer;
-    public float precision;
-    public float wallBuffer;
-    
-    
+
+    private RoomGridManager _gridManager;
+    private int targetIndex;
+    private List<Node> currentPath;
+
+    private void Awake()
+    {
+        _gridManager = transform.parent.GetComponent<RoomGridManager>();
+    }
+
     // find the intended direction of movement
     protected override Vector3 GetDirection()
     {
+        
         // Step 1: RayCast towards the player
         Vector3 dir = (_player.transform.position - transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, Mathf.Infinity, ~ignoreLayer);
@@ -26,41 +34,130 @@ public class FollowerEnemyController : EnemyControllerBase
             {
                 return dir;
             }
-            
         }
-
+        
+        if (_gridManager.path != null && _gridManager.path.Count > 0)
+        {
+            Debug.Log("path found");
+            currentPath = _gridManager.path;
+            StopAllCoroutines();
+            StartCoroutine(Follow());
+        }        
+        
         return Vector3.zero;
     }
-    
-    
-    
-    /*
-    private bool IsTooCloseToWall(Vector2 cellPosition)
-    {
-        Vector2[] directions = new Vector2[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
-        foreach (Vector2 dir in directions)
+    protected override void FindPath(Vector2 start, Vector2 end)
+    {
+        Debug.Log("start " + start +  " end " + end);
+        Node startNode = _gridManager.NodeFromWorldPoint(start);
+        Node endNode = _gridManager.NodeFromWorldPoint(end);
+        Debug.Log("start " + startNode.worldPosition + " end " + endNode.worldPosition);
+        
+        List<Node> openSet = new List<Node>();
+        HashSet<Node> closedSet = new HashSet<Node>();
+        
+        openSet.Add(startNode);
+
+        while (openSet.Count > 0)
         {
-            foreach (Vector2 dir2 in directions)
+            Node currentNode = openSet[0];
+
+            for (int i = 1; i < openSet.Count; i++)
             {
-                if (dir != dir2)
+                if (openSet[i].FCost < currentNode.FCost ||
+                    (openSet[i].FCost == currentNode.FCost && openSet[i].hCost < currentNode.hCost))
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(cellPosition, dir+dir2, wallBuffer, ~ignoreLayer);
-                    if (hit.collider != null)
-                    {
-                        if (!hit.collider.gameObject.CompareTag("Player"))
-                        {
-                            return true;
-                        }
-                    }                    
+                    currentNode = openSet[i];
                 }
             }
+            
+            openSet.Remove(currentNode);
+            closedSet.Add(currentNode);
 
+            if (currentNode == endNode)
+            {
+                RetracePath(startNode, endNode);
+                return;
+            }
+
+            foreach (Node neighbor in _gridManager.GetNeighbours(currentNode))
+            {
+                if (!neighbor.walkable || closedSet.Contains(neighbor))
+                {
+                    continue;
+                }
+
+                int MovementCost = currentNode.gCost + GetDistance(currentNode, neighbor);
+
+                if (MovementCost < neighbor.hCost || !openSet.Contains(neighbor))
+                {
+                    neighbor.gCost = MovementCost;
+                    neighbor.hCost = GetDistance(neighbor, endNode);
+                    neighbor.parent = currentNode;
+
+                    if (!openSet.Contains(neighbor))
+                    {
+                        openSet.Add(neighbor);
+                    }
+                }
+            }
         }
-
-        return false;
     }
-    */
+
+    private void RetracePath(Node start, Node end)
+    {
+        // todo delete later
+        // Debug.Log("from " + start.worldPosition + " to " + end.worldPosition);
+        
+        List<Node> path = new List<Node>();
+        Node currentNode = end;
+
+        while (currentNode != start)
+        {
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
+        }
+        
+        path.Reverse();
+        
+        _gridManager.path = path;
+    }
+
+    private int GetDistance(Node a, Node b)
+    {
+        int x = Mathf.Abs(a.gridX - b.gridX);
+        int y = Mathf.Abs(a.gridY - b.gridY);
+
+        if (x > y)
+        {
+            return 14 * y + 10 * (x - y);
+        }
+        
+        return 14 * x + 10 * (y - x);
+    }
+    
+    IEnumerator Follow()
+    {
+        Vector3 currentWaypoint = currentPath[0].worldPosition;
+        targetIndex = 0;
+
+        while (true)
+        {
+            if ((Vector2)_transform.position == (Vector2)currentWaypoint)
+            {
+                targetIndex++;
+                if (targetIndex >= currentPath.Count)
+                {
+                    yield break;
+                }
+                currentWaypoint = currentPath[targetIndex].worldPosition;
+            }
+
+            _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            yield return null;
+        }
+    }
     
     protected override void GetStats(string statLine)
     {

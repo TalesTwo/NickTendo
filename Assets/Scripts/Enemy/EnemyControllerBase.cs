@@ -22,6 +22,8 @@ public class EnemyControllerBase : MonoBehaviour
     protected GameObject _player;
     private SpriteRenderer _renderer;
     private Color _color;
+    protected Transform _playerTransform;
+    protected Transform _transform;
     
     [Header("Hit Effects")]
     public GameObject hitEffect;
@@ -41,14 +43,18 @@ public class EnemyControllerBase : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _color = _renderer.color;
         _player = GameObject.Find("Player");
+        _transform = GetComponent<Transform>();
+        _playerTransform = _player.GetComponent<Transform>();
         ParseStatsText();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         // step 1: check death condition
         CheckForDeath();
+
+        FindPath(_transform.position, _playerTransform.position);
         
         // step 2: get movement direction
         _direction = GetDirection();
@@ -157,6 +163,14 @@ public class EnemyControllerBase : MonoBehaviour
     {
         //transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
         Vector2 direction = new Vector2(_direction.x, _direction.y);
-        _rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
+        if (direction != Vector2.zero)
+        {
+            _rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
+        }
+    }
+
+    protected virtual void FindPath(Vector2 start, Vector2 end)
+    {
+        return;
     }
 }

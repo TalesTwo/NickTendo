@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8395498452694743106}
   - component: {fileID: 7126818405136621456}
   - component: {fileID: 1902935757004491482}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap_Walls(COLLISION)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
