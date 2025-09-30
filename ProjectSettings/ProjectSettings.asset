@@ -159,7 +159,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.NickTendoCopy
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -793,7 +794,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: NickTendoCopy
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -801,7 +802,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: NickTendoCopy
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: NickTendoCopy
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
