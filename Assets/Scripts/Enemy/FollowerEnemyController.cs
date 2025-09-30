@@ -23,7 +23,7 @@ public class FollowerEnemyController : EnemyControllerBase
     // find the intended direction of movement
     protected override Vector3 GetDirection()
     {
-        
+        /*
         // Step 1: RayCast towards the player
         Vector3 dir = (_player.transform.position - transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, Mathf.Infinity, ~ignoreLayer);
@@ -35,11 +35,11 @@ public class FollowerEnemyController : EnemyControllerBase
                 return dir;
             }
         }
+        */
         
+        // Step 1.2: No player found, travel shortest route
         if (_gridManager.path != null && _gridManager.path.Count > 0)
         {
-            Debug.Log("path found");
-            currentPath = _gridManager.path;
             StopAllCoroutines();
             StartCoroutine(Follow());
         }        
@@ -47,18 +47,25 @@ public class FollowerEnemyController : EnemyControllerBase
         return Vector3.zero;
     }
 
-    protected override void FindPath(Vector2 start, Vector2 end)
+    // finding the shortest path to the player
+    protected override void FindPath()
     {
-        Debug.Log("start " + start +  " end " + end);
+        Vector2 start = _transform.position;
+        Vector2 end = _playerTransform.position;
+        
+        // Step 1: set start and end nodes
         Node startNode = _gridManager.NodeFromWorldPoint(start);
         Node endNode = _gridManager.NodeFromWorldPoint(end);
-        Debug.Log("start " + startNode.worldPosition + " end " + endNode.worldPosition);
+        
+        Debug.Log(endNode.walkable);
+        Debug.Log(endNode.worldPosition);
         
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         
         openSet.Add(startNode);
 
+        // Step 2: iterate using A*
         while (openSet.Count > 0)
         {
             Node currentNode = openSet[0];
@@ -105,11 +112,9 @@ public class FollowerEnemyController : EnemyControllerBase
         }
     }
 
+    // take the discovered most efficient path and reverse it so enemy can travel to the player
     private void RetracePath(Node start, Node end)
     {
-        // todo delete later
-        // Debug.Log("from " + start.worldPosition + " to " + end.worldPosition);
-        
         List<Node> path = new List<Node>();
         Node currentNode = end;
 
@@ -122,8 +127,9 @@ public class FollowerEnemyController : EnemyControllerBase
         path.Reverse();
         
         _gridManager.path = path;
+        currentPath = path;
     }
-
+    
     private int GetDistance(Node a, Node b)
     {
         int x = Mathf.Abs(a.gridX - b.gridX);
@@ -137,11 +143,13 @@ public class FollowerEnemyController : EnemyControllerBase
         return 14 * x + 10 * (y - x);
     }
     
+    // follow the path as set out by A*
     IEnumerator Follow()
     {
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
 
+        // iterate though the path as it updates
         while (true)
         {
             if ((Vector2)_transform.position == (Vector2)currentWaypoint)
@@ -159,6 +167,7 @@ public class FollowerEnemyController : EnemyControllerBase
         }
     }
     
+    // grabs stats from .csv doc
     protected override void GetStats(string statLine)
     {
         string[] stats = statLine.Split(',');

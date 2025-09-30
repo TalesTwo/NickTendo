@@ -54,7 +54,7 @@ public class EnemyControllerBase : MonoBehaviour
         // step 1: check death condition
         CheckForDeath();
 
-        FindPath(_transform.position, _playerTransform.position);
+        FindPath();
         
         // step 2: get movement direction
         _direction = GetDirection();
@@ -165,11 +165,12 @@ public class EnemyControllerBase : MonoBehaviour
         Vector2 direction = new Vector2(_direction.x, _direction.y);
         if (direction != Vector2.zero)
         {
-            _rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
+            _transform.position = Vector2.MoveTowards(_transform.position, direction, Time.deltaTime * speed);
+            //_rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
         }
     }
 
-    protected virtual void FindPath(Vector2 start, Vector2 end)
+    protected virtual void FindPath()
     {
         return;
     }
