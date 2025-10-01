@@ -74,6 +74,7 @@ namespace Managers
             if (Seed != 0)
             {
                 UnityEngine.Random.InitState(Seed);
+                EventBroadcaster.Broadcast_SetSeed(Seed);
             }
             
             InitializeStartAndEndRoom();

@@ -83,7 +83,7 @@ MonoBehaviour:
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
-  Seed: 0
+  Seed: 16
 --- !u!1 &1870964041774676868
 GameObject:
   m_ObjectHideFlags: 0

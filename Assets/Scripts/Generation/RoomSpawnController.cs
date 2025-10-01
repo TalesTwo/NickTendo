@@ -21,8 +21,14 @@ public class RoomSpawnController : MonoBehaviour
         _roomGridManager = GetComponentInParent<RoomGridManager>();
         
         Initialize();
+        EventBroadcaster.SetSeed += SetSeed;
     }
 
+    private void SetSeed(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
+    }
+    
     private void Initialize()
     {
         
