@@ -11,13 +11,14 @@ public class FollowerEnemyController : EnemyControllerBase
     [Header("RayCasting")]
     public LayerMask ignoreLayer;
 
-    private RoomGridManager _gridManager;
+    
     private int targetIndex;
     private List<Node> currentPath;
 
     private void Awake()
     {
-        _gridManager = transform.parent.GetComponent<RoomGridManager>();
+        // had to remove this out of awake, due to timing issues. Room now inits this after spawning the enemy
+        //_gridManager = transform.parent.GetComponent<RoomGridManager>();
     }
 
     // find the intended direction of movement

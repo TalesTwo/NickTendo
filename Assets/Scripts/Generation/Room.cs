@@ -20,18 +20,6 @@ public class Room : MonoBehaviour
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
     
-    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>();
-    private List<GameObject> trapsInRoom = new List<GameObject>();
-    private List<BaseItem> lootInRoom = new List<BaseItem>();
-    public List<GameObject> enemySpawnPoints = new List<GameObject>();
-
-    private RoomSpawnController roomSpawnController;//TODO: this is not good lol
-
-    public List<EnemyControllerBase> GetEnemiesInRoom() { return enemiesInRoom; }
-    public List<GameObject> GetTrapsInRoom() { return trapsInRoom; }
-    public List<BaseItem> GetLootInRoom() { return lootInRoom; }
-    public List<GameObject> GetEnemySpawnPoints() { return enemySpawnPoints; }
-    public RoomSpawnController GetRoomSpawnController() { return roomSpawnController; }
 
     
     
@@ -80,7 +68,7 @@ public class Room : MonoBehaviour
         
         bIsFinalized = false;
         
-        if(roomSpawnController) roomSpawnController.Initialize();
+        
 
 
 

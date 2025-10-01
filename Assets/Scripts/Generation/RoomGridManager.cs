@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomGridManager : MonoBehaviour
 {
     [Header("Room Grid Details")]
     public LayerMask unwalkableLayer;
-    public Vector2 gridRoomSize;
+    private Vector2 gridRoomSize;
     public float nodeRadius = 0.5f;
 
     private Node[,] _grid;
@@ -21,6 +22,17 @@ public class RoomGridManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        
+        // Get access to the tilemap of the walls in the room, and get its x and y size
+        Tilemap tilemap = GetComponentInChildren<Tilemap>();
+        if (tilemap != null)
+        {
+            // Force refresh bounds
+            tilemap.CompressBounds();
+            BoundsInt bounds = tilemap.cellBounds;
+            gridRoomSize = new Vector2(bounds.size.x, bounds.size.y);
+        }
+        
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         
         gridSizeX = Mathf.RoundToInt(gridRoomSize.x);
@@ -86,6 +98,55 @@ public class RoomGridManager : MonoBehaviour
         }
         
         return neighbours;
+    }
+
+
+    public Transform FindValidWalkableCell()
+    {
+        /*
+         * Look through the grid, and find a random walkable cell.
+         * This will be used for enemy spawning, trap spawning, and other forms of spawning.
+         * To be valid, the node must be walkable AND have line-of-sight to the center of the room.
+         */
+    
+        if (_grid == null) return null;
+        
+        /*
+         * We are doign a temporary raycast to the centre of the map, just to ensure that
+         * we dont spawn enemies outside of the room, or in walls
+         */
+        Vector2 centerPoint = transform.position;
+        List<Node> validNodes = new List<Node>();
+        foreach (Node node in _grid)
+        {
+            if (!node.walkable) continue;
+
+            
+            Vector2 direction = (node.worldPosition - centerPoint).normalized;
+            float distance = Vector2.Distance(centerPoint, node.worldPosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(centerPoint, direction, distance, unwalkableLayer);
+            if (hit.collider == null)
+            {
+                
+                validNodes.Add(node);
+            }
+        }
+
+        if (validNodes.Count == 0) { return null; }
+
+        // Randomly select one of the valid nodes
+        Node chosenNode = validNodes[UnityEngine.Random.Range(0, validNodes.Count)];
+
+        // Create a temprary gameobject so we can have a spawn location
+        GameObject temp = new GameObject("TempSpawnPoint");
+        temp.transform.position = chosenNode.worldPosition;
+        temp.transform.SetParent(transform);
+
+        // Auto destroy to have some clean up
+        Destroy(temp, 0.5f);
+
+        return temp.transform;
     }
     
     /*
