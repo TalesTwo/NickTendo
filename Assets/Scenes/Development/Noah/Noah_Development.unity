@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4955921344443052296, guid: 0bbca8ce0f0cc0542813871b697b3d21, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7107906448747366015, guid: 0bbca8ce0f0cc0542813871b697b3d21, type: 3}
       propertyPath: m_Name
       value: BaseRoom_WALL
@@ -506,6 +510,10 @@ MonoBehaviour:
   hitEffect: {fileID: 2560593414228584792, guid: bb916d6a8cad70d4fab2ce9017edede7, type: 3}
   hitEffectDistance: 0.3
   hitFlashDuration: 0.1
+  projectile: {fileID: 2064634610991927975, guid: 2c450041c0744594197e81c49e1ea195, type: 3}
+  doNotHit:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!212 &1834244435
 SpriteRenderer:
   m_ObjectHideFlags: 0

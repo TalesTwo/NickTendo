@@ -62,10 +62,12 @@ public class EnemyControllerBase : SpawnableObject
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    private void Update()
     {
         // step 1: check death condition
         CheckForDeath();
+
+        _direction = getPlayerDirection();
         
         if (currentPath != null && currentPath.Count > 0)
         {
@@ -79,6 +81,8 @@ public class EnemyControllerBase : SpawnableObject
             pathingTimer = 0;
             FindPath();
         }
+        
+        Attack();
         
         // step 3: check for knockback then move: direction dependent on knockback state
         if (!_isKnockback)
@@ -127,6 +131,11 @@ public class EnemyControllerBase : SpawnableObject
     {
         Vector3 direction = (_player.transform.position - transform.position).normalized;
         return new Vector2(-direction.x, -direction.y);
+    }
+
+    private Vector2 getPlayerDirection()
+    {
+        return (_playerTransform.position - _transform.position).normalized;
     }
     
     // flash the sprite white to indicate a hit
@@ -181,5 +190,10 @@ public class EnemyControllerBase : SpawnableObject
     protected virtual IEnumerator Follow()
     {
         return null;
+    }
+
+    protected virtual void Attack()
+    {
+        return;
     }
 }
