@@ -10,23 +10,11 @@ public class ShopUIManager : MonoBehaviour
 {
     public GameObject ShopUI;
 
-    public Image Item0Image;
-    public Button Item0Button;
-    public TextMeshProUGUI Item0Name;
-    public TextMeshProUGUI Item0Desc;
-    public Image Item0Spotlight;
-
-    public Image Item1Image;
-    public Button Item1Button;
-    public TextMeshProUGUI Item1Name;
-    public TextMeshProUGUI Item1Desc;
-    public Image Item1Spotlight;
-
-    public Image Item2Image;
-    public Button Item2Button;
-    public TextMeshProUGUI Item2Name;
-    public TextMeshProUGUI Item2Desc;
-    public Image Item2Spotlight;
+    public Image[] ItemImages;
+    public Button[] ItemButtons;
+    public TextMeshProUGUI[] ItemNames;
+    public TextMeshProUGUI[] ItemDescriptions;
+    public Image[] ItemSpotlights;
 
     public Button CloseButton;
     public TextMeshProUGUI CoinCount;
@@ -37,9 +25,9 @@ public class ShopUIManager : MonoBehaviour
     void Start()
     {
         CloseButton.onClick.AddListener(CloseShop);
-        Item0Button.onClick.AddListener(AttemptBuyItem0);
-        Item1Button.onClick.AddListener(AttemptBuyItem1);
-        Item2Button.onClick.AddListener(AttemptBuyItem2);
+        ItemButtons[0].onClick.AddListener(delegate { AttemptBuyItem(0); });
+        ItemButtons[1].onClick.AddListener(delegate { AttemptBuyItem(1); });
+        ItemButtons[2].onClick.AddListener(delegate { AttemptBuyItem(2); });
 
         ShopM = gameObject.GetComponent<ShopManager>();
 
@@ -71,67 +59,28 @@ public class ShopUIManager : MonoBehaviour
         CoinCount.text = PlayerStats.Instance.GetCoins().ToString();
     }
 
-    void AttemptBuyItem0()
+    void AttemptBuyItem(int index)
     {
-        ShopM.AttemptBuy(0);
-    }
-
-    void AttemptBuyItem1()
-    {
-        ShopM.AttemptBuy(1);
-    }
-
-    void AttemptBuyItem2()
-    {
-        ShopM.AttemptBuy(2);
+        ShopM.AttemptBuy(index);
     }
 
     public void RemoveItemFromShop(int Index)
     {
-        if (Index == 0)
-        {
-            Destroy(Item0Image);
-            Destroy(Item0Button.gameObject);
-            Destroy(Item0Name);
-            Destroy(Item0Desc);
-            Destroy(Item0Spotlight);
-        }
-        else if (Index == 1)
-        {
-            Destroy(Item1Image);
-            Destroy(Item1Button.gameObject);
-            Destroy(Item1Name);
-            Destroy(Item1Desc);
-            Destroy(Item1Spotlight);
-        }
-        else if (Index == 2)
-        {
-            Destroy(Item2Image);
-            Destroy(Item2Button.gameObject);
-            Destroy(Item2Name);
-            Destroy(Item2Desc);
-            Destroy(Item2Spotlight);
-        }
+        Destroy(ItemImages[Index]);
+        Destroy(ItemButtons[Index].gameObject);
+        Destroy(ItemNames[Index]);
+        Destroy(ItemDescriptions[Index]);
+        Destroy(ItemSpotlights[Index]);
     }
 
-    public void MouseOverItem0()
+    public void MouseOverItem(int Index)
     {
-        Item0Spotlight.gameObject.SetActive(true);
+        ItemSpotlights[Index].gameObject.SetActive(true);
 
     }
-    public void MouseOverItem1()
-    {
-        Item1Spotlight.gameObject.SetActive(true);
-    }
-    public void MouseOverItem2()
-    {
-        Item2Spotlight.gameObject.SetActive(true);
-    }
 
-    public void MouseOverNoItem()
+    public void MouseLeftItem(int Index)
     {
-        if (!Item0Spotlight.IsDestroyed()) { Item0Spotlight.gameObject.SetActive(false); } 
-        if (!Item1Spotlight.IsDestroyed()) { Item1Spotlight.gameObject.SetActive(false); }
-        if (!Item2Spotlight.IsDestroyed()) { Item2Spotlight.gameObject.SetActive(false); }        
+        if (!ItemSpotlights[Index].IsDestroyed()) { ItemSpotlights[Index].gameObject.SetActive(false); }      
     }
 }

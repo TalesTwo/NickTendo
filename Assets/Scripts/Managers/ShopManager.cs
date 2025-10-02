@@ -16,9 +16,7 @@ public class ShopManager : MonoBehaviour
     {
         GetRandomShopList();
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
-        SetItem0();
-        SetItem1();
-        SetItem2();
+        SetItems();
         PlayerStats.Instance.DisplayAllBuffableStats();
     }
 
@@ -68,25 +66,15 @@ public class ShopManager : MonoBehaviour
 
 
     //probably move these to the Shop UI Manager (makes more sense there)
-    void SetItem0()
-    {
-        ShopUIM.Item0Image.sprite = ShopList[0].gameObject.GetComponent<SpriteRenderer>().sprite;
-        ShopUIM.Item0Name.text = ShopList[0].GetComponent<ShopItem>().Name;
-        ShopUIM.Item0Desc.text = ShopList[0].GetComponent<ShopItem>().GetDescription();
-    }
 
-    void SetItem1()
+    void SetItems()
     {
-        ShopUIM.Item1Image.sprite = ShopList[1].gameObject.GetComponent<SpriteRenderer>().sprite;
-        ShopUIM.Item1Name.text = ShopList[1].GetComponent<ShopItem>().Name;
-        ShopUIM.Item1Desc.text = ShopList[1].GetComponent<ShopItem>().GetDescription();
-    }
-
-    void SetItem2()
-    {
-        ShopUIM.Item2Image.sprite = ShopList[2].gameObject.GetComponent<SpriteRenderer>().sprite;
-        ShopUIM.Item2Name.text = ShopList[2].GetComponent<ShopItem>().Name;
-        ShopUIM.Item2Desc.text = ShopList[2].GetComponent<ShopItem>().GetDescription();
+        for (int i = 0; i <= 2; i++)
+        {
+            ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
+            ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
+            ShopUIM.ItemDescriptions[i].text = ShopList[i].GetComponent<ShopItem>().GetDescription();
+        }
     }
 
     public void AttemptBuy(int Index)
