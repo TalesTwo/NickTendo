@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: X Attack (Purple)
+  Name: X Accuracy
   itemValue: 100
-  buffValue: 10
-  buffType: 3
+  buffValue: 2
+  buffType: 6
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,8 +92,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -478394474689224354, guid: aaabc797fcb8623468c796ec9500327c, type: 3}
-  m_Color: {r: 0.5636095, g: 0.14644068, b: 0.61006296, a: 1}
+  m_Sprite: {fileID: 396415415775341810, guid: 720b1c4e0718fba4ca562cc2fb674340, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

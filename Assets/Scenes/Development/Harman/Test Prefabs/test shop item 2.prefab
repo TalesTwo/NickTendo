@@ -48,7 +48,7 @@ MonoBehaviour:
   Name: X SpAttack
   itemValue: 100
   buffValue: 5
-  buffType: 1
+  buffType: 4
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

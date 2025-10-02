@@ -14,6 +14,7 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //EventBroadcaster.SetSeed += SetSeed;
         GetRandomShopList();
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
         SetItems();
@@ -25,6 +26,11 @@ public class ShopManager : MonoBehaviour
     {
 
     }
+
+    /*void SetSeed(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
+    }*/
 
     void CheckListContents()
     {
@@ -42,7 +48,6 @@ public class ShopManager : MonoBehaviour
     void GetRandomShopList()
     {
         ShopList = new GameObject[3];
-        System.Random rand = new System.Random();
 
         int[] numbers = new int[ItemList.Length];
         for (int i =0; i<ItemList.Length; i++)
@@ -53,7 +58,7 @@ public class ShopManager : MonoBehaviour
         // Do the Fisher-Yates Shuffle
         for (int i = 0; i < numbers.Length; i++)
         {
-            int randomIndex = rand.Next(i, numbers.Length);
+            int randomIndex = UnityEngine.Random.Range(i, numbers.Length);
             int temp = numbers[i];
             numbers[i] = numbers[randomIndex];
             numbers[randomIndex] = temp;

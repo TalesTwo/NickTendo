@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: X Attack (Blue)
+  Name: X Defense
   itemValue: 100
-  buffValue: -10
-  buffType: 4
+  buffValue: 3
+  buffType: 0
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,8 +92,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -478394474689224354, guid: aaabc797fcb8623468c796ec9500327c, type: 3}
-  m_Color: {r: 0.3541592, g: 0.5204885, b: 0.8867924, a: 1}
+  m_Sprite: {fileID: -890837204512208485, guid: d75f15b790cf421449a6f754e882655c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
