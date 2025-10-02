@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerBase : MonoBehaviour
+public class EnemyControllerBase : SpawnableObject
 {
     [Header("Stats & difficulty")]
     public TextAsset statLineCSV;
@@ -36,6 +36,9 @@ public class EnemyControllerBase : MonoBehaviour
     [Header("direction of movement")]
     protected Vector3 _direction;
     
+    
+    protected RoomGridManager _gridManager;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -46,6 +49,11 @@ public class EnemyControllerBase : MonoBehaviour
         _transform = GetComponent<Transform>();
         _playerTransform = _player.GetComponent<Transform>();
         ParseStatsText();
+    }
+    
+    public void Initialize(int roomDifficulty)
+    {
+        _gridManager = transform.parent.GetComponent<RoomGridManager>();
     }
 
     // Update is called once per frame

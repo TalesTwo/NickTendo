@@ -71,6 +71,13 @@ public static class Types
         West
     }
     
+    public enum SpawnableType
+    {
+        Enemy,
+        Item,
+        Trap
+    }
+    
     /* ----------------- END GENERATION TYPES ----------------- */
     
 

@@ -18,6 +18,9 @@ public class Room : MonoBehaviour
     [SerializeField] private Types.RoomType roomType;
     
     public bool bIsFinalized = false; // has the player been in this room before?
+    public bool bIsDifficultySet = false; // has the difficulty been set for this room?
+    
+
     
     
     // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
@@ -25,14 +28,18 @@ public class Room : MonoBehaviour
     
     
     // what is the difficulty rating of this room?
-    public int roomDifficulty = 1;
+    public int roomDifficulty = int.MaxValue; // default to max value, so we can tell if it has been set or not.
     // What are the coordinates of this room in the grid? (-1, -1) if not set
-    public (int row, int col) RoomCoords = (-1, -1);
+    private (int row, int col) RoomCoords = (-1, -1);
     
     
     public void SetRoomDifficulty(int difficulty)
     {
         roomDifficulty = difficulty;
+    }
+    public int GetRoomDifficulty()
+    {
+        return roomDifficulty;
     }
     public void SetRoomCoords(int row, int col)
     {
@@ -51,21 +58,20 @@ public class Room : MonoBehaviour
     
     public void InitializeRoom(int difficulty = 1, (int row, int col)? coords = null)
     {
-        DebugUtils.Log("Initializing Room: " + gameObject.name);
-        DebugUtils.Log("Room Type: " + roomType);
-        DebugUtils.Log("Door Configuration: " + configuration.ToString());
-        DebugUtils.Log("Room Difficulty: " + difficulty);
-        DebugUtils.Log("Room Coords: " + (coords.HasValue ? coords.Value.ToString() : "Not Set"));
+
         roomDifficulty = difficulty;
         if (coords.HasValue)
             RoomCoords = coords.Value;
         
         // Initialize room logic here
         ApplyDoorConfiguration();
-        //TODO: Rename this to initalized
+        
         bIsFinalized = false;
         
         
+
+
+
     }
     
 

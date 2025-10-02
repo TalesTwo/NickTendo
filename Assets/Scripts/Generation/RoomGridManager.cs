@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomGridManager : MonoBehaviour
 {
     [Header("Room Grid Details")]
     public LayerMask unwalkableLayer;
-    public Vector2 gridRoomSize;
+    private Vector2 gridRoomSize;
     public float nodeRadius = 0.5f;
 
     private Node[,] _grid;
@@ -21,6 +22,17 @@ public class RoomGridManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        
+        // Get access to the tilemap of the walls in the room, and get its x and y size
+        Tilemap tilemap = GetComponentInChildren<Tilemap>();
+        if (tilemap != null)
+        {
+            // Force refresh bounds
+            tilemap.CompressBounds();
+            BoundsInt bounds = tilemap.cellBounds;
+            gridRoomSize = new Vector2(bounds.size.x, bounds.size.y);
+        }
+        
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         
         gridSizeX = Mathf.RoundToInt(gridRoomSize.x);
@@ -86,6 +98,67 @@ public class RoomGridManager : MonoBehaviour
         }
         
         return neighbours;
+    }
+
+
+    public Transform FindValidWalkableCell()
+    {
+
+
+        if (_grid == null) return null;
+
+        // Get all door positions from the "Doors" object
+        Transform doorsParent = transform.Find("Doors");
+        List<Transform> doorPoints = new List<Transform>();
+        foreach (Transform child in doorsParent)
+        {
+            doorPoints.Add(child);
+        }
+        
+        // Collect all valid nodes
+        List<Node> validNodes = new List<Node>();
+
+        foreach (Node node in _grid)
+        {
+            if (!node.walkable) continue;
+
+            bool hasLineOfSight = false;
+
+            // Check if *any* door has line of sight to this node
+            foreach (Transform door in doorPoints)
+            {
+                Vector2 start = door.position;
+                Vector2 end = node.worldPosition;
+                Vector2 direction = (end - start).normalized;
+                float distance = Vector2.Distance(start, end);
+
+                RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
+                if (hit.collider == null)
+                {
+                    hasLineOfSight = true;
+                    break;
+                }
+            }
+
+            if (hasLineOfSight)
+            {
+                validNodes.Add(node);
+            }
+        }
+
+        
+        // Randomly select one valid node
+        Node chosenNode = validNodes[UnityEngine.Random.Range(0, validNodes.Count)];
+
+        // Create a temporary transform to mark spawn
+        GameObject temp = new GameObject("TempSpawnPoint");
+        temp.transform.position = chosenNode.worldPosition;
+        temp.transform.SetParent(transform);
+
+        // Auto-cleanup
+        Destroy(temp, 0.5f);
+
+        return temp.transform;
     }
     
     /*
