@@ -36,8 +36,12 @@ public class EnemyControllerBase : SpawnableObject
     [Header("direction of movement")]
     protected Vector3 _direction;
     
-    
+    [Header("PathFinding")]
+    protected List<Node> currentPath;
+    protected int targetIndex;
     protected RoomGridManager _gridManager;
+    protected float findPathCooldown;
+    protected float pathingTimer = 0;
     
     // Start is called before the first frame update
     private void Start()
@@ -48,6 +52,7 @@ public class EnemyControllerBase : SpawnableObject
         _player = GameObject.Find("Player");
         _transform = GetComponent<Transform>();
         _playerTransform = _player.GetComponent<Transform>();
+        _gridManager = transform.parent.GetComponent<RoomGridManager>();
         ParseStatsText();
     }
     
@@ -61,16 +66,24 @@ public class EnemyControllerBase : SpawnableObject
     {
         // step 1: check death condition
         CheckForDeath();
-
-        FindPath();
         
-        // step 2: get movement direction
-        _direction = GetDirection();
+        if (currentPath != null && currentPath.Count > 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Follow());
+        }
+
+        pathingTimer += Time.deltaTime;
+        if (pathingTimer > findPathCooldown)
+        {
+            pathingTimer = 0;
+            FindPath();
+        }
         
         // step 3: check for knockback then move: direction dependent on knockback state
         if (!_isKnockback)
         {
-            Move();
+            StopAllCoroutines();
         }
     }
     
@@ -160,26 +173,13 @@ public class EnemyControllerBase : SpawnableObject
         return;
     }
 
-    // class MUST be overidden by child to move
-    protected virtual Vector3 GetDirection()
-    {
-        return Vector3.zero;
-    }
-
-    // ovverideing this metod is optional if the enemy has a different movement algorithm
-    protected virtual void Move()
-    {
-        //transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
-        Vector2 direction = new Vector2(_direction.x, _direction.y);
-        if (direction != Vector2.zero)
-        {
-            _transform.position = Vector2.MoveTowards(_transform.position, direction, Time.deltaTime * speed);
-            //_rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
-        }
-    }
-
     protected virtual void FindPath()
     {
         return;
+    }
+
+    protected virtual IEnumerator Follow()
+    {
+        return null;
     }
 }

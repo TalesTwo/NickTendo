@@ -7,47 +7,6 @@ using UnityEngine;
 
 public class FollowerEnemyController : EnemyControllerBase
 {
-    // ignore layermask
-    [Header("RayCasting")]
-    public LayerMask ignoreLayer;
-
-    
-    private int targetIndex;
-    private List<Node> currentPath;
-
-    private void Awake()
-    {
-        // had to remove this out of awake, due to timing issues. Room now inits this after spawning the enemy
-        //_gridManager = transform.parent.GetComponent<RoomGridManager>();
-    }
-
-    // find the intended direction of movement
-    protected override Vector3 GetDirection()
-    {
-        /*
-        // Step 1: RayCast towards the player
-        Vector3 dir = (_player.transform.position - transform.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, Mathf.Infinity, ~ignoreLayer);
-        if (hit.collider != null)
-        {
-            // Step 1.1: Player Found, go to Player
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                return dir;
-            }
-        }
-        */
-        
-        // Step 1.2: No player found, travel shortest route
-        if (_gridManager.path != null && _gridManager.path.Count > 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Follow());
-        }        
-        
-        return Vector3.zero;
-    }
-
     // finding the shortest path to the player
     protected override void FindPath()
     {
@@ -146,7 +105,7 @@ public class FollowerEnemyController : EnemyControllerBase
     }
     
     // follow the path as set out by A*
-    IEnumerator Follow()
+    protected override IEnumerator Follow()
     {
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
@@ -178,5 +137,6 @@ public class FollowerEnemyController : EnemyControllerBase
         damage = float.Parse(stats[2]);
         knockBackSpeed = float.Parse(stats[3]);
         knockBackTime = float.Parse(stats[4]);
+        findPathCooldown = 1f / (speed*2f);
     }
 }
