@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: X SpAttack
-  Description: 
   itemValue: 100
   buffValue: 5
+  buffType: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

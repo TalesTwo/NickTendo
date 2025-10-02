@@ -48,6 +48,7 @@ MonoBehaviour:
   Name: X Attack (Purple)
   itemValue: 100
   buffValue: 10
+  buffType: 3
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

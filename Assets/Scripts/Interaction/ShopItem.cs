@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ public class ShopItem : BaseItem
 {
     public int itemValue = 100;
     public float buffValue = 10;
+    public PlayerStatsEnum buffType;
     //public Image ItemImage;
     
     
@@ -32,7 +34,21 @@ public class ShopItem : BaseItem
 
     public string GetDescription()
     {
-        //change so attack is replaced by stat type
-        return (Name + " increases attack by " + buffValue);
+        string returnSting = "";
+        if (buffValue >= 0)
+        {
+            returnSting = Name + " increases " + AddSpace(buffType) + " by " + buffValue;
+        }
+        else
+        {
+            returnSting = Name + " decreases " + AddSpace(buffType) + " by " + -buffValue;
+        }
+        return returnSting;
+    }
+
+    string AddSpace(PlayerStatsEnum nameInEnum)
+    {
+        string[] splitName = nameInEnum.ToString().Split('_');
+        return String.Join(" ", splitName);
     }
 }

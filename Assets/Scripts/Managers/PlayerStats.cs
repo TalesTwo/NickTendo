@@ -65,4 +65,29 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateDashDistance(float UpdateValue) { DashDistance += UpdateValue; }
     public void UpdateKeys(int UpdateValue) { Keys += UpdateValue; }
     public void UpdateCoins(int UpdateValue) { Coins += UpdateValue; }
+
+
+    public void DisplayAllBuffableStats()
+    {
+        DebugUtils.Log("MaxHealth: " + MaxHealth);
+        DebugUtils.Log("MovementSpeed: " + MovementSpeed);
+        DebugUtils.Log("DashSpeed: " + DashSpeed);
+        DebugUtils.Log("AttackDamage: " + AttackDamage);
+        DebugUtils.Log("DashDamage: " + DashDamage);
+        DebugUtils.Log("DashCooldown: " + DashCooldown);
+        DebugUtils.Log("AttackCooldown: " + AttackCooldown);
+        DebugUtils.Log("DashDistance: " + DashDistance);
+    }
+}
+
+public enum PlayerStatsEnum
+{
+    Max_Health,
+    Movement_Speed,
+    Dash_Speed,
+    Attack_Damage,
+    Dash_Damage,
+    Dash_Cooldown,
+    Attack_Cooldown,
+    Dash_Distance
 }
