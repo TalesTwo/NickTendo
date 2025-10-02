@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     public GameObject attackAnimation;
     public GameObject dashAnimation;
 
-    // rigidbody
+    // rigidbody & animator
     private Rigidbody2D _rb;
+    private AnimatedPlayer _playerAnimator;
+    private bool _isFacingRight = true;
     
     // dashing boolean
     private bool _isDashing = false;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerAnimator = GetComponent<AnimatedPlayer>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
@@ -40,16 +43,27 @@ public class PlayerController : MonoBehaviour
 
         if (_isActive)
         {
-            // press the space bar to perform a slash attack
-            if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
+            // flip sprite along y axis if direction changes
+            if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
+            {
+                Flip();
+            }
+            else if (horizontalInput > 0 && !_isFacingRight && !(_isAttacking || _isDashMoving))
+            {
+                Flip();
+            }
+            
+            // press LMB to perform a slash attack
+            if (Input.GetMouseButtonDown(0) && !_isAttacking)
             {
                 StartAttack();
                 _isAttacking = true;
+                _playerAnimator.SetAttacking();
                 Invoke(nameof(ResetAttack), PlayerStats.Instance.GetAttackCooldown());
             }
             
-            // press left shift to perform a dash attack
-            else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
+            // press RMB to perform a dash attack
+            else if (Input.GetMouseButtonDown(1) && !_isDashing)
             {
                 // start dash
                 StartDash();
@@ -91,13 +105,13 @@ public class PlayerController : MonoBehaviour
     // starts base attack animation
     private void StartAttack()
     {
-        attackAnimation.SetActive(true);
+        Instantiate(attackAnimation);
     }
     
     // starts base dash attack
     private void StartDash()
     {
-        dashAnimation.SetActive(true);
+        Instantiate(dashAnimation);
     }
 
     // reset the dash attack after the cooldown
@@ -116,6 +130,14 @@ public class PlayerController : MonoBehaviour
     private void DashMovingStop()
     {
         _isDashMoving = false;
+    }
+
+    private void Flip()
+    {
+        _isFacingRight = !_isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     private void ToggleStartStop()

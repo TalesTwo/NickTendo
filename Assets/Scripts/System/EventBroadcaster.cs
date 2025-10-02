@@ -63,6 +63,12 @@ namespace System
         public delegate void StartStopActionHandler();
         public static event StartStopActionHandler StartStopAction;
         public static void Broadcast_StartStopAction() { StartStopAction?.Invoke(); }
+        
+        // Broadcast to set a seed across the game
+        public delegate void SetSeedHandler(int seed);
+        public static event SetSeedHandler SetSeed;
+        public static void Broadcast_SetSeed(int seed) { SetSeed?.Invoke(seed); }
+        
 
         /* Define the delegate for the ActivityCompleted event */
         //public delegate void ActivityCompletedHandler(BaseActivity activity);
