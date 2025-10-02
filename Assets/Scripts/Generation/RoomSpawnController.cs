@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Generation.Data;
 using Generation.ScriptableObjects;
 using UnityEngine;
 
@@ -13,7 +14,11 @@ public class RoomSpawnController : MonoBehaviour
     private List<GameObject> trapsInRoom = new List<GameObject>();
     private List<BaseItem> lootInRoom = new List<BaseItem>();
     
-    public List<EnemyData> EnemyData; // List of enemy prefabs that can be spawned in this room
+    [Header("Enemy Spawn Data")]
+    public List<SpawnableGroup> spawnableMap = new List<SpawnableGroup>();
+    
+    
+
     
     private void Start()
     {
@@ -35,13 +40,26 @@ public class RoomSpawnController : MonoBehaviour
         // Get access to the Room
         Transform SpawnLocation = _roomGridManager.FindValidWalkableCell();
         
+        
+        // look at the spawnable map, and find the list with the enemy type
+        List<SpawnData> enemiesToSpawn = new List<SpawnData>();
+        foreach (SpawnableGroup spawnableGroup in spawnableMap)
+        {
+            if (spawnableGroup.spawnType == Types.SpawnableType.Enemy)
+            {
+                enemiesToSpawn = spawnableGroup.Spawnables;
+                break;
+            }
+        }
+        
+        
         // pick a random enemy from the list of enemy prefabs
-        if (EnemyData.Count > 0 && SpawnLocation != null)
+        if (enemiesToSpawn.Count > 0 && SpawnLocation != null)
         {
             
             // Look through the enemy data, and look for any with a spawnChance of 1 (guaranteed spawn)
-            List<EnemyData> guaranteedEnemies = new List<EnemyData>();
-            foreach (EnemyData enemyData in EnemyData)
+            List<SpawnData> guaranteedEnemies = new List<SpawnData>();
+            foreach (SpawnData enemyData in enemiesToSpawn)
             {
                 if (enemyData.spawnChance >= 1f)
                 {
@@ -57,7 +75,7 @@ public class RoomSpawnController : MonoBehaviour
                 }
             }
             // loop through guaranteed enemies and spawn a random amount of them
-            foreach (EnemyData enemyData in guaranteedEnemies)
+            foreach (SpawnData enemyData in guaranteedEnemies)
             {
                 int spawnCount = UnityEngine.Random.Range(enemyData.minSpawnCount, enemyData.maxSpawnCount + 1);
                 for (int i = 0; i < spawnCount; i++)
@@ -69,7 +87,7 @@ public class RoomSpawnController : MonoBehaviour
                     }
                 }
                 // Remove the guaranteed enemy from the list so we don't spawn it again
-                EnemyData.Remove(enemyData);
+                enemiesToSpawn.Remove(enemyData);
             }
             
 

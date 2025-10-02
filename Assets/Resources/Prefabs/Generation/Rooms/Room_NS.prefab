@@ -5496,8 +5496,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0848d56fe912245bbad02188ae749e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyData:
-  - {fileID: 11400000, guid: bf5d2f1ab43c14043bf66dd0c6ad27a9, type: 2}
+  spawnableMap:
+  - spawnType: 0
+    Spawnables:
+    - enemyPrefab: {fileID: 3718088634739088283, guid: 2642759b201917948a506645585a9ce7, type: 3}
+      minSpawnCount: 2
+      maxSpawnCount: 4
+      spawnChance: 0.75
 --- !u!1001 &3665282670372120388
 PrefabInstance:
   m_ObjectHideFlags: 0

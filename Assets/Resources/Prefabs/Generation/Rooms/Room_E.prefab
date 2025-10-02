@@ -5522,6 +5522,7 @@ GameObject:
   - component: {fileID: 4634923766363041384}
   - component: {fileID: 5908526261584492863}
   - component: {fileID: -9055647480928163949}
+  - component: {fileID: 2519939599872664703}
   m_Layer: 0
   m_Name: Room_E
   m_TagString: Untagged
@@ -5580,6 +5581,7 @@ MonoBehaviour:
   doors: {fileID: 4544804470217660477}
   roomType: 0
   bIsFinalized: 0
+  bIsDifficultySet: 0
   roomDifficulty: 1
 --- !u!114 &-9055647480928163949
 MonoBehaviour:
@@ -5596,8 +5598,26 @@ MonoBehaviour:
   unwalkableLayer:
     serializedVersion: 2
     m_Bits: 8
-  gridRoomSize: {x: 22, y: 22}
   nodeRadius: 0.5
+--- !u!114 &2519939599872664703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611017202358040713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0848d56fe912245bbad02188ae749e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnableMap:
+  - spawnType: 0
+    Spawnables:
+    - enemyPrefab: {fileID: 3718088634739088283, guid: 2642759b201917948a506645585a9ce7, type: 3}
+      minSpawnCount: 2
+      maxSpawnCount: 4
+      spawnChance: 0.75
 --- !u!1001 &2666819155788606910
 PrefabInstance:
   m_ObjectHideFlags: 0

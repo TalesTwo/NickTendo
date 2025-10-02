@@ -61,12 +61,12 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
-            DebugUtils.Log("Player in range to interact with " + gameObject.name);
+            //DebugUtils.Log("Player in range to interact with " + gameObject.name);
             CanInteract = true;
             // enable the interact prompt if we have one
             if (interactPromptInstance != null)
             {
-                DebugUtils.Log("Enabling interact prompt for " + gameObject.name);
+                //DebugUtils.Log("Enabling interact prompt for " + gameObject.name);
                 interactPromptInstance.SetActive(true);
             }
         }
@@ -75,7 +75,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
-            DebugUtils.Log("Player out of range to interact with " + gameObject.name);
+            //DebugUtils.Log("Player out of range to interact with " + gameObject.name);
             CanInteract = false;
             // disable the interact prompt if we have one
             if (interactPromptInstance != null)

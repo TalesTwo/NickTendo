@@ -58,8 +58,9 @@ public class FollowerEnemyController : EnemyControllerBase
         Node startNode = _gridManager.NodeFromWorldPoint(start);
         Node endNode = _gridManager.NodeFromWorldPoint(end);
         
-        Debug.Log(endNode.walkable);
-        Debug.Log(endNode.worldPosition);
+        // Tick logs make me crash out LOL
+        //Debug.Log(endNode.walkable);
+        //Debug.Log(endNode.worldPosition);
         
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();

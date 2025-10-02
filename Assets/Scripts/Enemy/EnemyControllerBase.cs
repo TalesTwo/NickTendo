@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerBase : MonoBehaviour
+public class EnemyControllerBase : SpawnableObject
 {
     [Header("Stats & difficulty")]
     public TextAsset statLineCSV;

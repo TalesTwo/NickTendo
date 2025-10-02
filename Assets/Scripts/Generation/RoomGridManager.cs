@@ -103,47 +103,59 @@ public class RoomGridManager : MonoBehaviour
 
     public Transform FindValidWalkableCell()
     {
-        /*
-         * Look through the grid, and find a random walkable cell.
-         * This will be used for enemy spawning, trap spawning, and other forms of spawning.
-         * To be valid, the node must be walkable AND have line-of-sight to the center of the room.
-         */
-    
+
+
         if (_grid == null) return null;
+
+        // Get all door positions from the "Doors" object
+        Transform doorsParent = transform.Find("Doors");
+        List<Transform> doorPoints = new List<Transform>();
+        foreach (Transform child in doorsParent)
+        {
+            doorPoints.Add(child);
+        }
         
-        /*
-         * We are doign a temporary raycast to the centre of the map, just to ensure that
-         * we dont spawn enemies outside of the room, or in walls
-         */
-        Vector2 centerPoint = transform.position;
+        // Collect all valid nodes
         List<Node> validNodes = new List<Node>();
+
         foreach (Node node in _grid)
         {
             if (!node.walkable) continue;
 
-            
-            Vector2 direction = (node.worldPosition - centerPoint).normalized;
-            float distance = Vector2.Distance(centerPoint, node.worldPosition);
+            bool hasLineOfSight = false;
 
-            RaycastHit2D hit = Physics2D.Raycast(centerPoint, direction, distance, unwalkableLayer);
-            if (hit.collider == null)
+            // Check if *any* door has line of sight to this node
+            foreach (Transform door in doorPoints)
             {
-                
+                Vector2 start = door.position;
+                Vector2 end = node.worldPosition;
+                Vector2 direction = (end - start).normalized;
+                float distance = Vector2.Distance(start, end);
+
+                RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
+                if (hit.collider == null)
+                {
+                    hasLineOfSight = true;
+                    break;
+                }
+            }
+
+            if (hasLineOfSight)
+            {
                 validNodes.Add(node);
             }
         }
 
-        if (validNodes.Count == 0) { return null; }
-
-        // Randomly select one of the valid nodes
+        
+        // Randomly select one valid node
         Node chosenNode = validNodes[UnityEngine.Random.Range(0, validNodes.Count)];
 
-        // Create a temprary gameobject so we can have a spawn location
+        // Create a temporary transform to mark spawn
         GameObject temp = new GameObject("TempSpawnPoint");
         temp.transform.position = chosenNode.worldPosition;
         temp.transform.SetParent(transform);
 
-        // Auto destroy to have some clean up
+        // Auto-cleanup
         Destroy(temp, 0.5f);
 
         return temp.transform;
