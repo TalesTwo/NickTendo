@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerStats : Singleton<PlayerStats>
 {
@@ -66,9 +67,9 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateKeys(int UpdateValue) { Keys += UpdateValue; }
     public void UpdateCoins(int UpdateValue) { Coins += UpdateValue; }
 
-
-    public void DisplayAllBuffableStats()
+    public void DisplayAllStats()
     {
+        DebugUtils.Log("CurrentHealth: " + CurrentHealth);
         DebugUtils.Log("MaxHealth: " + MaxHealth);
         DebugUtils.Log("MovementSpeed: " + MovementSpeed);
         DebugUtils.Log("DashSpeed: " + DashSpeed);
@@ -77,11 +78,62 @@ public class PlayerStats : Singleton<PlayerStats>
         DebugUtils.Log("DashCooldown: " + DashCooldown);
         DebugUtils.Log("AttackCooldown: " + AttackCooldown);
         DebugUtils.Log("DashDistance: " + DashDistance);
+        DebugUtils.Log("Keys: " + Keys);
+        DebugUtils.Log("Coins: " + Coins);
+    }
+
+    public void ApplyItemBuffs(PlayerStatsEnum BuffType, float BuffValue)
+    {
+        if (BuffType == PlayerStatsEnum.Max_Health)
+        {
+            UpdateMaxHealth(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Movement_Speed)
+        {
+            UpdateMovementSpeed(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Dash_Speed)
+        {
+            UpdateDashSpeed(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Attack_Damage)
+        {
+            UpdateAttackDamage(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Dash_Damage)
+        {
+            UpdateDashDamage(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Dash_Cooldown)
+        {
+            UpdateDashCooldown(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Attack_Cooldown)
+        {
+            UpdateAttackCooldown(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Dash_Distance)
+        {
+            UpdateDashDistance(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Current_Health)
+        {
+            UpdateCurrentHealth(BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.Keys)
+        {
+            UpdateKeys(((int)BuffValue));
+        }
+        else if (BuffType == PlayerStatsEnum.Coins)
+        {
+            UpdateCoins((int)BuffValue);
+        }
     }
 }
 
 public enum PlayerStatsEnum
 {
+    Current_Health,
     Max_Health,
     Movement_Speed,
     Dash_Speed,
@@ -89,5 +141,7 @@ public enum PlayerStatsEnum
     Dash_Damage,
     Dash_Cooldown,
     Attack_Cooldown,
-    Dash_Distance
+    Dash_Distance,
+    Keys,
+    Coins
 }

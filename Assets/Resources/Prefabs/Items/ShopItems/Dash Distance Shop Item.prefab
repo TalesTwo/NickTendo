@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6678887121655184090}
   - component: {fileID: 7787435678194780221}
   m_Layer: 0
-  m_Name: test shop item 2
+  m_Name: Dash Distance Shop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: X SpAttack
+  Name: Dash Distance Shop Item
   itemValue: 100
   buffValue: 5
-  buffType: 0
+  buffType: 8
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

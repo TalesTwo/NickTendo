@@ -7,9 +7,11 @@ public class ShopTriggerInteraction : TriggerInteractBase
 {
     // Start is called before the first frame update
 
+    private ShopUIManager ShopUIM;
+
     public override void Interact()
     {
-        
-        DebugUtils.Log("Interaction is being called");
+        ShopUIM = gameObject.GetComponent<ShopUIManager>();
+        ShopUIM.OpenShop();
     }
 }

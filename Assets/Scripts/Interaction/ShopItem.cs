@@ -10,7 +10,6 @@ public class ShopItem : BaseItem
     public int itemValue = 100;
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
-    //public Image ItemImage;
     
     
     // Start is called before the first frame update
@@ -23,13 +22,6 @@ public class ShopItem : BaseItem
     void Update()
     {
         
-    }
-
-    void Use()
-    {
-        //just for testing]
-        //after testing is done replace it so it can work with every stat
-        PlayerStats.Instance.UpdateAttackDamage(buffValue);
     }
 
     public string GetDescription()

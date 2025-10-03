@@ -14,11 +14,11 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //EventBroadcaster.SetSeed += SetSeed;
+        EventBroadcaster.SetSeed += SetSeed;
         GetRandomShopList();
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
         SetItems();
-        PlayerStats.Instance.DisplayAllBuffableStats();
+        //PlayerStats.Instance.DisplayAllStats();
     }
 
     // Update is called once per frame
@@ -27,10 +27,10 @@ public class ShopManager : MonoBehaviour
 
     }
 
-    /*void SetSeed(int seed)
+    void SetSeed(int seed)
     {
         UnityEngine.Random.InitState(seed);
-    }*/
+    }
 
     void CheckListContents()
     {
@@ -69,9 +69,6 @@ public class ShopManager : MonoBehaviour
         ShopList[2] = ItemList[numbers[2]];
     }
 
-
-    //probably move these to the Shop UI Manager (makes more sense there)
-
     void SetItems()
     {
         for (int i = 0; i <= 2; i++)
@@ -84,55 +81,19 @@ public class ShopManager : MonoBehaviour
 
     public void AttemptBuy(int Index)
     {
-        if (PlayerStats.Instance.GetCoins() >= ShopList[Index].GetComponent<ShopItem>().itemValue)
+        ShopItem AttemptItem = ShopList[Index].GetComponent<ShopItem>();
+        if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
         {
             
-            PlayerStats.Instance.UpdateCoins(-ShopList[Index].GetComponent<ShopItem>().itemValue);
-            ApplyBuffs(ShopList[Index].GetComponent<ShopItem>());
-            PlayerStats.Instance.DisplayAllBuffableStats();
+            PlayerStats.Instance.UpdateCoins(-AttemptItem.itemValue);
+            PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
+            //PlayerStats.Instance.DisplayAllStats();
             ShopUIM.UpdateCoinDisplay();
             ShopUIM.RemoveItemFromShop(Index);
         }
         else
         {
-            DebugUtils.LogError("Not enough money to buy " + ShopList[Index].GetComponent<ShopItem>().name + "!");
-        }
-    }
-
-    void ApplyBuffs(ShopItem Item)
-    {
-        DebugUtils.Log("Apply buff is called");
-        if (Item.buffType == PlayerStatsEnum.Max_Health)
-        {
-            PlayerStats.Instance.UpdateMaxHealth(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Movement_Speed)
-        {
-            PlayerStats.Instance.UpdateMovementSpeed(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Dash_Speed)
-        {
-            PlayerStats.Instance.UpdateDashSpeed(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Attack_Damage)
-        {
-            PlayerStats.Instance.UpdateAttackDamage(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Dash_Damage)
-        {
-            PlayerStats.Instance.UpdateDashDamage(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Dash_Cooldown)
-        {
-            PlayerStats.Instance.UpdateDashCooldown(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Attack_Cooldown)
-        {
-            PlayerStats.Instance.UpdateAttackCooldown(Item.buffValue);
-        }
-        else if (Item.buffType == PlayerStatsEnum.Dash_Distance)
-        {
-            PlayerStats.Instance.UpdateDashDistance(Item.buffValue);
+            DebugUtils.LogError("Not enough money to buy " + AttemptItem.name + "!");
         }
     }
 }

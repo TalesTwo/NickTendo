@@ -39,19 +39,24 @@ public class ShopUIManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            if (ShopUI != null)
-            {
-                UpdateCoinDisplay();
-                ShopUI.SetActive(true);
-                DebugUtils.Log("Key is being pressed");
-            }
+            OpenShop();
         }        
+    }
+
+    public void OpenShop()
+    {
+        if (ShopUI != null)
+        {
+            UpdateCoinDisplay();
+            ShopUI.SetActive(true);
+            EventBroadcaster.Broadcast_StartStopAction();
+        }
     }
 
     void CloseShop()
     {
-        DebugUtils.Log("Close Shop is being called");
-        ShopUI.SetActive(false);    
+        ShopUI.SetActive(false);
+        EventBroadcaster.Broadcast_StartStopAction();
     }
 
     public void UpdateCoinDisplay()
