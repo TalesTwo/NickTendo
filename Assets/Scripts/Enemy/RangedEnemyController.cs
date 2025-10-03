@@ -2,61 +2,145 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RangedEnemyController : EnemyControllerBase
 {
-    [Header("distance from player")]
-    private float _distanceToPlayer;
-    
     [Header("Safe Distance from Player")]
     private float _minDistanceToPlayer;
     private float _maxDistanceToPlayer;
-
-    [Header("Strafing")]
-    private float _strafingInterval;
-    private float _strafingTimer;
-    private int _strafingDirection = 1;
-    private bool _isStrafing = false;
     
-    protected override Vector3 GetDirection()
-    {
-        Vector3 direction = Vector3.zero;
-        Vector3 directionToPlayer = (_player.transform.position - transform.position).normalized;
-        GetDistanceToPlayer();
+    [Header("Attack")]
+    public GameObject projectile;
+    public LayerMask doNotHit;
+    private float _attackCooldownMax;
+    private float _attackCooldownMin;
+    private float _attackCooldown;
+    private float _attackTimer = 0;
+    private float _projectileSpeed;
 
-        if (_distanceToPlayer < _minDistanceToPlayer)
+    // this method handles ranged enemies combat attacks
+    protected override void Attack()
+    {
+        _attackTimer += Time.deltaTime;
+
+        // raycast for player, do not shoot unless you can see him
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~doNotHit);
+
+        if (hit.collider != null)
         {
-            direction = -directionToPlayer;
-            _isStrafing = false;
+            
+            if (hit.collider.CompareTag("Player"))
+            {
+                
+                if (_attackTimer > _attackCooldown)
+                {
+                    // instantiate a projectile and give it velocity
+                    Vector2 attackPosition = new Vector2(_transform.position.x + _direction.x, _transform.position.y + _direction.y);
+                    GameObject newProjectile = Instantiate(projectile, attackPosition, Quaternion.identity);
+                    Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
+                    ProjectileRb.velocity = _direction * _projectileSpeed;
+                    
+                    // set damage of projectile
+                    EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
+                    controller.SetDamage(damage, knockbackForce, stunTimer);
+                    
+                    // reset timer and cooldown for attack
+                    _attackTimer = 0;
+                    _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
+                }                   
+            }
         }
-        else if (_distanceToPlayer > _maxDistanceToPlayer)
+    }
+    
+    // path finding
+    protected override void FindPath()
+    {
+        Vector2 start = _transform.position;
+        Vector2 playerPos = _playerTransform.position;
+        
+        Node currentNode = _gridManager.NodeFromWorldPoint(start);
+        List<Node> nextNode = new List<Node>();
+        float distance = Vector2.Distance(currentNode.worldPosition, playerPos);
+        
+        List<Node> neighbors = _gridManager.GetNeighbours(currentNode);
+        Node closestNode = null;
+        float closestDistance = float.MaxValue;
+        Node farthestNode = null;
+        float farthestDistance = float.MinValue;
+        Node strafeNode = null;
+        float strafeDistance = _maxDistanceToPlayer;
+        
+        // check all neighbors for three pathing options
+        foreach (Node neighbor in neighbors)
         {
-            direction = directionToPlayer;
-            _isStrafing = false;
-        }
-        else
-        {
-            direction = StrafeDirection(directionToPlayer);
-            _isStrafing = true;
+            if (neighbor.walkable)
+            {
+                float neighborDistance = Vector2.Distance(neighbor.worldPosition, playerPos);
+                if (neighborDistance < closestDistance)
+                {
+                    closestDistance = neighborDistance;
+                    closestNode = neighbor;
+                } 
+                if (neighborDistance > farthestDistance)
+                {
+                    farthestDistance = neighborDistance;
+                    farthestNode = neighbor;
+                } 
+                if (neighborDistance < strafeDistance && neighborDistance > _minDistanceToPlayer)
+                {
+                    strafeDistance = neighborDistance;
+                    strafeNode = neighbor;
+                }                
+            }
         }
         
-        return direction;
+        // step 1: is current node within legal range -> strafe
+        if (distance < _maxDistanceToPlayer && distance > _minDistanceToPlayer)
+        {
+            nextNode.Add(strafeNode);
+            currentPath = nextNode;
+        }
+        // step 2: is current too close -> retreat
+        else if (distance < _minDistanceToPlayer)
+        {
+            nextNode.Add(farthestNode);
+            currentPath = nextNode;
+        }
+        // step 3: is current node too far -> advance
+        else if (distance > _maxDistanceToPlayer)
+        {
+            nextNode.Add(closestNode);
+            currentPath = nextNode;
+        }
+
     }
 
-    protected override void Move()
+    // follow the path
+    protected override IEnumerator Follow()
     {
-        
-        if (!_isStrafing)
+        Vector3 currentWaypoint = currentPath[0].worldPosition;
+        targetIndex = 0;
+
+        // iterate though the path as it updates
+        while (true)
         {
-            transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
+            if ((Vector2)_transform.position == (Vector2)currentWaypoint)
+            {
+                targetIndex++;
+                if (targetIndex >= currentPath.Count)
+                {
+                    yield break;
+                }
+                currentWaypoint = currentPath[targetIndex].worldPosition;
+            }
+
+            _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            yield return null;
         }
-        else
-        {
-            transform.Translate(_direction * (_strafingDirection * speed * Time.deltaTime), Space.World);
-        }
-        
     }
 
+    // function grabs and allocates stats for enemy
     protected override void GetStats(string statLine)
     {
         string[] stats = statLine.Split(',');
@@ -67,26 +151,12 @@ public class RangedEnemyController : EnemyControllerBase
         knockBackTime = float.Parse(stats[4]);
         _minDistanceToPlayer = float.Parse(stats[5]);
         _maxDistanceToPlayer = float.Parse(stats[6]);
-        _strafingInterval = float.Parse(stats[7]);
-    }
-
-    private void GetDistanceToPlayer()
-    {
-        _distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
-    }
-
-    private Vector3 StrafeDirection(Vector3 directionToPlayer)
-    {
-        // do not allow the enemy to strafe in any one direction for too long
-        _strafingTimer += Time.deltaTime;
-        if (_strafingTimer >= _strafingInterval)
-        {
-            _strafingDirection *= -1;
-            _strafingTimer = 0;
-        }
-        
-        Vector3 direction = new Vector3(-directionToPlayer.y, directionToPlayer.x, 0);
-        
-        return direction;
+        _attackCooldownMin = float.Parse(stats[7]);
+        _attackCooldownMax = float.Parse(stats[8]);
+        _projectileSpeed = float.Parse(stats[9]);
+        knockbackForce =  float.Parse(stats[10]);
+        stunTimer = float.Parse(stats[11]);
+        _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
+        findPathCooldown = 1f / speed;
     }
 }

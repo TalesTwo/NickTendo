@@ -16,10 +16,13 @@ public class EnemyControllerBase : SpawnableObject
     protected float knockBackSpeed = 10;
     protected float knockBackTime = 0.15f;
     protected float damage = 1f;
+    protected float stunTimer;
+    protected float knockbackForce;
     
     [Header("Game Components & objects")]
     private Rigidbody2D _rb;
     protected GameObject _player;
+    protected PlayerController _playerController;
     private SpriteRenderer _renderer;
     private Color _color;
     protected Transform _playerTransform;
@@ -36,8 +39,12 @@ public class EnemyControllerBase : SpawnableObject
     [Header("direction of movement")]
     protected Vector3 _direction;
     
-    
+    [Header("PathFinding")]
+    protected List<Node> currentPath;
+    protected int targetIndex;
     protected RoomGridManager _gridManager;
+    protected float findPathCooldown;
+    protected float pathingTimer = 0;
     
     // Start is called before the first frame update
     private void Start()
@@ -46,31 +53,47 @@ public class EnemyControllerBase : SpawnableObject
         _renderer = GetComponent<SpriteRenderer>();
         _color = _renderer.color;
         _player = GameObject.Find("Player");
+        _playerController = _player.GetComponent<PlayerController>();
         _transform = GetComponent<Transform>();
         _playerTransform = _player.GetComponent<Transform>();
+        _gridManager = transform.parent.GetComponent<RoomGridManager>();
         ParseStatsText();
     }
     
     public void Initialize(int roomDifficulty)
     {
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
+        difficulty = roomDifficulty;
+        ParseStatsText();
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    private void Update()
     {
         // step 1: check death condition
         CheckForDeath();
 
-        FindPath();
+        _direction = getPlayerDirection();
         
-        // step 2: get movement direction
-        _direction = GetDirection();
+        if (currentPath != null && currentPath.Count > 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Follow());
+        }
+
+        pathingTimer += Time.deltaTime;
+        if (pathingTimer > findPathCooldown)
+        {
+            pathingTimer = 0;
+            FindPath();
+        }
+        
+        Attack();
         
         // step 3: check for knockback then move: direction dependent on knockback state
         if (!_isKnockback)
         {
-            Move();
+            StopAllCoroutines();
         }
     }
     
@@ -103,7 +126,7 @@ public class EnemyControllerBase : SpawnableObject
         _isKnockback = true;
         Vector2 knockBack = getKnockBackDirection();
         _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
-        StartCoroutine(HitFlash());
+        HitFlash();
         Quaternion angle = getEffectAngle();
         Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, angle);
         Invoke(nameof(ResetKnockBack), knockBackTime);
@@ -115,12 +138,21 @@ public class EnemyControllerBase : SpawnableObject
         Vector3 direction = (_player.transform.position - transform.position).normalized;
         return new Vector2(-direction.x, -direction.y);
     }
+
+    private Vector2 getPlayerDirection()
+    {
+        return (_playerTransform.position - _transform.position).normalized;
+    }
     
     // flash the sprite white to indicate a hit
-    IEnumerator HitFlash()
+    private void HitFlash()
     {
         _renderer.color = Color.white;
-        yield return new WaitForSeconds(hitFlashDuration);
+        Invoke(nameof(EndHitFlash),  hitFlashDuration);
+    }
+
+    private void EndHitFlash()
+    {
         _renderer.color = _color;
     }
     
@@ -160,25 +192,17 @@ public class EnemyControllerBase : SpawnableObject
         return;
     }
 
-    // class MUST be overidden by child to move
-    protected virtual Vector3 GetDirection()
-    {
-        return Vector3.zero;
-    }
-
-    // ovverideing this metod is optional if the enemy has a different movement algorithm
-    protected virtual void Move()
-    {
-        //transform.Translate(_direction * (speed * Time.deltaTime), Space.World);
-        Vector2 direction = new Vector2(_direction.x, _direction.y);
-        if (direction != Vector2.zero)
-        {
-            _transform.position = Vector2.MoveTowards(_transform.position, direction, Time.deltaTime * speed);
-            //_rb.MovePosition(_rb.position + direction * (speed * Time.deltaTime));
-        }
-    }
-
     protected virtual void FindPath()
+    {
+        return;
+    }
+
+    protected virtual IEnumerator Follow()
+    {
+        return null;
+    }
+
+    protected virtual void Attack()
     {
         return;
     }

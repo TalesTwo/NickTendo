@@ -4210,7 +4210,7 @@ GameObject:
   - component: {fileID: 6567953140896148064}
   m_Layer: 3
   m_Name: Tilemap_Walls(COLLISION)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5587,6 +5587,10 @@ MonoBehaviour:
       minSpawnCount: 2
       maxSpawnCount: 4
       spawnChance: 0.75
+    - enemyPrefab: {fileID: 2413488171680857417, guid: 0e7ded53104e73a4aa593d6a937f1f8d, type: 3}
+      minSpawnCount: 1
+      maxSpawnCount: 2
+      spawnChance: 0.5
 --- !u!1001 &2001117188650154185
 PrefabInstance:
   m_ObjectHideFlags: 0

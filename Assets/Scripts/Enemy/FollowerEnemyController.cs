@@ -7,45 +7,18 @@ using UnityEngine;
 
 public class FollowerEnemyController : EnemyControllerBase
 {
-    // ignore layermask
-    [Header("RayCasting")]
-    public LayerMask ignoreLayer;
-
+    private bool _playerHit;
+    private float _playerHitTimer;
     
-    private int targetIndex;
-    private List<Node> currentPath;
-
-    private void Awake()
+    // invoke player damage and freeze to avoid chaining the player
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        // had to remove this out of awake, due to timing issues. Room now inits this after spawning the enemy
-        //_gridManager = transform.parent.GetComponent<RoomGridManager>();
-    }
-
-    // find the intended direction of movement
-    protected override Vector3 GetDirection()
-    {
-        /*
-        // Step 1: RayCast towards the player
-        Vector3 dir = (_player.transform.position - transform.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, Mathf.Infinity, ~ignoreLayer);
-        if (hit.collider != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            // Step 1.1: Player Found, go to Player
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                return dir;
-            }
+            _playerHit = true;
+            Invoke(nameof(PlayerHitCooldown), _playerHitTimer);
+            DoDamage();
         }
-        */
-        
-        // Step 1.2: No player found, travel shortest route
-        if (_gridManager.path != null && _gridManager.path.Count > 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Follow());
-        }        
-        
-        return Vector3.zero;
     }
 
     // finding the shortest path to the player
@@ -146,7 +119,7 @@ public class FollowerEnemyController : EnemyControllerBase
     }
     
     // follow the path as set out by A*
-    IEnumerator Follow()
+    protected override IEnumerator Follow()
     {
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
@@ -164,9 +137,26 @@ public class FollowerEnemyController : EnemyControllerBase
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
 
-            _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            if (!_playerHit)
+            {
+                _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            }
+            
             yield return null;
         }
+    }
+    
+    // do damage to and knockback the player
+    private void DoDamage()
+    {
+        Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
+        _playerController.KnockBack(knockbackForce, direction, stunTimer);
+        PlayerStats.Instance.UpdateCurrentHealth(damage);
+    }
+
+    private void PlayerHitCooldown()
+    {
+        _playerHit = false;
     }
     
     // grabs stats from .csv doc
@@ -178,5 +168,9 @@ public class FollowerEnemyController : EnemyControllerBase
         damage = float.Parse(stats[2]);
         knockBackSpeed = float.Parse(stats[3]);
         knockBackTime = float.Parse(stats[4]);
+        knockbackForce =  float.Parse(stats[5]);
+        stunTimer = float.Parse(stats[6]);
+        _playerHitTimer = float.Parse(stats[7]);
+        findPathCooldown = 1f / (speed*2f);
     }
 }
