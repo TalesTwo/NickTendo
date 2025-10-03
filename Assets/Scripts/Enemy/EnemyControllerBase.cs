@@ -16,10 +16,13 @@ public class EnemyControllerBase : SpawnableObject
     protected float knockBackSpeed = 10;
     protected float knockBackTime = 0.15f;
     protected float damage = 1f;
+    protected float stunTimer;
+    protected float knockbackForce;
     
     [Header("Game Components & objects")]
     private Rigidbody2D _rb;
     protected GameObject _player;
+    protected PlayerController _playerController;
     private SpriteRenderer _renderer;
     private Color _color;
     protected Transform _playerTransform;
@@ -50,6 +53,7 @@ public class EnemyControllerBase : SpawnableObject
         _renderer = GetComponent<SpriteRenderer>();
         _color = _renderer.color;
         _player = GameObject.Find("Player");
+        _playerController = _player.GetComponent<PlayerController>();
         _transform = GetComponent<Transform>();
         _playerTransform = _player.GetComponent<Transform>();
         _gridManager = transform.parent.GetComponent<RoomGridManager>();

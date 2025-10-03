@@ -7,6 +7,20 @@ using UnityEngine;
 
 public class FollowerEnemyController : EnemyControllerBase
 {
+    private bool _playerHit;
+    private float _playerHitTimer;
+    
+    // invoke player damage and freeze to avoid chaining the player
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _playerHit = true;
+            Invoke(nameof(PlayerHitCooldown), _playerHitTimer);
+            DoDamage();
+        }
+    }
+
     // finding the shortest path to the player
     protected override void FindPath()
     {
@@ -123,9 +137,26 @@ public class FollowerEnemyController : EnemyControllerBase
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
 
-            _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            if (!_playerHit)
+            {
+                _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
+            }
+            
             yield return null;
         }
+    }
+    
+    // do damage to and knockback the player
+    private void DoDamage()
+    {
+        Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
+        _playerController.KnockBack(knockbackForce, direction, stunTimer);
+        PlayerStats.Instance.UpdateCurrentHealth(damage);
+    }
+
+    private void PlayerHitCooldown()
+    {
+        _playerHit = false;
     }
     
     // grabs stats from .csv doc
@@ -137,6 +168,9 @@ public class FollowerEnemyController : EnemyControllerBase
         damage = float.Parse(stats[2]);
         knockBackSpeed = float.Parse(stats[3]);
         knockBackTime = float.Parse(stats[4]);
+        knockbackForce =  float.Parse(stats[5]);
+        stunTimer = float.Parse(stats[6]);
+        _playerHitTimer = float.Parse(stats[7]);
         findPathCooldown = 1f / (speed*2f);
     }
 }

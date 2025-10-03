@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 7936059972847987403, guid: 5a11c848505feac4788f1d6b34740af2, type: 3}
+  projectileDamage: 1
+  ProjectileKnockback: 500
+  stunTimer: 0.7
 --- !u!70 &-206651833762895192
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

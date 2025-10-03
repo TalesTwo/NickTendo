@@ -43,7 +43,7 @@ public class RangedEnemyController : EnemyControllerBase
                     
                     // set damage of projectile
                     EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
-                    controller.SetDamage(damage);
+                    controller.SetDamage(damage, knockbackForce, stunTimer);
                     
                     // reset timer and cooldown for attack
                     _attackTimer = 0;
@@ -154,6 +154,8 @@ public class RangedEnemyController : EnemyControllerBase
         _attackCooldownMin = float.Parse(stats[7]);
         _attackCooldownMax = float.Parse(stats[8]);
         _projectileSpeed = float.Parse(stats[9]);
+        knockbackForce =  float.Parse(stats[10]);
+        stunTimer = float.Parse(stats[11]);
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
         findPathCooldown = 1f / speed;
     }
