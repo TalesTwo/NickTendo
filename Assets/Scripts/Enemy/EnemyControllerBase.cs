@@ -124,7 +124,7 @@ public class EnemyControllerBase : SpawnableObject
         _isKnockback = true;
         Vector2 knockBack = getKnockBackDirection();
         _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
-        StartCoroutine(HitFlash());
+        HitFlash();
         Quaternion angle = getEffectAngle();
         Instantiate(hitEffect, transform.position + new Vector3(-_direction.x, 0, -_direction.y) * hitEffectDistance, angle);
         Invoke(nameof(ResetKnockBack), knockBackTime);
@@ -143,10 +143,14 @@ public class EnemyControllerBase : SpawnableObject
     }
     
     // flash the sprite white to indicate a hit
-    IEnumerator HitFlash()
+    private void HitFlash()
     {
         _renderer.color = Color.white;
-        yield return new WaitForSeconds(hitFlashDuration);
+        Invoke(nameof(EndHitFlash),  hitFlashDuration);
+    }
+
+    private void EndHitFlash()
+    {
         _renderer.color = _color;
     }
     
