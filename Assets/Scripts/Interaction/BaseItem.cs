@@ -6,8 +6,7 @@ public class BaseItem : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public string Name;
-    public string Description;
+    public string Name = "Enter Name here";
     void Start()
     {
         

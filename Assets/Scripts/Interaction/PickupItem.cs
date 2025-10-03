@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickupItem : BaseItem
@@ -9,6 +10,8 @@ public class PickupItem : BaseItem
     public AudioSource PickupSFX;
     public bool CanAutoPickup = true;
     private bool CanInteract;
+    public PlayerStatsEnum BuffType;
+    public float BuffValue = 1;
 
 
     // Start is called before the first frame update
@@ -35,7 +38,7 @@ public class PickupItem : BaseItem
         {   
             if (CanAutoPickup)
             {
-                Pickup();   
+                Pickup();
             }
             else
             {
@@ -43,14 +46,14 @@ public class PickupItem : BaseItem
             }
         }
     }
-
     private void Pickup()
     {
-        //DebugUtils.Log("The Player touched " + this.name);
-
+        PlayerStats.Instance.ApplyItemBuffs(BuffType, BuffValue);
+        //PlayerStats.Instance.DisplayAllStats();
         PickupSFX.Play();
         //sprite is destoryed first because delete the entire object skips the playing of the sfx
         Destroy(GetComponent<SpriteRenderer>());
+        Destroy(GetComponent<Collider2D>());
         //delays destruction according to the lenght of the sfx
         Destroy(gameObject, PickupSFX.clip.length);
     }
