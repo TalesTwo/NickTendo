@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Managers;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
         {
             StartAttack();
+            AudioManager.Instance.PlaySwordSwingSound(1f, 0.1f);
             _isAttacking = true;
             Invoke(nameof(ResetAttack), attackCooldown);
         }
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
             StartDash();
             _isDashing = true;
             _isDashMoving = true;
+            AudioManager.Instance.PlayDashSound(1f, 0.1f);
             // get dash direction
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
