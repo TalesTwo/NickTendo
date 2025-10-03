@@ -14,8 +14,21 @@ public static class Types
         E,
         S,
         W,
+        NE,
+        NS,
+        NW,
+        ES,
+        EW,
+        SW,
+        NES,
+        NEW,
+        NSW,
+        ESW,
+        NESW,
         End,
+        DEFAULT,
     }
+
     
     [Serializable]
     public struct DoorConfiguration
@@ -25,6 +38,15 @@ public static class Types
         public bool SouthDoorActive;
         public bool WestDoorActive;
         
+        
+        // A constructor to easily create configurations
+        public DoorConfiguration(bool north, bool east, bool south, bool west)
+        {
+            NorthDoorActive = north;
+            EastDoorActive = east;
+            SouthDoorActive = south;
+            WestDoorActive = west;
+        }
         public override string ToString()
         {
             return $"N:{NorthDoorActive}, E:{EastDoorActive}, S:{SouthDoorActive}, W:{WestDoorActive}";
@@ -47,6 +69,13 @@ public static class Types
         East,
         South,
         West
+    }
+    
+    public enum SpawnableType
+    {
+        Enemy,
+        Item,
+        Trap
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */

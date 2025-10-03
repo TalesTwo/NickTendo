@@ -31,7 +31,7 @@ public class AnimatedPlayerAttack : AnimatedEntity
         }
         else if (_nextLoop)
         {
-            animation.SetActive(false);
+            Destroy(animation);
             _nextLoop = false;
         }
     }

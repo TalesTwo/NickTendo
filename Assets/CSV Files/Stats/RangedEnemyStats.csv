@@ -1,0 +1,4 @@
+﻿Health,Speed,Damage,Knock Back Speed,Knock Back Time,Min distance to player,Max Distance to player,Attack Cooldown Min,Attack Cooldown Max,Projectile Speed,Knockback Force,Stun Timer
+10,2,1,1500,0.2,3,5,3,5,4,500,0.7
+20,3,2,1500,0.2,3,5,3,5,4,500,0.7
+30,4,3,1500,0.2,3,5,3,5,4,500,0.7

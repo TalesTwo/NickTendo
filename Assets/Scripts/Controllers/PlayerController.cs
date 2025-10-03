@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,38 +6,35 @@ using Managers;
 
 public class PlayerController : MonoBehaviour
 {
-    // stats
-    [Header("Player Stats")]
-    public float speed;
-    public float dashSpeed = 10.0f;
-    public float attackCooldown = 1.0f;
-    public float dashCooldown = 5.0f;
-    public float dashMovingCooldown = 0.5f;
-    
-    
     // input variables
     [Header("inputs")]
     public float horizontalInput;
     public float verticalInput;
-    private Vector3 mouseDirection;
+    private Vector3 _mouseDirection;
     
     // attack animations
     [Header("Attack Animations")]
     public GameObject attackAnimation;
     public GameObject dashAnimation;
 
-    // rigidbody
-    private Rigidbody2D rb;
+    // rigidbody & animator
+    private Rigidbody2D _rb;
+    private AnimatedPlayer _playerAnimator;
+    private bool _isFacingRight = true;
     
     // dashing boolean
     private bool _isDashing = false;
     private bool _isDashMoving = false;
     private bool _isAttacking = false;
+    private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
+    private bool _isKnockback = false;
     
     // Start is called before the first frame update
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        _playerAnimator = GetComponent<AnimatedPlayer>();
+        EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
     private void Update()
@@ -44,59 +42,78 @@ public class PlayerController : MonoBehaviour
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        
-        // press the space bar to perform a slash attack
-        if (Input.GetKeyDown(KeyCode.Space) && !_isAttacking)
+
+        if (_isActive)
         {
-            StartAttack();
-            _isAttacking = true;
-            Invoke(nameof(ResetAttack), attackCooldown);
+            // flip sprite along y axis if direction changes
+            if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
+            {
+                Flip();
+            }
+            else if (horizontalInput > 0 && !_isFacingRight && !(_isAttacking || _isDashMoving))
+            {
+                Flip();
+            }
+            
+            // press LMB to perform a slash attack
+            if (Input.GetMouseButtonDown(0) && !_isAttacking)
+            {
+                StartAttack();
+                _isAttacking = true;
+                _playerAnimator.SetAttacking();
+                Invoke(nameof(ResetAttack), PlayerStats.Instance.GetAttackCooldown());
+            }
+            
+            // press RMB to perform a dash attack
+            else if (Input.GetMouseButtonDown(1) && !_isDashing)
+            {
+                // start dash
+                StartDash();
+                _isDashing = true;
+                _isDashMoving = true;
+                // get dash direction
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePosition.z = 0;
+                _mouseDirection = (mousePosition - transform.position).normalized;
+                // invoke dash cooldown
+                Invoke(nameof(ResetDash), PlayerStats.Instance.GetDashCooldown());
+                Invoke(nameof(DashMovingStop), PlayerStats.Instance.GetDashDistance());
+            }            
         }
-        
-        // press left shift to perform a dash attack
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing)
-        {
-            // start dash
-            StartDash();
-            _isDashing = true;
-            _isDashMoving = true;
-            // get dash direction
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            mouseDirection = (mousePosition - transform.position).normalized;
-            // invoke dash cooldown
-            Invoke(nameof(ResetDash), dashCooldown);
-            Invoke(nameof(DashMovingStop), dashMovingCooldown);
-        }
+
     }
 
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()
     {
-        // move player based on input
-        if (_isDashMoving)
+        if (_isActive)
         {
-            rb.MovePosition(rb.position + new Vector2(mouseDirection.x, mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+            // move player based on input
+            if (_isDashMoving && !_isKnockback)
+            {
+                float dashSpeed = PlayerStats.Instance.GetDashSpeed();
+                _rb.MovePosition(_rb.position + new Vector2(_mouseDirection.x, _mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
+            }
+            else if (!_isKnockback)
+            {
+                Vector2 update = new Vector2(horizontalInput, verticalInput);
+                float speed = PlayerStats.Instance.GetMovementSpeed();
+                _rb.MovePosition(_rb.position + update * (speed * Time.fixedDeltaTime)); 
+            }            
         }
-        else
-        {
-            Vector2 update = new Vector2(horizontalInput, verticalInput);
-            rb.MovePosition(rb.position + update * speed * Time.fixedDeltaTime); 
-        }
-
     }
     
     // starts base attack animation
     private void StartAttack()
     {
-        attackAnimation.SetActive(true);
+        Instantiate(attackAnimation);
     }
     
     // starts base dash attack
     private void StartDash()
     {
-        dashAnimation.SetActive(true);
+        Instantiate(dashAnimation);
     }
 
     // reset the dash attack after the cooldown
@@ -116,4 +133,37 @@ public class PlayerController : MonoBehaviour
     {
         _isDashMoving = false;
     }
+
+    private void Flip()
+    {
+        _isFacingRight = !_isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    private void ToggleStartStop()
+    {
+        if (_isActive)
+        {
+            _isActive = false;
+        }
+        else
+        {
+            _isActive = true;
+        }
+    }
+
+    public void KnockBack(float power, Vector2 direction, float stunTimer)
+    {
+        _isKnockback = true;
+        Invoke(nameof(UnsetKnockback), stunTimer);
+        _rb.AddForce(direction * power, ForceMode2D.Impulse);
+    }
+
+    private void UnsetKnockback()
+    {
+        _isKnockback = false;
+    }
+
 }

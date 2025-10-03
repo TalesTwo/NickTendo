@@ -13,14 +13,13 @@ GameObject:
   - component: {fileID: 650848207791582978}
   - component: {fileID: 3471283427815167059}
   - component: {fileID: 5201756706622150685}
-  - component: {fileID: 5497293211984391949}
   m_Layer: 0
   m_Name: SlashAttack
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2125759547923014115
 Transform:
   m_ObjectHideFlags: 0
@@ -31,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.05, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.6, z: 0.6666667}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1.7142859, z: 1.904762}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,9 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dffad9689a73840a5ffca367677e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: {fileID: 0}
   radius: 0.2
-  verticalEdit: 0.2
+  verticalEdit: 0.3
   angleEdit: 0
 --- !u!70 &5201756706622150685
 CapsuleCollider2D:
@@ -166,16 +164,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0.24402711, y: -0.13478597}
   m_Size: {x: 0.81053966, y: 0.9738461}
   m_Direction: 0
---- !u!114 &5497293211984391949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2407103696244724232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2623c6ec455ba047b6ad0023594b565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2

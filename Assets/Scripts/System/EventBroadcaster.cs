@@ -58,25 +58,36 @@ namespace System
         public delegate void StartDialogueHandler(string[] message, Image sprite, string name);
         public static event StartDialogueHandler StartDialogue;
         public static void Broadcast_StartDialogue(string[] message, Image sprite, string name) { StartDialogue?.Invoke(message, sprite, name); }
-    
+
+        // start or stop player actions
+        public delegate void StartStopActionHandler();
+        public static event StartStopActionHandler StartStopAction;
+        public static void Broadcast_StartStopAction() { StartStopAction?.Invoke(); }
+        
+        // Broadcast to set a seed across the game
+        public delegate void SetSeedHandler(int seed);
+        public static event SetSeedHandler SetSeed;
+        public static void Broadcast_SetSeed(int seed) { SetSeed?.Invoke(seed); }
+        
+
         /* Define the delegate for the ActivityCompleted event */
         //public delegate void ActivityCompletedHandler(BaseActivity activity);
         //public static event ActivityCompletedHandler ActivityCompleted;
         //public static void Broadcast_ActivityCompleted(BaseActivity activity) { ActivityCompleted?.Invoke(activity); }
-    
+
         /* Define the delegate for the ActivityFailed event */
         //public delegate void ActivityFailedHandler(BaseActivity activity);
         //public static event ActivityFailedHandler ActivityFailed;
         //public static void Broadcast_ActivityFailed(BaseActivity activity) { ActivityFailed?.Invoke(activity); }
-   
-        
+
+
         /* Define the delegate for calling a SaveData event */
         //public delegate void SaveData();
         //public static event SaveData SaveDataEvent;
         //public static void Broadcast_SaveData() { SaveDataEvent?.Invoke(); }
-        
+
         //-------------------------------- End Activity Events --------------------------------//
-        
-    
+
+
     }
 }
