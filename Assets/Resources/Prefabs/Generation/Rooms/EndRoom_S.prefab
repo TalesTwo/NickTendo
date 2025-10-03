@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6418021538926155184}
   m_Layer: 3
   m_Name: Tilemap_Walls(COLLISION)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1396,6 +1396,7 @@ MonoBehaviour:
   doors: {fileID: 8993192668610205120}
   roomType: 0
   bIsFinalized: 0
+  bIsDifficultySet: 0
   roomDifficulty: 1
 --- !u!114 &1956909751197954267
 MonoBehaviour:
@@ -1412,7 +1413,6 @@ MonoBehaviour:
   unwalkableLayer:
     serializedVersion: 2
     m_Bits: 8
-  gridRoomSize: {x: 22, y: 22}
   nodeRadius: 0.5
 --- !u!1 &6380972074743889580
 GameObject:

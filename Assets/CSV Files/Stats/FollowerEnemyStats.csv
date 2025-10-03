@@ -1,4 +1,4 @@
-﻿Health,Speed,Damage,Knock Back Speed,Knock Back Time
-10,2,1,1500,0.2
-20,3,2,1500,0.2
-30,4,3,1500,0.2
+﻿Health,Speed,Damage,Knock Back Speed,Knock Back Time,Knockback force,Stun Timer,Player Hit Timer
+10,2,1,1500,0.2,500,0.5,1
+20,3,2,1500,0.2,500,0.5,1
+30,4,3,1500,0.2,500,0.5,1

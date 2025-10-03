@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool _isDashMoving = false;
     private bool _isAttacking = false;
     private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
+    private bool _isKnockback = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -88,12 +89,12 @@ public class PlayerController : MonoBehaviour
         if (_isActive)
         {
             // move player based on input
-            if (_isDashMoving)
+            if (_isDashMoving && !_isKnockback)
             {
                 float dashSpeed = PlayerStats.Instance.GetDashSpeed();
                 _rb.MovePosition(_rb.position + new Vector2(_mouseDirection.x, _mouseDirection.y) * (dashSpeed * Time.fixedDeltaTime));
             }
-            else
+            else if (!_isKnockback)
             {
                 Vector2 update = new Vector2(horizontalInput, verticalInput);
                 float speed = PlayerStats.Instance.GetMovementSpeed();
@@ -151,4 +152,17 @@ public class PlayerController : MonoBehaviour
             _isActive = true;
         }
     }
+
+    public void KnockBack(float power, Vector2 direction, float stunTimer)
+    {
+        _isKnockback = true;
+        Invoke(nameof(UnsetKnockback), stunTimer);
+        _rb.AddForce(direction * power, ForceMode2D.Impulse);
+    }
+
+    private void UnsetKnockback()
+    {
+        _isKnockback = false;
+    }
+
 }
