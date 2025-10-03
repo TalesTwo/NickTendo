@@ -63,6 +63,8 @@ public class EnemyControllerBase : SpawnableObject
     public void Initialize(int roomDifficulty)
     {
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
+        difficulty = roomDifficulty;
+        ParseStatsText();
     }
 
     // Update is called once per frame
