@@ -109,8 +109,6 @@ public static class PersonaStatsLoader
 
             var persona = (Types.Persona) Enum.Parse(typeof(Types.Persona), values[0]);
             
-            // Debug print the values array
-            DebugUtils.Log($"Parsing line {i}: {string.Join(", ", values)}");
             PlayerStatsStruct stats = new PlayerStatsStruct
             {
                 CurrentHealth = float.Parse(values[1]),
