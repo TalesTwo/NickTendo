@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1502459016479553166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6979029636735630900}
+  - component: {fileID: 5497313280381876055}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6979029636735630900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502459016479553166}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 747.4677, y: 274.03934, z: -8.2694025}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5497313280381876055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502459016479553166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a303d10c7c3f045af31a9bbc759735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolSize: 10
+  swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
+  walkingSound: {fileID: 8300000, guid: 85e59a62a8bcc624bb2884458e03e7ea, type: 3}
+  dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
+  playerTalkingTones:
+  - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
+  - {fileID: 8300000, guid: e209121515be805469fc7a532da6a1a8, type: 3}
+  - {fileID: 8300000, guid: 863d09d0a12b2b54d829573a87b16f8a, type: 3}
+  - {fileID: 8300000, guid: de99ab94ae2bd374d9d2d8b3e0a20232, type: 3}
+  - {fileID: 8300000, guid: 5feb3f0faa8cd0c4180cf83f135a57f6, type: 3}
+  - {fileID: 8300000, guid: 70f5cea0d639505499eaa1b3826513df, type: 3}
+  amtOfTones: 6
+  playerTalkingTypes:
+  - {fileID: 8300000, guid: 03b01d04b55518449bf471c736f55269, type: 3}
+  - {fileID: 8300000, guid: dfeb6e6fa26a6fd4fb9e670c17276670, type: 3}
+  - {fileID: 8300000, guid: afe1f6380dd0c3c46b1d6a15aabaaf4a, type: 3}
+  - {fileID: 8300000, guid: 5237630d35b818e40aa4534fde750e9a, type: 3}
+  - {fileID: 8300000, guid: 77194674c97865b43b06c7b684c8d6d9, type: 3}
+  - {fileID: 8300000, guid: 90c9bc253af96f142a34421cd68e2eb7, type: 3}
+  amtOfTypes: 6
+  playerDamaged: {fileID: 0}
+  swordHitEffect: {fileID: 8300000, guid: dfeb1241d8bfda14ab469ac4dd51be42, type: 3}
+  PlayerDeath: {fileID: 8300000, guid: 69c7993717ebca341986c87755acb607, type: 3}
+  Interact: {fileID: 0}
+  BUDEETalkingTones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  BUDEEDeath: {fileID: 0}
+  enemyDamaged: {fileID: 0}
+  enemyDeath: {fileID: 0}
+  shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
+  shotHit: {fileID: 0}
+  followerHit: {fileID: 0}
+  followerMovement: {fileID: 0}
+  transitionearly: {fileID: 8300000, guid: 0a2db085042a3a346a1f0addfcba16f4, type: 3}
+  transitionend: {fileID: 8300000, guid: 9ce7158fd8aae0744a74eb7950b0242a, type: 3}
+  Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
+  Coinget: {fileID: 8300000, guid: ca9a62b5c26f1f341b717e778a548212, type: 3}
+  openDoor: {fileID: 0}
+  unlockDoor: {fileID: 0}
+  hittingSpikes: {fileID: 0}
+  cursorHover: {fileID: 0}
+  cursorSelect: {fileID: 0}
+  buyItem: {fileID: 0}
+  dialogueClick: {fileID: 0}
+  Overworld: {fileID: 0}
+  Boss: {fileID: 0}
+  Shop: {fileID: 0}
+  Credits: {fileID: 0}
+  TitleTheme: {fileID: 0}
+  Musicsource: {fileID: 0}
+  fadeDuration: 1

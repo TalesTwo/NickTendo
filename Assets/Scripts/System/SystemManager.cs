@@ -27,8 +27,9 @@ public class SystemManager : Singleton<SystemManager>
         // gameObject.AddComponent<ManagerClassName>();
         gameObject.AddComponent<PlayerManager>();
         gameObject.AddComponent<SceneSwapManager>();
-        gameObject.AddComponent<AudioManager>();
+        //gameObject.AddComponent<AudioManager>();
         gameObject.AddComponent<PlayerStats>();
+        gameObject.AddComponent<PersonaManager>();
         
     }
 }

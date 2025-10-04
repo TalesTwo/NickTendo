@@ -9,6 +9,60 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
+        [Header("Player Sounds")]
+        public AudioClip swordSwing;
+        public AudioClip walkingSound;
+        public AudioClip dashSound;
+        public List<AudioClip> playerTalkingTones;
+        public int amtOfTones = 6;
+        public List<AudioClip> playerTalkingTypes;
+        public int amtOfTypes = 6;
+        public AudioClip playerDamaged;
+        public AudioClip swordHitEffect;
+        public AudioClip PlayerDeath;
+        public AudioClip Interact;
+
+        [Header("BUDEE Effects")]
+        public List<AudioClip> BUDEETalkingTones;
+        public AudioClip BUDEEDeath;
+
+        [Header("Enemy Effects")]
+        public AudioClip enemyDamaged;
+        public AudioClip enemyDeath;
+        public AudioClip shot;
+        public AudioClip shotHit;
+        public AudioClip followerHit;
+        public AudioClip followerMovement;
+
+        [Header("General Sounds")]
+        public AudioClip transitionearly;
+        public AudioClip transitionend;
+        public AudioClip Keyget;
+        public AudioClip Coinget;
+        public AudioClip openDoor;
+        public AudioClip unlockDoor;
+        public AudioClip hittingSpikes;
+
+        [Header("UI Audio")]
+        public AudioClip cursorHover;
+        public AudioClip cursorSelect;
+        public AudioClip buyItem;
+        public AudioClip dialogueClick;
+
+        [Header("Soundtracks")]
+        public AudioClip Overworld;
+        public AudioClip Boss;
+        public AudioClip Shop;
+        public AudioClip Credits;
+        public AudioClip TitleTheme;
+
+
+
+        //variables for the soundtrack
+        public AudioSource Musicsource;
+        public float fadeDuration = 1f;
+        private float elapsedTime;
+
         protected override void Awake()
         {
             base.Awake();
@@ -22,6 +76,13 @@ namespace Managers
                 src.spatialBlend = 0f; // 2D by default
                 _sources.Add(src);
             }
+
+            AudioSource mus = gameObject.AddComponent<AudioSource>();
+            Musicsource = mus;
+            mus.playOnAwake = false;
+            mus.spatialBlend = 0f;
+            mus.loop = true;
+            mus.volume = 0;
         }
 
         /// <summary>
@@ -29,7 +90,7 @@ namespace Managers
         /// Volume can be higher than 1.0f to boost the clip.  
         /// If a GameObject is provided, sound plays from its world position (3D).  
         /// </summary>
-        public void PlaySFX(AudioClip clip, float volume = 1f, GameObject fromObject = null)
+        public void PlaySFX(AudioClip clip, float volume = 1f, float deviation = 0f, GameObject fromObject = null)
         {
             if (clip == null) return;
 
@@ -41,8 +102,107 @@ namespace Managers
             src.spatialBlend = fromObject ? 1f : 0f;
             src.volume = volume; 
             src.clip = clip;
+            src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();
         }
+
+        public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadein = false, GameObject fromObject = null)
+        {
+            if (clip == null) return;
+
+            AudioSource src = Musicsource;
+            if (src == null) return;
+
+            src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
+
+            src.spatialBlend = fromObject ? 1f : 0f;
+            if (src.isPlaying)
+            {
+                while (elapsedTime <= fadeDuration)
+                {
+                    float percentagecomplete = elapsedTime / fadeDuration;
+                    src.volume = Mathf.Lerp(volume, 0, percentagecomplete);
+                    elapsedTime += Time.deltaTime;
+                }
+                elapsedTime = 0;
+            }
+            src.clip = clip;
+            src.Play();
+            if(fadein == true)
+            {
+                while (elapsedTime <= fadeDuration)
+                {
+                    float percentagecomplete = elapsedTime / fadeDuration;
+                    src.volume = Mathf.Lerp(0, volume, percentagecomplete);
+                    elapsedTime += Time.deltaTime;
+                }
+                elapsedTime = 0;
+            }
+            else
+            {
+                src.volume = volume;
+            }
+            
+        }
+
+        public void PlayWalkingSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(walkingSound, volume, deviation);
+        }
+        public void PlayDashSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(dashSound, volume, deviation);
+        }
+        public void PlaySwordSwingSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(swordSwing, volume, deviation);
+        }
+        public void PlayFirstTransitionSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(transitionearly, volume, deviation);
+        }
+        public void PlaySecondTransitionSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(transitionend, volume, deviation);
+        }
+        public void PlayKeyGetSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Keyget, volume, deviation);
+        }
+        public void PlayCoinGetSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Coinget, volume, deviation);
+        }
+        public void PlaySwordHitSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(swordHitEffect, volume, deviation);
+        }
+        public void PlayPlayerDamagedSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(playerDamaged, volume, deviation);
+        }
+        public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(enemyDamaged, volume, deviation);
+        }
+        public void PlayEnemyDeathSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(enemyDeath, volume, deviation);
+        }
+        public void PlayTalkingTone(float volume = 1)
+        {
+            int tonenumber;
+            tonenumber = UnityEngine.Random.Range(0, amtOfTones);
+            int typenumber = UnityEngine.Random.Range(0, amtOfTypes);
+            AudioClip tone = playerTalkingTones[tonenumber];
+            AudioClip type = playerTalkingTypes[typenumber];
+
+            PlaySFX(type, volume);
+            PlaySFX(tone, volume);
+        }
+
+
+
 
         private AudioSource GetFreeSource()
         {
