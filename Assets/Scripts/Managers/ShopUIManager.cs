@@ -15,6 +15,7 @@ public class ShopUIManager : MonoBehaviour
     public TextMeshProUGUI[] ItemNames;
     public TextMeshProUGUI[] ItemDescriptions;
     public Image[] ItemSpotlights;
+    public TextMeshProUGUI[] ItemPrices;
 
     public Button CloseButton;
     public TextMeshProUGUI CoinCount;
