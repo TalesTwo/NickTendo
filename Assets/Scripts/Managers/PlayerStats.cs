@@ -43,8 +43,19 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetDashDistance(float NewDashDistance) { _dashDistance = NewDashDistance; }
     public void SetKeys(int NewKeys) { _keys = NewKeys; }
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
-    
-    public void UpdateCurrentHealth(float UpdateValue) { _currentHealth += UpdateValue; }
+
+    public void UpdateCurrentHealth(float UpdateValue)
+    {
+        _currentHealth += UpdateValue;
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+        else if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+    }
     public void UpdateMaxHealth(float UpdateValue) { _maxHealth += UpdateValue; }
     public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }
     public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }
