@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dream_X_Sp._Atk_Sprite_0: 6324245083510235197
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

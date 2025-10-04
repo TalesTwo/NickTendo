@@ -685,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: Overworld
+      value: 
+      objectReference: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
     - target: {fileID: 6979029636735630900, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
       propertyPath: m_LocalPosition.x
       value: 747.4677
@@ -787,7 +791,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1235597749469353601, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5072391782927799072, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}

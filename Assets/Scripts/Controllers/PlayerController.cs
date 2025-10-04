@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !_isAttacking)
             {
                 StartAttack();
+                AudioManager.Instance.PlaySwordSwingSound(0.5f, 0.1f);
                 _isAttacking = true;
                 _playerAnimator.SetAttacking();
                 Invoke(nameof(ResetAttack), PlayerStats.Instance.GetAttackCooldown());
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
             {
                 // start dash
                 StartDash();
+                AudioManager.Instance.PlayDashSound(1, 0.1f);
                 _isDashing = true;
                 _isDashMoving = true;
                 // get dash direction

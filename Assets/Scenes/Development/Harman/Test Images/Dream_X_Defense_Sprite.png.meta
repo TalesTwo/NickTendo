@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dream_X_Defense_Sprite_0: -890837204512208485
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

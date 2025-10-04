@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hd-yellow-spotlight-light-effect-png-701751694617928h9j6xds9ol_0: 5709383195073386088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

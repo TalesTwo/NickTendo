@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dream_X_Accuracy_Sprite_0: 396415415775341810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
