@@ -80,10 +80,7 @@ public class PlayerStats : Singleton<PlayerStats>
             "\nDash Distance: " + _dashDistance +
             "\nKeys: " + _keys +
             "\nCoins: " + _coins
-        );
-
-        
-
+        );     
     }
 
     public void ApplyItemBuffs(PlayerStatsEnum BuffType, float BuffValue)
@@ -122,6 +119,10 @@ public class PlayerStats : Singleton<PlayerStats>
         }
         else if (BuffType == PlayerStatsEnum.Current_Health)
         {
+            if (BuffValue + GetCurrentHealth() >= GetMaxHealth())
+            {
+                BuffValue = GetMaxHealth();
+            }
             UpdateCurrentHealth(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Keys)
@@ -190,7 +191,3 @@ public struct PlayerStatsStruct
     public int Keys;
     public int Coins;
 }
-
-
-
-
