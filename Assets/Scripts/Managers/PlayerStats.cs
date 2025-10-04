@@ -138,6 +138,14 @@ public class PlayerStats : Singleton<PlayerStats>
         SetKeys(stats.Keys);
         SetCoins(stats.Coins);
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DisplayAllStats();
+        }
+    }
 }
 
 public enum PlayerStatsEnum
