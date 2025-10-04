@@ -100,7 +100,7 @@ namespace Managers
             src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
 
             src.spatialBlend = fromObject ? 1f : 0f;
-            src.volume = volume; 
+            src.volume = volume;
             src.clip = clip;
             src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();
@@ -128,7 +128,7 @@ namespace Managers
             }
             src.clip = clip;
             src.Play();
-            if(fadein == true)
+            if (fadein == true)
             {
                 while (elapsedTime <= fadeDuration)
                 {
@@ -142,9 +142,10 @@ namespace Managers
             {
                 src.volume = volume;
             }
-            
+
         }
 
+        //Player Sounds
         public void PlayWalkingSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(walkingSound, volume, deviation);
@@ -157,6 +158,36 @@ namespace Managers
         {
             PlaySFX(swordSwing, volume, deviation);
         }
+        public void PlaySwordHitSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(swordHitEffect, volume, deviation);
+        }
+        public void PlayPlayerDamagedSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(playerDamaged, volume, deviation);
+        }
+        public void PlayPlayerDeathSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(PlayerDeath, volume, deviation);
+        }
+        public void PlayPlayerInteractSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Interact, volume, deviation);
+        }
+        public void PlayPlayerTalkingTone(float volume = 1)
+        {
+            int tonenumber;
+            tonenumber = UnityEngine.Random.Range(0, amtOfTones);
+            int typenumber = UnityEngine.Random.Range(0, amtOfTypes);
+            AudioClip tone = playerTalkingTones[tonenumber];
+            AudioClip type = playerTalkingTypes[typenumber];
+
+            PlaySFX(type, volume);
+            PlaySFX(tone, volume);
+        }
+
+
+
         public void PlayFirstTransitionSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(transitionearly, volume, deviation);
@@ -173,14 +204,8 @@ namespace Managers
         {
             PlaySFX(Coinget, volume, deviation);
         }
-        public void PlaySwordHitSound(float volume = 1, float deviation = 0)
-        {
-            PlaySFX(swordHitEffect, volume, deviation);
-        }
-        public void PlayPlayerDamagedSound(float volume = 1, float deviation = 0)
-        {
-            PlaySFX(playerDamaged, volume, deviation);
-        }
+
+
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(enemyDamaged, volume, deviation);
@@ -189,17 +214,11 @@ namespace Managers
         {
             PlaySFX(enemyDeath, volume, deviation);
         }
-        public void PlayTalkingTone(float volume = 1)
-        {
-            int tonenumber;
-            tonenumber = UnityEngine.Random.Range(0, amtOfTones);
-            int typenumber = UnityEngine.Random.Range(0, amtOfTypes);
-            AudioClip tone = playerTalkingTones[tonenumber];
-            AudioClip type = playerTalkingTypes[typenumber];
 
-            PlaySFX(type, volume);
-            PlaySFX(tone, volume);
-        }
+
+
+
+        //Soundtrack Functions
         public void PlayOverworldTrack(float volume = 1, bool fadein = false)
         {
             PlayBackgroundSoundtrack(Overworld, volume, fadein);
