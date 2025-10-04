@@ -78,6 +78,19 @@ public static class Types
         Trap
     }
     
+    public enum Persona
+    {
+        RageBaiter,
+        Influencer,
+        DoomPoster,
+        HappyGoLucky,
+        EdgeLord,
+        Lurker,
+        MemeLord, // idk, make this one be random or something, could be funny
+        Normie,
+        Normal,
+    }
+    
     /* ----------------- END GENERATION TYPES ----------------- */
     
 

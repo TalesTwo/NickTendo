@@ -8,78 +8,68 @@ public class PlayerStats : Singleton<PlayerStats>
 {
     // Start is called before the first frame update
 
-    private float CurrentHealth = 3f;
-    private float MaxHealth = 3f;
-    private float MovementSpeed = 5f;
-    private float DashSpeed = 10f;
-    private float AttackDamage = 2f; // fixed
-    private float AttackCooldown = 0.5f; //fixed
-    private float DashDamage = 5f; // fixed
-    private float DashCooldown = 5f; // fixed
-    private float DashDistance = 0.5f; // fixed
-    private int Keys = 1;
-    private int Coins = 1;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public float GetCurrentHealth() { return CurrentHealth; }
-    public float GetMaxHealth() { return MaxHealth; }
-    public float GetMovementSpeed() { return MovementSpeed; }
-    public float GetDashSpeed() { return DashSpeed; }
-    public float GetAttackDamage() { return AttackDamage; }
-    public float GetDashDamage() { return DashDamage; }
-    public float GetDashCooldown() { return DashCooldown; }
-    public float GetAttackCooldown() { return AttackCooldown; }
-    public float GetDashDistance() { return DashDistance; }
-    public int GetKeys() { return Keys; } 
-    public int GetCoins() { return Coins; }
-
-    public void SetCurrentHealth(float NewHealth) { CurrentHealth = NewHealth; }
-    public void SetMaxHealth(float NewMaxHealth) { MaxHealth = NewMaxHealth; }
-    public void SetMovementSpeed(float NewMovementSpeed) { MovementSpeed = NewMovementSpeed; }
-    public void SetDashSpeed(float NewDashSpeed) { DashSpeed = NewDashSpeed; }
-    public void SetAttackDamage(float NewAttackDamage) { AttackDamage = NewAttackDamage; }
-    public void SetDashDamage(float NewDashDamage) { DashDamage = NewDashDamage; }
-    public void SetDashCooldown(float NewDashCooldown) { DashCooldown = NewDashCooldown; }
-    public void SetAttackCooldown(float NewAttackCooldown) { AttackCooldown = NewAttackCooldown; }
-    public void SetDashDistance(float NewDashDistance) { DashDistance = NewDashDistance; }
-    public void SetKeys(int NewKeys) { Keys = NewKeys; }
-    public void SetCoins(int NewCoins) { Coins = NewCoins; }
+    private float _currentHealth = 3f;
+    private float _maxHealth = 3f;
+    private float _movementSpeed = 5f;
+    private float _dashSpeed = 10f;
+    private float _attackDamage = 2f; 
+    private float _attackCooldown = 0.5f; 
+    private float _dashDamage = 5f; 
+    private float _dashCooldown = 5f; 
+    private float _dashDistance = 0.5f; 
+    private int _keys = 0;
+    private int _coins = 0;
     
-    public void UpdateCurrentHealth(float UpdateValue) { CurrentHealth += UpdateValue; }
-    public void UpdateMaxHealth(float UpdateValue) { MaxHealth += UpdateValue; }
-    public void UpdateMovementSpeed(float UpdateValue) { MovementSpeed += UpdateValue; }
-    public void UpdateDashSpeed(float UpdateValue) { DashSpeed += UpdateValue; }
-    public void UpdateAttackDamage(float UpdateValue) { AttackDamage += UpdateValue; }
-    public void UpdateDashDamage(float UpdateValue) { DashDamage += UpdateValue; }
-    public void UpdateDashCooldown(float UpdateValue) { DashCooldown += UpdateValue; }
-    public void UpdateAttackCooldown(float UpdateValue) {AttackCooldown += UpdateValue; }
-    public void UpdateDashDistance(float UpdateValue) { DashDistance += UpdateValue; }
-    public void UpdateKeys(int UpdateValue) { Keys += UpdateValue; }
-    public void UpdateCoins(int UpdateValue) { Coins += UpdateValue; }
+    public float GetCurrentHealth() { return _currentHealth; }
+    public float GetMaxHealth() { return _maxHealth; }
+    public float GetMovementSpeed() { return _movementSpeed; }
+    public float GetDashSpeed() { return _dashSpeed; }
+    public float GetAttackDamage() { return _attackDamage; }
+    public float GetDashDamage() { return _dashDamage; }
+    public float GetDashCooldown() { return _dashCooldown; }
+    public float GetAttackCooldown() { return _attackCooldown; }
+    public float GetDashDistance() { return _dashDistance; }
+    public int GetKeys() { return _keys; } 
+    public int GetCoins() { return _coins; }
+
+    public void SetCurrentHealth(float NewHealth) { _currentHealth = NewHealth; }
+    public void SetMaxHealth(float NewMaxHealth) { _maxHealth = NewMaxHealth; }
+    public void SetMovementSpeed(float NewMovementSpeed) { _movementSpeed = NewMovementSpeed; }
+    public void SetDashSpeed(float NewDashSpeed) { _dashSpeed = NewDashSpeed; }
+    public void SetAttackDamage(float NewAttackDamage) { _attackDamage = NewAttackDamage; }
+    public void SetDashDamage(float NewDashDamage) { _dashDamage = NewDashDamage; }
+    public void SetDashCooldown(float NewDashCooldown) { _dashCooldown = NewDashCooldown; }
+    public void SetAttackCooldown(float NewAttackCooldown) { _attackCooldown = NewAttackCooldown; }
+    public void SetDashDistance(float NewDashDistance) { _dashDistance = NewDashDistance; }
+    public void SetKeys(int NewKeys) { _keys = NewKeys; }
+    public void SetCoins(int NewCoins) { _coins = NewCoins; }
+    
+    public void UpdateCurrentHealth(float UpdateValue) { _currentHealth += UpdateValue; }
+    public void UpdateMaxHealth(float UpdateValue) { _maxHealth += UpdateValue; }
+    public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }
+    public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }
+    public void UpdateAttackDamage(float UpdateValue) { _attackDamage += UpdateValue; }
+    public void UpdateDashDamage(float UpdateValue) { _dashDamage += UpdateValue; }
+    public void UpdateDashCooldown(float UpdateValue) { _dashCooldown += UpdateValue; }
+    public void UpdateAttackCooldown(float UpdateValue) {_attackCooldown += UpdateValue; }
+    public void UpdateDashDistance(float UpdateValue) { _dashDistance += UpdateValue; }
+    public void UpdateKeys(int UpdateValue) { _keys += UpdateValue; }
+    public void UpdateCoins(int UpdateValue) { _coins += UpdateValue; }
 
     public void DisplayAllStats()
     {
-        DebugUtils.Log("CurrentHealth: " + CurrentHealth);
-        DebugUtils.Log("MaxHealth: " + MaxHealth);
-        DebugUtils.Log("MovementSpeed: " + MovementSpeed);
-        DebugUtils.Log("DashSpeed: " + DashSpeed);
-        DebugUtils.Log("AttackDamage: " + AttackDamage);
-        DebugUtils.Log("DashDamage: " + DashDamage);
-        DebugUtils.Log("DashCooldown: " + DashCooldown);
-        DebugUtils.Log("AttackCooldown: " + AttackCooldown);
-        DebugUtils.Log("DashDistance: " + DashDistance);
-        DebugUtils.Log("Keys: " + Keys);
-        DebugUtils.Log("Coins: " + Coins);
+        DebugUtils.Log(
+            "Current Health: " + _currentHealth + "/" + _maxHealth +
+            "\nMovement Speed: " + _movementSpeed +
+            "\nDash Speed: " + _dashSpeed +
+            "\nAttack Damage: " + _attackDamage +
+            "\nAttack Cooldown: " + _attackCooldown +
+            "\nDash Damage: " + _dashDamage +
+            "\nDash Cooldown: " + _dashCooldown +
+            "\nDash Distance: " + _dashDistance +
+            "\nKeys: " + _keys +
+            "\nCoins: " + _coins
+        );     
     }
 
     public void ApplyItemBuffs(PlayerStatsEnum BuffType, float BuffValue)
@@ -118,6 +108,10 @@ public class PlayerStats : Singleton<PlayerStats>
         }
         else if (BuffType == PlayerStatsEnum.Current_Health)
         {
+            if (BuffValue + GetCurrentHealth() >= GetMaxHealth())
+            {
+                BuffValue = GetMaxHealth();
+            }
             UpdateCurrentHealth(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Keys)
@@ -127,6 +121,30 @@ public class PlayerStats : Singleton<PlayerStats>
         else if (BuffType == PlayerStatsEnum.Coins)
         {
             UpdateCoins((int)BuffValue);
+        }
+    }
+    
+    // function to initialize All of the player stats, based on a struct
+    public void InitializePlayerStats(PlayerStatsStruct stats)
+    {
+        SetCurrentHealth(stats.CurrentHealth);
+        SetMaxHealth(stats.MaxHealth);
+        SetMovementSpeed(stats.MovementSpeed);
+        SetDashSpeed(stats.DashSpeed);
+        SetAttackDamage(stats.AttackDamage);
+        SetAttackCooldown(stats.AttackCooldown);
+        SetDashDamage(stats.DashDamage);
+        SetDashCooldown(stats.DashCooldown);
+        SetDashDistance(stats.DashDistance);
+        SetKeys(stats.Keys);
+        SetCoins(stats.Coins);
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DisplayAllStats();
         }
     }
 }
@@ -144,4 +162,21 @@ public enum PlayerStatsEnum
     Dash_Distance,
     Keys,
     Coins
+}
+
+// create a struct to hold all of the player stats, which can be used to initialize the player stats
+[Serializable]
+public struct PlayerStatsStruct
+{
+    public float CurrentHealth;
+    public float MaxHealth;
+    public float MovementSpeed;
+    public float DashSpeed;
+    public float AttackDamage;
+    public float AttackCooldown;
+    public float DashDamage;
+    public float DashCooldown;
+    public float DashDistance;
+    public int Keys;
+    public int Coins;
 }

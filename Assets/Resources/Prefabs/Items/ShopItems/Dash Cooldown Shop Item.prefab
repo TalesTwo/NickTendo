@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dash Cooldown Shop Item
   itemValue: 100
-  buffValue: 2
+  buffValue: -2
   buffType: 6
 --- !u!212 &7787435678194780221
 SpriteRenderer:
