@@ -123,9 +123,7 @@ public static class PersonaStatsLoader
                 Keys = int.Parse(values[10]),
                 Coins = int.Parse(values[11])
             };
-            DebugUtils.Log($"Loaded Persona: {persona} with stats: {stats}");
             // debug the coins value
-            DebugUtils.Log($"Persona {persona} has {stats.Coins} coins.");
 
             _personaStats[persona] = stats;
         
