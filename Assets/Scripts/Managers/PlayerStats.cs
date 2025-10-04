@@ -12,11 +12,11 @@ public class PlayerStats : Singleton<PlayerStats>
     private float _maxHealth = 3f;
     private float _movementSpeed = 5f;
     private float _dashSpeed = 10f;
-    private float _attackDamage = 2f; // fixed
-    private float _attackCooldown = 0.5f; //fixed
-    private float _dashDamage = 5f; // fixed
-    private float _dashCooldown = 5f; // fixed
-    private float _dashDistance = 0.5f; // fixed
+    private float _attackDamage = 2f; 
+    private float _attackCooldown = 0.5f; 
+    private float _dashDamage = 5f; 
+    private float _dashCooldown = 5f; 
+    private float _dashDistance = 0.5f; 
     private int _keys = 0;
     private int _coins = 0;
     
@@ -58,17 +58,21 @@ public class PlayerStats : Singleton<PlayerStats>
 
     public void DisplayAllStats()
     {
-        DebugUtils.Log("CurrentHealth: " + _currentHealth);
-        DebugUtils.Log("MaxHealth: " + _maxHealth);
-        DebugUtils.Log("MovementSpeed: " + _movementSpeed);
-        DebugUtils.Log("DashSpeed: " + _dashSpeed);
-        DebugUtils.Log("AttackDamage: " + _attackDamage);
-        DebugUtils.Log("DashDamage: " + _dashDamage);
-        DebugUtils.Log("DashCooldown: " + _dashCooldown);
-        DebugUtils.Log("AttackCooldown: " + _attackCooldown);
-        DebugUtils.Log("DashDistance: " + _dashDistance);
-        DebugUtils.Log("Keys: " + _keys);
-        DebugUtils.Log("Coins: " + _coins);
+        DebugUtils.Log(
+            "Current Health: " + _currentHealth + "/" + _maxHealth +
+            "\nMovement Speed: " + _movementSpeed +
+            "\nDash Speed: " + _dashSpeed +
+            "\nAttack Damage: " + _attackDamage +
+            "\nAttack Cooldown: " + _attackCooldown +
+            "\nDash Damage: " + _dashDamage +
+            "\nDash Cooldown: " + _dashCooldown +
+            "\nDash Distance: " + _dashDistance +
+            "\nKeys: " + _keys +
+            "\nCoins: " + _coins
+        );
+
+        
+
     }
 
     public void ApplyItemBuffs(PlayerStatsEnum BuffType, float BuffValue)
