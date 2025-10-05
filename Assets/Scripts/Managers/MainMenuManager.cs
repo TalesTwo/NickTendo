@@ -9,6 +9,11 @@ namespace Managers
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
 
+        public void Start()
+        {
+            // Temporaryily start the main menu music here
+            AudioManager.Instance.PlayOverworldTrack();
+        }
         public void LoginButtonClicked()
         {
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
