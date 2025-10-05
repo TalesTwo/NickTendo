@@ -35,7 +35,7 @@ namespace Managers
                 yield break;
             }
 
-            //AudioManager.Instance.PlayFadeOutSound();
+            AudioManager.Instance.PlayFirstTransitionSound(10, 0.1f);
 
             _fadeImage.color = new Color(0, 0, 0, 0);
             yield return Fade(0f, 1f, duration);
@@ -50,7 +50,7 @@ namespace Managers
                 yield break;
             }
 
-            //AudioManager.Instance.PlayFadeInSound();
+            AudioManager.Instance.PlaySecondTransitionSound(10, 0.1f);
 
             _fadeImage.color = new Color(0, 0, 0, 1f);
             yield return Fade(1f, 0f, duration);

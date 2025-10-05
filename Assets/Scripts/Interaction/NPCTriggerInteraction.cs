@@ -22,6 +22,8 @@ public class NPCTriggerInteraction : TriggerInteractBase
 
     public override void Interact()
     {
+        // call to super
+        base.Interact();
         EventBroadcaster.Broadcast_StartDialogue(dialogue, sprite, npcName);
     }
 }
