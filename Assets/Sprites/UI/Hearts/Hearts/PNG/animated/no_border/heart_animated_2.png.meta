@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 5430907224ad43747821886d5f178b34
+guid: 1c2205f3264a84a40bd583d038b6605f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3951714321265772127
-    second: Cape_Placeholder_0
+      213: -367015839217504639
+    second: heart_animated_2_0
+  - first:
+      213: -5025174812137501099
+    second: heart_animated_2_1
+  - first:
+      213: 3227778937469392490
+    second: heart_animated_2_2
+  - first:
+      213: -994267376658378851
+    second: heart_animated_2_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,6 +93,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,19 +145,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -152,13 +161,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cape_Placeholder_0
+      name: heart_animated_2_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 21
-        width: 466
-        height: 470
+        x: 0
+        y: 2
+        width: 17
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +175,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f56ced4fc3f47d630800000000000000
-      internalID: 3951714321265772127
+      spriteID: 18eaf7ce90918eaf0800000000000000
+      internalID: -367015839217504639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: heart_animated_2_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 2
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55ecd44022ef24ab0800000000000000
+      internalID: -5025174812137501099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: heart_animated_2_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 2
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a66d95597df5bcc20800000000000000
+      internalID: 3227778937469392490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: heart_animated_2_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 8
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9f848ab617a332f0800000000000000
+      internalID: -994267376658378851
       vertices: []
       indices: 
       edges: []
@@ -183,7 +255,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cape_Placeholder_0: 3951714321265772127
+      heart_animated_2_0: -367015839217504639
+      heart_animated_2_1: -5025174812137501099
+      heart_animated_2_2: 3227778937469392490
+      heart_animated_2_3: -994267376658378851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
