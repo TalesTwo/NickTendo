@@ -785,6 +785,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: Interact
+      value: 
+      objectReference: {fileID: 8300000, guid: d7ad0c532659e9e4e842e5517df17db1, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: Overworld
+      value: 
+      objectReference: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: playerDamaged
+      value: 
+      objectReference: {fileID: 8300000, guid: 93dd91870457bbc42a55c9cce928986f, type: 3}
     - target: {fileID: 6979029636735630900, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
       propertyPath: m_LocalPosition.x
       value: 747.4677
