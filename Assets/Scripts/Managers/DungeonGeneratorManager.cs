@@ -74,8 +74,10 @@ namespace Managers
             InitializeDungeonGrid(rows, cols);
             // generate the dungeon
             DungeonGeneration();
-            // teleport the player into the dungeom
-            PlayerManager.Instance.TeleportPlayer(new Vector3(startPos.y * 20, -startPos.x * 20, 0));
+            
+            // teleport the player into the dungeon
+            Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.position;
+            PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
