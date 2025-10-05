@@ -18,10 +18,14 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     // Offset for the interact prompt
     private GameObject interactPromptInstance;
-    
-    
-    
-    public virtual void Interact() { }
+
+
+
+    public virtual void Interact()
+    {
+        // Play our interaction sound
+        AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
+    }
 
     protected virtual void Start()
     {

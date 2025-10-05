@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,80 +7,71 @@ namespace Managers
 {
     public class SceneFadeManager : Singleton<SceneFadeManager>
     {
+        [SerializeField] private Image _fadeImage;
 
-        [SerializeField] private Image _fadeOutImage;
-        [Range(0.1f, 10f)][SerializeField] private float _fadeOutSpeed = 1f;
-        [Range(0.1f, 10f)][SerializeField] private float _fadeInSpeed = 1f;
-    
-        [SerializeField] private Color fadeOutStartColor = Color.clear;
-    
-        // sounds effects for fade in and fade out
-        [SerializeField] private AudioClip _fadeOutSFX;
-        [SerializeField] private AudioClip _fadeInSFX;
-    
-        public bool IsFadingOut { get; private set; } = false;
-        public bool IsFadingIn { get; private set; } = false;
+        public bool IsFading { get; private set; }
 
         private void Awake()
         {
-            fadeOutStartColor.a = 0f;
+            if (_fadeImage != null)
+            {
+                _fadeImage.raycastTarget = false;
+                _fadeImage.color = new Color(0, 0, 0, 0);
+                _fadeImage.gameObject.SetActive(true);
+            }
+            Canvas canvas = _fadeImage.GetComponentInParent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.sortingOrder = 9999;
+                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            }
         }
 
-        private void Update()
+        public IEnumerator FadeOut(float duration)
         {
-            if (IsFadingOut)
+            if (_fadeImage == null)
             {
-                if(_fadeOutImage.color.a < 1f)
-                {
-                    fadeOutStartColor.a += Time.deltaTime * _fadeOutSpeed;
-                    _fadeOutImage.color = fadeOutStartColor;
-                }
-                else
-                {
-                    IsFadingOut = false;
-                }
-
-            }
-            if (IsFadingIn)
-            {
-                if(_fadeOutImage.color.a > 0f)
-                {
-                    fadeOutStartColor.a -= Time.deltaTime * _fadeInSpeed;
-                    _fadeOutImage.color = fadeOutStartColor;
-                }
-                else
-                {
-                    IsFadingIn = false;
-                }
-
+                DebugUtils.LogError("SceneFadeManager: _fadeImage not assigned!");
+                yield break;
             }
 
+            AudioManager.Instance.PlayFirstTransitionSound(10, 0.1f);
+
+            _fadeImage.color = new Color(0, 0, 0, 0);
+            yield return Fade(0f, 1f, duration);
+            _fadeImage.color = new Color(0, 0, 0, 1f);
         }
-    
-        public void StartFadeOut()
+
+        public IEnumerator FadeIn(float duration)
         {
-            if (_fadeOutSFX )
+            if (_fadeImage == null)
             {
-                // play the fade out sound effect
-                AudioManager.Instance.PlaySFX(_fadeOutSFX, 5);
-            }
-            _fadeOutImage.color = fadeOutStartColor;
-            IsFadingOut = true;
-        
-        }
-        public void StartFadeIn()
-        {
-            if (_fadeOutImage.color.a >= 1f)
-            {
-                if (_fadeInSFX )
-                {
-                    AudioManager.Instance.PlaySFX(_fadeInSFX, 5);
-                }
-                _fadeOutImage.color = fadeOutStartColor;
-                IsFadingIn = true;
+                DebugUtils.LogError("SceneFadeManager: _fadeImage not assigned!");
+                yield break;
             }
 
+            AudioManager.Instance.PlaySecondTransitionSound(10, 0.1f);
+
+            _fadeImage.color = new Color(0, 0, 0, 1f);
+            yield return Fade(1f, 0f, duration);
+            _fadeImage.color = new Color(0, 0, 0, 0f);
         }
-    
+
+        private IEnumerator Fade(float from, float to, float duration)
+        {
+            IsFading = true;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float alpha = Mathf.Lerp(from, to, elapsed / duration);
+                _fadeImage.color = new Color(0, 0, 0, alpha);
+                yield return null;
+            }
+
+            _fadeImage.color = new Color(0, 0, 0, to);
+            IsFading = false;
+        }
     }
 }

@@ -7,6 +7,7 @@ using static UnityEditor.Progress;
 public class PlayerStats : Singleton<PlayerStats>
 {
     // Start is called before the first frame update
+    private string _playerName = "Player";
 
     private float _currentHealth = 3f;
     private float _maxHealth = 3f;
@@ -20,6 +21,8 @@ public class PlayerStats : Singleton<PlayerStats>
     private int _keys = 0;
     private int _coins = 0;
     
+    public string GetPlayerName() { return _playerName; }
+    
     public float GetCurrentHealth() { return _currentHealth; }
     public float GetMaxHealth() { return _maxHealth; }
     public float GetMovementSpeed() { return _movementSpeed; }
@@ -32,6 +35,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public int GetKeys() { return _keys; } 
     public int GetCoins() { return _coins; }
 
+    public void SetPlayerName(string NewName) { _playerName = NewName; }
     public void SetCurrentHealth(float NewHealth) { _currentHealth = NewHealth; }
     public void SetMaxHealth(float NewMaxHealth) { _maxHealth = NewMaxHealth; }
     public void SetMovementSpeed(float NewMovementSpeed) { _movementSpeed = NewMovementSpeed; }
@@ -43,8 +47,19 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetDashDistance(float NewDashDistance) { _dashDistance = NewDashDistance; }
     public void SetKeys(int NewKeys) { _keys = NewKeys; }
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
-    
-    public void UpdateCurrentHealth(float UpdateValue) { _currentHealth += UpdateValue; }
+
+    public void UpdateCurrentHealth(float UpdateValue)
+    {
+        _currentHealth += UpdateValue;
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+        else if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+    }
     public void UpdateMaxHealth(float UpdateValue) { _maxHealth += UpdateValue; }
     public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }
     public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }

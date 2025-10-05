@@ -151,7 +151,7 @@ MonoBehaviour:
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
-  Seed: 0
+  Seed: 5
 --- !u!1 &1870964041774676868
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,12 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ab5132a9da48945b693c82cc5e8236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeOutImage: {fileID: 6014463442140742844}
-  _fadeOutSpeed: 7
-  _fadeInSpeed: 7
-  fadeOutStartColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 0}
-  _fadeOutSFX: {fileID: 8300000, guid: 0a2db085042a3a346a1f0addfcba16f4, type: 3}
-  _fadeInSFX: {fileID: 8300000, guid: 9ce7158fd8aae0744a74eb7950b0242a, type: 3}
+  _fadeImage: {fileID: 6014463442140742844}
 --- !u!1 &9066048136667935065
 GameObject:
   m_ObjectHideFlags: 0
