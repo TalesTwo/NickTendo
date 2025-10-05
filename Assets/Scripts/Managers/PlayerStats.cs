@@ -7,6 +7,7 @@ using static UnityEditor.Progress;
 public class PlayerStats : Singleton<PlayerStats>
 {
     // Start is called before the first frame update
+    private string _playerName = "Player";
 
     private float _currentHealth = 3f;
     private float _maxHealth = 3f;
@@ -20,6 +21,8 @@ public class PlayerStats : Singleton<PlayerStats>
     private int _keys = 0;
     private int _coins = 0;
     
+    public string GetPlayerName() { return _playerName; }
+    
     public float GetCurrentHealth() { return _currentHealth; }
     public float GetMaxHealth() { return _maxHealth; }
     public float GetMovementSpeed() { return _movementSpeed; }
@@ -32,6 +35,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public int GetKeys() { return _keys; } 
     public int GetCoins() { return _coins; }
 
+    public void SetPlayerName(string NewName) { _playerName = NewName; }
     public void SetCurrentHealth(float NewHealth) { _currentHealth = NewHealth; }
     public void SetMaxHealth(float NewMaxHealth) { _maxHealth = NewMaxHealth; }
     public void SetMovementSpeed(float NewMovementSpeed) { _movementSpeed = NewMovementSpeed; }

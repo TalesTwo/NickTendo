@@ -48,6 +48,10 @@ namespace Managers
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         private float waitTime = 2f;
         
+        public void Start()
+        {
+            EventBroadcaster.GameStarted += OnGameStarted;
+        }
         
         // Update is called once per frame
         void Update()
@@ -56,6 +60,12 @@ namespace Managers
             {
                 LoadIntoDungeon();
             }
+        }
+        private void OnGameStarted()
+        {
+            LoadIntoDungeon();
+            // Debug welcome message
+            DebugUtils.Log("Welcome " + PlayerStats.Instance.GetPlayerName() + " to Friend Finder!");
         }
 
         private void LoadIntoDungeon()
