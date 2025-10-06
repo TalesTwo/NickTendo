@@ -76,6 +76,7 @@ public class ShopManager : MonoBehaviour
             ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
             ShopUIM.ItemDescriptions[i].text = ShopList[i].GetComponent<ShopItem>().GetDescription();
+            ShopUIM.ItemPrices[i].text = ShopList[i].GetComponent<ShopItem>().itemValue.ToString();
         }
     }
 

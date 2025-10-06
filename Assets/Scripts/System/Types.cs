@@ -78,6 +78,12 @@ public static class Types
         Trap
     }
     
+    public enum Persona
+    {
+        Normal,
+        RageBaiter,
+    }
+    
     /* ----------------- END GENERATION TYPES ----------------- */
     
 

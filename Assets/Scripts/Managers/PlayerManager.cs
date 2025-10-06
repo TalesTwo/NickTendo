@@ -9,7 +9,8 @@ namespace Managers
         private GameObject player;
 
         [Header("Teleport Settings")]
-        [SerializeField] private float fadeDelay = 0.15f; // delay between fade out and fade in
+        [SerializeField] private float fadeDuration = 0.15f;
+        [SerializeField] private float fadeDelay = 0.15f;
 
         void Start()
         {
@@ -30,7 +31,7 @@ namespace Managers
 
             if (bShouldUseScreenFade)
             {
-                StartCoroutine(FadeTeleportRoutine(newPosition, fadeDelay));
+                StartCoroutine(FadeTeleportRoutine(newPosition, fadeDuration, fadeDelay));
             }
             else
             {
@@ -39,27 +40,20 @@ namespace Managers
         }
 
         /// <summary>
-        /// Handles fade out → teleport → fade in
+        /// Handles fade out → teleport → fade in using SceneFadeManager
         /// </summary>
-        private IEnumerator FadeTeleportRoutine(Vector3 newPosition, float delay)
+        private IEnumerator FadeTeleportRoutine(Vector3 newPosition, float fadeDuration, float delay)
         {
             SceneFadeManager fadeManager = SceneFadeManager.Instance;
-
-            // 1️⃣ Fade out
-            fadeManager.StartFadeOut();
-
-            // Wait for fade out to complete
-            while (fadeManager.IsFadingOut)
-                yield return null;
-
-            // 2️⃣ Teleport player
+            
+            yield return fadeManager.FadeOut(fadeDuration);
+            
             player.transform.position = newPosition;
-
-            // 3️⃣ Optional pause before fading back in
-            yield return new WaitForSeconds(delay);
-
-            // 4️⃣ Fade back in
-            fadeManager.StartFadeIn();
+            
+            if (delay > 0f)
+                yield return new WaitForSeconds(delay);
+            
+            yield return fadeManager.FadeIn(fadeDuration);
         }
     }
 }

@@ -185,7 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa1ee08c20bb90f4599163a0b4c2bc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcDialogue: {fileID: 0}
+  hasInteractPrompt: 1
+  interactPromptOffset: {x: 0, y: 1, z: 0}
+  npcDialogue: {fileID: 4900000, guid: 9932ff33ac8fbaa4081d02463538d125, type: 3}
   dialogue: []
   sprite: {fileID: 3914643202950574581}
   npcName: 
