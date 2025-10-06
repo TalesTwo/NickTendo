@@ -46,7 +46,7 @@ public class EnemyProjectileController : MonoBehaviour
     {
         Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
         _playerController.KnockBack(ProjectileKnockback, direction, stunTimer);
-        PlayerStats.Instance.UpdateCurrentHealth(projectileDamage);
+        PlayerStats.Instance.UpdateCurrentHealth(-projectileDamage);
     }
 
     // attacker sets damage when spawning projectile
