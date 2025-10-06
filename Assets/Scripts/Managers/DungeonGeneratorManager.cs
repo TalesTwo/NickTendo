@@ -68,7 +68,7 @@ namespace Managers
             DebugUtils.Log("Welcome " + PlayerStats.Instance.GetPlayerName() + " to Friend Finder!");
         }
 
-        private void LoadIntoDungeon()
+        public void LoadIntoDungeon()
         {
             // initialize the dungeon
             InitializeDungeonGrid(rows, cols);
@@ -448,17 +448,24 @@ namespace Managers
                 dungeonRooms.Add(row);
             }
             // I also want to clear all "room" objects from the world
-            Room[] existingRooms = FindObjectsOfType<Room>();
+            Room[] existingRooms = FindObjectsOfType<Room>(true);
             foreach (Room room in existingRooms)
             {
                 DestroyImmediate(room.gameObject);
             }
             // destroy all animated buttons
-            AnimatedButton[] existingButtons = FindObjectsOfType<AnimatedButton>();
+            AnimatedButton[] existingButtons = FindObjectsOfType<AnimatedButton>(true);
             foreach (AnimatedButton button in existingButtons)
             {
                 DestroyImmediate(button.gameObject);
             }
+            // destroy all objects of the SpawnableObject type
+            SpawnableObject[] existingSpawnableObjects = FindObjectsOfType<SpawnableObject>(true);
+            foreach (SpawnableObject obj in existingSpawnableObjects)
+            {
+                DestroyImmediate(obj.gameObject);
+            }
+            
         }
         
         private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position, int row = -1, int col = -1)
