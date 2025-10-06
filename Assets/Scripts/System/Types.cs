@@ -80,15 +80,8 @@ public static class Types
     
     public enum Persona
     {
-        RageBaiter,
-        Influencer,
-        DoomPoster,
-        HappyGoLucky,
-        EdgeLord,
-        Lurker,
-        MemeLord, // idk, make this one be random or something, could be funny
-        Normie,
         Normal,
+        RageBaiter,
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */
