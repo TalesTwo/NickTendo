@@ -60,15 +60,33 @@ namespace Managers
         public void Start()
         {
             // Listen for the player death event to reset persona
+            OnPlayerDeath += EventBroadcaster.PlayerDeath;
         }
 
-        private void OnPlayerDeath()
+        public void OnPlayerDeath()
         {
             // take the current persona, and mark it as inactive
             MarkAsLost(GetPersona());
             // reset to normal persona
             SetPersona(Types.Persona.Normal);
         
+        }
+
+        public int GetNumberOfAvailablePersonas()
+        {
+            /*
+             * This will check the dict of personas, and return the number non NON-Lost personas
+             */
+            int count = 0;
+            for (int i = 0; i < _personas.Count; i++)
+            {
+                if (_personas.ElementAt(i).Value != Types.PersonaState.Lost)
+                {
+                    count += 1;
+                }
+            }
+
+            return count;
         }
 
     
@@ -111,8 +129,13 @@ namespace Managers
             {
                 _personas[persona] = Types.PersonaState.Lost;
             }
-            // reset to the normal persona if the lost persona was the current one
-            SetPersona(Types.Persona.Normal);
+            
+            // if the lost person was not a Normal, set it to a normal person
+            if (_currentPersona != Types.Persona.Normal)
+            {
+                SetPersona(Types.Persona.Normal);
+            }
+            
         
         }
         public void LockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Locked;
@@ -123,6 +146,7 @@ namespace Managers
             if (Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log("Current Persona: " + _currentPersona);
+                DebugUtils.Log("Number of active personas: " + GetNumberOfAvailablePersonas());
             }
 
             if (Input.GetKeyDown(KeyCode.U))

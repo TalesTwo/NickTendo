@@ -71,7 +71,15 @@ public class PersonaUI : MonoBehaviour
         {
             var state = persona.Value;
             if (state == Types.PersonaState.Lost)
-                continue; // skip non-visible states
+            {
+                continue; 
+            }
+            // we should not be able to select the "Normal" persona
+            if (persona.Key == Types.Persona.Normal)
+            {
+                continue;
+            }
+                
             GameObject newPersona = Instantiate(personaTemplate, contentParent);
 
             // --- Fill in name ---
