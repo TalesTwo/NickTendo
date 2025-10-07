@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +10,9 @@ public class DeathScreenUI : MonoBehaviour
     public int attemptsRemaining;
     
     public Button respawnButton;
-    public Text gameLossText;
+    public TextMeshProUGUI gameLossText;
     public Button gameOverButton;
-
+    
     public void Login()
     {
         attemptsRemaining -= 1;
@@ -20,6 +21,7 @@ public class DeathScreenUI : MonoBehaviour
             SetGameOverScreen();
         }
         DungeonGeneratorManager.Instance.LoadIntoDungeon();
+        PlayerManager.Instance.PlayerAlive();
         gameObject.SetActive(false);
     }
 

@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool _isAttacking = false;
     private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
     private bool _isKnockback = false;
+    private bool _isDead = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -42,13 +43,8 @@ public class PlayerController : MonoBehaviour
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-
-        if (PlayerStats.Instance.GetCurrentHealth() <= 0)
-        {
-            Debug.Log("Player Dead");
-        }
-
-        if (_isActive)
+        
+        if (_isActive && !_isDead)
         {
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
@@ -94,7 +90,7 @@ public class PlayerController : MonoBehaviour
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()
     {
-        if (_isActive)
+        if (_isActive && !_isDead)
         {
             // move player based on input
             if (_isDashMoving && !_isKnockback)
@@ -171,6 +167,18 @@ public class PlayerController : MonoBehaviour
     private void UnsetKnockback()
     {
         _isKnockback = false;
+    }
+
+    // function to set player as dead
+    public void SetIsDead()
+    {
+        _isDead = true;
+    }
+
+    // function to set player as alive again
+    public void ResetIsDead()
+    {
+        _isDead = false;
     }
 
 }

@@ -7,6 +7,9 @@ namespace Managers
     public class PlayerManager : Singleton<PlayerManager>
     {
         private GameObject player;
+        private PlayerController playerController;
+        private GameObject deathScreen;
+        private Transform deathScreenCanvas;
 
         [Header("Teleport Settings")]
         [SerializeField] private float fadeDuration = 0.15f;
@@ -16,6 +19,25 @@ namespace Managers
         {
             // Get reference to the player
             player = GameObject.FindWithTag("Player");
+            playerController = player.GetComponent<PlayerController>();
+            deathScreen = GameObject.FindWithTag("DeathScreen");
+            deathScreenCanvas = transform.Find("Death Screen Canvas");
+            EventBroadcaster.PlayerDeath += PlayerDeath;
+        }
+
+        // handles player death
+        public void PlayerDeath()
+        {
+            Debug.Log("Player Death");
+            playerController.SetIsDead();
+            deathScreenCanvas.gameObject.SetActive(false);
+        }
+
+        // handles player resurection
+        public void PlayerAlive()
+        {
+            playerController.ResetIsDead();
+            PlayerStats.Instance.SetCurrentHealth(PlayerStats.Instance.GetMaxHealth());
         }
 
         /// <summary>
