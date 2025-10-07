@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AnimatedPlayerAttack : AnimatedEntity
 {
-    public GameObject animation;
+    public new GameObject animation;
 
     private bool _nextLoop;
     

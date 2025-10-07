@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -74,6 +75,8 @@ public class PlayerStats : Singleton<PlayerStats>
     public void DisplayAllStats()
     {
         DebugUtils.Log(
+            "Player Name: " + _playerName +
+            "\nCurrent Persona: " + PersonaManager.Instance.GetPersona() +
             "Current Health: " + _currentHealth + "/" + _maxHealth +
             "\nMovement Speed: " + _movementSpeed +
             "\nDash Speed: " + _dashSpeed +

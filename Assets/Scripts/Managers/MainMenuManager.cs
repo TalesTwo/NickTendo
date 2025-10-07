@@ -13,6 +13,11 @@ namespace Managers
         {
             // Temporaryily start the main menu music here
             AudioManager.Instance.PlayOverworldTrack();
+            var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.enabled = false;
+            }
         }
         public void LoginButtonClicked()
         {
@@ -30,7 +35,11 @@ namespace Managers
                 if (obj != null)
                     obj.SetActive(false);
             }
-
+            var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.enabled = true;
+            }
             SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
         }
     }

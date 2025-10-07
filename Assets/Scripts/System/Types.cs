@@ -78,10 +78,19 @@ public static class Types
         Trap
     }
     
+    public enum PersonaState
+    {
+        Available,
+        Selected,
+        Locked,
+        Lost
+    }
     public enum Persona
     {
         Normal,
-        RageBaiter,
+        Everyman_Account,
+        RageBaiter_Account
+        
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */

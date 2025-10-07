@@ -11,7 +11,7 @@ namespace Managers
 
         public bool IsFading { get; private set; }
 
-        private void Awake()
+        protected override void Awake()
         {
             if (_fadeImage != null)
             {
