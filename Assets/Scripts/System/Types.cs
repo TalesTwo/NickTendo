@@ -88,7 +88,9 @@ public static class Types
     public enum Persona
     {
         Normal,
-        RageBaiter,
+        Everyman_Account,
+        RageBaiter_Account
+        
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */
