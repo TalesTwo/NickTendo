@@ -31,7 +31,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         var promptPrefab = DialogueManager.Instance.GetInteractPrompt;
-        if (promptPrefab != null)
+        if (promptPrefab != null && hasInteractPrompt)
         {
             // Instantiate in world space
             interactPromptInstance = Instantiate(promptPrefab);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Generation.ScriptableObjects;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 /*
  * NOTE TO SELF:
@@ -40,13 +41,8 @@ namespace Managers
         private Vector2Int startPos = new Vector2Int(-1, -1);
         [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
         private Vector2Int endPos = new Vector2Int(-1, -1);
-
-
-        private static bool bPhaseOne = true;
-        
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
-        private float waitTime = 2f;
         
         public void Start()
         {
@@ -93,7 +89,6 @@ namespace Managers
             
             GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
-            bPhaseOne = false; // we are now in phase two
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
@@ -448,19 +443,20 @@ namespace Managers
                 dungeonRooms.Add(row);
             }
             // I also want to clear all "room" objects from the world
-            Room[] existingRooms = FindObjectsOfType<Room>(true);
+            Room[] existingRooms = FindObjectsByType<Room>(FindObjectsSortMode.None);
             foreach (Room room in existingRooms)
             {
                 DestroyImmediate(room.gameObject);
             }
             // destroy all animated buttons
-            AnimatedButton[] existingButtons = FindObjectsOfType<AnimatedButton>(true);
+            AnimatedButton[] existingButtons = FindObjectsByType<AnimatedButton>(FindObjectsSortMode.None);
+
             foreach (AnimatedButton button in existingButtons)
             {
                 DestroyImmediate(button.gameObject);
             }
             // destroy all objects of the SpawnableObject type
-            SpawnableObject[] existingSpawnableObjects = FindObjectsOfType<SpawnableObject>(true);
+            SpawnableObject[] existingSpawnableObjects = FindObjectsByType<SpawnableObject>(FindObjectsSortMode.None);
             foreach (SpawnableObject obj in existingSpawnableObjects)
             {
                 DestroyImmediate(obj.gameObject);
