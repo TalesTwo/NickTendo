@@ -15,7 +15,7 @@ public class DeathScreenUI : MonoBehaviour
 
     private void OnEnable()
     {
-        attemptsRemaining = 1; // PersonaManager.Instance.GetNumberOfAvailablePersonas();
+        attemptsRemaining = PersonaManager.Instance.GetNumberOfAvailablePersonas();
         if (attemptsRemaining <= 0)
         {
             SetGameOverScreen();
