@@ -24,10 +24,27 @@ public class PersonaUI : MonoBehaviour
     {
         GenerateContent();
         gameObject.SetActive(true);
+        // disable player movement
+        // Disable player movement
+        var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
     }
     public void ClosePersonaUI()
     {
         gameObject.SetActive(false);
+        // cleanup
+        foreach (Transform child in contentParent)
+        {
+            Destroy(child.gameObject);
+        }
+        var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.enabled = true;
+        }
     }
 
     public void UpdatePersonaUI()
