@@ -67,9 +67,6 @@ namespace Managers
         {
             // take the current persona, and mark it as inactive
             MarkAsLost(GetPersona());
-            // reset to normal persona
-            SetPersona(Types.Persona.Normal);
-        
         }
 
         public int GetNumberOfAvailablePersonas()
