@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using UnityEngine;
 
 using UnityEngine;
 
-public class PersonaManager : MonoBehaviour
+public class PersonaManager : Singleton<PersonaManager>
 {
     /*
      * The PersonaManager is responsible for handling which "online persona" 
@@ -21,6 +22,18 @@ public class PersonaManager : MonoBehaviour
 
     // CSV reference (loaded from Resources)
     private TextAsset _personaStatsCSV;
+    
+    private Dictionary<Types.Persona, Types.PersonaState> _personas = InitializePersonas();
+
+    private static Dictionary<Types.Persona, Types.PersonaState> InitializePersonas()
+    {
+        return Enum.GetValues(typeof(Types.Persona))
+            .Cast<Types.Persona>()
+            .ToDictionary(p => p, p => Types.PersonaState.Available); // default state
+    }
+
+// Expose read-only dictionary
+    public Dictionary<Types.Persona, Types.PersonaState> GetAllPersonas() => _personas;
     
 
     // Initialization flag
@@ -47,43 +60,87 @@ public class PersonaManager : MonoBehaviour
         SetPersona(_currentPersona);
     }
 
+    public void Start()
+    {
+        // Listen for the player death event to reset persona
+    }
+
+    private void OnPlayerDeath()
+    {
+        // take the current persona, and mark it as inactive
+        MarkAsLost(GetPersona());
+        // reset to normal persona
+        SetPersona(Types.Persona.Normal);
+        
+    }
+
+    
     // --------------------------------------------------
-    public void SetPersona(Types.Persona newPersona, bool bLog = true)
+    public void SetPersona(Types.Persona newPersona)
     {
         /*
          * Anytime the persona is set, we want to:
-         * Re-apply the player’s stats
-         * Broadcast the change to any listeners
+         * - Update state dictionary
+         * - Re-apply the player’s stats
+         * - Broadcast the change to any listeners
          */
 
-        // Update internal state
+        // Reset previously selected persona(s)
+        foreach (var key in _personas.Keys.ToList())
+        {
+            if (_personas[key] == Types.PersonaState.Selected)
+                _personas[key] = Types.PersonaState.Available;
+        }
+
+        // Update the selected persona state
         _currentPersona = newPersona;
+        _personas[_currentPersona] = Types.PersonaState.Selected;
 
         // Update player stats if loader is ready
         if (_isInitialized)
         {
-            // Retrieve stat line from CSV
             PlayerStatsStruct personaStats = PersonaStatsLoader.GetStats(newPersona);
-
-            // Apply those stats to player
             PlayerStats.Instance.InitializePlayerStats(personaStats);
         }
-        
-        // Broadcast after stats are applied (probably for the UI to update)
+
+        // Broadcast after stats are applied
         EventBroadcaster.Broadcast_PersonaChanged(newPersona);
-        if(bLog) { PlayerStats.Instance.DisplayAllStats(); }
     }
 
+    
+    public void MarkAsLost(Types.Persona persona)
+    {
+        if (_personas.ContainsKey(persona))
+        {
+            _personas[persona] = Types.PersonaState.Lost;
+        }
+        // reset to the normal persona if the lost persona was the current one
+        SetPersona(Types.Persona.Normal);
+        
+    }
+    public void LockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Locked;
+    public void UnlockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Available;
+    
     public void Update()
     {
-        // if we press O, swap to a random persona for testing
         if (Input.GetKeyDown(KeyCode.O))
         {
-            Array personas = Enum.GetValues(typeof(Types.Persona));
-            Types.Persona randomPersona = (Types.Persona)personas.GetValue(UnityEngine.Random.Range(0, personas.Length));
-            SetPersona(randomPersona);
+            Debug.Log("Current Persona: " + _currentPersona);
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            foreach (var kvp in _personas)
+            {
+                Debug.Log($"Persona: {kvp.Key}, State: {kvp.Value}");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            MarkAsLost(_currentPersona);
         }
     }
+
 }
 
 

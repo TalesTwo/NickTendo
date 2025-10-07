@@ -78,6 +78,13 @@ public static class Types
         Trap
     }
     
+    public enum PersonaState
+    {
+        Available,
+        Selected,
+        Locked,
+        Lost
+    }
     public enum Persona
     {
         Normal,
