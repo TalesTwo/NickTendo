@@ -29,7 +29,7 @@ namespace Managers
                 .ToDictionary(p => p, p => Types.PersonaState.Available);
         }
 
-        // Expose read-only dictionary
+        // Getter for all personas and their states
         public Dictionary<Types.Persona, Types.PersonaState> GetAllPersonas() => _personas;
     
 

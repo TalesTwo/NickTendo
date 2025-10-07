@@ -26,7 +26,7 @@ public class PersonaUI : MonoBehaviour
         GenerateContent();
         gameObject.SetActive(true);
         // disable player movement
-        // Disable player movement
+        //TODO: Probably make this a better system later
         var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (playerController != null)
         {
