@@ -7,19 +7,23 @@ using UnityEngine.UI;
 
 public class DeathScreenUI : MonoBehaviour
 {
-    public int attemptsRemaining;
+    private int attemptsRemaining;
     
     public Button respawnButton;
     public TextMeshProUGUI gameLossText;
     public Button gameOverButton;
-    
-    public void Login()
+
+    private void OnEnable()
     {
-        attemptsRemaining -= 1;
+        attemptsRemaining = 1; // PersonaManager.Instance.GetNumberOfAvailablePersonas();
         if (attemptsRemaining <= 0)
         {
             SetGameOverScreen();
         }
+    }
+    
+    public void Login()
+    {
         DungeonGeneratorManager.Instance.LoadIntoDungeon();
         PlayerManager.Instance.PlayerAlive();
         gameObject.SetActive(false);

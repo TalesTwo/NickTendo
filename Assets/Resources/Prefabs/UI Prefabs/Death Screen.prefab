@@ -254,7 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add695160d0bf6346af7e5eca13e33f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attemptsRemaining: 2
   respawnButton: {fileID: 1318073843388532477}
   gameLossText: {fileID: 7830332808711894717}
   gameOverButton: {fileID: 4437831073234516952}
@@ -342,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657436207426152782}
+  - component: {fileID: 8436113535734224646}
   m_Layer: 0
   m_Name: Death Screen
   m_TagString: DeathScreen
@@ -365,6 +365,19 @@ Transform:
   - {fileID: 3861821472728078862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8436113535734224646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130119471668062892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c693ddfb6551645b11d56caffecac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreen: {fileID: 1432380150429643122}
 --- !u!1 &2713898784941646841
 GameObject:
   m_ObjectHideFlags: 0

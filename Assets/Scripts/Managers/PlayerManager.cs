@@ -8,8 +8,6 @@ namespace Managers
     {
         private GameObject player;
         private PlayerController playerController;
-        private GameObject deathScreen;
-        private Transform deathScreenCanvas;
 
         [Header("Teleport Settings")]
         [SerializeField] private float fadeDuration = 0.15f;
@@ -20,8 +18,6 @@ namespace Managers
             // Get reference to the player
             player = GameObject.FindWithTag("Player");
             playerController = player.GetComponent<PlayerController>();
-            deathScreen = GameObject.FindWithTag("DeathScreen");
-            deathScreenCanvas = transform.Find("Death Screen Canvas");
             EventBroadcaster.PlayerDeath += PlayerDeath;
         }
 
@@ -30,7 +26,7 @@ namespace Managers
         {
             Debug.Log("Player Death");
             playerController.SetIsDead();
-            deathScreenCanvas.gameObject.SetActive(false);
+            DeathScreenUIActive.Instance.SetDeathScreen();
         }
 
         // handles player resurection
