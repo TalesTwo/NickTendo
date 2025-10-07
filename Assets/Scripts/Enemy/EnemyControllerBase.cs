@@ -64,6 +64,8 @@ public class EnemyControllerBase : SpawnableObject
     public void Deactivate()
     {
         Destroy(gameObject);
+        // unsubscribe from event (added this line)
+        EventBroadcaster.PlayerDeath -= Deactivate;
     }
     
     public void Initialize(int roomDifficulty)
