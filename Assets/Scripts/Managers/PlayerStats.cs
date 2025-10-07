@@ -60,6 +60,11 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             _currentHealth = 0;
         }
+
+        if (_currentHealth <= 0)
+        {
+            EventBroadcaster.Broadcast_PlayerDeath();
+        }
     }
     public void UpdateMaxHealth(float UpdateValue) { _maxHealth += UpdateValue; }
     public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }

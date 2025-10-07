@@ -60,7 +60,7 @@ namespace Managers
         public void Start()
         {
             // Listen for the player death event to reset persona
-            OnPlayerDeath += EventBroadcaster.PlayerDeath;
+            EventBroadcaster.PlayerDeath +=  OnPlayerDeath;
         }
 
         public void OnPlayerDeath()

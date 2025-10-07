@@ -78,6 +78,11 @@ namespace System
         public delegate void GameStartedHandler();
         public static event GameStartedHandler GameStarted;
         public static void Broadcast_GameStarted() { GameStarted?.Invoke(); }
+        
+        // Broadcast for when the player dies
+        public delegate void PlayerDeathHandler();
+        public static event PlayerDeathHandler PlayerDeath;
+        public static void Broadcast_PlayerDeath() { PlayerDeath?.Invoke(); }
 
         //-------------------------------- End Activity Events --------------------------------//
 
