@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
+        if (PlayerStats.Instance.GetCurrentHealth() <= 0)
+        {
+            Debug.Log("Player Dead");
+        }
+
         if (_isActive)
         {
             // flip sprite along y axis if direction changes
