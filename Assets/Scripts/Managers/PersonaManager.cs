@@ -196,7 +196,8 @@ namespace Managers
                     DashCooldown = float.Parse(values[8]),
                     DashDistance = float.Parse(values[9]),
                     Keys = int.Parse(values[10]),
-                    Coins = int.Parse(values[11])
+                    Coins = int.Parse(values[11]),
+                    PlayerColor = ParseColor(values[12])
                 };
                 // debug the coins value
 
@@ -234,6 +235,27 @@ namespace Managers
 
             Debug.LogError($"Persona not found: {persona}");
             return default;
+        }
+        
+        private static Color ParseColor(string colorName)
+        {
+            switch (colorName.Trim().ToLowerInvariant())
+            {
+                case "white": return Color.white;
+                case "black": return Color.black;
+                case "red": return Color.red;
+                case "green": return Color.green;
+                case "blue": return Color.blue;
+                case "yellow": return Color.yellow;
+                case "orange": return new Color(1f, 0.5f, 0f);
+                case "cyan": return Color.cyan;
+                case "magenta": return Color.magenta;
+                case "gray":
+                case "grey": return Color.gray;
+                default:
+                    Debug.LogWarning($"Unknown color name '{colorName}', defaulting to white.");
+                    return Color.white;
+            }
         }
     }
 }

@@ -202,4 +202,5 @@ public struct PlayerStatsStruct
     public float DashDistance;
     public int Keys;
     public int Coins;
+    public Color PlayerColor;
 }
