@@ -109,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7034018206351704079}
   - component: {fileID: 2225191399062975120}
+  - component: {fileID: 4155621867649481536}
   m_Layer: 0
   m_Name: DungeonGeneratorManager
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
   Seed: 0
+  RoomOffset: 40
+--- !u!114 &4155621867649481536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638679874807524097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a785a3e55063aa0458234c62ef1fc2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1870964041774676868
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,9 +729,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8941348631461493627}
     m_Modifications:
+    - target: {fileID: 350803507507197022, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.60899353
+      objectReference: {fileID: 0}
     - target: {fileID: 1050309879799609352, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.0110035
+      value: 1.0110016
       objectReference: {fileID: 0}
     - target: {fileID: 1289894082174871329, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_Name

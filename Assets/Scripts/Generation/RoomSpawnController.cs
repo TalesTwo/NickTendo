@@ -10,7 +10,7 @@ public class RoomSpawnController : MonoBehaviour
     // reference to the room that we are attached to
     private Room _room;
     private RoomGridManager _roomGridManager;
-    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>();
+    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>(); public List<EnemyControllerBase> GetEnemiesInRoom() { return enemiesInRoom; }
     private List<GameObject> trapsInRoom = new List<GameObject>();
     private List<BaseItem> lootInRoom = new List<BaseItem>();
     
