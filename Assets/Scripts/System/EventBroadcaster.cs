@@ -74,6 +74,15 @@ namespace System
         public static event PersonaChangedHandler PersonaChanged;
         public static void Broadcast_PersonaChanged(Types.Persona newPersona) { PersonaChanged?.Invoke(newPersona); }
         
+        // Broadcast for when the game is loaded / started
+        public delegate void GameStartedHandler();
+        public static event GameStartedHandler GameStarted;
+        public static void Broadcast_GameStarted() { GameStarted?.Invoke(); }
+        
+        // Broadcast for when the player dies
+        public delegate void PlayerDeathHandler();
+        public static event PlayerDeathHandler PlayerDeath;
+        public static void Broadcast_PlayerDeath() { PlayerDeath?.Invoke(); }
 
         //-------------------------------- End Activity Events --------------------------------//
 

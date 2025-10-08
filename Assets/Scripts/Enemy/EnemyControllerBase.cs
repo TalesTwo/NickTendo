@@ -57,7 +57,13 @@ public class EnemyControllerBase : SpawnableObject
         _transform = GetComponent<Transform>();
         _playerTransform = _player.GetComponent<Transform>();
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
+        EventBroadcaster.PlayerDeath += Deactivate;
         ParseStatsText();
+    }
+
+    public void Deactivate()
+    {
+        Destroy(gameObject);
     }
     
     public void Initialize(int roomDifficulty)

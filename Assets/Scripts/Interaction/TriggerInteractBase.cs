@@ -18,16 +18,20 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     // Offset for the interact prompt
     private GameObject interactPromptInstance;
-    
-    
-    
-    public virtual void Interact() { }
+
+
+
+    public virtual void Interact()
+    {
+        // Play our interaction sound
+        AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
+    }
 
     protected virtual void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         var promptPrefab = DialogueManager.Instance.GetInteractPrompt;
-        if (promptPrefab != null)
+        if (promptPrefab != null && hasInteractPrompt)
         {
             // Instantiate in world space
             interactPromptInstance = Instantiate(promptPrefab);

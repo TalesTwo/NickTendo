@@ -78,17 +78,19 @@ public static class Types
         Trap
     }
     
+    public enum PersonaState
+    {
+        Available,
+        Selected,
+        Locked,
+        Lost
+    }
     public enum Persona
     {
-        RageBaiter,
-        Influencer,
-        DoomPoster,
-        HappyGoLucky,
-        EdgeLord,
-        Lurker,
-        MemeLord, // idk, make this one be random or something, could be funny
-        Normie,
         Normal,
+        Everyman_Account,
+        RageBaiter_Account
+        
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */

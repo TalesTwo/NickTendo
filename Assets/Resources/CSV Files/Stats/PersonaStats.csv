@@ -1,10 +1,4 @@
 Persona,CurrentHealth,MaxHealth,MovementSpeed,DashSpeed,AttackDamage,AttackCooldown,DashDamage,DashCooldown,DashDistance,Keys,Coins
-RageBaiter,3,3,5,10,2,0.5,5,5,0.5,10,100
-Influencer,3,3,5,10,2,0.5,5,5,0.5,10,100
-DoomPoster,3,3,5,10,2,0.5,5,5,0.5,10,100
-HappyGoLucky,3,3,5,10,2,0.5,5,5,0.5,10,100
-EdgeLord,3,3,5,10,2,0.5,5,5,0.5,10,100
-Lurker,3,3,5,10,2,0.5,5,5,0.5,10,100
-MemeLord,3,3,5,10,2,0.5,5,5,0.5,10,100
-Normie,3,3,5,10,2,0.5,5,5,0.5,10,100
-Normal,3,3,5,10,2,0.5,5,5,0.5,10,100
+Normal,3,3,5,10,2,0.5,5,5,0.5,10,95
+Everyman_Account,2,2,3,8,1,0.75,3,5,0.5,10,95
+RageBaiter_Account,5,5,4,10,3,0.5,5,5,0.5,10,100

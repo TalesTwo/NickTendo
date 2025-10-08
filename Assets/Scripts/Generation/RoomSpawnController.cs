@@ -51,6 +51,16 @@ public class RoomSpawnController : MonoBehaviour
                 break;
             }
         }
+        // look for items to spawn
+        List<SpawnData> itemsToSpawn = new List<SpawnData>();
+        foreach (SpawnableGroup spawnableGroup in spawnableMap)
+        {
+            if (spawnableGroup.spawnType == Types.SpawnableType.Item)
+            {
+                itemsToSpawn = spawnableGroup.Spawnables;
+                break;
+            }
+        }
         
         
         // pick a random enemy from the list of enemy prefabs
@@ -91,6 +101,46 @@ public class RoomSpawnController : MonoBehaviour
             }
             
 
+        }
+        // pick a random item from the list of item prefabs
+        if (itemsToSpawn.Count > 0 && SpawnLocation != null)
+        {
+            // Look through the item data, and look for any with a spawnChance of 1 (guaranteed spawn)
+            List<SpawnData> guaranteedItems = new List<SpawnData>();
+            foreach (SpawnData itemData in itemsToSpawn)
+            {
+                if (itemData.spawnChance >= 1f)
+                {
+                    guaranteedItems.Add(itemData);
+                }
+                else
+                {
+                    float roll = UnityEngine.Random.Range(0f, 1f);
+                    if (roll <= itemData.spawnChance)
+                    {
+                        guaranteedItems.Add(itemData);
+                    }
+                }
+            }
+            // loop through guaranteed items and spawn a random amount of them
+            foreach (SpawnData itemData in guaranteedItems)
+            {
+                int spawnCount = UnityEngine.Random.Range(itemData.minSpawnCount, itemData.maxSpawnCount + 1);
+                for (int i = 0; i < spawnCount; i++)
+                {
+                    Transform spawnLocation = _roomGridManager.FindValidWalkableCell();
+                    if (spawnLocation != null)
+                    {
+                        // cast the enemy prefab to a BaseItem
+                        BaseItem Prefab = itemData.enemyPrefab.GetComponent<BaseItem>();
+                        BaseItem spawnedItem = Instantiate(Prefab, spawnLocation.position, Quaternion.identity);
+                        spawnedItem.transform.parent = _room.transform;
+                        lootInRoom.Add(spawnedItem);
+                    }
+                }
+                // Remove the guaranteed item from the list so we don't spawn it again
+                itemsToSpawn.Remove(itemData);
+            }
         }
 
     }

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - EnemyAttack
   - Wall
+  - DeathScreen
   layers:
   - Default
   - TransparentFX
