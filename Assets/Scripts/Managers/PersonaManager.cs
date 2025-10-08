@@ -73,11 +73,12 @@ namespace Managers
         {
             /*
              * This will check the dict of personas, and return the number non NON-Lost personas
+             * we also wont count the Normal persona, since its infinite, and its being stupid
              */
             int count = 0;
             for (int i = 0; i < _personas.Count; i++)
             {
-                if (_personas.ElementAt(i).Value != Types.PersonaState.Lost)
+                if (_personas.ElementAt(i).Value != Types.PersonaState.Lost && _personas.ElementAt(i).Key != Types.Persona.None)
                 {
                     count += 1;
                 }
@@ -91,11 +92,11 @@ namespace Managers
         public void SetPersona(Types.Persona newPersona)
         {
             /*
-         * Anytime the persona is set, we want to:
-         * - Update state dictionary
-         * - Re-apply the player’s stats
-         * - Broadcast the change to any listeners
-         */
+             * Anytime the persona is set, we want to:
+             * - Update state dictionary
+             * - Re-apply the player’s stats
+             * - Broadcast the change to any listeners
+             */
 
             // Reset previously selected persona(s)
             foreach (var key in _personas.Keys.ToList())
@@ -127,11 +128,20 @@ namespace Managers
                 _personas[persona] = Types.PersonaState.Lost;
             }
             
-            // if the lost person was not a Normal, set it to a normal person
-            if (_currentPersona != Types.Persona.Normal)
+            
+            // Set us back to Normal persona by default if we arnt currently Normal
+            if (GetPersona() != Types.Persona.Normal)
             {
                 SetPersona(Types.Persona.Normal);
             }
+            else
+            {
+                // Else, its a special case where we lost the Normal persona (which means game over)
+                SetPersona(Types.Persona.None);
+            }
+            
+            
+            
             
         
         }
