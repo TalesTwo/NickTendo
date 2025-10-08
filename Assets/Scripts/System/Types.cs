@@ -89,7 +89,8 @@ public static class Types
     {
         Normal,
         Everyman_Account,
-        RageBaiter_Account
+        RageBaiter_Account,
+        None
         
     }
     

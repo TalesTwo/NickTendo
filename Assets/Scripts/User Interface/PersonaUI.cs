@@ -75,7 +75,7 @@ public class PersonaUI : MonoBehaviour
                 continue; 
             }
             // we should not be able to select the "Normal" persona
-            if (persona.Key == Types.Persona.Normal)
+            if (persona.Key == Types.Persona.Normal || persona.Key == Types.Persona.None)
             {
                 continue;
             }

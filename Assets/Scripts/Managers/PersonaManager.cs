@@ -73,11 +73,12 @@ namespace Managers
         {
             /*
              * This will check the dict of personas, and return the number non NON-Lost personas
+             * we also wont count the Normal persona, since its infinite, and its being stupid
              */
             int count = 0;
             for (int i = 0; i < _personas.Count; i++)
             {
-                if (_personas.ElementAt(i).Value != Types.PersonaState.Lost)
+                if (_personas.ElementAt(i).Value != Types.PersonaState.Lost && _personas.ElementAt(i).Key != Types.Persona.None)
                 {
                     count += 1;
                 }
@@ -91,11 +92,11 @@ namespace Managers
         public void SetPersona(Types.Persona newPersona)
         {
             /*
-         * Anytime the persona is set, we want to:
-         * - Update state dictionary
-         * - Re-apply the player’s stats
-         * - Broadcast the change to any listeners
-         */
+             * Anytime the persona is set, we want to:
+             * - Update state dictionary
+             * - Re-apply the player’s stats
+             * - Broadcast the change to any listeners
+             */
 
             // Reset previously selected persona(s)
             foreach (var key in _personas.Keys.ToList())
@@ -127,11 +128,20 @@ namespace Managers
                 _personas[persona] = Types.PersonaState.Lost;
             }
             
-            // if the lost person was not a Normal, set it to a normal person
-            if (_currentPersona != Types.Persona.Normal)
+            
+            // Set us back to Normal persona by default if we arnt currently Normal
+            if (GetPersona() != Types.Persona.Normal)
             {
                 SetPersona(Types.Persona.Normal);
             }
+            else
+            {
+                // Else, its a special case where we lost the Normal persona (which means game over)
+                SetPersona(Types.Persona.None);
+            }
+            
+            
+            
             
         
         }
@@ -196,7 +206,8 @@ namespace Managers
                     DashCooldown = float.Parse(values[8]),
                     DashDistance = float.Parse(values[9]),
                     Keys = int.Parse(values[10]),
-                    Coins = int.Parse(values[11])
+                    Coins = int.Parse(values[11]),
+                    PlayerColor = ParseColor(values[12])
                 };
                 // debug the coins value
 
@@ -234,6 +245,27 @@ namespace Managers
 
             Debug.LogError($"Persona not found: {persona}");
             return default;
+        }
+        
+        private static Color ParseColor(string colorName)
+        {
+            switch (colorName.Trim().ToLowerInvariant())
+            {
+                case "white": return Color.white;
+                case "black": return Color.black;
+                case "red": return Color.red;
+                case "green": return Color.green;
+                case "blue": return Color.blue;
+                case "yellow": return Color.yellow;
+                case "orange": return new Color(1f, 0.5f, 0f);
+                case "cyan": return Color.cyan;
+                case "magenta": return Color.magenta;
+                case "gray":
+                case "grey": return Color.gray;
+                default:
+                    Debug.LogWarning($"Unknown color name '{colorName}', defaulting to white.");
+                    return Color.white;
+            }
         }
     }
 }

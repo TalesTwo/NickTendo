@@ -145,6 +145,12 @@ public class RoomGridManager : MonoBehaviour
                 validNodes.Add(node);
             }
         }
+        
+        if (validNodes.Count == 0)
+        {
+            Debug.LogWarning($"No valid walkable nodes found for {name} — returning null.");
+            return null;
+        }
 
         
         // Randomly select one valid node

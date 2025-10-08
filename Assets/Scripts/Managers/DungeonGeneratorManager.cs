@@ -43,6 +43,8 @@ namespace Managers
         private Vector2Int endPos = new Vector2Int(-1, -1);
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
+        // this is the distance between rooms, should be 200 for now so they dont overlap in any way
+        [SerializeField] private int RoomOffset = 40;
         
         public void Start()
         {
@@ -402,7 +404,7 @@ namespace Managers
                 startPos = new Vector2Int(rows - 1, randomCol);
             }
 
-            Vector3 startPosition = new Vector3(startPos.y * 20,-startPos.x * 20, 0);
+            Vector3 startPosition = new Vector3(startPos.y * RoomOffset,-startPos.x * RoomOffset, 0);
             Room startRoom = GenerateRoomFromType(Types.RoomType.Spawn, startPosition);
             startRoom.SetRoomDifficulty(0);
 
@@ -417,7 +419,7 @@ namespace Managers
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
             }
-            Vector3 endPosition = new Vector3(endPos.y * 20,-endPos.x * 20, 0);
+            Vector3 endPosition = new Vector3(endPos.y * RoomOffset,-endPos.x * RoomOffset, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
             
             endRoom.SetRoomDifficulty(int.MaxValue); // we will set the difficulty of the end room to be the max int, and then when we calculate the difficulty of the other rooms, it will be set to the correct value
@@ -605,7 +607,7 @@ namespace Managers
             
             // FINALLY, we have the final connections that this room needs to have
             
-            Vector3 position = new Vector3(col * 20, (-row * 20), 0);
+            Vector3 position = new Vector3(col * RoomOffset, (-row * RoomOffset), 0);
 
             Types.RoomType roomTypeToSpawn = GenerateRoomTypeFromConfiguration(requiredConnections);
             Room newRoom = GenerateRoomFromType(roomTypeToSpawn, position, row, col);
