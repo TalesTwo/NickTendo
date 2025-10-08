@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -20,10 +21,6 @@ public class Room : MonoBehaviour
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
     
-
-    
-    
-    // Rooms will have the ability to hold and spawn their own enemies, traps, and loot(?)
     
     
     
@@ -33,6 +30,40 @@ public class Room : MonoBehaviour
     private (int row, int col) RoomCoords = (-1, -1);
     
     
+    // Special logic for the spawn room
+    private void SpecialRoomLogic()
+    {
+        
+        // if the player currently is the "Normal" persona and has MORE than 1 Persona, disable all doors
+        // once the player has a different persona, enable the doors again
+        
+        // doors should only be enabled as Normal if the player has more 1 persona remaining
+        if (roomType == Types.RoomType.Spawn)
+        {
+            int numberOfPersonas = PersonaManager.Instance.GetNumberOfAvailablePersonas();
+            if (PersonaManager.Instance.GetPersona() == Types.Persona.Normal && numberOfPersonas > 1)
+            {
+                // disable all doors
+                foreach (Transform door in doors.transform)
+                {
+                    door.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                foreach (Transform door in doors.transform)
+                {
+                    door.gameObject.SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        SpecialRoomLogic();
+    }
+
     public void SetRoomDifficulty(int difficulty)
     {
         roomDifficulty = difficulty;
@@ -67,11 +98,6 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         
         bIsFinalized = false;
-        
-        
-
-
-
     }
     
 
