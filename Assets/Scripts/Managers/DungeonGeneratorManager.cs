@@ -21,6 +21,7 @@ namespace Managers
     {
         // a 2d array to hold the rooms
         List<List<Room>> dungeonRooms = new List<List<Room>>();
+        DungeonController dungeonController;
         
         public List<List<Room>> GetDungeonRooms()
         {
@@ -49,6 +50,7 @@ namespace Managers
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
+            dungeonController = FindFirstObjectByType<DungeonController>();
         }
         
         // Update is called once per frame
@@ -76,6 +78,7 @@ namespace Managers
             // teleport the player into the dungeon
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
+            dungeonController.SetCurrentRoomCoords(startPos.x, startPos.y);
         }
         
         // ReSharper disable Unity.PerformanceAnalysis

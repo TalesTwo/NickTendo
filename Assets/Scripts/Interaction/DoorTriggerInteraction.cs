@@ -20,7 +20,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // get access to the room manager, to get the dungeon layout
         List<List<Room>> dungeonLayout = DungeonGeneratorManager.Instance.GetDungeonRooms();
         // now, we can get the rooms coordinates
-        (int row, int col) currentRoomCoords = currentRoom.GetRoomCoords(row: -1, col: -1);
+        (int row, int col) currentRoomCoords = currentRoom.GetRoomCoords();
         
         // Now depending on what type of door we are, we will adjust the coordinates accordingly
         (int row, int col) targetRoomCoords = currentRoomCoords;

@@ -87,7 +87,7 @@ public class Room : MonoBehaviour
     {
         RoomCoords = (row, col);
     }
-    public (int row, int col) GetRoomCoords(int row, int col)
+    public (int row, int col) GetRoomCoords()
     {
         return RoomCoords;
     }
