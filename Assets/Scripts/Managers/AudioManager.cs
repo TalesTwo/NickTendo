@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 namespace Managers
 {
@@ -60,7 +61,7 @@ namespace Managers
 
         //variables for the soundtrack
         public AudioSource Musicsource;
-        public float fadeDuration = 1f;
+        public float fadeSpeed = 1f;
         private float elapsedTime;
 
         protected override void Awake()
@@ -105,8 +106,8 @@ namespace Managers
             src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();
         }
-
-        public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadein = false, GameObject fromObject = null)
+        //Soundtrack Functions and Coroutines
+        public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadein = false, float fadespeed = 1f, GameObject fromObject = null)
         {
             if (clip == null) return;
 
@@ -118,32 +119,56 @@ namespace Managers
             src.spatialBlend = fromObject ? 1f : 0f;
             if (src.isPlaying)
             {
-                while (elapsedTime <= fadeDuration)
-                {
-                    float percentagecomplete = elapsedTime / fadeDuration;
-                    src.volume = Mathf.Lerp(volume, 0, percentagecomplete);
-                    elapsedTime += Time.deltaTime;
-                }
-                elapsedTime = 0;
+                StartCoroutine(FadeOutAndIn(src, clip, fadespeed, fadein));
             }
-            src.clip = clip;
-            src.Play();
-            if (fadein == true)
+            else if (fadein)
             {
-                while (elapsedTime <= fadeDuration)
-                {
-                    float percentagecomplete = elapsedTime / fadeDuration;
-                    src.volume = Mathf.Lerp(0, volume, percentagecomplete);
-                    elapsedTime += Time.deltaTime;
-                }
-                elapsedTime = 0;
+                src.clip = clip;
+                src.volume = 0;
+                StartCoroutine(Fadein(src, fadespeed, volume));
             }
             else
             {
+                src.clip = clip;
                 src.volume = volume;
+                src.Play();
+            }
+        } 
+                
+        private IEnumerator FadeOutAndIn(AudioSource src, AudioClip newClip, float fadeinspeed = 1f, bool fadein = false)
+        {
+            float oldvolume = src.volume;
+            for(float volume = src.volume; volume >= 0; volume -= 0.01f * fadeinspeed)
+            {
+                if (volume < 0) volume = 0;
+                src.volume = volume;
+                yield return null;
+            }
+            src.Stop();
+            src.clip = newClip;
+            if (fadein)
+            {
+                StartCoroutine(Fadein(src, fadeinspeed, oldvolume));
+            }
+            else
+            {
+                src.volume = oldvolume;
+                src.Play();
             }
 
         }
+        private IEnumerator Fadein(AudioSource src, float fadeinspeed = 1f, float oldvolume = 1f)
+        {
+            for(float volume = 0; volume <= oldvolume; volume+=0.01f * fadeinspeed)
+            {
+                if (volume > oldvolume) volume = oldvolume;
+                src.volume = volume;
+                yield return null;
+            }
+        }
+
+
+
 
         //Player Sounds
         public void PlayWalkingSound(float volume = 1, float deviation = 0)
@@ -219,9 +244,9 @@ namespace Managers
 
 
         //Soundtrack Functions
-        public void PlayOverworldTrack(float volume = 1, bool fadein = false)
+        public void PlayOverworldTrack(float volume = 1, bool fadein = false, float fadespeed = 1f)
         {
-            PlayBackgroundSoundtrack(Overworld, volume, fadein);
+            PlayBackgroundSoundtrack(Overworld, volume, fadein, fadespeed);
         }
 
 
