@@ -21,6 +21,7 @@ namespace Managers
     {
         // a 2d array to hold the rooms
         List<List<Room>> dungeonRooms = new List<List<Room>>();
+        DungeonController dungeonController;
         
         public List<List<Room>> GetDungeonRooms()
         {
@@ -44,11 +45,13 @@ namespace Managers
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         // this is the distance between rooms, should be 200 for now so they dont overlap in any way
-        [SerializeField] private int RoomOffset = 40;
+        [SerializeField] private int RoomOffset = 30;
         
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
+            EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+            dungeonController = FindFirstObjectByType<DungeonController>();
         }
         
         // Update is called once per frame
@@ -59,6 +62,33 @@ namespace Managers
                 LoadIntoDungeon();
             }
         }
+        
+        private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
+        {
+            for (int r = 0; r < dungeonRooms.Count; r++)
+            {
+                for (int c = 0; c < dungeonRooms[r].Count; c++)
+                {
+                    Room currentRoom = dungeonRooms[r][c];
+                    if (currentRoom != null)
+                    {
+                        if (r == currentRoomCoords.row && c == currentRoomCoords.col)
+                        {
+                            currentRoom.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            currentRoom.gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
+        private void OnPlayerChangedRoom((int row, int col) newRoomCoords)
+        {
+            DisableAllRoomsExceptCurrent(newRoomCoords);
+        }
+        
         private void OnGameStarted()
         {
             LoadIntoDungeon();
@@ -76,6 +106,7 @@ namespace Managers
             // teleport the player into the dungeon
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
+            DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
         }
         
         // ReSharper disable Unity.PerformanceAnalysis

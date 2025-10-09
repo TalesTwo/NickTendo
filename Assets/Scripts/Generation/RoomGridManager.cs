@@ -18,6 +18,8 @@ public class RoomGridManager : MonoBehaviour
     public List<Node> path; // path from enemy to player
     
     private Transform _player;  // <-- Drag your player here in the Inspector
+    // Minimum distance from any door in world units
+    const float minDistanceFromDoor = 4f;
     
     // Start is called before the first frame update
     private void Awake()
@@ -123,8 +125,8 @@ public class RoomGridManager : MonoBehaviour
             if (!node.walkable) continue;
 
             bool hasLineOfSight = false;
+            bool tooCloseToDoor = false;
 
-            // Check if *any* door has line of sight to this node
             foreach (Transform door in doorPoints)
             {
                 Vector2 start = door.position;
@@ -132,18 +134,25 @@ public class RoomGridManager : MonoBehaviour
                 Vector2 direction = (end - start).normalized;
                 float distance = Vector2.Distance(start, end);
 
+                if (distance < minDistanceFromDoor)
+                {
+                    tooCloseToDoor = true;
+                    break;
+                }
+
                 RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
                 if (hit.collider == null)
                 {
                     hasLineOfSight = true;
-                    break;
                 }
             }
 
+            // now check both conditions normally
+            if (tooCloseToDoor)
+                continue;
+
             if (hasLineOfSight)
-            {
                 validNodes.Add(node);
-            }
         }
         
         if (validNodes.Count == 0)

@@ -10,7 +10,7 @@ public class RoomSpawnController : MonoBehaviour
     // reference to the room that we are attached to
     private Room _room;
     private RoomGridManager _roomGridManager;
-    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>();
+    private List<EnemyControllerBase> enemiesInRoom = new List<EnemyControllerBase>(); public List<EnemyControllerBase> GetEnemiesInRoom() { return enemiesInRoom; }
     private List<GameObject> trapsInRoom = new List<GameObject>();
     private List<BaseItem> lootInRoom = new List<BaseItem>();
     
@@ -39,6 +39,13 @@ public class RoomSpawnController : MonoBehaviour
         
         // Get access to the Room
         Transform SpawnLocation = _roomGridManager.FindValidWalkableCell();
+        
+        // if there is no safe spawn location, do not spawn anything, as something went wrong in this room
+        if (SpawnLocation == null)
+        {
+            DebugUtils.LogWarning("No valid spawn location found in room: " + _room.name);
+            return;
+        }
         
         
         // look at the spawnable map, and find the list with the enemy type
