@@ -1,0 +1,28 @@
+Conversation,Description,Character,Expression,Dialogue
+,,,,
+Example1,Dialogue for demo,BUDDEE,smile,Check it out pal! I can talk!
+Example1,,Player,smile,So can I!
+Example1,,BUDDEE,surprise,My face can change too?!?!
+Example1,,Player,smile,Well you do have a screen for a face.
+Example1,,BUDDEE,smile,Fair point.
+,,,,
+Example2,,BUDDEE,surprise,Did you touch that cube?
+Example2,,Player,smile,"I did, is that alright?"
+Example2,,BUDDEE,smile,But that was my favorite cube…
+,,,,
+,,,,
+,,,,
+,,,,
+Intro,First dialogue after login,BUDDEE,smile,Greetings [[login name]]! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant BUDDEE!
+Intro,,Player,smile,Woah this website is immersive as hell!
+Intro,,Player,smile,"Okay chatbot, what do I do now?"
+Intro,,BUDDEE,smile,Oh don't you worry about that! BUDDEE has got you covered. Try out this new account!
+Intro,,System,cape,YOU GOT THE EVERYMAN ACCOUNT!
+Intro,,BUDDEE,smile,With a pre-made custom account you'll be able to present the perfect personality to persuade potential (platonic) partners!
+Intro,,Player,smile,Okay but.. what do I do with this?
+Intro,,BUDDEE,smile,"Simple! Once you enter the forums you're bound to encounter some unsavory folks, it's the internet after all."
+Intro,,BUDDEE,smile,All you have to do is fight off those ne're-do-wells with your cursor and push forward!
+Intro,,BUDDEE,smile,Fair warning though. It can be like a maze in there. But I'll be there to guide you to your perfect platonic person!
+Intro,,BUDDEE,smile,Just head out the door when you're ready. You've got this BUDDEE!
+,,,,
+Personas,intro to personas after first death,,,
