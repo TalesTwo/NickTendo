@@ -145,6 +145,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             UpdateCoins((int)BuffValue);
         }
+        EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
     }
     
     // function to initialize All of the player stats, based on a struct
