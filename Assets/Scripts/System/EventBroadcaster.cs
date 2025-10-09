@@ -55,9 +55,9 @@ namespace System
         public static void Broadcast_PlayerDamaged(float damageAmount) { PlayerDamaged?.Invoke(damageAmount); }
         
         // Start Dialogue Broadcaster
-        public delegate void StartDialogueHandler(string[] message, Image sprite, string name);
+        public delegate void StartDialogueHandler(string name);
         public static event StartDialogueHandler StartDialogue;
-        public static void Broadcast_StartDialogue(string[] message, Image sprite, string name) { StartDialogue?.Invoke(message, sprite, name); }
+        public static void Broadcast_StartDialogue(string name) { StartDialogue?.Invoke(name); }
 
         // start or stop player actions
         public delegate void StartStopActionHandler();
@@ -84,6 +84,18 @@ namespace System
         public static event PlayerDeathHandler PlayerDeath;
         public static void Broadcast_PlayerDeath() { PlayerDeath?.Invoke(); }
 
+        // Broadcast for when the player changes rooms
+        public delegate void PlayerChangedRoomHandler((int row, int col) targetRoomCoords);
+        public static event PlayerChangedRoomHandler PlayerChangedRoom;
+        public static void Broadcast_PlayerChangedRoom((int row, int col) targetRoomCoords) { PlayerChangedRoom?.Invoke(targetRoomCoords); }
+        
+        // Briadcast for when a player stat changes
+        public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
+        public static event PlayerStatsChangedHandler PlayerStatsChanged;
+        public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
+
+
+        
         //-------------------------------- End Activity Events --------------------------------//
 
 

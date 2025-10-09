@@ -76,7 +76,7 @@ public class ShopManager : MonoBehaviour
             ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
             ShopUIM.ItemDescriptions[i].text = ShopList[i].GetComponent<ShopItem>().GetDescription();
-            ShopUIM.ItemPrices[i].text = ShopList[i].GetComponent<ShopItem>().itemValue.ToString();
+            ShopUIM.ItemPrices[i].text = "Item Price: " + ShopList[i].GetComponent<ShopItem>().itemValue.ToString();
         }
     }
 
@@ -85,11 +85,11 @@ public class ShopManager : MonoBehaviour
         ShopItem AttemptItem = ShopList[Index].GetComponent<ShopItem>();
         if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
         {
-            
-            PlayerStats.Instance.UpdateCoins(-AttemptItem.itemValue);
+            PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -AttemptItem.itemValue);
+            //PlayerStats.Instance.UpdateCoins(-AttemptItem.itemValue);
             PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
             //PlayerStats.Instance.DisplayAllStats();
-            ShopUIM.UpdateCoinDisplay();
+            /*ShopUIM.UpdateCoinDisplay();*/
             ShopUIM.RemoveItemFromShop(Index);
         }
         else

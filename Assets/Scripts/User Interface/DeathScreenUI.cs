@@ -37,6 +37,7 @@ public class DeathScreenUI : MonoBehaviour
             SetGameOverScreen();
         }
     }
+    
     public void Login()
     {
         DungeonGeneratorManager.Instance.LoadIntoDungeon();
