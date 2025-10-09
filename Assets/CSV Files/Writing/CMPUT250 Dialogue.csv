@@ -27,7 +27,7 @@ Intro,,BUDDEE,smile,Just head out the door when you're ready. You've got this BU
 ,,,,
 Personas,intro to personas after first death,,,
 ,,,,
-DemoIntro,First dialogue after login,BUDDEE,smile,Greetings <color=green>[[login name]]</color>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <b>BUDDEE</b>!
+DemoIntro,First dialogue after login,BUDDEE,smile,Greetings new user! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <b>BUDDEE</b>!
 DemoIntro,,Player,smile,Woah this website is immersive as hell!
 DemoIntro,,Player,smile,Okay chatbot. what do I do now?
 DemoIntro,,BUDDEE,smile,Oh don't you worry about that! <b>BUDDEE</b> has got you covered. Just head over to that <color=red>computer</color> before getting started.
@@ -41,3 +41,15 @@ DemoIntro,,BUDDEE,surprise,Just head out the door <b>after</b> selecting your ac
 IntroRandom,,BUDDEE,smile,Don't forget to pick out an account before starting!
 IntroRandom,,BUDDEE,surprise,I have no doubt you'll find what you're looking for!
 IntroRandom,,BUDDEE,surprise,It's that computer right over there <b><color=red>-></color></b>
+,,,,
+AfterDeath,,BUDDEE,smile,Welcome Back!
+AfterDeath,,BUDDEE,surprise,I see your first attempt didn't go so well.
+AfterDeath,,BUDDEE,smile,That's okay! We may have lost that account. But we still have more to choose from!
+AfterDeath,,BUDDEE,surprise,Just remember. When you <color=red>lose</color> an account. We can't get it back.
+AfterDeath,,BUDDEE,smile,So try not to lose them all. Maybe you'll have better luck with the next one!
+AfterDeath,,Player,smile,I sure hope so. Thanks <color=blue>BUDDEE</color>
+,,,,
+FinalRun,,BUDDEE,surprise,This is it! the <b>Final</b> try!
+FinalRun,,BUDDEE,smile,Be careful out there. I don't think I can bring you back anymore after this.
+FinalRun,,Player,smile,Oh <b><color=red>No</color></b>!
+FinalRun,,BUDDEE,surprise,No need to use the computer this time. just make your way through the forums for one last hurrah! I believe in you!

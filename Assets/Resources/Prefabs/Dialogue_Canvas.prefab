@@ -206,7 +206,7 @@ MonoBehaviour:
   playerSmileSprite: {fileID: 8793639957104055765, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
   capeSprite: {fileID: -205270267638800340, guid: 99ca60b3be5971f428b4856bbb45ef80, type: 3}
   interactPrompt: {fileID: 0}
-  wordSpeed: 0.02
+  wordSpeed: 0.01
 --- !u!1 &1404946323977787980
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
-    m_LineSpacing: 0.5
+    m_LineSpacing: 0.55
   m_Text: 
 --- !u!1 &2684326437209876966
 GameObject:
