@@ -1039,6 +1039,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Death Screen Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5771130748356985568, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8529827407482595740, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0
