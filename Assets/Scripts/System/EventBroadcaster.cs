@@ -58,6 +58,11 @@ namespace System
         public delegate void StartDialogueHandler(string name);
         public static event StartDialogueHandler StartDialogue;
         public static void Broadcast_StartDialogue(string name) { StartDialogue?.Invoke(name); }
+        
+        // end dialogue Broadcaster
+        public delegate void StopDialogueHandler();
+        public static event StopDialogueHandler StopDialogue;
+        public static void Broadcast_StopDialogue() { StopDialogue?.Invoke(); }
 
         // start or stop player actions
         public delegate void StartStopActionHandler();
