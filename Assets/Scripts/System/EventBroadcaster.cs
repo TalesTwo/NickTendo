@@ -84,6 +84,10 @@ namespace System
         public static event PlayerDeathHandler PlayerDeath;
         public static void Broadcast_PlayerDeath() { PlayerDeath?.Invoke(); }
 
+        // Broadcast for when the player changes rooms
+        public delegate void PlayerChangedRoomHandler((int row, int col) targetRoomCoords);
+        public static event PlayerChangedRoomHandler PlayerChangedRoom;
+        public static void Broadcast_PlayerChangedRoom((int row, int col) targetRoomCoords) { PlayerChangedRoom?.Invoke(targetRoomCoords); }
         //-------------------------------- End Activity Events --------------------------------//
 
 

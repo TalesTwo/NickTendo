@@ -56,6 +56,8 @@ public class DoorTriggerInteraction : TriggerInteractBase
     private static void HandleDoorTeleport(List<List<Room>> dungeonLayout, (int row, int col) targetRoomCoords, Types.DoorClassification doorToSpawnTo)
     {
         // Get the room at these coordinates
+        // we need to do this first, so we can ensure that the room is loaded and active to teleport to
+        EventBroadcaster.Broadcast_PlayerChangedRoom(targetRoomCoords);
         Room targetRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
         // get the door in the target room that is a south door
         Transform[] doors = targetRoom.GetComponentsInChildren<Transform>();
@@ -65,6 +67,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
+                
                 break;
             }
         }
