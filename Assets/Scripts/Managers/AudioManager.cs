@@ -230,7 +230,7 @@ namespace Managers
             PlaySFX(Coinget, volume, deviation);
         }
 
-
+        //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(enemyDamaged, volume, deviation);
@@ -239,14 +239,34 @@ namespace Managers
         {
             PlaySFX(enemyDeath, volume, deviation);
         }
+        public void PlayEnemyShotSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(shot, volume, deviation);
+        }
 
-
+        //UI Sounds
+        public void PlayUIHoverSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(cursorHover, volume, deviation);
+        }
+        public void PlayUISelectSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(cursorSelect, volume, deviation);
+        }
+        public void PlayDialogueSelectSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(dialogueClick, volume, deviation);
+        }
 
 
         //Soundtrack Functions
         public void PlayOverworldTrack(float volume = 1,bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
         {
             PlayBackgroundSoundtrack(Overworld, volume,fadeout,fadeoutspeed, fadein, fadeinspeed);
+        }
+        public void PlayTitleTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(TitleTheme, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
         }
 
 

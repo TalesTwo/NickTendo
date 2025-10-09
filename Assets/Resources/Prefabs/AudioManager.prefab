@@ -86,14 +86,13 @@ MonoBehaviour:
   openDoor: {fileID: 0}
   unlockDoor: {fileID: 0}
   hittingSpikes: {fileID: 0}
-  cursorHover: {fileID: 0}
-  cursorSelect: {fileID: 0}
+  cursorHover: {fileID: 8300000, guid: 6df649b389e6de7428b7250737fbdf76, type: 3}
+  cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 0}
-  dialogueClick: {fileID: 0}
-  Overworld: {fileID: 0}
+  dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
+  Overworld: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
   Boss: {fileID: 0}
   Shop: {fileID: 0}
   Credits: {fileID: 0}
-  TitleTheme: {fileID: 0}
+  TitleTheme: {fileID: 8300000, guid: cac1d32c6c17b2847acd70340e906482, type: 3}
   Musicsource: {fileID: 0}
-  fadeDuration: 1
