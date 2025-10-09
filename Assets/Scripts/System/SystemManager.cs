@@ -30,6 +30,7 @@ public class SystemManager : Singleton<SystemManager>
         //gameObject.AddComponent<AudioManager>();
         gameObject.AddComponent<PlayerStats>();
         gameObject.AddComponent<PersonaManager>();
-        
+        gameObject.AddComponent<GameStateManager>();
+
     }
 }

@@ -55,9 +55,9 @@ namespace System
         public static void Broadcast_PlayerDamaged(float damageAmount) { PlayerDamaged?.Invoke(damageAmount); }
         
         // Start Dialogue Broadcaster
-        public delegate void StartDialogueHandler(string[] message, Image sprite, string name);
+        public delegate void StartDialogueHandler(string name);
         public static event StartDialogueHandler StartDialogue;
-        public static void Broadcast_StartDialogue(string[] message, Image sprite, string name) { StartDialogue?.Invoke(message, sprite, name); }
+        public static void Broadcast_StartDialogue(string name) { StartDialogue?.Invoke(name); }
 
         // start or stop player actions
         public delegate void StartStopActionHandler();
