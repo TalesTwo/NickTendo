@@ -9,9 +9,16 @@ public class GameStateManager : Singleton<GameStateManager>
      * this class is designed to track the current state of the game.
      */
 
-    public string buddeeDialogState = "Example1";
+    public string buddeeDialogState = "DemoIntro";
     
     // getting and setting BUDDEE state
-    public string GetBuddeeDialogState() { return buddeeDialogState; }
-    public void SetBuddeeDialogState(string newState) { buddeeDialogState = newState; }
+    public string GetBuddeeDialogState()
+    {
+        return buddeeDialogState;
+    }
+
+    public void SetBuddeeDialogState(string newState)
+    {
+        buddeeDialogState = newState;
+    }
 }
