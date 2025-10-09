@@ -88,8 +88,11 @@ public static class Types
     public enum Persona
     {
         Normal,
-        Everyman_Account,
-        RageBaiter_Account,
+        Memer,
+        Sensitive,
+        Glamorous,
+        Stoic,
+        Lurker,
         None
         
     }

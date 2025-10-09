@@ -204,4 +204,5 @@ public struct PlayerStatsStruct
     public int Keys;
     public int Coins;
     public Color PlayerColor;
+    public string Description;
 }

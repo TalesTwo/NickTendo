@@ -207,7 +207,9 @@ namespace Managers
                     DashDistance = float.Parse(values[9]),
                     Keys = int.Parse(values[10]),
                     Coins = int.Parse(values[11]),
-                    PlayerColor = ParseColor(values[12])
+                    PlayerColor = ParseColor(values[12]),
+                    Description = values[13]
+                    
                 };
                 // debug the coins value
 
@@ -223,7 +225,7 @@ namespace Managers
         {
             if (!_isLoaded)
             {
-                Debug.LogError("PersonaStatsLoader not initialized!");
+                //Debug.LogError("PersonaStatsLoader not initialized!");
                 return default;
             }
 
@@ -260,6 +262,7 @@ namespace Managers
                 case "orange": return new Color(1f, 0.5f, 0f);
                 case "cyan": return Color.cyan;
                 case "magenta": return Color.magenta;
+                case "pink": return new Color(1f, 0.75f, 0.8f);
                 case "gray":
                 case "grey": return Color.gray;
                 default:
