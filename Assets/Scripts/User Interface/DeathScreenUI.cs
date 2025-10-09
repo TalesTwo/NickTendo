@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
@@ -15,18 +16,34 @@ public class DeathScreenUI : MonoBehaviour
 
     private void OnEnable()
     {
+        /*
+        attemptsRemaining = PersonaManager.Instance.GetNumberOfAvailablePersonas();
+        if (attemptsRemaining <= 0)
+        {
+            SetGameOverScreen();
+        }
+        */
+        
+        // failsafe to ensure that values are updated correctly,
+        // we can just hookup to when the persona changes, cause it always does at death
+        EventBroadcaster.PersonaChanged += OnPersonaChanged;
+    }
+    
+    private void OnPersonaChanged(Types.Persona newPersona)
+    {
         attemptsRemaining = PersonaManager.Instance.GetNumberOfAvailablePersonas();
         if (attemptsRemaining <= 0)
         {
             SetGameOverScreen();
         }
     }
-    
     public void Login()
     {
         DungeonGeneratorManager.Instance.LoadIntoDungeon();
         PlayerManager.Instance.PlayerAlive();
         gameObject.SetActive(false);
+        // unhook from the event
+        EventBroadcaster.PersonaChanged -= OnPersonaChanged;
     }
 
     private void SetGameOverScreen()

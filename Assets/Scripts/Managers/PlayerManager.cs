@@ -19,6 +19,7 @@ namespace Managers
             player = GameObject.FindWithTag("Player");
             playerController = player.GetComponent<PlayerController>();
             EventBroadcaster.PlayerDeath += PlayerDeath;
+            EventBroadcaster.PersonaChanged += OnPersonaChanged;
         }
 
         // handles player death
@@ -27,6 +28,17 @@ namespace Managers
             Debug.Log("Player Death");
             playerController.SetIsDead();
             DeathScreenUIActive.Instance.SetDeathScreen();
+        }
+        
+        private void OnPersonaChanged(Types.Persona newPersona)
+        {
+            // get the stats of the new persona
+            PlayerStatsStruct stats = PersonaStatsLoader.GetStats(newPersona);
+            // get the color of the new persona
+            Color color = stats.PlayerColor;
+            // set the player color to the new persona color
+            // update the player sprite color to the new persona color
+            player.GetComponent<SpriteRenderer>().color = color;
         }
 
         // handles player resurection
