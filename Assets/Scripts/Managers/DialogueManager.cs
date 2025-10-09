@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,12 @@ namespace Managers
         [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
         public GameObject spaceButton;
-        public Image sprite;
-        public Text nameText;
+        public Image playerSprite;
+        private Image _playerTransparency;
+        public Image NPCSprite;
+        private Image _npcTransparency;
+        public Text playerNameText;
+        public Text NPCNameText;
         public Text dialogueText;
 
         [Header("Dialogue CSV")] 
@@ -22,12 +27,22 @@ namespace Managers
         [Header("Dialogue Sprites")]
         public Sprite buddeeSmileSprite;
         public Sprite buddeeSurpriseSprite;
+        public Sprite buddeeDefaultSprite;
         public Sprite playerSmileSprite;
         public Sprite capeSprite;
+        
+        [Header("storage dictionaries")]
+        private Dictionary<string, Sprite> _buddeeSprites;
+        private Dictionary<string, Sprite> _playerSprites;
+        private Dictionary<string, Sprite> _systemSprites;
+        
+        [Header("current use dictionary")]
+        private Dictionary<string, Sprite> _npcSprites;
     
         private int _index;
         private string _characterName;
-        private string[] _dialogue;
+        private string _playerName;
+        private List<string[]> _dialogue;
         private Dictionary<string, List<string[]>> _lines;
         
         [SerializeField] private GameObject interactPrompt;
@@ -45,7 +60,26 @@ namespace Managers
         void Start()
         {
             EventBroadcaster.StartDialogue += ActivateDialogue;
+            _playerTransparency = playerSprite.gameObject.GetComponent<Image>();
+            _npcTransparency = NPCSprite.gameObject.GetComponent<Image>();
+            FillSpriteDictionary();
             ParseDialogue();
+        }
+
+        // not the best way to do it, but it is the most convenient
+        private void FillSpriteDictionary()
+        {
+            _buddeeSprites = new Dictionary<string, Sprite>();
+            _playerSprites = new Dictionary<string, Sprite>();
+            _systemSprites = new Dictionary<string, Sprite>();
+
+            _buddeeSprites["surprise"] = buddeeSurpriseSprite;
+            _buddeeSprites["smile"] = buddeeSmileSprite;
+            _buddeeSprites["default"] = buddeeDefaultSprite;
+            
+            _playerSprites["smile"] = playerSmileSprite;
+            
+            _systemSprites["cape"] = capeSprite;
         }
 
         private void ParseDialogue()
@@ -77,7 +111,7 @@ namespace Managers
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == _dialogue[_index])
+                if (dialogueText.text == _dialogue[_index][2])
                 {
                     _canContinue = true;
                     spaceButton.SetActive(true);
@@ -93,16 +127,30 @@ namespace Managers
             EventBroadcaster.Broadcast_StartStopAction(); // stop player inputs
             
             ZeroText();
-        
-            //dialogue = npcDialogue;
+            
+            // find which dialogue is currently being displayed
             _characterName = npcName;
-            //sprite.sprite = npcSprite.sprite;
-            nameText.text = _characterName;
+            switch (_characterName)
+            {
+                case "BUDDEE":
+                    _dialogue = _lines[GameStateManager.Instance.GetBuddeeDialogState()];
+                    _npcSprites = _buddeeSprites;
+                    break;
+                default:
+                    _dialogue = _lines["Example2"];
+                    break;
+            }
+            
+            _playerName = PlayerStats.Instance.GetPlayerName();
+            NPCNameText.text = _characterName;
+            playerNameText.text = _playerName;
 
             _canContinue = false;
             _isReading = true;
         
             dialogueBox.SetActive(true);
+            NPCSprite.gameObject.SetActive(true);
+            playerSprite.gameObject.SetActive(true);
             StartCoroutine(Typing());
             StartCoroutine(CheckInput());
         }
@@ -113,12 +161,62 @@ namespace Managers
             dialogueText.text = "";
             _index = 0;
             dialogueBox.SetActive(false);
+            NPCSprite.gameObject.SetActive(false);
+            playerSprite.gameObject.SetActive(false);
         }
     
         // types each letter in the dialogue one at a time
         IEnumerator Typing()
         {
-            foreach (char letter in _dialogue[_index].ToCharArray())
+            playerSprite.sprite = _playerSprites["smile"];
+            NPCSprite.sprite = _npcSprites["default"];
+            
+            if (_dialogue[_index][0] == _characterName)
+            {
+                NPCSprite.sprite = _npcSprites[_dialogue[_index][1]];
+                
+                NPCNameText.gameObject.SetActive(true);
+                playerNameText.gameObject.SetActive(false);
+                
+                Color currentColor = _npcTransparency.color;
+                currentColor.a = 1f;
+                _npcTransparency.color = currentColor;
+
+                currentColor = _playerTransparency.color;
+                currentColor.a = 0.5f;
+                _playerTransparency.color = currentColor;
+            }
+            else if (_dialogue[_index][0] == "Player")
+            {
+                playerSprite.sprite = _playerSprites[_dialogue[_index][1]];
+                
+                NPCNameText.gameObject.SetActive(false);
+                playerNameText.gameObject.SetActive(true);
+                
+                Color currentColor = _npcTransparency.color;
+                currentColor.a = 0.5f;
+                _npcTransparency.color = currentColor;
+
+                currentColor = _playerTransparency.color;
+                currentColor.a = 1.0f;
+                _playerTransparency.color = currentColor;
+            }
+            else
+            {
+                // todo: add part for system images
+                NPCNameText.gameObject.SetActive(false);
+                playerNameText.gameObject.SetActive(false);
+                
+                Color currentColor = _npcTransparency.color;
+                currentColor.a = 0.5f;
+                _npcTransparency.color = currentColor;
+
+                currentColor = _playerTransparency.color;
+                currentColor.a = 0.5f;
+                _playerTransparency.color = currentColor;
+            }
+            
+            foreach (char letter in _dialogue[_index][2].ToCharArray())
             {
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(wordSpeed);
@@ -130,7 +228,7 @@ namespace Managers
         {
             _canContinue = false;
         
-            if (_index < _dialogue.Length - 1)
+            if (_index < _dialogue.Count - 1)
             {
                 _index++;
                 dialogueText.text = "";
