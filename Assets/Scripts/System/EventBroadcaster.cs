@@ -84,6 +84,11 @@ namespace System
         public static event PlayerDeathHandler PlayerDeath;
         public static void Broadcast_PlayerDeath() { PlayerDeath?.Invoke(); }
 
+        public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
+        public static event PlayerStatsChangedHandler PlayerStatsChanged;
+        public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
+
+
         //-------------------------------- End Activity Events --------------------------------//
 
 
