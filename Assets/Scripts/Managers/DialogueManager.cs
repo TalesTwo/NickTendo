@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +9,26 @@ namespace Managers
 {
     public class DialogueManager : Singleton<DialogueManager>
     {
+        [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
         public GameObject spaceButton;
-        public Text dialogueText;
-        public Text nameText;
         public Image sprite;
+        public Text nameText;
+        public Text dialogueText;
+
+        [Header("Dialogue CSV")] 
+        public TextAsset csv;
+
+        [Header("Dialogue Sprites")]
+        public Sprite buddeeSmileSprite;
+        public Sprite buddeeSurpriseSprite;
+        public Sprite playerSmileSprite;
+        public Sprite capeSprite;
     
-        private int index;
-        private string characterName;
-        private string[] dialogue;
+        private int _index;
+        private string _characterName;
+        private string[] _dialogue;
+        private Dictionary<string, List<string[]>> _lines;
         
         [SerializeField] private GameObject interactPrompt;
     
@@ -23,33 +36,50 @@ namespace Managers
         public float wordSpeed;
     
         // checking if the player can continue the dialogue (line must finish first)
-        private bool canContinue = false;
+        private bool _canContinue = false;
     
         // checking if the player is still in the dialogue
-        private bool isReading = false;
+        private bool _isReading = false;
     
         // Start is called before the first frame update
         void Start()
         {
             EventBroadcaster.StartDialogue += ActivateDialogue;
+            ParseDialogue();
+        }
+
+        private void ParseDialogue()
+        {
+            _lines = new Dictionary<string, List<string[]>>();
+            string[] lines = csv.text.Split('\n');
+            foreach (string line in lines)
+            {
+                string[] cells = line.Split(',');
+                string[] remaining = cells.Skip(2).ToArray();
+                if (!_lines.ContainsKey(cells[0]))
+                {
+                    _lines[cells[0]] = new List<string[]>();
+                }
+                _lines[cells[0]].Add(remaining);
+            }
         }
 
         // Update is called once per frame
         IEnumerator CheckInput()
         {
-            while (isReading)
+            while (_isReading)
             {
                 // move to next line of dialogue
-                if (Input.GetKeyDown(KeyCode.Space) && canContinue)
+                if (Input.GetKeyDown(KeyCode.Space) && _canContinue)
                 {
                     NextLine();
                     spaceButton.SetActive(false);
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == dialogue[index])
+                if (dialogueText.text == _dialogue[_index])
                 {
-                    canContinue = true;
+                    _canContinue = true;
                     spaceButton.SetActive(true);
                 }
 
@@ -58,19 +88,19 @@ namespace Managers
 
         }
 
-        private void ActivateDialogue(string[] npcDialogue, Image npcSprite, string npcName)
+        private void ActivateDialogue(string npcName)
         {
             EventBroadcaster.Broadcast_StartStopAction(); // stop player inputs
             
             ZeroText();
         
-            dialogue = npcDialogue;
-            characterName = npcName;
-            sprite.sprite = npcSprite.sprite;
-            nameText.text = characterName;
+            //dialogue = npcDialogue;
+            _characterName = npcName;
+            //sprite.sprite = npcSprite.sprite;
+            nameText.text = _characterName;
 
-            canContinue = false;
-            isReading = true;
+            _canContinue = false;
+            _isReading = true;
         
             dialogueBox.SetActive(true);
             StartCoroutine(Typing());
@@ -81,14 +111,14 @@ namespace Managers
         public void ZeroText()
         {
             dialogueText.text = "";
-            index = 0;
+            _index = 0;
             dialogueBox.SetActive(false);
         }
     
         // types each letter in the dialogue one at a time
         IEnumerator Typing()
         {
-            foreach (char letter in dialogue[index].ToCharArray())
+            foreach (char letter in _dialogue[_index].ToCharArray())
             {
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(wordSpeed);
@@ -98,17 +128,17 @@ namespace Managers
         // advances to next line of dialogue
         public void NextLine()
         {
-            canContinue = false;
+            _canContinue = false;
         
-            if (index < dialogue.Length - 1)
+            if (_index < _dialogue.Length - 1)
             {
-                index++;
+                _index++;
                 dialogueText.text = "";
                 StartCoroutine(Typing());
             }
             else
             {
-                isReading = false;
+                _isReading = false;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
                 ZeroText();
             }
