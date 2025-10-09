@@ -88,6 +88,14 @@ namespace System
         public delegate void PlayerChangedRoomHandler((int row, int col) targetRoomCoords);
         public static event PlayerChangedRoomHandler PlayerChangedRoom;
         public static void Broadcast_PlayerChangedRoom((int row, int col) targetRoomCoords) { PlayerChangedRoom?.Invoke(targetRoomCoords); }
+        
+        // Briadcast for when a player stat changes
+        public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
+        public static event PlayerStatsChangedHandler PlayerStatsChanged;
+        public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
+
+
+        
         //-------------------------------- End Activity Events --------------------------------//
 
 
