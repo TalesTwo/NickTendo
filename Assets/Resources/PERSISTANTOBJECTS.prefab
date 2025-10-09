@@ -152,6 +152,7 @@ MonoBehaviour:
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
   Seed: 0
+  RoomOffset: 40
 --- !u!1 &1870964041774676868
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1050309879799609352, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.0110035
+      value: 1.0110016
       objectReference: {fileID: 0}
     - target: {fileID: 1289894082174871329, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_Name
@@ -841,6 +842,22 @@ PrefabInstance:
       propertyPath: Overworld
       value: 
       objectReference: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: TitleTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: cac1d32c6c17b2847acd70340e906482, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: cursorHover
+      value: 
+      objectReference: {fileID: 8300000, guid: 6df649b389e6de7428b7250737fbdf76, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: cursorSelect
+      value: 
+      objectReference: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
+    - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
+      propertyPath: dialogueClick
+      value: 
+      objectReference: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
     - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
       propertyPath: playerDamaged
       value: 
