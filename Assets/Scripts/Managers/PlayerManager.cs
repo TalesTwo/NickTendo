@@ -27,7 +27,7 @@ namespace Managers
         {
             Debug.Log("Player Death");
             playerController.SetIsDead();
-            DeathScreenUIActive.Instance.SetDeathScreen();
+            ScreenUIActivator.Instance.SetDeathScreen();
         }
         
         private void OnPersonaChanged(Types.Persona newPersona)

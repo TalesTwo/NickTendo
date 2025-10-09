@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Room : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class Room : MonoBehaviour
     
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
+    
+    
+    private RoomSpawnController roomSpawnController;
     
     
     
@@ -62,6 +66,13 @@ public class Room : MonoBehaviour
     private void Update()
     {
         SpecialRoomLogic();
+        
+        
+    }
+
+    private void Start()
+    {
+        roomSpawnController = GetComponent<RoomSpawnController>();
     }
 
     public void SetRoomDifficulty(int difficulty)
@@ -76,7 +87,7 @@ public class Room : MonoBehaviour
     {
         RoomCoords = (row, col);
     }
-    public (int row, int col) GetRoomCoords(int row, int col)
+    public (int row, int col) GetRoomCoords()
     {
         return RoomCoords;
     }
