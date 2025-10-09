@@ -190,36 +190,49 @@ namespace Managers
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
                 string[] values = line.Split(',');
-
-
-                var persona = (Types.Persona) Enum.Parse(typeof(Types.Persona), values[0]);
-            
-                PlayerStatsStruct stats = new PlayerStatsStruct
+                if (values.Length < 14)
                 {
-                    CurrentHealth = float.Parse(values[1]),
-                    MaxHealth = float.Parse(values[2]),
-                    MovementSpeed = float.Parse(values[3]),
-                    DashSpeed = float.Parse(values[4]),
-                    AttackDamage = float.Parse(values[5]),
-                    AttackCooldown = float.Parse(values[6]),
-                    DashDamage = float.Parse(values[7]),
-                    DashCooldown = float.Parse(values[8]),
-                    DashDistance = float.Parse(values[9]),
-                    Keys = int.Parse(values[10]),
-                    Coins = int.Parse(values[11]),
-                    PlayerColor = ParseColor(values[12]),
-                    Description = values[13]
-                    
-                };
-                // debug the coins value
+                    Debug.LogWarning($"Skipping malformed CSV line {i}: '{line}'");
+                    continue;
+                }
 
-                _personaStats[persona] = stats;
-        
+                
+                if (!Enum.TryParse(values[0].Trim(), out Types.Persona persona))
+                {
+                    Debug.LogWarning($"Skipping unknown Persona type '{values[0]}' at line {i}.");
+                    continue;
+                }
 
+                try
+                {
+                    PlayerStatsStruct stats = new PlayerStatsStruct
+                    {
+                        CurrentHealth   = float.Parse(values[1]),
+                        MaxHealth       = float.Parse(values[2]),
+                        MovementSpeed   = float.Parse(values[3]),
+                        DashSpeed       = float.Parse(values[4]),
+                        AttackDamage    = float.Parse(values[5]),
+                        AttackCooldown  = float.Parse(values[6]),
+                        DashDamage      = float.Parse(values[7]),
+                        DashCooldown    = float.Parse(values[8]),
+                        DashDistance    = float.Parse(values[9]),
+                        Keys            = int.Parse(values[10]),
+                        Coins           = int.Parse(values[11]),
+                        PlayerColor     = ParseColor(values[12]),
+                        Description     = values[13]
+                    };
+
+                    _personaStats[persona] = stats;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Error parsing stats for persona '{values[0]}' at line {i}: {e.Message}");
+                }
             }
 
             _isLoaded = true;
         }
+
 
         public static PlayerStatsStruct GetStats(Types.Persona persona)
         {

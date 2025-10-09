@@ -89,10 +89,10 @@ public static class Types
     {
         Normal,
         Memer,
-        Sensitive,
-        Glamorous,
+        //Sensitive,
+        //Glamorous,
         Stoic,
-        Lurker,
+        //Lurker,
         None
         
     }
