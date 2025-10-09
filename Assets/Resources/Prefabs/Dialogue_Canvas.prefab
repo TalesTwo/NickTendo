@@ -195,6 +195,7 @@ MonoBehaviour:
   dialogueText: {fileID: 4203684450307392599}
   nameText: {fileID: 9196054455291225828}
   sprite: {fileID: 2373226986831429028}
+  interactPrompt: {fileID: 0}
   wordSpeed: 0
 --- !u!1 &1404946323977787980
 GameObject:
@@ -389,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.86600006, y: 0.0765505}
   m_AnchorMax: {x: 0.97300005, y: 0.33800003}
-  m_AnchoredPosition: {x: -0.48999023, y: 1.0110016}
+  m_AnchoredPosition: {x: -0.48999023, y: 1.0109959}
   m_SizeDelta: {x: 20, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &152313527282351222
