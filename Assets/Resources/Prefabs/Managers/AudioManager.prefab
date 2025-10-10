@@ -73,7 +73,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   BUDEEDeath: {fileID: 0}
-  enemyDamaged: {fileID: 8300000, guid: 48dbfafea6a7ed84886d08486610cc84, type: 3}
+  enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
   shotHit: {fileID: 0}
