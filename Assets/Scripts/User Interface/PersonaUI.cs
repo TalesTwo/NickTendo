@@ -35,6 +35,7 @@ public class PersonaUI : MonoBehaviour
     }
     public void ClosePersonaUI()
     {
+        AudioManager.Instance.PlayUISelectSound();
         gameObject.SetActive(false);
         // cleanup
         foreach (Transform child in contentParent)
@@ -122,6 +123,7 @@ public class PersonaUI : MonoBehaviour
                     button.onClick.AddListener(() =>
                     {
                         PersonaManager.Instance.SetPersona(capturedPersona);
+                        AudioManager.Instance.PlayUISelectSound();
                         UpdatePersonaUI();
                     });
                 }

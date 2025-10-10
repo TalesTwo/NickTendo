@@ -227,12 +227,19 @@ namespace Managers
                 currentColor.a = 0.5f;
                 _playerTransparency.color = currentColor;
             }
-            
+            int talkingtonetimer = 0;
             foreach (char letter in _dialogue[_index][2].ToCharArray())
             {
                 dialogueText.text += letter;
+                ++talkingtonetimer;
+                if (talkingtonetimer == 10)
+                {
+                    talkingtonetimer = 0;
+                    AudioManager.Instance.PlayPlayerTalkingTone();
+                }
                 yield return new WaitForSeconds(wordSpeed);
             }
+            talkingtonetimer = 0;
         }
     
         // advances to next line of dialogue
