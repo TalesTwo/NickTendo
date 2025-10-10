@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Dash Cooldown Shop Item
-  itemValue: 100
+  itemValue: 40
   buffValue: -2
   buffType: 6
 --- !u!212 &7787435678194780221

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Dash Damage Shop Item
-  itemValue: 100
-  buffValue: 5
+  itemValue: 40
+  buffValue: 1
   buffType: 5
 --- !u!212 &7787435678194780221
 SpriteRenderer:

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Attack Cooldown Shop Item
-  itemValue: 100
-  buffValue: -5
+  itemValue: 25
+  buffValue: -2
   buffType: 7
 --- !u!212 &7787435678194780221
 SpriteRenderer:

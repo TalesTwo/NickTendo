@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Keys Shop Item
   itemValue: 100
-  buffValue: 5
+  buffValue: 1
   buffType: 9
 --- !u!212 &7787435678194780221
 SpriteRenderer:
