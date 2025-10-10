@@ -54,14 +54,7 @@ namespace Managers
             dungeonController = FindFirstObjectByType<DungeonController>();
         }
         
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                LoadIntoDungeon();
-            }
-        }
+
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
