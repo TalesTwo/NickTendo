@@ -52,6 +52,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateCurrentHealth(float UpdateValue)
     {
         _currentHealth += UpdateValue;
+
         if (_currentHealth > _maxHealth)
         {
             _currentHealth = _maxHealth;
@@ -61,8 +62,11 @@ public class PlayerStats : Singleton<PlayerStats>
             _currentHealth = 0;
         }
 
+        if (UpdateValue < 0 && _currentHealth != 0) AudioManager.Instance.PlayPlayerDamagedSound();
+
         if (_currentHealth <= 0)
         {
+            AudioManager.Instance.PlayEnemyDeathSound();
             EventBroadcaster.Broadcast_PlayerDeath();
         }
     }
@@ -144,7 +148,9 @@ public class PlayerStats : Singleton<PlayerStats>
         else if (BuffType == PlayerStatsEnum.Coins)
         {
             UpdateCoins((int)BuffValue);
+            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
         }
+        EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
     }
     
     // function to initialize All of the player stats, based on a struct
@@ -203,4 +209,5 @@ public struct PlayerStatsStruct
     public int Keys;
     public int Coins;
     public Color PlayerColor;
+    public string Description;
 }

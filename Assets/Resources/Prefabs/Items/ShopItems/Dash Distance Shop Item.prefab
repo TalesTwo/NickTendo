@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Dash Distance Shop Item
-  itemValue: 100
-  buffValue: 5
+  itemValue: 60
+  buffValue: 1
   buffType: 8
 --- !u!212 &7787435678194780221
 SpriteRenderer:

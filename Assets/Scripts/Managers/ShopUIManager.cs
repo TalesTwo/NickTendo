@@ -18,7 +18,7 @@ public class ShopUIManager : MonoBehaviour
     public TextMeshProUGUI[] ItemPrices;
 
     public Button CloseButton;
-    public TextMeshProUGUI CoinCount;
+    /*public TextMeshProUGUI CoinCount;*/
 
     private ShopManager ShopM;
 
@@ -32,24 +32,25 @@ public class ShopUIManager : MonoBehaviour
 
         ShopM = gameObject.GetComponent<ShopManager>();
 
-        UpdateCoinDisplay();
+        /*UpdateCoinDisplay();*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        /*if(Input.GetKeyDown(KeyCode.P))
         {
             OpenShop();
-        }        
+        } */       
     }
 
     public void OpenShop()
     {
         if (ShopUI != null)
         {
-            UpdateCoinDisplay();
+            /*UpdateCoinDisplay();*/
             ShopUI.SetActive(true);
+            PlayerUIManager.Instance.ToggleHUD();
             EventBroadcaster.Broadcast_StartStopAction();
         }
     }
@@ -57,13 +58,14 @@ public class ShopUIManager : MonoBehaviour
     void CloseShop()
     {
         ShopUI.SetActive(false);
+        PlayerUIManager.Instance.ToggleHUD();
         EventBroadcaster.Broadcast_StartStopAction();
     }
 
-    public void UpdateCoinDisplay()
+    /*public void UpdateCoinDisplay()
     {
         CoinCount.text = PlayerStats.Instance.GetCoins().ToString();
-    }
+    }*/
 
     void AttemptBuyItem(int index)
     {
@@ -77,6 +79,7 @@ public class ShopUIManager : MonoBehaviour
         Destroy(ItemNames[Index]);
         Destroy(ItemDescriptions[Index]);
         Destroy(ItemSpotlights[Index]);
+        Destroy(ItemPrices[Index]);
     }
 
     public void MouseOverItem(int Index)

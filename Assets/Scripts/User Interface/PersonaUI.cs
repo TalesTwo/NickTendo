@@ -35,6 +35,7 @@ public class PersonaUI : MonoBehaviour
     }
     public void ClosePersonaUI()
     {
+        AudioManager.Instance.PlayUISelectSound();
         gameObject.SetActive(false);
         // cleanup
         foreach (Transform child in contentParent)
@@ -85,7 +86,7 @@ public class PersonaUI : MonoBehaviour
             // --- Fill in name ---
             TMP_Text nameText = newPersona.transform.Find("Text_PersonaName")?.GetComponent<TMP_Text>();
             if (nameText != null)
-                nameText.text = persona.Key.ToString();
+                nameText.text = "The " + persona.Key.ToString();
 
             // --- Fill in stats ---
             var stats = PersonaStatsLoader.GetStats(persona.Key);
@@ -94,6 +95,13 @@ public class PersonaUI : MonoBehaviour
             {
                 statsText.text = $"Health: {stats.MaxHealth}  Speed: {stats.MovementSpeed}  " +
                                  $"Attack: {stats.AttackDamage}  DashDamage: {stats.DashDamage}";
+            }
+            // --- Fill in description ---
+
+            TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
+            if (descriptionText != null)
+            {
+                descriptionText.text = stats.Description;
             }
 
             // --- Button logic ---
@@ -115,6 +123,7 @@ public class PersonaUI : MonoBehaviour
                     button.onClick.AddListener(() =>
                     {
                         PersonaManager.Instance.SetPersona(capturedPersona);
+                        AudioManager.Instance.PlayUISelectSound();
                         UpdatePersonaUI();
                     });
                 }

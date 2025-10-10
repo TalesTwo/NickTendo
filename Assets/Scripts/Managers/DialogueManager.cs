@@ -5,6 +5,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 namespace Managers
 {
@@ -55,6 +56,9 @@ namespace Managers
     
         // checking if the player is still in the dialogue
         private bool _isReading = false;
+
+        // this dialog is random, and only one line will play at a time
+        private bool _dialogIsRandom = false;
     
         // Start is called before the first frame update
         void Start()
@@ -133,7 +137,9 @@ namespace Managers
             switch (_characterName)
             {
                 case "BUDDEE":
-                    _dialogue = _lines[GameStateManager.Instance.GetBuddeeDialogState()];
+                    string state = GameStateManager.Instance.GetBuddeeDialogState();
+                    _dialogIsRandom = state.Contains("Random");
+                    _dialogue = _lines[state];
                     _npcSprites = _buddeeSprites;
                     break;
                 default:
@@ -168,6 +174,12 @@ namespace Managers
         // types each letter in the dialogue one at a time
         IEnumerator Typing()
         {
+            if (_dialogIsRandom)
+            {
+                Random random = new Random();
+                _index = random.Next(0, _dialogue.Count);
+            }
+            
             playerSprite.sprite = _playerSprites["smile"];
             NPCSprite.sprite = _npcSprites["default"];
             
@@ -215,12 +227,19 @@ namespace Managers
                 currentColor.a = 0.5f;
                 _playerTransparency.color = currentColor;
             }
-            
+            int talkingtonetimer = 0;
             foreach (char letter in _dialogue[_index][2].ToCharArray())
             {
                 dialogueText.text += letter;
+                ++talkingtonetimer;
+                if (talkingtonetimer == 10)
+                {
+                    talkingtonetimer = 0;
+                    AudioManager.Instance.PlayPlayerTalkingTone();
+                }
                 yield return new WaitForSeconds(wordSpeed);
             }
+            talkingtonetimer = 0;
         }
     
         // advances to next line of dialogue
@@ -228,7 +247,7 @@ namespace Managers
         {
             _canContinue = false;
         
-            if (_index < _dialogue.Count - 1)
+            if ((_index < _dialogue.Count - 1) && !_dialogIsRandom)
             {
                 _index++;
                 dialogueText.text = "";
@@ -237,7 +256,10 @@ namespace Managers
             else
             {
                 _isReading = false;
+                _dialogIsRandom = false;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
+                GameStateManager.Instance.SetBuddeeDialogState("IntroRandom");
+                EventBroadcaster.Broadcast_StopDialogue();
                 ZeroText();
             }
         }
