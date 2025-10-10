@@ -114,6 +114,9 @@ public class EnemyControllerBase : SpawnableObject
             SetKnockBack();
         } else if (collision.gameObject.CompareTag("PlayerAttack"))
         {
+            Managers.AudioManager.Instance.PlayEnemyDamagedSound();
+            Managers.AudioManager.Instance.PlaySwordHitSound(1f, 0.3f);
+
             health -= (int)PlayerStats.Instance.GetAttackDamage();
             SetKnockBack();
         }
@@ -125,6 +128,7 @@ public class EnemyControllerBase : SpawnableObject
         if (health <= 0)
         {
             //Destroy(gameObject);
+            Managers.AudioManager.Instance.PlayEnemyDeathSound();
             Deactivate(); // switching to this to ensure event is unsubscribed
         }
     }
