@@ -147,28 +147,7 @@ namespace Managers
         }
         public void LockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Locked;
         public void UnlockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Available;
-    
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                Debug.Log("Current Persona: " + _currentPersona);
-                DebugUtils.Log("Number of active personas: " + GetNumberOfAvailablePersonas());
-            }
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                foreach (var kvp in _personas)
-                {
-                    Debug.Log($"Persona: {kvp.Key}, State: {kvp.Value}");
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                MarkAsLost(_currentPersona);
-            }
-        }
-
+        
     }
 
 
