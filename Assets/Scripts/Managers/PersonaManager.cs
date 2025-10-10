@@ -149,8 +149,7 @@ namespace Managers
         public void UnlockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Available;
         
     }
-
-
+    
 
     public static class PersonaStatsLoader
     {
