@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Managers;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerStats : Singleton<PlayerStats>
 {
