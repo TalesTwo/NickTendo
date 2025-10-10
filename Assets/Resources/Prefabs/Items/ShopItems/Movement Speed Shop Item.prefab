@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Movement Speed Shop Item
-  itemValue: 100
-  buffValue: 8
+  itemValue: 50
+  buffValue: 1
   buffType: 2
 --- !u!212 &7787435678194780221
 SpriteRenderer:
