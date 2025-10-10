@@ -64,23 +64,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 77194674c97865b43b06c7b684c8d6d9, type: 3}
   - {fileID: 8300000, guid: 90c9bc253af96f142a34421cd68e2eb7, type: 3}
   amtOfTypes: 6
-  playerDamaged: {fileID: 0}
+  playerDamaged: {fileID: 8300000, guid: 93dd91870457bbc42a55c9cce928986f, type: 3}
   swordHitEffect: {fileID: 8300000, guid: dfeb1241d8bfda14ab469ac4dd51be42, type: 3}
   PlayerDeath: {fileID: 8300000, guid: 69c7993717ebca341986c87755acb607, type: 3}
-  Interact: {fileID: 0}
+  Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   BUDEETalkingTones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   BUDEEDeath: {fileID: 0}
-  enemyDamaged: {fileID: 0}
-  enemyDeath: {fileID: 0}
+  enemyDamaged: {fileID: 8300000, guid: 48dbfafea6a7ed84886d08486610cc84, type: 3}
+  enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
   shotHit: {fileID: 0}
   followerHit: {fileID: 0}
   followerMovement: {fileID: 0}
-  transitionearly: {fileID: 8300000, guid: 0a2db085042a3a346a1f0addfcba16f4, type: 3}
-  transitionend: {fileID: 8300000, guid: 9ce7158fd8aae0744a74eb7950b0242a, type: 3}
+  transitionearly: {fileID: 8300000, guid: 9cfb84511d160354384d862384f4e948, type: 3}
+  transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
   Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
   Coinget: {fileID: 8300000, guid: ca9a62b5c26f1f341b717e778a548212, type: 3}
   openDoor: {fileID: 0}
