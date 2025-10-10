@@ -10,6 +10,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private float _width;
     private float _healthWidth;
     private Dictionary<string, float> BuffedStats;
+    private bool _isHUDActive;
 
     [Header("UI Elements")] 
     public float widthPerUnitHealth = 25;
@@ -27,6 +28,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
         BuffedStats = new Dictionary<string, float>();
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
+        _isHUDActive = true;
         SetHealth();
         SetBuffedStats();
     }
@@ -96,5 +98,19 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             }
         }
         buffedStatText.text = textToSet;
+    }
+
+    public void ToggleHUD()
+    {
+        if(_isHUDActive)
+        {
+           gameObject.SetActive(false);
+            _isHUDActive = false;
+        }
+        else if (!_isHUDActive)
+        {
+            gameObject.SetActive(true);
+            _isHUDActive = true;
+        }
     }
 }

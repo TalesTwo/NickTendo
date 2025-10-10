@@ -50,6 +50,7 @@ public class ShopUIManager : MonoBehaviour
         {
             /*UpdateCoinDisplay();*/
             ShopUI.SetActive(true);
+            PlayerUIManager.Instance.ToggleHUD();
             EventBroadcaster.Broadcast_StartStopAction();
         }
     }
@@ -57,6 +58,7 @@ public class ShopUIManager : MonoBehaviour
     void CloseShop()
     {
         ShopUI.SetActive(false);
+        PlayerUIManager.Instance.ToggleHUD();
         EventBroadcaster.Broadcast_StartStopAction();
     }
 
