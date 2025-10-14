@@ -40,6 +40,7 @@ public class RangedEnemyController : EnemyControllerBase
                     GameObject newProjectile = Instantiate(projectile, attackPosition, Quaternion.identity);
                     Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
                     ProjectileRb.velocity = _direction * _projectileSpeed;
+                    Managers.AudioManager.Instance.PlayEnemyShotSound();
                     
                     // set damage of projectile
                     EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
