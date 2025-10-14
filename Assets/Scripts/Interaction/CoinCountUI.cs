@@ -14,13 +14,6 @@ public class CoinCountUI : MonoBehaviour
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         SetCoins();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetCoins()
     {
         coinCount.text = PlayerStats.Instance.GetCoins().ToString();
