@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 8793639957104055765, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
+  m_Sprite: {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,9 +170,9 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.19733053, y: 0.87251973}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0.01, w: 0}
-    pivot: {x: 0.6025518, y: 0.2418951}
-    oldSize: {x: 3.35, y: 4.78}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.69647706, y: 0.49543324}
+    oldSize: {x: 4.1, y: 4.380967}
     newSize: {x: 0.29, y: 0.35}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -230,15 +230,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
-  - {fileID: 8793639957104055765, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
-  - {fileID: 6084859605308855041, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
-  - {fileID: 5704420531145803721, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
-  Framerate: 12
+  - {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: 1331232263431029876, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: 8558635697896236382, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  Framerate: 8
   SpriteRenderer: {fileID: 7530710643431106794}
   index: 0
   attackAnimation:
-  - {fileID: -5010287565412364656, guid: 3d454b14c208c4a459eac9b773f57a49, type: 3}
-  - {fileID: -5463148037355797382, guid: 3d454b14c208c4a459eac9b773f57a49, type: 3}
-  - {fileID: -5182820943178688908, guid: 3d454b14c208c4a459eac9b773f57a49, type: 3}
-  - {fileID: 6712529985953942657, guid: 3d454b14c208c4a459eac9b773f57a49, type: 3}
-  - {fileID: -3996406334776252399, guid: 3d454b14c208c4a459eac9b773f57a49, type: 3}
+  - {fileID: -9165438954690020684, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: 74180511213434753, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: -4480917934731911106, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}

@@ -7,6 +7,8 @@ public class AnimatedPlayer : AnimatedEntity
     [Header("Animation Cycles")]
     private bool _isAttacking = false;
     public List<Sprite> attackAnimation;
+    public List<Sprite> dashAnimation;
+    public List<Sprite> walkAnimation;
     
     // Start is called before the first frame update
     private void Start()
