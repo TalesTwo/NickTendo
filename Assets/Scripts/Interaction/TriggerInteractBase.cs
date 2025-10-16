@@ -65,7 +65,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
-            //DebugUtils.Log("Player in range to interact with " + gameObject.name);
+            DebugUtils.Log("Player in range to interact with " + gameObject.name);
             CanInteract = true;
             // enable the interact prompt if we have one
             if (interactPromptInstance != null)

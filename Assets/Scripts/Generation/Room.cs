@@ -50,14 +50,24 @@ public class Room : MonoBehaviour
                 // disable all doors
                 foreach (Transform door in doors.transform)
                 {
-                    door.gameObject.SetActive(false);
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        //doorComponent.SetDoorState(Door.DoorState.Closed);
+                    }
                 }
             }
             else
             {
                 foreach (Transform door in doors.transform)
                 {
-                    door.gameObject.SetActive(true);
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        //doorComponent.SetDoorState(Door.DoorState.Open);
+                    }
                 }
             }
         }

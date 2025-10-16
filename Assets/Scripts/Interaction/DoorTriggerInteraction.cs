@@ -9,9 +9,18 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     [Header("Door Settings")]
     [SerializeField] public Types.DoorClassification CurrentDoorPosition = Types.DoorClassification.None;
+    
+    
+    // get a reference to the door scripy
+    private Door _doorScript;
 
     public override void Interact()
     {
+        // if we successfuly interacted with a door, and its closed, we can open it
+        if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
+        {
+            _doorScript.SetDoorState(Door.DoorState.Open);
+        }
         //SceneSwapManager.SwapSceneFromDoorUse(_sceneToLoad, DoorToSpawnTo);
         // We need to teleport the player, to the correct door for the correct room
         // first, we can get access to the room this door is a part of
@@ -70,6 +79,15 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 
                 break;
             }
+        }
+    }
+    
+    private void Start()
+    {
+        _doorScript = GetComponent<Door>();
+        if (_doorScript == null)
+        {
+            DebugUtils.LogError("DoorTriggerInteraction: No Door script found on this object.");
         }
     }
 }
