@@ -46,6 +46,7 @@ public class AnimatedEntity : MonoBehaviour
                     index=0;
                     interruptFlag = false;
                     interruptAnimation= null;//clear interrupt animation
+                    ResetBools(); // reset bools and initiate transition animations depending on the bools
                 }
                 else{
                     SpriteRenderer.sprite = interruptAnimation[index];
@@ -61,6 +62,11 @@ public class AnimatedEntity : MonoBehaviour
         index = 0;
         interruptAnimation = _interruptAnimation;
         SpriteRenderer.sprite = interruptAnimation[index];
+    }
+
+    protected virtual void ResetBools()
+    {
+        return;
     }
     
 }

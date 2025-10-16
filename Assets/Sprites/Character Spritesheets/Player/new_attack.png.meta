@@ -281,7 +281,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack_to_idle_0
+      name: to_idle_0
       rect:
         serializedVersion: 2
         x: 4090
@@ -302,7 +302,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack_to_idle_1
+      name: to_idle_1
       rect:
         serializedVersion: 2
         x: 582
@@ -323,7 +323,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack_to_idle_2
+      name: to_idle_2
       rect:
         serializedVersion: 2
         x: 2343
@@ -344,7 +344,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack_to_idle_3
+      name: to_idle_3
       rect:
         serializedVersion: 2
         x: 4104
@@ -380,10 +380,10 @@ TextureImporter:
       attack_2: -2933707385202342937
       attack_3: -4904112985841368907
       attack_4: 2302550054399772875
-      attack_to_idle_0: 8901815683434674111
-      attack_to_idle_1: -7247126756310200383
-      attack_to_idle_2: -6441936258902913328
-      attack_to_idle_3: 653559004879556840
+      to_idle_0: 8901815683434674111
+      to_idle_1: -7247126756310200383
+      to_idle_2: -6441936258902913328
+      to_idle_3: 653559004879556840
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
