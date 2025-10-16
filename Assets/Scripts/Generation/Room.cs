@@ -54,7 +54,7 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
-                        doorComponent.SetDoorState(Door.DoorState.Closed);
+                        doorComponent.SetDoorState(Door.DoorState.Locked);
                     }
                 }
             }
@@ -72,17 +72,11 @@ public class Room : MonoBehaviour
             }
         }
     }
-
-    private void Update()
-    {
-        SpecialRoomLogic();
-        
-        
-    }
-
+    
     private void Start()
     {
         roomSpawnController = GetComponent<RoomSpawnController>();
+        SpecialRoomLogic();
     }
 
     public void SetRoomDifficulty(int difficulty)

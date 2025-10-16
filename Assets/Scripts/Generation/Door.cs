@@ -27,14 +27,13 @@ public class Door : MonoBehaviour
     [SerializeField] private Color lockedColor = Color.gray;
     
     // get access to our door trigger interaction script
-    private DoorTriggerInteraction _doorTriggerInteraction;
+    [SerializeField] private DoorTriggerInteraction _doorTriggerInteraction;
     
     
     void Start()
     {
         // Default state is closed
         SetDoorState(DoorState.Closed);
-        _doorTriggerInteraction = GetComponent<DoorTriggerInteraction>();
     }
     
     public void SetDoorState(DoorState newState)
@@ -48,17 +47,17 @@ public class Door : MonoBehaviour
                 DebugUtils.Log("Door: Setting door to Open state.");
                 spriteRenderer.sprite = openDoor;
                 spriteRenderer.color = openedColor;
-                //_doorTriggerInteraction.CanInteract = true;
+                _doorTriggerInteraction.SetInteractAllowedToInteract(true);
                 break;
             case DoorState.Closed:
                 spriteRenderer.sprite = closedDoor;
                 spriteRenderer.color = closedColor;
-                //_doorTriggerInteraction.CanInteract = true;
+                _doorTriggerInteraction.SetInteractAllowedToInteract(false);
                 break;
             case DoorState.Locked:
                 spriteRenderer.sprite = lockedDoor;
                 spriteRenderer.color = lockedColor;
-               // _doorTriggerInteraction.CanInteract = false;
+                _doorTriggerInteraction.SetInteractAllowedToInteract(false);
                 break;
             default:
                 Debug.LogError("Invalid door state");

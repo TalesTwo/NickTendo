@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rows: 4
-  cols: 4
+  cols: 1
   probabilityToAddOptionalDoor_OneRequiredDoor: 0.5
   probabilityToAddOptionalDoor_TwoRequiredDoors: 0.25
   probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.15
