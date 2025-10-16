@@ -233,7 +233,7 @@ MonoBehaviour:
   - {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   - {fileID: 1331232263431029876, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   - {fileID: 8558635697896236382, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
-  Framerate: 8
+  Framerate: 14
   SpriteRenderer: {fileID: 7530710643431106794}
   index: 0
   idleAnimation:
@@ -241,13 +241,17 @@ MonoBehaviour:
   - {fileID: 1331232263431029876, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   - {fileID: 8558635697896236382, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   attackAnimation:
-  - {fileID: -9165438954690020684, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
-  - {fileID: 74180511213434753, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
-  - {fileID: -4480917934731911106, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: -8233974069591669678, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: 5649543170227929274, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -2933707385202342937, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -4904112985841368907, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: 2302550054399772875, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
   dashAnimation:
-  - {fileID: -9165438954690020684, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
-  - {fileID: 74180511213434753, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
-  - {fileID: -4480917934731911106, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+  - {fileID: -8233974069591669678, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: 5649543170227929274, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -2933707385202342937, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -4904112985841368907, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: 2302550054399772875, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
   walkAnimation: []
   runAnimation:
   - {fileID: 7796415201278097457, guid: f496d571381055c418e16f3554a53df1, type: 3}
@@ -259,3 +263,8 @@ MonoBehaviour:
   hurtAnimation:
   - {fileID: 5930942955148145206, guid: 8c1fa6fecb251dc4781c501d366fc3c6, type: 3}
   - {fileID: -3682933218010967031, guid: 8c1fa6fecb251dc4781c501d366fc3c6, type: 3}
+  toIdleAnimation:
+  - {fileID: 8901815683434674111, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -7247126756310200383, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: -6441936258902913328, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  - {fileID: 653559004879556840, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}

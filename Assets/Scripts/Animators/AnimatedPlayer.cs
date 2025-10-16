@@ -11,6 +11,19 @@ public class AnimatedPlayer : AnimatedEntity
     public List<Sprite> walkAnimation;
     public List<Sprite> runAnimation;
     public List<Sprite> hurtAnimation;
+    public List<Sprite> toIdleAnimation;
+    
+    private bool _isRunning = false;
+    private bool _isAttacking = false;
+
+    protected override void ResetBools()
+    {
+        if (_isAttacking && !_isRunning)
+        {
+            SetToIdle();
+        }
+        _isAttacking = false;
+    }
     
     // Start is called before the first frame update
     private void Start()
@@ -26,6 +39,7 @@ public class AnimatedPlayer : AnimatedEntity
 
     public void SetAttacking()
     {
+        _isAttacking = true;
         Interrupt(attackAnimation);
     }
 
@@ -36,16 +50,27 @@ public class AnimatedPlayer : AnimatedEntity
 
     public void SetRunning()
     {
+        _isRunning = true;
         DefaultAnimationCycle = runAnimation;
     }
 
     public void SetStill()
     {
+        if (_isRunning && !_isAttacking)
+        {
+            SetToIdle();
+            _isRunning = false;
+        }
         DefaultAnimationCycle = idleAnimation;
     }
 
     public void SetDashing()
     {
         Interrupt(dashAnimation);
+    }
+
+    private void SetToIdle()
+    {
+        Interrupt(toIdleAnimation);
     }
 }
