@@ -34,6 +34,9 @@ public class Room : MonoBehaviour
     private (int row, int col) RoomCoords = (-1, -1);
     
     
+    bool spawn_special_logic_ran = false;
+    
+    
     // Special logic for the spawn room
     private void SpecialRoomLogic()
     {
@@ -44,6 +47,7 @@ public class Room : MonoBehaviour
         // doors should only be enabled as Normal if the player has more 1 persona remaining
         if (roomType == Types.RoomType.Spawn)
         {
+            
             int numberOfPersonas = PersonaManager.Instance.GetNumberOfAvailablePersonas();
             if (PersonaManager.Instance.GetPersona() == Types.Persona.Normal && numberOfPersonas > 1)
             {
@@ -57,6 +61,7 @@ public class Room : MonoBehaviour
                         doorComponent.SetDoorState(Door.DoorState.Locked);
                     }
                 }
+                spawn_special_logic_ran = true;
             }
             else
             {
@@ -70,13 +75,14 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+            spawn_special_logic_ran = true;
         }
     }
     
     public void Update()
     {
         // only run this logic if we are the spawn room
-        if (roomType == Types.RoomType.Spawn)
+        if (roomType == Types.RoomType.Spawn && !spawn_special_logic_ran)
         {
             SpecialRoomLogic();
         }
@@ -85,6 +91,7 @@ public class Room : MonoBehaviour
     private void Start()
     {
         roomSpawnController = GetComponent<RoomSpawnController>();
+        
         SpecialRoomLogic();
     }
 
@@ -122,6 +129,7 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         
         bIsFinalized = false;
+        spawn_special_logic_ran = false;
     }
     
 
