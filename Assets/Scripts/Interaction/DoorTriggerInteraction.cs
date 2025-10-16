@@ -55,11 +55,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
         // Move to the room north of the current one
         targetRoomCoords.row -= 1;
-
-        // Open the south door of the target room
-        Room northRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
-        TryOpenDoor(northRoom, Types.DoorClassification.South);
-
+        
         // Teleport handling
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.South);
         break;
@@ -68,8 +64,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         TryOpenDoor(currentRoom, Types.DoorClassification.East);
 
         targetRoomCoords.col += 1;
-        Room eastRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
-        TryOpenDoor(eastRoom, Types.DoorClassification.West);
+
 
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.West);
         break;
@@ -78,9 +73,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         TryOpenDoor(currentRoom, Types.DoorClassification.South);
 
         targetRoomCoords.row += 1;
-        Room southRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
-        TryOpenDoor(southRoom, Types.DoorClassification.North);
-
+        
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.North);
         break;
 
@@ -88,8 +81,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
         TryOpenDoor(currentRoom, Types.DoorClassification.West);
 
         targetRoomCoords.col -= 1;
-        Room westRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
-        TryOpenDoor(westRoom, Types.DoorClassification.East);
 
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.East);
         break;
@@ -105,7 +96,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
     }
 
-    private void TryOpenDoor(Room currentRoom, Types.DoorClassification direction)
+    private static void TryOpenDoor(Room currentRoom, Types.DoorClassification direction)
     {
         if (currentRoom == null)
         {
@@ -114,7 +105,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         }
 
         // Get all doors in this room
-        var doors = currentRoom.GetComponentsInChildren<DoorTriggerInteraction>().ToList();
+        var doors = currentRoom.GetComponentsInChildren<DoorTriggerInteraction>(true).ToList();
 
         // Find the door with the matching direction
         var targetDoor = doors.Find(door => door.CurrentDoorPosition == direction);
@@ -134,7 +125,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         }
     }
     
-    private static void HandleDoorTeleport(List<List<Room>> dungeonLayout, (int row, int col) targetRoomCoords, Types.DoorClassification doorToSpawnTo)
+    private void HandleDoorTeleport(List<List<Room>> dungeonLayout, (int row, int col) targetRoomCoords, Types.DoorClassification doorToSpawnTo)
     {
         // Get the room at these coordinates
         // we need to do this first, so we can ensure that the room is loaded and active to teleport to
@@ -148,10 +139,20 @@ public class DoorTriggerInteraction : TriggerInteractBase
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
+                // cause of TIMING ISSUES
+                DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
                 
                 break;
             }
         }
+    }
+    private static IEnumerator OpenDoorWhenReady(Room targetRoom, Types.DoorClassification direction)
+    {
+        // Wait until room and its children are active
+        yield return new WaitUntil(() => targetRoom.gameObject.activeInHierarchy);
+        yield return null; // also allow 1 frame for child activation
+
+        TryOpenDoor(targetRoom, direction);
     }
     
     protected override void Start()

@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     [SerializeField] private Sprite openDoor;
     [SerializeField] private Sprite closedDoor;
     [SerializeField] private Sprite lockedDoor;
-    private DoorState _currentState;
+    private DoorState _currentState = DoorState.Closed;
     
     // Color to hold the "opened" color of the door
     // the first time we interact with a door, we will change it to be opened

@@ -34,7 +34,6 @@ public class Room : MonoBehaviour
     private (int row, int col) RoomCoords = (-1, -1);
     
     
-    bool spawn_special_logic_ran = false;
     
     
     // Special logic for the spawn room
@@ -61,7 +60,7 @@ public class Room : MonoBehaviour
                         doorComponent.SetDoorState(Door.DoorState.Locked);
                     }
                 }
-                spawn_special_logic_ran = true;
+                
             }
             else
             {
@@ -71,18 +70,21 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
+                        // if the door is open then we don't want to close it
+                        if (doorComponent.GetCurrentState() == Door.DoorState.Open)
+                            continue;
                         doorComponent.SetDoorState(Door.DoorState.Closed);
                     }
                 }
             }
-            spawn_special_logic_ran = true;
+            
         }
     }
     
     public void Update()
     {
         // only run this logic if we are the spawn room
-        if (roomType == Types.RoomType.Spawn && !spawn_special_logic_ran)
+        if (roomType == Types.RoomType.Spawn)
         {
             SpecialRoomLogic();
         }
@@ -129,7 +131,6 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         
         bIsFinalized = false;
-        spawn_special_logic_ran = false;
     }
     
 
