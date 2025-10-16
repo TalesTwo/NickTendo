@@ -17,18 +17,20 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
     public override void Interact()
     {
+        
         base.Interact();
+        // log the current door state 
+        DebugUtils.Log("DoorTriggerInteraction: Current door state is " + (_doorScript != null ? _doorScript.GetCurrentState().ToString() : "No Door script found."));
+        if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
+        {
+            // play a "locked door" sound
+            return;
+        }
         // if we successfuly interacted with a door, and its closed, we can open it
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
         {
             DebugUtils.Log("DoorTriggerInteraction: Opening door.");
             _doorScript.SetDoorState(Door.DoorState.Open);
-            return;
-        }
-
-        if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
-        {
-            // play a "locked door" sound
             return;
         }
 

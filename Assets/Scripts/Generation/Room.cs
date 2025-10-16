@@ -66,10 +66,19 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
-                        doorComponent.SetDoorState(Door.DoorState.Open);
+                        doorComponent.SetDoorState(Door.DoorState.Closed);
                     }
                 }
             }
+        }
+    }
+    
+    public void Update()
+    {
+        // only run this logic if we are the spawn room
+        if (roomType == Types.RoomType.Spawn)
+        {
+            SpecialRoomLogic();
         }
     }
     

@@ -113,7 +113,7 @@ MonoBehaviour:
   closedDoor: {fileID: 1030226933, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
   lockedDoor: {fileID: 1030226933, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
   openedColor: {r: 1, g: 1, b: 1, a: 1}
-  closedColor: {r: 0.41176474, g: 0.41176474, b: 0.41176474, a: 1}
+  closedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.41176474, g: 0.41176474, b: 0.41176474, a: 1}
   _doorTriggerInteraction: {fileID: 6495961825788109008}
 --- !u!212 &397329265576089644

@@ -44,7 +44,6 @@ public class Door : MonoBehaviour
         switch (_currentState)
         {
             case DoorState.Open:
-                DebugUtils.Log("Door: Setting door to Open state.");
                 spriteRenderer.sprite = openDoor;
                 spriteRenderer.color = openedColor;
                 _doorTriggerInteraction.SetInteractAllowedToInteract(true);
@@ -52,7 +51,7 @@ public class Door : MonoBehaviour
             case DoorState.Closed:
                 spriteRenderer.sprite = closedDoor;
                 spriteRenderer.color = closedColor;
-                _doorTriggerInteraction.SetInteractAllowedToInteract(false);
+                _doorTriggerInteraction.SetInteractAllowedToInteract(true);
                 break;
             case DoorState.Locked:
                 spriteRenderer.sprite = lockedDoor;
