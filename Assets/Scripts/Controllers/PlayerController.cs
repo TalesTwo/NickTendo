@@ -46,6 +46,17 @@ public class PlayerController : MonoBehaviour
         
         if (_isActive && !_isDead)
         {
+            
+            // set default animation to running or ide depending on movement
+            if (horizontalInput == 0 && verticalInput == 0)
+            {
+                _playerAnimator.SetStill();
+            }
+            else
+            {
+                _playerAnimator.SetRunning();
+            }            
+            
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
             {
@@ -71,6 +82,7 @@ public class PlayerController : MonoBehaviour
             {
                 // start dash
                 StartDash();
+                _playerAnimator.SetDashing();
                 AudioManager.Instance.PlayDashSound(1, 0.1f);
                 _isDashing = true;
                 _isDashMoving = true;
@@ -137,6 +149,7 @@ public class PlayerController : MonoBehaviour
         _isDashMoving = false;
     }
 
+    // flips the sprite depending on the direction of movement
     private void Flip()
     {
         _isFacingRight = !_isFacingRight;
@@ -145,6 +158,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    // starts and stops all player input
     private void ToggleStartStop()
     {
         if (_isActive)
@@ -157,13 +171,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
+        _playerAnimator.SetHurting();
     }
 
+    // unstun the player after knockback
     private void UnsetKnockback()
     {
         _isKnockback = false;

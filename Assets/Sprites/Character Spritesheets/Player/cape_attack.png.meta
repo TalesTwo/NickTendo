@@ -1,0 +1,621 @@
+fileFormatVersion: 2
+guid: 1b85fae9c45350a4491633c158e7b607
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4944827469847909484
+    second: cape_attack_0
+  - first:
+      213: -4163312603998242326
+    second: cape_attack_1
+  - first:
+      213: 5302623286317588567
+    second: cape_attack_2
+  - first:
+      213: -7750921360861850664
+    second: cape_attack_3
+  - first:
+      213: 1929061122684592788
+    second: cape_attack_4
+  - first:
+      213: -4275738739359500135
+    second: cape_attack_5
+  - first:
+      213: -438718435281544512
+    second: cape_attack_6
+  - first:
+      213: -5889005593516337314
+    second: cape_attack_7
+  - first:
+      213: 9131714614018241027
+    second: cape_attack_8
+  - first:
+      213: 1357522048620750036
+    second: cape_attack_9
+  - first:
+      213: 7534236631767527010
+    second: cape_attack_10
+  - first:
+      213: -5052433941725078142
+    second: cape_attack_11
+  - first:
+      213: -6378221162554295517
+    second: cape_attack_12
+  - first:
+      213: 6713454233679430138
+    second: cape_attack_13
+  - first:
+      213: 1331232263431029876
+    second: cape_attack_14
+  - first:
+      213: 8558635697896236382
+    second: cape_attack_15
+  - first:
+      213: -9165438954690020684
+    second: cape_attack_16
+  - first:
+      213: 74180511213434753
+    second: cape_attack_17
+  - first:
+      213: -4480917934731911106
+    second: cape_attack_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cape_attack_0
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 5232
+        width: 312
+        height: 445
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49b2f107d91706bb0800000000000000
+      internalID: -4944827469847909484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_1
+      rect:
+        serializedVersion: 2
+        x: 2453
+        y: 5234
+        width: 293
+        height: 442
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae937cdae31f836c0800000000000000
+      internalID: -4163312603998242326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_2
+      rect:
+        serializedVersion: 2
+        x: 4201
+        y: 5233
+        width: 297
+        height: 444
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 750acaec8c3b69940800000000000000
+      internalID: 5302623286317588567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_3
+      rect:
+        serializedVersion: 2
+        x: 5866
+        y: 5266
+        width: 811
+        height: 415
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d397d3a6123f6490800000000000000
+      internalID: -7750921360861850664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_5
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 3970
+        width: 294
+        height: 463
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 998b918354689a4c0800000000000000
+      internalID: -4275738739359500135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_6
+      rect:
+        serializedVersion: 2
+        x: 2443
+        y: 3979
+        width: 312
+        height: 455
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cad0a458eb59e9f0800000000000000
+      internalID: -438718435281544512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_7
+      rect:
+        serializedVersion: 2
+        x: 4201
+        y: 3988
+        width: 310
+        height: 443
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e579b2e2d9c064ea0800000000000000
+      internalID: -5889005593516337314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_8
+      rect:
+        serializedVersion: 2
+        x: 5978
+        y: 4021
+        width: 542
+        height: 388
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302fcce3f0e5abe70800000000000000
+      internalID: 9131714614018241027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_9
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 2742
+        width: 293
+        height: 454
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4ecca5c13e6d210800000000000000
+      internalID: 1357522048620750036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_10
+      rect:
+        serializedVersion: 2
+        x: 2455
+        y: 2732
+        width: 293
+        height: 462
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e2d3a6c4cfe8860800000000000000
+      internalID: 7534236631767527010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_11
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 2731
+        width: 306
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28d9954591622e9b0800000000000000
+      internalID: -5052433941725078142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cape_attack_12
+      rect:
+        serializedVersion: 2
+        x: 5968
+        y: 2765
+        width: 406
+        height: 429
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32b721b55a10c77a0800000000000000
+      internalID: -6378221162554295517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_0
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 1521
+        width: 410
+        height: 438
+      alignment: 9
+      pivot: {x: 0.69647706, y: 0.49543324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af10e4e5e0bfa2d50800000000000000
+      internalID: 6713454233679430138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_1
+      rect:
+        serializedVersion: 2
+        x: 2359
+        y: 1524
+        width: 410
+        height: 438
+      alignment: 9
+      pivot: {x: 0.627626, y: 0.50000054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 474885fb0bc797210800000000000000
+      internalID: 1331232263431029876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_2
+      rect:
+        serializedVersion: 2
+        x: 4109
+        y: 1514
+        width: 410
+        height: 438
+      alignment: 9
+      pivot: {x: 0.65475065, y: 0.48913938}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55251752d166c670800000000000000
+      internalID: 8558635697896236382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slash_attack_0
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 258
+        width: 745
+        height: 445
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ba7c2fc4d1ddc080800000000000000
+      internalID: -9165438954690020684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slash_attack_1
+      rect:
+        serializedVersion: 2
+        x: 2306
+        y: 269
+        width: 745
+        height: 445
+      alignment: 9
+      pivot: {x: 0.5087256, y: 0.52984273}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 187322c28ca870100800000000000000
+      internalID: 74180511213434753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slash_attack_2
+      rect:
+        serializedVersion: 2
+        x: 4215
+        y: 267
+        width: 745
+        height: 445
+      alignment: 9
+      pivot: {x: 0.32398346, y: 0.45466447}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e30a0a811e490d1c0800000000000000
+      internalID: -4480917934731911106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 23413868cf1edac4fb2af7f770869df0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      cape_attack_0: -4944827469847909484
+      cape_attack_1: -4163312603998242326
+      cape_attack_10: 7534236631767527010
+      cape_attack_11: -5052433941725078142
+      cape_attack_12: -6378221162554295517
+      cape_attack_2: 5302623286317588567
+      cape_attack_3: -7750921360861850664
+      cape_attack_4: -420708658
+      cape_attack_5: -4275738739359500135
+      cape_attack_6: -438718435281544512
+      cape_attack_7: -5889005593516337314
+      cape_attack_8: 9131714614018241027
+      cape_attack_9: 1357522048620750036
+      idle_0: 6713454233679430138
+      idle_1: 1331232263431029876
+      idle_2: 8558635697896236382
+      ignore1: 1929061122684592788
+      slash_attack_0: -9165438954690020684
+      slash_attack_1: 74180511213434753
+      slash_attack_2: -4480917934731911106
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
