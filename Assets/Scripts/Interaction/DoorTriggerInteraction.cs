@@ -19,7 +19,9 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // if we successfuly interacted with a door, and its closed, we can open it
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
         {
+            DebugUtils.Log("DoorTriggerInteraction: Opening door.");
             _doorScript.SetDoorState(Door.DoorState.Open);
+            return;
         }
         //SceneSwapManager.SwapSceneFromDoorUse(_sceneToLoad, DoorToSpawnTo);
         // We need to teleport the player, to the correct door for the correct room
@@ -82,8 +84,11 @@ public class DoorTriggerInteraction : TriggerInteractBase
         }
     }
     
-    private void Start()
+    protected override void Start()
     {
+        // call super
+        base.Start();
+        
         _doorScript = GetComponent<Door>();
         if (_doorScript == null)
         {

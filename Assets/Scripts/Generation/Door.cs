@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,18 +33,19 @@ public class Door : MonoBehaviour
     void Start()
     {
         // Default state is closed
-       // SetDoorState(DoorState.Closed);
-        //_doorTriggerInteraction = GetComponent<DoorTriggerInteraction>();
+        SetDoorState(DoorState.Closed);
+        _doorTriggerInteraction = GetComponent<DoorTriggerInteraction>();
     }
     
     public void SetDoorState(DoorState newState)
     {
         _currentState = newState;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if(spriteRenderer != null){return;}
+        if(spriteRenderer == null){ return;}
         switch (_currentState)
         {
             case DoorState.Open:
+                DebugUtils.Log("Door: Setting door to Open state.");
                 spriteRenderer.sprite = openDoor;
                 spriteRenderer.color = openedColor;
                 //_doorTriggerInteraction.CanInteract = true;
