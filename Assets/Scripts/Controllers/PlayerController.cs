@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     [Header("Attack Animations")]
     public GameObject attackAnimation;
     public GameObject dashAnimation;
+    
+    // effect for getting hit
+    [Header("Hit Effects")]
+    public GameObject hitEffect;
+    public float hitEffectDistance;
 
     // rigidbody & animator
     private Rigidbody2D _rb;
@@ -178,6 +183,28 @@ public class PlayerController : MonoBehaviour
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
         _playerAnimator.SetHurting();
+    }
+
+    public void HitEffect(Vector3 enemyPosition)
+    {
+        Quaternion angle = getHitEffectAngle(enemyPosition);
+        Vector3 direction = (enemyPosition - transform.position).normalized;
+        Instantiate(hitEffect, transform.position + direction * hitEffectDistance, angle);
+    }
+    
+    // gets angle for the particles
+    private Quaternion getHitEffectAngle(Vector3 enemyPosition)
+    {
+        // step 1: get direction
+        Vector3 direction = enemyPosition - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        
+        // step 2: set the rotation angle
+        float angle = MathF.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180;
+        
+        // Step 3: return the direction as Quaternion
+        return Quaternion.Euler(0, 0, angle);
     }
 
     // unstun the player after knockback
