@@ -34,7 +34,16 @@ public class RoomGridManager : MonoBehaviour
             // Force refresh bounds
             tilemap.CompressBounds();
             BoundsInt bounds = tilemap.cellBounds;
-            gridRoomSize = new Vector2(bounds.size.x, bounds.size.y);
+
+            // Convert to world space for correct coverage
+            Vector3Int minCell = bounds.min;
+            Vector3Int maxCell = bounds.max;
+
+            Vector3 worldMin = tilemap.CellToWorld(minCell);
+            Vector3 worldMax = tilemap.CellToWorld(maxCell);
+
+            gridRoomSize = new Vector2(worldMax.x - worldMin.x, worldMax.y - worldMin.y);
+            _bottomLeft = worldMin;
         }
         
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -53,10 +62,6 @@ public class RoomGridManager : MonoBehaviour
         // Adjust node radius accordingly
         float scaledRadius = nodeRadius / resolutionMultiplier;
     
-        _bottomLeft = (Vector2)transform.position 
-                      - Vector2.right * gridRoomSize.x / 2 
-                      - Vector2.up * gridRoomSize.y / 2;
-
         for (int x = 0; x < gridSizeX * resolutionMultiplier; x++)
         {
             for (int y = 0; y < gridSizeY * resolutionMultiplier; y++)
@@ -79,17 +84,17 @@ public class RoomGridManager : MonoBehaviour
 
     
     // calculate the nearest node based on the current position
-public Node NodeFromWorldPoint(Vector2 worldPoint)
-{
+    public Node NodeFromWorldPoint(Vector2 worldPoint)
+    {
 
-    float percentX = Mathf.Clamp01((worldPoint.x - _bottomLeft.x) / gridRoomSize.x);
-    float percentY = Mathf.Clamp01((worldPoint.y - _bottomLeft.y) / gridRoomSize.y);
+        float percentX = Mathf.Clamp01((worldPoint.x - _bottomLeft.x) / gridRoomSize.x);
+        float percentY = Mathf.Clamp01((worldPoint.y - _bottomLeft.y) / gridRoomSize.y);
 
-    int x = Mathf.RoundToInt((gridSizeX * resolutionMultiplier - 1) * percentX);
-    int y = Mathf.RoundToInt((gridSizeY * resolutionMultiplier - 1) * percentY);
+        int x = Mathf.RoundToInt((gridSizeX * resolutionMultiplier - 1) * percentX);
+        int y = Mathf.RoundToInt((gridSizeY * resolutionMultiplier - 1) * percentY);
 
-    return _grid[x, y];
-}
+        return _grid[x, y];
+    }
 
     // find all neighboring cells
     public List<Node> GetNeighbours(Node node)
@@ -195,12 +200,12 @@ public Node NodeFromWorldPoint(Vector2 worldPoint)
     
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    
+    /*
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
+        Gizmos.DrawWireCube(_bottomLeft + (Vector2)gridRoomSize / 2, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
 
         if (_grid != null)
         {
@@ -225,7 +230,5 @@ public Node NodeFromWorldPoint(Vector2 worldPoint)
             }
         }
     }
-    
+    */
 }
-
-
