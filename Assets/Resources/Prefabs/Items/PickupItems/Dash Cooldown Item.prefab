@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Dash Cooldown Item
-  PickupSFX: {fileID: 0}
   CanAutoPickup: 1
   BuffType: 6
   BuffValue: 5
