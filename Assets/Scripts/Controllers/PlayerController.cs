@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     [Header("Attack Animations")]
     public GameObject attackAnimation;
     public GameObject dashAnimation;
+    
+    // effect for getting hit
+    [Header("Hit Effects")]
+    public GameObject hitEffect;
+    public float hitEffectDistance;
 
     // rigidbody & animator
     private Rigidbody2D _rb;
@@ -46,6 +51,17 @@ public class PlayerController : MonoBehaviour
         
         if (_isActive && !_isDead)
         {
+            
+            // set default animation to running or ide depending on movement
+            if (horizontalInput == 0 && verticalInput == 0)
+            {
+                _playerAnimator.SetStill();
+            }
+            else
+            {
+                _playerAnimator.SetRunning();
+            }            
+            
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
             {
@@ -71,6 +87,7 @@ public class PlayerController : MonoBehaviour
             {
                 // start dash
                 StartDash();
+                _playerAnimator.SetDashing();
                 AudioManager.Instance.PlayDashSound(1, 0.1f);
                 _isDashing = true;
                 _isDashMoving = true;
@@ -137,6 +154,7 @@ public class PlayerController : MonoBehaviour
         _isDashMoving = false;
     }
 
+    // flips the sprite depending on the direction of movement
     private void Flip()
     {
         _isFacingRight = !_isFacingRight;
@@ -145,6 +163,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    // starts and stops all player input
     private void ToggleStartStop()
     {
         if (_isActive)
@@ -157,13 +176,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
+        _playerAnimator.SetHurting();
     }
 
+    public void HitEffect(Vector3 enemyPosition)
+    {
+        Quaternion angle = getHitEffectAngle(enemyPosition);
+        Vector3 direction = (enemyPosition - transform.position).normalized;
+        Instantiate(hitEffect, transform.position + direction * hitEffectDistance, angle);
+    }
+    
+    // gets angle for the particles
+    private Quaternion getHitEffectAngle(Vector3 enemyPosition)
+    {
+        // step 1: get direction
+        Vector3 direction = enemyPosition - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        
+        // step 2: set the rotation angle
+        float angle = MathF.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180;
+        
+        // Step 3: return the direction as Quaternion
+        return Quaternion.Euler(0, 0, angle);
+    }
+
+    // unstun the player after knockback
     private void UnsetKnockback()
     {
         _isKnockback = false;
