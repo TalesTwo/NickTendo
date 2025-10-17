@@ -195,7 +195,7 @@ public Node NodeFromWorldPoint(Vector2 worldPoint)
     
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    /*
+    
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -225,7 +225,7 @@ public Node NodeFromWorldPoint(Vector2 worldPoint)
             }
         }
     }
-    */
+    
 }
 
 
