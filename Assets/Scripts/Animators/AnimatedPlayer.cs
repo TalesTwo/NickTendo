@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class AnimatedPlayer : AnimatedEntity
     private void Start()
     {
         AnimationSetup();
+        EventBroadcaster.PlayerDeath += SetDead;
     }
 
     // Update is called once per frame
@@ -72,5 +74,10 @@ public class AnimatedPlayer : AnimatedEntity
     private void SetToIdle()
     {
         Interrupt(toIdleAnimation);
+    }
+
+    private void SetDead()
+    {
+        DefaultAnimationCycle = hurtAnimation;
     }
 }
