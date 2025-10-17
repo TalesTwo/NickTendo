@@ -13,6 +13,7 @@ public class RangedEnemyController : EnemyControllerBase
     [Header("Attack")]
     public GameObject projectile;
     public LayerMask doNotHit;
+    public float attackSpawnDistance;
     private float _attackCooldownMax;
     private float _attackCooldownMin;
     private float _attackCooldown;
@@ -36,7 +37,7 @@ public class RangedEnemyController : EnemyControllerBase
                 if (_attackTimer > _attackCooldown)
                 {
                     // instantiate a projectile and give it velocity
-                    Vector2 attackPosition = new Vector2(_transform.position.x + _direction.x, _transform.position.y + _direction.y);
+                    Vector2 attackPosition = new Vector2(_transform.position.x + _direction.x * attackSpawnDistance, _transform.position.y + _direction.y * attackSpawnDistance);
                     GameObject newProjectile = Instantiate(projectile, attackPosition, Quaternion.identity);
                     Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
                     ProjectileRb.velocity = _direction * _projectileSpeed;

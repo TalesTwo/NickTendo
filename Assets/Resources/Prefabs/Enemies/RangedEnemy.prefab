@@ -113,6 +113,7 @@ MonoBehaviour:
   doNotHit:
     serializedVersion: 2
     m_Bits: 4
+  attackSpawnDistance: 0.45
 --- !u!50 &7480070181977869436
 Rigidbody2D:
   serializedVersion: 4
