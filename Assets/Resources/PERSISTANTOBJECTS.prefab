@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2fee122be8f044882e6414baf8624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 4
-  cols: 4
+  rows: 5
+  cols: 1
   probabilityToAddOptionalDoor_OneRequiredDoor: 0.5
   probabilityToAddOptionalDoor_TwoRequiredDoors: 0.25
   probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.15
@@ -484,7 +484,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: fd7c2388ffaa7de449c332fe60f0714a, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

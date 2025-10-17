@@ -18,13 +18,29 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     // Offset for the interact prompt
     private GameObject interactPromptInstance;
+    
+    private bool _isAllowedToInteract = true;
 
 
+    public void SetInteractAllowedToInteract(bool isActive)
+    {
+        _isAllowedToInteract = isActive;
+        if (!isActive)
+        {
+            CanInteract = false;
+            if (interactPromptInstance != null)
+            {
+                interactPromptInstance.SetActive(false);
+            }
+        }
+    }
 
     public virtual void Interact()
     {
         // Play our interaction sound
+        if (!_isAllowedToInteract) { return; }
         AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
+        
     }
 
     protected virtual void Start()

@@ -151,6 +151,7 @@ public class FollowerEnemyController : EnemyControllerBase
     {
         Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
         _playerController.KnockBack(knockbackForce, direction, stunTimer);
+        _playerController.HitEffect(transform.position);
         PlayerStats.Instance.UpdateCurrentHealth(-damage);
     }
 
