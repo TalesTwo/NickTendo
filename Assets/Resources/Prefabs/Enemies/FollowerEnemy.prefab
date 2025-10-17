@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5626084319817434467}
   - component: {fileID: 3570777434882912848}
   - component: {fileID: 5909016426033719839}
+  - component: {fileID: 7206158782251651554}
   m_Layer: 2
   m_Name: FollowerEnemy
   m_TagString: Enemy
@@ -218,3 +219,29 @@ CapsuleCollider2D:
   m_Offset: {x: 0.03244853, y: -0.009569585}
   m_Size: {x: 0.40644503, y: 0.40644538}
   m_Direction: 0
+--- !u!114 &7206158782251651554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718088634739088283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ed8c0c7f3d2ee43b0180a800582e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable:
+  - drop: {fileID: 2502751402912625270, guid: 9a2f5140fd125844684788192c20793a, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: 2cf8bf55fa0e5ec49b485b57a54681c7, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: ddf2b60cd09f00046a96c721f61ec4a6, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: ff7c7908be21d76409cd182a0e678969, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
+    dropChance: 100
+  generalDropRate: 20
