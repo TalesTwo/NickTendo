@@ -7,6 +7,7 @@ public class RoomGridManager : MonoBehaviour
 {
     [Header("Room Grid Details")]
     public LayerMask unwalkableLayer;
+    public LayerMask pitLayer;
     private Vector2 gridRoomSize;
     public float nodeRadius = 0.5f;
 
@@ -75,7 +76,9 @@ public class RoomGridManager : MonoBehaviour
                 Vector2 boxSize = Vector2.one * (scaledRadius * 2 * 0.95999f);
 
                 bool hasCollision = Physics2D.OverlapBox(roomPoint, boxSize, 0f, unwalkableLayer);
-                bool walkable = !hasCollision;
+                // we are walkable if we dont have collision, and we are on not a pit layermask
+                bool bIsPitTile = (Physics2D.OverlapBox(roomPoint, boxSize, 0f, pitLayer));
+                bool walkable = !hasCollision && !bIsPitTile;
 
                 _grid[x, y] = new Node(walkable, roomPoint, x, y);
             }
@@ -200,7 +203,7 @@ public class RoomGridManager : MonoBehaviour
     
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    /*
+    
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -230,5 +233,5 @@ public class RoomGridManager : MonoBehaviour
             }
         }
     }
-    */
+    
 }
