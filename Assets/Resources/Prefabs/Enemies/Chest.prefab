@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4538521557190921826}
   - component: {fileID: 8051222349043791377}
   - component: {fileID: 7266837796748594910}
+  - component: {fileID: 2163536137498407680}
   m_Layer: 3
   m_Name: Chest
   m_TagString: Untagged
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1095038227
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4931053149192371854, guid: 83394407dd42219489981ee008cca2ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -218,3 +219,29 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &2163536137498407680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451576646126675803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ed8c0c7f3d2ee43b0180a800582e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable:
+  - drop: {fileID: 2502751402912625270, guid: 9a2f5140fd125844684788192c20793a, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: 2cf8bf55fa0e5ec49b485b57a54681c7, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: ddf2b60cd09f00046a96c721f61ec4a6, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: ff7c7908be21d76409cd182a0e678969, type: 3}
+    dropChance: 100
+  - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
+    dropChance: 100
+  generalDropRate: 100

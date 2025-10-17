@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1095038227
+  m_SortingLayer: 2
   m_SortingOrder: 10
   m_Sprite: {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,6 +107,8 @@ MonoBehaviour:
   verticalInput: 0
   attackAnimation: {fileID: 2407103696244724232, guid: 5d12879e9f121ae4885584d2e23e374f, type: 3}
   dashAnimation: {fileID: 223078568798008408, guid: f34d64407862b8f4580da16d58dcccbc, type: 3}
+  hitEffect: {fileID: 2560593414228584792, guid: 859f9514e29dfcd49a67c085abee479d, type: 3}
+  hitEffectDistance: 0.3
 --- !u!50 &6926609328043849505
 Rigidbody2D:
   serializedVersion: 4

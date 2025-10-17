@@ -34,6 +34,8 @@ public class Room : MonoBehaviour
     private (int row, int col) RoomCoords = (-1, -1);
     
     
+    
+    
     // Special logic for the spawn room
     private void SpecialRoomLogic()
     {
@@ -44,35 +46,55 @@ public class Room : MonoBehaviour
         // doors should only be enabled as Normal if the player has more 1 persona remaining
         if (roomType == Types.RoomType.Spawn)
         {
+            
             int numberOfPersonas = PersonaManager.Instance.GetNumberOfAvailablePersonas();
             if (PersonaManager.Instance.GetPersona() == Types.Persona.Normal && numberOfPersonas > 1)
             {
                 // disable all doors
                 foreach (Transform door in doors.transform)
                 {
-                    door.gameObject.SetActive(false);
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        doorComponent.SetDoorState(Door.DoorState.Locked);
+                    }
                 }
+                
             }
             else
             {
                 foreach (Transform door in doors.transform)
                 {
-                    door.gameObject.SetActive(true);
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        // if the door is open then we don't want to close it
+                        if (doorComponent.GetCurrentState() == Door.DoorState.Open)
+                            continue;
+                        doorComponent.SetDoorState(Door.DoorState.Closed);
+                    }
                 }
             }
+            
         }
     }
-
-    private void Update()
+    
+    public void Update()
     {
-        SpecialRoomLogic();
-        
-        
+        // only run this logic if we are the spawn room
+        if (roomType == Types.RoomType.Spawn)
+        {
+            SpecialRoomLogic();
+        }
     }
-
+    
     private void Start()
     {
         roomSpawnController = GetComponent<RoomSpawnController>();
+        
+        SpecialRoomLogic();
     }
 
     public void SetRoomDifficulty(int difficulty)

@@ -75,18 +75,18 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 1095038227
+  m_SortingLayer: 2
+  m_SortingOrder: 8
+  m_Sprite: {fileID: -478394474689224354, guid: aaabc797fcb8623468c796ec9500327c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.21, y: 3.79}
+  m_Size: {x: 0.9, y: 0.88}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &2719054816464069916
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.895
+  m_Radius: 0.54455197
 --- !u!114 &4091901693953286788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,10 +138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Movement Speed Item
-  PickupSFX: {fileID: 0}
   CanAutoPickup: 1
   BuffType: 2
-  BuffValue: 5
+  BuffValue: 1
 --- !u!82 &7976342880477101657
 AudioSource:
   m_ObjectHideFlags: 0
