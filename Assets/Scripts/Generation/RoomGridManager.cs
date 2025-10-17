@@ -20,6 +20,8 @@ public class RoomGridManager : MonoBehaviour
     private Transform _player;  // <-- Drag your player here in the Inspector
     // Minimum distance from any door in world units
     const float minDistanceFromDoor = 4f;
+    // the extra grid resolution multiplier (2 = 4 subcells per cell, 3 = 9 subcells per cell..)
+    const int resolutionMultiplier = 2;
     
     // Start is called before the first frame update
     private void Awake()
@@ -46,61 +48,76 @@ public class RoomGridManager : MonoBehaviour
     // create the grid starting from the bottom left of the room
     private void CreateGrid()
     {
-        _grid = new Node[gridSizeX, gridSizeY];
-        _bottomLeft = (Vector2)transform.position - Vector2.right * gridRoomSize.x / 2 - Vector2.up * gridRoomSize.y / 2;
+        _grid = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
+    
+        // Adjust node radius accordingly
+        float scaledRadius = nodeRadius / resolutionMultiplier;
+    
+        _bottomLeft = (Vector2)transform.position 
+                      - Vector2.right * gridRoomSize.x / 2 
+                      - Vector2.up * gridRoomSize.y / 2;
 
-        for (int x = 0; x < gridSizeX; x++)
+        for (int x = 0; x < gridSizeX * resolutionMultiplier; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < gridSizeY * resolutionMultiplier; y++)
             {
-                // check for wall, if not, then set new cell to walkable
-                Vector2 roomPoint = new Vector2(_bottomLeft.x + x + nodeRadius, _bottomLeft.y + y + nodeRadius);
-                Vector2 boxSize = Vector2.one * (nodeRadius * 2 * 0.95999f);
-                bool walkable = !(Physics2D.OverlapBox(roomPoint, boxSize, 0f, unwalkableLayer));
+                // Each subcell is now smaller
+                Vector2 roomPoint = new Vector2(
+                    _bottomLeft.x + (x + 0.5f) * (scaledRadius * 2),
+                    _bottomLeft.y + (y + 0.5f) * (scaledRadius * 2)
+                );
+
+                Vector2 boxSize = Vector2.one * (scaledRadius * 2 * 0.95999f);
+
+                bool hasCollision = Physics2D.OverlapBox(roomPoint, boxSize, 0f, unwalkableLayer);
+                bool walkable = !hasCollision;
+
                 _grid[x, y] = new Node(walkable, roomPoint, x, y);
             }
         }
     }
+
     
     // calculate the nearest node based on the current position
-    public Node NodeFromWorldPoint(Vector2 worldPoint)
-    {
-        float percentX = Mathf.Clamp01((worldPoint.x - _bottomLeft.x) / gridRoomSize.x);
-        float percentY = Mathf.Clamp01((worldPoint.y - _bottomLeft.y) / gridRoomSize.y);
+public Node NodeFromWorldPoint(Vector2 worldPoint)
+{
 
-        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
+    float percentX = Mathf.Clamp01((worldPoint.x - _bottomLeft.x) / gridRoomSize.x);
+    float percentY = Mathf.Clamp01((worldPoint.y - _bottomLeft.y) / gridRoomSize.y);
 
-        return _grid[x, y];
-    }
+    int x = Mathf.RoundToInt((gridSizeX * resolutionMultiplier - 1) * percentX);
+    int y = Mathf.RoundToInt((gridSizeY * resolutionMultiplier - 1) * percentY);
+
+    return _grid[x, y];
+}
 
     // find all neighboring cells
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
+        
+        int maxX = gridSizeX * resolutionMultiplier;
+        int maxY = gridSizeY * resolutionMultiplier;
 
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
             {
-                // filter any spots that are not in the cardinal directions.
+                // Only cardinal directions
                 if ((x == 0 && y == 0) || (Mathf.Abs(x) == 1 && Mathf.Abs(y) == 1))
-                {
                     continue;
-                }
-                
+
                 int checkX = node.gridX + x;
                 int checkY = node.gridY + y;
 
-                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
-                {
+                if (checkX >= 0 && checkX < maxX && checkY >= 0 && checkY < maxY)
                     neighbours.Add(_grid[checkX, checkY]);
-                }
             }
         }
-        
+
         return neighbours;
     }
+
 
 
     public Transform FindValidWalkableCell()
@@ -176,8 +193,9 @@ public class RoomGridManager : MonoBehaviour
         return temp.transform;
     }
     
-    /*
+    
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
+    /*
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -186,24 +204,24 @@ public class RoomGridManager : MonoBehaviour
 
         if (_grid != null)
         {
+            // Match whatever multiplier you used when generating the grid
+            float scaledRadius = nodeRadius / resolutionMultiplier;
+
             foreach (Node n in _grid)
             {
                 // Default color based on walkability
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.color = n.walkable ? Color.white : Color.red;
 
                 // Highlight the node the player is standing on
-                if (_player != null && Vector2.Distance(n.worldPosition, _player.position) < nodeRadius)
-                {
+                if (_player != null && Vector2.Distance(n.worldPosition, _player.position) < scaledRadius)
                     Gizmos.color = Color.green;
-                }
 
                 // If this node is part of the current path, override color to black
                 if (path != null && path.Contains(n))
-                {
                     Gizmos.color = Color.black;
-                }
 
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius * 2 - 0.1f));
+                // Use the scaled radius for correct cube size
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (scaledRadius * 2 - 0.05f));
             }
         }
     }
