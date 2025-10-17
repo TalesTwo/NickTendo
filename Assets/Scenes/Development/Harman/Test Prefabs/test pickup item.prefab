@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1095038227
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -7929401417552255745, guid: 445f67c03f191e74081cdce1a09f9d86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -138,8 +138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Rowlet
-  Description: My boi
-  PickupSFX: {fileID: -8326022446778235669}
+  CanAutoPickup: 1
+  BuffType: 0
+  BuffValue: 1
 --- !u!82 &-8326022446778235669
 AudioSource:
   m_ObjectHideFlags: 0
