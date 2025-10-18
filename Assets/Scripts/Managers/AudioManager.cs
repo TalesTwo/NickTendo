@@ -240,6 +240,10 @@ namespace Managers
         {
             PlaySFX(explosion, volume, deviation);
         }
+        public void PlayOpenDoorSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(openDoor, volume, deviation);
+        }
 
 
         //Enemy Sounds
