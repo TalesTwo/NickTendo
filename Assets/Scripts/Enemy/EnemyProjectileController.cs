@@ -37,6 +37,7 @@ public class EnemyProjectileController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
+            Managers.AudioManager.Instance.PlayEnemyShotHitSound(1f, 0.2f);
             DoDamage();
             DestroySelf();
         }

@@ -30,8 +30,10 @@ namespace Managers
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
         public AudioClip enemyDeath;
+        public AudioClip shooterMovement;
         public AudioClip shot;
         public AudioClip shotHit;
+        public AudioClip shotMiss;
         public AudioClip followerHit;
         public AudioClip followerMovement;
 
@@ -40,9 +42,10 @@ namespace Managers
         public AudioClip transitionend;
         public AudioClip Keyget;
         public AudioClip Coinget;
+        public AudioClip ItemGet;
         public AudioClip openDoor;
         public AudioClip unlockDoor;
-        public AudioClip hittingSpikes;
+        public AudioClip explosion;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -195,10 +198,7 @@ namespace Managers
         {
             PlaySFX(PlayerDeath, volume, deviation);
         }
-        public void PlayPlayerInteractSound(float volume = 1, float deviation = 0)
-        {
-            PlaySFX(Interact, volume, deviation);
-        }
+
         public void PlayPlayerTalkingTone(float volume = 1)
         {
             int tonenumber;
@@ -211,8 +211,11 @@ namespace Managers
             PlaySFX(tone, volume);
         }
 
-
-
+        //General Sounds
+        public void PlayPlayerInteractSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Interact, volume, deviation);
+        }
         public void PlayFirstTransitionSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(transitionearly, volume, deviation);
@@ -229,6 +232,19 @@ namespace Managers
         {
             PlaySFX(Coinget, volume, deviation);
         }
+        public void PlayItemGetSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(ItemGet, volume, deviation);
+        }
+        public void PlayExplosionSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(explosion, volume, deviation);
+        }
+        public void PlayOpenDoorSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(openDoor, volume, deviation);
+        }
+
 
         //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
@@ -239,9 +255,29 @@ namespace Managers
         {
             PlaySFX(enemyDeath, volume, deviation);
         }
+        public void PlayFollowMovementSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(followerMovement, volume, deviation);
+        }
+        public void PlayFollowerHitSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(followerHit, volume, deviation);
+        }
+        public void PlayRangedEnemyMovementSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(shooterMovement, volume, deviation);
+        }
         public void PlayEnemyShotSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(shot, volume, deviation);
+        }
+        public void PlayEnemyShotHitSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(shotHit, volume, deviation);
+        }
+        public void PlayEnemyShotMissSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(shotMiss, volume, deviation);
         }
 
         //UI Sounds
@@ -257,6 +293,10 @@ namespace Managers
         {
             PlaySFX(dialogueClick, volume, deviation);
         }
+        public void PlayItemBuySound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(buyItem, volume, deviation);
+        }
 
 
         //Soundtrack Functions
@@ -268,7 +308,18 @@ namespace Managers
         {
             PlayBackgroundSoundtrack(TitleTheme, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
         }
-
+        public void PlayShopTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(Shop, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
+        }
+        public void PlayBossTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(Boss, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
+        }
+        public void PlayCreditsTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(Credits, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
+        }
 
         private AudioSource GetFreeSource()
         {
