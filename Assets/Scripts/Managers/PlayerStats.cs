@@ -100,34 +100,42 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         if (BuffType == PlayerStatsEnum.Max_Health)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateMaxHealth(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Movement_Speed)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateMovementSpeed(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Dash_Speed)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateDashSpeed(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Attack_Damage)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateAttackDamage(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Dash_Damage)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateDashDamage(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Dash_Cooldown)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateDashCooldown(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Attack_Cooldown)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateAttackCooldown(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Dash_Distance)
         {
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateDashDistance(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Current_Health)
