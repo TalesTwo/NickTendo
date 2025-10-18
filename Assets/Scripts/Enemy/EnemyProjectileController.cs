@@ -10,13 +10,21 @@ public class EnemyProjectileController : MonoBehaviour
     public float ProjectileKnockback;
     public float stunTimer;
 
+    public float lifeDuration = 5f;
+
     private GameObject _player;
     private PlayerController _playerController;
+    private Rigidbody2D _rb;
+
+    private bool _isPlayerAttack = false;
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerController = _player.GetComponent<PlayerController>();
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        EventBroadcaster.PlayerDeath += DestroySelf;
+        Invoke(nameof(DestroySelf), lifeDuration);
     }
     
     // on collision, destroy
@@ -34,11 +42,40 @@ public class EnemyProjectileController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PlayerAttack"))
+        {
+            Debug.Log(other.gameObject.name);
+            _isPlayerAttack = true;
+            Deflect();
+        }
+        
+        if (other.gameObject.CompareTag("Enemy") && _isPlayerAttack)
+        {
+            DestroySelf();
+        }
+    }
+
     // destroy with a particle effect
     private void DestroySelf()
     {
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    // deflect the enemy projectile and turn it into a player attack
+    private void Deflect()
+    {
+        // turn into player attack
+        gameObject.tag = "PlayerAttack";
+        
+        // deflect towards mouse position
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        Vector3 mouseDirection = (mousePosition - transform.position).normalized;
+        float projectileSpeed = _rb.velocity.magnitude;
+        _rb.velocity= mouseDirection * projectileSpeed;
     }
 
     // do damage to the player

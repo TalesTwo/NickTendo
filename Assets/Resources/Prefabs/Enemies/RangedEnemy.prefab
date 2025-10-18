@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 563192251687869648}
   - component: {fileID: 7288839828136079936}
   - component: {fileID: 4356571639101041153}
+  - component: {fileID: 5152000528352275147}
   m_Layer: 2
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -77,11 +78,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1095038227
+  m_SortingLayer: 1
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.0063653057, g: 0.6886792, b: 0, a: 1}
+  m_Sprite: {fileID: 1619342443083222518, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -175,17 +176,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0025200844, y: -0.12095025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.875, y: 1.1875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.7631388, y: 0.9697624}
   m_EdgeRadius: 0
 --- !u!70 &7288839828136079936
 CapsuleCollider2D:
@@ -221,8 +222,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: -0.00000023841858, y: -0.037796855}
+  m_Size: {x: 0.80849504, y: 1.0251977}
   m_Direction: 0
 --- !u!114 &4356571639101041153
 MonoBehaviour:
@@ -250,3 +251,26 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
     dropChance: 100
   generalDropRate: 30
+--- !u!114 &5152000528352275147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413488171680857417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93250482c4ecbc41a602e3860659195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 1619342443083222518, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: 634189667866449442, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: -2570300341543693941, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: 4468571113375002077, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: -2888724893806449119, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: -8128115808696623154, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  - {fileID: 4761633822260975408, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  Framerate: 12
+  SpriteRenderer: {fileID: 5494889573112493696}
+  index: 0
