@@ -19168,14 +19168,14 @@ MonoBehaviour:
       minSpawnCount: 1
       maxSpawnCount: 2
       spawnChance: 0.5
-    - enemyPrefab: {fileID: 2413488171680857417, guid: 0e7ded53104e73a4aa593d6a937f1f8d, type: 3}
-      minSpawnCount: 1
-      maxSpawnCount: 2
-      spawnChance: 0.5
     - enemyPrefab: {fileID: 6451576646126675803, guid: 59a56dea38464a14e9b383cf9216319d, type: 3}
       minSpawnCount: 1
       maxSpawnCount: 1
       spawnChance: 0.25
+    - enemyPrefab: {fileID: 6451576646126675803, guid: 1ee3121e2c657e5419d2788ee2a2614f, type: 3}
+      minSpawnCount: 1
+      maxSpawnCount: 3
+      spawnChance: 0.5
   - spawnType: 1
     Spawnables:
     - enemyPrefab: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}

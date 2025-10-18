@@ -15122,6 +15122,10 @@ MonoBehaviour:
       minSpawnCount: 1
       maxSpawnCount: 2
       spawnChance: 0.1
+    - enemyPrefab: {fileID: 6451576646126675803, guid: 1ee3121e2c657e5419d2788ee2a2614f, type: 3}
+      minSpawnCount: 1
+      maxSpawnCount: 2
+      spawnChance: 0.5
   - spawnType: 0
     Spawnables:
     - enemyPrefab: {fileID: 3718088634739088283, guid: 2642759b201917948a506645585a9ce7, type: 3}
