@@ -79,7 +79,18 @@ namespace Managers
         }
         private void OnPlayerChangedRoom((int row, int col) newRoomCoords)
         {
-            DisableAllRoomsExceptCurrent(newRoomCoords);
+            // enable the new rooms corns
+            Room newRoom = dungeonRooms[newRoomCoords.row][newRoomCoords.col];
+            newRoom.gameObject.SetActive(true);
+            // and then after a small delay, disable all other rooms
+            
+            StartCoroutine(DisableOtherRoomsCoroutine(newRoomCoords));
+        }
+        
+        private IEnumerator DisableOtherRoomsCoroutine((int row, int col) currentRoomCoords)
+        {
+            yield return new WaitForSeconds(0.5f); // wait half a second before disabling other rooms
+            DisableAllRoomsExceptCurrent(currentRoomCoords);
         }
         
         
