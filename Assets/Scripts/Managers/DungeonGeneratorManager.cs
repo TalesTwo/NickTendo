@@ -97,7 +97,7 @@ namespace Managers
             DungeonGeneration();
             
             // teleport the player into the dungeon
-            Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.position;
+            Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
         }
