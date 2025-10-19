@@ -203,7 +203,7 @@ public class RoomGridManager : MonoBehaviour
     
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    
+    /*
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -233,5 +233,6 @@ public class RoomGridManager : MonoBehaviour
             }
         }
     }
+    */
     
 }
