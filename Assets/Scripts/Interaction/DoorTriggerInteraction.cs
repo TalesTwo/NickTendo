@@ -30,6 +30,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
         {
             DebugUtils.Log("DoorTriggerInteraction: Opening door.");
+            Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
             _doorScript.SetDoorState(Door.DoorState.Open);
             return;
         }

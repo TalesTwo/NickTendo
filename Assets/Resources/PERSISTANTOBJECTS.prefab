@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rows: 5
-  cols: 1
-  probabilityToAddOptionalDoor_OneRequiredDoor: 0.5
-  probabilityToAddOptionalDoor_TwoRequiredDoors: 0.25
-  probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.15
+  cols: 5
+  probabilityToAddOptionalDoor_OneRequiredDoor: 0
+  probabilityToAddOptionalDoor_TwoRequiredDoors: 0
+  probabilityToAddOptionalDoor_ThreeRequiredDoors: 0
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}

@@ -75,20 +75,23 @@ MonoBehaviour:
   BUDEEDeath: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
+  shooterMovement: {fileID: 0}
   shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
-  shotHit: {fileID: 0}
+  shotHit: {fileID: 8300000, guid: a45c176413fba6a4585317aea82176b6, type: 3}
+  shotMiss: {fileID: 0}
   followerHit: {fileID: 0}
   followerMovement: {fileID: 0}
   transitionearly: {fileID: 8300000, guid: 9cfb84511d160354384d862384f4e948, type: 3}
   transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
   Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
   Coinget: {fileID: 8300000, guid: ca9a62b5c26f1f341b717e778a548212, type: 3}
-  openDoor: {fileID: 0}
+  ItemGet: {fileID: 8300000, guid: 9ec3b02ae6967144eab4725d514eefe7, type: 3}
+  openDoor: {fileID: 8300000, guid: 66a09fbb8c4dcbf4ba38dc57e25bc84b, type: 3}
   unlockDoor: {fileID: 0}
-  hittingSpikes: {fileID: 0}
+  explosion: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
   cursorHover: {fileID: 8300000, guid: 6df649b389e6de7428b7250737fbdf76, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
-  buyItem: {fileID: 0}
+  buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
   dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
   Overworld: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
   Boss: {fileID: 0}

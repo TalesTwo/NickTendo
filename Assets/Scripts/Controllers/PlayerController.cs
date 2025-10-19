@@ -225,4 +225,9 @@ public class PlayerController : MonoBehaviour
         _isDead = false;
     }
 
+    public bool IsDashing()
+    {
+        return _isDashMoving;
+    }
+
 }

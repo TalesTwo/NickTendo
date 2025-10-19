@@ -84,6 +84,7 @@ public class ShopManager : MonoBehaviour
         ShopItem AttemptItem = ShopList[Index].GetComponent<ShopItem>();
         if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
         {
+            Managers.AudioManager.Instance.PlayItemBuySound(1, 0);
             PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -AttemptItem.itemValue);
             PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
             ShopUIM.RemoveItemFromShop(Index);
