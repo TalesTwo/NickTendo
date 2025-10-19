@@ -25,8 +25,10 @@ public class RangedEnemyController : EnemyControllerBase
     {
         _attackTimer += Time.deltaTime;
 
-        // raycast for player, do not shoot unless you can see him
-        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~doNotHit);
+        // raycast for player, do not shoot unless you can see him (we also will ignore pits)
+        int finalMask = doNotHit | LayerMask.GetMask("Pits");
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~finalMask);
+
 
         if (hit.collider != null)
         {
