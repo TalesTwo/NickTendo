@@ -82,6 +82,8 @@ namespace Managers
             DisableAllRoomsExceptCurrent(newRoomCoords);
         }
         
+        
+        
         private void OnGameStarted()
         {
             LoadIntoDungeon();
@@ -143,6 +145,9 @@ namespace Managers
             // start from the start room, and calculate the difficulty of each room
             Room startingRoom = dungeonRooms[startPos.x][startPos.y];
             CalculateRoomDifficulty(dungeonRooms, startingRoom, startPos.x, startPos.y);
+            
+            // warmup the dungeon
+            //StartCoroutine(PrewarmDungeon(dungeonRooms));
             
         }
         
@@ -487,8 +492,35 @@ namespace Managers
             {
                 DestroyImmediate(obj.gameObject);
             }
-            
+            // destroy all projectiles
+            EnemyProjectileController[] existingProjectiles = FindObjectsByType<EnemyProjectileController>(FindObjectsSortMode.None);
+            foreach (EnemyProjectileController proj in existingProjectiles)
+            {
+                DestroyImmediate(proj.gameObject);
+            }
         }
+        
+        IEnumerator PrewarmDungeon(List<List<Room>> dungeonLayout)
+        {
+            foreach (var row in dungeonLayout)
+            {
+                foreach (var room in row)
+                {
+                    if (room != null)
+                    {
+                        room.gameObject.SetActive(true);
+                        yield return null; // 1 frame ensures Awake/Start/shaders run
+                        // if its not the start room, disable it again
+                        if (room.GetRoomCoords() != (startPos.x, startPos.y))
+                        {
+                            room.gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
+            Debug.Log("Dungeon prewarm complete");
+        }
+
         
         private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position, int row = -1, int col = -1)
         {

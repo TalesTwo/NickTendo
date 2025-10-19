@@ -117,6 +117,16 @@ public class Room : MonoBehaviour
 
     public void Awake()
     {
+        // Catch the doors, incase its null
+        if (doors == null)
+        {
+            doors = transform.Find("Doors")?.gameObject;
+            if (doors == null)
+            {
+                Debug.LogError($"{name}: Could not find child object named 'Doors'.");
+                return;
+            }
+        }
         InitializeRoom();
     }
     
