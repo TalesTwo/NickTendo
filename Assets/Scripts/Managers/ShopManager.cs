@@ -18,7 +18,6 @@ public class ShopManager : MonoBehaviour
         GetRandomShopList();
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
         SetItems();
-        //PlayerStats.Instance.DisplayAllStats();
     }
 
     // Update is called once per frame
@@ -86,10 +85,7 @@ public class ShopManager : MonoBehaviour
         if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
         {
             PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -AttemptItem.itemValue);
-            //PlayerStats.Instance.UpdateCoins(-AttemptItem.itemValue);
             PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
-            //PlayerStats.Instance.DisplayAllStats();
-            /*ShopUIM.UpdateCoinDisplay();*/
             ShopUIM.RemoveItemFromShop(Index);
         }
         else
