@@ -81,7 +81,6 @@ public class Room : MonoBehaviour
             
         }
     }
-
     
     public void Update()
     {
@@ -102,11 +101,11 @@ public class Room : MonoBehaviour
         }
 
         
-
     }
 
     public void UpdateLockedDoors(bool forceLocked = false)
     {
+        
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
@@ -132,19 +131,21 @@ public class Room : MonoBehaviour
             }
             else
             {
-                DebugUtils.Log($"Room: {name} has cleared all enemies. Unlocking doors.");
+                // set all locked doors to closed
                 foreach (Transform door in doors.transform)
                 {
                     // cast to a Door
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
+                        DebugUtils.Log($"Unlocking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Locked)
                         {
                             doorComponent.SetDoorState(Door.DoorState.Closed);
+                            DebugUtils.Log($"Room: {name} unlocking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
-                } 
+                }
             }
         }
     }
@@ -222,9 +223,6 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         
         bIsFinalized = false;
-        
-        
-        
     }
     
 
@@ -232,13 +230,12 @@ public class Room : MonoBehaviour
     {
         Action action = bEnabled ? EnableRoom : DisableRoom;
         action();
-        
     }
 
     
-    
-    private IEnumerator DelayedUpdateRoom(float delay)
+    private IEnumerator EnableRoomCoroutine(float delay)
     {
+        // wait for end of frame to ensure all room content is loaded
         yield return new WaitForSeconds(delay);
         UpdateLockedDoors();
     }
@@ -247,14 +244,13 @@ public class Room : MonoBehaviour
     {
         // disable the room here
         gameObject.SetActive(true);
-        UpdateLockedDoors();
+        StartCoroutine(EnableRoomCoroutine(2f));
         // this is a separate function, incase we need to do more complex logic in the future
-        
+
     }
     private void DisableRoom()
     {
         // disable the room here
-        UpdateLockedDoors();
         gameObject.SetActive(false);
         
         // this is a separate function, incase we need to do more complex logic in the future

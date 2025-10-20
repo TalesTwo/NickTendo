@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     [SerializeField] private Sprite openDoor;
     [SerializeField] private Sprite closedDoor;
     [SerializeField] private Sprite lockedDoor;
-    private DoorState _currentState = DoorState.Closed;
+    private DoorState _currentState = DoorState.Locked;
     
     // Color to hold the "opened" color of the door
     // the first time we interact with a door, we will change it to be opened
@@ -57,6 +57,7 @@ public class Door : MonoBehaviour
                 spriteRenderer.sprite = lockedDoor;
                 spriteRenderer.color = lockedColor;
                 _doorTriggerInteraction.SetInteractAllowedToInteract(false);
+                DebugUtils.LogSuccess("the door is now locked");
                 break;
             default:
                 Debug.LogError("Invalid door state");
