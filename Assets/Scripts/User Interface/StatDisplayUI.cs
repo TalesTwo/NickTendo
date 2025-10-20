@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,31 +12,24 @@ public class StatDisplayUI : MonoBehaviour
     [SerializeField]
     private PlayerStatsEnum[] _statTypeList;
     [SerializeField]
-    private PlayerStatsEnum[] _bannedStats;
+    private TextMeshProUGUI _statDisplayText;
 
-
+    private float _statDisplayNumber;
     [SerializeField]
     private GameObject _tooltip;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
-   
+
     private void Start()
     {
         _statDictionary = new Dictionary<PlayerStatsEnum, float[]>();
-        //_tooltip = GameObject.Find("Tooltip");
-        //_tooltip.GetComponent<TooltipUI>().HideTooltip();
 
         SetStatDict();
+        _statDisplayNumber = 0;
 
         EventBroadcaster.PersonaChanged += SetBaseStats;
-        EventBroadcaster.PlayerStatsChanged += SetBuffedStats;
-    }
+        EventBroadcaster.PlayerStatsChanged += HandleStatChanged;
 
-    private void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.L))
-        {
-            Test();
-        }*/
+        gameObject.SetActive(false);
     }
 
     void SetStatDict()
@@ -61,40 +56,68 @@ public class StatDisplayUI : MonoBehaviour
             else if (_buffType == PlayerStatsEnum.Movement_Speed) { _baseStat = PlayerStats.Instance.GetMovementSpeed(); }
             
             _statDictionary[_buffType][0] = _baseStat;
+            _statDictionary[_buffType][1] = 0;
+            gameObject.SetActive(false);
         }
+    }
+
+    void HandleStatChanged(PlayerStatsEnum _buffType, float _buffValue)
+    {
+        SetBuffedStats(_buffType, _buffValue);
+        HandleDisplayText(_buffType, _buffValue);
     }
 
     void SetBuffedStats(PlayerStatsEnum _buffType, float _buffValue)
     {
-        float _buffedStat = 0;
-        if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _buffedStat = PlayerStats.Instance.GetAttackCooldown(); }
-        else if (_buffType == PlayerStatsEnum.Attack_Damage) { _buffedStat = PlayerStats.Instance.GetAttackDamage(); }
-        else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _buffedStat = PlayerStats.Instance.GetDashCooldown(); }
-        else if (_buffType == PlayerStatsEnum.Dash_Damage) { _buffedStat = PlayerStats.Instance.GetDashDistance(); }
-        else if (_buffType == PlayerStatsEnum.Dash_Speed) { _buffedStat = PlayerStats.Instance.GetDashSpeed(); }
-        else if (_buffType == PlayerStatsEnum.Movement_Speed) { _buffedStat = PlayerStats.Instance.GetMovementSpeed(); }
-
-        _statDictionary[_buffType][1] = _buffedStat;
+        if (_statDictionary.ContainsKey(_buffType))
+        {
+            _statDictionary[_buffType][1] += _buffValue;
+        }
     }
 
-    string Test()
+    void HandleDisplayText(PlayerStatsEnum _buffType, float _buffValue)
     {
-        string buffs = "";
+        if (_statDictionary.ContainsKey(_buffType))
+        {
+            _statDisplayNumber += _statDictionary[_buffType][1];
+            if (_statDisplayNumber < 0)
+            {
+                _statDisplayNumber *= -1;
+            }
+
+            gameObject.SetActive(true);
+            _statDisplayText.SetText(_statDisplayNumber.ToString());
+        }        
+    }
+
+    string TooltipText()
+    {
+        string _buffText = "";
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
-            buffs += _buffType + " has a base stat of " + _statDictionary[_buffType][0] + " and a buff of " + _statDictionary[_buffType][1] + "\n";
+            _buffText += AddSpace(_buffType) + "\n" +
+                         "Base stat: " + _statDictionary[_buffType][0] + ", Buffed by: " + _statDictionary[_buffType][1] + "\n\n";
         }
-        return buffs;
+        return _buffText;
+    }
+
+
+    string AddSpace(PlayerStatsEnum _nameInEnum)
+    {
+        string[] _splitName = _nameInEnum.ToString().Split('_');
+        return String.Join(" ", _splitName);
     }
 
     public void Enter(bool _hasEntered)
     {
         if(_hasEntered)
         {
-            _tooltip.GetComponent<TooltipUI>().ShowTooltip(Test());
+            DebugUtils.Log("enter");
+            _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
         }
         else
         {
+            DebugUtils.Log("exit");
             _tooltip.GetComponent<TooltipUI>().HideTooltip();
         }
     }
