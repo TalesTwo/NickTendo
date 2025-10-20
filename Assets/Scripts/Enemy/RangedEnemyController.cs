@@ -25,8 +25,10 @@ public class RangedEnemyController : EnemyControllerBase
     {
         _attackTimer += Time.deltaTime;
 
-        // raycast for player, do not shoot unless you can see him
-        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~doNotHit);
+        // raycast for player, do not shoot unless you can see him (we also will ignore pits)
+        int finalMask = doNotHit | LayerMask.GetMask("Pits");
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~finalMask);
+
 
         if (hit.collider != null)
         {
@@ -121,6 +123,9 @@ public class RangedEnemyController : EnemyControllerBase
     // follow the path
     protected override IEnumerator Follow()
     {
+        // error check for while we are in a pit
+        if(currentPath == null || currentPath.Count == 0)
+            yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
 
