@@ -19410,7 +19410,7 @@ MonoBehaviour:
     WestDoorActive: 1
   doors: {fileID: 5905571152510921296}
   bRequireFullRoomCleared: 1
-  roomType: 0
+  roomType: 7
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
@@ -19431,7 +19431,7 @@ MonoBehaviour:
     m_Bits: 8
   pitLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   nodeRadius: 0.5
 --- !u!114 &2690134955688737402
 MonoBehaviour:
