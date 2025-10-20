@@ -104,6 +104,11 @@ namespace System
         public delegate void EnemyDeathHandler(EnemyControllerBase enemy, Room room = null);
         public static event EnemyDeathHandler EnemyDeath;
         public static void Broadcast_EnemyDeath(EnemyControllerBase enemy, Room room = null) { EnemyDeath?.Invoke(enemy, room); }
+        
+        // broadcast for closing the persona UI
+        public delegate void ClosePersonaUIHandler();
+        public static event ClosePersonaUIHandler ClosePersonaUI;
+        public static void Broadcast_ClosePersonaUI() { ClosePersonaUI?.Invoke(); }
 
 
         
