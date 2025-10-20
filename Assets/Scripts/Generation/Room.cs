@@ -15,6 +15,7 @@ public class Room : MonoBehaviour
     [SerializeField] public Types.DoorConfiguration configuration;
     [SerializeField] private GameObject doors;
     [SerializeField] private bool bRequireFullRoomCleared; // parent object for all room content (enemies, pickups, etc)
+    public bool GetRequireFullRoomCleared() { return bRequireFullRoomCleared; }
     
     [Space(10f)]
     [Header("Room Type")]
