@@ -49,11 +49,13 @@ public class EnemyProjectileController : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             _isPlayerAttack = true;
+            Managers.AudioManager.Instance.PlayDeflectSound(1, 0.25f);
             Deflect();
         }
         
         if (other.gameObject.CompareTag("Enemy") && _isPlayerAttack)
         {
+            Managers.AudioManager.Instance.PlayEnemyShotHitSound(1, 0);
             DestroySelf();
         }
     }

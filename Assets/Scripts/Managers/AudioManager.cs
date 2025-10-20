@@ -22,6 +22,7 @@ namespace Managers
         public AudioClip swordHitEffect;
         public AudioClip PlayerDeath;
         public AudioClip Interact;
+        public AudioClip Deflect;
 
         [Header("BUDEE Effects")]
         public List<AudioClip> BUDEETalkingTones;
@@ -209,6 +210,10 @@ namespace Managers
 
             PlaySFX(type, volume);
             PlaySFX(tone, volume);
+        }
+        public void PlayDeflectSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Deflect, volume, deviation);
         }
 
         //General Sounds
