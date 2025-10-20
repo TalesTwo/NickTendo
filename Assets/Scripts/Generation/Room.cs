@@ -101,17 +101,18 @@ public class Room : MonoBehaviour
             }
         }
 
-        UpdateLockedDoors();
+        
 
     }
 
-    private void UpdateLockedDoors()
+    public void UpdateLockedDoors(bool forceLocked = false)
     {
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
-            if (enemyCount > 0)
+            if (enemyCount > 0 || forceLocked)
             {
+                DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
                 {
@@ -119,15 +120,19 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
+                        DebugUtils.Log($"Locking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Closed)
                         {
+                            
                             doorComponent.SetDoorState(Door.DoorState.Locked);
+                            DebugUtils.Log($"Room: {name} locking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
                 }
             }
             else
             {
+                DebugUtils.Log($"Room: {name} has cleared all enemies. Unlocking doors.");
                 foreach (Transform door in doors.transform)
                 {
                     // cast to a Door
@@ -152,8 +157,26 @@ public class Room : MonoBehaviour
         
         SpecialRoomLogic();
         
+        // hook up to the enemy death event to check if we need to unlock doors
+        EventBroadcaster.EnemyDeath += OnEnemyDeath;
     }
-
+    
+    private void OnEnemyDeath(EnemyControllerBase enemy, Room room)
+    {
+        // only care about deaths in this room
+        if (room != this)
+            return;
+        
+        // tell the room spawn controller to remove the enemy from its list
+        if (roomSpawnController)
+        {
+            roomSpawnController.RemoveEnemyFromRoom(enemy);
+        }
+        
+        // update the locked doors
+        UpdateLockedDoors();
+    }
+    
 
     public void SetRoomDifficulty(int difficulty)
     {
@@ -199,6 +222,9 @@ public class Room : MonoBehaviour
         ApplyDoorConfiguration();
         
         bIsFinalized = false;
+        
+        
+        
     }
     
 
@@ -206,18 +232,29 @@ public class Room : MonoBehaviour
     {
         Action action = bEnabled ? EnableRoom : DisableRoom;
         action();
+        
     }
 
+    
+    
+    private IEnumerator DelayedUpdateRoom(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UpdateLockedDoors();
+    }
+    
     private void EnableRoom()
     {
         // disable the room here
         gameObject.SetActive(true);
-        
+        UpdateLockedDoors();
         // this is a separate function, incase we need to do more complex logic in the future
+        
     }
     private void DisableRoom()
     {
         // disable the room here
+        UpdateLockedDoors();
         gameObject.SetActive(false);
         
         // this is a separate function, incase we need to do more complex logic in the future

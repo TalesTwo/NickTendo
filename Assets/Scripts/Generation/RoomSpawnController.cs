@@ -158,7 +158,6 @@ public class RoomSpawnController : MonoBehaviour
                 itemsToSpawn.Remove(itemData);
             }
         }
-
     }
 
     private void SpawnEnemy(EnemyControllerBase EnemyBasePrefab, Transform SpawnLocation)

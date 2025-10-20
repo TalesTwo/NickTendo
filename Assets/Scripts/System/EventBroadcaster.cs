@@ -98,6 +98,12 @@ namespace System
         public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
         public static event PlayerStatsChangedHandler PlayerStatsChanged;
         public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
+        
+        
+        // Broadcast for when an enemy dies
+        public delegate void EnemyDeathHandler(EnemyControllerBase enemy, Room room = null);
+        public static event EnemyDeathHandler EnemyDeath;
+        public static void Broadcast_EnemyDeath(EnemyControllerBase enemy, Room room = null) { EnemyDeath?.Invoke(enemy, room); }
 
 
         

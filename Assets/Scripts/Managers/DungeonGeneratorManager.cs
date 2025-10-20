@@ -67,11 +67,11 @@ namespace Managers
                     {
                         if (r == currentRoomCoords.row && c == currentRoomCoords.col)
                         {
-                            currentRoom.gameObject.SetActive(true);
+                            currentRoom.SetRoomEnabled(true);
                         }
                         else
                         {
-                            currentRoom.gameObject.SetActive(false);
+                            currentRoom.SetRoomEnabled(false);
                         }
                     }
                 }
