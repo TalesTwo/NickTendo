@@ -123,6 +123,9 @@ public class RangedEnemyController : EnemyControllerBase
     // follow the path
     protected override IEnumerator Follow()
     {
+        // error check for while we are in a pit
+        if(currentPath == null || currentPath.Count == 0)
+            yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
 
