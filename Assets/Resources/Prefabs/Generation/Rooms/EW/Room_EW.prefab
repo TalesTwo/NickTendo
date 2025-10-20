@@ -15114,7 +15114,7 @@ MonoBehaviour:
     m_Bits: 8
   pitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   nodeRadius: 0.5
 --- !u!114 &8668673033057511707
 MonoBehaviour:

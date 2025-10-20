@@ -1395,6 +1395,7 @@ MonoBehaviour:
     SouthDoorActive: 1
     WestDoorActive: 0
   doors: {fileID: 8993192668610205120}
+  bRequireFullRoomCleared: 0
   roomType: 0
   bIsFinalized: 0
   bIsDifficultySet: 0
@@ -1414,6 +1415,9 @@ MonoBehaviour:
   unwalkableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pitLayer:
+    serializedVersion: 2
+    m_Bits: 0
   nodeRadius: 0.5
 --- !u!1 &6380972074743889580
 GameObject:
