@@ -19632,6 +19632,7 @@ MonoBehaviour:
     SouthDoorActive: 1
     WestDoorActive: 1
   doors: {fileID: 7424218361898634310}
+  bRequireFullRoomCleared: 1
   roomType: 0
   bIsFinalized: 0
   bIsDifficultySet: 0

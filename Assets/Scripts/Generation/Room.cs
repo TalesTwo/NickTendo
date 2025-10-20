@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
     [Header("Room Configuration")]
     [SerializeField] public Types.DoorConfiguration configuration;
     [SerializeField] private GameObject doors;
+    [SerializeField] private bool bRequireFullRoomCleared; // parent object for all room content (enemies, pickups, etc)
     
     [Space(10f)]
     [Header("Room Type")]
@@ -80,6 +81,7 @@ public class Room : MonoBehaviour
             
         }
     }
+
     
     public void Update()
     {
@@ -88,14 +90,70 @@ public class Room : MonoBehaviour
         {
             SpecialRoomLogic();
         }
+        
+        // debug key to check how many enemies are in the room
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if (roomSpawnController)
+            {
+                int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
+                Debug.Log($"Enemies in room: {enemyCount}");
+            }
+        }
+
+        UpdateLockedDoors();
+
     }
+
+    private void UpdateLockedDoors()
+    {
+        if (roomSpawnController)
+        {
+            int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
+            if (enemyCount > 0)
+            {
+                // set all closed doors to locked
+                foreach (Transform door in doors.transform)
+                {
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        if (doorComponent.GetCurrentState() == Door.DoorState.Closed)
+                        {
+                            doorComponent.SetDoorState(Door.DoorState.Locked);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Transform door in doors.transform)
+                {
+                    // cast to a Door
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null)
+                    {
+                        if (doorComponent.GetCurrentState() == Door.DoorState.Locked)
+                        {
+                            doorComponent.SetDoorState(Door.DoorState.Closed);
+                        }
+                    }
+                } 
+            }
+        }
+    }
+    
+
     
     private void Start()
     {
         roomSpawnController = GetComponent<RoomSpawnController>();
         
         SpecialRoomLogic();
+        
     }
+
 
     public void SetRoomDifficulty(int difficulty)
     {
