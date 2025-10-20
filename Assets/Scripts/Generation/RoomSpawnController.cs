@@ -29,6 +29,15 @@ public class RoomSpawnController : MonoBehaviour
         EventBroadcaster.SetSeed += SetSeed;
     }
 
+    // remove an enemy from the room's enemy list
+    public void RemoveEnemyFromRoom(EnemyControllerBase enemy)
+    {
+        if (enemiesInRoom.Contains(enemy))
+        {
+            enemiesInRoom.Remove(enemy);
+        }
+    }
+    
     private void SetSeed(int seed)
     {
         UnityEngine.Random.InitState(seed);
@@ -158,7 +167,12 @@ public class RoomSpawnController : MonoBehaviour
         // set the enemy prefab as a child of the room
         spawnedEnemy.transform.parent = _room.transform;
         spawnedEnemy.Initialize(_room.roomDifficulty);
-        enemiesInRoom.Add(spawnedEnemy);
+        // see if we can cast to either a MeleeEnemyController or RangedEnemyController
+        if (spawnedEnemy is FollowerEnemyController meleeEnemy || spawnedEnemy is RangedEnemyController rangedEnemy)
+        {
+            enemiesInRoom.Add(spawnedEnemy);
+        }
+        DebugUtils.Log("Spawned enemy: " + spawnedEnemy.name + " in room: " + _room.name);
     }
     
 }
