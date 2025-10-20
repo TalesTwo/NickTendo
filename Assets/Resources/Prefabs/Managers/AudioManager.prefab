@@ -79,8 +79,8 @@ MonoBehaviour:
   shooterMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
   shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
   shotHit: {fileID: 8300000, guid: 62e3a7cc67963d7499ff0eb1573a5052, type: 3}
-  shotMiss: {fileID: 0}
-  followerHit: {fileID: 0}
+  shotMiss: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
+  followerHit: {fileID: 8300000, guid: 096f06bfe20ee804480ca29b61e515b9, type: 3}
   followerMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
   transitionearly: {fileID: 8300000, guid: 9cfb84511d160354384d862384f4e948, type: 3}
   transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
@@ -90,6 +90,8 @@ MonoBehaviour:
   openDoor: {fileID: 8300000, guid: 66a09fbb8c4dcbf4ba38dc57e25bc84b, type: 3}
   unlockDoor: {fileID: 0}
   explosion: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
+  crateBreak: {fileID: 8300000, guid: fdbe1cc2ead1a37459c771d1ac870655, type: 3}
+  Heal: {fileID: 0}
   cursorHover: {fileID: 8300000, guid: 6df649b389e6de7428b7250737fbdf76, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}

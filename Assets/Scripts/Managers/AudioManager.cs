@@ -47,6 +47,8 @@ namespace Managers
         public AudioClip openDoor;
         public AudioClip unlockDoor;
         public AudioClip explosion;
+        public AudioClip crateBreak;
+        public AudioClip Heal;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;

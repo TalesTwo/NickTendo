@@ -32,6 +32,7 @@ public class EnemyProjectileController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
+            Managers.AudioManager.Instance.PlayEnemyShotMissSound(1, 0);
             DestroySelf();
         }
 
