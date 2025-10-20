@@ -15,6 +15,7 @@ public class Room : MonoBehaviour
     [SerializeField] public Types.DoorConfiguration configuration;
     [SerializeField] private GameObject doors;
     [SerializeField] private bool bRequireFullRoomCleared; // parent object for all room content (enemies, pickups, etc)
+    public bool GetRequireFullRoomCleared() { return bRequireFullRoomCleared; }
     
     [Space(10f)]
     [Header("Room Type")]
@@ -81,7 +82,6 @@ public class Room : MonoBehaviour
             
         }
     }
-
     
     public void Update()
     {
@@ -101,17 +101,18 @@ public class Room : MonoBehaviour
             }
         }
 
-        UpdateLockedDoors();
-
+        
     }
 
-    private void UpdateLockedDoors()
+    public void UpdateLockedDoors(bool forceLocked = false)
     {
+        
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
-            if (enemyCount > 0)
+            if (enemyCount > 0 || forceLocked)
             {
+                DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
                 {
@@ -119,27 +120,33 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
+                        DebugUtils.Log($"Locking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Closed)
                         {
+                            
                             doorComponent.SetDoorState(Door.DoorState.Locked);
+                            DebugUtils.Log($"Room: {name} locking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
                 }
             }
             else
             {
+                // set all locked doors to closed
                 foreach (Transform door in doors.transform)
                 {
                     // cast to a Door
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
+                        DebugUtils.Log($"Unlocking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Locked)
                         {
                             doorComponent.SetDoorState(Door.DoorState.Closed);
+                            DebugUtils.Log($"Room: {name} unlocking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
-                } 
+                }
             }
         }
     }
@@ -152,8 +159,26 @@ public class Room : MonoBehaviour
         
         SpecialRoomLogic();
         
+        // hook up to the enemy death event to check if we need to unlock doors
+        EventBroadcaster.EnemyDeath += OnEnemyDeath;
     }
-
+    
+    private void OnEnemyDeath(EnemyControllerBase enemy, Room room)
+    {
+        // only care about deaths in this room
+        if (room != this)
+            return;
+        
+        // tell the room spawn controller to remove the enemy from its list
+        if (roomSpawnController)
+        {
+            roomSpawnController.RemoveEnemyFromRoom(enemy);
+        }
+        
+        // update the locked doors
+        UpdateLockedDoors();
+    }
+    
 
     public void SetRoomDifficulty(int difficulty)
     {
@@ -208,12 +233,21 @@ public class Room : MonoBehaviour
         action();
     }
 
+    
+    private IEnumerator EnableRoomCoroutine(float delay)
+    {
+        // wait for end of frame to ensure all room content is loaded
+        yield return new WaitForSeconds(delay);
+        UpdateLockedDoors();
+    }
+    
     private void EnableRoom()
     {
         // disable the room here
         gameObject.SetActive(true);
-        
+        StartCoroutine(EnableRoomCoroutine(2f));
         // this is a separate function, incase we need to do more complex logic in the future
+
     }
     private void DisableRoom()
     {

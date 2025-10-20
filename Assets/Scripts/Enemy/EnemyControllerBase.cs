@@ -65,12 +65,7 @@ public class EnemyControllerBase : SpawnableObject
     {
         
         // tell the room we are in, that we have died
-        //TODO: IMPROVE THIS
-        RoomSpawnController parentRoom = transform.parent.GetComponent<RoomSpawnController>();
-        if (parentRoom)
-        {
-            parentRoom.RemoveEnemyFromRoom(this);
-        }
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
