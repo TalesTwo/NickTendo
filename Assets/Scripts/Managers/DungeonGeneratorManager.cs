@@ -47,6 +47,8 @@ namespace Managers
         // this is the distance between rooms, should be 200 for now so they dont overlap in any way
         [SerializeField] private int RoomOffset = 30;
         
+        private (int row, int col) CurrentRoomCoords = (-1, -1); public (int row, int col) GetCurrentRoomCoords() { return CurrentRoomCoords; }
+        
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
@@ -67,11 +69,12 @@ namespace Managers
                     {
                         if (r == currentRoomCoords.row && c == currentRoomCoords.col)
                         {
-                            currentRoom.gameObject.SetActive(true);
+                            currentRoom.SetRoomEnabled(true);
+                            CurrentRoomCoords = (r, c);
                         }
                         else
                         {
-                            currentRoom.gameObject.SetActive(false);
+                            currentRoom.SetRoomEnabled(false);
                         }
                     }
                 }
@@ -83,6 +86,7 @@ namespace Managers
             Room newRoom = dungeonRooms[newRoomCoords.row][newRoomCoords.col];
             newRoom.gameObject.SetActive(true);
             // and then after a small delay, disable all other rooms
+            CurrentRoomCoords = newRoomCoords;
             
             StartCoroutine(DisableOtherRoomsCoroutine(newRoomCoords));
         }
