@@ -30,13 +30,13 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         _isHUDActive = true;
-        SetHealth();
+        //SetHealth();
         SetBuffedStats();
     }
 
     private void Update()
     {
-        //SetHealth();
+        SetHealth();
     }
 
     public void SetHealth()
@@ -50,10 +50,10 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void OnChangedStats(PlayerStatsEnum BuffType, float BuffValue)
     {
-        if (BuffType == PlayerStatsEnum.Max_Health || BuffType == PlayerStatsEnum.Current_Health)
+        /*if (BuffType == PlayerStatsEnum.Max_Health || BuffType == PlayerStatsEnum.Current_Health)
         {
             SetHealth();
-        }
+        }*/
         if (BuffedStats.ContainsKey(BuffType.ToString()))
         {
             BuffedStats[BuffType.ToString()] += BuffValue;
@@ -121,6 +121,6 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void HandlePersonaChanged(Types.Persona P)
     {
-        SetHealth();
+        //SetHealth();
     }
 }
