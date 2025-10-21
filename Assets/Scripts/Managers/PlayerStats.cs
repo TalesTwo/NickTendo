@@ -18,6 +18,7 @@ public class PlayerStats : Singleton<PlayerStats>
     private float _dashDistance = 0.5f; 
     private int _keys = 0;
     private int _coins = 0;
+    private int _carryOverCoins = 0;
     
     public string GetPlayerName() { return _playerName; }
     
@@ -32,6 +33,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public float GetDashDistance() { return _dashDistance; }
     public int GetKeys() { return _keys; } 
     public int GetCoins() { return _coins; }
+    public int GetCarryOverCoins() { return _carryOverCoins; }
 
     public void SetPlayerName(string NewName) { _playerName = NewName; }
     public void SetCurrentHealth(float NewHealth) { _currentHealth = NewHealth; }
@@ -45,6 +47,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetDashDistance(float NewDashDistance) { _dashDistance = NewDashDistance; }
     public void SetKeys(int NewKeys) { _keys = NewKeys; }
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
+    public void SetCarryOverCoins(int NewCarryOverCoins) { _carryOverCoins = NewCarryOverCoins; }
 
     public void UpdateCurrentHealth(float UpdateValue)
     {
@@ -171,7 +174,7 @@ public class PlayerStats : Singleton<PlayerStats>
         SetDashCooldown(stats.DashCooldown);
         SetDashDistance(stats.DashDistance);
         SetKeys(stats.Keys);
-        SetCoins(stats.Coins);
+        SetCoins(stats.Coins + GetCarryOverCoins());
     }
 
     public void Update()
