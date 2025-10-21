@@ -12,7 +12,7 @@ namespace Managers
         public void Start()
         {
             // Temporaryily start the main menu music here
-            AudioManager.Instance.PlayTitleTrack(1f, false, 0.1f, false, 0.1f);
+            AudioManager.Instance.PlayTitleTrack(0.5f, false, 0.1f, false, 0.1f);
             var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
             if (playerController != null)
             {
@@ -23,7 +23,7 @@ namespace Managers
         {
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
             {
-                AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
+                AudioManager.Instance.PlayOverworldTrack(0.5f, true, 1f, true, 0.1f);
                 PlayerStats.Instance.SetPlayerName(_usernameInputField.text);
                 StartGame();
             }

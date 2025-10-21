@@ -70,14 +70,14 @@ MonoBehaviour:
   Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   Deflect: {fileID: 8300000, guid: 285daadac6381d3408096b36774925fc, type: 3}
   BUDEETalkingTones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: e209121515be805469fc7a532da6a1a8, type: 3}
+  - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
+  - {fileID: 8300000, guid: 863d09d0a12b2b54d829573a87b16f8a, type: 3}
   BUDEEDeath: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shooterMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
-  shot: {fileID: 8300000, guid: cbc0a955e48906f4195457e0e83b8a7c, type: 3}
+  shot: {fileID: 8300000, guid: a65652c7b8bcb9848a834dfe51f2cd2e, type: 3}
   shotHit: {fileID: 8300000, guid: 62e3a7cc67963d7499ff0eb1573a5052, type: 3}
   shotMiss: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
   followerHit: {fileID: 8300000, guid: 096f06bfe20ee804480ca29b61e515b9, type: 3}
@@ -86,7 +86,7 @@ MonoBehaviour:
   transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
   Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
   Coinget: {fileID: 8300000, guid: ca9a62b5c26f1f341b717e778a548212, type: 3}
-  ItemGet: {fileID: 8300000, guid: 9ec3b02ae6967144eab4725d514eefe7, type: 3}
+  ItemGet: {fileID: 8300000, guid: 73638757d5c0b254bbfc037c69547592, type: 3}
   openDoor: {fileID: 8300000, guid: 66a09fbb8c4dcbf4ba38dc57e25bc84b, type: 3}
   unlockDoor: {fileID: 0}
   explosion: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
@@ -96,9 +96,9 @@ MonoBehaviour:
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
   dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
-  Overworld: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
+  Overworld: {fileID: 8300000, guid: 4388648d6b45c49498a1b337899ea63c, type: 3}
   Boss: {fileID: 0}
   Shop: {fileID: 0}
   Credits: {fileID: 0}
-  TitleTheme: {fileID: 8300000, guid: cac1d32c6c17b2847acd70340e906482, type: 3}
+  TitleTheme: {fileID: 8300000, guid: 8a2fac04bd243da43bad2a372218a25d, type: 3}
   Musicsource: {fileID: 0}
