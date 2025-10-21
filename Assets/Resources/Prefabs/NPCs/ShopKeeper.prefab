@@ -159,9 +159,7 @@ MonoBehaviour:
   - {fileID: 507235820881655975, guid: d4b9272928322e44394ed7388461b61c, type: 3}
   - {fileID: 507235820881655975, guid: d203d0bf9eb19c144a2cc194751ce64a, type: 3}
   - {fileID: 507235820881655975, guid: 3312405e4502ba2489067b4b795ded4c, type: 3}
-  - {fileID: 507235820881655975, guid: a597b1ff906147949ad1a9501ac7d971, type: 3}
   - {fileID: 507235820881655975, guid: ff10e6d975f800a4cb8ef3dcba4ec4cc, type: 3}
-  - {fileID: 507235820881655975, guid: 07c61db074da0734da76954eb2ce8a40, type: 3}
   - {fileID: 507235820881655975, guid: 4f5b7ca3f643d124395fcedc90bceb5b, type: 3}
   - {fileID: 507235820881655975, guid: 86ad50c096a3501429f687d3c8478370, type: 3}
 --- !u!114 &1626837519954216462
@@ -202,6 +200,7 @@ MonoBehaviour:
   - {fileID: 6783558132975904703}
   - {fileID: 7462953144420778106}
   CloseButton: {fileID: 1526926634394918076}
+  IsInShop: 0
 --- !u!114 &1851505700121297511
 MonoBehaviour:
   m_ObjectHideFlags: 0

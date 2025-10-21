@@ -1,15 +1,16 @@
+using Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIManager : Singleton<PlayerUIManager>
 {
     private float _width;
     private float _healthWidth;
-    private Dictionary<string, float> BuffedStats;
     private bool _isHUDActive;
 
     [Header("UI Elements")] 
@@ -22,20 +23,51 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private RectTransform healthBar;
     [SerializeField]
     private TextMeshProUGUI buffedStatText;
+    [SerializeField]
+    private GameObject _enemyCounter;
+    [SerializeField]
+    private Slider _dashSlider;
+    [SerializeField]
+    private Image _dashSliderImage;
+
+    private GameObject _player;
+    private PlayerController _pController;
+    private bool _hasStartedSlider;
 
     private void Start()
     {
-
-        BuffedStats = new Dictionary<string, float>();
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
+        EventBroadcaster.PersonaChanged += HandlePersonaChanged;
+        _enemyCounter.SetActive(false);
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _pController = _player.GetComponent<PlayerController>();
         _isHUDActive = true;
-        SetHealth();
-        SetBuffedStats();
+        _dashSlider.value = 1;
+        _dashSliderImage.color = Color.yellow;
+        _hasStartedSlider = false;
+        //SetHealth();
     }
 
     private void Update()
     {
         SetHealth();
+
+        if (_pController.IsDashing() && !_hasStartedSlider)
+        {
+            HandleDashSlider();
+            _hasStartedSlider = true;         
+            Invoke(nameof(ResetSlideBool), PlayerStats.Instance.GetDashCooldown());
+        }
+
+        if (DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() > 0)
+        {
+            _enemyCounter.SetActive(true);
+            _enemyCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom().ToString());
+        }
+        else 
+        { 
+            _enemyCounter.SetActive(false); 
+        }
     }
 
     public void SetHealth()
@@ -49,55 +81,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void OnChangedStats(PlayerStatsEnum BuffType, float BuffValue)
     {
-        if (BuffedStats.ContainsKey(BuffType.ToString()))
-        {
-            BuffedStats[BuffType.ToString()] += BuffValue;
-        }
-        SetBuffedStatsText();
-        DisplayBuffedStats();
-    }
-
-    void SetBuffedStats()
-    {
-        string[] BannedStats = { "Current_Health", "Max_Health", "Keys", "Coins"};
         
-        foreach (int i in Enum.GetValues(typeof(PlayerStatsEnum)))
-        {
-            string name = Enum.GetName(typeof(PlayerStatsEnum), i);
-            if(!BannedStats.Contains(name))
-            {
-                BuffedStats[name] = 0;
-            }
-
-            //DebugUtils.Log(i + ": " +Enum.GetName(typeof(PlayerStatsEnum), i));
-
-        }
-
-        
-
-        DisplayBuffedStats();
-
-    }
-
-    void DisplayBuffedStats()
-    {
-        foreach (string name in BuffedStats.Keys)
-        {
-            DebugUtils.Log(name + ": " + BuffedStats[name]);
-        }
-    }
-
-    void SetBuffedStatsText()
-    {
-        string textToSet ="";
-        foreach (string name in BuffedStats.Keys)
-        {
-            if (BuffedStats[name] != 0)
-            {
-                textToSet += name + ": " + BuffedStats[name] + "\n";
-            }
-        }
-        buffedStatText.text = textToSet;
     }
 
     public void ToggleHUD()
@@ -112,5 +96,36 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             gameObject.SetActive(true);
             _isHUDActive = true;
         }
+    }
+
+    void HandlePersonaChanged(Types.Persona P)
+    {
+        //SetHealth();
+    }
+
+    void HandleDashSlider()
+    {
+        _dashSlider.value = 0;
+        _dashSliderImage.color = Color.white;
+        StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
+    }
+
+    IEnumerator FillSlider(float _cooldown)
+    {
+        float _fillTime = 0;
+        while (_fillTime < _cooldown)
+        {
+            _fillTime += Time.deltaTime;
+            float _lerpValue = _fillTime / _cooldown;
+            _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
+            yield return null;
+        }
+    }
+
+    void ResetSlideBool()
+    {
+        _hasStartedSlider = false;
+        AudioManager.Instance.PlayKeyGetSound();
+        _dashSliderImage.color = Color.yellow;
     }
 }

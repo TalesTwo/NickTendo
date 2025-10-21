@@ -12,6 +12,9 @@ public class ShopTriggerInteraction : TriggerInteractBase
     public override void Interact()
     {
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
-        ShopUIM.OpenShop();
+        if (!ShopUIM.IsInShop)
+        {
+            ShopUIM.OpenShop();
+        }
     }
 }

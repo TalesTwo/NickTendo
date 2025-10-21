@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
@@ -47,6 +48,9 @@ public class PersonaUI : MonoBehaviour
         {
             playerController.enabled = true;
         }
+        // tell the SelectionInteraction that the UI is closed
+        EventBroadcaster.Broadcast_ClosePersonaUI();
+
     }
 
     public void UpdatePersonaUI()
