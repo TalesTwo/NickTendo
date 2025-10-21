@@ -199,6 +199,10 @@ public class EnemyControllerBase : SpawnableObject
         string[] lines = statLineCSV.text.Split('\n');
         double lineNumber = (double)difficulty/difficultyScalingFactor;
         lineNumber = Math.Ceiling(lineNumber);
+        if (lineNumber > 5)
+        {
+            lineNumber = 5;
+        }
         GetStats(lines[(int)lineNumber]);
     }
 
