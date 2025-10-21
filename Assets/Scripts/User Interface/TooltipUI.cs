@@ -19,7 +19,6 @@ public class TooltipUI : MonoBehaviour
 
     private RectTransform _tooltipTransform;
 
-
     private void Awake()
     {
         _tooltipTransform = GetComponent<RectTransform>();

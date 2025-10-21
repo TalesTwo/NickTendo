@@ -1,3 +1,4 @@
+using Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,20 +25,49 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private TextMeshProUGUI buffedStatText;
     [SerializeField]
     private GameObject _enemyCounter;
+    [SerializeField]
+    private Slider _dashSlider;
+    [SerializeField]
+    private Image _dashSliderImage;
+
+    private GameObject _player;
+    private PlayerController _pController;
+    private bool _hasStartedSlider;
 
     private void Start()
     {
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
-        
+        _enemyCounter.SetActive(false);
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _pController = _player.GetComponent<PlayerController>();
         _isHUDActive = true;
+        _dashSlider.value = 1;
+        _dashSliderImage.color = Color.yellow;
+        _hasStartedSlider = false;
         //SetHealth();
     }
 
     private void Update()
     {
         SetHealth();
-        
+
+        if (_pController.IsDashing() && !_hasStartedSlider)
+        {
+            HandleDashSlider();
+            _hasStartedSlider = true;         
+            Invoke(nameof(ResetSlideBool), PlayerStats.Instance.GetDashCooldown());
+        }
+
+        if (DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() > 0)
+        {
+            _enemyCounter.SetActive(true);
+            _enemyCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom().ToString());
+        }
+        else 
+        { 
+            _enemyCounter.SetActive(false); 
+        }
     }
 
     public void SetHealth()
@@ -73,5 +103,29 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         //SetHealth();
     }
 
+    void HandleDashSlider()
+    {
+        _dashSlider.value = 0;
+        _dashSliderImage.color = Color.white;
+        StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
+    }
 
+    IEnumerator FillSlider(float _cooldown)
+    {
+        float _fillTime = 0;
+        while (_fillTime < _cooldown)
+        {
+            _fillTime += Time.deltaTime;
+            float _lerpValue = _fillTime / _cooldown;
+            _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
+            yield return null;
+        }
+    }
+
+    void ResetSlideBool()
+    {
+        _hasStartedSlider = false;
+        AudioManager.Instance.PlayKeyGetSound();
+        _dashSliderImage.color = Color.yellow;
+    }
 }

@@ -21,6 +21,7 @@ public class ShopUIManager : MonoBehaviour
     public TextMeshProUGUI[] ItemPrices;
 
     public Button CloseButton;
+    public bool IsInShop;
 
     private ShopManager ShopM;
 
@@ -32,6 +33,7 @@ public class ShopUIManager : MonoBehaviour
         ItemButtons[0].onClick.AddListener(delegate { AttemptBuyItem(0); });
         ItemButtons[1].onClick.AddListener(delegate { AttemptBuyItem(1); });
         ItemButtons[2].onClick.AddListener(delegate { AttemptBuyItem(2); });
+        IsInShop = false;
 
         ShopM = gameObject.GetComponent<ShopManager>();
     }
@@ -43,6 +45,7 @@ public class ShopUIManager : MonoBehaviour
             ShopUI.SetActive(true);
             PlayerUIManager.Instance.ToggleHUD();
             EventBroadcaster.Broadcast_StartStopAction();
+            IsInShop = true;
         }
     }
 
@@ -51,6 +54,7 @@ public class ShopUIManager : MonoBehaviour
         ShopUI.SetActive(false);
         PlayerUIManager.Instance.ToggleHUD();
         EventBroadcaster.Broadcast_StartStopAction();
+        IsInShop = false;
     }
 
     void AttemptBuyItem(int index)

@@ -79,12 +79,7 @@ public class StatDisplayUI : MonoBehaviour
     {
         if (_statDictionary.ContainsKey(_buffType))
         {
-            _statDisplayNumber += _statDictionary[_buffType][1];
-            if (_statDisplayNumber < 0)
-            {
-                _statDisplayNumber *= -1;
-            }
-
+            _statDisplayNumber++;
             gameObject.SetActive(true);
             _statDisplayText.SetText(_statDisplayNumber.ToString());
         }        
@@ -112,12 +107,10 @@ public class StatDisplayUI : MonoBehaviour
     {
         if(_hasEntered)
         {
-            DebugUtils.Log("enter");
             _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
         }
         else
         {
-            DebugUtils.Log("exit");
             _tooltip.GetComponent<TooltipUI>().HideTooltip();
         }
     }
