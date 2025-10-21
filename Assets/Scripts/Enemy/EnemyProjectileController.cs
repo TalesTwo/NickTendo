@@ -64,6 +64,7 @@ public class EnemyProjectileController : MonoBehaviour
     // destroy with a particle effect
     private void DestroySelf()
     {
+        EventBroadcaster.PlayerDeath -= DestroySelf;
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

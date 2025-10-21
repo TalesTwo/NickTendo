@@ -93,8 +93,8 @@ namespace System
         public delegate void PlayerChangedRoomHandler((int row, int col) targetRoomCoords);
         public static event PlayerChangedRoomHandler PlayerChangedRoom;
         public static void Broadcast_PlayerChangedRoom((int row, int col) targetRoomCoords) { PlayerChangedRoom?.Invoke(targetRoomCoords); }
-        
-        // Briadcast for when a player stat changes
+
+        // Broadcast for when a player stat changes
         public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
         public static event PlayerStatsChangedHandler PlayerStatsChanged;
         public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
@@ -104,6 +104,11 @@ namespace System
         public delegate void EnemyDeathHandler(EnemyControllerBase enemy, Room room = null);
         public static event EnemyDeathHandler EnemyDeath;
         public static void Broadcast_EnemyDeath(EnemyControllerBase enemy, Room room = null) { EnemyDeath?.Invoke(enemy, room); }
+        
+        // broadcast for closing the persona UI
+        public delegate void ClosePersonaUIHandler();
+        public static event ClosePersonaUIHandler ClosePersonaUI;
+        public static void Broadcast_ClosePersonaUI() { ClosePersonaUI?.Invoke(); }
 
 
         
