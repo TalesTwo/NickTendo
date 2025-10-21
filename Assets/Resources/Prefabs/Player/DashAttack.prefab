@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223078568798008408}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.92387956, w: 0.38268343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.154, y: -0.012, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1615614068149613777
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -6854623574421889526, guid: 88e01443ea8abc3449e68388eac893bb, type: 3}
+  m_Sprite: {fileID: 4499222649519847588, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,13 +102,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
-  - {fileID: -6854623574421889526, guid: 88e01443ea8abc3449e68388eac893bb, type: 3}
-  - {fileID: -2279737675863572011, guid: 16e5f77a6871dce4c9cfef09e1cd7ddc, type: 3}
-  - {fileID: 3292326675855872538, guid: 4ec296177d8c9dd4e84f980319c6a427, type: 3}
-  - {fileID: -2465336056643649544, guid: a08ab857ada664c459d86894c1f3bd80, type: 3}
-  - {fileID: -1033549139458317745, guid: 6b8f7aa6868b1454089d5f6f83ce3cdb, type: 3}
-  - {fileID: -8181339234705481943, guid: 967b1ecd3323fbd41928f268133227c0, type: 3}
-  Framerate: 12
+  - {fileID: -7939949182281049726, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: -3284661488852186270, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: 2311519822869537911, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: -5792275666308316705, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: 6268189485792803104, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: 7994959981462233229, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: 7424393436129330494, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: -860810585037790506, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  - {fileID: 4499222649519847588, guid: db3301bc51a482d428c51b5310b152e6, type: 3}
+  Framerate: 20
   SpriteRenderer: {fileID: 1615614068149613777}
   index: 0
   animation: {fileID: 223078568798008408}
@@ -125,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.2
-  verticalEdit: 0.1
-  angleEdit: 135
+  verticalEdit: 0
+  angleEdit: 0
 --- !u!60 &784255544891838936
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -164,8 +167,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.24575272, y: 0.19891779}
-    oldSize: {x: 0.6, y: 0.76}
+    pivot: {x: -0.3601094, y: 0.5787823}
+    oldSize: {x: 0.31254232, y: 0.1625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,10 +176,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5070268, y: 0.5077781}
-      - {x: 0.20478733, y: 0.29598683}
-      - {x: -0.09916866, y: 0.07740451}
-      - {x: -0.16312402, y: -0.1744617}
-      - {x: 0.09172696, y: -0.10617831}
-      - {x: 0.36598128, y: 0.30628514}
+    - - {x: -0.8953613, y: 0.07281278}
+      - {x: -1.0352885, y: 0.11755701}
+      - {x: -0.3281014, y: 0.3414394}
+      - {x: 0.48976088, y: -0.041028265}
+      - {x: -0.35002097, y: -0.27866456}
+      - {x: -1.0240825, y: 0.030363172}
   m_UseDelaunayMesh: 0
