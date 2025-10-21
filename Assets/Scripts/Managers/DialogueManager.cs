@@ -13,7 +13,7 @@ namespace Managers
     {
         [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
-        public GameObject spaceButton;
+        //public GameObject spaceButton;
         public Image playerSprite;
         private Image _playerTransparency;
         public Image NPCSprite;
@@ -108,17 +108,17 @@ namespace Managers
             while (_isReading)
             {
                 // move to next line of dialogue
-                if (Input.GetKeyDown(KeyCode.Space) && _canContinue)
+                if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && _canContinue)
                 {
                     NextLine();
-                    spaceButton.SetActive(false);
+                    //spaceButton.SetActive(false);
                 }
 
                 // checking if current line of dialogue is finished
                 if (dialogueText.text == _dialogue[_index][2])
                 {
                     _canContinue = true;
-                    spaceButton.SetActive(true);
+                    //spaceButton.SetActive(true);
                 }
 
                 yield return null;            
