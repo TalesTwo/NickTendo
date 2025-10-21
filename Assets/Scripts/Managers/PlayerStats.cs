@@ -148,6 +148,7 @@ public class PlayerStats : Singleton<PlayerStats>
                 BuffValue = GetMaxHealth();
             }
             UpdateCurrentHealth(BuffValue);
+            Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
         else if (BuffType == PlayerStatsEnum.Keys)
         {
