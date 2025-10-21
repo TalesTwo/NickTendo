@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     // rigidbody & animator
     private Rigidbody2D _rb;
+    private SpriteRenderer _sr;
     private AnimatedPlayer _playerAnimator;
     private bool _isFacingRight = true;
     
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<AnimatedPlayer>();
+        _sr = GetComponent<SpriteRenderer>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
@@ -127,13 +129,19 @@ public class PlayerController : MonoBehaviour
     // starts base attack animation
     private void StartAttack()
     {
-        Instantiate(attackAnimation);
+        GameObject attack = Instantiate(attackAnimation);
+        Renderer rnd = attack.gameObject.GetComponent<Renderer>();
+        Color playerColor = _sr.color;
+        rnd.material.color = playerColor;
     }
     
     // starts base dash attack
     private void StartDash()
     {
-        Instantiate(dashAnimation);
+        GameObject attack = Instantiate(dashAnimation);
+        Renderer rnd = attack.gameObject.GetComponent<Renderer>();
+        Color playerColor = _sr.color;
+        rnd.material.color = playerColor;
     }
 
     // reset the dash attack after the cooldown
