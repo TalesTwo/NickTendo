@@ -10,20 +10,8 @@ public class ShopItem : BaseItem
     public int itemValue = 100;
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Just returns the desctiption for the item
     public string GetDescription()
     {
         string returnSting = "";
@@ -38,6 +26,7 @@ public class ShopItem : BaseItem
         return returnSting;
     }
 
+    // Replaces the '_' with a space for a better look
     string AddSpace(PlayerStatsEnum nameInEnum)
     {
         string[] splitName = nameInEnum.ToString().Split('_');
