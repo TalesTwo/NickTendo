@@ -954,7 +954,7 @@ PrefabInstance:
     - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
       propertyPath: Overworld
       value: 
-      objectReference: {fileID: 8300000, guid: ffa6dc41e943723439c35b37855949a1, type: 3}
+      objectReference: {fileID: 8300000, guid: 4388648d6b45c49498a1b337899ea63c, type: 3}
     - target: {fileID: 5497313280381876055, guid: 42cf3505ccbfeb64e90c55d3793db927, type: 3}
       propertyPath: playerDamaged
       value: 
@@ -1269,6 +1269,14 @@ PrefabInstance:
     - target: {fileID: 2681262444241212009, guid: b1019796674627942bbaccd10f995db0, type: 3}
       propertyPath: m_Name
       value: Player UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336576896325930065, guid: b1019796674627942bbaccd10f995db0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336576896325930065, guid: b1019796674627942bbaccd10f995db0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8579513326192531913, guid: b1019796674627942bbaccd10f995db0, type: 3}
       propertyPath: m_Pivot.x

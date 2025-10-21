@@ -243,6 +243,10 @@ namespace Managers
         {
             PlaySFX(ItemGet, volume, deviation);
         }
+        public void PlayHealSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Heal, volume, deviation);
+        }
         public void PlayExplosionSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(explosion, volume, deviation);
