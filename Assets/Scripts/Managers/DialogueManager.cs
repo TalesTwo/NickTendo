@@ -247,7 +247,10 @@ namespace Managers
                 if (talkingtonetimer == 10)
                 {
                     talkingtonetimer = 0;
-                    AudioManager.Instance.PlayPlayerTalkingTone();
+                    if (!_skipToEnd)
+                    {
+                        AudioManager.Instance.PlayPlayerTalkingTone();
+                    }
                 }
                 if (!_skipToEnd)
                 {
