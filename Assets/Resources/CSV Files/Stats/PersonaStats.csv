@@ -1,5 +1,5 @@
 Persona,CurrentHealth,MaxHealth,MovementSpeed,DashSpeed,AttackDamage,AttackCooldown,DashDamage,DashCooldown,DashDistance,Keys,Coins,Color,Description
-Normal,3,3,5,10,2,0.5,5,5,0.5,10,95,White,Just be yourself
+Normal,3,3,5,10,1,0.5,5,5,0.5,10,95,White,Just be yourself
 Memer,3,3,5,10,2,0.5,3,3,0.5,10,495,Yellow,Everyone likes a funnyman! With the power of comedy everyone will want to talk to you! 
 Sensitive,2,2,7,10,4,0.5,5,7,0.5,10,100,Blue,Your life is so tragic! People online are sure to sympathize and give you all the support you could want!
 Glamorous,3,3,5,10,2,0.5,5,5,0.5,10,95,Pink,Makeup tutorials and fancy cars! When you pop up on someone's feed you're sure to earn their loyalty!
