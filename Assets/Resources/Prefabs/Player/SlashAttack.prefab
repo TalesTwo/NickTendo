@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.05, y: 0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1.7142859, z: 1.904762}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 358760766997906012, guid: d6eb53584a3924e40948fa50a57abeb0, type: 3}
+  m_Sprite: {fileID: 2629122318610872235, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,13 +102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
-  - {fileID: 358760766997906012, guid: d6eb53584a3924e40948fa50a57abeb0, type: 3}
-  - {fileID: 6300538773677738693, guid: a3d1eb6f65a057c4281baae0c357a5ca, type: 3}
-  - {fileID: 647438233762354370, guid: 7de1635d497f1eb45ac02d3f5545d6a3, type: 3}
-  - {fileID: 8665830065163619595, guid: 3eba37d49cde9df43bc9affc6e44f4f6, type: 3}
-  - {fileID: 3620588005246479193, guid: f06dede72c7b97c449c717eddd445dbf, type: 3}
-  - {fileID: 6551994172060705944, guid: 24b3b34fc6f275842acd27c32b9f749b, type: 3}
-  Framerate: 24
+  - {fileID: 2629122318610872235, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
+  - {fileID: 2982093381401132500, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
+  - {fileID: -6273899873386608410, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
+  - {fileID: -1294340539764027309, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
+  - {fileID: 4580402205709804364, guid: c63c8a7781ecff5418516aee0d4e3e48, type: 3}
+  Framerate: 20
   SpriteRenderer: {fileID: 4343754465124580542}
   index: 0
   animation: {fileID: 2407103696244724232}
@@ -161,6 +160,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.24402711, y: -0.13478597}
-  m_Size: {x: 0.81053966, y: 0.9738461}
+  m_Offset: {x: 0.27202293, y: -0.26618475}
+  m_Size: {x: 0.8665313, y: 1.726956}
   m_Direction: 0
