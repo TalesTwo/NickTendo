@@ -17835,6 +17835,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: attachedPromptToObject
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: _sceneToLoad._sceneName
       value: Room_S
       objectReference: {fileID: 0}
@@ -18106,4 +18110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
   interactPromptOffset: {x: 0, y: 1, z: 0}
+  attachedPromptToObject: 0
   personaSelectionUI: {fileID: 0}
