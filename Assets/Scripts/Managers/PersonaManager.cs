@@ -123,6 +123,11 @@ namespace Managers
     
         public void MarkAsLost(Types.Persona persona)
         {
+            
+            //TODO: we need to handle what is gonna carry over between deaths
+            int numberOfCoins = PlayerStats.Instance.GetCoins();
+            PlayerStats.Instance.SetCarryOverCoins(numberOfCoins/2); // Carry over half the coins
+            
             if (_personas.ContainsKey(persona))
             {
                 _personas[persona] = Types.PersonaState.Lost;

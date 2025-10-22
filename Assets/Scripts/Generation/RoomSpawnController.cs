@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Generation.Data;
 using Generation.ScriptableObjects;
 using UnityEngine;
 
@@ -109,6 +108,7 @@ public class RoomSpawnController : MonoBehaviour
                     Transform spawnLocation = _roomGridManager.FindValidWalkableCell();
                     if (spawnLocation != null)
                     {
+                        DebugUtils.Log("Spawning enemy at the following location: " + spawnLocation.position);
                         SpawnEnemy(enemyData.enemyPrefab.GetComponent<EnemyControllerBase>(), spawnLocation);
                     }
                 }

@@ -19,22 +19,36 @@ public class DungeonController : Singleton<DungeonController>
     public int GetNumberOfEnemiesInCurrentRoom()
     {
         (int row, int col) CurrentRoomCoords = DungeonGeneratorManager.Instance.GetCurrentRoomCoords();
-        Room currentRoom = DungeonGeneratorManager.Instance.GetDungeonRooms()[CurrentRoomCoords.row][CurrentRoomCoords.col];
-        if (currentRoom)
+        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+        if (dungeonRooms != null)
         {
-            //if (!currentRoom.GetRequireFullRoomCleared())
-            //{
-                //return -1; // indicates that the room does not require clearing
-            //}
             
-            RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
-            if (roomSpawnController != null)
+            try
             {
-                // check to see if the bool 
-                return roomSpawnController.GetEnemiesInRoom().Count;
+                Room currentRoom = DungeonGeneratorManager.Instance.GetDungeonRooms()[CurrentRoomCoords.row][CurrentRoomCoords.col];
+                if (currentRoom)
+                {
+                    //if (!currentRoom.GetRequireFullRoomCleared())
+                    //{
+                    //return -1; // indicates that the room does not require clearing
+                    //}
+            
+                    RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+                    if (roomSpawnController != null)
+                    {
+                        // check to see if the bool 
+                        return roomSpawnController.GetEnemiesInRoom().Count;
+                    }
+
+                }
+            } catch (ArgumentOutOfRangeException e)
+            {
+                return 0;
             }
 
         }
+
+        
         // Otherwise, there is no enemies in the room
         return 0;
     }

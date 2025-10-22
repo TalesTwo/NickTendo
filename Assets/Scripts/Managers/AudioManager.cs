@@ -123,7 +123,7 @@ namespace Managers
             StopAllCoroutines();
             if (fadeout && src.isPlaying)
             {
-                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein));
+                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume));
             }
             else if (fadein)
             {
@@ -140,24 +140,24 @@ namespace Managers
             }
         } 
                 
-        private IEnumerator FadeOutAndIn(AudioSource src, AudioClip newClip, float fadeoutspeed = 1f, float fadeinspeed = 1f, bool fadein = false)
+        private IEnumerator FadeOutAndIn(AudioSource src, AudioClip newClip, float fadeoutspeed = 1f, float fadeinspeed = 1f, bool fadein = false, float volume=1f)
         {
             float oldvolume = src.volume;
-            for(float volume = src.volume; volume >= 0; volume -= 0.01f * oldvolume * fadeoutspeed)
+            for(float tempvolume = src.volume; tempvolume >= 0; tempvolume -= 0.01f * oldvolume * fadeoutspeed)
             {
-                if (volume < 0) volume = 0;
-                src.volume = volume;
+                if (tempvolume < 0) tempvolume = 0;
+                src.volume = tempvolume;
                 yield return null;
             }
             src.Stop();
             src.clip = newClip;
             if (fadein)
             {
-                StartCoroutine(Fadein(src, fadeinspeed, oldvolume));
+                StartCoroutine(Fadein(src, fadeinspeed, volume));
             }
             else
             {
-                src.volume = oldvolume;
+                src.volume = volume;
                 src.Play();
             }
 
@@ -242,6 +242,10 @@ namespace Managers
         public void PlayItemGetSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(ItemGet, volume, deviation);
+        }
+        public void PlayHealSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Heal, volume, deviation);
         }
         public void PlayExplosionSound(float volume = 1, float deviation = 0)
         {

@@ -13,7 +13,6 @@ namespace Managers
     {
         [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
-        public GameObject spaceButton;
         public Image playerSprite;
         private Image _playerTransparency;
         public Image NPCSprite;
@@ -56,6 +55,12 @@ namespace Managers
     
         // checking if the player is still in the dialogue
         private bool _isReading = false;
+        
+        // checking if the dialogue is currently typing
+        private bool _isTyping = false;
+        
+        // bool to identify when Typing() should skip to the end of the line
+        private bool _skipToEnd = false;
 
         // this dialog is random, and only one line will play at a time
         private bool _dialogIsRandom = false;
@@ -108,17 +113,23 @@ namespace Managers
             while (_isReading)
             {
                 // move to next line of dialogue
-                if (Input.GetKeyDown(KeyCode.Space) && _canContinue)
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
                 {
-                    NextLine();
-                    spaceButton.SetActive(false);
+                    if (_canContinue)
+                    {
+                        NextLine();
+                    }
+                    else if (_isTyping)
+                    {
+                        _skipToEnd = true;
+                    }
+                    
                 }
 
                 // checking if current line of dialogue is finished
                 if (dialogueText.text == _dialogue[_index][2])
                 {
                     _canContinue = true;
-                    spaceButton.SetActive(true);
                 }
 
                 yield return null;            
@@ -157,8 +168,8 @@ namespace Managers
             dialogueBox.SetActive(true);
             NPCSprite.gameObject.SetActive(true);
             playerSprite.gameObject.SetActive(true);
-            StartCoroutine(Typing());
             StartCoroutine(CheckInput());
+            StartCoroutine(Typing());
         }
     
         // resets the dialogue box
@@ -174,6 +185,8 @@ namespace Managers
         // types each letter in the dialogue one at a time
         IEnumerator Typing()
         {
+            _isTyping = true;
+            
             if (_dialogIsRandom)
             {
                 Random random = new Random();
@@ -215,7 +228,6 @@ namespace Managers
             }
             else
             {
-                // todo: add part for system images
                 NPCNameText.gameObject.SetActive(false);
                 playerNameText.gameObject.SetActive(false);
                 
@@ -235,10 +247,18 @@ namespace Managers
                 if (talkingtonetimer == 10)
                 {
                     talkingtonetimer = 0;
-                    AudioManager.Instance.PlayPlayerTalkingTone();
+                    if (!_skipToEnd)
+                    {
+                        AudioManager.Instance.PlayPlayerTalkingTone();
+                    }
                 }
-                yield return new WaitForSeconds(wordSpeed);
+                if (!_skipToEnd)
+                {
+                    yield return new WaitForSeconds(wordSpeed);
+                }
             }
+            _isTyping = false;
+            _skipToEnd = false;
             talkingtonetimer = 0;
         }
     

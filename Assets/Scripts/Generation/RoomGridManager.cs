@@ -165,18 +165,19 @@ public class RoomGridManager : MonoBehaviour
                     break;
                 }
 
-                RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
-                if (hit.collider == null)
-                {
-                    hasLineOfSight = true;
-                }
+                // No longer works in non-square rooms
+                //RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
+                //if (hit.collider == null)
+                //{
+                    //hasLineOfSight = true;
+                //}
             }
 
             // now check both conditions normally
             if (tooCloseToDoor)
                 continue;
 
-            if (hasLineOfSight)
+            //if (hasLineOfSight)
                 validNodes.Add(node);
         }
         
@@ -234,5 +235,6 @@ public class RoomGridManager : MonoBehaviour
         }
     }
     */
+    
     
 }
