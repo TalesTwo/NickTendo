@@ -15,6 +15,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     [Header("Interact Prompt Settings")]
     [SerializeField] private bool hasInteractPrompt = true;
     [SerializeField] private Vector3 interactPromptOffset = new Vector3(0, 1f, 0);
+    [SerializeField] private bool attachedPromptToObject = false;
     
     // Offset for the interact prompt
     private GameObject interactPromptInstance;
@@ -62,6 +63,10 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
             var sr = interactPromptInstance.GetComponent<SpriteRenderer>();
             if (sr != null)
                 sr.sortingOrder = 999;
+            if (attachedPromptToObject)
+            {
+                interactPromptInstance.transform.parent = transform;
+            }
 
             interactPromptInstance.SetActive(false);
         }
