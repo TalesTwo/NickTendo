@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1085639644894849210}
   - component: {fileID: 4735106189494910365}
   - component: {fileID: 482612092328866660}
+  - component: {fileID: 4738248158585002712}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: BUDDEE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.82, y: 3.42, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3174197035841406906}
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4010524832478835094, guid: a74149f6568211b4092100cfecd7280a, type: 3}
+  m_Sprite: {fileID: 5104411261062583894, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,13 +166,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.34, y: 0.4}
+    oldSize: {x: 1.125, y: 1.75}
     newSize: {x: 0.34, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.34, y: 0.4}
+  m_Size: {x: 4.94, y: 5.59}
   m_EdgeRadius: 0
 --- !u!114 &482612092328866660
 MonoBehaviour:
@@ -187,10 +188,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
   interactPromptOffset: {x: 0, y: 1, z: 0}
-  npcDialogue: {fileID: 4900000, guid: 9932ff33ac8fbaa4081d02463538d125, type: 3}
-  dialogue: []
-  sprite: {fileID: 3914643202950574581}
-  npcName: 
+  npcName: BUDDEE
+--- !u!114 &4738248158585002712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2262425917105696889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bd83ba20d7bf24f83bff2c0d3fb34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 5104411261062583894, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 5104411261062583894, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -6783836353237488458, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -6783836353237488458, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -3222880222851265203, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -3222880222851265203, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 4018490942402186822, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 4018490942402186822, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  Framerate: 8
+  SpriteRenderer: {fileID: 3366909779505757197}
+  index: 0
+  idle:
+  - {fileID: 5104411261062583894, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 5104411261062583894, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -6783836353237488458, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -6783836353237488458, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -3222880222851265203, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: -3222880222851265203, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 4018490942402186822, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  - {fileID: 4018490942402186822, guid: 96fbbc5706c26754d94973bd3c1783e2, type: 3}
+  alert:
+  - {fileID: 6593832073280498477, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  - {fileID: 6583268899271974734, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  - {fileID: 7926275169330671759, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  - {fileID: 3971397273965034557, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  - {fileID: 9052982118580939924, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  - {fileID: 8289289428577084355, guid: 20af80934f446aa4a9819c532312500a, type: 3}
+  talking:
+  - {fileID: -2082540453487355368, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  - {fileID: -6239482654316834915, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  - {fileID: -5035540640486966264, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  - {fileID: -3016124899347715579, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  - {fileID: -9005990149069431621, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  - {fileID: -9004958050476621873, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
 --- !u!1 &3552130815636030547
 GameObject:
   m_ObjectHideFlags: 0

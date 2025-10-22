@@ -193,16 +193,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 8544842764778265006}
-  spaceButton: {fileID: 4354123760812146000}
   playerSprite: {fileID: 6167899986014823275}
   NPCSprite: {fileID: 2373226986831429028}
   playerNameText: {fileID: 9196054455291225828}
   NPCNameText: {fileID: 2182260789854076939}
   dialogueText: {fileID: 4203684450307392599}
   csv: {fileID: 4900000, guid: 511dc45fee0573744b6fca8abddb0d4f, type: 3}
-  buddeeSmileSprite: {fileID: 3880593486023041567, guid: 622670d9f50028b4a8b4f6855e20ae0a, type: 3}
-  buddeeSurpriseSprite: {fileID: 1590631868736247383, guid: b440183051323e24b8cb0ec0a4d735a6, type: 3}
-  buddeeDefaultSprite: {fileID: 3880593486023041567, guid: 622670d9f50028b4a8b4f6855e20ae0a, type: 3}
+  buddeeSmileSprite: {fileID: -9005990149069431621, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  buddeeSurpriseSprite: {fileID: -6239482654316834915, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  buddeeDefaultSprite: {fileID: -9004958050476621873, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
   playerSmileSprite: {fileID: 8793639957104055765, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
   capeSprite: {fileID: -205270267638800340, guid: 99ca60b3be5971f428b4856bbb45ef80, type: 3}
   interactPrompt: {fileID: 0}
