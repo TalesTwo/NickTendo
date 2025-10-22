@@ -76,12 +76,12 @@ MonoBehaviour:
   BUDEEDeath: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
-  shooterMovement: {fileID: 8300000, guid: 8f4d55b44ab3b4b4f9c9ca2d5ffeaf52, type: 3}
+  shooterMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
   shot: {fileID: 8300000, guid: a65652c7b8bcb9848a834dfe51f2cd2e, type: 3}
   shotHit: {fileID: 8300000, guid: cdc285cddf7e0264cb918df383fba6d5, type: 3}
   shotMiss: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
   followerHit: {fileID: 8300000, guid: 096f06bfe20ee804480ca29b61e515b9, type: 3}
-  followerMovement: {fileID: 8300000, guid: 8f4d55b44ab3b4b4f9c9ca2d5ffeaf52, type: 3}
+  followerMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
   transitionearly: {fileID: 8300000, guid: 9cfb84511d160354384d862384f4e948, type: 3}
   transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
   Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
