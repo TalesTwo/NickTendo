@@ -57,12 +57,10 @@ public class PlayerController : MonoBehaviour
             if (horizontalInput == 0 && verticalInput == 0)
             {
                 _playerAnimator.SetStill();
-                StopWalkSound();
             }
             else
             {
                 _playerAnimator.SetRunning();
-                StartWalkSound();
             }            
 
             // flip sprite along y axis if direction changes
@@ -170,7 +168,6 @@ public class PlayerController : MonoBehaviour
     // starts base dash attack
     private void StartDash()
     {
-        StopWalkSound();
         Instantiate(dashAnimation);
     }
 
@@ -217,7 +214,6 @@ public class PlayerController : MonoBehaviour
     // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
-        StopWalkSound();
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
