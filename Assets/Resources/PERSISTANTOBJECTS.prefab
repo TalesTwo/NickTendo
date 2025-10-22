@@ -1061,6 +1061,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: DefaultAnimationCycle.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: 'DefaultAnimationCycle.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8558635697896236382, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
     m_RemovedComponents:
     - {fileID: 1235597749469353601, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
     m_RemovedGameObjects: []
