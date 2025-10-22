@@ -68,7 +68,8 @@ public class AnimatedPlayer : AnimatedEntity
 
     public void SetDashing()
     {
-        Interrupt(dashAnimation);
+        //Interrupt(dashAnimation);
+        DefaultAnimationCycle = dashAnimation;
     }
 
     private void SetToIdle()

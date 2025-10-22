@@ -55,14 +55,18 @@ public class PlayerController : MonoBehaviour
         {
             
             // set default animation to running or ide depending on movement
-            if (horizontalInput == 0 && verticalInput == 0)
+            if (!_isDashMoving)
             {
-                _playerAnimator.SetStill();
+                if (horizontalInput == 0 && verticalInput == 0)
+                {
+                    _playerAnimator.SetStill();
+                }
+                else
+                {
+                    _playerAnimator.SetRunning();
+                }                  
             }
-            else
-            {
-                _playerAnimator.SetRunning();
-            }            
+          
             
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
@@ -160,6 +164,7 @@ public class PlayerController : MonoBehaviour
     private void DashMovingStop()
     {
         _isDashMoving = false;
+        _playerAnimator.SetStill();
     }
 
     // flips the sprite depending on the direction of movement
