@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
     private bool _isKnockback = false;
     private bool _isDead = false;
-    
+    private bool _isWalking = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -56,12 +57,14 @@ public class PlayerController : MonoBehaviour
             if (horizontalInput == 0 && verticalInput == 0)
             {
                 _playerAnimator.SetStill();
+                StopWalkSound();
             }
             else
             {
                 _playerAnimator.SetRunning();
+                StartWalkSound();
             }            
-            
+
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
             {
@@ -103,6 +106,40 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void StartWalkSound()
+    {
+        if (!_isWalking)
+        {
+            _isWalking = true;
+            StartCoroutine(WalkingSoundLoop());
+        }
+    }
+
+    private void StopWalkSound()
+    {
+        if (_isWalking)
+        {
+            _isWalking = false;
+            StopAllCoroutines();
+        }
+    }
+
+
+
+
+    private IEnumerator WalkingSoundLoop()
+    {
+        for (int x = 0; x <= 222; ++x)
+        {
+            if(x == 222)
+            {
+                Managers.AudioManager.Instance.PlayWalkingSound(1, 0);
+                x = 0;
+            }
+            yield return null;
+        }
+    }
+
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()
@@ -133,6 +170,7 @@ public class PlayerController : MonoBehaviour
     // starts base dash attack
     private void StartDash()
     {
+        StopWalkSound();
         Instantiate(dashAnimation);
     }
 
@@ -179,6 +217,7 @@ public class PlayerController : MonoBehaviour
     // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
+        StopWalkSound();
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
