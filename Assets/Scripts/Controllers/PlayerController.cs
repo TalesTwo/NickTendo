@@ -142,9 +142,19 @@ public class PlayerController : MonoBehaviour
     // starts base dash attack
     private void StartDash()
     {
+        // instantiate dash
         GameObject attack = Instantiate(dashAnimation);
+        
+        // get dash direction
+        AttackPositionController trn = attack.gameObject.GetComponent<AttackPositionController>();
+        trn.FindRotation();
+        
+        // get player + dash color
         Renderer rnd = attack.gameObject.GetComponent<Renderer>();
         Color playerColor = _sr.color;
+        
+        // set values
+        _playerAnimator.SetDashAngle(attack.transform.rotation);
         rnd.material.color = playerColor;
     }
 
@@ -165,6 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         _isDashMoving = false;
         _playerAnimator.SetStill();
+        _playerAnimator.ResetDashAngle();
     }
 
     // flips the sprite depending on the direction of movement

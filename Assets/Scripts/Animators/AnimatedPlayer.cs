@@ -72,6 +72,17 @@ public class AnimatedPlayer : AnimatedEntity
         DefaultAnimationCycle = dashAnimation;
     }
 
+    public void SetDashAngle(Quaternion rotation)
+    {
+        Vector3 angles = rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(angles.x, angles.y, angles.z-90f);
+    }
+
+    public void ResetDashAngle()
+    {
+        transform.rotation = Quaternion.identity;
+    }
+
     private void SetToIdle()
     {
         Interrupt(toIdleAnimation);
