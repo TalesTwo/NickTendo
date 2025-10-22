@@ -15,8 +15,16 @@ public class AttackPositionController : MonoBehaviour
 
     private Vector3 _direction;
     private Vector3 _edit;
+    private Quaternion _rotation;
     
     void Start()
+    {
+        _attacker = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        FollowMouse();
+    }
+
+    public void FindRotation()
     {
         _attacker = GameObject.FindGameObjectWithTag("Player").transform;
         
@@ -58,7 +66,8 @@ public class AttackPositionController : MonoBehaviour
 
             // Rotate to face the mouse
             float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg + angleEdit;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            _rotation = Quaternion.Euler(0, 0, angle);
+            transform.rotation = _rotation;
             
             // change position on the first frame only
             _isAttacking = true;
@@ -69,5 +78,10 @@ public class AttackPositionController : MonoBehaviour
     private void SetPosition()
     {
         transform.position = _attacker.position + _direction * radius + _edit * verticalEdit;
+    }
+
+    public Quaternion GetRotation()
+    {
+        return _rotation;
     }
 }
