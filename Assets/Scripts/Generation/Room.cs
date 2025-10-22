@@ -147,6 +147,7 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
+                if(enemyCount == 0)Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
             }
         }
     }
