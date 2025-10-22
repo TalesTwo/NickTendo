@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -8,6 +9,8 @@ namespace Managers
         [SerializeField] private SceneField _initialGameScene;
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
+        
+        private Button _loginButton;
 
         public void Start()
         {
@@ -18,6 +21,12 @@ namespace Managers
             {
                 playerController.enabled = false;
             }
+            _loginButton = GetComponentInChildren<Button>();
+            if (_loginButton != null)
+            {
+                _loginButton.onClick.AddListener(LoginButtonClicked);
+            }
+
         }
         public void LoginButtonClicked()
         {
