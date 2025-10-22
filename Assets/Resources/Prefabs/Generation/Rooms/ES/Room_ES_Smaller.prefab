@@ -125,6 +125,12 @@ MonoBehaviour:
       minSpawnCount: 4
       maxSpawnCount: 7
       spawnChance: 0.5
+  - spawnType: 1
+    Spawnables:
+    - enemyPrefab: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
+      minSpawnCount: 1
+      maxSpawnCount: 1
+      spawnChance: 0.25
 --- !u!1 &580180919557100743
 GameObject:
   m_ObjectHideFlags: 0
@@ -33062,7 +33068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: interactPromptOffset.y
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: _sceneToLoad._sceneName
@@ -33226,7 +33232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: interactPromptOffset.y
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: _sceneToLoad._sceneName

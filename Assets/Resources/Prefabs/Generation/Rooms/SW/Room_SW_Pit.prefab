@@ -16970,7 +16970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: interactPromptOffset.y
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: _sceneToLoad._sceneName
@@ -17134,7 +17134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: interactPromptOffset.y
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: _sceneToLoad._sceneName

@@ -26,14 +26,10 @@ namespace Managers
             {
                 _loginButton.onClick.AddListener(LoginButtonClicked);
             }
-            else
-            {
-                Debug.LogWarning("Login button not found in MainMenuManager.");
-            }
+
         }
         public void LoginButtonClicked()
         {
-            Debug.Log("Login button clicked.");
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
             {
                 AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
