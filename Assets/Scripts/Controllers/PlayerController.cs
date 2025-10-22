@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void StartWalkSound()
+    public void StartWalkSound()
     {
         if (!_isWalking)
         {
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StopWalkSound()
+    public void StopWalkSound()
     {
         if (_isWalking)
         {

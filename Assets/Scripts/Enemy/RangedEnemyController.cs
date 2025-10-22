@@ -119,7 +119,7 @@ public class RangedEnemyController : EnemyControllerBase
         }
 
     }
-
+    private int count = 0;
     // follow the path
     protected override IEnumerator Follow()
     {
@@ -128,7 +128,7 @@ public class RangedEnemyController : EnemyControllerBase
             yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
-        int count = 0;
+
 
         // iterate though the path as it updates
         while (true)
@@ -144,7 +144,7 @@ public class RangedEnemyController : EnemyControllerBase
             }
             if (count == 222)
             {
-                Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0);
+                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
                 count = 0;
             }
             ++count;
