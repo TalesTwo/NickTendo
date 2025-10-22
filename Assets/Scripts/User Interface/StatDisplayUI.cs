@@ -13,10 +13,10 @@ public class StatDisplayUI : MonoBehaviour
     private PlayerStatsEnum[] _statTypeList;
     [SerializeField]
     private TextMeshProUGUI _statDisplayText;
-
-    private float _statDisplayNumber;
     [SerializeField]
     private GameObject _tooltip;
+
+    private float _statDisplayNumber;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
 
     private void Start()
@@ -24,10 +24,12 @@ public class StatDisplayUI : MonoBehaviour
         _statDictionary = new Dictionary<PlayerStatsEnum, float[]>();
 
         SetStatDict();
+        SetBaseStats();
         _statDisplayNumber = 0;
 
-        EventBroadcaster.PersonaChanged += SetBaseStats;
+        EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerStatsChanged += HandleStatChanged;
+        EventBroadcaster.PlayerDeath += HandleDeath;
 
         gameObject.SetActive(false);
     }
@@ -43,7 +45,7 @@ public class StatDisplayUI : MonoBehaviour
         }
     }
 
-    void SetBaseStats(Types.Persona P)
+    void SetBaseStats()
     {
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
@@ -113,5 +115,19 @@ public class StatDisplayUI : MonoBehaviour
         {
             _tooltip.GetComponent<TooltipUI>().HideTooltip();
         }
+    }
+
+    void HandlePersonaChanged(Types.Persona p)
+    {
+        SetStatDict();
+        SetBaseStats();
+        _statDisplayNumber = 0;
+    }
+
+    void HandleDeath()
+    {
+        SetStatDict();
+        SetBaseStats();
+        _statDisplayNumber = 0;
     }
 }

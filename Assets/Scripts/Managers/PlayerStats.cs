@@ -101,6 +101,7 @@ public class PlayerStats : Singleton<PlayerStats>
         if (BuffType == PlayerStatsEnum.Max_Health)
         {
             Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
+            UpdateCurrentHealth(BuffValue);
             UpdateMaxHealth(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Movement_Speed)

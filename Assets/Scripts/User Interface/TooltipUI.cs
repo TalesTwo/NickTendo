@@ -48,7 +48,7 @@ public class TooltipUI : MonoBehaviour
     
     private void Update()
     {
-        Vector2 _tooltipPosition = Input.mousePosition;
+        Vector2 _tooltipPosition = Input.mousePosition / _canvasTransform.localScale.x;
 
 
         if (_tooltipPosition.x + _background.rect.width > _canvasTransform.rect.width)
