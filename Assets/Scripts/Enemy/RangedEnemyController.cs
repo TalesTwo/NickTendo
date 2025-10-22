@@ -128,6 +128,7 @@ public class RangedEnemyController : EnemyControllerBase
             yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
+        int count = 0;
 
         // iterate though the path as it updates
         while (true)
@@ -141,6 +142,12 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
+            if (count == 222)
+            {
+                Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0);
+                count = 0;
+            }
+            ++count;
 
             _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;

@@ -123,6 +123,7 @@ public class FollowerEnemyController : EnemyControllerBase
     {
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
+        int count = 0;
 
         // iterate though the path as it updates
         while (true)
@@ -141,11 +142,18 @@ public class FollowerEnemyController : EnemyControllerBase
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             }
-            
+            if(count == 222)
+            {
+                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
+                count = 0;
+            }
+            ++count;
             yield return null;
         }
     }
-    
+
+
+
     // do damage to and knockback the player
     private void DoDamage()
     {
