@@ -60,10 +60,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (horizontalInput == 0 && verticalInput == 0)
                 {
+                    StopWalkSound();
                     _playerAnimator.SetStill();
                 }
                 else
                 {
+                    StartWalkSound();
                     _playerAnimator.SetRunning();
                 }                  
             }
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
     // starts base attack animation
     private void StartAttack()
     {
+        StopWalkSound();
         GameObject attack = Instantiate(attackAnimation);
         Renderer rnd = attack.gameObject.GetComponent<Renderer>();
         Color playerColor = _sr.color;
@@ -177,6 +180,7 @@ public class PlayerController : MonoBehaviour
     // starts base dash attack
     private void StartDash()
     {
+        StopWalkSound();
         // instantiate dash
         GameObject attack = Instantiate(dashAnimation);
         
@@ -238,6 +242,7 @@ public class PlayerController : MonoBehaviour
     // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
+        StopWalkSound();
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
@@ -275,6 +280,7 @@ public class PlayerController : MonoBehaviour
     // function to set player as dead
     public void SetIsDead()
     {
+        StopWalkSound();
         _isDead = true;
     }
 
