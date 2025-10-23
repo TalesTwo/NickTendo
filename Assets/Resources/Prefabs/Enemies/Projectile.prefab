@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3260285867665164136}
   - component: {fileID: 5587231627943037528}
   - component: {fileID: -206651833762895192}
+  - component: {fileID: 2661344030048849047}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: EnemyAttack
@@ -207,3 +208,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0035265088, y: -0.0052899867}
   m_Size: {x: 0.6967032, y: 0.73197}
   m_Direction: 0
+--- !u!114 &2661344030048849047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064634610991927975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33617cd37b234449622835bea510bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 105169053199506356, guid: 1880819674915f14f84adf11b32322c6, type: 3}
+  - {fileID: -3209795618878514358, guid: 1880819674915f14f84adf11b32322c6, type: 3}
+  Framerate: 12
+  SpriteRenderer: {fileID: 0}
+  index: 0
