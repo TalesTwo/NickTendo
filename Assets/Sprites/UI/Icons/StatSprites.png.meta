@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9e6eac1d72a541a48a15b62bd0ac1ffa
+guid: 700fc24b78d5db045926d068b039314b
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: 4748280286669562259
     second: StatSprites_5
+  - first:
+      213: 2856891333714230379
+    second: StatSprites_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +69,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,11 +118,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MovementIcon
+      name: PersonaIcon
       rect:
         serializedVersion: 2
         x: 16
-        y: 109
+        y: 108
         width: 16
         height: 16
       alignment: 0
@@ -136,11 +139,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PersonaIcon1
+      name: PersonaHighlight
       rect:
         serializedVersion: 2
-        x: 112
-        y: 109
+        x: 48
+        y: 108
         width: 16
         height: 16
       alignment: 0
@@ -161,28 +164,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 231
-        y: 111
-        width: 17
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0dd82f8000196ebe0800000000000000
-      internalID: -1448310800816894512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: StatSprites_3
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 41
+        y: 110
         width: 17
         height: 17
       alignment: 0
@@ -199,11 +181,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthIcon
+      name: MovementIcon
       rect:
         serializedVersion: 2
-        x: 135
-        y: 41
+        x: 32
+        y: 43
         width: 17
         height: 17
       alignment: 0
@@ -220,11 +202,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DashIcon
+      name: HealthIcon
       rect:
         serializedVersion: 2
-        x: 231
-        y: 41
+        x: 127
+        y: 43
         width: 17
         height: 17
       alignment: 0
@@ -240,10 +222,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DashIcon
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 43
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6cbde31887b5a720800000000000000
+      internalID: 2856891333714230379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1e729b99d151448439a7e7fb8cf45956
+    spriteID: 459a008e2736841438a04ce5551d35c1
     internalID: 0
     vertices: []
     indices: 
@@ -251,13 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AttackIcon: -1448310800816894512
-      DashIcon: 4748280286669562259
-      HealthIcon: 5343255981752702087
-      MovementIcon: -6944296137640011417
-      PersonaIcon1: 5203494920179446359
-      StatSprites_0: 255648514
-      StatSprites_3: -897015248468258193
+      AttackIcon: -897015248468258193
+      DashIcon: 2856891333714230379
+      HealthIcon: 4748280286669562259
+      MovementIcon: 5343255981752702087
+      PersonaHighlight: 5203494920179446359
+      PersonaIcon: -6944296137640011417
+      StatSprites_2: -1448310800816894512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
