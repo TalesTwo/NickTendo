@@ -42,6 +42,7 @@ namespace Managers
         private int _index;
         private string _characterName;
         private string _playerName;
+        private string _spokenLine;
         private List<string[]> _dialogue;
         private Dictionary<string, List<string[]>> _lines;
         
@@ -127,7 +128,7 @@ namespace Managers
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == _dialogue[_index][2])
+                if (dialogueText.text == _spokenLine) //_dialogue[_index][2]
                 {
                     _canContinue = true;
                 }
@@ -240,8 +241,8 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
-            string spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
-            foreach (char letter in spokenLine.ToCharArray())
+            _spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
+            foreach (char letter in _spokenLine.ToCharArray())
             {
                 dialogueText.text += letter;
                 ++talkingtonetimer;
