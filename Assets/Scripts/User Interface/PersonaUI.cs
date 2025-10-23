@@ -102,14 +102,15 @@ public class PersonaUI : MonoBehaviour
             }
             // --- Fill in description ---
 
-            TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
+            /*TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
             if (descriptionText != null)
             {
                 descriptionText.text = stats.Description;
-            }
+            }*/
 
             // --- Button logic ---
             Button button = newPersona.GetComponentInChildren<Button>();
+            PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
             if (button != null)
             {
                 var capturedPersona = persona.Key;
@@ -117,6 +118,7 @@ public class PersonaUI : MonoBehaviour
                 if (state == Types.PersonaState.Selected)
                 {
                     button.interactable = false;
+                    pItemUI.ShowCheckmark();
                     TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
                     if (btnLabel != null)
                         btnLabel.text = "Selected";
@@ -124,6 +126,7 @@ public class PersonaUI : MonoBehaviour
                 else if (state == Types.PersonaState.Available)
                 {
                     button.interactable = true;
+                    //pItemUI.HideCheckmark();
                     button.onClick.AddListener(() =>
                     {
                         PersonaManager.Instance.SetPersona(capturedPersona);
