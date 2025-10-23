@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int x = 0; x <= 222; ++x)
         {
-            if(x == 222)
+            if(x == 222 && _isActive)
             {
                 Managers.AudioManager.Instance.PlayWalkingSound(1, 0);
                 x = 0;
@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
         if (_isActive)
         {
             _isActive = false;
+            _playerAnimator.SetStill();
         }
         else
         {
