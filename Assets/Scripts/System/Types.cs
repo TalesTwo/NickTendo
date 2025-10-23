@@ -96,6 +96,14 @@ public static class Types
         None
         
     }
+
+    public enum EnemyType
+    {
+        FollowerEnemy,
+        RangedEnemy,
+        ChestEnemy,
+        PotEnemy
+    }
     
     /* ----------------- END GENERATION TYPES ----------------- */
     
