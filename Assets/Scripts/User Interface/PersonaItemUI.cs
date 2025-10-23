@@ -14,13 +14,6 @@ public class PersonaItemUI : MonoBehaviour
     }
     public void ShowCheckmark()
     {
-        DebugUtils.Log("show called");
         _checkmark.SetActive(true);
-    }
-
-    public void HideCheckmark()
-    {
-        DebugUtils.Log("hide called");
-        _checkmark.SetActive(false);
     }
 }
