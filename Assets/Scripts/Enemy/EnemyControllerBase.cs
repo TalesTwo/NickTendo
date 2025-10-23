@@ -62,7 +62,7 @@ public class EnemyControllerBase : SpawnableObject
     }
 
 
-    public void Deactivate()
+    public void Deactivate() 
     {
 
         // tell the room we are in, that we have died
