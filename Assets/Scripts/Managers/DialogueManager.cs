@@ -99,6 +99,13 @@ namespace Managers
             {
                 string[] cells = line.Split(',');
                 string[] remaining = cells.Skip(2).ToArray();
+                /*
+                string[] finalLine = new string[remaining.Length];
+                for (int i = 0; i < remaining.Length; i++)
+                {
+                    finalLine[i] = remaining[i].Replace("{player_name}", _playerName);
+                }
+                */
                 if (!_lines.ContainsKey(cells[0]))
                 {
                     _lines[cells[0]] = new List<string[]>();
@@ -240,7 +247,8 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
-            foreach (char letter in _dialogue[_index][2].ToCharArray())
+            string spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
+            foreach (char letter in spokenLine.ToCharArray())
             {
                 dialogueText.text += letter;
                 ++talkingtonetimer;
