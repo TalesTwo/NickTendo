@@ -289,6 +289,7 @@ public class PlayerController : MonoBehaviour
     public void ResetIsDead()
     {
         _isDead = false;
+        _playerAnimator.UnsetDead();
     }
 
     public bool IsDashing()
