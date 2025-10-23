@@ -34,10 +34,10 @@ public class Room : MonoBehaviour
     public int roomDifficulty = int.MaxValue; // default to max value, so we can tell if it has been set or not.
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     private (int row, int col) RoomCoords = (-1, -1);
-    
-    
-    
-    
+    //Signals whether the door unlock sound has to be played or not.
+    bool openSoundHasPlayed = false;
+
+
     // Special logic for the spawn room
     private void SpecialRoomLogic()
     {
@@ -103,16 +103,16 @@ public class Room : MonoBehaviour
 
         
     }
-
     public void UpdateLockedDoors(bool forceLocked = false)
     {
         
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
-            bool openSoundHasPlayed = false;
+            bool NeverEnemy = true;
             if (enemyCount > 0 || forceLocked)
             {
+                NeverEnemy = false;
                 DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
@@ -148,7 +148,7 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
-                if (!openSoundHasPlayed)
+                if (!openSoundHasPlayed&&NeverEnemy == true)
                 {
                     Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
                     openSoundHasPlayed = true;
@@ -173,6 +173,7 @@ public class Room : MonoBehaviour
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
     {
         DebugUtils.Log($"Room: {name} detected player changed room to coords: {targetRoomCoords}");
+        
         // check to see if its the final room we went too
         Vector2 cords = DungeonGeneratorManager.Instance.GetEndPos();
         // convert to int tuple
