@@ -15,8 +15,17 @@ public class DoorTriggerInteraction : TriggerInteractBase
     // get a reference to the door scripy
     private Door _doorScript;
 
+    private float _nextAllowedInteractTime = 0f;
+    private const float InteractCooldown = 0.75f;
     public override void Interact()
     {
+
+        // Prevent interaction if not ready
+        if (Time.time < _nextAllowedInteractTime)
+            return;
+
+        // Update the next allowed time 
+        _nextAllowedInteractTime = Time.time + InteractCooldown;
         
         base.Interact();
         // log the current door state 
