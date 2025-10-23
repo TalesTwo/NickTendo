@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
         if (_isActive)
         {
             _isActive = false;
+            _playerAnimator.SetStill();
         }
         else
         {
