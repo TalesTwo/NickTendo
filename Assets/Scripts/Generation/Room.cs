@@ -81,12 +81,21 @@ public class Room : MonoBehaviour
             }
             
         }
+
+        if (roomType == Types.RoomType.End)
+        {
+            if (GameStateManager.Instance.GetBuddeeDialogState() != "Vertwin")
+            {
+                GameStateManager.Instance.SetEndGameFlag();
+            }
+        }
+        
     }
     
     public void Update()
     {
         // only run this logic if we are the spawn room
-        if (roomType == Types.RoomType.Spawn)
+        if (roomType == Types.RoomType.Spawn || roomType == Types.RoomType.End)
         {
             SpecialRoomLogic();
         }

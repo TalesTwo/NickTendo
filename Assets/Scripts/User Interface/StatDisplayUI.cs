@@ -14,6 +14,8 @@ public class StatDisplayUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _statDisplayText;
     [SerializeField]
+    private TextMeshProUGUI _statDisplayTextBG;
+    [SerializeField]
     private GameObject _tooltip;
 
     private float _statDisplayNumber;
@@ -84,6 +86,7 @@ public class StatDisplayUI : MonoBehaviour
             _statDisplayNumber++;
             gameObject.SetActive(true);
             _statDisplayText.SetText(_statDisplayNumber.ToString());
+            _statDisplayTextBG.SetText(_statDisplayNumber.ToString());
         }        
     }
 

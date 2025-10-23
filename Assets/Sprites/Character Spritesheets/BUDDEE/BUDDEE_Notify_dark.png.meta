@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 9e6eac1d72a541a48a15b62bd0ac1ffa
+guid: 8db861f65d4a8cf41805daa53b4b167c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6944296137640011417
-    second: StatSprites_0
+      213: 3003548924246509705
+    second: BUDDEE_Notify_dark_0
   - first:
-      213: 5203494920179446359
-    second: StatSprites_1
+      213: 1186316798793453475
+    second: BUDDEE_Notify_dark_1
   - first:
-      213: -1448310800816894512
-    second: StatSprites_2
+      213: -7892179988851911893
+    second: BUDDEE_Notify_dark_2
   - first:
-      213: -897015248468258193
-    second: StatSprites_3
+      213: -9030190307501202826
+    second: BUDDEE_Notify_dark_3
   - first:
-      213: 5343255981752702087
-    second: StatSprites_4
+      213: -6958887635430629755
+    second: BUDDEE_Notify_dark_4
   - first:
-      213: 4748280286669562259
-    second: StatSprites_5
+      213: -7159565988737885489
+    second: BUDDEE_Notify_dark_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,10 +63,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,6 +87,19 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -111,17 +124,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MovementIcon
+      name: BUDDEE_Notify_dark_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 109
+        x: 33
+        y: 178
         width: 16
-        height: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76999dc8477e0af90800000000000000
-      internalID: -6944296137640011417
+      spriteID: 988483745dfbea920800000000000000
+      internalID: 3003548924246509705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PersonaIcon1
+      name: BUDDEE_Notify_dark_1
       rect:
         serializedVersion: 2
-        x: 112
-        y: 109
+        x: 161
+        y: 178
         width: 16
-        height: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75278d38f07863840800000000000000
-      internalID: 5203494920179446359
+      spriteID: 3af8927d7d4a67010800000000000000
+      internalID: 1186316798793453475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AttackIcon
+      name: BUDDEE_Notify_dark_2
       rect:
         serializedVersion: 2
-        x: 231
-        y: 111
-        width: 17
-        height: 17
+        x: 289
+        y: 178
+        width: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0dd82f8000196ebe0800000000000000
-      internalID: -1448310800816894512
+      spriteID: b23190d5d18597290800000000000000
+      internalID: -7892179988851911893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: StatSprites_3
+      name: BUDDEE_Notify_dark_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 41
-        width: 17
-        height: 17
+        x: 33
+        y: 51
+        width: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f62d0f452692d83f0800000000000000
-      internalID: -897015248468258193
+      spriteID: 672273362c15ea280800000000000000
+      internalID: -9030190307501202826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthIcon
+      name: BUDDEE_Notify_dark_4
       rect:
         serializedVersion: 2
-        x: 135
-        y: 41
-        width: 17
-        height: 17
+        x: 161
+        y: 50
+        width: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 784d950710f072a40800000000000000
-      internalID: 5343255981752702087
+      spriteID: 58e9c4ab0901d6f90800000000000000
+      internalID: -6958887635430629755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DashIcon
+      name: BUDDEE_Notify_dark_5
       rect:
         serializedVersion: 2
-        x: 231
-        y: 41
-        width: 17
-        height: 17
+        x: 289
+        y: 50
+        width: 16
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,8 +286,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 391ede463c745e140800000000000000
-      internalID: 4748280286669562259
+      spriteID: fca5f4f8aac14ac90800000000000000
+      internalID: -7159565988737885489
       vertices: []
       indices: 
       edges: []
@@ -243,7 +295,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1e729b99d151448439a7e7fb8cf45956
+    spriteID: ae6f388d4a688c14d880f0f13746eaab
     internalID: 0
     vertices: []
     indices: 
@@ -251,13 +303,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AttackIcon: -1448310800816894512
-      DashIcon: 4748280286669562259
-      HealthIcon: 5343255981752702087
-      MovementIcon: -6944296137640011417
-      PersonaIcon1: 5203494920179446359
-      StatSprites_0: 255648514
-      StatSprites_3: -897015248468258193
+      BUDDEE_Notify_dark_0: 3003548924246509705
+      BUDDEE_Notify_dark_1: 1186316798793453475
+      BUDDEE_Notify_dark_2: -7892179988851911893
+      BUDDEE_Notify_dark_3: -9030190307501202826
+      BUDDEE_Notify_dark_4: -6958887635430629755
+      BUDDEE_Notify_dark_5: -7159565988737885489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

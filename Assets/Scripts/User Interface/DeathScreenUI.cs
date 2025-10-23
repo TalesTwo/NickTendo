@@ -5,6 +5,7 @@ using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Essential for scene management
 
 public class DeathScreenUI : MonoBehaviour
 {
@@ -56,7 +57,9 @@ public class DeathScreenUI : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        //SceneSwapManager.Instance.SwapScene(, 1f, 3f);
+        SceneManager.LoadScene("MainMenu");
+        // todo Application.Quit();
     }
     
 }
