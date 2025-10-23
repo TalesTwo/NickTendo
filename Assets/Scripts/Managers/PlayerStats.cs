@@ -183,7 +183,10 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            DisplayAllStats();
+            // get the persna stats and print the email
+            var persona = PersonaManager.Instance.GetPersona();
+            var stats = PersonaStatsLoader.GetStats(persona);
+            DebugUtils.Log("Persona Email: " + stats.Email);
         }
     }
 }
@@ -220,4 +223,5 @@ public struct PlayerStatsStruct
     public int Coins;
     public Color PlayerColor;
     public string Description;
+    public string Email;
 }
