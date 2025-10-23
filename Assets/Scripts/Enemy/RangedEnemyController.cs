@@ -143,7 +143,7 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
-            if (count == 222)
+            if (count == 70)
             {
                 Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
                 count = 0;
@@ -180,6 +180,7 @@ public class RangedEnemyController : EnemyControllerBase
         base.Deactivate();
         EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         // specific to ranged enemy deactivation logic can go here
+        Managers.AudioManager.Instance.PlayEnemyDeathSound();
         Debug.Log("Ranged Enemy destroyed");
     }
 }

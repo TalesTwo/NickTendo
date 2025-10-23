@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a303d10c7c3f045af31a9bbc759735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolSize: 20
+  _poolSize: 30
   swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
-  walkingSound: {fileID: 8300000, guid: 7a3e6cc44c600264aae78d08b7283601, type: 3}
+  walkingSound: {fileID: 8300000, guid: ed46d945428c3ea4fb37b24d843975c1, type: 3}
   dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
   playerTalkingTones:
   - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
@@ -76,7 +76,7 @@ MonoBehaviour:
   BUDEEDeath: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
-  shooterMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
+  shooterMovement: {fileID: 8300000, guid: 7d9fc54b29c83c74d97cb553c394bbf4, type: 3}
   shot: {fileID: 8300000, guid: a65652c7b8bcb9848a834dfe51f2cd2e, type: 3}
   shotHit: {fileID: 8300000, guid: cdc285cddf7e0264cb918df383fba6d5, type: 3}
   shotMiss: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
