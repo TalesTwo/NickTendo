@@ -297,4 +297,9 @@ public class PlayerController : MonoBehaviour
         return _isDashMoving;
     }
 
+    public bool GetIsDead()
+    {
+        return _isDead;
+    }
+
 }
