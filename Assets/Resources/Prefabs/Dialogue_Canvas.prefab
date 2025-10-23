@@ -199,9 +199,9 @@ MonoBehaviour:
   NPCNameText: {fileID: 2182260789854076939}
   dialogueText: {fileID: 4203684450307392599}
   csv: {fileID: 4900000, guid: 511dc45fee0573744b6fca8abddb0d4f, type: 3}
-  buddeeSmileSprite: {fileID: -9005990149069431621, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  buddeeSmileSprite: {fileID: -9004958050476621873, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
   buddeeSurpriseSprite: {fileID: -6239482654316834915, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
-  buddeeDefaultSprite: {fileID: -9004958050476621873, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
+  buddeeDefaultSprite: {fileID: -9005990149069431621, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
   playerSmileSprite: {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   capeSprite: {fileID: -205270267638800340, guid: 99ca60b3be5971f428b4856bbb45ef80, type: 3}
   interactPrompt: {fileID: 0}
@@ -673,14 +673,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -6152101797668367418, guid: 1d84d586d219614428364b0c82fca1b4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
