@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 20af80934f446aa4a9819c532312500a
+guid: 1880819674915f14f84adf11b32322c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6593832073280498477
-    second: BUDDEE_Alert_0
+      213: 105169053199506356
+    second: projectile_0
   - first:
-      213: 6583268899271974734
-    second: BUDDEE_Alert_1
-  - first:
-      213: 7926275169330671759
-    second: BUDDEE_Alert_2
-  - first:
-      213: 3971397273965034557
-    second: BUDDEE_Alert_3
-  - first:
-      213: 9052982118580939924
-    second: BUDDEE_Alert_4
-  - first:
-      213: 8289289428577084355
-    second: BUDDEE_Alert_5
+      213: -3209795618878514358
+    second: projectile_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -167,127 +155,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BUDDEE_Alert_0
+      name: projectile_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 177
-        width: 18
-        height: 28
+        x: 69
+        y: 53
+        width: 12
+        height: 12
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2b2674c55ff18b50800000000000000
-      internalID: 6593832073280498477
+      spriteID: 4bb125952b2a57100800000000000000
+      internalID: 105169053199506356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BUDDEE_Alert_1
+      name: projectile_1
       rect:
         serializedVersion: 2
-        x: 160
-        y: 177
-        width: 18
-        height: 28
+        x: 197
+        y: 54
+        width: 11
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4f9bf92f287c5b50800000000000000
-      internalID: 6583268899271974734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BUDDEE_Alert_2
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 177
-        width: 18
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f8034f37549cffd60800000000000000
-      internalID: 7926275169330671759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BUDDEE_Alert_3
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 50
-        width: 19
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d3cf3a087cc3d1730800000000000000
-      internalID: 3971397273965034557
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BUDDEE_Alert_4
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 49
-        width: 18
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 49ceaf7a547a2ad70800000000000000
-      internalID: 9052982118580939924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BUDDEE_Alert_5
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 49
-        width: 18
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c3ecb611d8790370800000000000000
-      internalID: 8289289428577084355
+      spriteID: a4b142f04e38473d0800000000000000
+      internalID: -3209795618878514358
       vertices: []
       indices: 
       edges: []
@@ -295,7 +199,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 54d7dc3a6f321d04f94225af7dee933c
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -303,12 +207,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BUDDEE_Alert_0: 6593832073280498477
-      BUDDEE_Alert_1: 6583268899271974734
-      BUDDEE_Alert_2: 7926275169330671759
-      BUDDEE_Alert_3: 3971397273965034557
-      BUDDEE_Alert_4: 9052982118580939924
-      BUDDEE_Alert_5: 8289289428577084355
+      projectile_0: 105169053199506356
+      projectile_1: -3209795618878514358
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

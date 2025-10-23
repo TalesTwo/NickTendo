@@ -8,7 +8,7 @@ Example1,,BUDDEE,smile,Fair point.
 ,,,,
 ,,,,
 Example2,,BUDDEE,surprise,Did you touch that cube?
-Example2,,Player,smile,"I did, is that alright?"
+Example2,,Player,smile,I did. is that alright?
 Example2,,BUDDEE,smile,But that was my favorite cube…
 ,,,,
 ,,,,
@@ -16,13 +16,13 @@ Example2,,BUDDEE,smile,But that was my favorite cube…
 ,,,,
 Intro,First dialogue after login,BUDDEE,smile,Greetings <b>{player_name}</b>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <color=blue>BUDDEE</color>!
 Intro,,Player,smile,Woah this website is immersive as hell!
-Intro,,Player,smile,"Alright chatbot, how do I get started finding that perfect partner?"
+Intro,,Player,smile,Alright chatbot. how do I get started finding that perfect partner?
 Intro,,BUDDEE,smile,Oh don't you worry about that! <color=blue>BUDDEE</color> has got you covered. Try out this new account!
 Intro,,System,cape,YOU GOT THE EVERYMAN ACCOUNT!
 Intro,,BUDDEE,smile,With a pre-made custom account you'll be able to present the perfect personality to persuade potential <i>platonic</i> partners!
 Intro,,Player,smile,Oh sweet I <b>hate</b> setting up my profile.
 Intro,,BUDDEE,smile,All you have to do now is enter the forums! 
-Intro,,BUDDEE,smile,"Our security is sorta on the fritz right now, so you might encounter some bots or hackers about. But don't worry!"
+Intro,,BUDDEE,smile,Our security is sorta on the fritz right now. so you might encounter some bots or hackers about. But don't worry!
 Intro,,BUDDEE,smile,You can defend yourself with your cursor by getting close and clicking in their direction! A cursor is a deadly tool you know.
 Intro,,BUDDEE,smile,I'll be following to keep you safe. Just head out the door when you're ready. You've got this friend!
 ,,,,
@@ -55,7 +55,7 @@ FinalRun,,BUDDEE,smile,Be careful out there. I don't think I can bring you back 
 FinalRun,,Player,smile,Oh <b><color=red>No</color></b>!
 FinalRun,,BUDDEE,surprise,No need to use the computer this time. just make your way through the forums for one last hurrah! I believe in you!
 ,,,,
-AccManStart,player clicking the account manager before their first run.,BUDDEE,smile,"Sorry, our account manager is currently undergoing maintenance! Please come back later."
+AccManStart,player clicking the account manager before their first run.,BUDDEE,smile,Sorry. our account manager is currently undergoing maintenance! Please come back later.
 AccManStart,,Player,smile,How much later?
 AccManStart,,BUDDEE,smile,If only anyone ever had the answer to that.
 ,,,,
@@ -64,14 +64,14 @@ AccManStart,,BUDDEE,smile,If only anyone ever had the answer to that.
 ,,,,
 Death1,BUDDE dialogue after dying in first run.,BUDDE,surprise,Woah! Looks like you almost fell out there! Good thing I caught you before they could nab your data!
 Death1,,Player,surprise,Wait they were going to steal my data? Is my account safe?
-Death1,,BUDDEE,smile,"Well unfortunately we did lose access to the account, but I have the solution! Head over to the account manager and pick whichever one you like!"
-Death1,,BUDDEE,smile,"We have a wide selection that'll not only attract new friends, they'll protect your identity and let you navigate the forums more easily!"
-Death1,,BUDDEE,smile,"Do be aware though, I won't be able to save these ones either, and they're the only ones left. The company doesn't want me making any more fake emails..."
+Death1,,BUDDEE,smile,Well unfortunately we did lose access to the account. but I have the solution! Head over to the account manager and pick whichever one you like!
+Death1,,BUDDEE,smile,We have a wide selection that'll not only attract new friends. they'll protect your identity and let you navigate the forums more easily!
+Death1,,BUDDEE,smile,Do be aware though. I won't be able to save these ones either. and they're the only ones left. The company doesn't want me making any more fake emails...
 Death1,,Player,smile,Thanks for the help  <color=blue>BUDDEE</color>.
 ,,,,
 Death2,BUDDEE dialogue after 2nd run,Player,smile,Wow it really is rough out there.
 Death2,,Player,smile,Can't you help me a bit more?
-Death2,,BUDDEE,smile,"Well I'm not normally allowed, but if you search deep enough in the forums I might find a way to sneak in."
+Death2,,BUDDEE,smile,Well I'm not normally allowed. but if you search deep enough in the forums I might find a way to sneak in.
 Death2,,BUDDEE,smile,Find me and I'll hapilly trade you for the data you collect!
 ,,,,
 Vertwin,temporay win for vertical slice,BUDDEE,smile,Congratulations on finding a friend! You'll still be my friend too right?
@@ -84,41 +84,41 @@ Vertwin,,BUDDEE,smile,404 ERROR: BOSSFIGHT NOT FOUND
 HubRandom,ramdon BUDDEE dialogue in the hub room,BUDDEE,smile,Don't forget to pick your account before leaving!
 HubRandom,,BUDDEE,smile,I hope our security gets fixed soon..
 HubRandom,,BUDDEE,smile,Friend Finder is the world's leading completely platonic friend-making service!
-HubRandom,,BUDDEE,smile,"Defeating bots or hackers will make them drop their delicious, delicious data~"
+HubRandom,,BUDDEE,smile,Defeating bots or hackers will make them drop their delicious. delicious data~
 HubRandom,,BUDDEE,smile,Good luck finding that friend!
 ,,,,
 VertIntro,First dialogue after login in vertical slice,BUDDEE,smile,Greetings <b>{player_name}</b>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <color=blue>BUDDEE</color>!
 VertIntro,,Player,smile,Woah this website is immersive as hell!
-VertIntro,,Player,smile,"Alright chatbot, how do I get started finding that perfect partner?"
+VertIntro,,Player,smile,Alright chatbot. how do I get started finding that perfect partner?
 VertIntro,,BUDDEE,smile,Oh don't you worry about that! <color=blue>BUDDEE</color> has got you covered. Just press <b>[P]</b> to enter the account manager!
 VertIntro,,BUDDEE,smile,With a pre-made custom account you'll be able to present the perfect personality to persuade potential <i>platonic</i> partners!
 VertIntro,,Player,smile,Oh sweet I <b>hate</b> setting up my profile. Thanks!
 VertIntro,,BUDDEE,smile,You're welcome pal! All you have to do now is enter the forums! 
-VertIntro,,BUDDEE,smile,"Our security is sorta on the fritz right now, so you might encounter some bots or hackers about. But don't worry!"
+VertIntro,,BUDDEE,smile,Our security is sorta on the fritz right now. so you might encounter some bots or hackers about. But don't worry!
 VertIntro,,BUDDEE,smile,You can defend yourself with your cursor by getting close and clicking in their direction! A cursor is a deadly tool you know.
 VertIntro,,BUDDEE,smile,Just head out the door when you're ready or talk to me and I can tell you more about how to fight in the forums!
 ,,,,
 ,,,,
 vertDeath1,BUDDE dialogue after dying in first run. Vertical slice edition,BUDDEE,surprise,Woah! Looks like you almost fell out there! Good thing I caught you before they could nab your data!
-vertDeath1,,Player,surprise,Wait they were going to steal my data? Is my account safe?
-vertDeath1,,BUDDEE,smile,"Well unfortunately we did lose access to the account, but we still have an extra account for you to use."
-vertDeath1,,BUDDEE,smile,"I hope you manage with this one, I can't make any more. "
+vertDeath1,,Player,smile,Wait they were going to steal my data? Is my account safe?
+vertDeath1,,BUDDEE,smile,Well unfortunately we did lose access to the account. but we still have an extra account for you to use.
+vertDeath1,,BUDDEE,smile,I hope you manage with this one. I can't make any more. 
 vertDeath1,,BUDDEE,smile,The company doesn't want me making any more fake emails...
-vertDeath1,,Player,smile,"Alright, I'll do my best. Thanks for the help <color=blue>BUDDEE</color>."
+vertDeath1,,Player,smile,Alright. I'll do my best. Thanks for the help <color=blue>BUDDEE</color>.
 ,,,,
 vertDeath2,BUDDE dialogue after dying in second run. Vertical slice edition,BUDDEE,smile,Looks like we lost the last account.. It's over..
-vertDeath2,,Player,smile,"Wait, couldn't I try going in without a fake account? "
-vertDeath2,,BUDDEE,smile,"But you're exposing yourself, you could have all your data stolen."
-vertDeath2,,Player,surpise,How am I supposed to make a real friend if I don't show my real self?
+vertDeath2,,Player,smile,Wait. couldn't I try going in without a fake account? 
+vertDeath2,,BUDDEE,smile,But you're exposing yourself. you could have all your data stolen.
+vertDeath2,,Player,smile,How am I supposed to make a real friend if I don't show my real self?
 vertDeath2,,BUDDEE,smile,I really can't recommend it but I believe in you {player_name}. I hope you find your friend.
 vertDeath2,,Player,smile,Thanks <color=blue>BUDDEE</color>. See you soon.
 ,,,,
 vertIntroyell,BUDDEE yell after login,BUDDEE,smile,Oh a new user! Come over here!
 ,,,,
-vertIntroinfo,"mechanic explanation, available after intro dialogue",BUDDEE,smile,You wanna hear more about how to fight? No problem!
-vertIntroinfo,,BUDDEE,smile,"You can use <b>[WASD]</b> to move around, but you know that."
+vertIntroinfo,mechanic explanation available after intro dialogue,BUDDEE,smile,You wanna hear more about how to fight? No problem!
+vertIntroinfo,,BUDDEE,smile,You can use <b>[WASD]</b> to move around. but you know that.
 vertIntroinfo,,BUDDEE,smile,Pressing <b>[M1]</b> will swing your weapon in the direction of your cursor!
-vertIntroinfo,,BUDDEE,smile,"Not only can it hurt foes, it can reflect enemy attacks, and even break some objects!"
-vertIntroinfo,,BUDDEE,smile,"If you press <b>[M2]</b> you'll do a dash, dealing damage and throwing you in the direction of your cursor."
-vertIntroinfo,,BUDDEE,smile,"Watch out though. You'll have to recharge before you can dash again, so use it wisely!"
-vertIntroinfo,,BUDDEE,smile,"You should be able to find ways to get stronger while exploring, so make sure to check everywhere! I believe in you <b>{player_name}</b>!"
+vertIntroinfo,,BUDDEE,smile,Not only can it hurt foes. it can reflect enemy attacks. and even break some objects!
+vertIntroinfo,,BUDDEE,smile,If you press <b>[M2]</b> you'll do a dash. dealing damage and throwing you in the direction of your cursor.
+vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you can dash again. so use it wisely!
+vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!

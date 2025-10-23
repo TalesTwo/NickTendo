@@ -41,8 +41,16 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         // Play our interaction sound
         if (!_isAllowedToInteract) { return; }
+
+        AnimationOverrideOnInteract();
+        // When the player interacts with something, we should default set them back to their idle animation
         AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
         
+    }
+    
+    protected virtual void AnimationOverrideOnInteract()
+    {
+        // child classes can inherit this method to override the player animation on interact
     }
 
     protected virtual void Start()

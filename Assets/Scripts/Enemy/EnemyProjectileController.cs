@@ -11,6 +11,8 @@ public class EnemyProjectileController : MonoBehaviour
     public float stunTimer;
 
     public float lifeDuration = 5f;
+    public float angleEdit = 45f;
+    private Quaternion _rotation;
 
     private GameObject _player;
     private PlayerController _playerController;
@@ -38,9 +40,17 @@ public class EnemyProjectileController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            Managers.AudioManager.Instance.PlayEnemyShotHitSound(1f, 0.2f);
-            DoDamage();
-            DestroySelf();
+            if (!gameObject.CompareTag("PlayerAttack"))
+            {
+                Managers.AudioManager.Instance.PlayEnemyShotHitSound(1f, 0.2f);
+                DoDamage();
+                DestroySelf();                
+            }
+            else
+            {
+                DestroySelf();
+            }
+
         }
     }
 
@@ -79,6 +89,7 @@ public class EnemyProjectileController : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         Vector3 mouseDirection = (mousePosition - transform.position).normalized;
+        SetAngle(mouseDirection);
         float projectileSpeed = _rb.velocity.magnitude;
         _rb.velocity= mouseDirection * projectileSpeed;
     }
@@ -98,5 +109,13 @@ public class EnemyProjectileController : MonoBehaviour
         projectileDamage = damage;
         stunTimer = stun;
         ProjectileKnockback = knockback;
+    }
+
+    // change angle depending on the direction of the projectile
+    public void SetAngle(Vector3 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleEdit;
+        _rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = _rotation;
     }
 }

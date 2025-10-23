@@ -202,7 +202,8 @@ namespace Managers
                         Keys            = int.Parse(values[10]),
                         Coins           = int.Parse(values[11]),
                         PlayerColor     = ParseColor(values[12]),
-                        Description     = values[13]
+                        Description     = values[13],
+                        Email           = values.Length > 14 ? values[14] : ""
                     };
 
                     _personaStats[persona] = stats;

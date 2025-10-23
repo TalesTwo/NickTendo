@@ -35,6 +35,7 @@ public class PersonaUI : MonoBehaviour
         {
             playerController.enabled = false;
         }
+        EventBroadcaster.Broadcast_OpenPersonaUI();
     }
     public void ClosePersonaUI()
     {

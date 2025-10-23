@@ -43,6 +43,7 @@ public class RangedEnemyController : EnemyControllerBase
                     GameObject newProjectile = Instantiate(projectile, attackPosition, Quaternion.identity);
                     Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
                     ProjectileRb.velocity = _direction * _projectileSpeed;
+                    newProjectile.GetComponent<EnemyProjectileController>().SetAngle(_direction);
                     Managers.AudioManager.Instance.PlayEnemyShotSound();
                     
                     // set damage of projectile
@@ -171,6 +172,6 @@ public class RangedEnemyController : EnemyControllerBase
         knockbackForce =  float.Parse(stats[10]);
         stunTimer = float.Parse(stats[11]);
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
-        findPathCooldown = 1f / speed;
+        findPathCooldown = 1f / (speed*2);
     }
 }
