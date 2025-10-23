@@ -32,6 +32,7 @@ namespace Managers
         {
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
             {
+                AudioManager.Instance.PlayUISelectSound();
                 AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
                 PlayerStats.Instance.SetPlayerName(_usernameInputField.text);
                 StartGame();
