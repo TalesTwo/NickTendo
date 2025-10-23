@@ -110,6 +110,7 @@ public class Room : MonoBehaviour
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
+            bool openSoundHasPlayed = false;
             if (enemyCount > 0 || forceLocked)
             {
                 DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
@@ -147,7 +148,11 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
-                if(enemyCount == 0)Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
+                if (!openSoundHasPlayed)
+                {
+                    Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
+                    openSoundHasPlayed = true;
+                }
             }
         }
     }
