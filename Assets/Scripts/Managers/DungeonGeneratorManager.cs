@@ -39,7 +39,7 @@ namespace Managers
         [Header("Start/End Positions (Row, Col)")]
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
-        private Vector2Int startPos = new Vector2Int(-1, -1);
+        private Vector2Int startPos = new Vector2Int(-1, -1); public Vector2Int GetStartPos() { return startPos; }
         [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
         private Vector2Int endPos = new Vector2Int(-1, -1);
         
