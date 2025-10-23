@@ -183,4 +183,13 @@ public class FollowerEnemyController : EnemyControllerBase
         _playerHitTimer = float.Parse(stats[7]);
         findPathCooldown = 1f / (speed*2f);
     }
+    
+    protected override void Deactivate() 
+    {
+        base.Deactivate();
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
+        // specific to ranged enemy deactivation logic can go here
+        Debug.Log("Follower Enemy destroyed");
+        
+    }
 }

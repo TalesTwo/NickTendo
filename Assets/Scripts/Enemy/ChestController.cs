@@ -8,4 +8,21 @@ public class ChestController : EnemyControllerBase
     {
         health = float.Parse(statLine);
     }
+    
+    protected override void Deactivate() 
+    {
+        base.Deactivate();
+        // specific to ranged enemy deactivation logic can go here
+        if(enemyType == Types.EnemyType.ChestEnemy)
+        {
+            // chest logic here
+            Debug.Log("Chest destroyed");
+        }
+        if(enemyType == Types.EnemyType.PotEnemy)
+        {
+            // pot logic here
+            Debug.Log("Pot destroyed");
+        }
+        
+    }
 }
