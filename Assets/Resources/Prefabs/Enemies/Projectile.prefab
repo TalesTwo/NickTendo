@@ -171,6 +171,7 @@ MonoBehaviour:
   ProjectileKnockback: 500
   stunTimer: 0.7
   lifeDuration: 5
+  angleEdit: 45
 --- !u!70 &-206651833762895192
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -223,6 +224,6 @@ MonoBehaviour:
   DefaultAnimationCycle:
   - {fileID: 105169053199506356, guid: 1880819674915f14f84adf11b32322c6, type: 3}
   - {fileID: -3209795618878514358, guid: 1880819674915f14f84adf11b32322c6, type: 3}
-  Framerate: 12
-  SpriteRenderer: {fileID: 0}
+  Framerate: 6
+  SpriteRenderer: {fileID: 4891257339266809299}
   index: 0
