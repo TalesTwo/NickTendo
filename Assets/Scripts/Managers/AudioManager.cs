@@ -259,6 +259,10 @@ namespace Managers
         {
             PlaySFX(unlockDoor, volume, deviation);
         }
+        public void PlayCrateBreakSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(crateBreak, volume, deviation);
+        }
 
         //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)

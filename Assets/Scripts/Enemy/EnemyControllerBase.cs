@@ -133,7 +133,6 @@ public class EnemyControllerBase : SpawnableObject
         if (health <= 0)
         {
             //Destroy(gameObject);
-            Managers.AudioManager.Instance.PlayEnemyDeathSound();
             Deactivate(); // switching to this to ensure event is unsubscribed
         }
     }
