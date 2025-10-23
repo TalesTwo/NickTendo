@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolSize: 30
   swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
-  walkingSound: {fileID: 8300000, guid: 7a3e6cc44c600264aae78d08b7283601, type: 3}
+  walkingSound: {fileID: 8300000, guid: ed46d945428c3ea4fb37b24d843975c1, type: 3}
   dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
   playerTalkingTones:
   - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
