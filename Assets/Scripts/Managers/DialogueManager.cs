@@ -240,7 +240,8 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
-            foreach (char letter in _dialogue[_index][2].ToCharArray())
+            string spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
+            foreach (char letter in spokenLine.ToCharArray())
             {
                 dialogueText.text += letter;
                 ++talkingtonetimer;
@@ -278,7 +279,7 @@ namespace Managers
                 _isReading = false;
                 _dialogIsRandom = false;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
-                GameStateManager.Instance.SetBuddeeDialogState("IntroRandom");
+                GameStateManager.Instance.Dialogue("BUDDEE");
                 EventBroadcaster.Broadcast_StopDialogue();
                 ZeroText();
             }

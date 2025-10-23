@@ -202,7 +202,7 @@ MonoBehaviour:
   buddeeSmileSprite: {fileID: -9005990149069431621, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
   buddeeSurpriseSprite: {fileID: -6239482654316834915, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
   buddeeDefaultSprite: {fileID: -9004958050476621873, guid: 93e8b3b8ebef6b442a8ff641f53afb31, type: 3}
-  playerSmileSprite: {fileID: 8793639957104055765, guid: dfe6a582ad0774f4596a9bac0677a71c, type: 3}
+  playerSmileSprite: {fileID: 6713454233679430138, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
   capeSprite: {fileID: -205270267638800340, guid: 99ca60b3be5971f428b4856bbb45ef80, type: 3}
   interactPrompt: {fileID: 0}
   wordSpeed: 0.01
