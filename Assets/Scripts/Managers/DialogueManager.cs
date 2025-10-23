@@ -99,13 +99,6 @@ namespace Managers
             {
                 string[] cells = line.Split(',');
                 string[] remaining = cells.Skip(2).ToArray();
-                /*
-                string[] finalLine = new string[remaining.Length];
-                for (int i = 0; i < remaining.Length; i++)
-                {
-                    finalLine[i] = remaining[i].Replace("{player_name}", _playerName);
-                }
-                */
                 if (!_lines.ContainsKey(cells[0]))
                 {
                     _lines[cells[0]] = new List<string[]>();
