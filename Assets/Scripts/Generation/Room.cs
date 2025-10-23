@@ -344,4 +344,11 @@ public class Room : MonoBehaviour
     {
         return roomType;
     }
+
+    public void OnDestroy()
+    {
+        //unsubscribe from events
+        EventBroadcaster.EnemyDeath -= OnEnemyDeath;
+        EventBroadcaster.PlayerChangedRoom -= OnPlayerChangedRoom;
+    }
 }

@@ -88,6 +88,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         targetRoomCoords.row += 1;
         // we can special edge case here to see if its the spawn room we are attempting to go to
         // convert the targetRoomCoords to a Vector2Int for comparison
+        
         Vector2Int targetRoomCoordsVec = new Vector2Int(targetRoomCoords.row, targetRoomCoords.col);
         if (targetRoomCoordsVec == DungeonGeneratorManager.Instance.GetStartPos())
         {
@@ -100,6 +101,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
             }
             break;
         }
+        
         
         
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.North);
