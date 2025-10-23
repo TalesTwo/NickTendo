@@ -142,7 +142,7 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
-            if (count == 222)
+            if (count == 70)
             {
                 Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
                 count = 0;
