@@ -172,6 +172,6 @@ public class RangedEnemyController : EnemyControllerBase
         knockbackForce =  float.Parse(stats[10]);
         stunTimer = float.Parse(stats[11]);
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
-        findPathCooldown = 1f / speed;
+        findPathCooldown = 1f / (speed*2);
     }
 }
