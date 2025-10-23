@@ -45,6 +45,8 @@ public class EnemyControllerBase : SpawnableObject
     protected RoomGridManager _gridManager;
     protected float findPathCooldown;
     protected float pathingTimer = 0;
+    [Header("Type")]
+    public Types.EnemyType enemyType;
 
     // Start is called before the first frame update
     private void Start()
@@ -62,11 +64,9 @@ public class EnemyControllerBase : SpawnableObject
     }
 
 
-    public void Deactivate() 
+    protected virtual void Deactivate() 
     {
-
-        // tell the room we are in, that we have died
-        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
+        
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
