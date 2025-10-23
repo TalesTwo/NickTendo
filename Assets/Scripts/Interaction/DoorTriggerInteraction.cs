@@ -198,6 +198,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         EventBroadcaster.PersonaChanged += OnPersonaChanged;
         EventBroadcaster.OpenPersonaUI += OnPersonaUIOpened;
         EventBroadcaster.ClosePersonaUI += OnPersonaUIClosed;
+        
     }
     
     private void OnPersonaUIOpened()
