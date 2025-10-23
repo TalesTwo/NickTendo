@@ -15,8 +15,17 @@ public class DoorTriggerInteraction : TriggerInteractBase
     // get a reference to the door scripy
     private Door _doorScript;
 
+    private float _nextAllowedInteractTime = 0f;
+    private const float InteractCooldown = 0.75f;
     public override void Interact()
     {
+
+        // Prevent interaction if not ready
+        if (Time.time < _nextAllowedInteractTime)
+            return;
+
+        // Update the next allowed time 
+        _nextAllowedInteractTime = Time.time + InteractCooldown;
         
         base.Interact();
         // log the current door state 
@@ -165,5 +174,21 @@ public class DoorTriggerInteraction : TriggerInteractBase
         {
             DebugUtils.LogError("DoorTriggerInteraction: No Door script found on this object.");
         }
+        
+        // bind to the persona changed delegate, so we can update accordingly
+        // when the persona is changed WHILE we are inside the hitbox
+        EventBroadcaster.PersonaChanged += OnPersonaChanged;
     }
+
+    private void OnPersonaChanged(Types.Persona newPersona)
+    {
+        // we will check again to see if we are currently overlapping
+        if (_currentlyInOverlap)
+        {
+            // recall the overlap function
+            OnTriggerEnter2D(Player.GetComponent<Collider2D>());
+        }
+        
+    }
+    
 }
