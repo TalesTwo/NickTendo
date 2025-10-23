@@ -9,7 +9,7 @@ public class GameStateManager : Singleton<GameStateManager>
      * this class is designed to track the current state of the game.
      */
 
-    public string buddeeDialogState = "DemoIntro";
+    public string buddeeDialogState = "vertIntroyell";
     private int _playerDeathCount = 0;
     
     // getting and setting BUDDEE state
@@ -28,11 +28,37 @@ public class GameStateManager : Singleton<GameStateManager>
         _playerDeathCount++;
         if (_playerDeathCount == 1)
         {
-            buddeeDialogState = "AfterDeath";
+            buddeeDialogState = "vertDeath1";
         }
         if (_playerDeathCount == 2)
         {
-            buddeeDialogState = "FinalRun";
+            buddeeDialogState = "vertDeath2";
         }
+    }
+
+    public void Dialogue(string npcName)
+    {
+        if (npcName == "BUDDEE")
+        {
+            if (buddeeDialogState == "vertIntroyell")
+            {
+                buddeeDialogState = "VertIntro";
+            } else if (buddeeDialogState == "VertIntro")
+            {
+                buddeeDialogState = "vertIntroinfo";
+            } else if (buddeeDialogState == "vertIntroinfo")
+            {
+                buddeeDialogState = "HubRandom";
+            } else
+            {
+                buddeeDialogState = "HubRandom";
+            }
+            Debug.Log(npcName);
+        }
+    }
+
+    public void SetEndGameFlag()
+    {
+        buddeeDialogState = "Vertwin";
     }
 }
