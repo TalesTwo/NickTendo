@@ -32,6 +32,9 @@ namespace Managers
         {
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
             {
+                // disable the button to prevent multiple clicks
+                _loginButton.interactable = false;
+                AudioManager.Instance.PlayUISelectSound();
                 AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
                 PlayerStats.Instance.SetPlayerName(_usernameInputField.text);
                 StartGame();

@@ -16,6 +16,5 @@ public class ButtonUI : MonoBehaviour
     public void PointerClick()
     {
         
-        AudioManager.Instance.PlayUISelectSound();
     }
 }
