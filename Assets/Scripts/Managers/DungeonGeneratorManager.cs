@@ -117,6 +117,7 @@ namespace Managers
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
+            EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
