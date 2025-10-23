@@ -128,7 +128,7 @@ namespace Managers
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == _spokenLine) //_dialogue[_index][2]
+                if (dialogueText.text == _spokenLine)
                 {
                     _canContinue = true;
                 }
@@ -241,8 +241,9 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
+            Debug.Log(_dialogue[_index][2]);
             _spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
-            foreach (char letter in _spokenLine.ToCharArray())
+            foreach (char letter in _spokenLine)
             {
                 dialogueText.text += letter;
                 ++talkingtonetimer;
