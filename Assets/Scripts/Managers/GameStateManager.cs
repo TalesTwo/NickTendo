@@ -49,7 +49,12 @@ public class GameStateManager : Singleton<GameStateManager>
             } else if (buddeeDialogState == "vertIntroinfo")
             {
                 buddeeDialogState = "HubRandom";
-            } else
+            } else if (buddeeDialogState == "Vertwin")
+            {
+                CreditsManager.Instance.BeginCredits();
+                //buddeeDialogState = "VertIntro";
+            } 
+            else
             {
                 buddeeDialogState = "HubRandom";
             }
