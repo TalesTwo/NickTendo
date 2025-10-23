@@ -278,7 +278,7 @@ namespace Managers
                 _isReading = false;
                 _dialogIsRandom = false;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
-                GameStateManager.Instance.SetBuddeeDialogState("IntroRandom");
+                GameStateManager.Instance.Dialogue("BUDDEE");
                 EventBroadcaster.Broadcast_StopDialogue();
                 ZeroText();
             }
