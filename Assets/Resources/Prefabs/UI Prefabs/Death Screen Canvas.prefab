@@ -1175,7 +1175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5792591993575782107, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_text
-      value: Quit Game
+      value: Restart Game
       objectReference: {fileID: 0}
     - target: {fileID: 5792591993575782107, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_fontSize
