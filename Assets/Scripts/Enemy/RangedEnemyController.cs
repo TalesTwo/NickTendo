@@ -174,4 +174,12 @@ public class RangedEnemyController : EnemyControllerBase
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
         findPathCooldown = 1f / (speed*2);
     }
+    
+    protected override void Deactivate() 
+    {
+        base.Deactivate();
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
+        // specific to ranged enemy deactivation logic can go here
+        Debug.Log("Ranged Enemy destroyed");
+    }
 }
