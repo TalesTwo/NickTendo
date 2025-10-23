@@ -302,7 +302,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BUDDEE_Notify_dark_0: 3003548924246509705
+      BUDDEE_Notify_dark_1: 1186316798793453475
+      BUDDEE_Notify_dark_2: -7892179988851911893
+      BUDDEE_Notify_dark_3: -9030190307501202826
+      BUDDEE_Notify_dark_4: -6958887635430629755
+      BUDDEE_Notify_dark_5: -7159565988737885489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
