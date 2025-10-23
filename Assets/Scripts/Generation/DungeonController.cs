@@ -18,7 +18,7 @@ public class DungeonController : Singleton<DungeonController>
 
     private int cachedEnemyCount;
     private bool isUpdating = false;
-    private float updateInterval = 1f;
+    private float updateInterval = 0.75f;
 
     // this has been changed to have a slight time delay on updating, to avoid it returning too quickly
     public int GetNumberOfEnemiesInCurrentRoom()
