@@ -11,6 +11,7 @@ public class PersonaUI : MonoBehaviour
     // Reference to the template GameObject
     [SerializeField] private GameObject personaTemplate;
     [SerializeField] private Transform contentParent; 
+    [SerializeField] private GameObject buddeeUI;
 
     public void Start()
     {
@@ -119,6 +120,7 @@ public class PersonaUI : MonoBehaviour
                 {
                     button.interactable = false;
                     pItemUI.ShowCheckmark();
+                    buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(stats.Description);
                     TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
                     if (btnLabel != null)
                         btnLabel.text = "Selected";
