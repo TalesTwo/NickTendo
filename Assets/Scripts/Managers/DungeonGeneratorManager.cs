@@ -41,7 +41,7 @@ namespace Managers
         [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
         private Vector2Int startPos = new Vector2Int(-1, -1); public Vector2Int GetStartPos() { return startPos; }
         [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
-        private Vector2Int endPos = new Vector2Int(-1, -1);
+        private Vector2Int endPos = new Vector2Int(-1, -1); public Vector2Int GetEndPos() { return endPos; }
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         // this is the distance between rooms, should be 200 for now so they dont overlap in any way
