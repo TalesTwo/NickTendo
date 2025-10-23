@@ -22,11 +22,12 @@ public class PersonaUI : MonoBehaviour
             closeButton.onClick.AddListener(ClosePersonaUI);
         }
     }
-    
+
     public void OpenPersonaUI()
     {
         GenerateContent();
         gameObject.SetActive(true);
+        buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the icons to learn more!!!");
         // disable player movement
         //TODO: Probably make this a better system later
         var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
@@ -121,7 +122,8 @@ public class PersonaUI : MonoBehaviour
                 {
                     button.interactable = false;
                     pItemUI.ShowCheckmark();
-                    buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(stats.Description);
+                    buddeeUI.GetComponent<BUDDEEUI>().StopCR();
+                    buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(stats.Description);                                        
                     TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
                     if (btnLabel != null)
                         btnLabel.text = "Selected";
