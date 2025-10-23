@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: b440183051323e24b8cb0ec0a4d735a6
+guid: 8db861f65d4a8cf41805daa53b4b167c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1590631868736247383
-    second: Armature_Jump_17_0
+      213: 3003548924246509705
+    second: BUDDEE_Notify_dark_0
+  - first:
+      213: 1186316798793453475
+    second: BUDDEE_Notify_dark_1
+  - first:
+      213: -7892179988851911893
+    second: BUDDEE_Notify_dark_2
+  - first:
+      213: -9030190307501202826
+    second: BUDDEE_Notify_dark_3
+  - first:
+      213: -6958887635430629755
+    second: BUDDEE_Notify_dark_4
+  - first:
+      213: -7159565988737885489
+    second: BUDDEE_Notify_dark_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -152,22 +167,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armature_Jump_17_0
+      name: BUDDEE_Notify_dark_0
       rect:
         serializedVersion: 2
-        x: 301
-        y: 239
-        width: 263
-        height: 367
+        x: 33
+        y: 178
+        width: 16
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7569070d14f031610800000000000000
-      internalID: 1590631868736247383
+      spriteID: 988483745dfbea920800000000000000
+      internalID: 3003548924246509705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Notify_dark_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 178
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af8927d7d4a67010800000000000000
+      internalID: 1186316798793453475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Notify_dark_2
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 178
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23190d5d18597290800000000000000
+      internalID: -7892179988851911893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Notify_dark_3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 51
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 672273362c15ea280800000000000000
+      internalID: -9030190307501202826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Notify_dark_4
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 50
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e9c4ab0901d6f90800000000000000
+      internalID: -6958887635430629755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Notify_dark_5
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 50
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fca5f4f8aac14ac90800000000000000
+      internalID: -7159565988737885489
       vertices: []
       indices: 
       edges: []
@@ -175,7 +295,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ae6f388d4a688c14d880f0f13746eaab
     internalID: 0
     vertices: []
     indices: 
@@ -183,7 +303,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armature_Jump_17_0: 1590631868736247383
+      BUDDEE_Notify_dark_0: 3003548924246509705
+      BUDDEE_Notify_dark_1: 1186316798793453475
+      BUDDEE_Notify_dark_2: -7892179988851911893
+      BUDDEE_Notify_dark_3: -9030190307501202826
+      BUDDEE_Notify_dark_4: -6958887635430629755
+      BUDDEE_Notify_dark_5: -7159565988737885489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 622670d9f50028b4a8b4f6855e20ae0a
+guid: ebaf4af4603829a42947f0cabab2b76c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3880593486023041567
-    second: Armature_Idle_00_0
+      213: -972353540487338045
+    second: BUDDEE_Idle_dark_0
+  - first:
+      213: -1243673953024035385
+    second: BUDDEE_Idle_dark_1
+  - first:
+      213: 4229435181165891375
+    second: BUDDEE_Idle_dark_2
+  - first:
+      213: -1056631093249667355
+    second: BUDDEE_Idle_dark_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -76,6 +85,19 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,26 +144,102 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armature_Idle_00_0
+      name: BUDDEE_Idle_dark_0
       rect:
         serializedVersion: 2
-        x: 203
-        y: 218
-        width: 249
-        height: 360
+        x: 33
+        y: 178
+        width: 16
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f12291c1733aad530800000000000000
-      internalID: 3880593486023041567
+      spriteID: 3c7a82f4b918182f0800000000000000
+      internalID: -972353540487338045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Idle_dark_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 178
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c5b89501259dbee0800000000000000
+      internalID: -1243673953024035385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Idle_dark_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 50
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2fcee583e8f1ba30800000000000000
+      internalID: 4229435181165891375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Idle_dark_3
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 50
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ee88347e971651f0800000000000000
+      internalID: -1056631093249667355
       vertices: []
       indices: 
       edges: []
@@ -149,7 +247,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7400bc8a94d492f4994c36525e7c7a6b
     internalID: 0
     vertices: []
     indices: 
@@ -157,7 +255,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armature_Idle_00_0: 3880593486023041567
+      BUDDEE_Idle_dark_0: -972353540487338045
+      BUDDEE_Idle_dark_1: -1243673953024035385
+      BUDDEE_Idle_dark_2: 4229435181165891375
+      BUDDEE_Idle_dark_3: -1056631093249667355
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
