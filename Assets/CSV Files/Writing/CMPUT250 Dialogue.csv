@@ -115,7 +115,7 @@ vertDeath2,,Player,smile,Thanks <color=blue>BUDDEE</color>. See you soon.
 ,,,,
 vertIntroyell,BUDDEE yell after login,BUDDEE,smile,Oh a new user! Come over here!
 ,,,,
-vertIntroinfo,"mechanic explanation, available after intro dialogue",BUDDEE,smile,You wanna hear more about how to fight? No problem!
+vertIntroinfo,mechanic explanation available after intro dialogue,BUDDEE,smile,You wanna hear more about how to fight? No problem!
 vertIntroinfo,,BUDDEE,smile,"You can use <b>[WASD]</b> to move around, but you know that."
 vertIntroinfo,,BUDDEE,smile,Pressing <b>[M1]</b> will swing your weapon in the direction of your cursor!
 vertIntroinfo,,BUDDEE,smile,Not only can it hurt foes. it can reflect enemy attacks. and even break some objects!
