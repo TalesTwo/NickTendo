@@ -19,7 +19,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
     private Door _doorScript;
 
     private float _nextAllowedInteractTime = 0f;
-    private const float InteractCooldown = 1.5f;
+    private const float InteractCooldown = .75f;
     public override void Interact()
     {
         
@@ -86,6 +86,21 @@ public class DoorTriggerInteraction : TriggerInteractBase
         TryOpenDoor(currentRoom, Types.DoorClassification.South);
 
         targetRoomCoords.row += 1;
+        // we can special edge case here to see if its the spawn room we are attempting to go to
+        // convert the targetRoomCoords to a Vector2Int for comparison
+        Vector2Int targetRoomCoordsVec = new Vector2Int(targetRoomCoords.row, targetRoomCoords.col);
+        if (targetRoomCoordsVec == DungeonGeneratorManager.Instance.GetStartPos())
+        {
+            // we do not want to allow teleporting back to the spawn room through the south door
+            // and just to troll the player, lock the door lol
+            if(_doorScript!= null)
+            {
+                _doorScript.SetDoorState(Door.DoorState.Locked);
+                AudioManager.Instance.PlayOpenDoorSound(1, 0);
+            }
+            break;
+        }
+        
         
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.North);
         break;
@@ -152,7 +167,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
-                // cause of TIMING ISSUES
+                
                 DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
                 break;
             }
@@ -183,6 +198,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         EventBroadcaster.PersonaChanged += OnPersonaChanged;
         EventBroadcaster.OpenPersonaUI += OnPersonaUIOpened;
         EventBroadcaster.ClosePersonaUI += OnPersonaUIClosed;
+        
     }
     
     private void OnPersonaUIOpened()

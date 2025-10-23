@@ -167,6 +167,22 @@ public class Room : MonoBehaviour
         
         // hook up to the enemy death event to check if we need to unlock doors
         EventBroadcaster.EnemyDeath += OnEnemyDeath;
+        EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+    }
+    
+    private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+    {
+        DebugUtils.Log($"Room: {name} detected player changed room to coords: {targetRoomCoords}");
+        // check to see if its the final room we went too
+        Vector2 cords = DungeonGeneratorManager.Instance.GetEndPos();
+        // convert to int tuple
+        (int row, int col) endRoomCoords = ((int)cords.y, (int)cords.x);
+        if (targetRoomCoords == endRoomCoords)
+        {
+            // we are entering the final room
+            DebugUtils.Log("Player has entered the final room. Setting end game flag.");
+            GameStateManager.Instance.SetEndGameFlag();
+        }
     }
     
     private void OnEnemyDeath(EnemyControllerBase enemy, Room room)
@@ -190,18 +206,9 @@ public class Room : MonoBehaviour
     {
         roomDifficulty = difficulty;
     }
-    public int GetRoomDifficulty()
-    {
-        return roomDifficulty;
-    }
-    public void SetRoomCoords(int row, int col)
-    {
-        RoomCoords = (row, col);
-    }
-    public (int row, int col) GetRoomCoords()
-    {
-        return RoomCoords;
-    }
+    public int GetRoomDifficulty() { return roomDifficulty; }
+    public void SetRoomCoords(int row, int col) { RoomCoords = (row, col); }
+    public (int row, int col) GetRoomCoords() { return RoomCoords; }
 
 
     public void Awake()
