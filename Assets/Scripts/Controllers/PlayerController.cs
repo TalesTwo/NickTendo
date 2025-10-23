@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     // rigidbody & animator
     private Rigidbody2D _rb;
+    private SpriteRenderer _sr;
     private AnimatedPlayer _playerAnimator;
     private bool _isFacingRight = true;
     
@@ -34,12 +35,14 @@ public class PlayerController : MonoBehaviour
     private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
     private bool _isKnockback = false;
     private bool _isDead = false;
-    
+    private bool _isWalking = false;
+
     // Start is called before the first frame update
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<AnimatedPlayer>();
+        _sr = GetComponent<SpriteRenderer>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
     }
     
@@ -53,14 +56,20 @@ public class PlayerController : MonoBehaviour
         {
             
             // set default animation to running or ide depending on movement
-            if (horizontalInput == 0 && verticalInput == 0)
+            if (!_isDashMoving)
             {
-                _playerAnimator.SetStill();
+                if (horizontalInput == 0 && verticalInput == 0)
+                {
+                    StopWalkSound();
+                    _playerAnimator.SetStill();
+                }
+                else
+                {
+                    StartWalkSound();
+                    _playerAnimator.SetRunning();
+                }                  
             }
-            else
-            {
-                _playerAnimator.SetRunning();
-            }            
+          
             
             // flip sprite along y axis if direction changes
             if (horizontalInput < 0 && _isFacingRight && !(_isAttacking || _isDashMoving))
@@ -103,6 +112,40 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void StartWalkSound()
+    {
+        if (!_isWalking)
+        {
+            _isWalking = true;
+            StartCoroutine(WalkingSoundLoop());
+        }
+    }
+
+    public void StopWalkSound()
+    {
+        if (_isWalking)
+        {
+            _isWalking = false;
+            StopAllCoroutines();
+        }
+    }
+
+
+
+
+    private IEnumerator WalkingSoundLoop()
+    {
+        for (int x = 0; x <= 222; ++x)
+        {
+            if(x == 222)
+            {
+                Managers.AudioManager.Instance.PlayWalkingSound(1, 0);
+                x = 0;
+            }
+            yield return null;
+        }
+    }
+
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()
@@ -127,13 +170,31 @@ public class PlayerController : MonoBehaviour
     // starts base attack animation
     private void StartAttack()
     {
-        Instantiate(attackAnimation);
+        StopWalkSound();
+        GameObject attack = Instantiate(attackAnimation);
+        Renderer rnd = attack.gameObject.GetComponent<Renderer>();
+        Color playerColor = _sr.color;
+        rnd.material.color = playerColor;
     }
     
     // starts base dash attack
     private void StartDash()
     {
-        Instantiate(dashAnimation);
+        StopWalkSound();
+        // instantiate dash
+        GameObject attack = Instantiate(dashAnimation);
+        
+        // get dash direction
+        AttackPositionController trn = attack.gameObject.GetComponent<AttackPositionController>();
+        trn.FindRotation();
+        
+        // get player + dash color
+        Renderer rnd = attack.gameObject.GetComponent<Renderer>();
+        Color playerColor = _sr.color;
+        
+        // set values
+        _playerAnimator.SetDashAngle(attack.transform.rotation);
+        rnd.material.color = playerColor;
     }
 
     // reset the dash attack after the cooldown
@@ -152,6 +213,8 @@ public class PlayerController : MonoBehaviour
     private void DashMovingStop()
     {
         _isDashMoving = false;
+        _playerAnimator.SetStill();
+        _playerAnimator.ResetDashAngle();
     }
 
     // flips the sprite depending on the direction of movement
@@ -179,6 +242,7 @@ public class PlayerController : MonoBehaviour
     // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
+        StopWalkSound();
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
@@ -216,6 +280,7 @@ public class PlayerController : MonoBehaviour
     // function to set player as dead
     public void SetIsDead()
     {
+        StopWalkSound();
         _isDead = true;
     }
 

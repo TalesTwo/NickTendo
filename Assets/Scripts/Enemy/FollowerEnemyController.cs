@@ -117,12 +117,13 @@ public class FollowerEnemyController : EnemyControllerBase
         
         return 14 * x + 10 * (y - x);
     }
-    
+    private int walkcount = 0;
     // follow the path as set out by A*
     protected override IEnumerator Follow()
     {
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
+        
 
         // iterate though the path as it updates
         while (true)
@@ -141,17 +142,25 @@ public class FollowerEnemyController : EnemyControllerBase
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             }
-            
+            if(walkcount == 150)
+            {
+                Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0);
+                walkcount = 0;
+            }
+            ++walkcount;
             yield return null;
         }
     }
-    
+
+
+
     // do damage to and knockback the player
     private void DoDamage()
     {
         Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
         _playerController.KnockBack(knockbackForce, direction, stunTimer);
         _playerController.HitEffect(transform.position);
+        Managers.AudioManager.Instance.PlayFollowerHitSound(1, 0);
         PlayerStats.Instance.UpdateCurrentHealth(-damage);
     }
 

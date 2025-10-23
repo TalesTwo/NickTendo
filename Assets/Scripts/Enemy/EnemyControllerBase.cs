@@ -45,7 +45,7 @@ public class EnemyControllerBase : SpawnableObject
     protected RoomGridManager _gridManager;
     protected float findPathCooldown;
     protected float pathingTimer = 0;
-    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -61,8 +61,12 @@ public class EnemyControllerBase : SpawnableObject
         ParseStatsText();
     }
 
+
     public void Deactivate()
     {
+
+        // tell the room we are in, that we have died
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
@@ -104,7 +108,8 @@ public class EnemyControllerBase : SpawnableObject
             StopAllCoroutines();
         }
     }
-    
+
+
     // reduce health on damage from a PlayerAttack
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -196,6 +201,10 @@ public class EnemyControllerBase : SpawnableObject
         string[] lines = statLineCSV.text.Split('\n');
         double lineNumber = (double)difficulty/difficultyScalingFactor;
         lineNumber = Math.Ceiling(lineNumber);
+        if (lineNumber > 5)
+        {
+            lineNumber = 5;
+        }
         GetStats(lines[(int)lineNumber]);
     }
 

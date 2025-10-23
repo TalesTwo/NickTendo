@@ -1,7 +1,7 @@
 Persona,CurrentHealth,MaxHealth,MovementSpeed,DashSpeed,AttackDamage,AttackCooldown,DashDamage,DashCooldown,DashDistance,Keys,Coins,Color,Description
-Normal,3,3,5,10,2,0.5,5,5,0.5,10,95,White,Just be yourself
-Memer,3,3,5,10,2,0.5,3,3,0.5,10,495,Yellow,Everyone likes a funnyman! With the power of comedy everyone will want to talk to you! 
-Sensitive,2,2,7,10,4,0.5,5,7,0.5,10,100,Blue,Your life is so tragic! People online are sure to sympathize and give you all the support you could want!
-Glamorous,3,3,5,10,2,0.5,5,5,0.5,10,95,Pink,Makeup tutorials and fancy cars! When you pop up on someone's feed you're sure to earn their loyalty!
-Stoic,6,6,3,10,1,0.5,5,5,0.5,10,95,Orange,Unfazed and cynical. Your professional attitude is sure to earn you respect from every nihilist you come across!
-Lurker,4,4,5,10,1,0.5,7,5,0.5,10,95,Black,"Hiding may not be great at drawing attention, but you'll be even more special to the ones you choose to talk too!"
+Normal,3,3,5,10,1,0.5,5,5,0.5,10,0,White,Just be yourself
+Memer,3,3,5,10,2,0.5,3,3,0.5,10,15,Yellow,Everyone likes a funnyman! With the power of comedy everyone will want to talk to you! 
+Sensitive,2,2,7,10,4,0.5,5,7,0.5,10,0,Blue,Your life is so tragic! People online are sure to sympathize and give you all the support you could want!
+Glamorous,3,3,5,10,2,0.5,5,5,0.5,10,0,Pink,Makeup tutorials and fancy cars! When you pop up on someone's feed you're sure to earn their loyalty!
+Stoic,6,6,3,10,1,0.5,5,5,0.5,10,20,Orange,Unfazed and cynical. Your professional attitude is sure to earn you respect from every nihilist you come across!
+Lurker,4,4,5,10,1,0.5,7,5,0.5,10,0,Black,"Hiding may not be great at drawing attention, but you'll be even more special to the ones you choose to talk too!"

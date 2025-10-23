@@ -142,7 +142,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
                 // cause of TIMING ISSUES
                 DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
-                
                 break;
             }
         }

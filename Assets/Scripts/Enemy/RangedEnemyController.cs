@@ -25,8 +25,10 @@ public class RangedEnemyController : EnemyControllerBase
     {
         _attackTimer += Time.deltaTime;
 
-        // raycast for player, do not shoot unless you can see him
-        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~doNotHit);
+        // raycast for player, do not shoot unless you can see him (we also will ignore pits)
+        int finalMask = doNotHit | LayerMask.GetMask("Pits");
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _direction, float.MaxValue, ~finalMask);
+
 
         if (hit.collider != null)
         {
@@ -117,12 +119,16 @@ public class RangedEnemyController : EnemyControllerBase
         }
 
     }
-
+    private int count = 0;
     // follow the path
     protected override IEnumerator Follow()
     {
+        // error check for while we are in a pit
+        if(currentPath == null || currentPath.Count == 0)
+            yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
+
 
         // iterate though the path as it updates
         while (true)
@@ -136,6 +142,12 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
+            if (count == 222)
+            {
+                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
+                count = 0;
+            }
+            ++count;
 
             _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;

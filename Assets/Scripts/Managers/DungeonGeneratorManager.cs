@@ -47,6 +47,8 @@ namespace Managers
         // this is the distance between rooms, should be 200 for now so they dont overlap in any way
         [SerializeField] private int RoomOffset = 30;
         
+        private (int row, int col) CurrentRoomCoords = (-1, -1); public (int row, int col) GetCurrentRoomCoords() { return CurrentRoomCoords; }
+        
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
@@ -67,11 +69,12 @@ namespace Managers
                     {
                         if (r == currentRoomCoords.row && c == currentRoomCoords.col)
                         {
-                            currentRoom.gameObject.SetActive(true);
+                            currentRoom.SetRoomEnabled(true);
+                            CurrentRoomCoords = (r, c);
                         }
                         else
                         {
-                            currentRoom.gameObject.SetActive(false);
+                            currentRoom.SetRoomEnabled(false);
                         }
                     }
                 }
@@ -79,8 +82,22 @@ namespace Managers
         }
         private void OnPlayerChangedRoom((int row, int col) newRoomCoords)
         {
-            DisableAllRoomsExceptCurrent(newRoomCoords);
+            // enable the new rooms corns
+            Room newRoom = dungeonRooms[newRoomCoords.row][newRoomCoords.col];
+            newRoom.gameObject.SetActive(true);
+            // and then after a small delay, disable all other rooms
+            CurrentRoomCoords = newRoomCoords;
+            
+            StartCoroutine(DisableOtherRoomsCoroutine(newRoomCoords));
         }
+        
+        private IEnumerator DisableOtherRoomsCoroutine((int row, int col) currentRoomCoords)
+        {
+            yield return new WaitForSeconds(0.5f); // wait half a second before disabling other rooms
+            DisableAllRoomsExceptCurrent(currentRoomCoords);
+        }
+        
+        
         
         private void OnGameStarted()
         {
@@ -97,7 +114,7 @@ namespace Managers
             DungeonGeneration();
             
             // teleport the player into the dungeon
-            Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.position;
+            Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
         }
@@ -143,6 +160,9 @@ namespace Managers
             // start from the start room, and calculate the difficulty of each room
             Room startingRoom = dungeonRooms[startPos.x][startPos.y];
             CalculateRoomDifficulty(dungeonRooms, startingRoom, startPos.x, startPos.y);
+            
+            // warmup the dungeon
+            //StartCoroutine(PrewarmDungeon(dungeonRooms));
             
         }
         
@@ -487,8 +507,35 @@ namespace Managers
             {
                 DestroyImmediate(obj.gameObject);
             }
-            
+            // destroy all projectiles
+            EnemyProjectileController[] existingProjectiles = FindObjectsByType<EnemyProjectileController>(FindObjectsSortMode.None);
+            foreach (EnemyProjectileController proj in existingProjectiles)
+            {
+                DestroyImmediate(proj.gameObject);
+            }
         }
+        
+        IEnumerator PrewarmDungeon(List<List<Room>> dungeonLayout)
+        {
+            foreach (var row in dungeonLayout)
+            {
+                foreach (var room in row)
+                {
+                    if (room != null)
+                    {
+                        room.gameObject.SetActive(true);
+                        yield return null; // 1 frame ensures Awake/Start/shaders run
+                        // if its not the start room, disable it again
+                        if (room.GetRoomCoords() != (startPos.x, startPos.y))
+                        {
+                            room.gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
+            Debug.Log("Dungeon prewarm complete");
+        }
+
         
         private static Room GenerateRoomFromClass(Room roomPrefab, Vector3 position, int row = -1, int col = -1)
         {

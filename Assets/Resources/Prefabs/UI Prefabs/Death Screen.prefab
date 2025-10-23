@@ -55,101 +55,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4657436207426152782}
     m_Modifications:
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_fontSize
-      value: 77.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_margin.x
-      value: -188.35376
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_margin.y
-      value: -189.0946
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_margin.z
-      value: -144.72095
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 77.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412906964421772591, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430795163613389582, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5771130748356985568, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
       propertyPath: m_Name
       value: Death Screen Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5771130748356985568, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661937175793439979, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661937175793439979, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661937175793439979, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172607090556627611, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172607090556627611, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172607090556627611, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7376419475262099563, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8529827407482595740, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
       propertyPath: m_Pivot.x
@@ -230,14 +138,6 @@ PrefabInstance:
     - target: {fileID: 8529827407482595740, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789065374569562861, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789065374569562861, guid: 2b49d11b2b2843048b74d594bfefd1aa, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

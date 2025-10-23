@@ -8,6 +8,7 @@ namespace Managers
     {
         private GameObject player;
         private PlayerController playerController;
+        private GameObject camera;
 
         [Header("Teleport Settings")]
         [SerializeField] private float fadeDuration = 0.15f;
@@ -18,6 +19,7 @@ namespace Managers
             // Get reference to the player
             player = GameObject.FindWithTag("Player");
             playerController = player.GetComponent<PlayerController>();
+            camera = GameObject.FindWithTag("MainCamera");
             EventBroadcaster.PlayerDeath += PlayerDeath;
             EventBroadcaster.PersonaChanged += OnPersonaChanged;
         }
@@ -80,6 +82,7 @@ namespace Managers
             yield return fadeManager.FadeOut(fadeDuration);
             
             player.transform.position = newPosition;
+            camera.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
             
             if (delay > 0f)
                 yield return new WaitForSeconds(delay);

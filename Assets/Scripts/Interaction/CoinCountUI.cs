@@ -11,26 +11,25 @@ public class CoinCountUI : MonoBehaviour
     void Start()
     {
         coinCount = gameObject.GetComponent<TextMeshProUGUI>();
-        EventBroadcaster.PlayerStatsChanged += OnChangedStats;
+        EventBroadcaster.PlayerStatsChanged += OnPickedCoins;
+        EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         SetCoins();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetCoins()
     {
         coinCount.text = PlayerStats.Instance.GetCoins().ToString();
     }
 
-    void OnChangedStats(PlayerStatsEnum BufFType, float BuffValue)
+    void OnPickedCoins(PlayerStatsEnum BufFType, float BuffValue)
     {
         if (BufFType == PlayerStatsEnum.Coins)
         {
             SetCoins();
         }
+    }
+
+    void HandlePersonaChanged(Types.Persona P)
+    {
+        SetCoins();
     }
 }
