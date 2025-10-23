@@ -9,11 +9,18 @@ public class PersonaItemUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject _checkmark;
+    [SerializeField]
+    private Image _personaBackground;
     private void Start()
     {
     }
     public void ShowCheckmark()
     {
         _checkmark.SetActive(true);
+    }
+
+    public void SetColor(Color _color)
+    {
+        _personaBackground.color = _color;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,6 +78,7 @@ public class PersonaUI : MonoBehaviour
         // Create the same number of UI elements as there are personas
         foreach (var persona in personas)
         {
+
             var state = persona.Value;
             if (state == Types.PersonaState.Lost)
             {
@@ -103,6 +105,17 @@ public class PersonaUI : MonoBehaviour
                 statsText.text = $"Health: {stats.MaxHealth}  Speed: {stats.MovementSpeed}  " +
                                  $"Attack: {stats.AttackDamage}  DashDamage: {stats.DashDamage}";
             }
+
+            nameText.text += " | " + stats.Email;
+
+            TMP_Text emailText = newPersona.transform.Find("Text_PersonaEmail")?.GetComponent<TMP_Text>();
+            if (emailText != null)
+            {
+                emailText.text = stats.Email;
+            }
+
+            PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
+            pItemUI.SetColor(stats.PlayerColor);
             // --- Fill in description ---
 
             /*TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
@@ -113,7 +126,6 @@ public class PersonaUI : MonoBehaviour
 
             // --- Button logic ---
             Button button = newPersona.GetComponentInChildren<Button>();
-            PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
             if (button != null)
             {
                 var capturedPersona = persona.Key;

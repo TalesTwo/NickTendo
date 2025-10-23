@@ -12,12 +12,13 @@ public class PickupItem : BaseItem
     public PlayerStatsEnum BuffType;
     public float BuffValue = 1;
 
-
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+
         CanInteract = false;
+        //EventBroadcaster.PlayerDeath += DeleteItem;
     }
 
     // Update is called once per frame
@@ -48,13 +49,21 @@ public class PickupItem : BaseItem
     private void Pickup()
     {
         DebugUtils.Log("Picked up " + Name);
-        PlayerStats.Instance.ApplyItemBuffs(BuffType, BuffValue);
+        if (!Player.GetComponent<PlayerController>().GetIsDead())
+        {
+            PlayerStats.Instance.ApplyItemBuffs(BuffType, BuffValue);
+        }
         
         //PlayerStats.Instance.DisplayAllStats();
         //sprite is destoryed first because delete the entire object skips the playing of the sfx
         Destroy(GetComponent<SpriteRenderer>());
         Destroy(GetComponent<Collider2D>());
         //delays destruction according to the lenght of the sfx
+        Destroy(gameObject);
+    }
+
+    private void DeleteItem()
+    {
         Destroy(gameObject);
     }
 }
