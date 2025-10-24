@@ -55,11 +55,16 @@ namespace Managers
         {
             EventBroadcaster.GameStarted += OnGameStarted;
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+            EventBroadcaster.GameRestart += OnGameRestart;
             
             dungeonController = FindFirstObjectByType<DungeonController>();
         }
-        
 
+
+        private void OnGameRestart()
+        {
+            OnGameStarted();
+        }
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
