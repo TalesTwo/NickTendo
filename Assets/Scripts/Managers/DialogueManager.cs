@@ -14,6 +14,7 @@ namespace Managers
         [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
         public Image playerSprite;
+        public Image blur;
         private Image _playerTransparency;
         public Image NPCSprite;
         private Image _npcTransparency;
@@ -168,7 +169,10 @@ namespace Managers
         
             dialogueBox.SetActive(true);
             NPCSprite.gameObject.SetActive(true);
+            Color color = PersonaManager.Instance.GetPersonaColour();
+            playerSprite.gameObject.GetComponent<Image>().color = color;
             playerSprite.gameObject.SetActive(true);
+            blur.gameObject.SetActive(true);
             StartCoroutine(CheckInput());
             StartCoroutine(Typing());
         }
@@ -181,6 +185,7 @@ namespace Managers
             dialogueBox.SetActive(false);
             NPCSprite.gameObject.SetActive(false);
             playerSprite.gameObject.SetActive(false);
+            blur.gameObject.SetActive(false);
         }
     
         // types each letter in the dialogue one at a time
