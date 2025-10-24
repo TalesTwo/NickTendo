@@ -55,11 +55,20 @@ public class DeathScreenUI : MonoBehaviour
         gameOverButton.gameObject.SetActive(true);
     }
 
+    private void SetRunEndScreen()
+    {
+        respawnButton.gameObject.SetActive(true);
+        gameLossText.text = "Your Account Has been <color=red>Compromised</color>";
+        gameOverButton.gameObject.SetActive(false);
+    }
+
     public void QuitGame()
     {
-        //SceneSwapManager.Instance.SwapScene(, 1f, 3f);
-        SceneManager.LoadScene("MainMenu");
-        // todo Application.Quit();
+        EventBroadcaster.Broadcast_GameRestart();
+        SetRunEndScreen();
+        PlayerManager.Instance.PlayerAlive();
+        gameObject.SetActive(false);
+        EventBroadcaster.PersonaChanged -= OnPersonaChanged;
     }
     
 }
