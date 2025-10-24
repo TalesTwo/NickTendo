@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -28,9 +29,26 @@ namespace Managers
             }
 
         }
+
+        private bool VerifyLoginName()
+        {
+            // read in the current login name
+            string loginName = _usernameInputField.text;
+            int maxLength = 20; // example maximum length
+            // check for a maximum length
+            if (loginName.Length > maxLength)
+            {
+                DebugUtils.LogWarning($"Login name exceeds maximum length of {maxLength} characters. We need to warn the player");
+                return false;
+            }
+
+
+            // if we reach this point, the name is valid
+            return true;
+        }
         public void LoginButtonClicked()
         {
-            if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
+            if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text) && VerifyLoginName())
             {
                 // disable the button to prevent multiple clicks
                 _loginButton.interactable = false;
