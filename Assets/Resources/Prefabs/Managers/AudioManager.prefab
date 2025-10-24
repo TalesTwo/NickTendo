@@ -66,7 +66,7 @@ MonoBehaviour:
   amtOfTypes: 6
   playerDamaged: {fileID: 8300000, guid: 93dd91870457bbc42a55c9cce928986f, type: 3}
   swordHitEffect: {fileID: 8300000, guid: dfeb1241d8bfda14ab469ac4dd51be42, type: 3}
-  PlayerDeath: {fileID: 8300000, guid: 69c7993717ebca341986c87755acb607, type: 3}
+  PlayerDeath: {fileID: 8300000, guid: aa29ec4f223b0c84e80a31da5f266410, type: 3}
   Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   Deflect: {fileID: 8300000, guid: 285daadac6381d3408096b36774925fc, type: 3}
   BUDEETalkingTones:
