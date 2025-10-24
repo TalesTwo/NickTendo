@@ -46,8 +46,15 @@ public class RoomGridManager : MonoBehaviour
             gridRoomSize = new Vector2(worldMax.x - worldMin.x, worldMax.y - worldMin.y);
             _bottomLeft = worldMin;
         }
-        
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        else
+        {
+            _player = null;
+        }
         
         gridSizeX = Mathf.RoundToInt(gridRoomSize.x);
         gridSizeY = Mathf.RoundToInt(gridRoomSize.y);
