@@ -62,7 +62,7 @@ AccManStart,,BUDDEE,smile,If only anyone ever had the answer to that.
 ,,,,
 ,,,,
 ,,,,
-Death1,BUDDE dialogue after dying in first run.,BUDDE,surprise,Woah! Looks like you almost fell out there! Good thing I caught you before they could nab your data!
+Death1,BUDDE dialogue after dying in first run.,BUDDE,surprise,Woah! We almost lost you out there! Good thing I caught you before they could nab your data!
 Death1,,Player,surprise,Wait they were going to steal my data? Is my account safe?
 Death1,,BUDDEE,smile,Well unfortunately we did lose access to the account. but I have the solution! Head over to the account manager and pick whichever one you like!
 Death1,,BUDDEE,smile,We have a wide selection that'll not only attract new friends. they'll protect your identity and let you navigate the forums more easily!
@@ -90,7 +90,7 @@ HubRandom,,BUDDEE,smile,Good luck finding that friend!
 VertIntro,First dialogue after login in vertical slice,BUDDEE,smile,Greetings <b>{player_name}</b>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <color=blue>BUDDEE</color>!
 VertIntro,,Player,smile,Woah this website is immersive as hell!
 VertIntro,,Player,smile,Alright chatbot. how do I get started finding that perfect partner?
-VertIntro,,BUDDEE,smile,Oh don't you worry about that! <color=blue>BUDDEE</color> has got you covered. Just press <b>[P]</b> to enter the account manager!
+VertIntro,,BUDDEE,smile,Oh don't you worry about that! <color=blue>BUDDEE</color> has got you covered. <color=red>Just press <b>[P]</b> to enter the account manager!</color>
 VertIntro,,BUDDEE,smile,With a pre-made custom account you'll be able to present the perfect personality to persuade potential <i>platonic</i> partners!
 VertIntro,,Player,smile,Oh sweet I <b>hate</b> setting up my profile. Thanks!
 VertIntro,,BUDDEE,smile,You're welcome pal! All you have to do now is enter the forums! 
