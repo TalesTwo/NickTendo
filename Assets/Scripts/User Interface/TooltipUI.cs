@@ -50,7 +50,6 @@ public class TooltipUI : MonoBehaviour
     {
         Vector2 _tooltipPosition = Input.mousePosition / _canvasTransform.localScale.x;
 
-
         if (_tooltipPosition.x + _background.rect.width > _canvasTransform.rect.width)
         {
             //stops tooltip from going out of the screen on the right
