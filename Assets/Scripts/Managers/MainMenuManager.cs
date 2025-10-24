@@ -66,8 +66,6 @@ namespace Managers
                 return false;
             }
             
-
-
             // if we reach this point, the name is valid
             return true;
         }
