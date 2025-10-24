@@ -11,9 +11,7 @@ public class PersonaItemUI : MonoBehaviour
     private GameObject _checkmark;
     [SerializeField]
     private Image _personaBackground;
-    private void Start()
-    {
-    }
+
     public void ShowCheckmark()
     {
         _checkmark.SetActive(true);

@@ -506,8 +506,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 758.47, y: 415.6}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: 749.6814, y: 406.65164}
+  m_SizeDelta: {x: 57, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4398787102761746840
 CanvasRenderer:
@@ -682,6 +682,42 @@ PrefabInstance:
     - target: {fileID: 6358160961990753527, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_Name
       value: BUDDEE UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1834.6997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 333.3728
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.834351
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.2229
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1423.2322
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 268.0226
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -208.67279
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

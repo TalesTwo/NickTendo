@@ -22,28 +22,23 @@ public class CreditsManager : Singleton<CreditsManager>
 
     public void BeginCredits()
     {
-        // deactivate the player
-        PlayerManager.Instance.DeactivatePlayer();
 
         // prepare credits
         canvas.SetActive(true);
         _rectTransform.anchoredPosition = _startPosition;
 
         // disable player controls
-        var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
-        if (playerController != null)
-        {
-            playerController.enabled = false;
-        }
+        //EventBroadcaster.Broadcast_StartStopAction();
 
         // play title screen music
         AudioManager.Instance.PlayTitleTrack(1f, true, 0.1f, true, 0.1f);
 
         // start scrolling
         _isScrolling = true;
-
+        // Disable player actions
+        PlayerManager.Instance.DeactivatePlayer();
         // restart the game after a delay
-        StartCoroutine(RestartGameAfterDelay(55f));
+        StartCoroutine(RestartGameAfterDelay(5f));
     }
 
     private IEnumerator RestartGameAfterDelay(float delay)
@@ -54,6 +49,9 @@ public class CreditsManager : Singleton<CreditsManager>
 
         // Restart game broadcast
         EventBroadcaster.Broadcast_GameRestart();
+        EventBroadcaster.Broadcast_StartStopAction();
+        PlayerManager.Instance.ActivatePlayer();
+        PlayerManager.Instance.PlayerAlive();
     }
 
     private void ResetCredits()

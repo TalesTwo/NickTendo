@@ -16,6 +16,10 @@ public class TooltipUI : MonoBehaviour
     private float _xPadding;
     [SerializeField]
     private float _yPadding;
+    [SerializeField]
+    private float _xPositionPadding;
+    [SerializeField]
+    private float _yPositionPadding;
 
     private RectTransform _tooltipTransform;
 
@@ -50,7 +54,6 @@ public class TooltipUI : MonoBehaviour
     {
         Vector2 _tooltipPosition = Input.mousePosition / _canvasTransform.localScale.x;
 
-
         if (_tooltipPosition.x + _background.rect.width > _canvasTransform.rect.width)
         {
             //stops tooltip from going out of the screen on the right
@@ -71,6 +74,9 @@ public class TooltipUI : MonoBehaviour
             //stops tooltip from going out of the screen on the bottom
             _tooltipPosition.y = 0;
         }
+
+        _tooltipPosition.x += _xPositionPadding;
+        _tooltipPosition.y += _yPositionPadding;
 
         _tooltipTransform.anchoredPosition = _tooltipPosition;
     }

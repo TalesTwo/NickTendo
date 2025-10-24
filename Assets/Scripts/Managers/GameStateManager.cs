@@ -52,7 +52,6 @@ public class GameStateManager : Singleton<GameStateManager>
             } else if (buddeeDialogState == "Vertwin")
             {
                 CreditsManager.Instance.BeginCredits();
-                //buddeeDialogState = "VertIntro";
             } 
             else
             {

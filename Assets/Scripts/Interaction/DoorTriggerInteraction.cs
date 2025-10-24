@@ -19,7 +19,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
     private Door _doorScript;
 
     private float _nextAllowedInteractTime = 0f;
-    private const float InteractCooldown = .75f;
+    private const float InteractCooldown = .25f;
     public override void Interact()
     {
         
