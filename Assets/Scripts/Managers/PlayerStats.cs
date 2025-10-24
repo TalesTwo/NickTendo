@@ -66,7 +66,7 @@ public class PlayerStats : Singleton<PlayerStats>
 
         if (_currentHealth <= 0)
         {
-            AudioManager.Instance.PlayEnemyDeathSound();
+            AudioManager.Instance.PlayPlayerDeathSound(1, 0);
             EventBroadcaster.Broadcast_PlayerDeath();
         }
     }

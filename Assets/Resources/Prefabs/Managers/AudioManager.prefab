@@ -66,7 +66,7 @@ MonoBehaviour:
   amtOfTypes: 6
   playerDamaged: {fileID: 8300000, guid: 93dd91870457bbc42a55c9cce928986f, type: 3}
   swordHitEffect: {fileID: 8300000, guid: dfeb1241d8bfda14ab469ac4dd51be42, type: 3}
-  PlayerDeath: {fileID: 8300000, guid: 69c7993717ebca341986c87755acb607, type: 3}
+  PlayerDeath: {fileID: 8300000, guid: aa29ec4f223b0c84e80a31da5f266410, type: 3}
   Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   Deflect: {fileID: 8300000, guid: 285daadac6381d3408096b36774925fc, type: 3}
   BUDEETalkingTones:
@@ -90,7 +90,7 @@ MonoBehaviour:
   openDoor: {fileID: 8300000, guid: 66a09fbb8c4dcbf4ba38dc57e25bc84b, type: 3}
   unlockDoor: {fileID: 8300000, guid: 2f4b4bf7d4235454fbabefcbbbd1d7ca, type: 3}
   explosion: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
-  crateBreak: {fileID: 8300000, guid: fdbe1cc2ead1a37459c771d1ac870655, type: 3}
+  crateBreak: {fileID: 8300000, guid: 4a3017bbb8441314b8c5bca9b9bcb56c, type: 3}
   Heal: {fileID: 8300000, guid: c32dc8e26873a5c4b870a127640b1826, type: 3}
   cursorHover: {fileID: 8300000, guid: 6df649b389e6de7428b7250737fbdf76, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
