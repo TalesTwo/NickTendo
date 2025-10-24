@@ -17,6 +17,14 @@ namespace Managers
         private Types.Persona _currentPersona = Types.Persona.Normal;
         public Types.Persona GetPersona() { return _currentPersona; }
 
+        public Color GetPersonaColour()
+        {
+            var persona = GetPersona();
+            var stats = PersonaStatsLoader.GetStats(persona);
+            var colour = stats.PlayerColor;
+            return colour;
+        }
+
         // CSV reference (loaded from Resources)
         private TextAsset _personaStatsCSV;
     
