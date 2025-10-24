@@ -58,10 +58,6 @@ namespace Managers
             EventBroadcaster.GameRestart += OnGameRestart;
             
             dungeonController = FindFirstObjectByType<DungeonController>();
-            
-            var persona = PersonaManager.Instance.GetPersona();
-            var stats = PersonaStatsLoader.GetStats(persona);
-            var colour = stats.PlayerColor;
         }
 
 
