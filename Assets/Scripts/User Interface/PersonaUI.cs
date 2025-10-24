@@ -28,9 +28,18 @@ public class PersonaUI : MonoBehaviour
     {
         GenerateContent();
         gameObject.SetActive(true);
-        buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the icons to learn more!!!");
+        if (PersonaManager.Instance.GetNumberOfAvailablePersonas() == 1)
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like we ran out of all available accounts...");
+        }
+        else
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the accounts to learn more!!!");
+        }
+
         // disable player movement
-        //TODO: Probably make this a better system later
+        //TODO: Probably make
+        //this a better system later
         var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (playerController != null)
         {

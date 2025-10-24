@@ -266,3 +266,5 @@ MonoBehaviour:
   _text: {fileID: 5918528010788285512}
   _xPadding: 10
   _yPadding: 2
+  _xPositionPadding: 0
+  _yPositionPadding: 0

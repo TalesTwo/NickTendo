@@ -683,6 +683,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: BUDDEE UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1834.6997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 333.3728
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.834351
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324495582062676649, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.2229
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1423.2322
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 268.0226
+      objectReference: {fileID: 0}
+    - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -208.67279
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

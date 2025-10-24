@@ -12,7 +12,7 @@ public class ShopUIManager : MonoBehaviour
     public GameObject ShopUI;
 
     // Lists that store all the UI elements that have need functionality
-    // (maybe change from public to serialized field
+    // (maybe change from public to serialized field)
     public Image[] ItemImages;
     public Button[] ItemButtons;
     public TextMeshProUGUI[] ItemNames;
