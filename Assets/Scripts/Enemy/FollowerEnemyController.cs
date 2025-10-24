@@ -117,7 +117,6 @@ public class FollowerEnemyController : EnemyControllerBase
         
         return 14 * x + 10 * (y - x);
     }
-    private int walkcount = 0;
     // follow the path as set out by A*
     protected override IEnumerator Follow()
     {
@@ -142,12 +141,6 @@ public class FollowerEnemyController : EnemyControllerBase
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             }
-            if(walkcount == 150)
-            {
-                Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0);
-                walkcount = 0;
-            }
-            ++walkcount;
             yield return null;
         }
     }
