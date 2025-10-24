@@ -22,6 +22,7 @@ namespace Managers
             camera = GameObject.FindWithTag("MainCamera");
             EventBroadcaster.PlayerDeath += PlayerDeath;
             EventBroadcaster.PersonaChanged += OnPersonaChanged;
+            EventBroadcaster.GameRestart += ActivatePlayer;
         }
 
         // handles player death
@@ -31,6 +32,16 @@ namespace Managers
             playerController.SetIsDead();
             GameStateManager.Instance.PlayerDeath();
             ScreenUIActivator.Instance.SetDeathScreen();
+        }
+        
+        public void DeactivatePlayer()
+        {
+            player.SetActive(false);
+        }
+        
+        public void ActivatePlayer()
+        {
+            player.SetActive(true);
         }
         
         private void OnPersonaChanged(Types.Persona newPersona)

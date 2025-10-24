@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptOffset: {x: 0, y: 1, z: 0}
+  interactPromptOffset: {x: 0, y: 1.25, z: 0}
   attachedPromptToObject: 0
   npcName: BUDDEE
 --- !u!114 &4738248158585002712
