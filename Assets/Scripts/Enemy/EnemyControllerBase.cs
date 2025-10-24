@@ -115,6 +115,7 @@ public class EnemyControllerBase : SpawnableObject
     {
         if (collision.gameObject.CompareTag("DashAttack"))
         {
+            Managers.AudioManager.Instance.PlayEnemyDamagedSound();
             health -= (int)PlayerStats.Instance.GetDashDamage();
             SetKnockBack();
         } else if (collision.gameObject.CompareTag("PlayerAttack"))
