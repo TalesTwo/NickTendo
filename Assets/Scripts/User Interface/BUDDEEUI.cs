@@ -39,7 +39,6 @@ public class BUDDEEUI : MonoBehaviour
         {
             if (!_isCRRunning)
             {
-                DebugUtils.Log("This method is called");
                 yield return null;
             }
             _buddeeDialogue.text += _letter;

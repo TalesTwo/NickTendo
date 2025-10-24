@@ -101,7 +101,6 @@ public class StatDisplayUI : MonoBehaviour
         return _buffText;
     }
 
-
     string AddSpace(PlayerStatsEnum _nameInEnum)
     {
         string[] _splitName = _nameInEnum.ToString().Split('_');

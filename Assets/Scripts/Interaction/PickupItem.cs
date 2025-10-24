@@ -18,7 +18,6 @@ public class PickupItem : BaseItem
         Player = GameObject.FindGameObjectWithTag("Player");
 
         CanInteract = false;
-        //EventBroadcaster.PlayerDeath += DeleteItem;
     }
 
     // Update is called once per frame
@@ -53,12 +52,10 @@ public class PickupItem : BaseItem
         {
             PlayerStats.Instance.ApplyItemBuffs(BuffType, BuffValue);
         }
-        
-        //PlayerStats.Instance.DisplayAllStats();
+
         //sprite is destoryed first because delete the entire object skips the playing of the sfx
         Destroy(GetComponent<SpriteRenderer>());
         Destroy(GetComponent<Collider2D>());
-        //delays destruction according to the lenght of the sfx
         Destroy(gameObject);
     }
 
