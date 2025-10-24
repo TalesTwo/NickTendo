@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 20, y: -10}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3791444146204551042
@@ -264,7 +264,7 @@ MonoBehaviour:
   _canvasTransform: {fileID: 0}
   _background: {fileID: 7675647087593194859}
   _text: {fileID: 5918528010788285512}
-  _xPadding: 10
-  _yPadding: 2
+  _xPadding: 40
+  _yPadding: 0
   _xPositionPadding: 0
   _yPositionPadding: 0
