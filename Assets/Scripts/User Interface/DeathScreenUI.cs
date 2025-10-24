@@ -66,6 +66,7 @@ public class DeathScreenUI : MonoBehaviour
     {
         EventBroadcaster.Broadcast_GameRestart();
         SetRunEndScreen();
+        PlayerManager.Instance.PlayerAlive();
         gameObject.SetActive(false);
         EventBroadcaster.PersonaChanged -= OnPersonaChanged;
     }
