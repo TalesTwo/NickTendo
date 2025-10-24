@@ -120,7 +120,6 @@ public class RangedEnemyController : EnemyControllerBase
         }
 
     }
-    private int count = 0;
     // follow the path
     protected override IEnumerator Follow()
     {
@@ -143,12 +142,6 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
-            if (count == 70)
-            {
-                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
-                count = 0;
-            }
-            ++count;
 
             _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
