@@ -168,6 +168,8 @@ namespace Managers
         
             dialogueBox.SetActive(true);
             NPCSprite.gameObject.SetActive(true);
+            Color color = PersonaManager.Instance.GetPersonaColour();
+            playerSprite.gameObject.GetComponent<Image>().color = color;
             playerSprite.gameObject.SetActive(true);
             StartCoroutine(CheckInput());
             StartCoroutine(Typing());
