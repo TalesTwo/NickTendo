@@ -61,12 +61,23 @@ namespace Managers
         {
             // Listen for the player death event to reset persona
             EventBroadcaster.PlayerDeath +=  OnPlayerDeath;
+            EventBroadcaster.GameRestart += OnGameRestart;
         }
 
-        public void OnPlayerDeath()
+        private void OnPlayerDeath()
         {
             // take the current persona, and mark it as inactive
             MarkAsLost(GetPersona());
+        }
+        private void OnGameRestart()
+        {
+            // Reset to Normal persona
+            SetPersona(Types.Persona.Normal);
+            // loop through all personas and set them to available
+            foreach (var key in _personas.Keys.ToList())
+            {
+                _personas[key] = Types.PersonaState.Available;
+            }
         }
 
         public int GetNumberOfAvailablePersonas()

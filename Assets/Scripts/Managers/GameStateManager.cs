@@ -66,4 +66,14 @@ public class GameStateManager : Singleton<GameStateManager>
     {
         buddeeDialogState = "Vertwin";
     }
+
+    public void Start()
+    {
+        EventBroadcaster.GameRestart += OnGameRestart;
+    }
+    private void OnGameRestart()
+    {
+        buddeeDialogState = "vertIntroyell";
+        _playerDeathCount = 0;
+    }
 }

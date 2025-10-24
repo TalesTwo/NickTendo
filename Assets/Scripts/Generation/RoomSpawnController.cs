@@ -54,7 +54,17 @@ public class RoomSpawnController : MonoBehaviour
             DebugUtils.LogWarning("No valid spawn location found in room: " + _room.name);
             return;
         }
-        
+        // check to see if there is any enemies already as children of the room (these would be pre-placed enemies)
+        FollowerEnemyController[] prePlacedEnemies = _room.GetComponentsInChildren<FollowerEnemyController>();
+        foreach (FollowerEnemyController prePlacedEnemy in prePlacedEnemies)
+        {
+            enemiesInRoom.Add(prePlacedEnemy);
+        }
+        RangedEnemyController[] prePlacedRangedEnemies = _room.GetComponentsInChildren<RangedEnemyController>();
+        foreach (RangedEnemyController prePlacedRangedEnemy in prePlacedRangedEnemies)
+        {
+            enemiesInRoom.Add(prePlacedRangedEnemy);
+        }
         
         // look at the spawnable map, and find the list with the enemy type
         List<SpawnData> enemiesToSpawn = new List<SpawnData>();
