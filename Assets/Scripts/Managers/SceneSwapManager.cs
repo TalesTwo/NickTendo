@@ -18,6 +18,17 @@ namespace Managers
             StartCoroutine(SwapSceneRoutine(newScene, fadeOutTime));
         }
 
+        public void Start()
+        {
+            EventBroadcaster.GameRestart += OnGameRestart;
+        }
+        
+        private void OnGameRestart()
+        {
+            // just do a hard scene swap to the main menu
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
+
         private IEnumerator SwapSceneRoutine(SceneField newScene, float fadeOutTime)
         {
             

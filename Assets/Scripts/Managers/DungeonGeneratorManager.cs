@@ -55,6 +55,7 @@ namespace Managers
         {
             EventBroadcaster.GameStarted += OnGameStarted;
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+            
             dungeonController = FindFirstObjectByType<DungeonController>();
         }
         
@@ -105,7 +106,7 @@ namespace Managers
         {
             LoadIntoDungeon();
             // Debug welcome message
-            DebugUtils.Log("Welcome " + PlayerStats.Instance.GetPlayerName() + " to Friend Finder!");
+            _IsFirstLoad = true;
         }
 
         public void LoadIntoDungeon()

@@ -114,6 +114,11 @@ namespace System
         public delegate void OpenPersonaUIHandler();
         public static event OpenPersonaUIHandler OpenPersonaUI;
         public static void Broadcast_OpenPersonaUI() { OpenPersonaUI?.Invoke(); }
+        
+        // Broadcast for when the game restarts
+        public delegate void GameRestartHandler();
+        public static event GameRestartHandler GameRestart;
+        public static void Broadcast_GameRestart() { GameRestart?.Invoke(); }
 
 
         
