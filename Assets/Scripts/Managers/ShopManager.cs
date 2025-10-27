@@ -6,8 +6,8 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public GameObject[] ItemList;
-    private GameObject[] ShopList;
 
+    private GameObject[] ShopList;
     private ShopUIManager ShopUIM;
 
 
@@ -18,12 +18,6 @@ public class ShopManager : MonoBehaviour
         GetRandomShopList();
         ShopUIM = gameObject.GetComponent<ShopUIManager>();
         SetItems();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void SetSeed(int seed)

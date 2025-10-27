@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,6 +11,10 @@ namespace Managers
         [SerializeField] private SceneField _initialGameScene;
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
+        
+        // variables for the error message
+        [SerializeField] private Text _errorMessageText;
+        [SerializeField] private Text _errorMessageTextShadow;
         
         private Button _loginButton;
 
@@ -26,14 +32,55 @@ namespace Managers
             {
                 _loginButton.onClick.AddListener(LoginButtonClicked);
             }
+            // hide the error message at start
+            if (_errorMessageText != null && _errorMessageTextShadow != null)
+            {
+                _errorMessageText.gameObject.SetActive(false);
+                _errorMessageTextShadow.gameObject.SetActive(false);
+            }
+            
+        }
 
+        private IEnumerator ShowErrorMessage(string message, float displayTime)
+        {
+            if (_errorMessageText != null && _errorMessageTextShadow != null)
+            {
+                _errorMessageText.text = message;
+                _errorMessageTextShadow.text = message;
+                _errorMessageText.gameObject.SetActive(true);
+                _errorMessageTextShadow.gameObject.SetActive(true);
+                yield return new WaitForSeconds(displayTime);
+                _errorMessageText.gameObject.SetActive(false);
+                _errorMessageTextShadow.gameObject.SetActive(false);
+            }
+        }
+        private bool VerifyLoginName()
+        {
+            // read in the current login name
+            string loginName = _usernameInputField.text;
+            int maxLength = 15; // example maximum length
+            // check for a maximum length
+            if (loginName.Length > maxLength)
+            {
+                StartCoroutine(ShowErrorMessage("Error: Name too long!", 3f));
+                return false;
+            }
+            
+            // if we reach this point, the name is valid
+            return true;
         }
         public void LoginButtonClicked()
         {
-            if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text))
+            if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text) && VerifyLoginName())
             {
+                // disable the button to prevent multiple clicks
+                _loginButton.interactable = false;
+                AudioManager.Instance.PlayUISelectSound();
                 AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
                 PlayerStats.Instance.SetPlayerName(_usernameInputField.text);
+                // hide the error message if it was showing
+                _errorMessageText.gameObject.SetActive(false);
+                _errorMessageTextShadow.gameObject.SetActive(false);
                 StartGame();
             }
         }

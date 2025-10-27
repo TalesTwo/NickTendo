@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b440183051323e24b8cb0ec0a4d735a6
+guid: 02853986a947c974c91571771bf36300
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1590631868736247383
-    second: Armature_Jump_17_0
+      213: -5537081673927839579
+    second: KeyE_Up_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,30 +135,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armature_Jump_17_0
+      name: KeyE_Up_0
       rect:
         serializedVersion: 2
-        x: 301
-        y: 239
-        width: 263
-        height: 367
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7569070d14f031610800000000000000
-      internalID: 1590631868736247383
+      spriteID: 5a0b435ed855823b0800000000000000
+      internalID: -5537081673927839579
       vertices: []
       indices: 
       edges: []
@@ -183,7 +170,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armature_Jump_17_0: 1590631868736247383
+      KeyE_Up_0: -5537081673927839579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

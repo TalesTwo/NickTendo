@@ -66,7 +66,7 @@ public class PlayerStats : Singleton<PlayerStats>
 
         if (_currentHealth <= 0)
         {
-            AudioManager.Instance.PlayEnemyDeathSound();
+            AudioManager.Instance.PlayPlayerDeathSound(1, 0);
             EventBroadcaster.Broadcast_PlayerDeath();
         }
     }
@@ -104,8 +104,8 @@ public class PlayerStats : Singleton<PlayerStats>
         if (BuffType == PlayerStatsEnum.Max_Health)
         {
             Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
-            UpdateCurrentHealth(BuffValue);
             UpdateMaxHealth(BuffValue);
+            UpdateCurrentHealth(BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.Movement_Speed)
         {
@@ -183,7 +183,10 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            DisplayAllStats();
+            // get the persna stats and print the email
+            var persona = PersonaManager.Instance.GetPersona();
+            var stats = PersonaStatsLoader.GetStats(persona);
+            DebugUtils.Log("Persona Email: " + stats.Email);
         }
     }
 }
@@ -220,4 +223,5 @@ public struct PlayerStatsStruct
     public int Coins;
     public Color PlayerColor;
     public string Description;
+    public string Email;
 }

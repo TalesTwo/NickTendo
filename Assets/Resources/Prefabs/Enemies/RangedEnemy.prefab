@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 10
-  m_Sprite: {fileID: 1619342443083222518, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
+  m_Sprite: {fileID: 2145681098398601845, guid: d7e64cedfd006994bb370a33e8ac19db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   hitEffect: {fileID: 2560593414228584792, guid: bb916d6a8cad70d4fab2ce9017edede7, type: 3}
   hitEffectDistance: 0.3
   hitFlashDuration: 0.1
+  enemyType: 1
   projectile: {fileID: 2064634610991927975, guid: 2c450041c0744594197e81c49e1ea195, type: 3}
   doNotHit:
     serializedVersion: 2
@@ -176,17 +177,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0025200844, y: -0.12095025}
+  m_Offset: {x: -0.0245502, y: 0.006071806}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 1.1875}
+    oldSize: {x: 1.125, y: 1.25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7631388, y: 0.9697624}
+  m_Size: {x: 0.9921956, y: 1.2238064}
   m_EdgeRadius: 0
 --- !u!70 &7288839828136079936
 CapsuleCollider2D:
@@ -222,8 +223,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00000023841858, y: -0.037796855}
-  m_Size: {x: 0.80849504, y: 1.0251977}
+  m_Offset: {x: -0.049975872, y: -0.039879203}
+  m_Size: {x: 0.7501898, y: 0.87110543}
   m_Direction: 0
 --- !u!114 &4356571639101041153
 MonoBehaviour:
@@ -264,13 +265,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
-  - {fileID: 1619342443083222518, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: 634189667866449442, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: -2570300341543693941, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: 4468571113375002077, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: -2888724893806449119, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: -8128115808696623154, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  - {fileID: 4761633822260975408, guid: e2d4e2d6b18daa045aac918600dc72f3, type: 3}
-  Framerate: 12
+  - {fileID: 2145681098398601845, guid: d7e64cedfd006994bb370a33e8ac19db, type: 3}
+  - {fileID: -3446469959969813143, guid: d7e64cedfd006994bb370a33e8ac19db, type: 3}
+  - {fileID: 1569243288605511531, guid: d7e64cedfd006994bb370a33e8ac19db, type: 3}
+  - {fileID: -2103400187211694588, guid: d7e64cedfd006994bb370a33e8ac19db, type: 3}
+  Framerate: 8
   SpriteRenderer: {fileID: 5494889573112493696}
   index: 0

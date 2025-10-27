@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorTriggerInteraction : TriggerInteractBase
@@ -11,13 +12,24 @@ public class DoorTriggerInteraction : TriggerInteractBase
     [Header("Door Settings")]
     [SerializeField] public Types.DoorClassification CurrentDoorPosition = Types.DoorClassification.None;
     
+    private bool _allowedToInteract = true;
+    
     
     // get a reference to the door scripy
     private Door _doorScript;
 
+    private float _nextAllowedInteractTime = 0f;
+    private const float InteractCooldown = .25f;
     public override void Interact()
     {
         
+        // Prevent interaction if not ready
+        if (Time.time < _nextAllowedInteractTime)
+            return;
+
+        // Update the next allowed time 
+        _nextAllowedInteractTime = Time.time + InteractCooldown;
+        if(!_allowedToInteract){ return; }
         base.Interact();
         // log the current door state 
         DebugUtils.Log("DoorTriggerInteraction: Current door state is " + (_doorScript != null ? _doorScript.GetCurrentState().ToString() : "No Door script found."));
@@ -74,6 +86,23 @@ public class DoorTriggerInteraction : TriggerInteractBase
         TryOpenDoor(currentRoom, Types.DoorClassification.South);
 
         targetRoomCoords.row += 1;
+        // we can special edge case here to see if its the spawn room we are attempting to go to
+        // convert the targetRoomCoords to a Vector2Int for comparison
+        
+        Vector2Int targetRoomCoordsVec = new Vector2Int(targetRoomCoords.row, targetRoomCoords.col);
+        if (targetRoomCoordsVec == DungeonGeneratorManager.Instance.GetStartPos())
+        {
+            // we do not want to allow teleporting back to the spawn room through the south door
+            // and just to troll the player, lock the door lol
+            if(_doorScript!= null)
+            {
+                _doorScript.SetDoorState(Door.DoorState.Locked);
+                AudioManager.Instance.PlayOpenDoorSound(1, 0);
+            }
+            break;
+        }
+        
+        
         
         HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.North);
         break;
@@ -140,7 +169,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
-                // cause of TIMING ISSUES
+                
                 DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
                 break;
             }
@@ -165,5 +194,41 @@ public class DoorTriggerInteraction : TriggerInteractBase
         {
             DebugUtils.LogError("DoorTriggerInteraction: No Door script found on this object.");
         }
+        
+        // bind to the persona changed delegate, so we can update accordingly
+        // when the persona is changed WHILE we are inside the hitbox
+        EventBroadcaster.PersonaChanged += OnPersonaChanged;
+        EventBroadcaster.OpenPersonaUI += OnPersonaUIOpened;
+        EventBroadcaster.ClosePersonaUI += OnPersonaUIClosed;
+        
     }
+    
+    private void OnPersonaUIOpened()
+    {
+        // if the player is currently overlapping, we will exit the overlap
+        _allowedToInteract = false;
+    }
+    private void OnPersonaUIClosed()
+    {
+        // we will check again to see if we are currently overlapping
+        _allowedToInteract = true;
+        if (_currentlyInOverlap)
+        {
+            // recall the overlap function
+            OnTriggerEnter2D(Player.GetComponent<Collider2D>());
+        }
+    }
+    
+
+    private void OnPersonaChanged(Types.Persona newPersona)
+    {
+        // we will check again to see if we are currently overlapping
+        if (_currentlyInOverlap)
+        {
+            // recall the overlap function
+            OnTriggerEnter2D(Player.GetComponent<Collider2D>());
+        }
+        
+    }
+    
 }

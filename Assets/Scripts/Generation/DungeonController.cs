@@ -16,44 +16,48 @@ public class DungeonController : Singleton<DungeonController>
 
 
 
+    private int cachedEnemyCount;
+    private bool isUpdating = false;
+    private float updateInterval = 0.75f;
+
+    // this has been changed to have a slight time delay on updating, to avoid it returning too quickly
     public int GetNumberOfEnemiesInCurrentRoom()
     {
+        if (!isUpdating)
+            StartCoroutine(UpdateEnemyCount());
+
+        return cachedEnemyCount;
+    }
+
+    private IEnumerator UpdateEnemyCount()
+    {
+        isUpdating = true;
+        yield return new WaitForSeconds(updateInterval);
+
         (int row, int col) CurrentRoomCoords = DungeonGeneratorManager.Instance.GetCurrentRoomCoords();
-        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+        var dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+
+        int result = 0;
+
         if (dungeonRooms != null)
         {
-            
             try
             {
-                Room currentRoom = DungeonGeneratorManager.Instance.GetDungeonRooms()[CurrentRoomCoords.row][CurrentRoomCoords.col];
+                Room currentRoom = dungeonRooms[CurrentRoomCoords.row][CurrentRoomCoords.col];
                 if (currentRoom)
                 {
-                    //if (!currentRoom.GetRequireFullRoomCleared())
-                    //{
-                    //return -1; // indicates that the room does not require clearing
-                    //}
-            
-                    RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
-                    if (roomSpawnController != null)
-                    {
-                        // check to see if the bool 
-                        return roomSpawnController.GetEnemiesInRoom().Count;
-                    }
-
+                    RoomSpawnController spawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+                    if (spawnController != null)
+                        result = spawnController.GetEnemiesInRoom().Count;
                 }
-            } catch (ArgumentOutOfRangeException e)
-            {
-                return 0;
             }
-
+            catch (System.ArgumentOutOfRangeException)
+            {
+                result = 0;
+            }
         }
 
-        
-        // Otherwise, there is no enemies in the room
-        return 0;
+        cachedEnemyCount = result;
+        isUpdating = false;
     }
-    
-    
-
-    
 }

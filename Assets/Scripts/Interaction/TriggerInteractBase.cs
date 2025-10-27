@@ -21,6 +21,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     private GameObject interactPromptInstance;
     
     private bool _isAllowedToInteract = true;
+    protected bool _currentlyInOverlap = false;
 
 
     public void SetInteractAllowedToInteract(bool isActive)
@@ -40,8 +41,16 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         // Play our interaction sound
         if (!_isAllowedToInteract) { return; }
+
+        AnimationOverrideOnInteract();
+        // When the player interacts with something, we should default set them back to their idle animation
         AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
         
+    }
+    
+    protected virtual void AnimationOverrideOnInteract()
+    {
+        // child classes can inherit this method to override the player animation on interact
     }
 
     protected virtual void Start()
@@ -82,10 +91,11 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
         }
     }
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == Player)
         {
+            _currentlyInOverlap = true;
             //DebugUtils.Log("Player in range to interact with " + gameObject.name);
             CanInteract = true;
             // enable the interact prompt if we have one
@@ -96,10 +106,11 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
             }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject == Player)
         {
+            _currentlyInOverlap = false;
             //DebugUtils.Log("Player out of range to interact with " + gameObject.name);
             CanInteract = false;
             // disable the interact prompt if we have one

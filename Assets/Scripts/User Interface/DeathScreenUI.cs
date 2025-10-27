@@ -5,6 +5,7 @@ using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Essential for scene management
 
 public class DeathScreenUI : MonoBehaviour
 {
@@ -54,9 +55,20 @@ public class DeathScreenUI : MonoBehaviour
         gameOverButton.gameObject.SetActive(true);
     }
 
+    private void SetRunEndScreen()
+    {
+        respawnButton.gameObject.SetActive(true);
+        gameLossText.text = "Your Account Has been <color=red>Compromised</color>";
+        gameOverButton.gameObject.SetActive(false);
+    }
+
     public void QuitGame()
     {
-        Application.Quit();
+        EventBroadcaster.Broadcast_GameRestart();
+        SetRunEndScreen();
+        PlayerManager.Instance.PlayerAlive();
+        gameObject.SetActive(false);
+        EventBroadcaster.PersonaChanged -= OnPersonaChanged;
     }
     
 }

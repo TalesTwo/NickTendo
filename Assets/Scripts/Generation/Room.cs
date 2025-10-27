@@ -34,10 +34,10 @@ public class Room : MonoBehaviour
     public int roomDifficulty = int.MaxValue; // default to max value, so we can tell if it has been set or not.
     // What are the coordinates of this room in the grid? (-1, -1) if not set
     private (int row, int col) RoomCoords = (-1, -1);
-    
-    
-    
-    
+    //Signals whether the door unlock sound has to be played or not.
+    bool openSoundHasPlayed = false;
+
+
     // Special logic for the spawn room
     private void SpecialRoomLogic()
     {
@@ -81,12 +81,21 @@ public class Room : MonoBehaviour
             }
             
         }
+
+        if (roomType == Types.RoomType.End)
+        {
+            if (GameStateManager.Instance.GetBuddeeDialogState() != "Vertwin")
+            {
+                GameStateManager.Instance.SetEndGameFlag();
+            }
+        }
+        
     }
     
     public void Update()
     {
         // only run this logic if we are the spawn room
-        if (roomType == Types.RoomType.Spawn)
+        if (roomType == Types.RoomType.Spawn || roomType == Types.RoomType.End)
         {
             SpecialRoomLogic();
         }
@@ -103,15 +112,16 @@ public class Room : MonoBehaviour
 
         
     }
-
     public void UpdateLockedDoors(bool forceLocked = false)
     {
         
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
+            bool NeverEnemy = true;
             if (enemyCount > 0 || forceLocked)
             {
+                NeverEnemy = false;
                 DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
@@ -147,6 +157,11 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
+                if (!openSoundHasPlayed&&NeverEnemy == true)
+                {
+                    Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
+                    openSoundHasPlayed = true;
+                }
             }
         }
     }
@@ -161,6 +176,23 @@ public class Room : MonoBehaviour
         
         // hook up to the enemy death event to check if we need to unlock doors
         EventBroadcaster.EnemyDeath += OnEnemyDeath;
+        EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+    }
+    
+    private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+    {
+        DebugUtils.Log($"Room: {name} detected player changed room to coords: {targetRoomCoords}");
+        
+        // check to see if its the final room we went too
+        Vector2 cords = DungeonGeneratorManager.Instance.GetEndPos();
+        // convert to int tuple
+        (int row, int col) endRoomCoords = ((int)cords.y, (int)cords.x);
+        if (targetRoomCoords == endRoomCoords)
+        {
+            // we are entering the final room
+            DebugUtils.Log("Player has entered the final room. Setting end game flag.");
+            GameStateManager.Instance.SetEndGameFlag();
+        }
     }
     
     private void OnEnemyDeath(EnemyControllerBase enemy, Room room)
@@ -184,18 +216,9 @@ public class Room : MonoBehaviour
     {
         roomDifficulty = difficulty;
     }
-    public int GetRoomDifficulty()
-    {
-        return roomDifficulty;
-    }
-    public void SetRoomCoords(int row, int col)
-    {
-        RoomCoords = (row, col);
-    }
-    public (int row, int col) GetRoomCoords()
-    {
-        return RoomCoords;
-    }
+    public int GetRoomDifficulty() { return roomDifficulty; }
+    public void SetRoomCoords(int row, int col) { RoomCoords = (row, col); }
+    public (int row, int col) GetRoomCoords() { return RoomCoords; }
 
 
     public void Awake()
@@ -330,5 +353,12 @@ public class Room : MonoBehaviour
     public Types.RoomType GetRoomType()
     {
         return roomType;
+    }
+
+    public void OnDestroy()
+    {
+        //unsubscribe from events
+        EventBroadcaster.EnemyDeath -= OnEnemyDeath;
+        EventBroadcaster.PlayerChangedRoom -= OnPlayerChangedRoom;
     }
 }

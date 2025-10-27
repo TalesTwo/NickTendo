@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private bool _isKnockback = false;
     private bool _isDead = false;
     private bool _isWalking = false;
+    private float _walktimer = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -60,12 +61,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (horizontalInput == 0 && verticalInput == 0)
                 {
-                    StopWalkSound();
+                    _isWalking = false;
                     _playerAnimator.SetStill();
                 }
                 else
                 {
-                    StartWalkSound();
+                    _isWalking = true;
                     _playerAnimator.SetRunning();
                 }                  
             }
@@ -109,42 +110,15 @@ public class PlayerController : MonoBehaviour
                 Invoke(nameof(DashMovingStop), PlayerStats.Instance.GetDashDistance());
             }            
         }
-
-    }
-
-    public void StartWalkSound()
-    {
-        if (!_isWalking)
+        if (_isWalking) _walktimer += Time.deltaTime;
+        else _walktimer = 0;
+        if (_walktimer >= 0.5 && _isActive)
         {
-            _isWalking = true;
-            StartCoroutine(WalkingSoundLoop());
+            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            _walktimer = 0;
         }
     }
 
-    public void StopWalkSound()
-    {
-        if (_isWalking)
-        {
-            _isWalking = false;
-            StopAllCoroutines();
-        }
-    }
-
-
-
-
-    private IEnumerator WalkingSoundLoop()
-    {
-        for (int x = 0; x <= 222; ++x)
-        {
-            if(x == 222)
-            {
-                Managers.AudioManager.Instance.PlayWalkingSound(1, 0);
-                x = 0;
-            }
-            yield return null;
-        }
-    }
 
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
@@ -170,7 +144,7 @@ public class PlayerController : MonoBehaviour
     // starts base attack animation
     private void StartAttack()
     {
-        StopWalkSound();
+        _isWalking = false;
         GameObject attack = Instantiate(attackAnimation);
         Renderer rnd = attack.gameObject.GetComponent<Renderer>();
         Color playerColor = _sr.color;
@@ -180,7 +154,7 @@ public class PlayerController : MonoBehaviour
     // starts base dash attack
     private void StartDash()
     {
-        StopWalkSound();
+        _isWalking = false;
         // instantiate dash
         GameObject attack = Instantiate(dashAnimation);
         
@@ -232,6 +206,7 @@ public class PlayerController : MonoBehaviour
         if (_isActive)
         {
             _isActive = false;
+            _playerAnimator.SetStill();
         }
         else
         {
@@ -242,7 +217,7 @@ public class PlayerController : MonoBehaviour
     // player is hit by attack that has knockback. knockback is physics based
     public void KnockBack(float power, Vector2 direction, float stunTimer)
     {
-        StopWalkSound();
+       _isWalking = false;
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
@@ -280,7 +255,7 @@ public class PlayerController : MonoBehaviour
     // function to set player as dead
     public void SetIsDead()
     {
-        StopWalkSound();
+        _isWalking = false;
         _isDead = true;
     }
 
@@ -288,11 +263,17 @@ public class PlayerController : MonoBehaviour
     public void ResetIsDead()
     {
         _isDead = false;
+        _playerAnimator.UnsetDead();
     }
 
     public bool IsDashing()
     {
         return _isDashMoving;
+    }
+
+    public bool GetIsDead()
+    {
+        return _isDead;
     }
 
 }

@@ -14,6 +14,7 @@ namespace Managers
         [Header("Dialogue Box Components")]
         public GameObject dialogueBox;
         public Image playerSprite;
+        public Image blur;
         private Image _playerTransparency;
         public Image NPCSprite;
         private Image _npcTransparency;
@@ -42,6 +43,7 @@ namespace Managers
         private int _index;
         private string _characterName;
         private string _playerName;
+        private string _spokenLine;
         private List<string[]> _dialogue;
         private Dictionary<string, List<string[]>> _lines;
         
@@ -127,7 +129,7 @@ namespace Managers
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == _dialogue[_index][2])
+                if (dialogueText.text == _spokenLine)
                 {
                     _canContinue = true;
                 }
@@ -167,7 +169,10 @@ namespace Managers
         
             dialogueBox.SetActive(true);
             NPCSprite.gameObject.SetActive(true);
+            Color color = PersonaManager.Instance.GetPersonaColour();
+            playerSprite.gameObject.GetComponent<Image>().color = color;
             playerSprite.gameObject.SetActive(true);
+            blur.gameObject.SetActive(true);
             StartCoroutine(CheckInput());
             StartCoroutine(Typing());
         }
@@ -180,6 +185,7 @@ namespace Managers
             dialogueBox.SetActive(false);
             NPCSprite.gameObject.SetActive(false);
             playerSprite.gameObject.SetActive(false);
+            blur.gameObject.SetActive(false);
         }
     
         // types each letter in the dialogue one at a time
@@ -240,7 +246,9 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
-            foreach (char letter in _dialogue[_index][2].ToCharArray())
+            Debug.Log(_dialogue[_index][2]);
+            _spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
+            foreach (char letter in _spokenLine)
             {
                 dialogueText.text += letter;
                 ++talkingtonetimer;
@@ -278,7 +286,7 @@ namespace Managers
                 _isReading = false;
                 _dialogIsRandom = false;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
-                GameStateManager.Instance.SetBuddeeDialogState("IntroRandom");
+                GameStateManager.Instance.Dialogue("BUDDEE");
                 EventBroadcaster.Broadcast_StopDialogue();
                 ZeroText();
             }

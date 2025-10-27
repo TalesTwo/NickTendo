@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class PersonaUI : MonoBehaviour
     // Reference to the template GameObject
     [SerializeField] private GameObject personaTemplate;
     [SerializeField] private Transform contentParent; 
+    [SerializeField] private GameObject buddeeUI;
 
     public void Start()
     {
@@ -21,18 +23,29 @@ public class PersonaUI : MonoBehaviour
             closeButton.onClick.AddListener(ClosePersonaUI);
         }
     }
-    
+
     public void OpenPersonaUI()
     {
         GenerateContent();
         gameObject.SetActive(true);
+        if (PersonaManager.Instance.GetNumberOfAvailablePersonas() == 1)
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like we ran out of all available accounts...");
+        }
+        else
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the accounts to learn more!!!");
+        }
+
         // disable player movement
-        //TODO: Probably make this a better system later
+        //TODO: Probably make
+        //this a better system later
         var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (playerController != null)
         {
             playerController.enabled = false;
         }
+        EventBroadcaster.Broadcast_OpenPersonaUI();
     }
     public void ClosePersonaUI()
     {
@@ -74,6 +87,7 @@ public class PersonaUI : MonoBehaviour
         // Create the same number of UI elements as there are personas
         foreach (var persona in personas)
         {
+
             var state = persona.Value;
             if (state == Types.PersonaState.Lost)
             {
@@ -100,13 +114,24 @@ public class PersonaUI : MonoBehaviour
                 statsText.text = $"Health: {stats.MaxHealth}  Speed: {stats.MovementSpeed}  " +
                                  $"Attack: {stats.AttackDamage}  DashDamage: {stats.DashDamage}";
             }
+
+            nameText.text += " | " + stats.Email;
+
+            TMP_Text emailText = newPersona.transform.Find("Text_PersonaEmail")?.GetComponent<TMP_Text>();
+            if (emailText != null)
+            {
+                emailText.text = stats.Email;
+            }
+
+            PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
+            pItemUI.SetColor(stats.PlayerColor);
             // --- Fill in description ---
 
-            TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
+            /*TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
             if (descriptionText != null)
             {
                 descriptionText.text = stats.Description;
-            }
+            }*/
 
             // --- Button logic ---
             Button button = newPersona.GetComponentInChildren<Button>();
@@ -117,6 +142,9 @@ public class PersonaUI : MonoBehaviour
                 if (state == Types.PersonaState.Selected)
                 {
                     button.interactable = false;
+                    pItemUI.ShowCheckmark();
+                    buddeeUI.GetComponent<BUDDEEUI>().StopCR();
+                    buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(stats.Description);                                        
                     TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
                     if (btnLabel != null)
                         btnLabel.text = "Selected";
@@ -124,6 +152,7 @@ public class PersonaUI : MonoBehaviour
                 else if (state == Types.PersonaState.Available)
                 {
                     button.interactable = true;
+                    //pItemUI.HideCheckmark();
                     button.onClick.AddListener(() =>
                     {
                         PersonaManager.Instance.SetPersona(capturedPersona);

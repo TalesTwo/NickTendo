@@ -131,6 +131,10 @@ MonoBehaviour:
       minSpawnCount: 1
       maxSpawnCount: 1
       spawnChance: 0.25
+    - enemyPrefab: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
+      minSpawnCount: 2
+      maxSpawnCount: 5
+      spawnChance: 0.25
 --- !u!1 &580180919557100743
 GameObject:
   m_ObjectHideFlags: 0
@@ -33002,6 +33006,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6148051813958866689}
     m_Modifications:
+    - target: {fileID: 778864542532171787, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.31
+      objectReference: {fileID: 0}
     - target: {fileID: 1756544074199440070, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_Name
       value: Door (1)

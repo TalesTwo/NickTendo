@@ -45,6 +45,10 @@ public class EnemyControllerBase : SpawnableObject
     protected RoomGridManager _gridManager;
     protected float findPathCooldown;
     protected float pathingTimer = 0;
+    [Header("Type")]
+    public Types.EnemyType enemyType;
+
+    private float _walktimer = 0f;
 
     // Start is called before the first frame update
     private void Start()
@@ -62,11 +66,9 @@ public class EnemyControllerBase : SpawnableObject
     }
 
 
-    public void Deactivate()
+    protected virtual void Deactivate() 
     {
-
-        // tell the room we are in, that we have died
-        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
+        
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
@@ -107,7 +109,19 @@ public class EnemyControllerBase : SpawnableObject
         {
             StopAllCoroutines();
         }
-    }
+        _walktimer += Time.deltaTime;
+
+        if (enemyType == Types.EnemyType.FollowerEnemy && _walktimer >= 0.25f)
+        {
+            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
+            _walktimer = 0;
+        }
+        if (enemyType == Types.EnemyType.RangedEnemy && _walktimer >= 0.3f)
+        {
+            Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
+            _walktimer = 0;
+        }
+}
 
 
     // reduce health on damage from a PlayerAttack
@@ -115,6 +129,7 @@ public class EnemyControllerBase : SpawnableObject
     {
         if (collision.gameObject.CompareTag("DashAttack"))
         {
+            Managers.AudioManager.Instance.PlayEnemyDamagedSound();
             health -= (int)PlayerStats.Instance.GetDashDamage();
             SetKnockBack();
         } else if (collision.gameObject.CompareTag("PlayerAttack"))
@@ -133,7 +148,6 @@ public class EnemyControllerBase : SpawnableObject
         if (health <= 0)
         {
             //Destroy(gameObject);
-            Managers.AudioManager.Instance.PlayEnemyDeathSound();
             Deactivate(); // switching to this to ensure event is unsubscribed
         }
     }

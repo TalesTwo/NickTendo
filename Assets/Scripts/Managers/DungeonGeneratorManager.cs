@@ -39,9 +39,9 @@ namespace Managers
         [Header("Start/End Positions (Row, Col)")]
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
-        private Vector2Int startPos = new Vector2Int(-1, -1);
+        private Vector2Int startPos = new Vector2Int(-1, -1); public Vector2Int GetStartPos() { return startPos; }
         [SerializeField] private Vector2Int _endPos = new Vector2Int(-1, -1);
-        private Vector2Int endPos = new Vector2Int(-1, -1);
+        private Vector2Int endPos = new Vector2Int(-1, -1); public Vector2Int GetEndPos() { return endPos; }
         
         [SerializeField] private int Seed = 16; // for future use, if we want to have seeded generation
         // this is the distance between rooms, should be 200 for now so they dont overlap in any way
@@ -49,14 +49,22 @@ namespace Managers
         
         private (int row, int col) CurrentRoomCoords = (-1, -1); public (int row, int col) GetCurrentRoomCoords() { return CurrentRoomCoords; }
         
+        private bool _IsFirstLoad = true; public bool IsFirstLoad() { return _IsFirstLoad; }
+        
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+            EventBroadcaster.GameRestart += OnGameRestart;
+            
             dungeonController = FindFirstObjectByType<DungeonController>();
         }
-        
 
+
+        private void OnGameRestart()
+        {
+            OnGameStarted();
+        }
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
@@ -103,7 +111,7 @@ namespace Managers
         {
             LoadIntoDungeon();
             // Debug welcome message
-            DebugUtils.Log("Welcome " + PlayerStats.Instance.GetPlayerName() + " to Friend Finder!");
+            _IsFirstLoad = true;
         }
 
         public void LoadIntoDungeon()
@@ -117,6 +125,12 @@ namespace Managers
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
+            if (_IsFirstLoad)
+            {
+                EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+            }
+            _IsFirstLoad = false;
+            
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
@@ -489,30 +503,31 @@ namespace Managers
                 dungeonRooms.Add(row);
             }
             // I also want to clear all "room" objects from the world
-            Room[] existingRooms = FindObjectsByType<Room>(FindObjectsSortMode.None);
+            Debug.Log("Clearing existing rooms and objects from the scene...");
+            Room[] existingRooms = FindObjectsByType<Room>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (Room room in existingRooms)
             {
                 DestroyImmediate(room.gameObject);
             }
-            // destroy all animated buttons
-            AnimatedButton[] existingButtons = FindObjectsByType<AnimatedButton>(FindObjectsSortMode.None);
 
+            AnimatedButton[] existingButtons = FindObjectsByType<AnimatedButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (AnimatedButton button in existingButtons)
             {
                 DestroyImmediate(button.gameObject);
             }
-            // destroy all objects of the SpawnableObject type
-            SpawnableObject[] existingSpawnableObjects = FindObjectsByType<SpawnableObject>(FindObjectsSortMode.None);
+
+            SpawnableObject[] existingSpawnableObjects = FindObjectsByType<SpawnableObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (SpawnableObject obj in existingSpawnableObjects)
             {
                 DestroyImmediate(obj.gameObject);
             }
-            // destroy all projectiles
-            EnemyProjectileController[] existingProjectiles = FindObjectsByType<EnemyProjectileController>(FindObjectsSortMode.None);
+
+            EnemyProjectileController[] existingProjectiles = FindObjectsByType<EnemyProjectileController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (EnemyProjectileController proj in existingProjectiles)
             {
                 DestroyImmediate(proj.gameObject);
             }
+
         }
         
         IEnumerator PrewarmDungeon(List<List<Room>> dungeonLayout)

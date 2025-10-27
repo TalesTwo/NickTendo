@@ -16,14 +16,17 @@ public class AnimatedPlayer : AnimatedEntity
     
     private bool _isRunning = false;
     private bool _isAttacking = false;
+    private bool _isDashing = false;
+    private bool _isDead = false;
 
     protected override void ResetBools()
     {
-        if (_isAttacking && !_isRunning)
+        if (_isAttacking && !_isRunning && !_isDashing && !_isDead)
         {
             SetToIdle();
         }
         _isAttacking = false;
+        _isDashing = false;
     }
     
     // Start is called before the first frame update
@@ -58,18 +61,22 @@ public class AnimatedPlayer : AnimatedEntity
 
     public void SetStill()
     {
-        if (_isRunning && !_isAttacking)
+        if (!_isDead)
         {
-            SetToIdle();
-            _isRunning = false;
+            if (_isRunning && !_isAttacking)
+            {
+                SetToIdle();
+                _isRunning = false;
+            }
+            DefaultAnimationCycle = idleAnimation;            
         }
-        DefaultAnimationCycle = idleAnimation;
     }
 
     public void SetDashing()
     {
         Interrupt(dashAnimation);
         DefaultAnimationCycle = dashAnimation;
+        _isDashing = true;
     }
 
     public void SetDashAngle(Quaternion rotation)
@@ -90,6 +97,13 @@ public class AnimatedPlayer : AnimatedEntity
 
     private void SetDead()
     {
+        _isDead = true;
         DefaultAnimationCycle = hurtAnimation;
+    }
+
+    public void UnsetDead()
+    {
+        _isDead = false;
+        DefaultAnimationCycle = idleAnimation;
     }
 }

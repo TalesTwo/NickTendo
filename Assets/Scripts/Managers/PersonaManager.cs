@@ -17,6 +17,14 @@ namespace Managers
         private Types.Persona _currentPersona = Types.Persona.Normal;
         public Types.Persona GetPersona() { return _currentPersona; }
 
+        public Color GetPersonaColour()
+        {
+            var persona = GetPersona();
+            var stats = PersonaStatsLoader.GetStats(persona);
+            var colour = stats.PlayerColor;
+            return colour;
+        }
+
         // CSV reference (loaded from Resources)
         private TextAsset _personaStatsCSV;
     
@@ -61,12 +69,23 @@ namespace Managers
         {
             // Listen for the player death event to reset persona
             EventBroadcaster.PlayerDeath +=  OnPlayerDeath;
+            EventBroadcaster.GameRestart += OnGameRestart;
         }
 
-        public void OnPlayerDeath()
+        private void OnPlayerDeath()
         {
             // take the current persona, and mark it as inactive
             MarkAsLost(GetPersona());
+        }
+        private void OnGameRestart()
+        {
+            // Reset to Normal persona
+            SetPersona(Types.Persona.Normal);
+            // loop through all personas and set them to available
+            foreach (var key in _personas.Keys.ToList())
+            {
+                _personas[key] = Types.PersonaState.Available;
+            }
         }
 
         public int GetNumberOfAvailablePersonas()
@@ -202,7 +221,8 @@ namespace Managers
                         Keys            = int.Parse(values[10]),
                         Coins           = int.Parse(values[11]),
                         PlayerColor     = ParseColor(values[12]),
-                        Description     = values[13]
+                        Description     = values[13],
+                        Email           = values.Length > 14 ? values[14] : ""
                     };
 
                     _personaStats[persona] = stats;

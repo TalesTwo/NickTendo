@@ -43,6 +43,7 @@ public class RangedEnemyController : EnemyControllerBase
                     GameObject newProjectile = Instantiate(projectile, attackPosition, Quaternion.identity);
                     Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
                     ProjectileRb.velocity = _direction * _projectileSpeed;
+                    newProjectile.GetComponent<EnemyProjectileController>().SetAngle(_direction);
                     Managers.AudioManager.Instance.PlayEnemyShotSound();
                     
                     // set damage of projectile
@@ -119,7 +120,6 @@ public class RangedEnemyController : EnemyControllerBase
         }
 
     }
-    private int count = 0;
     // follow the path
     protected override IEnumerator Follow()
     {
@@ -142,12 +142,6 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
-            if (count == 222)
-            {
-                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
-                count = 0;
-            }
-            ++count;
 
             _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
@@ -171,6 +165,15 @@ public class RangedEnemyController : EnemyControllerBase
         knockbackForce =  float.Parse(stats[10]);
         stunTimer = float.Parse(stats[11]);
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
-        findPathCooldown = 1f / speed;
+        findPathCooldown = 1f / (speed*2);
+    }
+    
+    protected override void Deactivate() 
+    {
+        base.Deactivate();
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
+        // specific to ranged enemy deactivation logic can go here
+        Managers.AudioManager.Instance.PlayEnemyDeathSound();
+        Debug.Log("Ranged Enemy destroyed");
     }
 }

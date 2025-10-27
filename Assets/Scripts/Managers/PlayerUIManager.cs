@@ -106,12 +106,12 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandleDashSlider()
     {
         _dashSlider.value = 0;
-        _dashSliderImage.color = Color.white;
         StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
     }
 
     IEnumerator FillSlider(float _cooldown)
     {
+        
         float _fillTime = 0;
         while (_fillTime < _cooldown)
         {
@@ -126,6 +126,5 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     {
         _hasStartedSlider = false;
         AudioManager.Instance.PlayKeyGetSound();
-        _dashSliderImage.color = Color.yellow;
     }
 }
