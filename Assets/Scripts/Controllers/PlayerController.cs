@@ -189,6 +189,8 @@ public class PlayerController : MonoBehaviour
         _isDashMoving = false;
         _playerAnimator.SetStill();
         _playerAnimator.ResetDashAngle();
+        // broadcast event so the pits know we stopped dashing (incase we are on one)
+        EventBroadcaster.Broadcast_PlayerFinishedDashing();
     }
 
     // flips the sprite depending on the direction of movement

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,10 @@ public class RoomGridManager : MonoBehaviour
     private Vector2 gridRoomSize;
     public float nodeRadius = 0.5f;
 
-    private Node[,] _grid;
+    // for walking paths
+    private Node[,] _walkGrid;
+    // for flying paths
+    private Node[,] _flyGrid;
     private Vector2 _bottomLeft;
     private int gridSizeX, gridSizeY;
     
@@ -59,58 +63,128 @@ public class RoomGridManager : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(gridRoomSize.x);
         gridSizeY = Mathf.RoundToInt(gridRoomSize.y);
         
-        CreateGrid();
+        CreateGrids();
+    }
+    private void Start()
+    {
+        // Subscribe to enemy death event to update grid
+        EventBroadcaster.EnemyDeath += OnEnemyDeath;
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            RegenerateGrids();
+        }
+    }
+
+
+    // we will call this anytime an enemy dies, or a chest/pot is placed to update the grid
+    private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
+    {
+        // check to see if its type is chest or pot
+        if (enemy.enemyType == Types.EnemyType.ChestEnemy || enemy.enemyType == Types.EnemyType.PotEnemy)
+        {
+            RegenerateGrids();
+        }
+    }
+    private void RegenerateGrids()
+    {
+        CreateGrids();
+        RemoveOverlappingWithChestsAndPots();
+    }
+
+    private void RemoveOverlappingWithChestsAndPots()
+    {
+        // Find all relevant enemies
+        EnemyControllerBase[] allEnemies = FindObjectsOfType<EnemyControllerBase>();
+        List<EnemyControllerBase> blockingEnemies = new List<EnemyControllerBase>();
+
+        foreach (EnemyControllerBase e in allEnemies)
+        {
+            if (e.enemyType == Types.EnemyType.ChestEnemy || e.enemyType == Types.EnemyType.PotEnemy)
+                blockingEnemies.Add(e);
+        }
+
+        foreach (EnemyControllerBase chets_pot in blockingEnemies)
+        {
+            Collider2D chets_pot_collider = chets_pot.GetComponent<Collider2D>();
+            if (chets_pot_collider == null) continue;
+
+            // Get the world bounds of the object
+            Bounds bounds = chets_pot_collider.bounds;
+
+            // Iterate through grid and disable overlapping nodes
+            for (int x = 0; x < _walkGrid.GetLength(0); x++)
+            {
+                for (int y = 0; y < _walkGrid.GetLength(1); y++)
+                {
+                    Node node = _walkGrid[x, y];
+                    if (!node.walkable) continue;
+
+                    // check overlap
+                    if (bounds.Contains(node.worldPosition))
+                    {
+                        node.walkable = false;
+                    }
+                }
+            }
+        }
     }
 
     // create the grid starting from the bottom left of the room
-    private void CreateGrid()
+    private void CreateGrids()
     {
-        _grid = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
-    
-        // Adjust node radius accordingly
+        _walkGrid = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
+        _flyGrid  = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
+
         float scaledRadius = nodeRadius / resolutionMultiplier;
-    
+
         for (int x = 0; x < gridSizeX * resolutionMultiplier; x++)
         {
             for (int y = 0; y < gridSizeY * resolutionMultiplier; y++)
             {
-                // Each subcell is now smaller
-                Vector2 roomPoint = new Vector2(
+                Vector2 worldPoint = new Vector2(
                     _bottomLeft.x + (x + 0.5f) * (scaledRadius * 2),
                     _bottomLeft.y + (y + 0.5f) * (scaledRadius * 2)
                 );
 
-                Vector2 boxSize = Vector2.one * (scaledRadius * 2 * 0.95999f);
+                Vector2 boxSize = Vector2.one * (scaledRadius * 2 * 0.96f);
 
-                bool hasCollision = Physics2D.OverlapBox(roomPoint, boxSize, 0f, unwalkableLayer);
-                // we are walkable if we dont have collision, and we are on not a pit layermask
-                bool bIsPitTile = (Physics2D.OverlapBox(roomPoint, boxSize, 0f, pitLayer));
-                bool walkable = !hasCollision && !bIsPitTile;
+                bool hasWall = Physics2D.OverlapBox(worldPoint, boxSize, 0f, unwalkableLayer);
+                bool isPit = Physics2D.OverlapBox(worldPoint, boxSize, 0f, pitLayer);
 
-                _grid[x, y] = new Node(walkable, roomPoint, x, y);
+                // Ground grid (can't walk on pits)
+                bool groundWalkable = !hasWall && !isPit;
+                // Flying grid (ignores pits)
+                bool airWalkable = !hasWall;
+
+                _walkGrid[x, y] = new Node(groundWalkable, worldPoint, x, y);
+                _flyGrid[x, y] = new Node(airWalkable, worldPoint, x, y);
             }
         }
     }
 
     
     // calculate the nearest node based on the current position
-    public Node NodeFromWorldPoint(Vector2 worldPoint)
+    public Node NodeFromWorldPoint(Vector2 worldPoint, bool isFlying)
     {
-
         float percentX = Mathf.Clamp01((worldPoint.x - _bottomLeft.x) / gridRoomSize.x);
         float percentY = Mathf.Clamp01((worldPoint.y - _bottomLeft.y) / gridRoomSize.y);
 
         int x = Mathf.RoundToInt((gridSizeX * resolutionMultiplier - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY * resolutionMultiplier - 1) * percentY);
 
-        return _grid[x, y];
+        return isFlying ? _flyGrid[x, y] : _walkGrid[x, y];
     }
 
     // find all neighboring cells
-    public List<Node> GetNeighbours(Node node)
+    public List<Node> GetNeighbours(Node node, bool isFlying)
     {
+        Node[,] grid = isFlying ? _flyGrid : _walkGrid;
         List<Node> neighbours = new List<Node>();
-        
+
         int maxX = gridSizeX * resolutionMultiplier;
         int maxY = gridSizeY * resolutionMultiplier;
 
@@ -118,7 +192,6 @@ public class RoomGridManager : MonoBehaviour
         {
             for (int y = -1; y <= 1; y++)
             {
-                // Only cardinal directions
                 if ((x == 0 && y == 0) || (Mathf.Abs(x) == 1 && Mathf.Abs(y) == 1))
                     continue;
 
@@ -126,75 +199,65 @@ public class RoomGridManager : MonoBehaviour
                 int checkY = node.gridY + y;
 
                 if (checkX >= 0 && checkX < maxX && checkY >= 0 && checkY < maxY)
-                    neighbours.Add(_grid[checkX, checkY]);
+                    neighbours.Add(grid[checkX, checkY]);
             }
         }
 
         return neighbours;
     }
-
-
-
-    public Transform FindValidWalkableCell()
+    
+    
+    
+    public Transform FindValidWalkableCell(bool isFlying = false)
     {
-
-
-        if (_grid == null) return null;
+        // Pick the correct grid
+        Node[,] grid = isFlying ? _flyGrid : _walkGrid;
+        if (grid == null)
+        {
+            Debug.LogWarning($"Grid not initialized in {name}");
+            return null;
+        }
 
         // Get all door positions from the "Doors" object
         Transform doorsParent = transform.Find("Doors");
         List<Transform> doorPoints = new List<Transform>();
-        foreach (Transform child in doorsParent)
+        if (doorsParent != null)
         {
-            doorPoints.Add(child);
+            foreach (Transform child in doorsParent)
+                doorPoints.Add(child);
         }
-        
+
         // Collect all valid nodes
         List<Node> validNodes = new List<Node>();
 
-        foreach (Node node in _grid)
+        foreach (Node node in grid)
         {
             if (!node.walkable) continue;
 
-            bool hasLineOfSight = false;
             bool tooCloseToDoor = false;
 
             foreach (Transform door in doorPoints)
             {
-                Vector2 start = door.position;
-                Vector2 end = node.worldPosition;
-                Vector2 direction = (end - start).normalized;
-                float distance = Vector2.Distance(start, end);
-
+                float distance = Vector2.Distance(door.position, node.worldPosition);
                 if (distance < minDistanceFromDoor)
                 {
                     tooCloseToDoor = true;
                     break;
                 }
-
-                // No longer works in non-square rooms
-                //RaycastHit2D hit = Physics2D.Raycast(start, direction, distance, unwalkableLayer);
-                //if (hit.collider == null)
-                //{
-                    //hasLineOfSight = true;
-                //}
             }
 
-            // now check both conditions normally
             if (tooCloseToDoor)
                 continue;
 
-            //if (hasLineOfSight)
-                validNodes.Add(node);
+            validNodes.Add(node);
         }
-        
+
         if (validNodes.Count == 0)
         {
             Debug.LogWarning($"No valid walkable nodes found for {name} — returning null.");
             return null;
         }
 
-        
         // Randomly select one valid node
         Node chosenNode = validNodes[UnityEngine.Random.Range(0, validNodes.Count)];
 
@@ -202,13 +265,11 @@ public class RoomGridManager : MonoBehaviour
         GameObject temp = new GameObject("TempSpawnPoint");
         temp.transform.position = chosenNode.worldPosition;
         temp.transform.SetParent(transform);
-
-        // Auto-cleanup
         Destroy(temp, 0.5f);
 
         return temp.transform;
     }
-    
+
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
     /*
@@ -218,12 +279,12 @@ public class RoomGridManager : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(_bottomLeft + (Vector2)gridRoomSize / 2, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
 
-        if (_grid != null)
+        if (_walkGrid != null)
         {
             // Match whatever multiplier you used when generating the grid
             float scaledRadius = nodeRadius / resolutionMultiplier;
 
-            foreach (Node n in _grid)
+            foreach (Node n in _walkGrid)
             {
                 // Default color based on walkability
                 Gizmos.color = n.walkable ? Color.white : Color.red;
@@ -243,5 +304,13 @@ public class RoomGridManager : MonoBehaviour
     }
     */
     
-    
 }
+
+
+
+    
+    
+    
+
+    
+

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class ChestController : EnemyControllerBase
             Debug.Log("Pot destroyed");
             Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
         }
+        
+        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         
     }
 }
