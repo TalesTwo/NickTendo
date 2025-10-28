@@ -51,7 +51,7 @@ public class EnemyControllerBase : SpawnableObject
     private float _walktimer = 0f;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();

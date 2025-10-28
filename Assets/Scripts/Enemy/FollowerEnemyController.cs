@@ -100,7 +100,7 @@ public class FollowerEnemyController : EnemyControllerBase
     }
 
     // take the discovered most efficient path and reverse it so enemy can travel to the player
-    private void RetracePath(Node start, Node end)
+    protected void RetracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
         Node currentNode = end;
@@ -117,7 +117,7 @@ public class FollowerEnemyController : EnemyControllerBase
         currentPath = path;
     }
     
-    private int GetDistance(Node a, Node b)
+    protected int GetDistance(Node a, Node b)
     {
         int x = Mathf.Abs(a.gridX - b.gridX);
         int y = Mathf.Abs(a.gridY - b.gridY);
