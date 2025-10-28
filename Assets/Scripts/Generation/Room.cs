@@ -202,6 +202,11 @@ public class Room : MonoBehaviour
         // only care about deaths in this room
         if (room != this)
             return;
+        // ensure its not a chest or pot enemy
+        if (enemy.enemyType == Types.EnemyType.ChestEnemy || enemy.enemyType == Types.EnemyType.PotEnemy)
+        {
+            return;
+        }
         
         // tell the room spawn controller to remove the enemy from its list
         if (roomSpawnController)

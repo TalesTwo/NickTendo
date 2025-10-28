@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,6 +64,73 @@ public class RoomGridManager : MonoBehaviour
         gridSizeY = Mathf.RoundToInt(gridRoomSize.y);
         
         CreateGrids();
+    }
+    private void Start()
+    {
+        // Subscribe to enemy death event to update grid
+        EventBroadcaster.EnemyDeath += OnEnemyDeath;
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            RegenerateGrids();
+        }
+    }
+
+
+    // we will call this anytime an enemy dies, or a chest/pot is placed to update the grid
+    private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
+    {
+        // check to see if its type is chest or pot
+        if (enemy.enemyType == Types.EnemyType.ChestEnemy || enemy.enemyType == Types.EnemyType.PotEnemy)
+        {
+            RegenerateGrids();
+        }
+    }
+    private void RegenerateGrids()
+    {
+        CreateGrids();
+        RemoveOverlappingWithChestsAndPots();
+    }
+
+    private void RemoveOverlappingWithChestsAndPots()
+    {
+        // Find all relevant enemies
+        EnemyControllerBase[] allEnemies = FindObjectsOfType<EnemyControllerBase>();
+        List<EnemyControllerBase> blockingEnemies = new List<EnemyControllerBase>();
+
+        foreach (EnemyControllerBase e in allEnemies)
+        {
+            if (e.enemyType == Types.EnemyType.ChestEnemy || e.enemyType == Types.EnemyType.PotEnemy)
+                blockingEnemies.Add(e);
+        }
+
+        foreach (EnemyControllerBase chets_pot in blockingEnemies)
+        {
+            Collider2D chets_pot_collider = chets_pot.GetComponent<Collider2D>();
+            if (chets_pot_collider == null) continue;
+
+            // Get the world bounds of the object
+            Bounds bounds = chets_pot_collider.bounds;
+
+            // Iterate through grid and disable overlapping nodes
+            for (int x = 0; x < _walkGrid.GetLength(0); x++)
+            {
+                for (int y = 0; y < _walkGrid.GetLength(1); y++)
+                {
+                    Node node = _walkGrid[x, y];
+                    if (!node.walkable) continue;
+
+                    // check overlap
+                    if (bounds.Contains(node.worldPosition))
+                    {
+                        node.walkable = false;
+                    }
+                }
+            }
+        }
     }
 
     // create the grid starting from the bottom left of the room
@@ -211,12 +279,12 @@ public class RoomGridManager : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(_bottomLeft + (Vector2)gridRoomSize / 2, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
 
-        if (_grid != null)
+        if (_walkGrid != null)
         {
             // Match whatever multiplier you used when generating the grid
             float scaledRadius = nodeRadius / resolutionMultiplier;
 
-            foreach (Node n in _grid)
+            foreach (Node n in _walkGrid)
             {
                 // Default color based on walkability
                 Gizmos.color = n.walkable ? Color.white : Color.red;
@@ -235,6 +303,7 @@ public class RoomGridManager : MonoBehaviour
         }
     }
     */
+    
 }
 
 
