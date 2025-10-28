@@ -183,7 +183,6 @@ public class Room : MonoBehaviour
     
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
     {
-        DebugUtils.Log($"Room: {name} detected player changed room to coords: {targetRoomCoords}");
         
         // check to see if its the final room we went too
         Vector2 cords = DungeonGeneratorManager.Instance.GetEndPos();
@@ -192,7 +191,6 @@ public class Room : MonoBehaviour
         if (targetRoomCoords == endRoomCoords)
         {
             // we are entering the final room
-            DebugUtils.Log("Player has entered the final room. Setting end game flag.");
             GameStateManager.Instance.SetEndGameFlag();
         }
     }

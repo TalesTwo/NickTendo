@@ -66,7 +66,6 @@ public class PitTilemap : MonoBehaviour
 
 
         // Broadcast event with the correct pit center
-        DebugUtils.LogSuccess($"{root.name} fell into pit at {tileCenter}");
         EventBroadcaster.Broadcast_ObjectFellInPit(root, tileCenter);
     }
     
