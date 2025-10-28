@@ -49,6 +49,7 @@ namespace Managers
         public AudioClip explosion;
         public AudioClip crateBreak;
         public AudioClip Heal;
+        public AudioClip Pitfall;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -262,6 +263,10 @@ namespace Managers
         public void PlayCrateBreakSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(crateBreak, volume, deviation);
+        }
+        public void PlayPitFallSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Pitfall, volume, deviation);
         }
 
         //Enemy Sounds
