@@ -30,6 +30,7 @@ namespace Managers
             
         }
 
+ 
         
         private void OnObjectFellInPit(GameObject obj, Vector3 pitCenter)
         {

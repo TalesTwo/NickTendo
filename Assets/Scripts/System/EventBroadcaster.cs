@@ -121,10 +121,16 @@ namespace System
         public static void Broadcast_GameRestart() { GameRestart?.Invoke(); }
         
 
-    // Broadcast when something collides with a Pit
+        // Broadcast when something collides with a Pit
         public delegate void ObjectFellInPitHandler(GameObject obj, Vector3 pitCenter);
         public static event ObjectFellInPitHandler ObjectFellInPit;
         public static void Broadcast_ObjectFellInPit(GameObject obj, Vector3 pitCenter) { ObjectFellInPit?.Invoke(obj, pitCenter); }
+        
+        // B roadcast for when the player finishes dashing
+        public delegate void PlayerFinishedDashingHandler(GameObject obj);
+        public static event PlayerFinishedDashingHandler PlayerFinishedDashing;
+       
+        public static void Broadcast_PlayerFinishedDashing() { PlayerFinishedDashing?.Invoke(GameObject.FindWithTag("Player")); }
 
 
 
