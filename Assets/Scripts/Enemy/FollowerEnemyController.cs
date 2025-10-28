@@ -10,6 +10,18 @@ public class FollowerEnemyController : EnemyControllerBase
     private bool _playerHit;
     private float _playerHitTimer;
     
+    // Variables for the pits
+    // these could be reduced if we make a co-routine work???? but they are so dumb
+    // that i chose to make this mess instead
+    private bool hasFallenInPit = false;
+    private bool isShrinking = false;
+    private float shrinkTimer = 0f;
+    private const float shrinkDuration = 0.5f;
+    private Vector3 startScale;
+    private Vector3 startPos;
+    private Vector3 pitTarget;
+    private bool _hasFallenInPit = false;
+    
     // invoke player damage and freeze to avoid chaining the player
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -28,8 +40,8 @@ public class FollowerEnemyController : EnemyControllerBase
         Vector2 end = _playerTransform.position;
         
         // Step 1: set start and end nodes
-        Node startNode = _gridManager.NodeFromWorldPoint(start);
-        Node endNode = _gridManager.NodeFromWorldPoint(end);
+        Node startNode = _gridManager.NodeFromWorldPoint(start, false);
+        Node endNode = _gridManager.NodeFromWorldPoint(end, false);
         
         // Tick logs make me crash out LOL
         //Debug.Log(endNode.walkable);
@@ -63,7 +75,7 @@ public class FollowerEnemyController : EnemyControllerBase
                 return;
             }
 
-            foreach (Node neighbor in _gridManager.GetNeighbours(currentNode))
+            foreach (Node neighbor in _gridManager.GetNeighbours(currentNode, false))
             {
                 if (!neighbor.walkable || closedSet.Contains(neighbor))
                 {
@@ -186,4 +198,40 @@ public class FollowerEnemyController : EnemyControllerBase
         Debug.Log("Follower Enemy destroyed");
         
     }
+    
+    protected override void OnFellInPit(GameObject obj, Vector3 pitCenter)
+    {
+        if (obj != gameObject || hasFallenInPit)
+            return;
+
+        hasFallenInPit = true;
+        isShrinking = true;
+        shrinkTimer = 0f;
+        startScale = transform.localScale;
+        startPos = transform.position;
+        pitTarget = pitCenter;
+    }
+
+    private void Update()
+    {
+        base.Update();
+        if (!isShrinking)
+            return;
+
+        shrinkTimer += Time.deltaTime;
+        float time = Mathf.Clamp01(shrinkTimer / shrinkDuration);
+
+        // Move and shrink simultaneously
+        transform.position = Vector3.Lerp(startPos, pitTarget, time);
+        transform.localScale = Vector3.Lerp(startScale, Vector3.zero, time);
+
+        if (time >= 1f)
+        {
+            isShrinking = false;
+            transform.localScale = Vector3.zero;
+            transform.position = pitTarget;
+            Deactivate();
+        }
+    }
+    
 }

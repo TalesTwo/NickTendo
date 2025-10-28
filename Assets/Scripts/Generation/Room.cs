@@ -177,6 +177,8 @@ public class Room : MonoBehaviour
         // hook up to the enemy death event to check if we need to unlock doors
         EventBroadcaster.EnemyDeath += OnEnemyDeath;
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+        // Register the pits in this room
+        PitManager.Instance.RegisterPitsInRoom(this);
     }
     
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)

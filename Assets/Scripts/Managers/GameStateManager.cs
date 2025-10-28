@@ -34,6 +34,7 @@ public class GameStateManager : Singleton<GameStateManager>
         {
             buddeeDialogState = "vertDeath2";
         }
+        
     }
 
     public void Dialogue(string npcName)

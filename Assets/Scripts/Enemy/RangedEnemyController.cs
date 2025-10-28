@@ -64,11 +64,11 @@ public class RangedEnemyController : EnemyControllerBase
         Vector2 start = _transform.position;
         Vector2 playerPos = _playerTransform.position;
         
-        Node currentNode = _gridManager.NodeFromWorldPoint(start);
+        Node currentNode = _gridManager.NodeFromWorldPoint(start, true);
         List<Node> nextNode = new List<Node>();
         float distance = Vector2.Distance(currentNode.worldPosition, playerPos);
         
-        List<Node> neighbors = _gridManager.GetNeighbours(currentNode);
+        List<Node> neighbors = _gridManager.GetNeighbours(currentNode, true);
         Node closestNode = null;
         float closestDistance = float.MaxValue;
         Node farthestNode = null;

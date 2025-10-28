@@ -62,9 +62,14 @@ public class EnemyControllerBase : SpawnableObject
         _playerTransform = _player.GetComponent<Transform>();
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
         EventBroadcaster.PlayerDeath += Deactivate;
+        EventBroadcaster.ObjectFellInPit += OnFellInPit;
         ParseStatsText();
     }
 
+    protected virtual void OnFellInPit(GameObject obj, Vector3 pitCenter)
+    {
+        // Overridden in child classes
+    }
 
     protected virtual void Deactivate() 
     {
@@ -72,6 +77,7 @@ public class EnemyControllerBase : SpawnableObject
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
+        EventBroadcaster.ObjectFellInPit -= OnFellInPit;
     }
     
     public void Initialize(int roomDifficulty)
@@ -82,7 +88,7 @@ public class EnemyControllerBase : SpawnableObject
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         // step 1: check death condition
         CheckForDeath();

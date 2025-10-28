@@ -60,4 +60,21 @@ public class DungeonController : Singleton<DungeonController>
         cachedEnemyCount = result;
         isUpdating = false;
     }
+    
+    public Room GetCurrentRoom()
+    {
+        (int row, int col) CurrentRoomCoords = DungeonGeneratorManager.Instance.GetCurrentRoomCoords();
+        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+
+        if (dungeonRooms != null)
+        {
+   
+            Room currentRoom = dungeonRooms[CurrentRoomCoords.row][CurrentRoomCoords.col];
+            if (currentRoom)
+            {
+                return currentRoom;
+            }
+        }
+        return null;
+    }
 }
