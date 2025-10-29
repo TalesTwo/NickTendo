@@ -35,8 +35,10 @@ public class PitTilemap : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         GameObject root = other.transform.parent.gameObject;
+        if(root == null){return;}
         if (root.CompareTag("Player"))
         {
+            DebugUtils.LogError("Player exited pit collider");
             _IsPlayerInPit = false;
         }
     }
@@ -55,11 +57,9 @@ public class PitTilemap : MonoBehaviour
             return;
         if (root.CompareTag("Player"))
         {
+            DebugUtils.LogSuccess("Player entered pit collider");
             _IsPlayerInPit = true;
         }
-
-        //TODO: Figure out how to improve this so it actually works lol
-        // Use the pit collider's actual position (NOT tilemap center or transform position)
         Vector3 hitPosition = other.transform.position;
         Vector3Int cellPos = tilemap.WorldToCell(hitPosition);
         Vector3 tileCenter = tilemap.GetCellCenterWorld(cellPos);

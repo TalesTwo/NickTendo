@@ -31106,13 +31106,13 @@ MonoBehaviour:
   - spawnType: 0
     Spawnables:
     - enemyPrefab: {fileID: 3718088634739088283, guid: 2642759b201917948a506645585a9ce7, type: 3}
-      minSpawnCount: 2
-      maxSpawnCount: 3
+      minSpawnCount: 1
+      maxSpawnCount: 8
       spawnChance: 1
     - enemyPrefab: {fileID: 2413488171680857417, guid: 0e7ded53104e73a4aa593d6a937f1f8d, type: 3}
       minSpawnCount: 1
       maxSpawnCount: 2
-      spawnChance: 0.5
+      spawnChance: 0
     - enemyPrefab: {fileID: 6451576646126675803, guid: 59a56dea38464a14e9b383cf9216319d, type: 3}
       minSpawnCount: 1
       maxSpawnCount: 1
