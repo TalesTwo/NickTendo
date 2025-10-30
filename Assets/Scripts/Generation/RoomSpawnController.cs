@@ -218,7 +218,7 @@ public class RoomSpawnController : MonoBehaviour
             extraVariance = roomDifficulty - maxRoomDifficulty;
         }
         
-        int variance = UnityEngine.Random.Range(0, spawnVariance + 1);
+        int variance = UnityEngine.Random.Range(0, spawnVariance);
         variance += extraVariance;
         spawnCount += variance;
         
