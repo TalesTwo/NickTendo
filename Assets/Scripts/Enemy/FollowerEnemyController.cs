@@ -8,7 +8,7 @@ using UnityEngine;
 public class FollowerEnemyController : EnemyControllerBase
 {
     private bool _playerHit;
-    private float _playerHitTimer;
+    protected float _playerHitTimer;
     
     // Variables for the pits
     // these could be reduced if we make a co-routine work???? but they are so dumb
@@ -177,9 +177,10 @@ public class FollowerEnemyController : EnemyControllerBase
     // grabs stats from .csv doc
     protected override void GetStats(string statLine)
     {
+        // we will add slight variants to this
         string[] stats = statLine.Split(',');
         health = float.Parse(stats[0]);
-        speed = float.Parse(stats[1]);
+        speed = float.Parse(stats[1]) + UnityEngine.Random.Range(-0.5f, 0.5f);
         damage = float.Parse(stats[2]);
         knockBackSpeed = float.Parse(stats[3]);
         knockBackTime = float.Parse(stats[4]);

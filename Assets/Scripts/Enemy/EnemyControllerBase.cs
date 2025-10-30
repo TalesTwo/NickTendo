@@ -43,7 +43,7 @@ public class EnemyControllerBase : SpawnableObject
     protected List<Node> currentPath;
     protected int targetIndex;
     protected RoomGridManager _gridManager;
-    protected float findPathCooldown;
+    protected float findPathCooldown = 0;
     protected float pathingTimer = 0;
     [Header("Type")]
     public Types.EnemyType enemyType;
@@ -63,7 +63,12 @@ public class EnemyControllerBase : SpawnableObject
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
         EventBroadcaster.PlayerDeath += Deactivate;
         EventBroadcaster.ObjectFellInPit += OnFellInPit;
+        EventBroadcaster.SetSeed += SetSeed;
         ParseStatsText();
+    }
+    private void SetSeed(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
     }
 
     protected virtual void OnFellInPit(GameObject obj, Vector3 pitCenter)
@@ -95,26 +100,20 @@ public class EnemyControllerBase : SpawnableObject
 
         _direction = getPlayerDirection();
         
-        if (currentPath != null && currentPath.Count > 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Follow());
-        }
-
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
         {
             pathingTimer = 0;
             FindPath();
+            if (currentPath != null && currentPath.Count > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(Follow());
+            }
         }
         
         Attack();
         
-        // step 3: check for knockback then move: direction dependent on knockback state
-        if (!_isKnockback)
-        {
-            StopAllCoroutines();
-        }
         _walktimer += Time.deltaTime;
 
         if (enemyType == Types.EnemyType.FollowerEnemy && _walktimer >= 0.25f)
@@ -127,7 +126,7 @@ public class EnemyControllerBase : SpawnableObject
             Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
             _walktimer = 0;
         }
-}
+    }
 
 
     // reduce health on damage from a PlayerAttack
@@ -162,6 +161,7 @@ public class EnemyControllerBase : SpawnableObject
     private void SetKnockBack()
     {
         _isKnockback = true;
+        StopAllCoroutines();
         Vector2 knockBack = getKnockBackDirection();
         _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
         HitFlash();
