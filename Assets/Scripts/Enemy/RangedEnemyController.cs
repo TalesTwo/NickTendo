@@ -64,11 +64,11 @@ public class RangedEnemyController : EnemyControllerBase
         Vector2 start = _transform.position;
         Vector2 playerPos = _playerTransform.position;
         
-        Node currentNode = _gridManager.NodeFromWorldPoint(start);
+        Node currentNode = _gridManager.NodeFromWorldPoint(start, true);
         List<Node> nextNode = new List<Node>();
         float distance = Vector2.Distance(currentNode.worldPosition, playerPos);
         
-        List<Node> neighbors = _gridManager.GetNeighbours(currentNode);
+        List<Node> neighbors = _gridManager.GetNeighbours(currentNode, true);
         Node closestNode = null;
         float closestDistance = float.MaxValue;
         Node farthestNode = null;
@@ -120,7 +120,6 @@ public class RangedEnemyController : EnemyControllerBase
         }
 
     }
-    private int count = 0;
     // follow the path
     protected override IEnumerator Follow()
     {
@@ -143,12 +142,6 @@ public class RangedEnemyController : EnemyControllerBase
                 }
                 currentWaypoint = currentPath[targetIndex].worldPosition;
             }
-            if (count == 70)
-            {
-                Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0);
-                count = 0;
-            }
-            ++count;
 
             _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;

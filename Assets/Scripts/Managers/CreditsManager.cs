@@ -35,7 +35,8 @@ public class CreditsManager : Singleton<CreditsManager>
 
         // start scrolling
         _isScrolling = true;
-
+        // Disable player actions
+        PlayerManager.Instance.DeactivatePlayer();
         // restart the game after a delay
         StartCoroutine(RestartGameAfterDelay(55f));
     }
@@ -49,6 +50,7 @@ public class CreditsManager : Singleton<CreditsManager>
         // Restart game broadcast
         EventBroadcaster.Broadcast_GameRestart();
         EventBroadcaster.Broadcast_StartStopAction();
+        PlayerManager.Instance.ActivatePlayer();
         PlayerManager.Instance.PlayerAlive();
     }
 

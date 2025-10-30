@@ -177,11 +177,12 @@ public class Room : MonoBehaviour
         // hook up to the enemy death event to check if we need to unlock doors
         EventBroadcaster.EnemyDeath += OnEnemyDeath;
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+        // Register the pits in this room
+        PitManager.Instance.RegisterPitsInRoom(this);
     }
     
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
     {
-        DebugUtils.Log($"Room: {name} detected player changed room to coords: {targetRoomCoords}");
         
         // check to see if its the final room we went too
         Vector2 cords = DungeonGeneratorManager.Instance.GetEndPos();
@@ -190,7 +191,6 @@ public class Room : MonoBehaviour
         if (targetRoomCoords == endRoomCoords)
         {
             // we are entering the final room
-            DebugUtils.Log("Player has entered the final room. Setting end game flag.");
             GameStateManager.Instance.SetEndGameFlag();
         }
     }
@@ -200,6 +200,11 @@ public class Room : MonoBehaviour
         // only care about deaths in this room
         if (room != this)
             return;
+        // ensure its not a chest or pot enemy
+        if (enemy.enemyType == Types.EnemyType.ChestEnemy || enemy.enemyType == Types.EnemyType.PotEnemy)
+        {
+            return;
+        }
         
         // tell the room spawn controller to remove the enemy from its list
         if (roomSpawnController)

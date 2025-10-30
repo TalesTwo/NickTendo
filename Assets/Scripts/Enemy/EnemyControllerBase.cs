@@ -43,13 +43,15 @@ public class EnemyControllerBase : SpawnableObject
     protected List<Node> currentPath;
     protected int targetIndex;
     protected RoomGridManager _gridManager;
-    protected float findPathCooldown;
+    protected float findPathCooldown = 0;
     protected float pathingTimer = 0;
     [Header("Type")]
     public Types.EnemyType enemyType;
 
+    private float _walktimer = 0f;
+
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -60,9 +62,19 @@ public class EnemyControllerBase : SpawnableObject
         _playerTransform = _player.GetComponent<Transform>();
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
         EventBroadcaster.PlayerDeath += Deactivate;
+        EventBroadcaster.ObjectFellInPit += OnFellInPit;
+        EventBroadcaster.SetSeed += SetSeed;
         ParseStatsText();
     }
+    private void SetSeed(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
+    }
 
+    protected virtual void OnFellInPit(GameObject obj, Vector3 pitCenter)
+    {
+        // Overridden in child classes
+    }
 
     protected virtual void Deactivate() 
     {
@@ -70,6 +82,7 @@ public class EnemyControllerBase : SpawnableObject
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
+        EventBroadcaster.ObjectFellInPit -= OnFellInPit;
     }
     
     public void Initialize(int roomDifficulty)
@@ -80,32 +93,38 @@ public class EnemyControllerBase : SpawnableObject
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         // step 1: check death condition
         CheckForDeath();
 
         _direction = getPlayerDirection();
         
-        if (currentPath != null && currentPath.Count > 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Follow());
-        }
-
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
         {
             pathingTimer = 0;
             FindPath();
+            if (currentPath != null && currentPath.Count > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(Follow());
+            }
         }
         
         Attack();
         
-        // step 3: check for knockback then move: direction dependent on knockback state
-        if (!_isKnockback)
+        _walktimer += Time.deltaTime;
+
+        if (enemyType == Types.EnemyType.FollowerEnemy && _walktimer >= 0.25f)
         {
-            StopAllCoroutines();
+            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
+            _walktimer = 0;
+        }
+        if (enemyType == Types.EnemyType.RangedEnemy && _walktimer >= 0.3f)
+        {
+            Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
+            _walktimer = 0;
         }
     }
 
@@ -142,6 +161,7 @@ public class EnemyControllerBase : SpawnableObject
     private void SetKnockBack()
     {
         _isKnockback = true;
+        StopAllCoroutines();
         Vector2 knockBack = getKnockBackDirection();
         _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
         HitFlash();

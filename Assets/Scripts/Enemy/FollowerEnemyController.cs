@@ -8,7 +8,19 @@ using UnityEngine;
 public class FollowerEnemyController : EnemyControllerBase
 {
     private bool _playerHit;
-    private float _playerHitTimer;
+    protected float _playerHitTimer;
+    
+    // Variables for the pits
+    // these could be reduced if we make a co-routine work???? but they are so dumb
+    // that i chose to make this mess instead
+    private bool hasFallenInPit = false;
+    private bool isShrinking = false;
+    private float shrinkTimer = 0f;
+    private const float shrinkDuration = 0.5f;
+    private Vector3 startScale;
+    private Vector3 startPos;
+    private Vector3 pitTarget;
+    private bool _hasFallenInPit = false;
     
     // invoke player damage and freeze to avoid chaining the player
     private void OnCollisionEnter2D(Collision2D other)
@@ -28,8 +40,8 @@ public class FollowerEnemyController : EnemyControllerBase
         Vector2 end = _playerTransform.position;
         
         // Step 1: set start and end nodes
-        Node startNode = _gridManager.NodeFromWorldPoint(start);
-        Node endNode = _gridManager.NodeFromWorldPoint(end);
+        Node startNode = _gridManager.NodeFromWorldPoint(start, false);
+        Node endNode = _gridManager.NodeFromWorldPoint(end, false);
         
         // Tick logs make me crash out LOL
         //Debug.Log(endNode.walkable);
@@ -63,7 +75,7 @@ public class FollowerEnemyController : EnemyControllerBase
                 return;
             }
 
-            foreach (Node neighbor in _gridManager.GetNeighbours(currentNode))
+            foreach (Node neighbor in _gridManager.GetNeighbours(currentNode, false))
             {
                 if (!neighbor.walkable || closedSet.Contains(neighbor))
                 {
@@ -88,7 +100,7 @@ public class FollowerEnemyController : EnemyControllerBase
     }
 
     // take the discovered most efficient path and reverse it so enemy can travel to the player
-    private void RetracePath(Node start, Node end)
+    protected void RetracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
         Node currentNode = end;
@@ -105,7 +117,7 @@ public class FollowerEnemyController : EnemyControllerBase
         currentPath = path;
     }
     
-    private int GetDistance(Node a, Node b)
+    protected int GetDistance(Node a, Node b)
     {
         int x = Mathf.Abs(a.gridX - b.gridX);
         int y = Mathf.Abs(a.gridY - b.gridY);
@@ -117,7 +129,6 @@ public class FollowerEnemyController : EnemyControllerBase
         
         return 14 * x + 10 * (y - x);
     }
-    private int walkcount = 0;
     // follow the path as set out by A*
     protected override IEnumerator Follow()
     {
@@ -142,12 +153,6 @@ public class FollowerEnemyController : EnemyControllerBase
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, currentWaypoint, speed * Time.deltaTime);
             }
-            if(walkcount == 150)
-            {
-                Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0);
-                walkcount = 0;
-            }
-            ++walkcount;
             yield return null;
         }
     }
@@ -172,9 +177,10 @@ public class FollowerEnemyController : EnemyControllerBase
     // grabs stats from .csv doc
     protected override void GetStats(string statLine)
     {
+        // we will add slight variants to this
         string[] stats = statLine.Split(',');
         health = float.Parse(stats[0]);
-        speed = float.Parse(stats[1]);
+        speed = float.Parse(stats[1]) + UnityEngine.Random.Range(-0.5f, 0.5f);
         damage = float.Parse(stats[2]);
         knockBackSpeed = float.Parse(stats[3]);
         knockBackTime = float.Parse(stats[4]);
@@ -193,4 +199,40 @@ public class FollowerEnemyController : EnemyControllerBase
         Debug.Log("Follower Enemy destroyed");
         
     }
+    
+    protected override void OnFellInPit(GameObject obj, Vector3 pitCenter)
+    {
+        if (obj != gameObject || hasFallenInPit)
+            return;
+
+        hasFallenInPit = true;
+        isShrinking = true;
+        shrinkTimer = 0f;
+        startScale = transform.localScale;
+        startPos = transform.position;
+        pitTarget = pitCenter;
+    }
+
+    private void Update()
+    {
+        base.Update();
+        if (!isShrinking)
+            return;
+
+        shrinkTimer += Time.deltaTime;
+        float time = Mathf.Clamp01(shrinkTimer / shrinkDuration);
+
+        // Move and shrink simultaneously
+        transform.position = Vector3.Lerp(startPos, pitTarget, time);
+        transform.localScale = Vector3.Lerp(startScale, Vector3.zero, time);
+
+        if (time >= 1f)
+        {
+            isShrinking = false;
+            transform.localScale = Vector3.zero;
+            transform.position = pitTarget;
+            Deactivate();
+        }
+    }
+    
 }

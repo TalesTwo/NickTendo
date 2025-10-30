@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3504130381428074363}
   - component: {fileID: 6783353849636327102}
-  - component: {fileID: 5197960586502552733}
   - component: {fileID: 5626084319817434467}
   - component: {fileID: 3570777434882912848}
   - component: {fileID: 5909016426033719839}
   - component: {fileID: 7206158782251651554}
   - component: {fileID: 7403220348359039235}
+  - component: {fileID: 6631985905808627754}
   m_Layer: 2
-  m_Name: FollowerEnemy
+  m_Name: ChaoticFollowerEnemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 1301278337192169457, guid: 5984f4bee371a0449a497488d31e695b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.30113026, b: 0.30113026, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,25 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5197960586502552733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3718088634739088283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a772a885c7282b4594886cbd6afd6bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statLineCSV: {fileID: 4900000, guid: f86cfba758150214eac87f6bbd7bf664, type: 3}
-  difficulty: 7
-  difficultyScalingFactor: 5
-  hitEffect: {fileID: 2560593414228584792, guid: bb916d6a8cad70d4fab2ce9017edede7, type: 3}
-  hitEffectDistance: 0.3
-  hitFlashDuration: 0.1
-  enemyType: 0
 --- !u!50 &5626084319817434467
 Rigidbody2D:
   serializedVersion: 4
@@ -270,6 +251,27 @@ MonoBehaviour:
   Framerate: 12
   SpriteRenderer: {fileID: 6783353849636327102}
   index: 0
+--- !u!114 &6631985905808627754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718088634739088283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6538a72a4b59ac848ba618c71535d87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statLineCSV: {fileID: 4900000, guid: f86cfba758150214eac87f6bbd7bf664, type: 3}
+  difficulty: 7
+  difficultyScalingFactor: 5
+  hitEffect: {fileID: 2560593414228584792, guid: bb916d6a8cad70d4fab2ce9017edede7, type: 3}
+  hitEffectDistance: 0.2
+  hitFlashDuration: 0.1
+  enemyType: 0
+  chaosRadius: 2
+  chaosUpdateInterval: 1.5
 --- !u!1 &8540734103842761648
 GameObject:
   m_ObjectHideFlags: 0

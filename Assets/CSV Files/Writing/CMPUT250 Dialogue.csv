@@ -86,6 +86,7 @@ HubRandom,,BUDDEE,smile,I hope our security gets fixed soon..
 HubRandom,,BUDDEE,smile,Friend Finder is the world's leading completely platonic friend-making service!
 HubRandom,,BUDDEE,smile,Defeating bots or hackers will make them drop their delicious. delicious data~
 HubRandom,,BUDDEE,smile,Good luck finding that friend!
+HubRandom,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color>
 ,,,,
 VertIntro,First dialogue after login in vertical slice,BUDDEE,smile,Greetings <b>{player_name}</b>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <color=blue>BUDDEE</color>!
 VertIntro,,Player,smile,Woah this website is immersive as hell!
@@ -99,7 +100,7 @@ VertIntro,,BUDDEE,smile,You can defend yourself with your cursor by getting clos
 VertIntro,,BUDDEE,smile,Just head out the door when you're ready or talk to me and I can tell you more about how to fight in the forums!
 ,,,,
 ,,,,
-vertDeath1,BUDDE dialogue after dying in first run. Vertical slice edition,BUDDEE,surprise,Woah! Looks like you almost fell out there! Good thing I caught you before they could nab your data!
+vertDeath1,BUDDE dialogue after dying in first run. Vertical slice edition,BUDDEE,surprise,Woah! We almost lost you out there! Good thing I caught you before they could nab your data!
 vertDeath1,,Player,smile,Wait they were going to steal my data? Is my account safe?
 vertDeath1,,BUDDEE,smile,Well unfortunately we did lose access to the account. but we still have an extra account for you to use.
 vertDeath1,,BUDDEE,smile,I hope you manage with this one. I can't make any more. 
@@ -122,3 +123,4 @@ vertIntroinfo,,BUDDEE,smile,Not only can it hurt foes. it can reflect enemy atta
 vertIntroinfo,,BUDDEE,smile,If you press <b>[M2]</b> you'll do a dash. dealing damage and throwing you in the direction of your cursor.
 vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you can dash again. so use it wisely!
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
+vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!

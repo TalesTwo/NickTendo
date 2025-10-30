@@ -10,6 +10,7 @@ TagManager:
   - EnemyAttack
   - Wall
   - DeathScreen
+  - Pit_Collider
   layers:
   - Default
   - TransparentFX
