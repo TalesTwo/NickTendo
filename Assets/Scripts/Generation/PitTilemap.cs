@@ -34,7 +34,7 @@ public class PitTilemap : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other == null){return;}
+        if(other == null || other.transform.parent == null){return;}
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
         if (root.CompareTag("Player"))
