@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2787330384486328791}
   - component: {fileID: 2652282505437444814}
+  - component: {fileID: 1071703726486312655}
   m_Layer: 5
   m_Name: StatDisplay
   m_TagString: Untagged
@@ -237,6 +238,20 @@ MonoBehaviour:
   _statDisplayText: {fileID: 8762535223281424604}
   _statDisplayTextBG: {fileID: 117559533640372120}
   _tooltip: {fileID: 0}
+--- !u!114 &1071703726486312655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741009190318815335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf4bae231ab1e745860f22f5632b3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectTime: 0.2
+  _scaleFactor: 1.5
 --- !u!1 &2727834647543457937
 GameObject:
   m_ObjectHideFlags: 0
