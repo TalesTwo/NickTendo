@@ -144,11 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2fee122be8f044882e6414baf8624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 5
-  cols: 5
-  probabilityToAddOptionalDoor_OneRequiredDoor: 0
-  probabilityToAddOptionalDoor_TwoRequiredDoors: 0
-  probabilityToAddOptionalDoor_ThreeRequiredDoors: 0
+  rows: 10
+  cols: 10
+  probabilityToAddOptionalDoor_OneRequiredDoor: 0.5
+  probabilityToAddOptionalDoor_TwoRequiredDoors: 0.3
+  probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.2
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
