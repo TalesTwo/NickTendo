@@ -153,7 +153,7 @@ MonoBehaviour:
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
   Seed: 0
-  RoomOffset: 40
+  RoomOffset: 60
 --- !u!114 &4155621867649481536
 MonoBehaviour:
   m_ObjectHideFlags: 0
