@@ -22,6 +22,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private RectTransform healthBar;
     [SerializeField]
+    private Image _healthIcon;
+    [SerializeField]
     private TextMeshProUGUI buffedStatText;
     [SerializeField]
     private GameObject _enemyCounter;
@@ -40,6 +42,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     {
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
+        EventBroadcaster.PlayerDamaged += HandlePlayerDamage;
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
         _pController = _player.GetComponent<PlayerController>();
@@ -47,12 +50,12 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         _dashSlider.value = 1;
         _dashSliderImage.color = Color.yellow;
         _hasStartedSlider = false;
-        //SetHealth();
+        SetHealth();
     }
 
     private void Update()
     {
-        SetHealth();
+        //SetHealth();
 
         if (_pController.IsDashing() && !_hasStartedSlider)
         {
@@ -102,20 +105,18 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void HandlePersonaChanged(Types.Persona P)
     {
-        //SetHealth();
+        SetHealth();
     }
 
     void HandleDashSlider()
     {
         _dashSlider.value = 0;
-        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
-        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        _dashIcon.GetComponent<Image>().color = Color.gray;
         StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
     }
 
     IEnumerator FillSlider(float _cooldown)
     {
-        
         float _fillTime = 0;
         while (_fillTime < _cooldown)
         {
@@ -129,8 +130,16 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void ResetSlideBool()
     {
         _hasStartedSlider = false;
+        _dashIcon.color = Color.white;
         _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
         _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
         AudioManager.Instance.PlayKeyGetSound();
+    }
+
+    void HandlePlayerDamage()
+    {
+        SetHealth();
+        _healthIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+        _healthIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
     }
 }
