@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 1301278337192169457, guid: 5984f4bee371a0449a497488d31e695b, type: 3}
-  m_Color: {r: 0.8584906, g: 0.38470095, b: 0.38470095, a: 1}
+  m_Color: {r: 0.9528302, g: 0.30113026, b: 0.30113026, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -270,9 +270,8 @@ MonoBehaviour:
   hitEffectDistance: 0.2
   hitFlashDuration: 0.1
   enemyType: 0
-  pathRecalcTimer: 2.5
-  chaosRadius: 4
-  debugTarget: 0
+  chaosRadius: 2
+  chaosUpdateInterval: 1.5
 --- !u!1 &8540734103842761648
 GameObject:
   m_ObjectHideFlags: 0

@@ -269,6 +269,40 @@ public class RoomGridManager : MonoBehaviour
 
         return temp.transform;
     }
+    
+    // Find the nearest walkable node to a world position
+    public Node GetNearestWalkableNode(Vector2 worldPos, bool isFlying = false, int maxSearchDistance = 5)
+    {
+        Node startNode = NodeFromWorldPoint(worldPos, isFlying);
+        if (startNode.walkable)
+            return startNode;
+
+        Node[,] grid = isFlying ? _flyGrid : _walkGrid;
+        int maxX = grid.GetLength(0);
+        int maxY = grid.GetLength(1);
+
+        for (int radius = 1; radius <= maxSearchDistance; radius++)
+        {
+            for (int dx = -radius; dx <= radius; dx++)
+            {
+                for (int dy = -radius; dy <= radius; dy++)
+                {
+                    int checkX = startNode.gridX + dx;
+                    int checkY = startNode.gridY + dy;
+
+                    if (checkX < 0 || checkX >= maxX || checkY < 0 || checkY >= maxY)
+                        continue;
+
+                    Node node = grid[checkX, checkY];
+                    if (node.walkable)
+                        return node;
+                }
+            }
+        }
+
+        return startNode; // fallback to original even if blocked
+    }
+
 
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
@@ -302,8 +336,8 @@ public class RoomGridManager : MonoBehaviour
             }
         }
     }
-    */
     
+    */
 }
 
 

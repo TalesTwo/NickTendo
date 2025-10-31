@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Generation.ScriptableObjects;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RoomSpawnController : MonoBehaviour
@@ -15,6 +16,11 @@ public class RoomSpawnController : MonoBehaviour
     
     [Header("Enemy Spawn Data")]
     public List<SpawnableGroup> spawnableMap = new List<SpawnableGroup>();
+    [SerializeField] private int minRoomDifficulty = 1;
+    [SerializeField] private int maxRoomDifficulty = 20;
+    [SerializeField] private int spawnVariance = 1;
+    
+    
     
     
 
@@ -112,7 +118,7 @@ public class RoomSpawnController : MonoBehaviour
             // loop through guaranteed enemies and spawn a random amount of them
             foreach (SpawnData enemyData in guaranteedEnemies)
             {
-                int spawnCount = UnityEngine.Random.Range(enemyData.minSpawnCount, enemyData.maxSpawnCount + 1);
+                int spawnCount = CalculateSpawnNumber(enemyData, _room.roomDifficulty);
                 for (int i = 0; i < spawnCount; i++)
                 {
                     Transform spawnLocation = _roomGridManager.FindValidWalkableCell();
@@ -182,6 +188,42 @@ public class RoomSpawnController : MonoBehaviour
             enemiesInRoom.Add(spawnedEnemy);
         }
         DebugUtils.Log("Spawned enemy: " + spawnedEnemy.name + " in room: " + _room.name);
+    }
+
+    private int CalculateSpawnNumber(SpawnData spawnData, int roomDifficulty)
+    {
+        /*
+         * The overall spawning system is gonna be altered, where now when a thing spawns, rather than having a flat chance
+         * at the number of enemies to spawn, we will have a system where based on the rooms difficulty, we will scale the number
+         * So for example. we will have a overall Min - Max room difficulty.
+         *
+         * we will be scaling from minRoomDifficulty to maxRoomDifficulty in a normalized way, and then mapping that to a spawn count
+         * of the enemy spawn data, which will also be normalized.
+         *
+         * slighty variance will be added to this value aswell, but it will never go below the min spawn count
+         */
+        int spawnCount = 0;
+        
+        float normalizedRoomDifficulty = (float)(roomDifficulty - minRoomDifficulty) / (float)(maxRoomDifficulty - minRoomDifficulty);
+
+        float normalizedSpawnCount = normalizedRoomDifficulty * (spawnData.maxSpawnCount - spawnData.minSpawnCount) + spawnData.minSpawnCount;
+        spawnCount = Mathf.RoundToInt(normalizedSpawnCount);
+        // calculate the variance, which is just a random value between -spawnVariance and +spawnVariance
+        
+        // upgrade spawnVarience based on room difficulty
+        // every int past the maxRoomDifficulty increases spawnVariance by 1
+        int extraVariance = 0;
+        if (roomDifficulty > maxRoomDifficulty)
+        {
+            extraVariance = roomDifficulty - maxRoomDifficulty;
+        }
+        
+        int variance = UnityEngine.Random.Range(0, spawnVariance);
+        variance += extraVariance;
+        spawnCount += variance;
+        
+        
+        return spawnCount;
     }
     
 }
