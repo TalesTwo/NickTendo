@@ -29,6 +29,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private Slider _dashSlider;
     [SerializeField]
     private Image _dashSliderImage;
+    [SerializeField]
+    private Image _dashIcon;
 
     private GameObject _player;
     private PlayerController _pController;
@@ -106,6 +108,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandleDashSlider()
     {
         _dashSlider.value = 0;
+        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
         StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
     }
 
@@ -125,6 +129,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void ResetSlideBool()
     {
         _hasStartedSlider = false;
+        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
         AudioManager.Instance.PlayKeyGetSound();
     }
 }

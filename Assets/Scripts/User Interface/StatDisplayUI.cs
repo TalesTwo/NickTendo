@@ -69,6 +69,12 @@ public class StatDisplayUI : MonoBehaviour
     {
         SetBuffedStats(_buffType, _buffValue);
         HandleDisplayText(_buffType, _buffValue);
+        if (_statDisplayNumber > 1)
+        {
+            DebugUtils.Log("I am called" + _statDisplayNumber);
+            gameObject.GetComponent<ScaleEffectsUI>().IncreaseSize();
+            gameObject.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        }
     }
 
     void SetBuffedStats(PlayerStatsEnum _buffType, float _buffValue)
@@ -93,18 +99,37 @@ public class StatDisplayUI : MonoBehaviour
     string TooltipText()
     {
         string _buffText = "";
+        float _buffPerc;
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
             _buffText += AddSpace(_buffType) + "\n" +
                          "Base stat: " + _statDictionary[_buffType][0] + ", Buffed by: " + _statDictionary[_buffType][1] + "\n\n";
+
+            _buffPerc = (_statDictionary[_buffType][0] + _statDictionary[_buffType][1]) / _statDictionary[_buffType][0];
+            _buffPerc *= 100;
+            _buffPerc = Mathf.RoundToInt(_buffPerc);
+
+            // display up if more than 100 and down if less than 100
         }
         return _buffText;
     }
 
-    string AddSpace(PlayerStatsEnum _nameInEnum)
+    private string AddSpace(PlayerStatsEnum _nameInEnum)
     {
         string[] _splitName = _nameInEnum.ToString().Split('_');
         return String.Join(" ", _splitName);
+    }
+
+    private bool IsCoolDown(PlayerStatsEnum _nameInEnum)
+    {
+        bool _returnBool = false;
+        string[] _splitName = _nameInEnum.ToString().Split('_');
+        if (_splitName[1] == "Cooldown")
+        {
+            _returnBool = true;
+        }
+
+        return _returnBool;
     }
 
     public void Enter(bool _hasEntered)
