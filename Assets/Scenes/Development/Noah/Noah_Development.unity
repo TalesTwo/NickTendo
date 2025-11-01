@@ -1622,9 +1622,17 @@ PrefabInstance:
       propertyPath: smoothDampTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 34353067714316052, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: startYCoordinateTop
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 543200897592807649, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: smoothDampTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 543200897592807649, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: startYCoordinateTop
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 860249048055277067, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: m_Name
