@@ -217,13 +217,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // player is hit by attack that has knockback. knockback is physics based
-    public void KnockBack(float power, Vector2 direction, float stunTimer)
+    public void KnockBack(float power, Vector2 direction, float stunTimer, bool takingDamage=false)
     {
        _isWalking = false;
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
-        _playerAnimator.SetHurting();
+        if (!takingDamage)
+        {
+            _playerAnimator.SetHurting();
+        }
     }
 
     public void HitEffect(Vector3 enemyPosition)

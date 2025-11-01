@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 26842366}
   - component: {fileID: 26842368}
   - component: {fileID: 26842367}
+  - component: {fileID: 26842369}
   m_Layer: 0
   m_Name: Right Arm
   m_TagString: Untagged
@@ -253,6 +254,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &26842369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26842365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &111925754
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +436,7 @@ GameObject:
   - component: {fileID: 473355689}
   - component: {fileID: 473355691}
   - component: {fileID: 473355690}
+  - component: {fileID: 473355692}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -542,6 +559,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &473355692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473355688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &502528008
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +585,7 @@ GameObject:
   - component: {fileID: 502528009}
   - component: {fileID: 502528011}
   - component: {fileID: 502528010}
+  - component: {fileID: 502528012}
   m_Layer: 0
   m_Name: Right Forearm
   m_TagString: Untagged
@@ -676,6 +709,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &502528012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502528008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &525201995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1239,7 @@ GameObject:
   - component: {fileID: 1062575256}
   - component: {fileID: 1062575258}
   - component: {fileID: 1062575257}
+  - component: {fileID: 1062575259}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -1313,6 +1362,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1062575259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062575255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &1105128555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1462,8 @@ GameObject:
   - component: {fileID: 1139765220}
   - component: {fileID: 1139765219}
   - component: {fileID: 1139765218}
+  - component: {fileID: 1139765222}
+  - component: {fileID: 1139765221}
   m_Layer: 0
   m_Name: Boss_screen
   m_TagString: Untagged
@@ -1454,7 +1520,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.082641125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1464,7 +1530,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6, y: 3.5}
+  m_Size: {x: 6, y: 3.3347178}
   m_EdgeRadius: 0
 --- !u!50 &1139765219
 Rigidbody2D:
@@ -1547,6 +1613,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1139765221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139765216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203d00e1c107d424b8dc6ddfee42b92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunTimer: 0.1
+  knockBackForce: 500
+--- !u!61 &1139765222
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139765216}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.085045815}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 3.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6, y: 3.3299084}
+  m_EdgeRadius: 0
 --- !u!1001 &1147297156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2108,6 +2234,7 @@ GameObject:
   - component: {fileID: 1716907727}
   - component: {fileID: 1716907729}
   - component: {fileID: 1716907728}
+  - component: {fileID: 1716907730}
   m_Layer: 0
   m_Name: Left Forearm
   m_TagString: Untagged
@@ -2231,6 +2358,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1716907730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716907726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &1716940184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2667,7 @@ GameObject:
   - component: {fileID: 1849676962}
   - component: {fileID: 1849676964}
   - component: {fileID: 1849676963}
+  - component: {fileID: 1849676965}
   m_Layer: 0
   m_Name: Left Arm
   m_TagString: Untagged
@@ -2648,6 +2791,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1849676965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849676961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f772e89927a630f43be68581799847e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  stunTimer: 0.5
+  knockBackForce: 500
 --- !u!1 &1885600047
 GameObject:
   m_ObjectHideFlags: 0
