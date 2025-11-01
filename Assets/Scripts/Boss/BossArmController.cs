@@ -16,6 +16,18 @@ using UnityEngine;
  */
 public class BossArmController : MonoBehaviour
 {
+    public GameObject arm;
+    public GameObject forearm;
+    public GameObject hand;
+    
+    public enum Direction
+    {
+        Right,
+        Left
+    }
+    
+    public Direction side;
+    
     private void Start()
     {
         

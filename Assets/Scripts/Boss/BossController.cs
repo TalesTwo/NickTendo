@@ -14,10 +14,13 @@ using UnityEngine;
  * * calling for the arms to perform actions
  * * managing vulnerable and invulnerable stages
  * * managing the state of the battle
- * * pushing the player back when attacked during invulnerable mode
  */
 public class BossController : MonoBehaviour
 {
+    public GameObject rightArm;
+    public GameObject leftArm;
+    public GameObject face;
+    
     // Start is called before the first frame update
     void Start()
     {
