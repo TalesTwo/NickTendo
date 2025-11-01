@@ -16,6 +16,7 @@ using UnityEngine;
  */
 public class BossArmController : MonoBehaviour
 {
+    [Header("arm parts")]
     public GameObject arm;
     public GameObject forearm;
     public GameObject hand;
