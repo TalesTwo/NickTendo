@@ -59,6 +59,7 @@ namespace Managers
              */
             // change the player sprite to be the "falling" sprite (for now, we will use the dead sprite)
             _playerAnimator.SetHurting();
+            Managers.AudioManager.Instance.PlayPitFallSound(1,0);
             StartCoroutine(HandlePlayerFellInPit(pitCenter));
             
         }
