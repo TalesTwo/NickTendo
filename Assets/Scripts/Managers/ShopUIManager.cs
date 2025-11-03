@@ -15,12 +15,15 @@ public class ShopUIManager : MonoBehaviour
     // (maybe change from public to serialized field)
     public Image[] ItemImages;
     public Button[] ItemButtons;
-    public TextMeshProUGUI[] ItemNames;
-    public TextMeshProUGUI[] ItemDescriptions;
+    //public TextMeshProUGUI[] ItemNames;
+    //public TextMeshProUGUI[] ItemDescriptions;
     public Image[] ItemSpotlights;
     public TextMeshProUGUI[] ItemPrices;
 
     public Button CloseButton;
+    public Button RerollButton;
+    public int RerollCost = 50;
+    public GameObject Tooltip;
     public bool IsInShop;
 
     private ShopManager ShopM;
@@ -30,6 +33,7 @@ public class ShopUIManager : MonoBehaviour
     {
         // Adding all the click events 
         CloseButton.onClick.AddListener(CloseShop);
+        RerollButton.onClick.AddListener(RerollItems);
         ItemButtons[0].onClick.AddListener(delegate { AttemptBuyItem(0); });
         ItemButtons[1].onClick.AddListener(delegate { AttemptBuyItem(1); });
         ItemButtons[2].onClick.AddListener(delegate { AttemptBuyItem(2); });
@@ -67,8 +71,8 @@ public class ShopUIManager : MonoBehaviour
         // Removes all the info for a bought item
         Destroy(ItemImages[Index]);
         Destroy(ItemButtons[Index].gameObject);
-        Destroy(ItemNames[Index]);
-        Destroy(ItemDescriptions[Index]);
+        //Destroy(ItemNames[Index]);
+        //Destroy(ItemDescriptions[Index]);
         Destroy(ItemSpotlights[Index]);
         Destroy(ItemPrices[Index]);
     }
@@ -81,5 +85,31 @@ public class ShopUIManager : MonoBehaviour
     public void MouseLeftItem(int Index)
     {
         if (!ItemSpotlights[Index].IsDestroyed()) { ItemSpotlights[Index].gameObject.SetActive(false); }      
+    }
+
+    public void ShowTooltip(bool status)
+    {
+        if (status)
+        {
+            Tooltip.SetActive(true);
+        }
+        else
+        {
+            Tooltip.SetActive(false);
+        }
+    }
+
+    public void RerollItems()
+    {   
+        if (PlayerStats.Instance.GetCoins() >= RerollCost)
+        {
+            PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins,-RerollCost);
+            ShopM.GetRandomShopList();
+            ShopM.SetItems();
+        }
+        else
+        {
+            DebugUtils.Log("Player don't have gold");
+        }        
     }
 }
