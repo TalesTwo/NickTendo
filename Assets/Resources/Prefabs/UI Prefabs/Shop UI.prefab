@@ -2253,11 +2253,11 @@ PrefabInstance:
       objectReference: {fileID: 9125203309246260239}
     - target: {fileID: 3891586756067532039, guid: 332b9fefbd1eac34f80f21e1d1466bab, type: 3}
       propertyPath: _xPositionPadding
-      value: 0
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 3891586756067532039, guid: 332b9fefbd1eac34f80f21e1d1466bab, type: 3}
       propertyPath: _yPositionPadding
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

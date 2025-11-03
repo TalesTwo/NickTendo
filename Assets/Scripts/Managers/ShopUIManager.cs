@@ -119,10 +119,13 @@ public class ShopUIManager : MonoBehaviour
         {
             if (IsRerollButton)
             {
+                Tooltip.GetComponent<TooltipUI>().SetXPadding(75);
+                Tooltip.GetComponent<TooltipUI>().SetYPadding(-50);
                 Tooltip.GetComponent<TooltipUI>().ShowTooltip("Click to reroll shop items!\nCost: " + RerollCost + "\n\n");
             }
             else
             {
+                Tooltip.GetComponent<TooltipUI>().ResetPadding();
                 Tooltip.GetComponent<TooltipUI>().ShowTooltip(ItemDescriptions[TooltipIndex]);
             }
         }
