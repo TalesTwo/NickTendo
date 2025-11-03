@@ -61,10 +61,28 @@ public class PitTilemap : MonoBehaviour
             DebugUtils.LogSuccess("Player entered pit collider");
             _IsPlayerInPit = true;
         }
-        Vector3 hitPosition = other.transform.position;
-        Vector3Int cellPos = tilemap.WorldToCell(hitPosition);
-        Vector3 tileCenter = tilemap.GetCellCenterWorld(cellPos);
+        
+        
+        //Vector3 hitPosition = other.transform.position;
+        //Vector3Int cellPos = tilemap.WorldToCell(hitPosition);
+        //Vector3 tileCenter = tilemap.GetCellCenterWorld(cellPos);
 
+        // get access to the current room
+        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+        if (currentRoom == null)
+        {
+            DebugUtils.LogError("Current room is null in PitTilemap OnTriggerEnter2D");
+            return;
+        }
+        // get the RoomGridController
+        RoomGridManager gridManager = currentRoom.GetComponentInChildren<RoomGridManager>();
+        if (gridManager == null)
+        {
+            DebugUtils.LogError("RoomGridManager is null in PitTilemap OnTriggerEnter2D");
+            return;
+        }
+        // find the nearest pit location to the object that fell in
+        Vector3 tileCenter = gridManager.GetNearestPitToLocation(root.transform.position);
 
         // Broadcast event with the correct pit center
         EventBroadcaster.Broadcast_ObjectFellInPit(root, tileCenter);

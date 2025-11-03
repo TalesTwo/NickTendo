@@ -19,6 +19,9 @@ public class RoomGridManager : MonoBehaviour
     private Vector2 _bottomLeft;
     private int gridSizeX, gridSizeY;
     
+    // going to keep a reference of the current locations of all of the "pits" in the room
+    private List<Vector2> _pitLocations = new List<Vector2>();
+    
     [HideInInspector]
     public List<Node> path; // path from enemy to player
     
@@ -162,6 +165,11 @@ public class RoomGridManager : MonoBehaviour
 
                 _walkGrid[x, y] = new Node(groundWalkable, worldPoint, x, y);
                 _flyGrid[x, y] = new Node(airWalkable, worldPoint, x, y);
+                // update the pit locations list
+                if (isPit)
+                {
+                    _pitLocations.Add(worldPoint);
+                }
             }
         }
     }
@@ -205,8 +213,28 @@ public class RoomGridManager : MonoBehaviour
 
         return neighbours;
     }
-    
-    
+
+
+    public Vector3 GetNearestPitToLocation(Vector3 position)
+    {
+        // Given a particular position, find the nearest pit location from the _pitLocations list
+        Vector3 nearestPit = Vector3.zero;
+        float nearestDistance = float.MaxValue;
+
+        foreach (Vector2 pitPos in _pitLocations)
+        {
+            // Compare in 2D but output a 3D position (assuming pits are stored as Vector2)
+            float distance = Vector2.Distance(new Vector2(position.x, position.y), pitPos);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestPit = new Vector3(pitPos.x, pitPos.y, position.z);
+            }
+        }
+
+        return nearestPit;
+    }
+
     
     public Transform FindValidWalkableCell(bool isFlying = false)
     {
