@@ -1596,17 +1596,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1299865780}
     m_Modifications:
-    - target: {fileID: 34353067714316052, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: rocketAttackTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 543200897592807649, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: rocketAttackTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 860249048055277067, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[0].rocketCountPerArm
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[1].rocketCountPerArm
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[2].rocketCountPerArm
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[3].rocketCountPerArm
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6457432782451709770, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: m_LocalPosition.x
