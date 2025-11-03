@@ -21,7 +21,6 @@ public class StatDisplayUI : MonoBehaviour
 
     private float _statDisplayNumber;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
-    private PlayerStatsStruct _normalStats;
 
     private void Start()
     {
@@ -36,10 +35,6 @@ public class StatDisplayUI : MonoBehaviour
         EventBroadcaster.PlayerDeath += HandleDeath;
 
         gameObject.SetActive(false);
-
-        _normalStats = PersonaStatsLoader.GetStats(Types.Persona.Memer);
-
-        DebugUtils.Log("Base attack: "+  _normalStats.AttackDamage);
     }
 
     void SetStatDict()
@@ -58,14 +53,12 @@ public class StatDisplayUI : MonoBehaviour
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
             float _baseStat = 0;
-            if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _baseStat = _normalStats.AttackCooldown; }
-            else if (_buffType == PlayerStatsEnum.Attack_Damage) { _baseStat = _normalStats.AttackDamage; }
-            else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _baseStat = _normalStats.DashCooldown; }
-            else if (_buffType == PlayerStatsEnum.Dash_Damage) { _baseStat = _normalStats.DashDamage; }
-            else if (_buffType == PlayerStatsEnum.Dash_Speed) { _baseStat = _normalStats.DashSpeed; }
-            else if (_buffType == PlayerStatsEnum.Movement_Speed) { _baseStat = _normalStats.MovementSpeed; }
-
-            DebugUtils.Log(_buffType + ": " + _baseStat);
+            if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).AttackCooldown;}
+            else if (_buffType == PlayerStatsEnum.Attack_Damage) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).AttackDamage; }
+            else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashCooldown; }
+            else if (_buffType == PlayerStatsEnum.Dash_Damage) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashDamage; }
+            else if (_buffType == PlayerStatsEnum.Dash_Speed) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashSpeed; }
+            else if (_buffType == PlayerStatsEnum.Movement_Speed) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).MovementSpeed; }
 
             _statDictionary[_buffType][0] = _baseStat;
             _statDictionary[_buffType][1] = 0;
@@ -98,6 +91,9 @@ public class StatDisplayUI : MonoBehaviour
 
             DebugUtils.Log(_buffType + ": " + _newStat);
 
+
+            //SHOW COOLDOWN STUFF CORRECTLY
+
             _statDictionary[_buffType][1] = _newStat;
         }
     }
@@ -124,10 +120,12 @@ public class StatDisplayUI : MonoBehaviour
 
             if (IsCoolDown(_buffType))
             {
+                DebugUtils.Log(_buffType + ": " + _statDictionary[_buffType][1]);
                 _buffText += _statDictionary[_buffType][1] + " sec\n";
             }
             else
             {
+                DebugUtils.Log(_buffType + "- BaseStat: " + _statDictionary[_buffType][0] + " BuffedStat: " + _statDictionary[_buffType][1]);
                 _buffPerc = _statDictionary[_buffType][1] / _statDictionary[_buffType][0];
                 _buffPerc *= 100;
                 _buffPerc = Mathf.RoundToInt(_buffPerc);
