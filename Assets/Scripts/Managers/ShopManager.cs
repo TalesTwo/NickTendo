@@ -38,7 +38,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    void GetRandomShopList()
+    public void GetRandomShopList()
     {
         ShopList = new GameObject[3];
 
@@ -62,14 +62,15 @@ public class ShopManager : MonoBehaviour
         ShopList[2] = ItemList[numbers[2]];
     }
 
-    void SetItems()
+    public void SetItems()
     {
         for (int i = 0; i <= 2; i++)
         {
             ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
-            ShopUIM.ItemDescriptions[i].text = ShopList[i].GetComponent<ShopItem>().GetDescription();
-            ShopUIM.ItemPrices[i].text = "Item Price: " + ShopList[i].GetComponent<ShopItem>().itemValue.ToString();
+            ShopUIM.ItemDescriptions[i] = ShopList[i].GetComponent<ShopItem>().GetDescription();
+            ShopUIM.ItemFlavorText[i] = "This is just a placeholder string (set in shop manager)"/*ShopList[i].GetComponent<ShopItem>().flavorText*/;
+            //ShopUIM.ItemPrices[i].text = "Item Price: " + ShopList[i].GetComponent<ShopItem>().itemValue.ToString();
         }
     }
 
@@ -85,7 +86,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            DebugUtils.LogError("Not enough money to buy " + AttemptItem.name + "!");
+            ShopUIM.NotEnoughMoney();
         }
     }
 }

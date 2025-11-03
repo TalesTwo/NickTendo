@@ -35,13 +35,15 @@ public class BUDDEEUI : MonoBehaviour
     {
         _isCRRunning = true;
         int _talkingToneTimer = 0;
-        foreach (char _letter in _dialogue)
+        _buddeeDialogue.maxVisibleCharacters = 0;
+        _buddeeDialogue.text = _dialogue;
+        for (int i = 0; i < _dialogue.Length; i++)
         {
             if (!_isCRRunning)
             {
                 yield return null;
             }
-            _buddeeDialogue.text += _letter;
+            _buddeeDialogue.maxVisibleCharacters++;
             _talkingToneTimer++;
             if (_talkingToneTimer == 10)
             {

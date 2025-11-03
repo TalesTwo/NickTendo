@@ -21,6 +21,7 @@ public class StatDisplayUI : MonoBehaviour
 
     private float _statDisplayNumber;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
+    private bool _isViewing;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class StatDisplayUI : MonoBehaviour
         SetStatDict();
         SetBaseStats();
         _statDisplayNumber = 0;
+        _isViewing = false;
 
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerStatsChanged += HandleStatChanged;
@@ -70,32 +72,20 @@ public class StatDisplayUI : MonoBehaviour
     {
         SetBuffedStats(_buffType, _buffValue);
         HandleDisplayText(_buffType, _buffValue);
-        if (_statDisplayNumber > 1)
+        if (_isViewing)
         {
-            gameObject.GetComponent<ScaleEffectsUI>().IncreaseSize();
-            gameObject.GetComponent<ScaleEffectsUI>().DecreaseSize();
+            _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
         }
     }
 
     void SetBuffedStats(PlayerStatsEnum _buffType, float _buffValue)
     {
-        float _newStat = 0;
-        if (_statDictionary.ContainsKey(_buffType))
-        {
-            if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _newStat = PlayerStats.Instance.GetAttackCooldown(); }
-            else if (_buffType == PlayerStatsEnum.Attack_Damage) { _newStat = PlayerStats.Instance.GetAttackDamage(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _newStat = PlayerStats.Instance.GetDashCooldown(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Damage) { _newStat = PlayerStats.Instance.GetDashDistance(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Speed) { _newStat = PlayerStats.Instance.GetDashSpeed(); }
-            else if (_buffType == PlayerStatsEnum.Movement_Speed) { _newStat = PlayerStats.Instance.GetMovementSpeed(); }
-
-            DebugUtils.Log(_buffType + ": " + _newStat);
-
-
-            //SHOW COOLDOWN STUFF CORRECTLY
-
-            _statDictionary[_buffType][1] = _newStat;
-        }
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Attack_Cooldown)) { _statDictionary[PlayerStatsEnum.Attack_Cooldown][1] = PlayerStats.Instance.GetAttackCooldown(); }
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Attack_Damage)) _statDictionary[PlayerStatsEnum.Attack_Damage][1] = PlayerStats.Instance.GetAttackDamage();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Cooldown)) _statDictionary[PlayerStatsEnum.Dash_Cooldown][1] = PlayerStats.Instance.GetDashCooldown();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Damage)) _statDictionary[PlayerStatsEnum.Dash_Damage][1] = PlayerStats.Instance.GetDashDamage();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Speed)) _statDictionary[PlayerStatsEnum.Dash_Speed][1] = PlayerStats.Instance.GetDashSpeed();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Movement_Speed)) _statDictionary[PlayerStatsEnum.Movement_Speed][1] = PlayerStats.Instance.GetMovementSpeed();
     }
 
     void HandleDisplayText(PlayerStatsEnum _buffType, float _buffValue)
@@ -106,6 +96,11 @@ public class StatDisplayUI : MonoBehaviour
             gameObject.SetActive(true);
             _statDisplayText.SetText(_statDisplayNumber.ToString());
             _statDisplayTextBG.SetText(_statDisplayNumber.ToString());
+            if (_statDisplayNumber > 1)
+            {
+                gameObject.GetComponent<ScaleEffectsUI>().IncreaseSize();
+                gameObject.GetComponent<ScaleEffectsUI>().DecreaseSize();
+            }
         }        
     }
 
@@ -159,10 +154,12 @@ public class StatDisplayUI : MonoBehaviour
         if(_hasEntered)
         {
             _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
+            _isViewing = true;
         }
         else
         {
             _tooltip.GetComponent<TooltipUI>().HideTooltip();
+            _isViewing = false;
         }
     }
 

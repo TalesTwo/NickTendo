@@ -49,6 +49,7 @@ MonoBehaviour:
   itemValue: 40
   buffValue: -0.5
   buffType: 6
+  itemDescription: 
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

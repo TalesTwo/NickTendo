@@ -27,6 +27,19 @@ public class ScaleEffectsUI : MonoBehaviour
         _isEffectRunning = false;
     }
 
+    public void StartBreathe()
+    {
+        _isEffectRunning = true;
+        StartCoroutine(BreathCycle1());
+    }
+
+    public void StopBreathe()
+    {
+        _isEffectRunning = false;
+        StopAllCoroutines();
+        _rectTransform.localScale = new Vector2(_baseScaleX, _baseScaleY);
+    }
+
     public void IncreaseSize()
     {
         _isEffectRunning = true;
@@ -58,7 +71,7 @@ public class ScaleEffectsUI : MonoBehaviour
             Vector2 _tempVector = new Vector2(_tempX, _tempY);
             _rectTransform.localScale = _tempVector;
             yield return null;
-        }
+        }        
     }
 
     private IEnumerator DecreaseSizeCR()
@@ -74,5 +87,42 @@ public class ScaleEffectsUI : MonoBehaviour
             _rectTransform.localScale = _tempVector;
             yield return null;
         }
+    }
+
+    private IEnumerator BreathCycle1()
+    {
+        float _runTime = 0;
+        while (_runTime < _effectTime)
+        {
+            _runTime += Time.deltaTime;
+            float _lerpValue = _runTime / (_effectTime / 2);
+            float _tempX = Mathf.Lerp(_baseScaleX, _baseScaleX * _scaleFactor, _lerpValue);
+            float _tempY = Mathf.Lerp(_baseScaleY, _baseScaleY * _scaleFactor, _lerpValue);
+            Vector2 _tempVector = new Vector2(_tempX, _tempY);
+            _rectTransform.localScale = _tempVector;
+            yield return null;
+        }
+        StartCoroutine(BreathCycle2());
+    }
+
+    private IEnumerator BreathCycle2()
+    {
+        float _runTime = 0;
+        while (_runTime < _effectTime)
+        {
+            _runTime += Time.deltaTime;
+            float _lerpValue = _runTime / (_effectTime / 2);
+            float _tempX = Mathf.Lerp(_baseScaleX * _scaleFactor, _baseScaleX, _lerpValue);
+            float _tempY = Mathf.Lerp(_baseScaleY * _scaleFactor, _baseScaleY, _lerpValue);
+            Vector2 _tempVector = new Vector2(_tempX, _tempY);
+            _rectTransform.localScale = _tempVector;
+            yield return null;
+        }
+        StartCoroutine(BreathCycle1());
+    }
+
+    public bool GetIsEffecetRunning()
+    {
+        return _isEffectRunning;
     }
 }
