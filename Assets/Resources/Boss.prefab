@@ -48,7 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightArm: {fileID: 3398844250087538318}
+  rightArmController: {fileID: 543200897592807649}
   leftArm: {fileID: 5746805199241599897}
+  leftArmController: {fileID: 34353067714316052}
   face: {fileID: 4485938005947340060}
   health: 0
   battle: 0
@@ -642,6 +644,18 @@ MonoBehaviour:
   forearm: {fileID: 1994174248312641029}
   hand: {fileID: 4500754400095974572}
   side: 0
+  DirectionModifier: 0
+  offScreenXCoordinate: 30
+  smoothDampTime: 1
+  moveSpeedAttack: 10
+  maxXCoordinate: 10
+  minXCoordinate: -10
+  maxYCoordinate: 0
+  minYCoordinate: -20
+  startXCoordinateRight: 30
+  startXCoordinateLeft: -30
+  startYCoordinateBottom: -30
+  startYCoordinateTop: 15
 --- !u!1 &4120618212871296092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,6 +1255,18 @@ MonoBehaviour:
   forearm: {fileID: 6606136446495967308}
   hand: {fileID: 3265533470236457020}
   side: 1
+  DirectionModifier: 0
+  offScreenXCoordinate: 30
+  smoothDampTime: 1
+  moveSpeedAttack: 10
+  maxXCoordinate: 10
+  minXCoordinate: -10
+  maxYCoordinate: 0
+  minYCoordinate: -20
+  startXCoordinateRight: 30
+  startXCoordinateLeft: -30
+  startYCoordinateBottom: -30
+  startYCoordinateTop: 15
 --- !u!1 &6606136446495967308
 GameObject:
   m_ObjectHideFlags: 0

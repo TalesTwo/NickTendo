@@ -42,7 +42,7 @@ public class BossArmController : MonoBehaviour
     public float offScreenXCoordinate = 30f;
     private Vector2 _velocity = Vector2.zero;
     public float smoothDampTime = 0.2f;
-    public float moveSpeedAttack = 10f;
+    public float rocketAttackTime = 0.1f;
     
     [Header("Attack Coordinates")]
     private bool _rocketReady = false;
@@ -110,36 +110,52 @@ public class BossArmController : MonoBehaviour
 
         float x;
         float y;
+        Vector2 destination = Vector2.zero;
         switch (direction)
         {
             case RocketDirection.Up:
                 x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
                 start = new Vector2(x, startYCoordinateBottom);
                 transform.rotation = Quaternion.Euler(0, 0, 180);
+                destination = new Vector2(start.x, start.y + (startYCoordinateTop - startYCoordinateBottom));
                 break;
             case RocketDirection.Down:
                 x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
                 start = new Vector2(x, startYCoordinateTop);
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                destination = new Vector2(start.x, start.y + (startYCoordinateBottom - startYCoordinateTop));
                 break;
             case RocketDirection.Left:
                 y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                 start = new Vector2(startXCoordinateRight, y);
                 transform.rotation = Quaternion.Euler(0, 0, -90);
+                destination = new Vector2(start.x + (startXCoordinateLeft - startXCoordinateRight), start.y);
                 break;
             case RocketDirection.Right:
                 y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                 start = new Vector2(startXCoordinateLeft, y);
                 transform.rotation = Quaternion.Euler(0, 0, 90);
+                destination = new Vector2(start.x + (startXCoordinateRight - startXCoordinateLeft), start.y);
                 break;
             default:
                 break;
         }
         
-        
         transform.localPosition = start;
+        yield return null;
         
         // Step 4: fly across the screen until max coordinate is reached
+        while (true)
+        {
+            transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
+            if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 1.0f)
+            {
+                break;
+            }
+            yield return null;
+        }
+        
+        Debug.Log(transform.localPosition);
 
         // Step 5: repeat until phase is over
     }
