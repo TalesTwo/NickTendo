@@ -49,7 +49,17 @@ public class PitTilemap : MonoBehaviour
         // If we dont hit specifically the pit collider, skip it
         if (!other.CompareTag("Pit_Collider"))
             return;
-    
+        
+        // We need to account for if an "item" falls in the pit (as in, when a player dies and it spawns a pickup item)
+        // in this case, we want to just destroy the item without any effects
+        // check if its an instance of BaseItem
+        BaseItem item = other.GetComponent<BaseItem>();
+        if (item != null)
+        {
+            Destroy(other.gameObject);
+            return;
+        }
+        
         // Get the parent object (the actual enemy or player) since we are a child collider
         GameObject root = other.transform.parent.gameObject;
 
