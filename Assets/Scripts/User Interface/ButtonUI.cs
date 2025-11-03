@@ -11,10 +11,17 @@ public class ButtonUI : MonoBehaviour
     public void PointerEnter()
     {
         AudioManager.Instance.PlayUIHoverSound();
+        gameObject.GetComponent<ScaleEffectsUI>().StartBreathe();
     }
 
     public void PointerClick()
     {
+        AudioManager.Instance.PlayUISelectSound();
+    }
+
+    public void PointerExit()
+    {
         
+        gameObject.GetComponent<ScaleEffectsUI>().StopBreathe();
     }
 }

@@ -81,6 +81,5 @@ public class TooltipUI : MonoBehaviour
         _tooltipPosition.y += _yPositionPadding;
 
         _tooltipTransform.anchoredPosition = _tooltipPosition;
-        DebugUtils.Log("X: " + Input.mousePosition.x + " Y: " + Input.mousePosition.y);
     }
 }

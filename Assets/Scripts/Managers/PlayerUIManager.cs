@@ -11,20 +11,22 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 {
     private float _width;
     private float _healthWidth;
+    private float _backgroundWidth;
     private bool _isHUDActive;
 
     [Header("UI Elements")] 
     public float widthPerUnitHealth = 25;
     public float healthBarHeight = 20;
+    public float backgroundHeight = 29.1f;
 
     [SerializeField] 
     private RectTransform health;
     [SerializeField]
     private RectTransform healthBar;
     [SerializeField]
-    private Image _healthIcon;
+    private RectTransform healthBackground;
     [SerializeField]
-    private TextMeshProUGUI buffedStatText;
+    private Image _healthIcon;
     [SerializeField]
     private GameObject _enemyCounter;
     [SerializeField]
@@ -37,12 +39,14 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private GameObject _player;
     private PlayerController _pController;
     private bool _hasStartedSlider;
+    private bool _isPlayerAlive;
 
     private void Start()
     {
         EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerDamaged += HandlePlayerDamage;
+        EventBroadcaster.PlayerDeath += HandlePlayerDeath;
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
         _pController = _player.GetComponent<PlayerController>();
@@ -50,6 +54,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         _dashSlider.value = 1;
         _dashSliderImage.color = Color.yellow;
         _hasStartedSlider = false;
+        _isPlayerAlive = true;
         SetHealth();
     }
 
@@ -78,9 +83,11 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     public void SetHealth()
     {
         _width = widthPerUnitHealth * PlayerStats.Instance.GetMaxHealth();
+        _backgroundWidth = _width;
         _healthWidth = widthPerUnitHealth * PlayerStats.Instance.GetCurrentHealth();
 
         healthBar.sizeDelta = new Vector2(_width, healthBarHeight);
+        healthBackground.sizeDelta = new Vector2(_backgroundWidth, backgroundHeight);
         health.sizeDelta = new Vector2(_healthWidth, healthBarHeight);
     }
 
@@ -101,6 +108,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             gameObject.SetActive(true);
             _isHUDActive = true;
         }
+        
     }
 
     void HandlePersonaChanged(Types.Persona P)
@@ -139,7 +147,15 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandlePlayerDamage()
     {
         SetHealth();
-        _healthIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
-        _healthIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        if (_isPlayerAlive)
+        {
+            _healthIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+            _healthIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        }        
+    }
+
+    void HandlePlayerDeath()
+    {
+        _isPlayerAlive = false;
     }
 }
