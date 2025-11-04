@@ -6,9 +6,9 @@ using UnityEngine;
  * The central hub for controlling all things boss fight
  *
  * This script is responsible for:
- * * initiating the arm attacks
+ * * initiating the arm attacks (finished)
  * * spawning minions
- * * shooting projectiles
+ * * shooting projectiles (next)
  * * managing health
  * * calling for animations
  * * calling for the arms to perform actions
@@ -17,6 +17,16 @@ using UnityEngine;
  */
 public class BossController : MonoBehaviour
 {
+    [System.Serializable]
+    public class Stats
+    {
+        public int rocketCountPerArm;
+        public float rocketAttackTime;
+        public int enemiesSpawning;
+        public int enemiesDifficulty;
+        public HealthState health;
+    }
+    
     [Header("body parts")]
     public GameObject rightArm;
     public BossArmController rightArmController;
@@ -50,6 +60,9 @@ public class BossController : MonoBehaviour
     private PlayerController _playerController;
     private GameObject _player;
     
+    [Header("Attacks")]
+    public List<Stats> attacks;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -63,24 +76,23 @@ public class BossController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LaunchLeftArm();
+            LaunchArm(leftArmController);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            LaunchRightArm();
+            LaunchArm(rightArmController);
         }
     }
 
-    // launching the left arm for rocket attack
-    private void LaunchLeftArm()
+    private void LaunchArm(BossArmController armController)
     {
-        leftArmController.LaunchAttack();
-    }
-
-    // launching the right arm for rocket attack
-    private void LaunchRightArm()
-    {
-        rightArmController.LaunchAttack();
+        foreach (Stats stat in attacks)
+        {
+            if (stat.health == health)
+            {
+                armController.LaunchAttack(stat.rocketCountPerArm, stat.rocketAttackTime);
+            }
+        }
     }
 }
