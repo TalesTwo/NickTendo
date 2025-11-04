@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6457432782451709770}
   - component: {fileID: 2034208427708374011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,9 +80,9 @@ MonoBehaviour:
     knockbackForce: 500
     stunTimer: 0.7
     followWaitTime: 0.3
-    spreadWavesCount: 0
-    spreadWaitTime: 0
-    spreadAngle: 0
+    spreadWavesCount: 4
+    spreadWaitTime: 0.9
+    spreadAngle: 85
     health: 1
   - rocketCountPerArm: 3
     rocketAttackTime: 1
@@ -94,9 +94,9 @@ MonoBehaviour:
     knockbackForce: 500
     stunTimer: 0.7
     followWaitTime: 0.3
-    spreadWavesCount: 0
-    spreadWaitTime: 0
-    spreadAngle: 0
+    spreadWavesCount: 5
+    spreadWaitTime: 0.8
+    spreadAngle: 90
     health: 2
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
@@ -108,9 +108,9 @@ MonoBehaviour:
     knockbackForce: 500
     stunTimer: 0.7
     followWaitTime: 0.3
-    spreadWavesCount: 0
-    spreadWaitTime: 0
-    spreadAngle: 0
+    spreadWavesCount: 6
+    spreadWaitTime: 0.7
+    spreadAngle: 95
     health: 3
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
@@ -122,9 +122,9 @@ MonoBehaviour:
     knockbackForce: 500
     stunTimer: 0.7
     followWaitTime: 0.3
-    spreadWavesCount: 0
-    spreadWaitTime: 0
-    spreadAngle: 0
+    spreadWavesCount: 6
+    spreadWaitTime: 0.7
+    spreadAngle: 95
     health: 4
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 3114333140402452001}
   - component: {fileID: 4575827740278708729}
   - component: {fileID: 7911408026913967881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 5324857193716202470}
   - component: {fileID: 1346683434062280508}
   - component: {fileID: 2604638418550352830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2211963474735182871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wrist Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6911325344546483260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wrist Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 3548058712275494106}
   - component: {fileID: 2227411276649451970}
   - component: {fileID: 7053476509081095313}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 2297382874050604897}
   - component: {fileID: 4607275886280188092}
   - component: {fileID: 543200897592807649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Shoulder Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 8734075007353885119}
   - component: {fileID: 256492306830220240}
   - component: {fileID: 3461587529492039635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 8466465307618636595}
   - component: {fileID: 8637996377245535417}
   - component: {fileID: 7404622717604968865}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss_screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1114,7 @@ GameObject:
   - component: {fileID: 2310001041129328460}
   - component: {fileID: 1653208518234905162}
   - component: {fileID: 3710922332910338239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 3700316427796393539}
   - component: {fileID: 5969154077283798737}
   - component: {fileID: 34353067714316052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Shoulder Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1351,7 +1351,7 @@ GameObject:
   - component: {fileID: 4037103897263662846}
   - component: {fileID: 5474872182482336830}
   - component: {fileID: 2804026952635284637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1498,7 +1498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6371304106793935228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Elbow Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1530,7 +1530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333025996417840279}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Elbow Pivot (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
