@@ -52,6 +52,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateCurrentHealth(float UpdateValue)
     {
         _currentHealth += UpdateValue;
+        EventBroadcaster.Broadcast_PlayerDamaged();
 
         if (_currentHealth > _maxHealth)
         {

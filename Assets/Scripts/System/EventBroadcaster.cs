@@ -50,9 +50,9 @@ namespace System
         //-------------------------------- Activity Events --------------------------------//
         
         /* Define the delegate for the ActivityStarted event */
-        public delegate void PlayerDamagedHandler(float damageAmount);
+        public delegate void PlayerDamagedHandler();
         public static event PlayerDamagedHandler PlayerDamaged;
-        public static void Broadcast_PlayerDamaged(float damageAmount) { PlayerDamaged?.Invoke(damageAmount); }
+        public static void Broadcast_PlayerDamaged() { PlayerDamaged?.Invoke(); }
         
         // Start Dialogue Broadcaster
         public delegate void StartDialogueHandler(string name);
@@ -126,19 +126,12 @@ namespace System
         public static event ObjectFellInPitHandler ObjectFellInPit;
         public static void Broadcast_ObjectFellInPit(GameObject obj, Vector3 pitCenter) { ObjectFellInPit?.Invoke(obj, pitCenter); }
         
-        // B roadcast for when the player finishes dashing
+        // Broadcast for when the player finishes dashing
         public delegate void PlayerFinishedDashingHandler(GameObject obj);
         public static event PlayerFinishedDashingHandler PlayerFinishedDashing;
        
         public static void Broadcast_PlayerFinishedDashing() { PlayerFinishedDashing?.Invoke(GameObject.FindWithTag("Player")); }
-
-
-
-
-
         
         //-------------------------------- End Activity Events --------------------------------//
-
-
     }
 }

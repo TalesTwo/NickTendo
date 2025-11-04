@@ -49,6 +49,7 @@ MonoBehaviour:
   itemValue: 25
   buffValue: -2
   buffType: 7
+  flavorText: 
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,9 +91,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1095038227
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6324245083510235197, guid: 76f89821424ccb54f9ad08428aa7d96d, type: 3}
+  m_Sprite: {fileID: -897015248468258193, guid: 700fc24b78d5db045926d068b039314b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

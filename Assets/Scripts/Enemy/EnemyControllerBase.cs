@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class EnemyControllerBase : SpawnableObject
@@ -49,6 +50,12 @@ public class EnemyControllerBase : SpawnableObject
     public Types.EnemyType enemyType;
 
     private float _walktimer = 0f;
+    
+    
+    // IMPROVING PATHING LOGIC
+    [SerializeField] private float _separationRadius = 1.0f;    // how close enemies can get before repelling
+    [SerializeField] private float _separationForce = 2.0f;     // how strong the push is
+    private List<EnemyControllerBase> _allEnemies;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -65,6 +72,9 @@ public class EnemyControllerBase : SpawnableObject
         EventBroadcaster.ObjectFellInPit += OnFellInPit;
         EventBroadcaster.SetSeed += SetSeed;
         ParseStatsText();
+        
+        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+        _allEnemies = currentRoom.GetComponentInChildren<RoomSpawnController>().GetEnemiesInRoom();
     }
     private void SetSeed(int seed)
     {
@@ -126,7 +136,39 @@ public class EnemyControllerBase : SpawnableObject
             Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
             _walktimer = 0;
         }
+        
+        ApplySeparation();
     }
+    
+    protected void ApplySeparation()
+    {
+        Vector2 separation = Vector2.zero;
+        int neighborCount = 0;
+        
+
+        // iterate through all other enemies
+        foreach (EnemyControllerBase other in _allEnemies)
+        {
+            if (other == this) continue; // skip self
+
+            float dist = Vector2.Distance(_transform.position, other._transform.position);
+            if (dist < _separationRadius && dist > 0.001f)
+            {
+                // make sure they are kept away
+                Vector2 away = (_transform.position - other._transform.position).normalized;
+                separation += away / dist; 
+                neighborCount++;
+            }
+        }
+
+        // apply averaged separation
+        if (neighborCount > 0)
+        {
+            separation /= neighborCount;
+            _transform.position += (Vector3)(separation * _separationForce * Time.deltaTime);
+        }
+    }
+
 
 
     // reduce health on damage from a PlayerAttack

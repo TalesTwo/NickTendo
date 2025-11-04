@@ -32,7 +32,7 @@ public class EnemyProjectileController : MonoBehaviour
     // on collision, destroy
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Spawnable"))
         {
             Managers.AudioManager.Instance.PlayEnemyShotMissSound(1, 0);
             DestroySelf();
@@ -52,6 +52,8 @@ public class EnemyProjectileController : MonoBehaviour
             }
 
         }
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
