@@ -78,21 +78,21 @@ public class DungeonController : Singleton<DungeonController>
         return null;
     }
     
-    public void SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType)
+    public Vector3 SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType, int enemyLevelOverride = -1)
     {
         //  Get the current room
         Room currentRoom = GetCurrentRoom();
         if (currentRoom == null )
         {
             Debug.LogWarning("No current room found — cannot spawn enemy.");
-            return;
+            return Vector3.zero;
         }
         // get the spawn room controller 
         RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
         if (roomSpawnController == null)
         {
             Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
-            return;
+            return Vector3.zero;
         }
 
         //  Get the spawn controller for this room
@@ -100,17 +100,18 @@ public class DungeonController : Singleton<DungeonController>
         if (spawnController == null)
         {
             Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
-            return;
+            return Vector3.zero;
         }
 
         //  Get the enemy prefab by type from your EnemyDatabase or Factory
         EnemyControllerBase enemyPrefab = EnemyDatabase.Instance.GetEnemyPrefabByType(enemyType);
         if (enemyPrefab == null)
         {
-            return;
+            return Vector3.zero;
         }
-        roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, true);
-        
+        Vector3 spawnLocation = roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, true, enemyLevelOverride);
+        return spawnLocation;
+
     }
     
     public void Update()

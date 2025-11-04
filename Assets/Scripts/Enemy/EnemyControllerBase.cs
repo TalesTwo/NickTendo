@@ -149,7 +149,9 @@ public class EnemyControllerBase : SpawnableObject
         // iterate through all other enemies
         foreach (EnemyControllerBase other in _allEnemies)
         {
-            if (other == this) continue; // skip self
+            if (other == this || other == null || other._transform == null)
+                continue;
+
 
             float dist = Vector2.Distance(_transform.position, other._transform.position);
             if (dist < _separationRadius && dist > 0.001f)
