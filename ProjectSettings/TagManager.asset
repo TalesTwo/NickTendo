@@ -12,6 +12,7 @@ TagManager:
   - DeathScreen
   - Pit_Collider
   - Spawnable
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - Pits
   - Spawning
-  - 
+  - Boss
   - 
   - 
   - 

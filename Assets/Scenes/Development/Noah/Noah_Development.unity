@@ -1600,54 +1600,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[0].rocketAttackTime
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[1].rocketAttackTime
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[2].rocketAttackTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[3].rocketAttackTime
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[4].rocketAttackTime
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[0].rocketCountPerArm
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[1].rocketCountPerArm
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[2].rocketCountPerArm
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[3].rocketCountPerArm
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: attacks.Array.data[4].rocketCountPerArm
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2297382874050604897, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 3700316427796393539, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.99
-      objectReference: {fileID: 0}
     - target: {fileID: 6457432782451709770, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5000002
