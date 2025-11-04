@@ -20,10 +20,19 @@ public class BossController : MonoBehaviour
     [System.Serializable]
     public class Stats
     {
+        [Header("Rockets")]
         public int rocketCountPerArm;
         public float rocketAttackTime;
+        [Header("Minions")]
         public int enemiesSpawning;
         public int enemiesDifficulty;
+        [Header("Projectiles")]
+        public int projectileCount;
+        public float projectileSpeed;
+        public float projectileDamage;
+        public float knockbackForce;
+        public float stunTimer;
+        [Header("Battle State")]
         public HealthState health;
     }
     
@@ -62,6 +71,8 @@ public class BossController : MonoBehaviour
     
     [Header("Attacks")]
     public List<Stats> attacks;
+    public GameObject bossProjectile;
+    public float projectileSpawnDistance;
     
     // Start is called before the first frame update
     void Start()
@@ -97,12 +108,31 @@ public class BossController : MonoBehaviour
             if (stat.health == health)
             {
                 armController.LaunchAttack(stat.rocketCountPerArm, stat.rocketAttackTime);
+                break;
             }
         }
     }
 
     private void LaunchProjectile()
     {
-        
+        foreach (Stats stat in attacks)
+        {
+            if (stat.health == health)
+            {
+                Vector2 direction = (_player.transform.position - transform.position).normalized;
+                // instantiate a projectile and give it velocity
+                Vector2 attackPosition = new Vector2(transform.position.x + direction.x * projectileSpawnDistance, transform.position.y + direction.y * projectileSpawnDistance);
+                GameObject newProjectile = Instantiate(bossProjectile, attackPosition, Quaternion.identity);
+                Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
+                ProjectileRb.velocity = direction * stat.projectileSpeed;
+                newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
+                Managers.AudioManager.Instance.PlayEnemyShotSound();
+                            
+                // set damage of projectile
+                EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
+                controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer);                
+            }
+        }
+
     }
 }
