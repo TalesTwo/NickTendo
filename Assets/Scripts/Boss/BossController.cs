@@ -32,6 +32,7 @@ public class BossController : MonoBehaviour
         public float projectileDamage;
         public float knockbackForce;
         public float stunTimer;
+        public float followWaitTime;
         [Header("Battle State")]
         public HealthState health;
     }
@@ -57,12 +58,21 @@ public class BossController : MonoBehaviour
         Idle,
         RocketArms,
         BanHammer,
-        Summoning
+        Shooting,
+        Summoning,
+        Tired
+    }
+
+    public enum ProjectileState
+    {
+        Spread,
+        Follow
     }
     
     [Header("State of the Fight")]
     public HealthState health;
     public BattleState battle;
+    public ProjectileState projectile;
     private RoomGridManager _roomGridManager;
     
     [Header("Player Reference")]
@@ -119,20 +129,52 @@ public class BossController : MonoBehaviour
         {
             if (stat.health == health)
             {
-                Vector2 direction = (_player.transform.position - transform.position).normalized;
-                // instantiate a projectile and give it velocity
-                Vector2 attackPosition = new Vector2(transform.position.x + direction.x * projectileSpawnDistance, transform.position.y + direction.y * projectileSpawnDistance);
-                GameObject newProjectile = Instantiate(bossProjectile, attackPosition, Quaternion.identity);
-                Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
-                ProjectileRb.velocity = direction * stat.projectileSpeed;
-                newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
-                Managers.AudioManager.Instance.PlayEnemyShotSound();
-                            
-                // set damage of projectile
-                EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
-                controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer);                
+                if (projectile == ProjectileState.Follow)
+                {
+                    StartCoroutine(FollowProjectile(stat));
+                    projectile = ProjectileState.Spread;
+                }
+                else if (projectile == ProjectileState.Spread)
+                {
+                    Vector2 direction = (_player.transform.position - transform.position).normalized;
+                    // instantiate a projectile and give it velocity
+                    Vector2 attackPosition = new Vector2(transform.position.x + direction.x * projectileSpawnDistance, transform.position.y + direction.y * projectileSpawnDistance);
+                    GameObject newProjectile = Instantiate(bossProjectile, attackPosition, Quaternion.identity);
+                    Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
+                    ProjectileRb.velocity = direction * stat.projectileSpeed;
+                    newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
+                    Managers.AudioManager.Instance.PlayEnemyShotSound();
+                                
+                    // set damage of projectile
+                    EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
+                    controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer);                       
+                }
             }
         }
 
+    }
+
+    private IEnumerator FollowProjectile(Stats stat)
+    {
+        for (int i = 0; i < stat.projectileCount; i++)
+        {
+            // set direction of the projectile
+            Vector2 direction = (_player.transform.position - transform.position).normalized;
+            
+            // instantiate a projectile and give it velocity
+            Vector2 attackPosition = new Vector2(transform.position.x + direction.x * projectileSpawnDistance, transform.position.y + direction.y * projectileSpawnDistance);
+            GameObject newProjectile = Instantiate(bossProjectile, attackPosition, Quaternion.identity);
+            Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
+            ProjectileRb.velocity = direction * stat.projectileSpeed;
+            newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
+            Managers.AudioManager.Instance.PlayEnemyShotSound();
+                            
+            // set damage of projectile
+            EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
+            controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer); 
+            
+            // wait time for next projectile
+            yield return new WaitForSeconds(stat.followWaitTime);
+        }
     }
 }

@@ -1601,12 +1601,16 @@ PrefabInstance:
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: projectile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: bossProjectile
       value: 
       objectReference: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: projectileSpawnDistance
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[0].stunTimer
@@ -1629,20 +1633,40 @@ PrefabInstance:
       value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[0].followWaitTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[0].knockbackForce
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[1].followWaitTime
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[1].knockbackForce
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[2].followWaitTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[2].knockbackForce
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[3].followWaitTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[3].knockbackForce
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[4].followWaitTime
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[4].knockbackForce
