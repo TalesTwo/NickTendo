@@ -19432,6 +19432,9 @@ MonoBehaviour:
   pitLayer:
     serializedVersion: 2
     m_Bits: 64
+  spawnLayer:
+    serializedVersion: 2
+    m_Bits: 0
   nodeRadius: 0.5
 --- !u!114 &2690134955688737402
 MonoBehaviour:
