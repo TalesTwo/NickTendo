@@ -27675,6 +27675,9 @@ MonoBehaviour:
       minSpawnCount: 1
       maxSpawnCount: 1
       spawnChance: 0.25
+  minRoomDifficulty: 1
+  maxRoomDifficulty: 20
+  spawnVariance: 0
 --- !u!1 &7337024909818260417
 GameObject:
   m_ObjectHideFlags: 0

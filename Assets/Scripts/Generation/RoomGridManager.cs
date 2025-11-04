@@ -9,6 +9,7 @@ public class RoomGridManager : MonoBehaviour
     [Header("Room Grid Details")]
     public LayerMask unwalkableLayer;
     public LayerMask pitLayer;
+    public LayerMask spawnLayer;
     private Vector2 gridRoomSize;
     public float nodeRadius = 0.5f;
 
@@ -16,6 +17,11 @@ public class RoomGridManager : MonoBehaviour
     private Node[,] _walkGrid;
     // for flying paths
     private Node[,] _flyGrid;
+    // Spawn locations
+    private List<Node> _spawnableNodes = new List<Node>();
+
+    // pit locations
+    private List<Vector2> _pitLocations = new List<Vector2>();
     private Vector2 _bottomLeft;
     private int gridSizeX, gridSizeY;
     
@@ -138,7 +144,7 @@ public class RoomGridManager : MonoBehaviour
     {
         _walkGrid = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
         _flyGrid  = new Node[gridSizeX * resolutionMultiplier, gridSizeY * resolutionMultiplier];
-
+        _spawnableNodes.Clear();
         float scaledRadius = nodeRadius / resolutionMultiplier;
 
         for (int x = 0; x < gridSizeX * resolutionMultiplier; x++)
@@ -154,14 +160,24 @@ public class RoomGridManager : MonoBehaviour
 
                 bool hasWall = Physics2D.OverlapBox(worldPoint, boxSize, 0f, unwalkableLayer);
                 bool isPit = Physics2D.OverlapBox(worldPoint, boxSize, 0f, pitLayer);
+                bool isSpawnable = Physics2D.OverlapBox(worldPoint, boxSize, 0f, spawnLayer);
 
                 // Ground grid (can't walk on pits)
-                bool groundWalkable = !hasWall && !isPit;
+                bool groundWalkable = (!hasWall && !isPit) || isSpawnable;
                 // Flying grid (ignores pits)
                 bool airWalkable = !hasWall;
 
                 _walkGrid[x, y] = new Node(groundWalkable, worldPoint, x, y);
                 _flyGrid[x, y] = new Node(airWalkable, worldPoint, x, y);
+                // Record pit locations
+                if (isPit)
+                {
+                    _pitLocations.Add(worldPoint);
+                }
+                if (isSpawnable)
+                {
+                    _spawnableNodes.Add(_walkGrid[x, y]);
+                }
             }
         }
     }
@@ -207,7 +223,24 @@ public class RoomGridManager : MonoBehaviour
     }
     
     
-    
+    public Transform FindValidSpawnableCell()
+    {
+        if (_spawnableNodes == null || _spawnableNodes.Count == 0)
+        {
+            Debug.LogWarning($"No cached spawnable nodes found for {name}");
+            return null;
+        }
+
+        Node chosenNode = _spawnableNodes[UnityEngine.Random.Range(0, _spawnableNodes.Count)];
+
+        GameObject temp = new GameObject("TempSpawnPoint");
+        temp.transform.position = chosenNode.worldPosition;
+        temp.transform.SetParent(transform);
+        Destroy(temp, 0.5f);
+
+        return temp.transform;
+    }
+
     public Transform FindValidWalkableCell(bool isFlying = false)
     {
         // Pick the correct grid
@@ -303,10 +336,28 @@ public class RoomGridManager : MonoBehaviour
         return startNode; // fallback to original even if blocked
     }
 
+    public Vector3 GetNearestPitToLocation(Vector3 position)
+    {
+        // Given a particular position, find the nearest pit location from the _pitLocations list
+        Vector3 nearestPit = Vector3.zero;
+        float nearestDistance = float.MaxValue;
 
+        foreach (Vector2 pitPos in _pitLocations)
+        {
+            // Compare in 2D but output a 3D position (assuming pits are stored as Vector2)
+            float distance = Vector2.Distance(new Vector2(position.x, position.y), pitPos);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestPit = new Vector3(pitPos.x, pitPos.y, position.z);
+            }
+        }
+
+        return nearestPit;
+    }
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    /*
+    
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -337,7 +388,7 @@ public class RoomGridManager : MonoBehaviour
         }
     }
     
-    */
+    
 }
 
 
@@ -347,4 +398,3 @@ public class RoomGridManager : MonoBehaviour
     
 
     
-

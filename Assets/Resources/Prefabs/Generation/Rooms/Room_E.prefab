@@ -5626,6 +5626,9 @@ MonoBehaviour:
       minSpawnCount: 1
       maxSpawnCount: 2
       spawnChance: 0.5
+  minRoomDifficulty: 1
+  maxRoomDifficulty: 20
+  spawnVariance: 0
 --- !u!1001 &2666819155788606910
 PrefabInstance:
   m_ObjectHideFlags: 0
