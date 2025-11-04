@@ -52,7 +52,7 @@ public class RoomSpawnController : MonoBehaviour
     {
         
         // Get access to the Room
-        Transform SpawnLocation = _roomGridManager.FindValidWalkableCell();
+        Transform SpawnLocation = _roomGridManager.FindValidSpawnableCell();
         
         // if there is no safe spawn location, do not spawn anything, as something went wrong in this room
         if (SpawnLocation == null)
@@ -121,7 +121,7 @@ public class RoomSpawnController : MonoBehaviour
                 int spawnCount = CalculateSpawnNumber(enemyData, _room.roomDifficulty);
                 for (int i = 0; i < spawnCount; i++)
                 {
-                    Transform spawnLocation = _roomGridManager.FindValidWalkableCell();
+                    Transform spawnLocation = _roomGridManager.FindValidSpawnableCell();
                     if (spawnLocation != null)
                     {
                         DebugUtils.Log("Spawning enemy at the following location: " + spawnLocation.position);
@@ -160,7 +160,7 @@ public class RoomSpawnController : MonoBehaviour
                 int spawnCount = UnityEngine.Random.Range(itemData.minSpawnCount, itemData.maxSpawnCount + 1);
                 for (int i = 0; i < spawnCount; i++)
                 {
-                    Transform spawnLocation = _roomGridManager.FindValidWalkableCell();
+                    Transform spawnLocation = _roomGridManager.FindValidSpawnableCell();
                     if (spawnLocation != null)
                     {
                         // cast the enemy prefab to a BaseItem

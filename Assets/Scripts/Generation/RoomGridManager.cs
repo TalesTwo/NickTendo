@@ -163,7 +163,7 @@ public class RoomGridManager : MonoBehaviour
                 bool isSpawnable = Physics2D.OverlapBox(worldPoint, boxSize, 0f, spawnLayer);
 
                 // Ground grid (can't walk on pits)
-                bool groundWalkable = !hasWall && !isPit;
+                bool groundWalkable = (!hasWall && !isPit) || isSpawnable;
                 // Flying grid (ignores pits)
                 bool airWalkable = !hasWall;
 
@@ -174,7 +174,7 @@ public class RoomGridManager : MonoBehaviour
                 {
                     _pitLocations.Add(worldPoint);
                 }
-                if (isSpawnable && groundWalkable)
+                if (isSpawnable)
                 {
                     _spawnableNodes.Add(_walkGrid[x, y]);
                 }
@@ -357,7 +357,7 @@ public class RoomGridManager : MonoBehaviour
     }
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    /*
+    
     private void OnDrawGizmos()
     {
         // Draw the boundary of the grid
@@ -388,7 +388,7 @@ public class RoomGridManager : MonoBehaviour
         }
     }
     
-    */
+    
 }
 
 
