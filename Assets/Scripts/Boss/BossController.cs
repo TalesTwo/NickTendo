@@ -6,9 +6,9 @@ using UnityEngine;
  * The central hub for controlling all things boss fight
  *
  * This script is responsible for:
- * * initiating the arm attacks
+ * * initiating the arm attacks (finished)
  * * spawning minions
- * * shooting projectiles
+ * * shooting projectiles (next)
  * * managing health
  * * calling for animations
  * * calling for the arms to perform actions
@@ -77,13 +77,11 @@ public class BossController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             LaunchArm(leftArmController);
-            //LaunchLeftArm();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             LaunchArm(rightArmController);
-            //LaunchRightArm();
         }
     }
 

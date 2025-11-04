@@ -43,7 +43,8 @@ public class BossArmController : MonoBehaviour
     public float offScreenXCoordinate = 30f;
     private Vector2 _velocity = Vector2.zero;
     public float smoothDampTime = 0.2f;
-    //public float rocketAttackTime = 0.1f;
+    private Vector2 _offScreenPos;
+    private Vector2 _startPos;
     
     private bool _rocketReady = false;
     [Header("Arm Bounds")]
@@ -70,6 +71,8 @@ public class BossArmController : MonoBehaviour
     public void LaunchAttack(int numberOfRockets, float rocketAttackTime)
     {
         Vector2 destination = new Vector2(offScreenXCoordinate * DirectionModifier, transform.position.y);
+        _offScreenPos = destination;
+        _startPos = transform.position;
         StartCoroutine(MoveArmOffScreen(destination));
         StartCoroutine(RocktAttack(numberOfRockets, rocketAttackTime));
     }
@@ -97,6 +100,10 @@ public class BossArmController : MonoBehaviour
         {
             yield return null;
         }
+        
+        Quaternion armRotation = arm.transform.rotation;
+        Quaternion forearmRotation = forearm.transform.rotation;
+        Quaternion handRotation = hand.transform.rotation;
         
         // Step 2: adjust piece rotations
         arm.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -151,14 +158,32 @@ public class BossArmController : MonoBehaviour
             while (true)
             {
                 transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
-                if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 1.0f)
+                if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 2.0f)
                 {
                     break;
                 }
                 yield return null;
             }            
         }
-
         
+        // step 5: after all cycles, return to the head
+
+        arm.transform.rotation = armRotation;
+        forearm.transform.rotation = forearmRotation;
+        hand.transform.rotation = handRotation;
+
+        transform.position = _offScreenPos;
+        
+        while (true)
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, _startPos, ref _velocity, smoothDampTime);
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), _startPos) < 0.01f)
+            {
+                break;
+            }
+            yield return null;
+        }    
+        
+
     }
 }
