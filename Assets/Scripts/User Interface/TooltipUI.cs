@@ -24,10 +24,15 @@ public class TooltipUI : MonoBehaviour
     private float _yPositionPadding;
 
     private RectTransform _tooltipTransform;
+    private float _baseXPosPadding;
+    private float _baseYPosPadding;
 
     private void Awake()
     {
         _tooltipTransform = GetComponent<RectTransform>();
+        _baseXPosPadding = _xPositionPadding;
+        _baseYPosPadding = _yPositionPadding;
+       
     }
 
     private void SetTooltipText(string TooltipText)
@@ -81,5 +86,20 @@ public class TooltipUI : MonoBehaviour
         _tooltipPosition.y += _yPositionPadding;
 
         _tooltipTransform.anchoredPosition = _tooltipPosition;
+    }
+
+    public void SetXPadding(float _newXPadding)
+    {
+        _xPositionPadding = _newXPadding;
+    }
+    public void SetYPadding(float _newYPadding)
+    {
+        _yPositionPadding = _newYPadding;
+    }
+
+    public void ResetPadding()
+    {
+        _xPositionPadding = _baseXPosPadding;
+        _yPositionPadding = _baseYPosPadding;
     }
 }

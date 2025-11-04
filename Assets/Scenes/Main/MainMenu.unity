@@ -324,6 +324,14 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
+    - target: {fileID: 5955609192846353349, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
+      propertyPath: _effectTime
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955609192846353349, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
+      propertyPath: _scaleFactor
+      value: 1.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7683716711964075993, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_Name
       value: Button
