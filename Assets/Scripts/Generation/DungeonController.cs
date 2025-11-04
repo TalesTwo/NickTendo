@@ -78,7 +78,7 @@ public class DungeonController : Singleton<DungeonController>
         return null;
     }
     
-    public Vector3 SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType, int enemyLevelOverride = -1)
+    public Vector3 SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType, bool addToRoomList = true, int enemyLevelOverride = -1)
     {
         //  Get the current room
         Room currentRoom = GetCurrentRoom();
@@ -109,7 +109,7 @@ public class DungeonController : Singleton<DungeonController>
         {
             return Vector3.zero;
         }
-        Vector3 spawnLocation = roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, true, enemyLevelOverride);
+        Vector3 spawnLocation = roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, addToRoomList, enemyLevelOverride);
         return spawnLocation;
 
     }
