@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -678532733393228705, guid: b76553e36f1ac7a449540f0110d68905, type: 3}
+  m_Sprite: {fileID: -972353540487338045, guid: ebaf4af4603829a42947f0cabab2b76c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,13 +133,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.64, y: 2.5}
+    oldSize: {x: 1, y: 1.625}
     newSize: {x: 1, y: 0.715}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.94, y: 3.65}
+  m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &495245033008982861
 MonoBehaviour:
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteractPrompt: 1
-  interactPromptOffset: {x: 0, y: 1, z: 0}
+  interactPromptOffset: {x: 0, y: 1.2, z: 0}
   attachedPromptToObject: 0
 --- !u!1001 &533687451380696763
 PrefabInstance:
