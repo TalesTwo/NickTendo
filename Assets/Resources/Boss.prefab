@@ -54,32 +54,80 @@ MonoBehaviour:
   face: {fileID: 4485938005947340060}
   health: 0
   battle: 0
+  projectile: 1
   attacks:
-  - rocketCountPerArm: 0
-    rocketAttackTime: 2
+  - rocketCountPerArm: 1
+    rocketAttackTime: 1.5
     enemiesSpawning: 3
     enemiesDifficulty: 5
+    projectileCount: 5
+    projectileSpeed: 4
+    projectileDamage: 2
+    knockbackForce: 500
+    stunTimer: 0.7
+    followWaitTime: 0.3
+    spreadWavesCount: 3
+    spreadWaitTime: 1
+    spreadAngle: 80
     health: 0
-  - rocketCountPerArm: 0
-    rocketAttackTime: 1.6
+  - rocketCountPerArm: 3
+    rocketAttackTime: 1.2
     enemiesSpawning: 4
     enemiesDifficulty: 10
+    projectileCount: 7
+    projectileSpeed: 5
+    projectileDamage: 2
+    knockbackForce: 500
+    stunTimer: 0.7
+    followWaitTime: 0.3
+    spreadWavesCount: 0
+    spreadWaitTime: 0
+    spreadAngle: 0
     health: 1
-  - rocketCountPerArm: 0
-    rocketAttackTime: 1.2
-    enemiesSpawning: 5
-    enemiesDifficulty: 15
-    health: 2
-  - rocketCountPerArm: 0
-    rocketAttackTime: 1
-    enemiesSpawning: 6
-    enemiesDifficulty: 20
-    health: 3
   - rocketCountPerArm: 3
     rocketAttackTime: 1
+    enemiesSpawning: 5
+    enemiesDifficulty: 15
+    projectileCount: 9
+    projectileSpeed: 6
+    projectileDamage: 3
+    knockbackForce: 500
+    stunTimer: 0.7
+    followWaitTime: 0.3
+    spreadWavesCount: 0
+    spreadWaitTime: 0
+    spreadAngle: 0
+    health: 2
+  - rocketCountPerArm: 3
+    rocketAttackTime: 0.9
+    enemiesSpawning: 6
+    enemiesDifficulty: 20
+    projectileCount: 11
+    projectileSpeed: 7
+    projectileDamage: 3
+    knockbackForce: 500
+    stunTimer: 0.7
+    followWaitTime: 0.3
+    spreadWavesCount: 0
+    spreadWaitTime: 0
+    spreadAngle: 0
+    health: 3
+  - rocketCountPerArm: 3
+    rocketAttackTime: 0.9
     enemiesSpawning: 7
     enemiesDifficulty: 20
+    projectileCount: 13
+    projectileSpeed: 7
+    projectileDamage: 3
+    knockbackForce: 500
+    stunTimer: 0.7
+    followWaitTime: 0.3
+    spreadWavesCount: 0
+    spreadWaitTime: 0
+    spreadAngle: 0
     health: 4
+  bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
+  projectileSpawnDistance: 2
 --- !u!1 &1994174248312641029
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +668,7 @@ Transform:
   m_GameObject: {fileID: 3398844250087538318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 2.99, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -673,7 +721,6 @@ MonoBehaviour:
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
-  rocketAttackTime: 2
   maxXCoordinate: 10
   minXCoordinate: -10
   maxYCoordinate: 0
@@ -1231,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 5746805199241599897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -2.99, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1284,7 +1331,6 @@ MonoBehaviour:
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
-  rocketAttackTime: 2
   maxXCoordinate: 10
   minXCoordinate: -10
   maxYCoordinate: 0
