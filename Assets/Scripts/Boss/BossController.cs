@@ -83,6 +83,11 @@ public class BossController : MonoBehaviour
         {
             LaunchArm(rightArmController);
         }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            LaunchProjectile();
+        }
     }
 
     private void LaunchArm(BossArmController armController)
@@ -94,5 +99,10 @@ public class BossController : MonoBehaviour
                 armController.LaunchAttack(stat.rocketCountPerArm, stat.rocketAttackTime);
             }
         }
+    }
+
+    private void LaunchProjectile()
+    {
+        
     }
 }
