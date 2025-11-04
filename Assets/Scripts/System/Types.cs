@@ -102,7 +102,8 @@ public static class Types
         FollowerEnemy,
         RangedEnemy,
         ChestEnemy,
-        PotEnemy
+        PotEnemy,
+        ChaoticFollowerEnemy,
     }
     
     /* ----------------- END GENERATION TYPES ----------------- */

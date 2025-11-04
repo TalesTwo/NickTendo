@@ -121,12 +121,8 @@ public class RoomSpawnController : MonoBehaviour
                 int spawnCount = CalculateSpawnNumber(enemyData, _room.roomDifficulty);
                 for (int i = 0; i < spawnCount; i++)
                 {
-                    Transform spawnLocation = _roomGridManager.FindValidSpawnableCell();
-                    if (spawnLocation != null)
-                    {
-                        DebugUtils.Log("Spawning enemy at the following location: " + spawnLocation.position);
-                        SpawnEnemy(enemyData.enemyPrefab.GetComponent<EnemyControllerBase>(), spawnLocation);
-                    }
+
+                    SpawnEnemyAtValidLocation(enemyData.enemyPrefab.GetComponent<EnemyControllerBase>());
                 }
                 // Remove the guaranteed enemy from the list so we don't spawn it again
                 enemiesToSpawn.Remove(enemyData);
@@ -176,6 +172,7 @@ public class RoomSpawnController : MonoBehaviour
         }
     }
 
+    /*
     private void SpawnEnemy(EnemyControllerBase EnemyBasePrefab, Transform SpawnLocation)
     {
         EnemyControllerBase spawnedEnemy = Instantiate(EnemyBasePrefab, SpawnLocation.position, Quaternion.identity);
@@ -189,6 +186,37 @@ public class RoomSpawnController : MonoBehaviour
         }
         DebugUtils.Log("Spawned enemy: " + spawnedEnemy.name + " in room: " + _room.name);
     }
+    */
+    public void SpawnEnemyAtValidLocation(EnemyControllerBase enemyBasePrefab, bool addToRoomList = true)
+    {
+        // Step 1: Find a valid spawn location
+        Transform spawnLocation = _roomGridManager.FindValidSpawnableCell();
+        if (spawnLocation == null)
+        {
+            Debug.LogWarning("Failed to find a valid spawn location.");
+            return;
+        }
+
+        DebugUtils.Log("Spawning enemy at location: " + spawnLocation.position);
+
+        // Step 2: Instantiate and initialize the enemy
+        EnemyControllerBase spawnedEnemy = Instantiate(enemyBasePrefab, spawnLocation.position, Quaternion.identity);
+
+        // Set as child of the room
+        spawnedEnemy.transform.parent = _room.transform;
+
+        // Initialize with room difficulty
+        spawnedEnemy.Initialize(_room.roomDifficulty);
+
+        // Step 3: Track enemies if type matches
+        if (spawnedEnemy is FollowerEnemyController && addToRoomList || spawnedEnemy is RangedEnemyController && addToRoomList)
+        {
+            enemiesInRoom.Add(spawnedEnemy);
+        }
+
+        DebugUtils.Log($"Spawned enemy: {spawnedEnemy.name} in room: {_room.name}");
+    }
+
 
     private int CalculateSpawnNumber(SpawnData spawnData, int roomDifficulty)
     {

@@ -77,4 +77,48 @@ public class DungeonController : Singleton<DungeonController>
         }
         return null;
     }
+    
+    public void SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType)
+    {
+        //  Get the current room
+        Room currentRoom = GetCurrentRoom();
+        if (currentRoom == null )
+        {
+            Debug.LogWarning("No current room found — cannot spawn enemy.");
+            return;
+        }
+        // get the spawn room controller 
+        RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+        if (roomSpawnController == null)
+        {
+            Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
+            return;
+        }
+
+        //  Get the spawn controller for this room
+        RoomSpawnController spawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+        if (spawnController == null)
+        {
+            Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
+            return;
+        }
+
+        //  Get the enemy prefab by type from your EnemyDatabase or Factory
+        EnemyControllerBase enemyPrefab = EnemyDatabase.Instance.GetEnemyPrefabByType(enemyType);
+        if (enemyPrefab == null)
+        {
+            return;
+        }
+        roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, true);
+        
+    }
+    
+    public void Update()
+    {
+     if(Input.GetKeyDown(KeyCode.K))   
+     {
+         DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy);
+     }
+    }
+
 }
