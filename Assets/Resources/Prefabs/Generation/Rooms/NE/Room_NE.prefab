@@ -496,6 +496,9 @@ MonoBehaviour:
   pitLayer:
     serializedVersion: 2
     m_Bits: 64
+  spawnLayer:
+    serializedVersion: 2
+    m_Bits: 0
   nodeRadius: 0.5
 --- !u!114 &185456490889213036
 MonoBehaviour:
@@ -530,6 +533,9 @@ MonoBehaviour:
       minSpawnCount: 2
       maxSpawnCount: 4
       spawnChance: 0.25
+  minRoomDifficulty: 1
+  maxRoomDifficulty: 20
+  spawnVariance: 1
 --- !u!1 &3404107223123663375
 GameObject:
   m_ObjectHideFlags: 0

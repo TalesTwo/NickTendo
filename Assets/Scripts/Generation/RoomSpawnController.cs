@@ -187,14 +187,14 @@ public class RoomSpawnController : MonoBehaviour
         DebugUtils.Log("Spawned enemy: " + spawnedEnemy.name + " in room: " + _room.name);
     }
     */
-    public void SpawnEnemyAtValidLocation(EnemyControllerBase enemyBasePrefab, bool addToRoomList = true)
+    public Vector3 SpawnEnemyAtValidLocation(EnemyControllerBase enemyBasePrefab, bool addToRoomList = true, int enemyLevelOverride = -1)
     {
         // Step 1: Find a valid spawn location
         Transform spawnLocation = _roomGridManager.FindValidSpawnableCell();
         if (spawnLocation == null)
         {
             Debug.LogWarning("Failed to find a valid spawn location.");
-            return;
+            return Vector3.zero;
         }
 
         DebugUtils.Log("Spawning enemy at location: " + spawnLocation.position);
@@ -206,7 +206,9 @@ public class RoomSpawnController : MonoBehaviour
         spawnedEnemy.transform.parent = _room.transform;
 
         // Initialize with room difficulty
-        spawnedEnemy.Initialize(_room.roomDifficulty);
+        // if we have a level over-ride, use that instead (if its not -1)
+        spawnedEnemy.Initialize(enemyLevelOverride != -1 ? enemyLevelOverride : _room.roomDifficulty);
+
 
         // Step 3: Track enemies if type matches
         if (spawnedEnemy is FollowerEnemyController && addToRoomList || spawnedEnemy is RangedEnemyController && addToRoomList)
@@ -215,6 +217,8 @@ public class RoomSpawnController : MonoBehaviour
         }
 
         DebugUtils.Log($"Spawned enemy: {spawnedEnemy.name} in room: {_room.name}");
+        // return the Vector3 position of the spawned enemy
+        return spawnedEnemy.transform.position;
     }
 
 
