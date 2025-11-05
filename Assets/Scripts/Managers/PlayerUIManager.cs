@@ -83,7 +83,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     public void SetHealth()
     {
         _width = widthPerUnitHealth * PlayerStats.Instance.GetMaxHealth();
-        _backgroundWidth = _width;
+        _backgroundWidth = widthPerUnitHealth * PlayerStats.Instance.GetMaxHealth();
         _healthWidth = widthPerUnitHealth * PlayerStats.Instance.GetCurrentHealth();
 
         healthBar.sizeDelta = new Vector2(_width, healthBarHeight);
