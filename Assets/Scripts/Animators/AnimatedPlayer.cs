@@ -40,6 +40,14 @@ public class AnimatedPlayer : AnimatedEntity
     private void Update()
     {
         AnimationUpdate();
+
+        List<int> footstepsFrame = new List<int>();
+        int currentIndex = 0;
+
+        if (currentIndex == index && footstepsFrame.Contains(index))
+        {
+            
+        }
     }
 
     public void SetAttacking()
