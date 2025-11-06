@@ -24,7 +24,9 @@ public class BossController : MonoBehaviour
         public int rocketCountPerArm;
         public float rocketAttackTime;
         [Header("Minions")]
-        public int enemiesSpawning;
+        public int numberOfFollowers;
+        public int numberOfRanged;
+        public int numberOfChaoticFollowers;
         public int enemiesDifficulty;
         [Header("Projectiles")]
         public int projectileCount;
