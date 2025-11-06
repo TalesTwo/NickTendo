@@ -66,6 +66,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i <= 2; i++)
         {
+            ShopUIM.ItemSlots[i].SetActive(true);
             ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
             ShopUIM.ItemDescriptions[i] = ShopList[i].GetComponent<ShopItem>().GetDescription();

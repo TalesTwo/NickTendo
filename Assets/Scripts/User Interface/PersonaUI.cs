@@ -46,6 +46,7 @@ public class PersonaUI : MonoBehaviour
             playerController.enabled = false;
         }
         EventBroadcaster.Broadcast_OpenPersonaUI();
+        EventBroadcaster.Broadcast_PlayerOpenMenu();
     }
     public void ClosePersonaUI()
     {
@@ -63,6 +64,7 @@ public class PersonaUI : MonoBehaviour
         }
         // tell the SelectionInteraction that the UI is closed
         EventBroadcaster.Broadcast_ClosePersonaUI();
+        EventBroadcaster.Broadcast_PlayerCloseMenu();
 
     }
 

@@ -147,9 +147,12 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             if (BuffValue + GetCurrentHealth() >= GetMaxHealth())
             {
-                BuffValue = GetMaxHealth();
+                SetCurrentHealth(GetMaxHealth());
             }
-            UpdateCurrentHealth(BuffValue);
+            else
+            {
+                UpdateCurrentHealth(BuffValue);
+            }    
             Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
         else if (BuffType == PlayerStatsEnum.Keys)
