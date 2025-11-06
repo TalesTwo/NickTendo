@@ -110,13 +110,15 @@ public class PlayerController : MonoBehaviour
                 Invoke(nameof(DashMovingStop), PlayerStats.Instance.GetDashDistance());
             }            
         }
-        if (_isWalking) _walktimer += Time.deltaTime;
-        else _walktimer = 0;
-        if (_walktimer >= 0.5 && _isActive)
-        {
-            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
-            _walktimer = 0;
-        }
+ 
+        //if (_isWalking) _walktimer += Time.deltaTime;
+        //else _walktimer = 0;
+        //if (_walktimer >= 0.5 && _isActive)
+        //{
+          //  Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            //_walktimer = 0;
+        //}
+        
     }
 
 

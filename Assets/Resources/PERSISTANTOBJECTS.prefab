@@ -1129,6 +1129,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: footstepFrames.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: 'footstepFrames.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: 'footstepFrames.Array.data[1]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
+      propertyPath: 'footstepFrames.Array.data[2]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160741386850893878, guid: 94957cfbedc6d6e4b84ca35083606fb0, type: 3}
       propertyPath: DefaultAnimationCycle.Array.size
       value: 6
       objectReference: {fileID: 0}
