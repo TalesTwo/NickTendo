@@ -16,6 +16,7 @@ public class ShopUIManager : MonoBehaviour
 
     // Lists that store all the UI elements that have need functionality
     // (maybe change from public to serialized field)
+    public GameObject[] ItemSlots;
     public Image[] ItemImages;
     public Button[] ItemButtons;
     public TextMeshProUGUI[] ItemNames;
@@ -90,10 +91,7 @@ public class ShopUIManager : MonoBehaviour
     public void RemoveItemFromShop(int Index)
     {
         // Removes all the info for a bought item
-        Destroy(ItemImages[Index]);
-        Destroy(ItemButtons[Index].gameObject);
-        Destroy(ItemNames[Index]);
-        Destroy(ItemSpotlights[Index]);
+        ItemSlots[Index].SetActive(false);
         Tooltip.GetComponent<TooltipUI>().HideTooltip();
     }
 
