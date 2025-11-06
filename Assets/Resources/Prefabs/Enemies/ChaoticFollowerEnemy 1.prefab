@@ -251,6 +251,7 @@ MonoBehaviour:
   Framerate: 12
   SpriteRenderer: {fileID: 6783353849636327102}
   index: 0
+  footstepFrames: 0200000005000000
 --- !u!114 &6631985905808627754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +271,8 @@ MonoBehaviour:
   hitEffectDistance: 0.2
   hitFlashDuration: 0.1
   enemyType: 0
+  _separationRadius: 1
+  _separationForce: 2
   chaosRadius: 2
   chaosUpdateInterval: 1.5
 --- !u!1 &8540734103842761648

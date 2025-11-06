@@ -111,6 +111,8 @@ MonoBehaviour:
   hitEffectDistance: 0.3
   hitFlashDuration: 0.1
   enemyType: 1
+  _separationRadius: 1
+  _separationForce: 2
   projectile: {fileID: 2064634610991927975, guid: 2c450041c0744594197e81c49e1ea195, type: 3}
   doNotHit:
     serializedVersion: 2
@@ -272,3 +274,4 @@ MonoBehaviour:
   Framerate: 8
   SpriteRenderer: {fileID: 5494889573112493696}
   index: 0
+  footstepFrames: 0100000003000000
