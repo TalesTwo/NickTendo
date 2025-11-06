@@ -112,6 +112,11 @@ public class BossController : MonoBehaviour
         {
             LaunchProjectile();
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SpawnMinions();
+        }
     }
 
     private void LaunchArm(BossArmController armController)
@@ -213,5 +218,16 @@ public class BossController : MonoBehaviour
         // set damage of projectile
         EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
         controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer); 
+    }
+
+    private void SpawnMinions()
+    {
+        foreach (Stats stat in attacks)
+        {
+            if (stat.health == health)
+            {
+                DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy, false, stat.enemiesDifficulty);
+            }
+        }
     }
 }
