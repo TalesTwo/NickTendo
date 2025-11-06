@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Managers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyControllerBase : SpawnableObject
 {
@@ -57,6 +59,12 @@ public class EnemyControllerBase : SpawnableObject
     [SerializeField] private float _separationForce = 2.0f;     // how strong the push is
     private List<EnemyControllerBase> _allEnemies;
 
+    [Header("Health Bar")]
+    [SerializeField] private bool _displayHealthBar = true;
+    [SerializeField] private Slider _healthSlider;
+    private float _maxHealth;
+    private Color[] _originalColors;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -72,7 +80,17 @@ public class EnemyControllerBase : SpawnableObject
         EventBroadcaster.ObjectFellInPit += OnFellInPit;
         EventBroadcaster.SetSeed += SetSeed;
         ParseStatsText();
-        
+
+        _maxHealth = health;
+        _originalColors = new Color[3];
+        int i = 0;
+        foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+        {
+            _originalColors[i++] = _image.color;
+            _image.color = Color.clear;
+        }
+
+
         Room currentRoom = DungeonController.Instance.GetCurrentRoom();
         _allEnemies = currentRoom.GetComponentInChildren<RoomSpawnController>().GetEnemiesInRoom();
     }
@@ -107,8 +125,6 @@ public class EnemyControllerBase : SpawnableObject
     {
         // step 1: check death condition
         CheckForDeath();
-
-        _direction = getPlayerDirection();
         
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
@@ -181,6 +197,7 @@ public class EnemyControllerBase : SpawnableObject
             Managers.AudioManager.Instance.PlayEnemyDamagedSound();
             health -= (int)PlayerStats.Instance.GetDashDamage();
             SetKnockBack();
+            SetHealthBar();
         } else if (collision.gameObject.CompareTag("PlayerAttack"))
         {
             Managers.AudioManager.Instance.PlayEnemyDamagedSound();
@@ -188,6 +205,7 @@ public class EnemyControllerBase : SpawnableObject
 
             health -= (int)PlayerStats.Instance.GetAttackDamage();
             SetKnockBack();
+            SetHealthBar();
         }
     }
     
@@ -262,6 +280,7 @@ public class EnemyControllerBase : SpawnableObject
     // splits the stats on a line
     private void ParseStatsText()
     {
+        DebugUtils.Log("test");
         string[] lines = statLineCSV.text.Split('\n');
         double lineNumber = (double)difficulty/difficultyScalingFactor;
         lineNumber = Math.Ceiling(lineNumber);
@@ -270,6 +289,19 @@ public class EnemyControllerBase : SpawnableObject
             lineNumber = 5;
         }
         GetStats(lines[(int)lineNumber]);
+    }
+
+    private void SetHealthBar()
+    {
+        if (_displayHealthBar) 
+        {
+            int i = 0;
+            foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+            {
+                _image.color = _originalColors[i++];
+            }
+            _healthSlider.value = health / _maxHealth; 
+        }
     }
 
     // method MUST be overriden in child class
