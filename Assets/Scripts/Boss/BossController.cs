@@ -28,6 +28,7 @@ public class BossController : MonoBehaviour
         public int numberOfRanged;
         public int numberOfChaoticFollowers;
         public int enemiesDifficulty;
+        public float timeBetweenEnemies;
         [Header("Projectiles")]
         public int projectileCount;
         public float projectileSpeed;
@@ -117,7 +118,7 @@ public class BossController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            SpawnMinions();
+            StartCoroutine(SpawnMinions());
         }
     }
 
@@ -222,13 +223,41 @@ public class BossController : MonoBehaviour
         controller.SetDamage(stat.projectileDamage, stat.knockbackForce, stat.stunTimer); 
     }
 
-    private void SpawnMinions()
+    private IEnumerator SpawnMinions()
     {
+        int follower = 0;
+        int ranged = 0;
+        int chaotic = 0;
+        
         foreach (Stats stat in attacks)
         {
             if (stat.health == health)
             {
-                DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy, false, stat.enemiesDifficulty);
+                while (stat.numberOfFollowers > follower || stat.numberOfRanged > ranged ||
+                       stat.numberOfChaoticFollowers > chaotic)
+                {
+                    if (stat.numberOfFollowers != follower)
+                    {
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy, false, stat.enemiesDifficulty);
+                        follower += 1;
+                        yield return new WaitForSeconds(stat.timeBetweenEnemies);
+                    }
+
+                    if (stat.numberOfRanged != ranged)
+                    {
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.RangedEnemy, false, stat.enemiesDifficulty);
+                        ranged += 1;
+                        yield return new WaitForSeconds(stat.timeBetweenEnemies);
+                    }
+
+                    if (stat.numberOfChaoticFollowers != chaotic)
+                    {
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
+                        chaotic += 1;
+                        yield return new WaitForSeconds(stat.timeBetweenEnemies);
+                    }                    
+                }
+
             }
         }
     }
