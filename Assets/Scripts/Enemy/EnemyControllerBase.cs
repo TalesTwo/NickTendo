@@ -163,6 +163,8 @@ public class EnemyControllerBase : SpawnableObject
         
 
         // iterate through all other enemies
+        if (_allEnemies == null)
+            return;
         foreach (EnemyControllerBase other in _allEnemies)
         {
             if (other == this || other == null || other._transform == null)

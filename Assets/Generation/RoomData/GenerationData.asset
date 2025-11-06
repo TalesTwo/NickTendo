@@ -16,6 +16,7 @@ MonoBehaviour:
   - roomType: 0
     roomPrefabs:
     - {fileID: 4328904834969820885, guid: c6d2382fb2aa63b489303d4e602364aa, type: 3}
+    - {fileID: 4328904834969820885, guid: fa45b2282f442b8459e3c56209b6a5e3, type: 3}
   - roomType: 1
     roomPrefabs:
     - {fileID: 2595589864118896423, guid: 229d604fb3447ba4db7999bec506a3a9, type: 3}
@@ -30,20 +31,23 @@ MonoBehaviour:
     - {fileID: 3752444015275546601, guid: 0db8dcd30020e3848b944eebb87eb50e, type: 3}
   - roomType: 5
     roomPrefabs:
-    - {fileID: 9129418544975448612, guid: ad7fe3ab5d7ccf2428bcc85e9e550f56, type: 3}
+    - {fileID: 9129418544975448612, guid: 216cf808d5873234cba9081044976f22, type: 3}
+    - {fileID: 9129418544975448612, guid: 2d6aa131b99f2494c99216a878ccda63, type: 3}
   - roomType: 6
     roomPrefabs:
     - {fileID: 8677134343594244541, guid: 4452dc2723e87344986e6a741972788d, type: 3}
+    - {fileID: 8677134343594244541, guid: 0467b5bce413ffc46a20250f83e6d784, type: 3}
   - roomType: 7
     roomPrefabs:
     - {fileID: 8239656342555435308, guid: 9ce1c785e86464d418818e358b89f89c, type: 3}
+    - {fileID: 8239656342555435308, guid: 4b769d8dfca493a488e497d345cfcc31, type: 3}
   - roomType: 8
     roomPrefabs:
     - {fileID: 8659786163336806181, guid: 5446465004972b948a2eb1c7ca0719ac, type: 3}
-    - {fileID: 8659786163336806181, guid: a5bbe65d070e8514ea9d9a18cdc669f8, type: 3}
+    - {fileID: 8659786163336806181, guid: 7a57e4a2269b0a0409642d864eeb6f62, type: 3}
   - roomType: 9
     roomPrefabs:
-    - {fileID: 5734311238141484597, guid: b338f3c42d091584282806687bf4c426, type: 3}
+    - {fileID: 5734311238141484597, guid: d62582263bc9ae6488fb0702fc95115b, type: 3}
     - {fileID: 5734311238141484597, guid: 6840714e46bbf83458ffd3c84117df98, type: 3}
   - roomType: 10
     roomPrefabs:
