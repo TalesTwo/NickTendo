@@ -9,11 +9,6 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : Singleton<PlayerUIManager>
 {
-    private float _width;
-    private float _healthWidth;
-    private float _backgroundWidth;
-    private bool _isHUDActive;
-
     [Header("UI Elements")] 
     public float widthPerUnitHealth = 25;
     public float healthBarHeight = 20;
@@ -36,25 +31,37 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private Image _dashIcon;
 
+    private float _width;
+    private float _healthWidth;
+    private float _backgroundWidth;
+    private bool _isHUDActive;
     private GameObject _player;
     private PlayerController _pController;
     private bool _hasStartedSlider;
     private bool _isPlayerAlive;
+    private bool _isPlayerInMenu;
+    private bool _didSkipCR;
 
     private void Start()
     {
-        EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerDamaged += HandlePlayerDamage;
         EventBroadcaster.PlayerDeath += HandlePlayerDeath;
+        EventBroadcaster.PlayerOpenMenu += HandlePlayerOpenMenu;
+        EventBroadcaster.PlayerCloseMenu += HandlePlayerCloseMenu;
+
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
         _pController = _player.GetComponent<PlayerController>();
+
         _isHUDActive = true;
         _dashSlider.value = 1;
         _dashSliderImage.color = Color.yellow;
         _hasStartedSlider = false;
         _isPlayerAlive = true;
+        _isPlayerInMenu = false;
+        _didSkipCR = false;
+
         SetHealth();
     }
 
@@ -66,7 +73,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         {
             HandleDashSlider();
             _hasStartedSlider = true;         
-            Invoke(nameof(ResetSlideBool), PlayerStats.Instance.GetDashCooldown());
+            Invoke(nameof(ResetSlide), PlayerStats.Instance.GetDashCooldown());
         }
 
         if (DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() > 0)
@@ -89,11 +96,6 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         healthBar.sizeDelta = new Vector2(_width, healthBarHeight);
         healthBackground.sizeDelta = new Vector2(_backgroundWidth, backgroundHeight);
         health.sizeDelta = new Vector2(_healthWidth, healthBarHeight);
-    }
-
-    void OnChangedStats(PlayerStatsEnum BuffType, float BuffValue)
-    {
-        
     }
 
     public void ToggleHUD()
@@ -131,23 +133,33 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _fillTime += Time.deltaTime;
             float _lerpValue = _fillTime / _cooldown;
             _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
-            yield return null;
+            yield return null;            
         }
     }
 
-    void ResetSlideBool()
+    void ResetSlide()
     {
         _hasStartedSlider = false;
         _dashIcon.color = Color.white;
-        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
-        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
-        AudioManager.Instance.PlayKeyGetSound();
+        if(!_isPlayerInMenu)
+        {
+            if (_didSkipCR)
+            {
+                _didSkipCR = false;
+            }
+            else
+            {
+                _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+                _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+                AudioManager.Instance.PlayKeyGetSound();
+            }
+        }
     }
 
     void HandlePlayerDamage()
     {
         SetHealth();
-        if (_isPlayerAlive)
+        if (_isPlayerAlive && !_isPlayerInMenu)
         {
             _healthIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
             _healthIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
@@ -157,5 +169,22 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandlePlayerDeath()
     {
         _isPlayerAlive = false;
+    }
+
+    void HandlePlayerOpenMenu()
+    {
+        _isPlayerInMenu = true;
+        if (_hasStartedSlider && _dashSlider.value < 1)
+        {
+            _didSkipCR = true;
+            _dashSlider.value = 1;
+            _dashIcon.color = Color.white;
+        }
+        _dashIcon.GetComponent<ScaleEffectsUI>().ResetScale();
+    }
+
+    void HandlePlayerCloseMenu()
+    {
+        _isPlayerInMenu = false;
     }
 }

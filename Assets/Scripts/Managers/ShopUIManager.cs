@@ -59,6 +59,7 @@ public class ShopUIManager : MonoBehaviour
     {
         if (ShopUI != null)
         {
+            EventBroadcaster.Broadcast_PlayerOpenMenu();
             ShopUI.SetActive(true);
             if (IsFirstOpen)
             {
@@ -74,6 +75,7 @@ public class ShopUIManager : MonoBehaviour
 
     void CloseShop()
     {
+        EventBroadcaster.Broadcast_PlayerCloseMenu();
         ShopUI.SetActive(false);
         PlayerUIManager.Instance.ToggleHUD();
         EventBroadcaster.Broadcast_StartStopAction();
