@@ -6,9 +6,9 @@ public class AnimatedFollowerEnemy : AnimatedEntity
 {
     // Start is called before the first frame update
 
-    private int currentindex = 0;
-    private bool hasstepped = false;
-    public List<int> footstepFrames;
+    //private int currentindex = 0;
+    //private bool hasstepped = false;
+    //public List<int> footstepFrames;
     void Start()
     {
         AnimationSetup();
@@ -18,15 +18,6 @@ public class AnimatedFollowerEnemy : AnimatedEntity
     void Update()
     {
         AnimationUpdate();
-        if (index != currentindex)
-        {
-            currentindex = index;
-            hasstepped = false;
-        }
-        if (footstepFrames.Contains(index) && !hasstepped)
-        {
-            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
-            hasstepped = true;
-        }
+
     }
 }
