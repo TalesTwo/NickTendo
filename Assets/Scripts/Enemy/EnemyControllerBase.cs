@@ -129,6 +129,9 @@ public class EnemyControllerBase : SpawnableObject
         // step 1: check death condition
         CheckForDeath();
         
+        // smh, this stays here
+        _direction = getPlayerDirection();
+        
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
         {
