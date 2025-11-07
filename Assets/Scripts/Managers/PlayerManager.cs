@@ -30,7 +30,16 @@ namespace Managers
             
         }
 
- 
+
+        public float GetNormalizedDistanceFromPlayer(Vector3 position, float maxDistance = 10f)
+        {
+            /*
+             * Takes in a vector and a max distance, and computed a normalzized distance from the player
+             */
+            float distance = Vector3.Distance(player.transform.position, position);
+            float normalizedDistance = Mathf.Clamp01(distance / maxDistance);
+            return 1 - normalizedDistance;
+        }
         
         private void OnObjectFellInPit(GameObject obj, Vector3 pitCenter)
         {
