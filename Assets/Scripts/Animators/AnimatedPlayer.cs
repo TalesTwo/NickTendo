@@ -13,7 +13,7 @@ public class AnimatedPlayer : AnimatedEntity
     public List<Sprite> runAnimation;
     public List<Sprite> hurtAnimation;
     public List<Sprite> toIdleAnimation;
-    public List<int> footstepFrames;
+   // public List<int> footstepFrames;
     
     private bool _isRunning = false;
     private bool _isAttacking = false;
@@ -21,8 +21,8 @@ public class AnimatedPlayer : AnimatedEntity
     private bool _isDead = false;
 
     //Walk values
-    private int currentindex;
-    private bool hasstepped = false;
+    //private int currentindex;
+    //private bool hasstepped = false;
 
     protected override void ResetBools()
     {
@@ -45,20 +45,7 @@ public class AnimatedPlayer : AnimatedEntity
     private void Update()
     {
         AnimationUpdate();
-        if (_isRunning)
-        {
-            if (index != currentindex)
-            {
-                currentindex = index;
-                hasstepped = false;
-            }
-            if(footstepFrames.Contains(index) && !hasstepped)
-            {
-                Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
-                hasstepped = true;
-            }
 
-        }
     }
 
     public void SetAttacking()
