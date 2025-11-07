@@ -26,7 +26,7 @@ public class AnimatedFollowerEnemy : AnimatedEntity
         }
         if (footstepFrames.Contains(index) && !hasstepped)
         {
-            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
             hasstepped = true;
         }
     }

@@ -26,7 +26,7 @@ public class AnimatedRangedEnemy : AnimatedEntity
         }
         if (footstepFrames.Contains(index) && !hasstepped)
         {
-            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
             hasstepped = true;
         }
     }
