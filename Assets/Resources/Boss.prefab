@@ -1274,6 +1274,7 @@ MonoBehaviour:
   offScreenXCoordinate: 30
   smoothDampTime: 1
   angleDampTime: 0.15
+  returnAngleDampTime: 0.4
   targetArmAngle: 0
   targetForearmAngle: 0
   maxXCoordinate: 10
@@ -2108,6 +2109,7 @@ MonoBehaviour:
   offScreenXCoordinate: 30
   smoothDampTime: 1
   angleDampTime: 0.15
+  returnAngleDampTime: 0.4
   targetArmAngle: 0
   targetForearmAngle: 0
   maxXCoordinate: 10

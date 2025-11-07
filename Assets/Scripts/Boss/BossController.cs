@@ -134,7 +134,38 @@ public class BossController : Singleton<BossController>
         {
             rightArmController.BecomeTired();
             leftArmController.BecomeTired();
-            // call to the animator to switch over to the exhausted face
+            
+            BossScreenController.Instance.SetIsExhausted(true);
+            
+            
+            // todo call to the animator to switch over to the exhausted face
+        }
+    }
+
+    public void TakeDamage()
+    {
+        rightArmController.BecomeUntired();
+        leftArmController.BecomeUntired();
+        
+        BossScreenController.Instance.SetIsExhausted(false);
+
+        switch (health)
+        {
+            case HealthState.Healthy:
+                health = HealthState.Light;
+                break;
+            case HealthState.Light:
+                health = HealthState.Medium;
+                break;
+            case HealthState.Medium:
+                health = HealthState.Heavy;
+                break;
+            case HealthState.Heavy:
+                health = HealthState.Dead;
+                break;
+            case HealthState.Dead:
+                Destroy(gameObject);
+                break;
         }
     }
 

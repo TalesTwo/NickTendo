@@ -56,6 +56,7 @@ public class BossArmController : MonoBehaviour
 
     [Header("Exhausted Phase")] 
     public float angleDampTime = 0.2f;
+    public float returnAngleDampTime;
     public float targetArmAngle;
     public float targetForearmAngle;
     private float _originalArmAngle;
@@ -96,6 +97,11 @@ public class BossArmController : MonoBehaviour
         StartCoroutine(MoveToTiredPosition());
     }
 
+    public void BecomeUntired()
+    {
+        StartCoroutine(MoveToUntiredPosition());
+    }
+
     private void SetExhaustedBools(bool isExhausted)
     {
         _shoulder.SetIsTired(isExhausted);
@@ -103,6 +109,23 @@ public class BossArmController : MonoBehaviour
         _elbow.SetIsTired(isExhausted);
         _forearm.SetIsTired(isExhausted);
         _hand.SetIsTired(isExhausted);
+    }
+
+    private IEnumerator MoveToUntiredPosition()
+    {
+        while (Mathf.Abs(arm.transform.eulerAngles.z - _originalArmAngle) > 0.1 ||
+               Mathf.Abs(forearm.transform.eulerAngles.z - _originalForearmAngle) > 0.1)
+        {
+            float armAngle = Mathf.SmoothDampAngle(arm.transform.eulerAngles.z, _originalArmAngle, ref _armVelocity, returnAngleDampTime);
+            float forearmAngle = Mathf.SmoothDampAngle(forearm.transform.eulerAngles.z, _originalForearmAngle, ref _forearmVelocity, returnAngleDampTime);
+
+            arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
+            forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
+            
+            yield return null;
+        }
+        
+        SetExhaustedBools(false);
     }
 
     private IEnumerator MoveToTiredPosition()
@@ -120,15 +143,6 @@ public class BossArmController : MonoBehaviour
 
             arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
             forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
-            
-            Debug.Log(arm.transform.eulerAngles.z);
-            Debug.Log(forearm.transform.eulerAngles.z);
-
-            Debug.Log(targetArmAngle);
-            Debug.Log(targetForearmAngle);
-            
-            Debug.Log(Mathf.Abs(arm.transform.eulerAngles.z - targetArmAngle));
-            Debug.Log(Mathf.Abs(forearm.transform.eulerAngles.z - targetForearmAngle));
             
             yield return null;
         }
