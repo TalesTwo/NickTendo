@@ -180,6 +180,8 @@ public class BossArmController : MonoBehaviour
         {
             yield return null;
         }
+        
+        _rocketReady = false;
 
         Quaternion shoulderRotation = shoulder.transform.rotation;
         Quaternion armRotation = arm.transform.rotation;
@@ -273,6 +275,13 @@ public class BossArmController : MonoBehaviour
             transform.position = Vector2.SmoothDamp(transform.position, _startPos, ref _velocity, smoothDampTime);
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), _startPos) < 0.01f)
             {
+                if (side == Direction.Left)
+                {
+                    BossController.Instance.LeftArmReturned();
+                } else if (side == Direction.Right)
+                {
+                    BossController.Instance.RightArmReturned();
+                }
                 break;
             }
             yield return null;

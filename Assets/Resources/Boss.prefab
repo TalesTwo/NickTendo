@@ -175,10 +175,10 @@ MonoBehaviour:
     health: 4
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
-  rocketProjectionHorizontal: {fileID: 0}
+  rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
   horizontalProjectionOffset: {x: 0, y: 0}
-  rocketProjectionVertical: {fileID: 0}
-  verticalProjectionOffset: {x: 0, y: 0}
+  rocketProjectionVertical: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
+  verticalProjectionOffset: {x: 0, y: -8.98}
 --- !u!1 &1328521562464880001
 GameObject:
   m_ObjectHideFlags: 0
