@@ -60,4 +60,83 @@ public class DungeonController : Singleton<DungeonController>
         cachedEnemyCount = result;
         isUpdating = false;
     }
+    
+    public Room GetCurrentRoom()
+    {
+        (int row, int col) CurrentRoomCoords = DungeonGeneratorManager.Instance.GetCurrentRoomCoords();
+        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+
+        if (dungeonRooms != null)
+        {
+
+            try
+            {
+                Room currentRoom = dungeonRooms[CurrentRoomCoords.row][CurrentRoomCoords.col];
+                if (currentRoom)
+                {
+                    return currentRoom;
+                }
+            } catch (System.ArgumentOutOfRangeException)
+            {
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    public Vector3 SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType, bool addToRoomList = true, int enemyLevelOverride = -1)
+    {
+        //  Get the current room
+
+        Room currentRoom = GetCurrentRoom();
+        
+        if (currentRoom == null )
+        {
+            // in this case, we will attempt to find a possible potential room. so we will look in the heirachy, and search for the first valid room
+            Room[] allRooms = GameObject.FindObjectsOfType<Room>();
+            if (allRooms.Length > 0)
+            {
+                currentRoom = allRooms[0];
+            }
+            else
+            {
+                Debug.LogWarning("No current room found and no rooms in scene to fallback to.");
+                return Vector3.zero;
+            }
+        }
+        // get the spawn room controller 
+        RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+        if (roomSpawnController == null)
+        {
+            Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
+            return Vector3.zero;
+        }
+
+        //  Get the spawn controller for this room
+        RoomSpawnController spawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+        if (spawnController == null)
+        {
+            Debug.LogWarning($"No RoomSpawnController found in room {currentRoom.name}");
+            return Vector3.zero;
+        }
+
+        //  Get the enemy prefab by type from your EnemyDatabase or Factory
+        EnemyControllerBase enemyPrefab = EnemyDatabase.Instance.GetEnemyPrefabByType(enemyType);
+        if (enemyPrefab == null)
+        {
+            return Vector3.zero;
+        }
+        Vector3 spawnLocation = roomSpawnController.SpawnEnemyAtValidLocation(enemyPrefab, addToRoomList, enemyLevelOverride);
+        return spawnLocation;
+
+    }
+    
+    public void Update()
+    {
+     if(Input.GetKeyDown(KeyCode.K))   
+     {
+         DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy);
+     }
+    }
+
 }

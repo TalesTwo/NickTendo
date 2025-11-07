@@ -9,54 +9,71 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : Singleton<PlayerUIManager>
 {
-    private float _width;
-    private float _healthWidth;
-    private bool _isHUDActive;
-
     [Header("UI Elements")] 
     public float widthPerUnitHealth = 25;
     public float healthBarHeight = 20;
+    public float backgroundHeight = 29.1f;
 
     [SerializeField] 
     private RectTransform health;
     [SerializeField]
     private RectTransform healthBar;
     [SerializeField]
-    private TextMeshProUGUI buffedStatText;
+    private RectTransform healthBackground;
+    [SerializeField]
+    private Image _healthIcon;
     [SerializeField]
     private GameObject _enemyCounter;
     [SerializeField]
     private Slider _dashSlider;
     [SerializeField]
     private Image _dashSliderImage;
+    [SerializeField]
+    private Image _dashIcon;
 
+    private float _width;
+    private float _healthWidth;
+    private float _backgroundWidth;
+    private bool _isHUDActive;
     private GameObject _player;
     private PlayerController _pController;
     private bool _hasStartedSlider;
+    private bool _isPlayerAlive;
+    private bool _isPlayerInMenu;
+    private bool _didSkipCR;
 
     private void Start()
     {
-        EventBroadcaster.PlayerStatsChanged += OnChangedStats;
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
+        EventBroadcaster.PlayerDamaged += HandlePlayerDamage;
+        EventBroadcaster.PlayerDeath += HandlePlayerDeath;
+        EventBroadcaster.PlayerOpenMenu += HandlePlayerOpenMenu;
+        EventBroadcaster.PlayerCloseMenu += HandlePlayerCloseMenu;
+
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
         _pController = _player.GetComponent<PlayerController>();
+
         _isHUDActive = true;
         _dashSlider.value = 1;
         _dashSliderImage.color = Color.yellow;
         _hasStartedSlider = false;
-        //SetHealth();
+        _isPlayerAlive = true;
+        _isPlayerInMenu = false;
+        _didSkipCR = false;
+
+        SetHealth();
     }
 
     private void Update()
     {
-        SetHealth();
+        //SetHealth();
 
         if (_pController.IsDashing() && !_hasStartedSlider)
         {
             HandleDashSlider();
             _hasStartedSlider = true;         
-            Invoke(nameof(ResetSlideBool), PlayerStats.Instance.GetDashCooldown());
+            Invoke(nameof(ResetSlide), PlayerStats.Instance.GetDashCooldown());
         }
 
         if (DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() > 0)
@@ -73,15 +90,12 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     public void SetHealth()
     {
         _width = widthPerUnitHealth * PlayerStats.Instance.GetMaxHealth();
+        _backgroundWidth = widthPerUnitHealth * PlayerStats.Instance.GetMaxHealth();
         _healthWidth = widthPerUnitHealth * PlayerStats.Instance.GetCurrentHealth();
 
         healthBar.sizeDelta = new Vector2(_width, healthBarHeight);
+        healthBackground.sizeDelta = new Vector2(_backgroundWidth, backgroundHeight);
         health.sizeDelta = new Vector2(_healthWidth, healthBarHeight);
-    }
-
-    void OnChangedStats(PlayerStatsEnum BuffType, float BuffValue)
-    {
-        
     }
 
     public void ToggleHUD()
@@ -96,35 +110,81 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             gameObject.SetActive(true);
             _isHUDActive = true;
         }
+        
     }
 
     void HandlePersonaChanged(Types.Persona P)
     {
-        //SetHealth();
+        SetHealth();
     }
 
     void HandleDashSlider()
     {
         _dashSlider.value = 0;
+        _dashIcon.GetComponent<Image>().color = Color.gray;
         StartCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
     }
 
     IEnumerator FillSlider(float _cooldown)
     {
-        
         float _fillTime = 0;
         while (_fillTime < _cooldown)
         {
             _fillTime += Time.deltaTime;
             float _lerpValue = _fillTime / _cooldown;
             _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
-            yield return null;
+            yield return null;            
         }
     }
 
-    void ResetSlideBool()
+    void ResetSlide()
     {
         _hasStartedSlider = false;
-        AudioManager.Instance.PlayKeyGetSound();
+        _dashIcon.color = Color.white;
+        if(!_isPlayerInMenu)
+        {
+            if (_didSkipCR)
+            {
+                _didSkipCR = false;
+            }
+            else
+            {
+                _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+                _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+                AudioManager.Instance.PlayKeyGetSound();
+            }
+        }
+    }
+
+    void HandlePlayerDamage()
+    {
+        SetHealth();
+        if (_isPlayerAlive && !_isPlayerInMenu)
+        {
+            _healthIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+            _healthIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        }        
+    }
+
+    void HandlePlayerDeath()
+    {
+        _isPlayerAlive = false;
+    }
+
+    void HandlePlayerOpenMenu()
+    {
+        _isPlayerInMenu = true;
+        if (_hasStartedSlider && _dashSlider.value < 1)
+        {
+            _didSkipCR = true;
+            _dashSlider.value = 1;
+            _dashIcon.color = Color.white;
+        }
+        _dashIcon.GetComponent<ScaleEffectsUI>().ResetScale();
+    }
+
+    void HandlePlayerCloseMenu()
+    {
+        _isPlayerInMenu = false;
     }
 }

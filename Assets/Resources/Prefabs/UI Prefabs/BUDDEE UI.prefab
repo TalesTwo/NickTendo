@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -20}
-  m_SizeDelta: {x: 1074.657, y: 200}
+  m_SizeDelta: {x: 722.0835, y: 142.671}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &215637031201888913
 CanvasRenderer:
@@ -65,7 +65,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Yap yap yap yap
+  m_text: 'Yap yap yap yap Yap yap yap yap Yap yap yap yap Yap yap yap yap Yap yap
+    yap yap Yap yap yap yap '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
   m_sharedMaterial: {fileID: 3873898717485562902, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -162,8 +163,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2170769818575765398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 32.66848}
-  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1.3333334}
+  m_LocalPosition: {x: 0, y: 0, z: 54.869}
+  m_LocalScale: {x: 3, y: 3, z: 3.1454668}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7324495582062676649}
@@ -171,8 +172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 762.5999, y: -119}
-  m_SizeDelta: {x: 844.6667, y: 200}
+  m_AnchoredPosition: {x: 731.385, y: -151.88113}
+  m_SizeDelta: {x: 579.1617, y: 150.5537}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4055011802778231940
 CanvasRenderer:

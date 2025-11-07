@@ -50,9 +50,9 @@ namespace System
         //-------------------------------- Activity Events --------------------------------//
         
         /* Define the delegate for the ActivityStarted event */
-        public delegate void PlayerDamagedHandler(float damageAmount);
+        public delegate void PlayerDamagedHandler();
         public static event PlayerDamagedHandler PlayerDamaged;
-        public static void Broadcast_PlayerDamaged(float damageAmount) { PlayerDamaged?.Invoke(damageAmount); }
+        public static void Broadcast_PlayerDamaged() { PlayerDamaged?.Invoke(); }
         
         // Start Dialogue Broadcaster
         public delegate void StartDialogueHandler(string name);
@@ -119,11 +119,27 @@ namespace System
         public delegate void GameRestartHandler();
         public static event GameRestartHandler GameRestart;
         public static void Broadcast_GameRestart() { GameRestart?.Invoke(); }
+        
 
+        // Broadcast when something collides with a Pit
+        public delegate void ObjectFellInPitHandler(GameObject obj, Vector3 pitCenter);
+        public static event ObjectFellInPitHandler ObjectFellInPit;
+        public static void Broadcast_ObjectFellInPit(GameObject obj, Vector3 pitCenter) { ObjectFellInPit?.Invoke(obj, pitCenter); }
+        
+        // Broadcast for when the player finishes dashing
+        public delegate void PlayerFinishedDashingHandler(GameObject obj);
+        public static event PlayerFinishedDashingHandler PlayerFinishedDashing;
+       
+        public static void Broadcast_PlayerFinishedDashing() { PlayerFinishedDashing?.Invoke(GameObject.FindWithTag("Player")); }
 
+        public delegate void PlayerOpenMenuHandler();
+        public static event PlayerOpenMenuHandler PlayerOpenMenu;
+        public static void Broadcast_PlayerOpenMenu() { PlayerOpenMenu?.Invoke(); }
+
+        public delegate void PlayerCloseMenuHandler();
+        public static event PlayerCloseMenuHandler PlayerCloseMenu;
+        public static void Broadcast_PlayerCloseMenu() { PlayerCloseMenu?.Invoke(); }   
         
         //-------------------------------- End Activity Events --------------------------------//
-
-
     }
 }

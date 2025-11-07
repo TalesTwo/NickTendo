@@ -1,3 +1,4 @@
+using Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class StatDisplayUI : MonoBehaviour
 
     private float _statDisplayNumber;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
+    private bool _isViewing;
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class StatDisplayUI : MonoBehaviour
         SetStatDict();
         SetBaseStats();
         _statDisplayNumber = 0;
+        _isViewing = false;
 
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerStatsChanged += HandleStatChanged;
@@ -52,13 +55,13 @@ public class StatDisplayUI : MonoBehaviour
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
             float _baseStat = 0;
-            if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _baseStat = PlayerStats.Instance.GetAttackCooldown(); }
-            else if (_buffType == PlayerStatsEnum.Attack_Damage) { _baseStat = PlayerStats.Instance.GetAttackDamage(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _baseStat = PlayerStats.Instance.GetDashCooldown(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Damage) { _baseStat = PlayerStats.Instance.GetDashDistance(); }
-            else if (_buffType == PlayerStatsEnum.Dash_Speed) { _baseStat = PlayerStats.Instance.GetDashSpeed(); }
-            else if (_buffType == PlayerStatsEnum.Movement_Speed) { _baseStat = PlayerStats.Instance.GetMovementSpeed(); }
-            
+            if (_buffType == PlayerStatsEnum.Attack_Cooldown) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).AttackCooldown;}
+            else if (_buffType == PlayerStatsEnum.Attack_Damage) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).AttackDamage; }
+            else if (_buffType == PlayerStatsEnum.Dash_Cooldown) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashCooldown; }
+            else if (_buffType == PlayerStatsEnum.Dash_Damage) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashDamage; }
+            else if (_buffType == PlayerStatsEnum.Dash_Speed) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).DashSpeed; }
+            else if (_buffType == PlayerStatsEnum.Movement_Speed) { _baseStat = PersonaStatsLoader.GetStats(Types.Persona.Normal).MovementSpeed; }
+
             _statDictionary[_buffType][0] = _baseStat;
             _statDictionary[_buffType][1] = 0;
             gameObject.SetActive(false);
@@ -69,14 +72,20 @@ public class StatDisplayUI : MonoBehaviour
     {
         SetBuffedStats(_buffType, _buffValue);
         HandleDisplayText(_buffType, _buffValue);
+        if (_isViewing)
+        {
+            _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
+        }
     }
 
     void SetBuffedStats(PlayerStatsEnum _buffType, float _buffValue)
     {
-        if (_statDictionary.ContainsKey(_buffType))
-        {
-            _statDictionary[_buffType][1] += _buffValue;
-        }
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Attack_Cooldown)) { _statDictionary[PlayerStatsEnum.Attack_Cooldown][1] = PlayerStats.Instance.GetAttackCooldown(); }
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Attack_Damage)) _statDictionary[PlayerStatsEnum.Attack_Damage][1] = PlayerStats.Instance.GetAttackDamage();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Cooldown)) _statDictionary[PlayerStatsEnum.Dash_Cooldown][1] = PlayerStats.Instance.GetDashCooldown();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Damage)) _statDictionary[PlayerStatsEnum.Dash_Damage][1] = PlayerStats.Instance.GetDashDamage();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Dash_Speed)) _statDictionary[PlayerStatsEnum.Dash_Speed][1] = PlayerStats.Instance.GetDashSpeed();
+        if (_statDictionary.ContainsKey(PlayerStatsEnum.Movement_Speed)) _statDictionary[PlayerStatsEnum.Movement_Speed][1] = PlayerStats.Instance.GetMovementSpeed();
     }
 
     void HandleDisplayText(PlayerStatsEnum _buffType, float _buffValue)
@@ -87,24 +96,57 @@ public class StatDisplayUI : MonoBehaviour
             gameObject.SetActive(true);
             _statDisplayText.SetText(_statDisplayNumber.ToString());
             _statDisplayTextBG.SetText(_statDisplayNumber.ToString());
+            if (_statDisplayNumber > 1)
+            {
+                gameObject.GetComponent<ScaleEffectsUI>().IncreaseSize();
+                gameObject.GetComponent<ScaleEffectsUI>().DecreaseSize();
+            }
         }        
     }
 
     string TooltipText()
     {
         string _buffText = "";
+        float _buffPerc;
         foreach (PlayerStatsEnum _buffType in _statDictionary.Keys)
         {
-            _buffText += AddSpace(_buffType) + "\n" +
-                         "Base stat: " + _statDictionary[_buffType][0] + ", Buffed by: " + _statDictionary[_buffType][1] + "\n\n";
+
+            _buffText += AddSpace(_buffType) + ": ";
+
+            if (IsCoolDown(_buffType))
+            {
+                //DebugUtils.Log(_buffType + ": " + _statDictionary[_buffType][1]);
+                _buffText += _statDictionary[_buffType][1] + " sec\n";
+            }
+            else
+            {
+                //DebugUtils.Log(_buffType + "- BaseStat: " + _statDictionary[_buffType][0] + " BuffedStat: " + _statDictionary[_buffType][1]);
+                _buffPerc = _statDictionary[_buffType][1] / _statDictionary[_buffType][0];
+                _buffPerc *= 100;
+                _buffPerc = Mathf.RoundToInt(_buffPerc);
+                _buffText += _buffPerc + "%\n";
+            }
         }
+        _buffText += "\n";
         return _buffText;
     }
 
-    string AddSpace(PlayerStatsEnum _nameInEnum)
+    private string AddSpace(PlayerStatsEnum _nameInEnum)
     {
         string[] _splitName = _nameInEnum.ToString().Split('_');
         return String.Join(" ", _splitName);
+    }
+
+    private bool IsCoolDown(PlayerStatsEnum _nameInEnum)
+    {
+        bool _returnBool = false;
+        string[] _splitName = _nameInEnum.ToString().Split('_');
+        if (_splitName[1] == "Cooldown")
+        {
+            _returnBool = true;
+        }
+
+        return _returnBool;
     }
 
     public void Enter(bool _hasEntered)
@@ -112,10 +154,12 @@ public class StatDisplayUI : MonoBehaviour
         if(_hasEntered)
         {
             _tooltip.GetComponent<TooltipUI>().ShowTooltip(TooltipText());
+            _isViewing = true;
         }
         else
         {
             _tooltip.GetComponent<TooltipUI>().HideTooltip();
+            _isViewing = false;
         }
     }
 

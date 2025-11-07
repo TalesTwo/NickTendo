@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Managers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyControllerBase : SpawnableObject
 {
@@ -43,15 +46,26 @@ public class EnemyControllerBase : SpawnableObject
     protected List<Node> currentPath;
     protected int targetIndex;
     protected RoomGridManager _gridManager;
-    protected float findPathCooldown;
+    protected float findPathCooldown = 0;
     protected float pathingTimer = 0;
     [Header("Type")]
     public Types.EnemyType enemyType;
 
-    private float _walktimer = 0f;
+    
+    
+    // IMPROVING PATHING LOGIC
+    [SerializeField] private float _separationRadius = 1.0f;    // how close enemies can get before repelling
+    [SerializeField] private float _separationForce = 2.0f;     // how strong the push is
+    private List<EnemyControllerBase> _allEnemies;
+
+    [Header("Health Bar")]
+    [SerializeField] private bool _displayHealthBar = true;
+    [SerializeField] private Slider _healthSlider;
+    private float _maxHealth;
+    private Color[] _originalColors;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -62,9 +76,35 @@ public class EnemyControllerBase : SpawnableObject
         _playerTransform = _player.GetComponent<Transform>();
         _gridManager = transform.parent.GetComponent<RoomGridManager>();
         EventBroadcaster.PlayerDeath += Deactivate;
+        EventBroadcaster.ObjectFellInPit += OnFellInPit;
+        EventBroadcaster.SetSeed += SetSeed;
         ParseStatsText();
+
+        _maxHealth = health;
+        _originalColors = new Color[3];
+        int i = 0;
+        if(_healthSlider != null)
+        {
+            foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+            {
+                _originalColors[i++] = _image.color;
+                _image.color = Color.clear;
+            }
+        }
+
+
+        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+        _allEnemies = currentRoom.GetComponentInChildren<RoomSpawnController>().GetEnemiesInRoom();
+    }
+    private void SetSeed(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
     }
 
+    protected virtual void OnFellInPit(GameObject obj, Vector3 pitCenter)
+    {
+        // Overridden in child classes
+    }
 
     protected virtual void Deactivate() 
     {
@@ -72,6 +112,7 @@ public class EnemyControllerBase : SpawnableObject
         Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
+        EventBroadcaster.ObjectFellInPit -= OnFellInPit;
     }
     
     public void Initialize(int roomDifficulty)
@@ -82,46 +123,65 @@ public class EnemyControllerBase : SpawnableObject
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         // step 1: check death condition
         CheckForDeath();
-
+        
+        // smh, this stays here
         _direction = getPlayerDirection();
         
-        if (currentPath != null && currentPath.Count > 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Follow());
-        }
-
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
         {
             pathingTimer = 0;
             FindPath();
+            if (currentPath != null && currentPath.Count > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(Follow());
+            }
         }
         
         Attack();
+       
         
-        // step 3: check for knockback then move: direction dependent on knockback state
-        if (!_isKnockback)
-        {
-            StopAllCoroutines();
-        }
-        _walktimer += Time.deltaTime;
+        ApplySeparation();
+    }
+    
+    protected void ApplySeparation()
+    {
+        Vector2 separation = Vector2.zero;
+        int neighborCount = 0;
+        
 
-        if (enemyType == Types.EnemyType.FollowerEnemy && _walktimer >= 0.25f)
+        // iterate through all other enemies
+        if (_allEnemies == null)
+            return;
+        foreach (EnemyControllerBase other in _allEnemies)
         {
-            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
-            _walktimer = 0;
+            if (other == this || other == null || other._transform == null)
+                continue;
+
+
+            float dist = Vector2.Distance(_transform.position, other._transform.position);
+            if (dist < _separationRadius && dist > 0.001f)
+            {
+                // make sure they are kept away
+                Vector2 away = (_transform.position - other._transform.position).normalized;
+                separation += away / dist; 
+                neighborCount++;
+            }
         }
-        if (enemyType == Types.EnemyType.RangedEnemy && _walktimer >= 0.3f)
+
+        // apply averaged separation
+        if (neighborCount > 0)
         {
-            Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
-            _walktimer = 0;
+            separation /= neighborCount;
+            _transform.position += (Vector3)(separation * _separationForce * Time.deltaTime);
         }
-}
+    }
+
 
 
     // reduce health on damage from a PlayerAttack
@@ -132,6 +192,7 @@ public class EnemyControllerBase : SpawnableObject
             Managers.AudioManager.Instance.PlayEnemyDamagedSound();
             health -= (int)PlayerStats.Instance.GetDashDamage();
             SetKnockBack();
+            SetHealthBar();
         } else if (collision.gameObject.CompareTag("PlayerAttack"))
         {
             Managers.AudioManager.Instance.PlayEnemyDamagedSound();
@@ -139,6 +200,7 @@ public class EnemyControllerBase : SpawnableObject
 
             health -= (int)PlayerStats.Instance.GetAttackDamage();
             SetKnockBack();
+            SetHealthBar();
         }
     }
     
@@ -156,6 +218,7 @@ public class EnemyControllerBase : SpawnableObject
     private void SetKnockBack()
     {
         _isKnockback = true;
+        StopAllCoroutines();
         Vector2 knockBack = getKnockBackDirection();
         _rb.AddForce(knockBack * knockBackSpeed, ForceMode2D.Impulse);
         HitFlash();
@@ -212,6 +275,7 @@ public class EnemyControllerBase : SpawnableObject
     // splits the stats on a line
     private void ParseStatsText()
     {
+        DebugUtils.Log("test");
         string[] lines = statLineCSV.text.Split('\n');
         double lineNumber = (double)difficulty/difficultyScalingFactor;
         lineNumber = Math.Ceiling(lineNumber);
@@ -220,6 +284,22 @@ public class EnemyControllerBase : SpawnableObject
             lineNumber = 5;
         }
         GetStats(lines[(int)lineNumber]);
+    }
+
+    private void SetHealthBar()
+    {
+        if (_displayHealthBar) 
+        {
+            int i = 0;
+            if (_healthSlider != null)
+            {
+                foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+                {
+                    _image.color = _originalColors[i++];
+                }
+                _healthSlider.value = health / _maxHealth; 
+            }
+        }
     }
 
     // method MUST be overriden in child class

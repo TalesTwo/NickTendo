@@ -69,6 +69,7 @@ namespace Managers
             // if we reach this point, the name is valid
             return true;
         }
+
         public void LoginButtonClicked()
         {
             if (_usernameInputField && !string.IsNullOrWhiteSpace(_usernameInputField.text) && VerifyLoginName())

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,32 @@ public class CameraController : MonoBehaviour
 {
     private Transform _playerTransform;
     public float cameraSpeed = 0.05f;
+    private CameraShake _cameraShake;
     
     // Start is called before the first frame update
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _cameraShake = GetComponent<CameraShake>();
+        EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
     }
 
+    private void OnPlayerDamaged()
+    {
+        // Call the camera shake effect
+        ShakeCamera(0.15f, 0.3f);
+    }
+    
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        _cameraShake?.ShakeOnce(duration, magnitude);
+    }
+    
+    void OnDestroy()
+    {
+        EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
+    }
+    
     // Update is called once per frame
     void LateUpdate()
     {
@@ -34,6 +54,8 @@ public class CameraController : MonoBehaviour
             /*
         }
         */
+            // apply the shake offset after moving
+            if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
 
     }
 }

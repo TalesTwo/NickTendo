@@ -110,13 +110,15 @@ public class PlayerController : MonoBehaviour
                 Invoke(nameof(DashMovingStop), PlayerStats.Instance.GetDashDistance());
             }            
         }
-        if (_isWalking) _walktimer += Time.deltaTime;
-        else _walktimer = 0;
-        if (_walktimer >= 0.5 && _isActive)
-        {
-            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
-            _walktimer = 0;
-        }
+ 
+        //if (_isWalking) _walktimer += Time.deltaTime;
+        //else _walktimer = 0;
+        //if (_walktimer >= 0.5 && _isActive)
+        //{
+          //  Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            //_walktimer = 0;
+        //}
+        
     }
 
 
@@ -189,6 +191,8 @@ public class PlayerController : MonoBehaviour
         _isDashMoving = false;
         _playerAnimator.SetStill();
         _playerAnimator.ResetDashAngle();
+        // broadcast event so the pits know we stopped dashing (incase we are on one)
+        EventBroadcaster.Broadcast_PlayerFinishedDashing();
     }
 
     // flips the sprite depending on the direction of movement
@@ -215,13 +219,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // player is hit by attack that has knockback. knockback is physics based
-    public void KnockBack(float power, Vector2 direction, float stunTimer)
+    public void KnockBack(float power, Vector2 direction, float stunTimer, bool takingDamage=false)
     {
        _isWalking = false;
         _isKnockback = true;
         Invoke(nameof(UnsetKnockback), stunTimer);
         _rb.AddForce(direction * power, ForceMode2D.Impulse);
-        _playerAnimator.SetHurting();
+        if (!takingDamage)
+        {
+            _playerAnimator.SetHurting();
+        }
     }
 
     public void HitEffect(Vector3 enemyPosition)

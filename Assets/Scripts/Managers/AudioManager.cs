@@ -10,6 +10,10 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
+        [Header("Mutes")]
+        public bool muteSFX = false;
+        public bool muteMusic = false;
+
         [Header("Player Sounds")]
         public AudioClip swordSwing;
         public AudioClip walkingSound;
@@ -23,10 +27,17 @@ namespace Managers
         public AudioClip PlayerDeath;
         public AudioClip Interact;
         public AudioClip Deflect;
+        public AudioClip HittingWall;
 
         [Header("BUDEE Effects")]
         public List<AudioClip> BUDEETalkingTones;
+        public int BUDDEEToneCount = 3;
         public AudioClip BUDEEDeath;
+        public AudioClip RocketArm;
+        public AudioClip BUDDEESlam;
+        public AudioClip Charge;
+        public AudioClip BUDDEEShoot;
+        public AudioClip BUDDEEDamaged;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
@@ -49,6 +60,8 @@ namespace Managers
         public AudioClip explosion;
         public AudioClip crateBreak;
         public AudioClip Heal;
+        public AudioClip Pitfall;
+        public AudioClip WallSlam;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -97,6 +110,7 @@ namespace Managers
         /// </summary>
         public void PlaySFX(AudioClip clip, float volume = 1f, float deviation = 0f, GameObject fromObject = null)
         {
+            if (muteSFX) return;
             if (clip == null) return;
 
             AudioSource src = GetFreeSource();
@@ -113,6 +127,7 @@ namespace Managers
         //Soundtrack Functions and Coroutines
         public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f, GameObject fromObject = null)
         {
+            if (muteMusic) return;
 
             AudioSource src = Musicsource;
             if (src == null) return;
@@ -217,6 +232,45 @@ namespace Managers
         {
             PlaySFX(Deflect, volume, deviation);
         }
+        public void PlayHittingWallSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(HittingWall, volume, deviation);
+        }
+
+        //BUDDEE Sound
+        public void PlayBUDDEEPunchSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(RocketArm, volume, deviation);
+        }
+        public void PlayBUDDEESlamSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(BUDDEESlam, volume, deviation);
+        }
+        public void PlayBUDDEEChargingSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Charge, volume, deviation);
+        }
+        public void PlayBUDDEEShootSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(BUDDEEShoot, volume, deviation);
+        }
+        public void PlayBUDDEEDamagedSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(BUDDEEDamaged, volume, deviation);
+        }
+        public void PlayBUDDEEDyingSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(BUDEEDeath, volume, deviation);
+        }
+        public void PlayBUDDEETalkingTone(float volume = 1)
+        {
+            int tonenumber;
+            tonenumber = UnityEngine.Random.Range(0, BUDDEEToneCount);
+            int typenumber = UnityEngine.Random.Range(0, BUDDEEToneCount);
+            AudioClip tone = BUDEETalkingTones[tonenumber];
+            PlaySFX(tone, volume);
+        }
+
 
         //General Sounds
         public void PlayPlayerInteractSound(float volume = 1, float deviation = 0)
@@ -262,6 +316,14 @@ namespace Managers
         public void PlayCrateBreakSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(crateBreak, volume, deviation);
+        }
+        public void PlayPitFallSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Pitfall, volume, deviation);
+        }
+        public void PlayWallSlamSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(WallSlam, volume, deviation);
         }
 
         //Enemy Sounds
