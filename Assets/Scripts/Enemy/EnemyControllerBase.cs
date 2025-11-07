@@ -84,10 +84,13 @@ public class EnemyControllerBase : SpawnableObject
         _maxHealth = health;
         _originalColors = new Color[3];
         int i = 0;
-        foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+        if(_healthSlider != null)
         {
-            _originalColors[i++] = _image.color;
-            _image.color = Color.clear;
+            foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+            {
+                _originalColors[i++] = _image.color;
+                _image.color = Color.clear;
+            }
         }
 
 
@@ -125,6 +128,9 @@ public class EnemyControllerBase : SpawnableObject
     {
         // step 1: check death condition
         CheckForDeath();
+        
+        // smh, this stays here
+        _direction = getPlayerDirection();
         
         pathingTimer += Time.deltaTime;
         if (pathingTimer > findPathCooldown)
@@ -298,11 +304,14 @@ public class EnemyControllerBase : SpawnableObject
         if (_displayHealthBar) 
         {
             int i = 0;
-            foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+            if (_healthSlider != null)
             {
-                _image.color = _originalColors[i++];
+                foreach (Image _image in _healthSlider.GetComponentsInChildren<Image>())
+                {
+                    _image.color = _originalColors[i++];
+                }
+                _healthSlider.value = health / _maxHealth; 
             }
-            _healthSlider.value = health / _maxHealth; 
         }
     }
 
