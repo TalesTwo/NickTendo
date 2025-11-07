@@ -55,6 +55,7 @@ MonoBehaviour:
   - roomType: 11
     roomPrefabs:
     - {fileID: 6373883147940246428, guid: 73c3398219b1d1f439a070f12ed5cb30, type: 3}
+    - {fileID: 6373883147940246428, guid: 3b462435f2e1892449e1d947139ce632, type: 3}
   - roomType: 12
     roomPrefabs:
     - {fileID: 9004431624858716773, guid: 4a193bad6dd2868498bc86421891635f, type: 3}
@@ -73,3 +74,4 @@ MonoBehaviour:
   - roomType: 17
     roomPrefabs:
     - {fileID: 7754863991986966913, guid: 0698177362fa4b74c9d5495a4c47174c, type: 3}
+    - {fileID: 7754863991986966913, guid: 2450d11207c470542b179ff169efe8e9, type: 3}
