@@ -54,7 +54,7 @@ public class EnemyControllerBase : SpawnableObject
     
     
     // IMPROVING PATHING LOGIC
-    [SerializeField] private float _separationRadius = 1.0f;    // how close enemies can get before repelling
+    [SerializeField] private float _separationRadius = 0.5f;    // how close enemies can get before repelling
     [SerializeField] private float _separationForce = 2.0f;     // how strong the push is
     private List<EnemyControllerBase> _allEnemies;
 

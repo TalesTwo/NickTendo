@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c866db9e5bc464090e73e6efe3076e, type: 3}
+  m_Name: SpecialGenerationData
+  m_EditorClassIdentifier: 
+  roomEntries:
+  - roomType: 0
+    roomPrefabs: []
+  - roomType: 1
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 0d4cae3742411764a846f9916058b80a, type: 3}
+  - roomType: 2
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 34b25aaf88348f0408c95b589f1cbe1d, type: 3}
+  - roomType: 3
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 68cf6c3eedfed9c478811d25a068939d, type: 3}
+  - roomType: 4
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 11026e8bce47f684b8a06002e9343e02, type: 3}
+  - roomType: 5
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 834b03cd299e3194db1b704e8fd510a2, type: 3}
+  - roomType: 6
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 0bbf348fb8fb765418abf3865b493ca6, type: 3}
+  - roomType: 7
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: fa80de166e58aa1488b8ba5946c366cc, type: 3}
+  - roomType: 8
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: bf6d32deef4378646bbdaeeae438a132, type: 3}
+  - roomType: 9
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 105ce2f65e929d044ad17cc7b4cd6ac9, type: 3}
+  - roomType: 10
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 60b19996b1abeda49b40d68c3b922d9f, type: 3}
+  - roomType: 11
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: cde51f661bef90340ae2aa4fce1d6ff4, type: 3}
+  - roomType: 12
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: cd608323afadc974c8256487f5aea3df, type: 3}
+  - roomType: 13
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 972096ebcbdd6f24ab3f37a7ded79dbc, type: 3}
+  - roomType: 14
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 300f25752cc7cd248aa338c42b9f95dd, type: 3}
+  - roomType: 15
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: d569c5a88fae70e4192de94a4783b399, type: 3}
+  - roomType: 16
+    roomPrefabs: []
+  - roomType: 17
+    roomPrefabs: []
