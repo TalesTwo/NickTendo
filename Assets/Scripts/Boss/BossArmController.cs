@@ -17,8 +17,10 @@ using Random = System.Random;
  */
 public class BossArmController : MonoBehaviour
 {
-    [Header("Arm Parts")]
+    [Header("Arm Parts")] 
+    public GameObject shoulder;
     public GameObject arm;
+    public GameObject elbow;
     public GameObject forearm;
     public GameObject hand;
     
@@ -100,12 +102,20 @@ public class BossArmController : MonoBehaviour
         {
             yield return null;
         }
-        
+
+        Quaternion shoulderRotation = shoulder.transform.rotation;
         Quaternion armRotation = arm.transform.rotation;
         Quaternion forearmRotation = forearm.transform.rotation;
         Quaternion handRotation = hand.transform.rotation;
         
         // Step 2: adjust piece rotations
+        if (side == Direction.Left)
+        {
+            shoulder.transform.rotation = Quaternion.Euler(0, 0, 90);
+        } else if (side == Direction.Right)
+        {
+            shoulder.transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
         arm.transform.rotation = Quaternion.Euler(0, 0, 0);
         forearm.transform.rotation = Quaternion.Euler(0, 0, 0);
         hand.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -173,6 +183,7 @@ public class BossArmController : MonoBehaviour
         
         // step 5: after all cycles, return to the head
 
+        shoulder.transform.rotation = shoulderRotation;
         arm.transform.rotation = armRotation;
         forearm.transform.rotation = forearmRotation;
         hand.transform.rotation = handRotation;
