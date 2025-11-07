@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,15 @@ using UnityEngine;
  *
  * This script is responsible for:
  * * initiating the arm attacks (finished)
- * * spawning minions
- * * shooting projectiles (next)
+ * * spawning minions (finished)
+ * * shooting projectiles (finished)
  * * managing health
  * * calling for animations
- * * calling for the arms to perform actions
+ * * calling for the arms to perform actions (finished)
  * * managing vulnerable and invulnerable stages
  * * managing the state of the battle
  */
-public class BossController : MonoBehaviour
+public class BossController : Singleton<BossController>
 {
     [System.Serializable]
     public class Stats
@@ -89,6 +90,12 @@ public class BossController : MonoBehaviour
     public List<Stats> attacks;
     public GameObject bossProjectile;
     public float projectileSpawnDistance;
+
+    public GameObject rocketProjectionHorizontal;
+    public Vector2 horizontalProjectionOffset;
+    public GameObject rocketProjectionVertical;
+    public Vector2 verticalProjectionOffset;
+    private Queue<GameObject> _rocketProjectionsQueue;
     
     // Start is called before the first frame update
     void Start()
@@ -96,6 +103,7 @@ public class BossController : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerController = _player.GetComponent<PlayerController>();
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
+        _rocketProjectionsQueue = new Queue<GameObject>();
     }
 
     // Update is called once per frame
@@ -132,6 +140,34 @@ public class BossController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ArmProjections(bool isHorizontal, float a)
+    {
+        if (isHorizontal)
+        {
+            //Vector2 currentPos = transform.position;
+            Vector2 spawnPos = horizontalProjectionOffset;
+            spawnPos.y = a;
+            GameObject projection = Instantiate(rocketProjectionHorizontal, this.transform);
+            projection.transform.localPosition = spawnPos;
+            _rocketProjectionsQueue.Enqueue(projection);
+        }
+        else
+        {
+            //Vector2 currentPos = transform.position;
+            Vector2 spawnPos = new Vector2(a + verticalProjectionOffset.x, verticalProjectionOffset.y);
+            //spawnPos.x = a + verticalProjectionOffset.x;
+            GameObject projection = Instantiate(rocketProjectionVertical, this.transform);
+            projection.transform.localPosition = spawnPos;
+            _rocketProjectionsQueue.Enqueue(projection);
+        }
+    }
+
+    public void RocketFinished()
+    {
+        GameObject projection = _rocketProjectionsQueue.Dequeue();
+        Destroy(projection);
     }
 
     private void LaunchProjectile()
@@ -238,21 +274,21 @@ public class BossController : MonoBehaviour
                 {
                     if (stat.numberOfFollowers != follower)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_FollowerEnemy, false, stat.enemiesDifficulty);
                         follower += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfRanged != ranged)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.RangedEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_RangedEnemy, false, stat.enemiesDifficulty);
                         ranged += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfChaoticFollowers != chaotic)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
                         chaotic += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }                    

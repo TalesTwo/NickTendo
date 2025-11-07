@@ -217,7 +217,7 @@ MonoBehaviour:
   _separationRadius: 1
   _separationForce: 2
   _displayHealthBar: 1
-  _healthSlider: {fileID: 0}
+  _healthSlider: {fileID: 2192235751613354711}
   projectile: {fileID: 2064634610991927975, guid: 2c450041c0744594197e81c49e1ea195, type: 3}
   doNotHit:
     serializedVersion: 2

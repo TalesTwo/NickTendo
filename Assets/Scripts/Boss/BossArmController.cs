@@ -128,24 +128,28 @@ public class BossArmController : MonoBehaviour
                     start = new Vector2(x, startYCoordinateBottom);
                     transform.rotation = Quaternion.Euler(0, 0, 180);
                     destination = new Vector2(start.x, start.y + (startYCoordinateTop - startYCoordinateBottom));
+                    BossController.Instance.ArmProjections(false, x);
                     break;
                 case RocketDirection.Down:
                     x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
                     start = new Vector2(x, startYCoordinateTop);
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     destination = new Vector2(start.x, start.y + (startYCoordinateBottom - startYCoordinateTop));
+                    BossController.Instance.ArmProjections(false, x);
                     break;
                 case RocketDirection.Left:
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                     start = new Vector2(startXCoordinateRight, y);
                     transform.rotation = Quaternion.Euler(0, 0, -90);
                     destination = new Vector2(start.x + (startXCoordinateLeft - startXCoordinateRight), start.y);
+                    BossController.Instance.ArmProjections(true, y);
                     break;
                 case RocketDirection.Right:
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                     start = new Vector2(startXCoordinateLeft, y);
                     transform.rotation = Quaternion.Euler(0, 0, 90);
                     destination = new Vector2(start.x + (startXCoordinateRight - startXCoordinateLeft), start.y);
+                    BossController.Instance.ArmProjections(true, y);
                     break;
                 default:
                     break;
@@ -160,6 +164,7 @@ public class BossArmController : MonoBehaviour
                 transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
                 if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 2.0f)
                 {
+                    BossController.Instance.RocketFinished();
                     break;
                 }
                 yield return null;

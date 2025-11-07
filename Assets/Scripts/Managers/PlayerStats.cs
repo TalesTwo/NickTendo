@@ -52,6 +52,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateCurrentHealth(float UpdateValue)
     {
         _currentHealth += UpdateValue;
+        DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
         EventBroadcaster.Broadcast_PlayerDamaged();
 
         if (_currentHealth > _maxHealth)
@@ -145,14 +146,13 @@ public class PlayerStats : Singleton<PlayerStats>
         }
         else if (BuffType == PlayerStatsEnum.Current_Health)
         {
+            float Heal = BuffValue;
             if (BuffValue + GetCurrentHealth() >= GetMaxHealth())
             {
                 SetCurrentHealth(GetMaxHealth());
+                Heal = 0;
             }
-            else
-            {
-                UpdateCurrentHealth(BuffValue);
-            }    
+            UpdateCurrentHealth(Heal);
             Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
         else if (BuffType == PlayerStatsEnum.Keys)
