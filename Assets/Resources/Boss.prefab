@@ -1178,7 +1178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ceef1b85064fc4285e11f8d805edb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoulder: {fileID: 1328521562464880001}
   arm: {fileID: 2581792321881471862}
+  elbow: {fileID: 4558792653738263640}
   forearm: {fileID: 1994174248312641029}
   hand: {fileID: 4500754400095974572}
   side: 0
@@ -1919,7 +1921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ceef1b85064fc4285e11f8d805edb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoulder: {fileID: 1374766132670660063}
   arm: {fileID: 4120618212871296092}
+  elbow: {fileID: 3142498558334894884}
   forearm: {fileID: 6606136446495967308}
   hand: {fileID: 3265533470236457020}
   side: 1
