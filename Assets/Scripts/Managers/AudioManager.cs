@@ -10,6 +10,10 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
+        [Header("Mutes")]
+        public bool muteSFX = false;
+        public bool muteMusic = false;
+
         [Header("Player Sounds")]
         public AudioClip swordSwing;
         public AudioClip walkingSound;
@@ -106,6 +110,7 @@ namespace Managers
         /// </summary>
         public void PlaySFX(AudioClip clip, float volume = 1f, float deviation = 0f, GameObject fromObject = null)
         {
+            if (muteSFX) return;
             if (clip == null) return;
 
             AudioSource src = GetFreeSource();
@@ -122,6 +127,7 @@ namespace Managers
         //Soundtrack Functions and Coroutines
         public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f, GameObject fromObject = null)
         {
+            if (muteMusic) return;
 
             AudioSource src = Musicsource;
             if (src == null) return;
