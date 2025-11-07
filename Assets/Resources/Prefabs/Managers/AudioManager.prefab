@@ -69,14 +69,21 @@ MonoBehaviour:
   PlayerDeath: {fileID: 8300000, guid: aa29ec4f223b0c84e80a31da5f266410, type: 3}
   Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   Deflect: {fileID: 8300000, guid: 285daadac6381d3408096b36774925fc, type: 3}
+  HittingWall: {fileID: 0}
   BUDEETalkingTones:
   - {fileID: 8300000, guid: e209121515be805469fc7a532da6a1a8, type: 3}
   - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
   - {fileID: 8300000, guid: 863d09d0a12b2b54d829573a87b16f8a, type: 3}
+  BUDDEEToneCount: 3
   BUDEEDeath: {fileID: 0}
+  RocketArm: {fileID: 0}
+  BUDDEESlam: {fileID: 0}
+  Charge: {fileID: 0}
+  BUDDEEShoot: {fileID: 0}
+  BUDDEEDamaged: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
-  shooterMovement: {fileID: 8300000, guid: 7d9fc54b29c83c74d97cb553c394bbf4, type: 3}
+  shooterMovement: {fileID: 8300000, guid: 22e03fc8260cacf43b6de319d2269c59, type: 3}
   shot: {fileID: 8300000, guid: a65652c7b8bcb9848a834dfe51f2cd2e, type: 3}
   shotHit: {fileID: 8300000, guid: cdc285cddf7e0264cb918df383fba6d5, type: 3}
   shotMiss: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
@@ -93,6 +100,7 @@ MonoBehaviour:
   crateBreak: {fileID: 8300000, guid: 4a3017bbb8441314b8c5bca9b9bcb56c, type: 3}
   Heal: {fileID: 8300000, guid: c32dc8e26873a5c4b870a127640b1826, type: 3}
   Pitfall: {fileID: 8300000, guid: ac8f7da83233b954dab8c810b6e4cb30, type: 3}
+  WallSlam: {fileID: 0}
   cursorHover: {fileID: 8300000, guid: 6ce34b95ccbeab2458402d10c386c458, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}

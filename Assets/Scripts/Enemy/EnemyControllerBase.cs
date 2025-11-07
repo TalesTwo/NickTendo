@@ -51,7 +51,6 @@ public class EnemyControllerBase : SpawnableObject
     [Header("Type")]
     public Types.EnemyType enemyType;
 
-    private float _walktimer = 0f;
     
     
     // IMPROVING PATHING LOGIC
@@ -145,19 +144,7 @@ public class EnemyControllerBase : SpawnableObject
         }
         
         Attack();
-        
-        _walktimer += Time.deltaTime;
-
-        if (enemyType == Types.EnemyType.FollowerEnemy && _walktimer >= 0.25f)
-        {
-            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
-            _walktimer = 0;
-        }
-        if (enemyType == Types.EnemyType.RangedEnemy && _walktimer >= 0.3f)
-        {
-            Managers.AudioManager.Instance.PlayRangedEnemyMovementSound(1, 0.1f);
-            _walktimer = 0;
-        }
+       
         
         ApplySeparation();
     }
