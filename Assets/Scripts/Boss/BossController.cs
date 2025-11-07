@@ -128,6 +128,14 @@ public class BossController : Singleton<BossController>
         {
             StartCoroutine(SpawnMinions());
         }
+        
+        // note: can only be tired when both arms are connected
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            rightArmController.BecomeTired();
+            leftArmController.BecomeTired();
+            // call to the animator to switch over to the exhausted face
+        }
     }
 
     private void LaunchArm(BossArmController armController)

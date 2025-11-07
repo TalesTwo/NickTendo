@@ -23,6 +23,12 @@ public class BossArmController : MonoBehaviour
     public GameObject elbow;
     public GameObject forearm;
     public GameObject hand;
+
+    private BossColliderController _shoulder;
+    private BossColliderController _arm;
+    private BossColliderController _elbow;
+    private BossColliderController _forearm;
+    private BossColliderController _hand;
     
     public enum Direction
     {
@@ -47,6 +53,15 @@ public class BossArmController : MonoBehaviour
     public float smoothDampTime = 0.2f;
     private Vector2 _offScreenPos;
     private Vector2 _startPos;
+
+    [Header("Exhausted Phase")] 
+    public float angleDampTime = 0.2f;
+    public float targetArmAngle;
+    public float targetForearmAngle;
+    private float _originalArmAngle;
+    private float _originalForearmAngle;
+    private float _armVelocity = 0f;
+    private float _forearmVelocity = 0f;
     
     private bool _rocketReady = false;
     [Header("Arm Bounds")]
@@ -67,6 +82,55 @@ public class BossArmController : MonoBehaviour
         else
         {
             DirectionModifier = -1;
+        }
+        
+        _shoulder = shoulder.GetComponent<BossColliderController>();
+        _arm = arm.GetComponent<BossColliderController>();
+        _elbow = elbow.GetComponent<BossColliderController>();
+        _forearm = forearm.GetComponent<BossColliderController>();
+        _hand = hand.GetComponent<BossColliderController>();
+    }
+
+    public void BecomeTired()
+    {
+        StartCoroutine(MoveToTiredPosition());
+    }
+
+    private void SetExhaustedBools(bool isExhausted)
+    {
+        _shoulder.SetIsTired(isExhausted);
+        _arm.SetIsTired(isExhausted);
+        _elbow.SetIsTired(isExhausted);
+        _forearm.SetIsTired(isExhausted);
+        _hand.SetIsTired(isExhausted);
+    }
+
+    private IEnumerator MoveToTiredPosition()
+    {
+        _originalArmAngle = arm.transform.eulerAngles.z;
+        _originalForearmAngle = forearm.transform.eulerAngles.z;
+        
+        SetExhaustedBools(true);
+
+        while (Mathf.Abs(arm.transform.eulerAngles.z - targetArmAngle) > 0.5 ||
+               Mathf.Abs(forearm.transform.eulerAngles.z - targetForearmAngle) > 0.5)
+        {
+            float armAngle = Mathf.SmoothDampAngle(arm.transform.eulerAngles.z, targetArmAngle, ref _armVelocity, angleDampTime);
+            float forearmAngle = Mathf.SmoothDampAngle(forearm.transform.eulerAngles.z, targetForearmAngle, ref _forearmVelocity, angleDampTime);
+
+            arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
+            forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
+            
+            Debug.Log(arm.transform.eulerAngles.z);
+            Debug.Log(forearm.transform.eulerAngles.z);
+
+            Debug.Log(targetArmAngle);
+            Debug.Log(targetForearmAngle);
+            
+            Debug.Log(Mathf.Abs(arm.transform.eulerAngles.z - targetArmAngle));
+            Debug.Log(Mathf.Abs(forearm.transform.eulerAngles.z - targetForearmAngle));
+            
+            yield return null;
         }
     }
     
