@@ -27,6 +27,8 @@ public class Room : MonoBehaviour
     
     private RoomSpawnController roomSpawnController;
     
+    private int initial_number_of_enemies_in_room = 0;
+    
     
     
     
@@ -118,10 +120,8 @@ public class Room : MonoBehaviour
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
-            bool NeverEnemy = true;
             if (enemyCount > 0 || forceLocked)
             {
-                NeverEnemy = false;
                 DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
@@ -157,9 +157,9 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
-                if (!openSoundHasPlayed&&NeverEnemy == true)
+                if (!openSoundHasPlayed && DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() == 0 && initial_number_of_enemies_in_room > 0)
                 {
-                    Managers.AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
+                    AudioManager.Instance.PlayUnlockDoorSound(1, 0.1f);
                     openSoundHasPlayed = true;
                 }
             }
@@ -179,6 +179,7 @@ public class Room : MonoBehaviour
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
         // Register the pits in this room
         PitManager.Instance.RegisterPitsInRoom(this);
+        initial_number_of_enemies_in_room = roomSpawnController != null ? roomSpawnController.GetEnemiesInRoom().Count : 0;
     }
 
     public void EnableAllDoors()
