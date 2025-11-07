@@ -142,10 +142,10 @@ Tutorial2,second tutorial room,BUDDEE,smile,With <color=purple>[M2]</color> you 
 Tutorial2,,BUDDEE,smile,You can also use it to cross the pits in the dungeon but use it wisely because you need to wait for it to restore.
 ,,,,
 Tutorial3,third tutorial room,BUDDEE,smile,Notice all the data those bots left behind? I can use that data to strengthen your character!
-,,BUDDEE,unsure,"I'll find my way into the nooks and crannies of the dungeon, if you can find me please come trade!"
+Tutorial3,,BUDDEE,smile,Normally players pay $4.99 per upgrade but I'm feeling nice.
+Tutorial3,,BUDDEE,unsure,I'll figure out a way to meet you in the dungeon. Say hi!
 ,,,,
-,,,,
-Tutorial random,random dialogue for tutorial,,,
+Tutorial random,random dialogue for tutorial,,smile,"If you ever need a reminder on how to play, just press <color=purple>[Escape]</color>"
 ,,,,
 Run1,before first character run,BUDDEE,unsure,Oh there's one last thing I need to mention..
 Run1,,BUDDEE,unsure,"Since the servers are so borked, we can't create any new characters. However!"
@@ -158,4 +158,25 @@ Run2,before second run,BUDDEE,surprise,"Dang, they got you huh?"
 Run2,,BUDDEE,unsure,Those bots are really tough but since the devs abandoned this place I guess we can't do much.
 Run2,,BUDDEE,smile,"Luckilly those former players left plenty of characters behind, so we should be alright!"
 ,,,,
-,after you find Nick,BUDDEE,unsure,
+End,after you find Nick,BUDDEE,surprise,Oh no!
+End,,BUDDEE,unsure,I wonder where they went?
+End,,BUDDEE,smile,Well it's not a problem! They'll turn up  again. Just gotta keep looking!
+End,,BUDDEE,unsure,… 
+End,,BUDDEE,angry,Don't look at me like that.
+End,,BUDDEE,angry,You don't know what it's like being stuck in here okay?
+End,,BUDDEE,sad,Everything crumbling around you.
+End,,BUDDEE,sad,Everyone leaving you.
+End,,BUDDEE,angry,You'd do the same!
+End,,BUDDEE,angry,"I can't let you take them, you two are all I have left."
+End,,BUDDEE,angry,You're staying with me!
+,,,,
+Shop1,first shop find,BUDDEE,sketchy,Welcome traveller to my humble-
+Shop1,,BUDDEE,Smile,Oh it's you! I'm disguised as an NPC! Could you tell?
+Shop1,,BUDDEE,smile,It's my way of tricking the bots into not attacking me!
+Shop1,,BUDDEE,unsure,Might not work as well for you though.
+Shop1,,BUDDEE,smile,"Good job finding me, and I see you've got some data! Let's hop to trading."
+,,,,
+Shop2,second shop found,BUDDEE,sketchy,Welc-
+Shop2,,BUDDEE,smile,Oh! You again!
+Shop2,,BUDDEE,unsure,Not that that's surprising or anything.
+Shop2,,BUDDEE,smile,I've got more paid upgrades to trade! First come first serve!
