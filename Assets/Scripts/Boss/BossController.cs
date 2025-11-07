@@ -274,21 +274,21 @@ public class BossController : Singleton<BossController>
                 {
                     if (stat.numberOfFollowers != follower)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.FollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_FollowerEnemy, false, stat.enemiesDifficulty);
                         follower += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfRanged != ranged)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.RangedEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_RangedEnemy, false, stat.enemiesDifficulty);
                         ranged += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfChaoticFollowers != chaotic)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
                         chaotic += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }                    
