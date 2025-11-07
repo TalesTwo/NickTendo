@@ -28,7 +28,7 @@ public class AnimatedFollowerEnemy : AnimatedEntity
         if (footstepFrames.Contains(index) && !hasstepped)
         {
             float volumeScale = PlayerManager.Instance.GetNormalizedDistanceFromPlayer(gameObject.transform.position, 15f);
-            Managers.AudioManager.Instance.PlayWalkingSound(volumeScale, 0.1f);
+            AudioManager.Instance.PlayFollowMovementSound(volumeScale, 0.1f);
             hasstepped = true;
         }
     }
