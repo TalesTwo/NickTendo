@@ -224,7 +224,7 @@ namespace Managers
             }
             // we dont want to include the final room in this calculation, so this is just a safety measure
             //TODO: see if we actually need to keep this tho
-            maxDifficulty -= 1;
+            maxDifficulty = Mathf.Max(1, maxDifficulty - 1);
             // determine the segment size
             // if the number of special rooms to generate is greater than the max difficulty, we will just set it to 1 (since then we need to generate a special room for each difficulty level)
             int segmentSize = numberOfSpecialRoomsToGenerate >= maxDifficulty ? 1 : Mathf.CeilToInt((float)maxDifficulty / numberOfSpecialRoomsToGenerate);
@@ -262,14 +262,13 @@ namespace Managers
                     Types.DoorConfiguration doorConfig = roomToReplace.configuration;
                     // generate a special room of the same door configuration
                     Types.RoomType specialRoomType = GenerateRoomTypeFromConfiguration(doorConfig);
-                    Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position, coords.row, coords.col);
+                    Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position, coords.row, coords.col, true);
                     if (specialRoom != null)
                     {
                         DebugUtils.LogSuccess("Special Room Type: " + specialRoomType);
                         // replace the room in the dungeon map
-                        dungeonMap[coords.row][coords.col] = specialRoom;
-                        // destroy the old room
                         DestroyImmediate(roomToReplace.gameObject);
+                        dungeonMap[coords.row][coords.col] = specialRoom;
                     }
                 }
             }
