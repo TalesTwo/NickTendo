@@ -1854,7 +1854,7 @@ MonoBehaviour:
     WestDoorActive: 1
   doors: {fileID: 3619242623764736616}
   bRequireFullRoomCleared: 0
-  roomType: 0
+  roomType: 4
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
@@ -21527,7 +21527,7 @@ TilemapRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.0031446815, y: 0.0031446815, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0

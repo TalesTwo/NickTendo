@@ -33252,7 +33252,7 @@ MonoBehaviour:
     WestDoorActive: 0
   doors: {fileID: 2764924922212269853}
   bRequireFullRoomCleared: 0
-  roomType: 0
+  roomType: 11
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1

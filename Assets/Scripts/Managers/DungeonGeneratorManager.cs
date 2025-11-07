@@ -36,6 +36,11 @@ namespace Managers
         [SerializeField] private float probabilityToAddOptionalDoor_ThreeRequiredDoors = 0.25f;
         [SerializeField] private GenerationData generationData;
         [Space(10f)]
+        [Header("Special Room Settings")]
+        [Header("Rooms like shop, treasure, miniboss, etc.")]
+        [SerializeField] private GenerationData generationDataSPECIAL;
+        [SerializeField] private int numberOfSpecialRoomsToGenerate = 3;
+        [Space(10f)]
         [Header("Start/End Positions (Row, Col)")]
         [Header("If set to -1, -1, will randomize")]
         [SerializeField] private Vector2Int _startPos = new Vector2Int(-1, -1);
@@ -178,9 +183,49 @@ namespace Managers
             // warmup the dungeon
             //StartCoroutine(PrewarmDungeon(dungeonRooms));
             
+            // Phase 3: Populate the dungeon with "special" rooms
+            // these rooms will be in a seperate [SerializeField] private GenerationData generationData;
+            // we will simply "replace" existing rooms with special rooms that fit the same door configuration
+            GenerateSpecialRooms(dungeonRooms);
+
         }
-        
-        
+
+
+        private void GenerateSpecialRooms(List<List<Room>> dungeonMap)
+        {
+            /*
+             * How this will work, is rooms will be swapped based on the difficulty level
+             * For example:
+             * start -> 0
+             * end -> 20
+             *
+             * if we wish to make 4 specials rooms, we will divide the difficulty range into 4 segments
+             * and create a special room in each segment.
+             * so the segments
+             * 1 -> 5
+             * 6 -> 10
+             * 11 -> 15
+             *  16 -> 20
+             * where one random room in each "difficulty" range will be replaced with the matching roomType from the special generation data
+             */
+            
+            // Determine the difficulty range(s)
+            // this should realistically just be the final room, but we will do this for safety
+            int maxDifficulty = 0;
+            foreach (var row in dungeonMap)
+            {
+                foreach (var room in row)
+                {
+                    if (room != null && room.GetRoomDifficulty() > maxDifficulty)
+                    {
+                        maxDifficulty = room.GetRoomDifficulty();
+                    }
+                }
+            }
+            // determine the segment size
+            int segmentSize = maxDifficulty / numberOfSpecialRoomsToGenerate;
+            
+        }
         private void PCG(List<List<Room>> dungeonMap, Room currentRoom, int currentRow, int currentCol)
         {
             // This will be the recursive depth first search algorithm to generate the dungeon
