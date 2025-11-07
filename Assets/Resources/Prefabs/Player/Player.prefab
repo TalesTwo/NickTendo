@@ -270,6 +270,7 @@ MonoBehaviour:
   - {fileID: -7247126756310200383, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
   - {fileID: -6441936258902913328, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
   - {fileID: 653559004879556840, guid: ce588de0c068ecf4095d7978ad312a39, type: 3}
+  footstepFrames: 0200000005000000
 --- !u!1 &9011178903666654049
 GameObject:
   m_ObjectHideFlags: 0

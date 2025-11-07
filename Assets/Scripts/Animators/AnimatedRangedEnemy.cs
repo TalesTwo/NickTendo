@@ -5,9 +5,9 @@ using UnityEngine;
 public class AnimatedRangedEnemy : AnimatedEntity
 {
     // Start is called before the first frame update
-    //private int currentindex = 0;
-    //private bool hasstepped = false;
-    //public List<int> footstepFrames;
+    private int currentindex = 0;
+    private bool hasstepped = false;
+    public List<int> footstepFrames;
     void Start()
     {
         AnimationSetup();
@@ -18,5 +18,16 @@ public class AnimatedRangedEnemy : AnimatedEntity
     {
         AnimationUpdate();
 
+
+        if (index != currentindex)
+        {
+            currentindex = index;
+            hasstepped = false;
+        }
+        if (footstepFrames.Contains(index) && !hasstepped)
+        {
+            Managers.AudioManager.Instance.PlayWalkingSound(1, 0.1f);
+            hasstepped = true;
+        }
     }
 }
