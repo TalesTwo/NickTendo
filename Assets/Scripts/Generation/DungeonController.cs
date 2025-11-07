@@ -68,11 +68,17 @@ public class DungeonController : Singleton<DungeonController>
 
         if (dungeonRooms != null)
         {
-   
-            Room currentRoom = dungeonRooms[CurrentRoomCoords.row][CurrentRoomCoords.col];
-            if (currentRoom)
+
+            try
             {
-                return currentRoom;
+                Room currentRoom = dungeonRooms[CurrentRoomCoords.row][CurrentRoomCoords.col];
+                if (currentRoom)
+                {
+                    return currentRoom;
+                }
+            } catch (System.ArgumentOutOfRangeException)
+            {
+                return null;
             }
         }
         return null;
@@ -81,11 +87,22 @@ public class DungeonController : Singleton<DungeonController>
     public Vector3 SpawnEnemyInCurrentRoomByType(Types.EnemyType enemyType, bool addToRoomList = true, int enemyLevelOverride = -1)
     {
         //  Get the current room
+
         Room currentRoom = GetCurrentRoom();
+        
         if (currentRoom == null )
         {
-            Debug.LogWarning("No current room found — cannot spawn enemy.");
-            return Vector3.zero;
+            // in this case, we will attempt to find a possible potential room. so we will look in the heirachy, and search for the first valid room
+            Room[] allRooms = GameObject.FindObjectsOfType<Room>();
+            if (allRooms.Length > 0)
+            {
+                currentRoom = allRooms[0];
+            }
+            else
+            {
+                Debug.LogWarning("No current room found and no rooms in scene to fallback to.");
+                return Vector3.zero;
+            }
         }
         // get the spawn room controller 
         RoomSpawnController roomSpawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();

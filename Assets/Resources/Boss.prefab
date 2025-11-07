@@ -58,8 +58,11 @@ MonoBehaviour:
   attacks:
   - rocketCountPerArm: 1
     rocketAttackTime: 1.5
-    enemiesSpawning: 3
+    numberOfFollowers: 1
+    numberOfRanged: 1
+    numberOfChaoticFollowers: 1
     enemiesDifficulty: 5
+    timeBetweenEnemies: 0.5
     projectileCount: 5
     projectileSpeed: 4
     projectileDamage: 2
@@ -72,8 +75,11 @@ MonoBehaviour:
     health: 0
   - rocketCountPerArm: 3
     rocketAttackTime: 1.2
-    enemiesSpawning: 4
+    numberOfFollowers: 2
+    numberOfRanged: 1
+    numberOfChaoticFollowers: 1
     enemiesDifficulty: 10
+    timeBetweenEnemies: 0.5
     projectileCount: 7
     projectileSpeed: 5
     projectileDamage: 2
@@ -86,8 +92,11 @@ MonoBehaviour:
     health: 1
   - rocketCountPerArm: 3
     rocketAttackTime: 1
-    enemiesSpawning: 5
+    numberOfFollowers: 2
+    numberOfRanged: 2
+    numberOfChaoticFollowers: 1
     enemiesDifficulty: 15
+    timeBetweenEnemies: 0.5
     projectileCount: 9
     projectileSpeed: 6
     projectileDamage: 3
@@ -100,8 +109,11 @@ MonoBehaviour:
     health: 2
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
-    enemiesSpawning: 6
+    numberOfFollowers: 2
+    numberOfRanged: 2
+    numberOfChaoticFollowers: 2
     enemiesDifficulty: 20
+    timeBetweenEnemies: 0.4
     projectileCount: 11
     projectileSpeed: 7
     projectileDamage: 3
@@ -114,8 +126,11 @@ MonoBehaviour:
     health: 3
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
-    enemiesSpawning: 7
+    numberOfFollowers: 2
+    numberOfRanged: 2
+    numberOfChaoticFollowers: 2
     enemiesDifficulty: 20
+    timeBetweenEnemies: 1
     projectileCount: 13
     projectileSpeed: 7
     projectileDamage: 3
@@ -233,7 +248,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -383,7 +398,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -596,7 +611,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -834,7 +849,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1012,7 +1027,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1206,7 +1221,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1444,7 +1459,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
