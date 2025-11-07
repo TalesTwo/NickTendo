@@ -676,22 +676,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4142931588506849761, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
-      propertyPath: rocketProjectionVertical
-      value: 
-      objectReference: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
-    - target: {fileID: 4142931588506849761, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
-      propertyPath: rocketProjectionHorizontal
-      value: 
-      objectReference: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
-    - target: {fileID: 4142931588506849761, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
-      propertyPath: verticalProjectionOffset.x
-      value: -0.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 4142931588506849761, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
-      propertyPath: verticalProjectionOffset.y
-      value: -8.97
-      objectReference: {fileID: 0}
     - target: {fileID: 8026720527007712852, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
       propertyPath: m_Name
       value: Room_BOSS
