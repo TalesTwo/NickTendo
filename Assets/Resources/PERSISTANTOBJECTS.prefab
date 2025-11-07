@@ -261,6 +261,12 @@ MonoBehaviour:
     prefab: {fileID: 8880805302080543262, guid: 0e7ded53104e73a4aa593d6a937f1f8d, type: 3}
   - enemyType: 4
     prefab: {fileID: 6631985905808627754, guid: cb8923aecd994dd47878e796727f5eba, type: 3}
+  - enemyType: 5
+    prefab: {fileID: 5197960586502552733, guid: b4422d9408983724db00b8e2168e8f6f, type: 3}
+  - enemyType: 6
+    prefab: {fileID: 8880805302080543262, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
+  - enemyType: 7
+    prefab: {fileID: 6631985905808627754, guid: d1210a02e7b25e344880a506e53d07a3, type: 3}
 --- !u!1 &3124823799662259294
 GameObject:
   m_ObjectHideFlags: 0
