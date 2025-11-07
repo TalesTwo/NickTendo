@@ -180,7 +180,18 @@ public class Room : MonoBehaviour
         // Register the pits in this room
         PitManager.Instance.RegisterPitsInRoom(this);
     }
-    
+
+    public void EnableAllDoors()
+    {
+        /*
+         * loop through all of our doors, and just enable them
+         */
+        foreach (Transform door in doors.transform)
+        {
+            door.gameObject.SetActive(true);
+        }
+            
+    }
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
     {
         
@@ -192,6 +203,12 @@ public class Room : MonoBehaviour
         {
             // we are entering the final room
             GameStateManager.Instance.SetEndGameFlag();
+        }
+        // attempt to get the room grid manager to regenerate grids
+        RoomGridManager roomGridManager = FindObjectOfType<RoomGridManager>();
+        if (roomGridManager != null)
+        {
+            roomGridManager.RegenerateGrids();
         }
     }
     

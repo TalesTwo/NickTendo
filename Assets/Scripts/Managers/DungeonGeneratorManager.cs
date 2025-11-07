@@ -263,18 +263,37 @@ namespace Managers
                     // generate a special room of the same door configuration
                     Types.RoomType specialRoomType = GenerateRoomTypeFromConfiguration(doorConfig);
                     Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position, coords.row, coords.col, true);
+                    specialRoom.SetRoomDifficulty(roomToReplace.GetRoomDifficulty());
+                    // attempt to get the room grid manager to regenerate grids
+                    RoomGridManager roomGridManager = specialRoom.GetComponent<RoomGridManager>();
+                    if (roomGridManager != null)
+                    {
+                        roomGridManager.RegenerateGrids();
+                    }
+                    specialRoom.EnableAllDoors();
+                    specialRoom.SetRoomEnabled(false); // disable the room by default
                     if (specialRoom != null)
                     {
                         DebugUtils.LogSuccess("Special Room Type: " + specialRoomType);
-                        // replace the room in the dungeon map
-                        DestroyImmediate(roomToReplace.gameObject);
-                        dungeonMap[coords.row][coords.col] = specialRoom;
+                        HandleRoomReplacement(dungeonMap, roomToReplace, specialRoom, coords.row, coords.col);
                     }
                 }
             }
             
+        }
+
+        private void HandleRoomReplacement(List<List<Room>> dungeonMap, Room currentRoom, Room newRoom, int currentRow, int currentCol)
+        {
+            DebugUtils.Log("Replacing room at (" + currentRow + ", " + currentCol + ") with new special room.");
+            // disable the current room
+            currentRoom.SetRoomEnabled(false);
+            // update the dungeon map
+            dungeonMap[currentRow][currentCol] = newRoom;
+            
+            
             
         }
+        
         private void PCG(List<List<Room>> dungeonMap, Room currentRoom, int currentRow, int currentCol)
         {
             // This will be the recursive depth first search algorithm to generate the dungeon
