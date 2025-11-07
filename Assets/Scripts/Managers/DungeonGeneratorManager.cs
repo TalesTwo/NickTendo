@@ -222,8 +222,58 @@ namespace Managers
                     }
                 }
             }
+            // we dont want to include the final room in this calculation, so this is just a safety measure
+            //TODO: see if we actually need to keep this tho
+            maxDifficulty -= 1;
             // determine the segment size
-            int segmentSize = maxDifficulty / numberOfSpecialRoomsToGenerate;
+            // if the number of special rooms to generate is greater than the max difficulty, we will just set it to 1 (since then we need to generate a special room for each difficulty level)
+            int segmentSize = numberOfSpecialRoomsToGenerate >= maxDifficulty ? 1 : Mathf.CeilToInt((float)maxDifficulty / numberOfSpecialRoomsToGenerate);
+            
+            DebugUtils.LogSuccess("The Max Difficulty of this dungeon is: " + maxDifficulty);
+            DebugUtils.LogSuccess("The Segment Size for special rooms is: " + segmentSize);
+            // randomly pick a "difficulty" in each segment, and replace a room with a special room of the same door configuration
+            for (int i = 0; i < numberOfSpecialRoomsToGenerate; i++)
+            {
+                // +1 to avoid 0 difficulty
+                int segmentStart = i * segmentSize + 1;
+                int segmentEnd = Math.Min((i + 1) * segmentSize, maxDifficulty);
+                
+                // collect all rooms in this difficulty range
+                List<Room> possibleRooms = new List<Room>();
+                foreach (var row in dungeonMap)
+                {
+                    foreach (var room in row)
+                    {
+                        if (room != null && room.GetRoomDifficulty() >= segmentStart && room.GetRoomDifficulty() <= segmentEnd)
+                        {
+                            possibleRooms.Add(room);
+                        }
+                    }
+                }
+                DebugUtils.Log("Attempting to generate special room in difficulty range: " + segmentStart + " to " + segmentEnd + ". Found " + possibleRooms.Count + " possible rooms.");
+                if (possibleRooms.Count > 0)
+                {
+                    DebugUtils.LogSuccess("Generating special room in difficulty range: " + segmentStart + " to " + segmentEnd);
+                    int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
+                    Room roomToReplace = possibleRooms[randomIndex];
+                    // get the room coordinates
+                    (int row, int col) coords = roomToReplace.GetRoomCoords();
+                    // get the door configuration
+                    Types.DoorConfiguration doorConfig = roomToReplace.configuration;
+                    // generate a special room of the same door configuration
+                    Types.RoomType specialRoomType = GenerateRoomTypeFromConfiguration(doorConfig);
+                    Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position, coords.row, coords.col);
+                    if (specialRoom != null)
+                    {
+                        DebugUtils.LogSuccess("Special Room Type: " + specialRoomType);
+                        // replace the room in the dungeon map
+                        dungeonMap[coords.row][coords.col] = specialRoom;
+                        // destroy the old room
+                        DestroyImmediate(roomToReplace.gameObject);
+                    }
+                }
+            }
+            
             
         }
         private void PCG(List<List<Room>> dungeonMap, Room currentRoom, int currentRow, int currentCol)
@@ -642,16 +692,31 @@ namespace Managers
         }
 
         
-        private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position, int row = -1, int col = -1)
+        private static Room GenerateRoomFromType(Types.RoomType roomType, Vector3 position, int row = -1, int col = -1, bool useSpecialGenerationData = false)
         {
-            if (!Instance.generationData.RoomDict.TryGetValue(roomType, out List<Room> possibleRooms) || possibleRooms.Count == 0)
+            if (useSpecialGenerationData == false)
             {
-                DebugUtils.LogError($"No room prefabs found for type {roomType}");
-                return null;
+                if (!Instance.generationData.RoomDict.TryGetValue(roomType, out List<Room> possibleRooms) || possibleRooms.Count == 0)
+                {
+                    DebugUtils.LogError($"No room prefabs found for type {roomType}");
+                    return null;
+                }
+
+                int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
+                return GenerateRoomFromClass(possibleRooms[randomIndex], position, row, col);
+            }
+            else
+            {
+                if (!Instance.generationDataSPECIAL.RoomDict.TryGetValue(roomType, out List<Room> possibleRooms) || possibleRooms.Count == 0)
+                {
+                    DebugUtils.LogError($"No SPECIAL room prefabs found for type {roomType}");
+                    return null;
+                }
+
+                int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
+                return GenerateRoomFromClass(possibleRooms[randomIndex], position, row, col);
             }
 
-            int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
-            return GenerateRoomFromClass(possibleRooms[randomIndex], position, row, col);
         }
 
 
