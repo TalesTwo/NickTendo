@@ -15,7 +15,7 @@ public class ShopItem : BaseItem
     public string flavorText;
 
     // Just returns the desctiption for the item
-    public string GetDescription()
+    public string GetTooltipText()
     {
         string itemDescription = "";
         itemDescription += "Stat: " + AddSpace(buffType) + "\n";

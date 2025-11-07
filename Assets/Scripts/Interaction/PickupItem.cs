@@ -47,7 +47,7 @@ public class PickupItem : BaseItem
     }
     private void Pickup()
     {
-        DebugUtils.Log("Picked up " + Name);
+        //DebugUtils.Log("Picked up " + Name);
         if (!Player.GetComponent<PlayerController>().GetIsDead())
         {
             PlayerStats.Instance.ApplyItemBuffs(BuffType, BuffValue);
