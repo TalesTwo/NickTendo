@@ -356,7 +356,7 @@ MonoBehaviour:
   _separationRadius: 1
   _separationForce: 2
   _displayHealthBar: 1
-  _healthSlider: {fileID: 0}
+  _healthSlider: {fileID: 2121833845605009527}
 --- !u!50 &5626084319817434467
 Rigidbody2D:
   serializedVersion: 4
