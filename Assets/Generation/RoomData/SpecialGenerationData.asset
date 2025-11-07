@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c866db9e5bc464090e73e6efe3076e, type: 3}
+  m_Name: SpecialGenerationData
+  m_EditorClassIdentifier: 
+  roomEntries:
+  - roomType: 0
+    roomPrefabs: []
+  - roomType: 1
+    roomPrefabs: []
+  - roomType: 2
+    roomPrefabs: []
+  - roomType: 3
+    roomPrefabs:
+    - {fileID: 4823484413053104267, guid: 68cf6c3eedfed9c478811d25a068939d, type: 3}
+  - roomType: 4
+    roomPrefabs: []
+  - roomType: 5
+    roomPrefabs: []
+  - roomType: 6
+    roomPrefabs: []
+  - roomType: 7
+    roomPrefabs: []
+  - roomType: 8
+    roomPrefabs: []
+  - roomType: 9
+    roomPrefabs: []
+  - roomType: 10
+    roomPrefabs: []
+  - roomType: 11
+    roomPrefabs: []
+  - roomType: 12
+    roomPrefabs: []
+  - roomType: 13
+    roomPrefabs: []
+  - roomType: 14
+    roomPrefabs: []
+  - roomType: 15
+    roomPrefabs: []
+  - roomType: 16
+    roomPrefabs: []
+  - roomType: 17
+    roomPrefabs: []
