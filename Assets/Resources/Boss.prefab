@@ -143,6 +143,10 @@ MonoBehaviour:
     health: 4
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
+  rocketProjectionHorizontal: {fileID: 0}
+  horizontalProjectionOffset: {x: 0, y: 0}
+  rocketProjectionVertical: {fileID: 0}
+  verticalProjectionOffset: {x: 0, y: 0}
 --- !u!1 &1994174248312641029
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +977,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 6943535168657398750, guid: a2a238d6582ba4b43b8a18541a137918, type: 3}
+  m_Sprite: {fileID: 4962739250824350458, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1049,7 +1053,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 3.5}
+    oldSize: {x: 5.875, y: 3.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1095,7 +1099,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 3.5}
+    oldSize: {x: 5.875, y: 3.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
