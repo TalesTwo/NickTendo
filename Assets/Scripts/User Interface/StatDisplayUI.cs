@@ -115,12 +115,12 @@ public class StatDisplayUI : MonoBehaviour
 
             if (IsCoolDown(_buffType))
             {
-                DebugUtils.Log(_buffType + ": " + _statDictionary[_buffType][1]);
+                //DebugUtils.Log(_buffType + ": " + _statDictionary[_buffType][1]);
                 _buffText += _statDictionary[_buffType][1] + " sec\n";
             }
             else
             {
-                DebugUtils.Log(_buffType + "- BaseStat: " + _statDictionary[_buffType][0] + " BuffedStat: " + _statDictionary[_buffType][1]);
+                //DebugUtils.Log(_buffType + "- BaseStat: " + _statDictionary[_buffType][0] + " BuffedStat: " + _statDictionary[_buffType][1]);
                 _buffPerc = _statDictionary[_buffType][1] / _statDictionary[_buffType][0];
                 _buffPerc *= 100;
                 _buffPerc = Mathf.RoundToInt(_buffPerc);

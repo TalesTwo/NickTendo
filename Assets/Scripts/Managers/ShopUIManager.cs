@@ -16,10 +16,11 @@ public class ShopUIManager : MonoBehaviour
 
     // Lists that store all the UI elements that have need functionality
     // (maybe change from public to serialized field)
+    public GameObject[] ItemSlots;
     public Image[] ItemImages;
     public Button[] ItemButtons;
     public TextMeshProUGUI[] ItemNames;
-    public string[] ItemDescriptions;
+    public string[] ItemTooltipText;
     public string[] ItemFlavorText;
     public Image[] ItemSpotlights;
 
@@ -35,6 +36,12 @@ public class ShopUIManager : MonoBehaviour
     private int TooltipIndex;
     private bool IsFirstOpen;
 
+    private void Awake()
+    {
+        ItemTooltipText = new string[3];
+        ItemFlavorText = new string[3];
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +55,6 @@ public class ShopUIManager : MonoBehaviour
         IsInShop = false;
         IsRerollButton = false;
         TooltipIndex = 0;
-        ItemDescriptions = new string[3];
-        ItemFlavorText = new string[3];
         IsFirstOpen = true;
 
         ShopM = gameObject.GetComponent<ShopManager>();
@@ -59,6 +64,7 @@ public class ShopUIManager : MonoBehaviour
     {
         if (ShopUI != null)
         {
+            EventBroadcaster.Broadcast_PlayerOpenMenu();
             ShopUI.SetActive(true);
             if (IsFirstOpen)
             {
@@ -74,6 +80,7 @@ public class ShopUIManager : MonoBehaviour
 
     void CloseShop()
     {
+        EventBroadcaster.Broadcast_PlayerCloseMenu();
         ShopUI.SetActive(false);
         PlayerUIManager.Instance.ToggleHUD();
         EventBroadcaster.Broadcast_StartStopAction();
@@ -88,10 +95,7 @@ public class ShopUIManager : MonoBehaviour
     public void RemoveItemFromShop(int Index)
     {
         // Removes all the info for a bought item
-        Destroy(ItemImages[Index]);
-        Destroy(ItemButtons[Index].gameObject);
-        Destroy(ItemNames[Index]);
-        Destroy(ItemSpotlights[Index]);
+        ItemSlots[Index].SetActive(false);
         Tooltip.GetComponent<TooltipUI>().HideTooltip();
     }
 
@@ -119,14 +123,13 @@ public class ShopUIManager : MonoBehaviour
         {
             if (IsRerollButton)
             {
-                Tooltip.GetComponent<TooltipUI>().SetXPadding(75);
-                Tooltip.GetComponent<TooltipUI>().SetYPadding(-50);
+                Tooltip.GetComponent<TooltipUI>().SetXYPadding(75, -50);
                 Tooltip.GetComponent<TooltipUI>().ShowTooltip("Click to reroll shop items!\nCost: " + RerollCost + "\n\n");
             }
             else
             {
                 Tooltip.GetComponent<TooltipUI>().ResetPadding();
-                Tooltip.GetComponent<TooltipUI>().ShowTooltip(ItemDescriptions[TooltipIndex]);
+                Tooltip.GetComponent<TooltipUI>().ShowTooltip(ItemTooltipText[TooltipIndex]);
             }
         }
         else

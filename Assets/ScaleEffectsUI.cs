@@ -125,4 +125,9 @@ public class ScaleEffectsUI : MonoBehaviour
     {
         return _isEffectRunning;
     }
+
+    public void ResetScale()
+    {
+        _rectTransform.localScale = new Vector2(_baseScaleX, _baseScaleY);
+    }
 }

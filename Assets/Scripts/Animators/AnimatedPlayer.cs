@@ -13,16 +13,11 @@ public class AnimatedPlayer : AnimatedEntity
     public List<Sprite> runAnimation;
     public List<Sprite> hurtAnimation;
     public List<Sprite> toIdleAnimation;
-   // public List<int> footstepFrames;
     
     private bool _isRunning = false;
     private bool _isAttacking = false;
     private bool _isDashing = false;
     private bool _isDead = false;
-
-    //Walk values
-    //private int currentindex;
-    //private bool hasstepped = false;
 
     protected override void ResetBools()
     {
@@ -46,6 +41,13 @@ public class AnimatedPlayer : AnimatedEntity
     {
         AnimationUpdate();
 
+        List<int> footstepsFrame = new List<int>();
+        int currentIndex = 0;
+
+        if (currentIndex == index && footstepsFrame.Contains(index))
+        {
+            
+        }
     }
 
     public void SetAttacking()

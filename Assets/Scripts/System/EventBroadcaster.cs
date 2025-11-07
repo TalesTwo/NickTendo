@@ -131,6 +131,14 @@ namespace System
         public static event PlayerFinishedDashingHandler PlayerFinishedDashing;
        
         public static void Broadcast_PlayerFinishedDashing() { PlayerFinishedDashing?.Invoke(GameObject.FindWithTag("Player")); }
+
+        public delegate void PlayerOpenMenuHandler();
+        public static event PlayerOpenMenuHandler PlayerOpenMenu;
+        public static void Broadcast_PlayerOpenMenu() { PlayerOpenMenu?.Invoke(); }
+
+        public delegate void PlayerCloseMenuHandler();
+        public static event PlayerCloseMenuHandler PlayerCloseMenu;
+        public static void Broadcast_PlayerCloseMenu() { PlayerCloseMenu?.Invoke(); }   
         
         //-------------------------------- End Activity Events --------------------------------//
     }

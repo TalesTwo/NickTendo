@@ -20,7 +20,12 @@ public class CameraController : MonoBehaviour
     private void OnPlayerDamaged()
     {
         // Call the camera shake effect
-        _cameraShake?.ShakeOnce(0.15f, 0.3f);
+        ShakeCamera(0.15f, 0.3f);
+    }
+    
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        _cameraShake?.ShakeOnce(duration, magnitude);
     }
     
     void OnDestroy()
