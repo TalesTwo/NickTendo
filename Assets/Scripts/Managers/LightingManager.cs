@@ -12,6 +12,7 @@ namespace Managers
         [SerializeField] private float globalLightTransitionDuration = 0.5f;
         [SerializeField] private float playerLightTransitionDuration = 0.5f;
         private bool _bTransitioning = false;
+        private bool _bFallingInPit = false;
         
 
         // Create a reference to the global light source
@@ -34,7 +35,8 @@ namespace Managers
             // TEMP FIX: 
             // every 1 second, check to update the global light based on enemy count in room
             // This is a temp fix for the issue where the global light does not update when enemies are killed via environmental hazards
-            if (Time.frameCount % 60 == 0 && !_bTransitioning) // assuming 60 FPS, this is roughly every second
+            // we also dont want to do this while the player is actively falling into a pit
+            if (Time.frameCount % 60 == 0 && !_bTransitioning && !_bFallingInPit) // assuming 60 FPS, this is roughly every second
             {
                 // get the current room the player is in
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -157,7 +159,9 @@ namespace Managers
             float dimDuration = 0.35f;
             float waitBeforeFadeIn = 0.5f; // wait a bit before restoring light (sync with respawn)
             float restoreDuration = 0.35f;
+            _bFallingInPit = true;
             if (playerLight == null) {return;}
+            
             // Get the root object (since the hitbox is a child of the player)
             //GameObject parentObj = obj.transform.parent.gameObject;
 
@@ -204,6 +208,7 @@ namespace Managers
             }
 
             playerLight.intensity = originalIntensity;
+            _bFallingInPit = false;
         }
 
 
