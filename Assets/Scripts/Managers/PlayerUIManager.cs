@@ -97,7 +97,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             if (!_isPlayerInMenu && !_isInPauseMenu)
             {
                 GameObject _pauseMenuInstace = Instantiate(_pauseMenu);
-                _pauseMenuInstace.GetComponent<PauseMenuManager>().OpenPauseMenu();
+                _pauseMenuInstace.GetComponent<PauseMenuManager>()?.OpenPauseMenu();
                 _isInPauseMenu = true;
             }
         }
