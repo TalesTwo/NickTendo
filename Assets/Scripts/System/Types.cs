@@ -88,13 +88,12 @@ public static class Types
     public enum Persona
     {
         Normal,
-        Memer,
-        //Sensitive,
-        //Glamorous,
-        Stoic,
-        //Lurker,
+        Warrior,
+        Speedster,
+        Charmer,
+        Tank,
+        Assassin,
         None
-        
     }
 
     public enum EnemyType
