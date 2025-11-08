@@ -17,19 +17,33 @@ namespace Managers
         {
             EventBroadcaster.GameStarted += InitializeWorldLight;
             EventBroadcaster.GameRestart += InitializeWorldLight;
-            EventBroadcaster.ObjectFellInPit += OnObjectFellInPit;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
             DebugUtils.LogSuccess("[LightingManager] Initialized successfully.");
         }
 
 
-        private void OnObjectFellInPit(GameObject obj, Vector3 pitCenter)
+        public void SetGlobalLightIntensity(float intensity)
+        {
+            if (globalLight != null)
+            {
+                globalLight.intensity = intensity;
+            }
+        }
+        public void SetPlayerLightIntensity(float intensity)
+        {
+            if (playerLight != null)
+            {
+                playerLight.intensity = intensity;
+            }
+        }
+
+        public void PlayerFellInPit(GameObject obj)
         {
             /*
              * When the player falls in a pit, we wanna "dim" the player light down to 0 over a variable duration
              */
             float dimDuration = 0.35f;
-            float waitBeforeFadeIn = 0.05f; // wait a bit before restoring light (sync with respawn)
+            float waitBeforeFadeIn = 0.5f; // wait a bit before restoring light (sync with respawn)
             float restoreDuration = 0.35f;
             DebugUtils.LogSuccess("1");
             if (playerLight == null) {return;}
@@ -49,6 +63,7 @@ namespace Managers
                 StartCoroutine(DimAndRestorePlayerLight(dimDuration, waitBeforeFadeIn, restoreDuration));
             }
         }
+
 
         
         private IEnumerator DimAndRestorePlayerLight(float dimDuration, float waitDelay, float restoreDuration)
