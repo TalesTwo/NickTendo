@@ -96,6 +96,10 @@ public class BossController : Singleton<BossController>
     public GameObject rocketProjectionVertical;
     public Vector2 verticalProjectionOffset;
     private Queue<GameObject> _rocketProjectionsQueue;
+
+    [Header("Battle State Bools")] 
+    private bool _rightArmAttached = true;
+    private bool _leftArmAttached = true;
     
     // Start is called before the first frame update
     void Start()
@@ -109,14 +113,16 @@ public class BossController : Singleton<BossController>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && _leftArmAttached)
         {
             LaunchArm(leftArmController);
+            _leftArmAttached = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && _rightArmAttached)
         {
             LaunchArm(rightArmController);
+            _rightArmAttached = false;
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -127,6 +133,45 @@ public class BossController : Singleton<BossController>
         if (Input.GetKeyDown(KeyCode.M))
         {
             StartCoroutine(SpawnMinions());
+        }
+        
+        // note: can only be tired when both arms are connected
+        if (Input.GetKeyDown(KeyCode.X) && _leftArmAttached && _rightArmAttached)
+        {
+            rightArmController.BecomeTired();
+            leftArmController.BecomeTired();
+            
+            BossScreenController.Instance.SetIsExhausted(true);
+            
+            
+            // todo call to the animator to switch over to the exhausted face
+        }
+    }
+
+    public void TakeDamage()
+    {
+        rightArmController.BecomeUntired();
+        leftArmController.BecomeUntired();
+        
+        BossScreenController.Instance.SetIsExhausted(false);
+
+        switch (health)
+        {
+            case HealthState.Healthy:
+                health = HealthState.Light;
+                break;
+            case HealthState.Light:
+                health = HealthState.Medium;
+                break;
+            case HealthState.Medium:
+                health = HealthState.Heavy;
+                break;
+            case HealthState.Heavy:
+                health = HealthState.Dead;
+                break;
+            case HealthState.Dead:
+                Destroy(gameObject);
+                break;
         }
     }
 
@@ -142,11 +187,20 @@ public class BossController : Singleton<BossController>
         }
     }
 
+    public void RightArmReturned()
+    {
+        _rightArmAttached = true;
+    }
+
+    public void LeftArmReturned()
+    {
+        _leftArmAttached = true;
+    }
+
     public void ArmProjections(bool isHorizontal, float a)
     {
         if (isHorizontal)
         {
-            //Vector2 currentPos = transform.position;
             Vector2 spawnPos = horizontalProjectionOffset;
             spawnPos.y = a;
             GameObject projection = Instantiate(rocketProjectionHorizontal, this.transform);
@@ -155,9 +209,7 @@ public class BossController : Singleton<BossController>
         }
         else
         {
-            //Vector2 currentPos = transform.position;
             Vector2 spawnPos = new Vector2(a + verticalProjectionOffset.x, verticalProjectionOffset.y);
-            //spawnPos.x = a + verticalProjectionOffset.x;
             GameObject projection = Instantiate(rocketProjectionVertical, this.transform);
             projection.transform.localPosition = spawnPos;
             _rocketProjectionsQueue.Enqueue(projection);

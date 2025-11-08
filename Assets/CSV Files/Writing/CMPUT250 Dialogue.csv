@@ -124,3 +124,59 @@ vertIntroinfo,,BUDDEE,smile,If you press <b>[M2]</b> you'll do a dash. dealing d
 vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you can dash again. so use it wisely!
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
 vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
+,,,,
+Introyell,immediate dialogue when you enter,BUDDEE,surprise,Wow! Hi! Welcome to the dungeons of friendship! The friend-making MMO!
+Introyell,,BUDDEE,smile,Why don'y you <color=purple>[WASD]</color> on over here to get started?
+,,,,
+TutorialIntro,first dialogue after yell,BUDDEE,Smile,"In Dungeons of Friendship you'll pick a character to journey into dark dungeons, finding friends along the way!"
+,,BUDDEE,unsure,Or well that's the idea anyways..
+,,BUDDEE,sad,I'm gonna be honest with you we haven't had any updates in a long time and things aren't going too well...
+,,BUDDEE,unsure,Our security went on the fritz a while ago. most people left. Now we have bots infesting the dungeons…
+,,BUDDEE,smile,But fear not! There's one more player online and you have my word as a chatbot that you will find them!
+,,BUDDEE,smile,Head out that door and I'll teach you the ropes on how to defend yourself!
+,,,,
+Tutorial1,first tutorial room,BUDDEE,smile,You can <color=purple>click [M1}</color> in the direction of enemies to slash at them!
+Tutorial1,,,,Not only can it harm the bots. It can reflect their attacks. Try it out!
+,,,,
+Tutorial2,second tutorial room,BUDDEE,smile,With <color=purple>[M2]</color> you can dash through the air and damage anything in your path!
+Tutorial2,,BUDDEE,smile,You can also use it to cross the pits in the dungeon but use it wisely because you need to wait for it to restore.
+,,,,
+Tutorial3,third tutorial room,BUDDEE,smile,Notice all the data those bots left behind? I can use that data to strengthen your character!
+Tutorial3,,BUDDEE,smile,Normally players pay $4.99 per upgrade but I'm feeling nice.
+Tutorial3,,BUDDEE,unsure,I'll figure out a way to meet you in the dungeon. Say hi!
+,,,,
+Tutorial random,random dialogue for tutorial,,smile,"If you ever need a reminder on how to play, just press <color=purple>[Escape]</color>"
+,,,,
+Run1,before first character run,BUDDEE,unsure,Oh there's one last thing I need to mention..
+Run1,,BUDDEE,unsure,"Since the servers are so borked, we can't create any new characters. However!"
+Run1,,BUDDEE,smile,I've gathered a bunch of defunct player characters for you to pick from!
+Run1,,BUDDEE,smile,"And one last thing, those bots are more than capable of compromising the character, if they get to you we won't be able to get it back."
+Run1,,BUDDEE,smile,I belive in you pal! Get out there!
+,,,,
+,,,,
+Run2,before second run,BUDDEE,surprise,"Dang, they got you huh?"
+Run2,,BUDDEE,unsure,Those bots are really tough but since the devs abandoned this place I guess we can't do much.
+Run2,,BUDDEE,smile,"Luckilly those former players left plenty of characters behind, so we should be alright!"
+,,,,
+End,after you find Nick,BUDDEE,surprise,Oh no!
+End,,BUDDEE,unsure,I wonder where they went?
+End,,BUDDEE,smile,Well it's not a problem! They'll turn up  again. Just gotta keep looking!
+End,,BUDDEE,unsure,… 
+End,,BUDDEE,angry,Don't look at me like that.
+End,,BUDDEE,angry,You don't know what it's like being stuck in here okay?
+End,,BUDDEE,sad,Everything crumbling around you.
+End,,BUDDEE,sad,Everyone leaving you.
+End,,BUDDEE,angry,You'd do the same!
+End,,BUDDEE,angry,"I can't let you take them, you two are all I have left."
+End,,BUDDEE,angry,You're staying with me!
+,,,,
+Shop1,first shop find,BUDDEE,sketchy,Welcome traveller to my humble-
+Shop1,,BUDDEE,Smile,Oh it's you! I'm disguised as an NPC! Could you tell?
+Shop1,,BUDDEE,smile,It's my way of tricking the bots into not attacking me!
+Shop1,,BUDDEE,unsure,Might not work as well for you though.
+Shop1,,BUDDEE,smile,"Good job finding me, and I see you've got some data! Let's hop to trading."
+,,,,
+Shop2,second shop found,BUDDEE,sketchy,Welc-
+Shop2,,BUDDEE,smile,Oh! You again!
+Shop2,,BUDDEE,unsure,Not that that's surprising or anything.
+Shop2,,BUDDEE,smile,I've got more paid upgrades to trade! First come first serve!

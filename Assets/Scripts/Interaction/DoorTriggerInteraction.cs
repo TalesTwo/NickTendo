@@ -44,7 +44,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
             DebugUtils.Log("DoorTriggerInteraction: Opening door.");
             Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
             _doorScript.SetDoorState(Door.DoorState.Open);
-            return;
+            //return; We no longer ant to have to interact twice
         }
 
         //SceneSwapManager.SwapSceneFromDoorUse(_sceneToLoad, DoorToSpawnTo);

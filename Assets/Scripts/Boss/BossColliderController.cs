@@ -14,6 +14,8 @@ public class BossColliderController : MonoBehaviour
     public int damage = 2;
     public float stunTimer = 0.5f;
     public float knockBackForce = 500;
+    
+    private bool _isTired = false;
 
     private void Start()
     {
@@ -22,7 +24,7 @@ public class BossColliderController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !_isTired)
         {
             DoDamage();
         }
@@ -35,5 +37,10 @@ public class BossColliderController : MonoBehaviour
         _playerController.HitEffect(transform.position);
         Managers.AudioManager.Instance.PlayFollowerHitSound(1, 0);
         PlayerStats.Instance.UpdateCurrentHealth(-damage);
+    }
+
+    public void SetIsTired(bool isTired)
+    {
+        _isTired = isTired;
     }
 }

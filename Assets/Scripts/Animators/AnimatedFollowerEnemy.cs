@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class AnimatedFollowerEnemy : AnimatedEntity
@@ -26,7 +27,8 @@ public class AnimatedFollowerEnemy : AnimatedEntity
         }
         if (footstepFrames.Contains(index) && !hasstepped)
         {
-            Managers.AudioManager.Instance.PlayFollowMovementSound(1, 0.1f);
+            float volumeScale = PlayerManager.Instance.GetNormalizedDistanceFromPlayer(gameObject.transform.position, 15f);
+            AudioManager.Instance.PlayFollowMovementSound(volumeScale, 0.1f);
             hasstepped = true;
         }
     }

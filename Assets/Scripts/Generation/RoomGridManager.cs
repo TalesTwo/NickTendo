@@ -95,7 +95,7 @@ public class RoomGridManager : MonoBehaviour
             RegenerateGrids();
         }
     }
-    private void RegenerateGrids()
+    public void RegenerateGrids()
     {
         CreateGrids();
         RemoveOverlappingWithChestsAndPots();
