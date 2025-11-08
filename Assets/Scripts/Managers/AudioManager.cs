@@ -81,6 +81,8 @@ namespace Managers
         //variables for the soundtrack
         public AudioSource Musicsource;
 
+        private bool muted = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -108,6 +110,22 @@ namespace Managers
         /// Volume can be higher than 1.0f to boost the clip.  
         /// If a GameObject is provided, sound plays from its world position (3D).  
         /// </summary>
+        /// 
+
+        private void Update()
+        {
+            if (muteMusic && !muted)
+            {
+                Musicsource.volume = 0;
+                muted = true;
+            }
+            if (!muteMusic && muted)
+            {
+                Musicsource.volume = 1;
+                muted = false;
+            }
+        }
+
         public void PlaySFX(AudioClip clip, float volume = 1f, float deviation = 0f, GameObject fromObject = null)
         {
             if (muteSFX) return;
