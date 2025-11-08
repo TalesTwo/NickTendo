@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Managers
 {
+    
     public class LightingManager : Singleton<LightingManager>
     {
+        private bool _bTransitioning = false;
 
         // Create a reference to the global light source
         private UnityEngine.Rendering.Universal.Light2D globalLight;
@@ -18,11 +20,57 @@ namespace Managers
             EventBroadcaster.GameStarted += InitializeWorldLight;
             EventBroadcaster.GameRestart += InitializeWorldLight;
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+            EventBroadcaster.EnemyDeath += OnEnemyDeath;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
             DebugUtils.LogSuccess("[LightingManager] Initialized successfully.");
         }
 
+        public void Update()
+        {
+            // TEMP FIX: 
+            // every 1 second, check to update the global light based on enemy count in room
+            // This is a temp fix for the issue where the global light does not update when enemies are killed via environmental hazards
+            if (Time.frameCount % 60 == 0 && !_bTransitioning) // assuming 60 FPS, this is roughly every second
+            {
+                // get the current room the player is in
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player == null) { return; }
 
+                Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+                if (currentRoom == null) { return; }
+                int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(currentRoom);
+                if (enemyCount == 0)
+                {
+                    _bTransitioning = true;
+                    SetGlobalLightIntensity(1.0f, 0.5f);
+                    
+                }
+                else
+                {
+                    _bTransitioning = true;
+                    SetGlobalLightIntensity(0f, 0.5f);
+                }
+            }
+        }
+
+
+        private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
+        {
+            
+            // get the number of enemies in the room
+            int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(room);
+            // if the number if 0, set global light to max intensity
+            if (enemyCount == 0)
+            {
+                DebugUtils.LogSuccess("[LightingManager] No enemies in room. Setting global light to max intensity.");
+                SetGlobalLightIntensity(1.0f);
+            }
+            else
+            {
+                SetGlobalLightIntensity(0f);
+            }
+        }
+        
         private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
         {
             // get access to the target room
@@ -34,27 +82,70 @@ namespace Managers
             // if the number if 0, set global light to max intensity
             if (enemyCount == 0)
             {
+                DebugUtils.LogSuccess("[LightingManager] No enemies in room. Setting global light to max intensity.");
                 SetGlobalLightIntensity(1.0f);
             }
             else
             {
+                DebugUtils.LogSuccess("[LightingManager] Enemies detected in room. Setting global light to min intensity.");
                 SetGlobalLightIntensity(0f);
             }
         }
         
-        public void SetGlobalLightIntensity(float intensity)
+        public void SetGlobalLightIntensity(float intensity, float duration = 0f)
         {
-            if (globalLight != null)
+            if (globalLight == null) return;
+
+            if (duration > 0f)
+            {
+                StopCoroutine(nameof(LerpGlobalLightIntensity));
+                StartCoroutine(LerpGlobalLightIntensity(globalLight.intensity, intensity, duration));
+            }
+            else
             {
                 globalLight.intensity = intensity;
             }
         }
-        public void SetPlayerLightIntensity(float intensity)
+        
+        private IEnumerator LerpGlobalLightIntensity(float from, float to, float duration)
         {
-            if (playerLight != null)
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                globalLight.intensity = Mathf.Lerp(from, to, elapsed / duration);
+                yield return null;
+            }
+            globalLight.intensity = to;
+            _bTransitioning = false;
+        }
+        
+        public void SetPlayerLightIntensity(float intensity, float duration = 0f)
+        {
+            if (playerLight == null) return;
+
+            if (duration > 0f)
+            {
+                StopCoroutine(nameof(LerpPlayerLightIntensity));
+                StartCoroutine(LerpPlayerLightIntensity(playerLight.intensity, intensity, duration));
+            }
+            else
             {
                 playerLight.intensity = intensity;
             }
+        }
+        
+        private IEnumerator LerpPlayerLightIntensity(float from, float to, float duration)
+        {
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                playerLight.intensity = Mathf.Lerp(from, to, elapsed / duration);
+                yield return null;
+            }
+            playerLight.intensity = to;
+            _bTransitioning = false;
         }
 
         public void PlayerFellInPit(GameObject obj)
@@ -65,15 +156,12 @@ namespace Managers
             float dimDuration = 0.35f;
             float waitBeforeFadeIn = 0.5f; // wait a bit before restoring light (sync with respawn)
             float restoreDuration = 0.35f;
-            DebugUtils.LogSuccess("1");
             if (playerLight == null) {return;}
-            DebugUtils.LogSuccess("2");
             // Get the root object (since the hitbox is a child of the player)
             //GameObject parentObj = obj.transform.parent.gameObject;
 
 
             //if (parentObj == null){ return; }
-            DebugUtils.LogSuccess("3");
                 
 
             // Ensure it's the player, by checking the tag
