@@ -154,7 +154,7 @@ MonoBehaviour:
   numberOfSpecialRoomsToGenerate: 3
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
-  Seed: 0
+  Seed: 14
   RoomOffset: 60
 --- !u!114 &4155621867649481536
 MonoBehaviour:

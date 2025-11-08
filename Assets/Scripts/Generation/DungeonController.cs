@@ -28,6 +28,17 @@ public class DungeonController : Singleton<DungeonController>
 
         return cachedEnemyCount;
     }
+    
+    public int GetNumberOfEnemiesInRoom(Room room)
+    {
+        if (room)
+        {
+            RoomSpawnController spawnController = room.GetComponentInChildren<RoomSpawnController>();
+            if (spawnController != null)
+                return spawnController.GetEnemiesInRoom().Count;
+        }
+        return 0;
+    }
 
     private IEnumerator UpdateEnemyCount()
     {

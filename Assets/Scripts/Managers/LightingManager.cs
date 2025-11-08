@@ -17,11 +17,31 @@ namespace Managers
         {
             EventBroadcaster.GameStarted += InitializeWorldLight;
             EventBroadcaster.GameRestart += InitializeWorldLight;
+            EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
             DebugUtils.LogSuccess("[LightingManager] Initialized successfully.");
         }
 
 
+        private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+        {
+            // get access to the target room
+            Room targetRoom = DungeonGeneratorManager.Instance.GetDungeonRooms()[targetRoomCoords.row][targetRoomCoords.col];
+            // null check it for saftey
+            if (targetRoom == null) { return; }
+            // get the number of enemies in the room
+            int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(targetRoom);
+            // if the number if 0, set global light to max intensity
+            if (enemyCount == 0)
+            {
+                SetGlobalLightIntensity(1.0f);
+            }
+            else
+            {
+                SetGlobalLightIntensity(0f);
+            }
+        }
+        
         public void SetGlobalLightIntensity(float intensity)
         {
             if (globalLight != null)
