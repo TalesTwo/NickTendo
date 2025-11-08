@@ -93,7 +93,7 @@ public class DungeonController : Singleton<DungeonController>
         if (currentRoom == null )
         {
             // in this case, we will attempt to find a possible potential room. so we will look in the heirachy, and search for the first valid room
-            Room[] allRooms = GameObject.FindObjectsOfType<Room>();
+            Room[] allRooms = FindObjectsByType<Room>(FindObjectsSortMode.None);
             if (allRooms.Length > 0)
             {
                 currentRoom = allRooms[0];

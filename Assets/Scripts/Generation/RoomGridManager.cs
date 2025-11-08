@@ -104,7 +104,8 @@ public class RoomGridManager : MonoBehaviour
     private void RemoveOverlappingWithChestsAndPots()
     {
         // Find all relevant enemies
-        EnemyControllerBase[] allEnemies = FindObjectsOfType<EnemyControllerBase>();
+        EnemyControllerBase[] allEnemies = FindObjectsByType<EnemyControllerBase>(FindObjectsSortMode.None);
+
         List<EnemyControllerBase> blockingEnemies = new List<EnemyControllerBase>();
 
         foreach (EnemyControllerBase e in allEnemies)

@@ -32,7 +32,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
         if(!_allowedToInteract){ return; }
         base.Interact();
         // log the current door state 
-        DebugUtils.Log("DoorTriggerInteraction: Current door state is " + (_doorScript != null ? _doorScript.GetCurrentState().ToString() : "No Door script found."));
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
             // play a "locked door" sound
@@ -41,7 +40,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // if we successfuly interacted with a door, and its closed, we can open it
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
         {
-            DebugUtils.Log("DoorTriggerInteraction: Opening door.");
             Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
             _doorScript.SetDoorState(Door.DoorState.Open);
             //return; We no longer ant to have to interact twice
@@ -59,7 +57,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
         // Now depending on what type of door we are, we will adjust the coordinates accordingly
         (int row, int col) targetRoomCoords = currentRoomCoords;
-        DebugUtils.Log("Current Room Coords: " + currentRoomCoords);
         switch (CurrentDoorPosition)
 {
     case Types.DoorClassification.North:
@@ -145,7 +142,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
         {
             if (targetDoor._doorScript.GetCurrentState() == Door.DoorState.Closed)
             {
-                DebugUtils.Log($"DoorTriggerInteraction: Opening {direction} door of current room.");
                 targetDoor._doorScript.SetDoorState(Door.DoorState.Open);
             }
         }

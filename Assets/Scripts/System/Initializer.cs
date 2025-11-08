@@ -22,7 +22,7 @@ namespace System
         public static void Execute()
         {
             // Log initialization step for debugging and visibility.
-            DebugUtils.Log("Loading persistent systems...");
+            //DebugUtils.Log("Loading persistent systems...");
 
             // Load the "PERSISTANTOBJECTS" prefab from Resources,
             // instantiate it, and mark it to not be destroyed when changing scenes.
