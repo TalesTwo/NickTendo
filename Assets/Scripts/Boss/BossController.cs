@@ -94,7 +94,8 @@ public class BossController : Singleton<BossController>
     public GameObject rocketProjectionHorizontal;
     public Vector2 horizontalProjectionOffset;
     public GameObject rocketProjectionVertical;
-    public Vector2 verticalProjectionOffset;
+    public Vector2 verticalProjectionOffsetRight;
+    public Vector2 verticalProjectionOffsetLeft;
     private Queue<GameObject> _rocketProjectionsQueue;
 
     [Header("Battle State Bools")] 
@@ -197,7 +198,7 @@ public class BossController : Singleton<BossController>
         _leftArmAttached = true;
     }
 
-    public void ArmProjections(bool isHorizontal, float a)
+    public void ArmProjections(bool isHorizontal, float a, BossArmController.Direction direction)
     {
         if (isHorizontal)
         {
@@ -209,7 +210,15 @@ public class BossController : Singleton<BossController>
         }
         else
         {
-            Vector2 spawnPos = new Vector2(a + verticalProjectionOffset.x, verticalProjectionOffset.y);
+            Vector2 spawnPos;
+            if (direction == BossArmController.Direction.Left)
+            {
+                spawnPos = new Vector2(a + verticalProjectionOffsetLeft.x, verticalProjectionOffsetLeft.y);
+            }
+            else
+            {
+                spawnPos = new Vector2(a + verticalProjectionOffsetRight.x, verticalProjectionOffsetRight.y);
+            }
             GameObject projection = Instantiate(rocketProjectionVertical, this.transform);
             projection.transform.localPosition = spawnPos;
             _rocketProjectionsQueue.Enqueue(projection);

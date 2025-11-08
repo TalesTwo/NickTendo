@@ -221,7 +221,7 @@ public class BossArmController : MonoBehaviour
                     Debug.Log("Up");
                     Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x, start.y + (startYCoordinateTop - startYCoordinateBottom));
-                    BossController.Instance.ArmProjections(false, x);
+                    BossController.Instance.ArmProjections(false, x, side);
                     break;
                 case RocketDirection.Down:
                     x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
@@ -230,7 +230,7 @@ public class BossArmController : MonoBehaviour
                     Debug.Log("Down");
                     Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x, start.y + (startYCoordinateBottom - startYCoordinateTop));
-                    BossController.Instance.ArmProjections(false, x);
+                    BossController.Instance.ArmProjections(false, x, side);
                     break;
                 case RocketDirection.Left:
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
@@ -239,7 +239,7 @@ public class BossArmController : MonoBehaviour
                     Debug.Log("Left");
                     Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x + (startXCoordinateLeft - startXCoordinateRight), start.y);
-                    BossController.Instance.ArmProjections(true, y);
+                    BossController.Instance.ArmProjections(true, y, side);
                     break;
                 case RocketDirection.Right:
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
@@ -248,7 +248,7 @@ public class BossArmController : MonoBehaviour
                     Debug.Log("Right");
                     Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x + (startXCoordinateRight - startXCoordinateLeft), start.y);
-                    BossController.Instance.ArmProjections(true, y);
+                    BossController.Instance.ArmProjections(true, y, side);
                     break;
                 default:
                     break;
