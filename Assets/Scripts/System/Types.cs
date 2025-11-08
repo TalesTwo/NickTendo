@@ -88,7 +88,6 @@ public static class Types
     public enum Persona
     {
         Normal,
-        Stoic,
         Warrior,
         Speedster,
         Charmer,
