@@ -122,7 +122,6 @@ public class Room : MonoBehaviour
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
             if (enemyCount > 0 || forceLocked)
             {
-                DebugUtils.Log($"Room: {name} still has {enemyCount} enemies. Keeping doors locked.");
                 // set all closed doors to locked
                 foreach (Transform door in doors.transform)
                 {
@@ -130,12 +129,10 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
-                        DebugUtils.Log($"Locking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Closed)
                         {
                             
                             doorComponent.SetDoorState(Door.DoorState.Locked);
-                            DebugUtils.Log($"Room: {name} locking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
                 }
@@ -149,11 +146,9 @@ public class Room : MonoBehaviour
                     Door doorComponent = door.GetComponent<Door>();
                     if (doorComponent != null)
                     {
-                        DebugUtils.Log($"Unlocking door: {doorComponent.name} in room: {name} and the current state is: {doorComponent.GetCurrentState()}");
                         if (doorComponent.GetCurrentState() == Door.DoorState.Locked)
                         {
                             doorComponent.SetDoorState(Door.DoorState.Closed);
-                            DebugUtils.Log($"Room: {name} unlocking door: {doorComponent.name} and the current state is now: {doorComponent.GetCurrentState()}");
                         }
                     }
                 }
@@ -206,7 +201,7 @@ public class Room : MonoBehaviour
             GameStateManager.Instance.SetEndGameFlag();
         }
         // attempt to get the room grid manager to regenerate grids
-        RoomGridManager roomGridManager = FindObjectOfType<RoomGridManager>();
+        RoomGridManager roomGridManager = FindAnyObjectByType<RoomGridManager>();
         if (roomGridManager != null)
         {
             roomGridManager.RegenerateGrids();

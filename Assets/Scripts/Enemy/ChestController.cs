@@ -18,12 +18,10 @@ public class ChestController : EnemyControllerBase
         {
             // chest logic here
             Managers.AudioManager.Instance.PlayCrateBreakSound(1,0.1f);
-            Debug.Log("Chest destroyed");
         }
         if(enemyType == Types.EnemyType.PotEnemy)
         {
             // pot logic here
-            Debug.Log("Pot destroyed");
             Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
         }
         

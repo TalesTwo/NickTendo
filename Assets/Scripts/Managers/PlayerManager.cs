@@ -69,12 +69,16 @@ namespace Managers
             // change the player sprite to be the "falling" sprite (for now, we will use the dead sprite)
             _playerAnimator.SetHurting();
             Managers.AudioManager.Instance.PlayPitFallSound(1,0);
+            LightingManager.Instance.PlayerFellInPit(obj);
+            // add a 1f delay onto the fall to allow the sound to play
             StartCoroutine(HandlePlayerFellInPit(pitCenter));
             
         }
         
         private IEnumerator HandlePlayerFellInPit(Vector3 pitCenter)
         {
+            
+            
             const float shrinkDuration = 0.3f;
             float elapsed = 0f;
 
@@ -98,6 +102,8 @@ namespace Managers
 
                 yield return null;
             }
+            // add a slight delay before respawning
+            yield return new WaitForSeconds(0.5f);
             playerController.enabled = true;
 
             // Finalize shrink
@@ -143,6 +149,9 @@ namespace Managers
                 _isFallingIntoPit = false;
             }
             
+            // reset the player orientation, incase we fell with rotation, or some input
+            playerController.ResetFacingDirection(true);
+            
 
             
         }
@@ -152,6 +161,8 @@ namespace Managers
             playerController.SetIsDead();
             GameStateManager.Instance.PlayerDeath();
             ScreenUIActivator.Instance.SetDeathScreen();
+            playerController.ResetFacingDirection(true);
+            LightingManager.Instance.SetPlayerLightIntensity(1f);
 
         }
         

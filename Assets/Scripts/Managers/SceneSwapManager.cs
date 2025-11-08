@@ -47,7 +47,7 @@ namespace Managers
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            DebugUtils.LogSuccess($"[SceneSwapManager] Scene loaded: {scene.name}");
+            //DebugUtils.LogSuccess($"[SceneSwapManager] Scene loaded: {scene.name}");
             
             if (scene.name == "Gameplay")
             {
