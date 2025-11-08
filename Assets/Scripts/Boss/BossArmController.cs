@@ -217,6 +217,8 @@ public class BossArmController : MonoBehaviour
                     x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
                     start = new Vector2(x, startYCoordinateBottom);
                     transform.rotation = Quaternion.Euler(0, 0, 180);
+                    Debug.Log("Up");
+                    Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x, start.y + (startYCoordinateTop - startYCoordinateBottom));
                     BossController.Instance.ArmProjections(false, x);
                     break;
@@ -224,6 +226,8 @@ public class BossArmController : MonoBehaviour
                     x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
                     start = new Vector2(x, startYCoordinateTop);
                     transform.rotation = Quaternion.Euler(0, 0, 0);
+                    Debug.Log("Down");
+                    Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x, start.y + (startYCoordinateBottom - startYCoordinateTop));
                     BossController.Instance.ArmProjections(false, x);
                     break;
@@ -231,6 +235,8 @@ public class BossArmController : MonoBehaviour
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                     start = new Vector2(startXCoordinateRight, y);
                     transform.rotation = Quaternion.Euler(0, 0, -90);
+                    Debug.Log("Left");
+                    Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x + (startXCoordinateLeft - startXCoordinateRight), start.y);
                     BossController.Instance.ArmProjections(true, y);
                     break;
@@ -238,6 +244,8 @@ public class BossArmController : MonoBehaviour
                     y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
                     start = new Vector2(startXCoordinateLeft, y);
                     transform.rotation = Quaternion.Euler(0, 0, 90);
+                    Debug.Log("Right");
+                    Debug.Log(transform.rotation.eulerAngles);
                     destination = new Vector2(start.x + (startXCoordinateRight - startXCoordinateLeft), start.y);
                     BossController.Instance.ArmProjections(true, y);
                     break;
