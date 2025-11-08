@@ -138,8 +138,16 @@ namespace System
 
         public delegate void PlayerCloseMenuHandler();
         public static event PlayerCloseMenuHandler PlayerCloseMenu;
-        public static void Broadcast_PlayerCloseMenu() { PlayerCloseMenu?.Invoke(); }   
-        
+        public static void Broadcast_PlayerCloseMenu() { PlayerCloseMenu?.Invoke(); }
+
+        public delegate void GamePauseHandler();
+        public static event GamePauseHandler GamePause;
+        public static void Broadcast_GamePause() { GamePause?.Invoke(); }
+
+        public delegate void GameUnpauseHandler();
+        public static event GameUnpauseHandler GameUnpause;
+        public static void Broadcast_GameUnpause() { GameUnpause?.Invoke(); }
+
         //-------------------------------- End Activity Events --------------------------------//
     }
 }
