@@ -58,7 +58,7 @@ public class GameStateManager : Singleton<GameStateManager>
             {
                 buddeeDialogState = "HubRandom";
             }
-            Debug.Log(npcName);
+            //Debug.Log(npcName);
         }
     }
 

@@ -14,7 +14,7 @@ public class SystemManager : Singleton<SystemManager>
     private void Start()
     {
         CreateManagers();
-        DebugUtils.LogSuccess("All managers built successfully.");
+        //DebugUtils.LogSuccess("All managers built successfully.");
     }
 
 
@@ -32,6 +32,7 @@ public class SystemManager : Singleton<SystemManager>
         gameObject.AddComponent<PersonaManager>();
         gameObject.AddComponent<GameStateManager>();
         gameObject.AddComponent<PitManager>();
+        gameObject.AddComponent<LightingManager>();
 
     }
 }

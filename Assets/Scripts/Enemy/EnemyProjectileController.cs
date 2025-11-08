@@ -60,7 +60,7 @@ public class EnemyProjectileController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerAttack"))
         {
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             _isPlayerAttack = true;
             Managers.AudioManager.Instance.PlayDeflectSound(1, 0.25f);
             Deflect();

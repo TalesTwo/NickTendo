@@ -57,7 +57,6 @@ public class Door : MonoBehaviour
                 spriteRenderer.sprite = lockedDoor;
                 spriteRenderer.color = lockedColor;
                 _doorTriggerInteraction.SetInteractAllowedToInteract(false);
-                DebugUtils.LogSuccess("the door is now locked");
                 break;
             default:
                 Debug.LogError("Invalid door state");

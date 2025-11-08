@@ -197,7 +197,6 @@ public class RoomSpawnController : MonoBehaviour
             return Vector3.zero;
         }
 
-        DebugUtils.Log("Spawning enemy at location: " + spawnLocation.position);
 
         // Step 2: Instantiate and initialize the enemy
         EnemyControllerBase spawnedEnemy = Instantiate(enemyBasePrefab, spawnLocation.position, Quaternion.identity);
@@ -216,7 +215,6 @@ public class RoomSpawnController : MonoBehaviour
             enemiesInRoom.Add(spawnedEnemy);
         }
 
-        DebugUtils.Log($"Spawned enemy: {spawnedEnemy.name} in room: {_room.name}");
         // return the Vector3 position of the spawned enemy
         return spawnedEnemy.transform.position;
     }

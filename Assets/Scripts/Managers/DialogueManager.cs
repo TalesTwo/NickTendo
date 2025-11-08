@@ -246,7 +246,7 @@ namespace Managers
                 _playerTransparency.color = currentColor;
             }
             int talkingtonetimer = 0;
-            Debug.Log(_dialogue[_index][2]);
+            //Debug.Log(_dialogue[_index][2]);
             _spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
             foreach (char letter in _spokenLine)
             {
