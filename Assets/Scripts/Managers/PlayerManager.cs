@@ -143,6 +143,9 @@ namespace Managers
                 _isFallingIntoPit = false;
             }
             
+            // reset the player orientation, incase we fell with rotation, or some input
+            playerController.ResetFacingDirection(true);
+            
 
             
         }
