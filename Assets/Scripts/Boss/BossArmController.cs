@@ -183,19 +183,13 @@ public class BossArmController : MonoBehaviour
         
         _rocketReady = false;
 
-        Quaternion shoulderRotation = shoulder.transform.rotation;
+        //Quaternion shoulderRotation = shoulder.transform.localRotation;
         Quaternion armRotation = arm.transform.rotation;
         Quaternion forearmRotation = forearm.transform.rotation;
         Quaternion handRotation = hand.transform.rotation;
         
         // Step 2: adjust piece rotations
-        if (side == Direction.Left)
-        {
-            shoulder.transform.rotation = Quaternion.Euler(0, 0, 90);
-        } else if (side == Direction.Right)
-        {
-            shoulder.transform.rotation = Quaternion.Euler(0, 0, -90);
-        }
+        
         arm.transform.rotation = Quaternion.Euler(0, 0, 0);
         forearm.transform.rotation = Quaternion.Euler(0, 0, 0);
         hand.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -270,8 +264,9 @@ public class BossArmController : MonoBehaviour
         }
         
         // step 5: after all cycles, return to the head
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        shoulder.transform.rotation = shoulderRotation;
+        //shoulder.transform.localRotation = shoulderRotation;
         arm.transform.rotation = armRotation;
         forearm.transform.rotation = forearmRotation;
         hand.transform.rotation = handRotation;
