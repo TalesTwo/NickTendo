@@ -8,7 +8,11 @@ namespace Managers
     
     public class LightingManager : Singleton<LightingManager>
     {
+        
+        [SerializeField] private float globalLightTransitionDuration = 0.5f;
+        [SerializeField] private float playerLightTransitionDuration = 0.5f;
         private bool _bTransitioning = false;
+        
 
         // Create a reference to the global light source
         private UnityEngine.Rendering.Universal.Light2D globalLight;
@@ -42,13 +46,13 @@ namespace Managers
                 if (enemyCount == 0)
                 {
                     _bTransitioning = true;
-                    SetGlobalLightIntensity(1.0f, 0.5f);
+                    SetGlobalLightIntensity(1.0f, globalLightTransitionDuration);
                     
                 }
                 else
                 {
                     _bTransitioning = true;
-                    SetGlobalLightIntensity(0f, 0.5f);
+                    SetGlobalLightIntensity(0f, playerLightTransitionDuration);
                 }
             }
         }
@@ -62,7 +66,6 @@ namespace Managers
             // if the number if 0, set global light to max intensity
             if (enemyCount == 0)
             {
-                DebugUtils.LogSuccess("[LightingManager] No enemies in room. Setting global light to max intensity.");
                 SetGlobalLightIntensity(1.0f);
             }
             else
@@ -82,12 +85,10 @@ namespace Managers
             // if the number if 0, set global light to max intensity
             if (enemyCount == 0)
             {
-                DebugUtils.LogSuccess("[LightingManager] No enemies in room. Setting global light to max intensity.");
                 SetGlobalLightIntensity(1.0f);
             }
             else
             {
-                DebugUtils.LogSuccess("[LightingManager] Enemies detected in room. Setting global light to min intensity.");
                 SetGlobalLightIntensity(0f);
             }
         }
@@ -167,7 +168,6 @@ namespace Managers
             // Ensure it's the player, by checking the tag
             if (obj.CompareTag("Player"))
             {
-                DebugUtils.LogSuccess("Dimming player light due to pit fall.");
                 StartCoroutine(DimAndRestorePlayerLight(dimDuration, waitBeforeFadeIn, restoreDuration));
             }
         }
