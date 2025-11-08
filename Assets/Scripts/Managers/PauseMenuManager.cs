@@ -44,6 +44,17 @@ public class PauseMenuManager : MonoBehaviour
         _noButton.onClick.AddListener(ConfirmNo);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                ClosePauseMenu();
+            }
+        }
+    }
+
     public void OpenPauseMenu()
     {
         EventBroadcaster.Broadcast_StartStopAction();
