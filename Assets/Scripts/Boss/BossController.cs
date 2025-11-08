@@ -30,6 +30,7 @@ public class BossController : Singleton<BossController>
         public int numberOfChaoticFollowers;
         public int enemiesDifficulty;
         public float timeBetweenEnemies;
+        public float timeBetweenEnemyWaves;
         [Header("Projectiles")]
         public int projectileCount;
         public float projectileSpeed;
@@ -42,6 +43,7 @@ public class BossController : Singleton<BossController>
         public float spreadAngle;
         [Header("Battle State")]
         public HealthState health;
+        public int exhaustionCounter;
     }
     
     [Header("body parts")]
@@ -80,6 +82,7 @@ public class BossController : Singleton<BossController>
     public HealthState health;
     public BattleState battle;
     public ProjectileState projectile;
+    private Stats currentStats;
     private RoomGridManager _roomGridManager;
     
     [Header("Player Reference")]
@@ -99,8 +102,12 @@ public class BossController : Singleton<BossController>
     private Queue<GameObject> _rocketProjectionsQueue;
 
     [Header("Battle State Bools")] 
+    private int _phases = 0;
     private bool _rightArmAttached = true;
     private bool _leftArmAttached = true;
+    private bool _isSpawningEnemies = false;
+    private int _noEnemies = 0;
+    private float _EnemiesTimer = 25f;
     
     // Start is called before the first frame update
     void Start()
@@ -109,6 +116,7 @@ public class BossController : Singleton<BossController>
         _playerController = _player.GetComponent<PlayerController>();
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
         _rocketProjectionsQueue = new Queue<GameObject>();
+        currentStats = attacks[0];
     }
 
     // Update is called once per frame
@@ -130,11 +138,12 @@ public class BossController : Singleton<BossController>
         {
             LaunchProjectile();
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.M))
         {
             StartCoroutine(SpawnMinions());
         }
+        
         
         // note: can only be tired when both arms are connected
         if (Input.GetKeyDown(KeyCode.X) && _leftArmAttached && _rightArmAttached)
@@ -147,6 +156,31 @@ public class BossController : Singleton<BossController>
             
             // todo call to the animator to switch over to the exhausted face
         }
+        */
+        
+        if (_phases >= currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
+            _rightArmAttached)
+        {
+            rightArmController.BecomeTired();
+            leftArmController.BecomeTired();
+            
+            BossScreenController.Instance.SetIsExhausted(true);
+
+            battle = BattleState.Tired;
+        }
+        
+        _EnemiesTimer += Time.deltaTime;
+
+        if (_EnemiesTimer >= currentStats.timeBetweenEnemyWaves && !_isSpawningEnemies && battle == BattleState.Idle)
+        {
+            StartCoroutine(SpawnMinions());
+            _isSpawningEnemies = true;
+            _EnemiesTimer = 0f;
+            _phases += 1;
+            battle = BattleState.Summoning;
+        }
+        
+        
     }
 
     public void TakeDamage()
@@ -335,21 +369,21 @@ public class BossController : Singleton<BossController>
                 {
                     if (stat.numberOfFollowers != follower)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_FollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_FollowerEnemy, true, stat.enemiesDifficulty);
                         follower += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfRanged != ranged)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_RangedEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_RangedEnemy, true, stat.enemiesDifficulty);
                         ranged += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }
 
                     if (stat.numberOfChaoticFollowers != chaotic)
                     {
-                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_ChaoticFollowerEnemy, false, stat.enemiesDifficulty);
+                        DungeonController.Instance.SpawnEnemyInCurrentRoomByType(Types.EnemyType.BOSS_ChaoticFollowerEnemy, true, stat.enemiesDifficulty);
                         chaotic += 1;
                         yield return new WaitForSeconds(stat.timeBetweenEnemies);
                     }                    
@@ -357,5 +391,8 @@ public class BossController : Singleton<BossController>
 
             }
         }
+        
+        _isSpawningEnemies = false;
+        battle = BattleState.Idle;
     }
 }

@@ -95,6 +95,7 @@ MonoBehaviour:
     numberOfChaoticFollowers: 1
     enemiesDifficulty: 5
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 30
     projectileCount: 5
     projectileSpeed: 4
     projectileDamage: 2
@@ -105,6 +106,7 @@ MonoBehaviour:
     spreadWaitTime: 1
     spreadAngle: 80
     health: 0
+    exhaustionCounter: 2
   - rocketCountPerArm: 3
     rocketAttackTime: 1.2
     numberOfFollowers: 2
@@ -112,6 +114,7 @@ MonoBehaviour:
     numberOfChaoticFollowers: 1
     enemiesDifficulty: 10
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 0
     projectileCount: 7
     projectileSpeed: 5
     projectileDamage: 2
@@ -122,6 +125,7 @@ MonoBehaviour:
     spreadWaitTime: 0.9
     spreadAngle: 85
     health: 1
+    exhaustionCounter: 7
   - rocketCountPerArm: 3
     rocketAttackTime: 1
     numberOfFollowers: 2
@@ -129,6 +133,7 @@ MonoBehaviour:
     numberOfChaoticFollowers: 1
     enemiesDifficulty: 15
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 0
     projectileCount: 9
     projectileSpeed: 6
     projectileDamage: 3
@@ -139,6 +144,7 @@ MonoBehaviour:
     spreadWaitTime: 0.8
     spreadAngle: 90
     health: 2
+    exhaustionCounter: 9
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
     numberOfFollowers: 2
@@ -146,6 +152,7 @@ MonoBehaviour:
     numberOfChaoticFollowers: 2
     enemiesDifficulty: 20
     timeBetweenEnemies: 0.4
+    timeBetweenEnemyWaves: 0
     projectileCount: 11
     projectileSpeed: 7
     projectileDamage: 3
@@ -156,6 +163,7 @@ MonoBehaviour:
     spreadWaitTime: 0.7
     spreadAngle: 95
     health: 3
+    exhaustionCounter: 11
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
     numberOfFollowers: 2
@@ -163,6 +171,7 @@ MonoBehaviour:
     numberOfChaoticFollowers: 2
     enemiesDifficulty: 20
     timeBetweenEnemies: 1
+    timeBetweenEnemyWaves: 0
     projectileCount: 13
     projectileSpeed: 7
     projectileDamage: 3
@@ -173,6 +182,7 @@ MonoBehaviour:
     spreadWaitTime: 0.7
     spreadAngle: 95
     health: 4
+    exhaustionCounter: 13
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
   rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
