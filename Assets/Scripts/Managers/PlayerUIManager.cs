@@ -31,6 +31,9 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private Image _dashIcon;
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject _pauseMenu;
+
     private float _width;
     private float _healthWidth;
     private float _backgroundWidth;
@@ -41,6 +44,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private bool _isPlayerAlive;
     private bool _isPlayerInMenu;
     private bool _didSkipCR;
+    private bool _isInPauseMenu;
 
     private void Start()
     {
@@ -49,6 +53,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         EventBroadcaster.PlayerDeath += HandlePlayerDeath;
         EventBroadcaster.PlayerOpenMenu += HandlePlayerOpenMenu;
         EventBroadcaster.PlayerCloseMenu += HandlePlayerCloseMenu;
+        EventBroadcaster.GameUnpause += ResetPauseBool;
 
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -61,6 +66,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         _isPlayerAlive = true;
         _isPlayerInMenu = false;
         _didSkipCR = false;
+        _isInPauseMenu = false;
 
         SetHealth();
     }
@@ -84,6 +90,16 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         else 
         { 
             _enemyCounter.SetActive(false); 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_isPlayerInMenu && !_isInPauseMenu)
+            {
+                GameObject _pauseMenuInstace = Instantiate(_pauseMenu);
+                _pauseMenuInstace.GetComponent<PauseMenuManager>().OpenPauseMenu();
+                _isInPauseMenu = true;
+            }
         }
     }
 
@@ -186,5 +202,10 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandlePlayerCloseMenu()
     {
         _isPlayerInMenu = false;
+    }
+
+    void ResetPauseBool()
+    {
+        _isInPauseMenu = false;
     }
 }

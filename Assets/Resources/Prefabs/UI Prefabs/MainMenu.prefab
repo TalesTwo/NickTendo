@@ -915,6 +915,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _usernameInputField: {fileID: 0}
+  _errorMessageText: {fileID: 0}
+  _errorMessageTextShadow: {fileID: 0}
 --- !u!1 &8775542131459188115
 GameObject:
   m_ObjectHideFlags: 0
