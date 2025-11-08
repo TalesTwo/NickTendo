@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossScreenController : MonoBehaviour
+public class BossScreenController : Singleton<BossScreenController>
 {
     private PlayerController _playerController;
     private GameObject _player;
 
     public float stunTimer = 0.1f;
     public float knockBackForce = 500;
+    
+    private bool _isExhausted = false;
     
     private void Start()
     {
@@ -20,8 +23,20 @@ public class BossScreenController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerAttack"))
         {
-            PushPlayer();
+            if (!_isExhausted)
+            {
+                PushPlayer();
+            }
+            else if (_isExhausted)
+            {
+                BossController.Instance.TakeDamage();
+            }
         }
+    }
+
+    public void SetIsExhausted(bool isExhausted)
+    {
+        _isExhausted = isExhausted;
     }
 
     private void PushPlayer()
