@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolSize: 30
+  muteSFX: 0
+  muteMusic: 0
   swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
   walkingSound: {fileID: 8300000, guid: ed46d945428c3ea4fb37b24d843975c1, type: 3}
   dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
@@ -106,7 +108,7 @@ MonoBehaviour:
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
   dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
   Overworld: {fileID: 8300000, guid: d42fef7fff9afdb4399b630ddbf71682, type: 3}
-  Boss: {fileID: 0}
+  Boss: {fileID: 8300000, guid: b18b613831cf7f94f9b7c5713dc1f325, type: 3}
   Shop: {fileID: 0}
   Credits: {fileID: 0}
   TitleTheme: {fileID: 8300000, guid: 8a2fac04bd243da43bad2a372218a25d, type: 3}
