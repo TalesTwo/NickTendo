@@ -105,16 +105,18 @@ MonoBehaviour:
     spreadWavesCount: 3
     spreadWaitTime: 1
     spreadAngle: 80
+    timeBetweenProjectileWaves: 10
     health: 0
     exhaustionCounter: 2
+    exhaustionTime: 10
   - rocketCountPerArm: 3
     rocketAttackTime: 1.2
     numberOfFollowers: 2
     numberOfRanged: 1
     numberOfChaoticFollowers: 1
-    enemiesDifficulty: 10
+    enemiesDifficulty: 7
     timeBetweenEnemies: 0.5
-    timeBetweenEnemyWaves: 0
+    timeBetweenEnemyWaves: 30
     projectileCount: 7
     projectileSpeed: 5
     projectileDamage: 2
@@ -124,16 +126,18 @@ MonoBehaviour:
     spreadWavesCount: 4
     spreadWaitTime: 0.9
     spreadAngle: 85
+    timeBetweenProjectileWaves: 10
     health: 1
     exhaustionCounter: 7
+    exhaustionTime: 9
   - rocketCountPerArm: 3
     rocketAttackTime: 1
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 1
-    enemiesDifficulty: 15
+    enemiesDifficulty: 10
     timeBetweenEnemies: 0.5
-    timeBetweenEnemyWaves: 0
+    timeBetweenEnemyWaves: 25
     projectileCount: 9
     projectileSpeed: 6
     projectileDamage: 3
@@ -143,16 +147,18 @@ MonoBehaviour:
     spreadWavesCount: 5
     spreadWaitTime: 0.8
     spreadAngle: 90
+    timeBetweenProjectileWaves: 8
     health: 2
     exhaustionCounter: 9
+    exhaustionTime: 8
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2
-    enemiesDifficulty: 20
+    enemiesDifficulty: 12
     timeBetweenEnemies: 0.4
-    timeBetweenEnemyWaves: 0
+    timeBetweenEnemyWaves: 25
     projectileCount: 11
     projectileSpeed: 7
     projectileDamage: 3
@@ -162,16 +168,18 @@ MonoBehaviour:
     spreadWavesCount: 6
     spreadWaitTime: 0.7
     spreadAngle: 95
+    timeBetweenProjectileWaves: 8
     health: 3
     exhaustionCounter: 11
+    exhaustionTime: 7
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2
-    enemiesDifficulty: 20
+    enemiesDifficulty: 15
     timeBetweenEnemies: 1
-    timeBetweenEnemyWaves: 0
+    timeBetweenEnemyWaves: 22
     projectileCount: 13
     projectileSpeed: 7
     projectileDamage: 3
@@ -181,8 +189,10 @@ MonoBehaviour:
     spreadWavesCount: 6
     spreadWaitTime: 0.7
     spreadAngle: 95
+    timeBetweenProjectileWaves: 7
     health: 4
     exhaustionCounter: 13
+    exhaustionTime: 6
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
   rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}

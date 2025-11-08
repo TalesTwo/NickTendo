@@ -41,9 +41,11 @@ public class BossController : Singleton<BossController>
         public int spreadWavesCount;
         public float spreadWaitTime;
         public float spreadAngle;
+        public float timeBetweenProjectileWaves;
         [Header("Battle State")]
         public HealthState health;
         public int exhaustionCounter;
+        public float exhaustionTime;
     }
     
     [Header("body parts")]
@@ -82,7 +84,7 @@ public class BossController : Singleton<BossController>
     public HealthState health;
     public BattleState battle;
     public ProjectileState projectile;
-    private Stats currentStats;
+    private Stats _currentStats;
     private RoomGridManager _roomGridManager;
     
     [Header("Player Reference")]
@@ -106,8 +108,9 @@ public class BossController : Singleton<BossController>
     private bool _rightArmAttached = true;
     private bool _leftArmAttached = true;
     private bool _isSpawningEnemies = false;
-    private int _noEnemies = 0;
-    private float _EnemiesTimer = 25f;
+    private bool _isShooting = false;
+    private float _enemiesTimer = 25f;
+    private float _projectilesTimer = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -116,7 +119,7 @@ public class BossController : Singleton<BossController>
         _playerController = _player.GetComponent<PlayerController>();
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
         _rocketProjectionsQueue = new Queue<GameObject>();
-        currentStats = attacks[0];
+        _currentStats = attacks[0];
     }
 
     // Update is called once per frame
@@ -133,12 +136,13 @@ public class BossController : Singleton<BossController>
             LaunchArm(rightArmController);
             _rightArmAttached = false;
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.B))
         {
             LaunchProjectile();
         }
-        /*
+        
+        
         if (Input.GetKeyDown(KeyCode.M))
         {
             StartCoroutine(SpawnMinions());
@@ -158,7 +162,7 @@ public class BossController : Singleton<BossController>
         }
         */
         
-        if (_phases >= currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
+        if (_phases >= _currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
             _rightArmAttached)
         {
             rightArmController.BecomeTired();
@@ -167,20 +171,48 @@ public class BossController : Singleton<BossController>
             BossScreenController.Instance.SetIsExhausted(true);
 
             battle = BattleState.Tired;
+            _phases = 0;
+            StartCoroutine(ExhaustionTimer());
         }
         
-        _EnemiesTimer += Time.deltaTime;
+        _enemiesTimer += Time.deltaTime;
 
-        if (_EnemiesTimer >= currentStats.timeBetweenEnemyWaves && !_isSpawningEnemies && battle == BattleState.Idle)
+        if (_enemiesTimer >= _currentStats.timeBetweenEnemyWaves && !_isSpawningEnemies && battle == BattleState.Idle)
         {
-            StartCoroutine(SpawnMinions());
+            
             _isSpawningEnemies = true;
-            _EnemiesTimer = 0f;
+            _enemiesTimer = 0f;
             _phases += 1;
             battle = BattleState.Summoning;
+            StartCoroutine(SpawnMinions());
+        }
+        
+        _projectilesTimer += Time.deltaTime;
+
+        if (_projectilesTimer >= _currentStats.timeBetweenProjectileWaves && battle == BattleState.Idle && !_isShooting)
+        {
+            _isShooting = true;
+            _projectilesTimer = 0f;
+            _phases += 1;
+            battle = BattleState.Shooting;
+            LaunchProjectile();
         }
         
         
+    }
+
+    private IEnumerator ExhaustionTimer()
+    {
+        float timer = 0f;
+        while (timer < _currentStats.exhaustionTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        rightArmController.BecomeUntired();
+        leftArmController.BecomeUntired();
+        BossScreenController.Instance.SetIsExhausted(false);
+        battle = BattleState.Idle;
     }
 
     public void TakeDamage()
@@ -189,6 +221,8 @@ public class BossController : Singleton<BossController>
         leftArmController.BecomeUntired();
         
         BossScreenController.Instance.SetIsExhausted(false);
+        
+        battle = BattleState.Idle;
 
         switch (health)
         {
@@ -207,6 +241,15 @@ public class BossController : Singleton<BossController>
             case HealthState.Dead:
                 Destroy(gameObject);
                 break;
+        }
+
+        foreach (Stats stat in attacks)
+        {
+            if (stat.health == health)
+            {
+                _currentStats = stat;
+                break;
+            }
         }
     }
 
@@ -298,6 +341,8 @@ public class BossController : Singleton<BossController>
             // wait time for next projectile
             yield return new WaitForSeconds(stat.followWaitTime);
         }
+        battle = BattleState.Idle;
+        _isShooting = false;
     }
 
     private IEnumerator SpreadProjectile(Stats stat)
@@ -334,7 +379,8 @@ public class BossController : Singleton<BossController>
             
             yield return new WaitForSeconds(stat.spreadWaitTime);
         }
-        
+        battle = BattleState.Idle;
+        _isShooting = false;
         
         yield return null;
     }
@@ -344,8 +390,8 @@ public class BossController : Singleton<BossController>
         // instantiate a projectile and give it velocity
         Vector2 attackPosition = new Vector2(transform.position.x + direction.x * projectileSpawnDistance, transform.position.y + direction.y * projectileSpawnDistance);
         GameObject newProjectile = Instantiate(bossProjectile, attackPosition, Quaternion.identity);
-        Rigidbody2D ProjectileRb = newProjectile.GetComponent<Rigidbody2D>();
-        ProjectileRb.velocity = direction * stat.projectileSpeed;
+        Rigidbody2D projectileRb = newProjectile.GetComponent<Rigidbody2D>();
+        projectileRb.velocity = direction * stat.projectileSpeed;
         newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
         Managers.AudioManager.Instance.PlayEnemyShotSound();
                             
