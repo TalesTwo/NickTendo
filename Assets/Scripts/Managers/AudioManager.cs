@@ -127,20 +127,25 @@ namespace Managers
         //Soundtrack Functions and Coroutines
         public void PlayBackgroundSoundtrack(AudioClip clip, float volume = 1f, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f, GameObject fromObject = null)
         {
-            if (muteMusic) return;
+
 
             AudioSource src = Musicsource;
+            if (muteMusic)
+            {
+                Musicsource.volume = 0;
+            }
+
             if (src == null) return;
 
             src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
 
             src.spatialBlend = fromObject ? 1f : 0f;
             StopAllCoroutines();
-            if (fadeout && src.isPlaying)
+            if (fadeout && src.isPlaying && !muteMusic)
             {
                 StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume));
             }
-            else if (fadein)
+            else if (fadein && !muteMusic)
             {
                 src.Stop();
                 src.clip = clip;
@@ -150,7 +155,7 @@ namespace Managers
             else
             {
                 src.clip = clip;
-                src.volume = volume;
+                if(!muteMusic)src.volume = volume;
                 src.Play();
             }
         } 

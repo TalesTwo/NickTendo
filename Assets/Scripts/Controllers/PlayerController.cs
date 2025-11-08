@@ -122,6 +122,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void ResetFacingDirection(bool faceRight = true)
+    {
+        _isFacingRight = faceRight;
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * (faceRight ? 1 : -1);
+        transform.localScale = scale;
+    }
+
+    
     // Update is called once per frame
     // "fixedDeltaTime" is necessary instead of "Delta Time" for this method
     private void FixedUpdate()

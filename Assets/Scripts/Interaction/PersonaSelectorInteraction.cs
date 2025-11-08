@@ -14,7 +14,7 @@ public class PersonaTriggerInteraction : TriggerInteractBase
         if(personaSelectionUI) personaSelectionUI.GetComponent<PersonaUI>()?.OpenPersonaUI();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
         // we dont care about the base start for this one
         EventBroadcaster.ClosePersonaUI += ClosePersonaUI;

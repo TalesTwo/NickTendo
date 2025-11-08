@@ -277,7 +277,7 @@ MonoBehaviour:
   Framerate: 8
   SpriteRenderer: {fileID: 5494889573112493696}
   index: 0
-  footstepFrames: 01000000
+  footstepFrames: 0100000003000000
 --- !u!1 &2600231080423151123
 GameObject:
   m_ObjectHideFlags: 0

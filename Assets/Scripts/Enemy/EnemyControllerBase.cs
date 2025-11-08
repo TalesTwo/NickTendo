@@ -275,7 +275,6 @@ public class EnemyControllerBase : SpawnableObject
     // splits the stats on a line
     private void ParseStatsText()
     {
-        DebugUtils.Log("test");
         string[] lines = statLineCSV.text.Split('\n');
         double lineNumber = (double)difficulty/difficultyScalingFactor;
         lineNumber = Math.Ceiling(lineNumber);

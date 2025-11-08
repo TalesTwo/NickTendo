@@ -123,7 +123,7 @@ public class RangedEnemyController : EnemyControllerBase
     protected override IEnumerator Follow()
     {
         // error check for while we are in a pit
-        if(currentPath == null || currentPath.Count == 0)
+        if(currentPath == null || currentPath.Count == 0 || currentPath[0] == null)
             yield break;
         Vector3 currentWaypoint = currentPath[0].worldPosition;
         targetIndex = 0;
@@ -173,6 +173,5 @@ public class RangedEnemyController : EnemyControllerBase
         EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         // specific to ranged enemy deactivation logic can go here
         Managers.AudioManager.Instance.PlayEnemyDeathSound();
-        Debug.Log("Ranged Enemy destroyed");
     }
 }

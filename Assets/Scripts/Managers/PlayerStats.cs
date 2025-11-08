@@ -52,7 +52,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateCurrentHealth(float UpdateValue)
     {
         _currentHealth += UpdateValue;
-        DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
+        //DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
         EventBroadcaster.Broadcast_PlayerDamaged();
 
         if (_currentHealth > _maxHealth)
@@ -182,17 +182,7 @@ public class PlayerStats : Singleton<PlayerStats>
         SetKeys(stats.Keys);
         SetCoins(stats.Coins + GetCarryOverCoins());
     }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            // get the persna stats and print the email
-            var persona = PersonaManager.Instance.GetPersona();
-            var stats = PersonaStatsLoader.GetStats(persona);
-            DebugUtils.Log("Persona Email: " + stats.Email);
-        }
-    }
+    
 }
 
 public enum PlayerStatsEnum
