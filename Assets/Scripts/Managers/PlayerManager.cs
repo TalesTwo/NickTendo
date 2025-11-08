@@ -155,6 +155,7 @@ namespace Managers
             playerController.SetIsDead();
             GameStateManager.Instance.PlayerDeath();
             ScreenUIActivator.Instance.SetDeathScreen();
+            playerController.ResetFacingDirection(true);
 
         }
         

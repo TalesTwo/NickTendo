@@ -32,6 +32,7 @@ public class SystemManager : Singleton<SystemManager>
         gameObject.AddComponent<PersonaManager>();
         gameObject.AddComponent<GameStateManager>();
         gameObject.AddComponent<PitManager>();
+        gameObject.AddComponent<LightingManager>();
 
     }
 }
