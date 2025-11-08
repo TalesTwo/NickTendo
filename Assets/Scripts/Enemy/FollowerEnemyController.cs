@@ -190,6 +190,7 @@ public class FollowerEnemyController : EnemyControllerBase
         findPathCooldown = 1f / (speed*2f);
     }
     
+    
     protected override void Deactivate() 
     {
         base.Deactivate();
