@@ -19453,6 +19453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemyBoss (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4356571639101041153, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
+      propertyPath: lootTable.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8880805302080543262, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
       propertyPath: Override_speed
       value: 0
@@ -19636,6 +19640,10 @@ PrefabInstance:
     - target: {fileID: 2413488171680857417, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
       propertyPath: m_Name
       value: RangedEnemyBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356571639101041153, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
+      propertyPath: lootTable.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8880805302080543262, guid: 204b833ad9b9e3a44857a4f0b49f61a9, type: 3}
       propertyPath: Override_speed
