@@ -262,6 +262,7 @@ public class BossArmController : MonoBehaviour
             while (true)
             {
                 transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
+                Managers.AudioManager.Instance.PlayBUDDEEPunchSound(1, 0);
                 if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 2.0f)
                 {
                     BossController.Instance.RocketFinished();

@@ -38,6 +38,7 @@ namespace Managers
         public AudioClip Charge;
         public AudioClip BUDDEEShoot;
         public AudioClip BUDDEEDamaged;
+        public AudioClip SpawningEnemies;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
@@ -284,6 +285,10 @@ namespace Managers
         public void PlayBUDDEEDyingSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(BUDEEDeath, volume, deviation);
+        }
+        public void PlaySpawnEnemiesSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(SpawningEnemies, volume, deviation);
         }
         public void PlayBUDDEETalkingTone(float volume = 1)
         {

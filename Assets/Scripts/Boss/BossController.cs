@@ -161,6 +161,7 @@ public class BossController : Singleton<BossController>
             _phases += 1;
             battle = BattleState.Summoning;
             StartCoroutine(SpawnMinions());
+            Managers.AudioManager.Instance.PlaySpawnEnemiesSound(1, 0);
         }
         
         _projectilesTimer += Time.deltaTime;
