@@ -11,11 +11,11 @@ using Random = System.Random;
  * * initiating the arm attacks (finished)
  * * spawning minions (finished)
  * * shooting projectiles (finished)
- * * managing health
+ * * managing health (finished)
  * * calling for animations
  * * calling for the arms to perform actions (finished)
- * * managing vulnerable and invulnerable stages
- * * managing the state of the battle
+ * * managing vulnerable and invulnerable stages (finished)
+ * * managing the state of the battle (finished)
  */
 public class BossController : Singleton<BossController>
 {
@@ -137,43 +137,6 @@ public class BossController : Singleton<BossController>
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.L) && _leftArmAttached)
-        {
-            LaunchArm(leftArmController);
-            _leftArmAttached = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && _rightArmAttached)
-        {
-            LaunchArm(rightArmController);
-            _rightArmAttached = false;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            LaunchProjectile();
-        }
-        
-        
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            StartCoroutine(SpawnMinions());
-        }
-        
-        
-        // note: can only be tired when both arms are connected
-        if (Input.GetKeyDown(KeyCode.X) && _leftArmAttached && _rightArmAttached)
-        {
-            rightArmController.BecomeTired();
-            leftArmController.BecomeTired();
-            
-            BossScreenController.Instance.SetIsExhausted(true);
-            
-            
-            // todo call to the animator to switch over to the exhausted face
-        }
-        */
         
         if (_phases >= _currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
             _rightArmAttached)
@@ -264,9 +227,6 @@ public class BossController : Singleton<BossController>
             _leftArmAttached = false;
             SetRandomRocketTimers(true, false);
         }
-        
-        // reset state back to idle after smoothdamptime in the bossArmController (also use an integer to track how many calls must be received for the state to return to idle)
-
     }
     
     // todo add function to turn battle state back to idle after launching an arm
