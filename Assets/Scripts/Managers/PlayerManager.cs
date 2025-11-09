@@ -111,15 +111,16 @@ namespace Managers
             player.transform.position = pitCenter;
 
             // Apply damage or death logic
-            PlayerStats.Instance.UpdateCurrentHealth(-1);
-            
+            // we want to only do this, if we ARE NOT in a tutorial room
+            if (DungeonController.Instance.IsPlayerInAnyTutorialRoom() == false)
+            {
+                PlayerStats.Instance.UpdateCurrentHealth(-1);
+            }
             // if the player is not dead, respawn them
             if (PlayerStats.Instance.GetCurrentHealth() > 0)
             {
                 RespawnPlayerInCurrentRoom();
             }
-            
-            
         }
         
 

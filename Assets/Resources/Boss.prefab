@@ -90,11 +90,14 @@ MonoBehaviour:
   attacks:
   - rocketCountPerArm: 1
     rocketAttackTime: 1.5
+    maxRocketLaunchesPerPhase: 3
+    timeBetweenRocketLaunches: 40
     numberOfFollowers: 1
     numberOfRanged: 1
     numberOfChaoticFollowers: 1
     enemiesDifficulty: 5
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 30
     projectileCount: 5
     projectileSpeed: 4
     projectileDamage: 2
@@ -104,14 +107,20 @@ MonoBehaviour:
     spreadWavesCount: 3
     spreadWaitTime: 1
     spreadAngle: 80
+    timeBetweenProjectileWaves: 10
     health: 0
+    exhaustionCounter: 5
+    exhaustionTime: 10
   - rocketCountPerArm: 3
     rocketAttackTime: 1.2
+    maxRocketLaunchesPerPhase: 3
+    timeBetweenRocketLaunches: 30
     numberOfFollowers: 2
     numberOfRanged: 1
     numberOfChaoticFollowers: 1
-    enemiesDifficulty: 10
+    enemiesDifficulty: 5
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 30
     projectileCount: 7
     projectileSpeed: 5
     projectileDamage: 2
@@ -121,14 +130,20 @@ MonoBehaviour:
     spreadWavesCount: 4
     spreadWaitTime: 0.9
     spreadAngle: 85
+    timeBetweenProjectileWaves: 10
     health: 1
+    exhaustionCounter: 7
+    exhaustionTime: 9
   - rocketCountPerArm: 3
     rocketAttackTime: 1
+    maxRocketLaunchesPerPhase: 4
+    timeBetweenRocketLaunches: 25
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 1
-    enemiesDifficulty: 15
+    enemiesDifficulty: 10
     timeBetweenEnemies: 0.5
+    timeBetweenEnemyWaves: 25
     projectileCount: 9
     projectileSpeed: 6
     projectileDamage: 3
@@ -138,14 +153,20 @@ MonoBehaviour:
     spreadWavesCount: 5
     spreadWaitTime: 0.8
     spreadAngle: 90
+    timeBetweenProjectileWaves: 8
     health: 2
+    exhaustionCounter: 9
+    exhaustionTime: 8
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
+    maxRocketLaunchesPerPhase: 5
+    timeBetweenRocketLaunches: 25
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2
-    enemiesDifficulty: 20
+    enemiesDifficulty: 10
     timeBetweenEnemies: 0.4
+    timeBetweenEnemyWaves: 25
     projectileCount: 11
     projectileSpeed: 7
     projectileDamage: 3
@@ -155,14 +176,20 @@ MonoBehaviour:
     spreadWavesCount: 6
     spreadWaitTime: 0.7
     spreadAngle: 95
+    timeBetweenProjectileWaves: 8
     health: 3
+    exhaustionCounter: 11
+    exhaustionTime: 7
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
+    maxRocketLaunchesPerPhase: 6
+    timeBetweenRocketLaunches: 20
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2
-    enemiesDifficulty: 20
+    enemiesDifficulty: 15
     timeBetweenEnemies: 1
+    timeBetweenEnemyWaves: 22
     projectileCount: 13
     projectileSpeed: 7
     projectileDamage: 3
@@ -172,13 +199,17 @@ MonoBehaviour:
     spreadWavesCount: 6
     spreadWaitTime: 0.7
     spreadAngle: 95
+    timeBetweenProjectileWaves: 7
     health: 4
+    exhaustionCounter: 13
+    exhaustionTime: 6
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
   projectileSpawnDistance: 2
   rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
-  horizontalProjectionOffset: {x: 0.4, y: 0}
+  horizontalProjectionOffset: {x: 0, y: 0}
   rocketProjectionVertical: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
-  verticalProjectionOffset: {x: 0, y: -8.98}
+  verticalProjectionOffsetRight: {x: 0.4, y: -8.98}
+  verticalProjectionOffsetLeft: {x: -0.4, y: -8.98}
 --- !u!1 &1328521562464880001
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,14 +519,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994174248312641029}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.12511894}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2211963474735182871}
   m_Father: {fileID: 2256205203691772520}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &3114333140402452001
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -724,7 +755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2581792321881471862}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.6499999, y: 0, z: -0.12511894}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

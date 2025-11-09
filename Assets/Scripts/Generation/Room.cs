@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     [Space(10f)]
     [Header("Room Type")]
     [SerializeField] private Types.RoomType roomType;
+    [SerializeField] public bool isTutorialRoom = false; // is this room a tutorial room?
     
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
@@ -59,9 +60,18 @@ public class Room : MonoBehaviour
                 {
                     // cast to a Door
                     Door doorComponent = door.GetComponent<Door>();
+
+                    
                     if (doorComponent != null)
                     {
-                        doorComponent.SetDoorState(Door.DoorState.Locked);
+                        // get the door trigger interaction
+                        DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+                        // we only wanna auto lock the north door on the spawn room
+                        if (doorTrigger && doorTrigger.CurrentDoorPosition == Types.DoorClassification.North)
+                        {
+                            doorComponent.SetDoorState(Door.DoorState.Locked);
+                        }
+                        
                     }
                 }
                 

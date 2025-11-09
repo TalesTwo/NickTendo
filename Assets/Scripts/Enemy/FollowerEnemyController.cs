@@ -188,6 +188,7 @@ public class FollowerEnemyController : EnemyControllerBase
         stunTimer = float.Parse(stats[6]);
         _playerHitTimer = float.Parse(stats[7]);
         findPathCooldown = 1f / (speed*2f);
+        base.GetStats(statLine);
     }
     
     

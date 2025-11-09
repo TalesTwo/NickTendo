@@ -20,6 +20,19 @@ public class DungeonController : Singleton<DungeonController>
     private bool isUpdating = false;
     private float updateInterval = 0.75f;
 
+
+    public bool IsPlayerInAnyTutorialRoom()
+    {
+        /*
+         * This will return true if the player is currently in a tutorial room, which will be done by checking the current room's properties
+         */
+        Room currentRoom = GetCurrentRoom();
+        if (currentRoom != null)
+        {
+            return currentRoom.isTutorialRoom;
+        }
+        return false;
+    }
     // this has been changed to have a slight time delay on updating, to avoid it returning too quickly
     public int GetNumberOfEnemiesInCurrentRoom()
     {

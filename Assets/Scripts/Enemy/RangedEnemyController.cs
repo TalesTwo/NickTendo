@@ -165,6 +165,7 @@ public class RangedEnemyController : EnemyControllerBase
         stunTimer = float.Parse(stats[11]);
         _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
         findPathCooldown = 1f / (speed*2);
+        base.GetStats(statLine);
     }
     
     protected override void Deactivate() 

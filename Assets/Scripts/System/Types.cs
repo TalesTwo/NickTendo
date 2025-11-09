@@ -27,6 +27,10 @@ public static class Types
         NESW,
         End,
         DEFAULT,
+        TutorialOne,
+        TutorialTwo,
+        TutorialThree
+        
     }
 
     

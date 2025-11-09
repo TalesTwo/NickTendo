@@ -63,7 +63,15 @@ public class EnemyControllerBase : SpawnableObject
     [SerializeField] private Slider _healthSlider;
     private float _maxHealth;
     private Color[] _originalColors;
-
+    
+    [Header("Stat Overrides")]
+    [SerializeField] private float Override_health = -1;
+    [SerializeField] private float Override_speed = -1;
+    [SerializeField] private float Override_knockBackSpeed = -1;
+    [SerializeField] private float Override_knockBackTime = -1;
+    [SerializeField] private float Override_damage = -1f;
+    [SerializeField] private float Override_stunTimer = -1;
+    [SerializeField] private float Override_knockbackForce =-1;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -94,7 +102,15 @@ public class EnemyControllerBase : SpawnableObject
 
 
         Room currentRoom = DungeonController.Instance.GetCurrentRoom();
-        _allEnemies = currentRoom.GetComponentInChildren<RoomSpawnController>().GetEnemiesInRoom();
+        if (currentRoom)
+        {
+            RoomSpawnController spawnController = currentRoom.GetComponentInChildren<RoomSpawnController>();
+            if (spawnController != null)
+            {
+                _allEnemies = spawnController.GetEnemiesInRoom();
+            }
+        }
+        
     }
     private void SetSeed(int seed)
     {
@@ -319,6 +335,19 @@ public class EnemyControllerBase : SpawnableObject
     // method MUST be overriden in child class
     protected virtual void GetStats(string statLine)
     {
+        
+        // if we have overrides (-1 means no override)
+        // we will assume base is called AFTER the child class has already read from the file, so we can just
+        // just check for a -1 value, and if its not, directly override the stat
+        if (Override_health != -1) { health = Override_health; }
+        if (Override_speed != -1) { speed = Override_speed; }
+        if (Override_knockBackSpeed != -1) { knockBackSpeed = Override_knockBackSpeed; }
+        if (Override_knockBackTime != -1) { knockBackTime = Override_knockBackTime; }
+        if (Override_damage != -1) { damage = Override_damage; }
+        if (Override_stunTimer != -1) { stunTimer = Override_stunTimer; }
+        if (Override_knockbackForce != -1) { knockbackForce = Override_knockbackForce; }
+        
+        
         return;
     }
 
