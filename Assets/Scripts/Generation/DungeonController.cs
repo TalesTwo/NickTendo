@@ -19,13 +19,19 @@ public class DungeonController : Singleton<DungeonController>
     private int cachedEnemyCount;
     private bool isUpdating = false;
     private float updateInterval = 0.75f;
+    
+    private bool _wasInShopRoom = false;
+    private bool _wasInBossRoom = false;
 
 
 
     private void Start()
     {
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+        
+
     }
+
     
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
     {
@@ -39,44 +45,35 @@ public class DungeonController : Singleton<DungeonController>
          *
          * And we need to also note, that a "boss room" is the same as an "non shop" room for the purposes of music
          */
+        Debug.Log("Player changed room, checking for special room transitions...");
         
         // get access to our current room
         Room currentRoom = GetCurrentRoom();
         if (currentRoom == null) { return; }
         
-        // get the room we are going to
-        (int row, int col) targetCoords = targetRoomCoords;
-        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
-        if(dungeonRooms == null) { return; }
-        Room targetRoom = dungeonRooms[targetCoords.row][targetCoords.col];
-        if (targetRoom == null) { return; }
         // check if we are in a shop room or boss room
         bool isInShopRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Shop;
         bool isInBossRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Boss;
-        // check if we are going to a shop room or boss room
-        bool isGoingToShopRoom = targetRoom.GetRoomClassification() == Types.RoomClassification.Shop;
-        bool isGoingToBossRoom = targetRoom.GetRoomClassification() == Types.RoomClassification.Boss;
         
-        // Case1: shop -> non-shop
-        if (isInShopRoom && !isGoingToShopRoom)
+        
+        
+        // We want to ensure that we only broadcast when there is a change
+        // --- Shop transition detection ---
+        if (isInShopRoom != _wasInShopRoom)
         {
-            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(false);
+            // Only broadcast if we actually changed the shop state
+            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(isInShopRoom);
+            _wasInShopRoom = isInShopRoom;
         }
-        // Case2: non-shop -> shop
-        else if (!isInShopRoom && isGoingToShopRoom)
+
+        // --- Boss transition detection ---
+        if (isInBossRoom != _wasInBossRoom)
         {
-            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(true);
+            // Only broadcast if we actually changed the boss room state
+            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(isInBossRoom);
+            _wasInBossRoom = isInBossRoom;
         }
-        // Case3: boss room -> non-boss room
-        else if (isInBossRoom && !isGoingToBossRoom)
-        {
-            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(false);
-        }
-        // Case4: non-boss room -> boss room
-        else if (!isInBossRoom && isGoingToBossRoom)
-        {
-            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(true);
-        }
+
         
         
         
