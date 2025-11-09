@@ -80,7 +80,7 @@ public class PersonaUI : MonoBehaviour
 
     }
     
-    private void GenerateContent()
+    private void GenerateContent(int numberOfPersonas = 4)
     {
         // get currently active persona
         var activePersona = PersonaManager.Instance.GetPersona();

@@ -25,8 +25,9 @@ namespace Managers
             return colour;
         }
 
-        // CSV reference (loaded from Resources)
+        // CSV references (loaded from Resources)
         private TextAsset _personaStatsCSV;
+        private TextAsset _personaDetailsCSV;
     
         private Dictionary<Types.Persona, Types.PersonaState> _personas = InitializePersonas();
 
@@ -44,6 +45,7 @@ namespace Managers
         // Initialization flag
         private bool _isInitialized = false;
         private string _csvPath = "CSV Files/Stats/PersonaStats";
+        private string _detailsCSVPath = "CSV Files/Stats/PersonaDetails";
 
         // --------------------------------------------------
         protected override void Awake()
@@ -57,8 +59,17 @@ namespace Managers
                 DebugUtils.LogError("PersonaStats.csv not found at Resources/" + _csvPath);
                 return;
             }
-        
             PersonaStatsLoader.Initialize(_personaStatsCSV.text);
+            
+            _personaDetailsCSV = Resources.Load<TextAsset>(_detailsCSVPath);
+            if (_personaDetailsCSV == null)
+            {
+                DebugUtils.LogError("PersonaDetails.csv not found at Resources/" + _detailsCSVPath);
+                return;
+            }
+            PersonaDetailsLoader.Initialize(_personaDetailsCSV.text);
+            
+            
             _isInitialized = true;
 
         
@@ -106,6 +117,17 @@ namespace Managers
             return count;
         }
 
+        private void Update()
+        {
+            /*
+             * For testing purposes, we can cycle through personas with the P key
+             */
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                // Generate a new persona
+                PlayerStatsStruct PS = GenerateNewPersona();
+            }
+        }
     
         // --------------------------------------------------
         public void SetPersona(Types.Persona newPersona)
@@ -149,7 +171,7 @@ namespace Managers
             
             if (_personas.ContainsKey(persona))
             {
-                _personas[persona] = Types.PersonaState.Lost;
+                //_personas[persona] = Types.PersonaState.Lost;
             }
             
             
@@ -171,6 +193,61 @@ namespace Managers
         }
         public void LockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Locked;
         public void UnlockPersona(Types.Persona persona) => _personas[persona] = Types.PersonaState.Available;
+        
+        
+        /*
+         * Persona system is being updated, where we are going to create a bunch of "bases" and procedeurally generate personas
+         *
+         * PersonaStatsCSV will be used for the persona bases
+         */
+
+        public PlayerStatsStruct GenerateNewPersona()
+        {
+            if (!_isInitialized)
+            {
+                DebugUtils.LogError("PersonaManager not initialized!");
+                return default;
+            }
+
+            // 1. Pick a random persona class (from PersonaStatsLoader)
+            Array personas = Enum.GetValues(typeof(Types.Persona));
+            Types.Persona randomPersona = (Types.Persona)personas.GetValue(UnityEngine.Random.Range(1, personas.Length-1)); // skip "None" and "Normal"
+
+            // 2. Random details (name, email handle, domain)
+            string username = PersonaDetailsLoader.GetRandomUsername();
+            string emailHandle = PersonaDetailsLoader.GetRandomEmailHandle();
+            string domain = PersonaDetailsLoader.GetRandomDomain();
+
+            // 3. Generate full identity
+            string email = $"{emailHandle}@{domain}";
+
+            // 4. Get base stats from PersonaStatsLoader and copy into a new struct
+            PlayerStatsStruct baseStats = PersonaStatsLoader.GetStats(randomPersona);
+
+            PlayerStatsStruct stats = new PlayerStatsStruct
+            {
+                CurrentHealth   = baseStats.CurrentHealth,
+                MaxHealth       = baseStats.MaxHealth,
+                MovementSpeed   = baseStats.MovementSpeed,
+                DashSpeed       = baseStats.DashSpeed,
+                AttackDamage    = baseStats.AttackDamage,
+                AttackCooldown  = baseStats.AttackCooldown,
+                DashDamage      = baseStats.DashDamage,
+                DashCooldown    = baseStats.DashCooldown,
+                DashDistance    = baseStats.DashDistance,
+                Keys            = baseStats.Keys,
+                Coins           = baseStats.Coins,
+                PlayerColor     = baseStats.PlayerColor,
+                Description     = baseStats.Description,
+                Email           = email,
+                Username        = username
+            };
+            
+            DebugUtils.Log($"Generated New Persona: {name} ({email}) [{username}] Class: {randomPersona}");
+            DebugUtils.Log($"Stats: Type: {randomPersona}, Health: {stats.MaxHealth}, Speed: {stats.MovementSpeed}, Attack: {stats.AttackDamage}, DashDamage: {stats.DashDamage}");
+            return stats;
+        }
+
         
     }
     
@@ -222,7 +299,8 @@ namespace Managers
                         Coins           = int.Parse(values[11]),
                         PlayerColor     = ParseColor(values[12]),
                         Description     = values[13],
-                        Email           = values.Length > 14 ? values[14] : ""
+                        Email           = values.Length > 14 ? values[14] : "",
+                        Username      = values.Length > 15 ? values[15] : ""
                     };
 
                     _personaStats[persona] = stats;
@@ -287,4 +365,57 @@ namespace Managers
             }
         }
     }
+    
+    
+    public static class PersonaDetailsLoader
+    {
+        private static List<string> _Usernames = new();
+        private static List<string> _emails = new();
+        private static List<string> _domains = new();
+        private static bool _isLoaded = false;
+
+        public static void Initialize(string csvText)
+        {
+            if (_isLoaded) return;
+
+            string[] lines = csvText.Split('\n');
+
+            // Skip header
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string line = lines[i].Trim();
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                string[] values = line.Split(',');
+
+                // If name column exists and not empty
+                if (values.Length > 0 && !string.IsNullOrWhiteSpace(values[0]))
+                    _Usernames.Add(values[0].Trim());
+
+                // If email handle column exists and not empty
+                if (values.Length > 1 && !string.IsNullOrWhiteSpace(values[1]))
+                    _emails.Add(values[1].Trim());
+
+                // If domain column exists and not empty
+                if (values.Length > 2 && !string.IsNullOrWhiteSpace(values[2]))
+                {
+                    string domain = values[2].Trim();
+                    if (domain.StartsWith(".")) domain = domain.Substring(1); // remove leading "."
+                    _domains.Add(domain);
+                }
+            }
+
+            _isLoaded = true;
+
+            DebugUtils.LogSuccess($"Loaded {_Usernames.Count} names, {_emails.Count} handles, {_domains.Count} domains.");
+        }
+
+
+        public static string GetRandomUsername() => _Usernames.Count > 0 ? _Usernames[UnityEngine.Random.Range(0, _Usernames.Count)] : "Unknown";
+        public static string GetRandomEmailHandle() => _emails.Count > 0 ? _emails[UnityEngine.Random.Range(0, _emails.Count)] : "user";
+        public static string GetRandomDomain() => _domains.Count > 0 ? _domains[UnityEngine.Random.Range(0, _domains.Count)] : "example.com";
+    }
+
+
+    
 }
