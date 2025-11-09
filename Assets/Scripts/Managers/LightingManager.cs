@@ -27,72 +27,37 @@ namespace Managers
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
             EventBroadcaster.EnemyDeath += OnEnemyDeath;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-            DebugUtils.LogSuccess("[LightingManager] Initialized successfully.");
+            InvokeRepeating(nameof(CheckLight), 0f, 0.25f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room
         }
 
-        public void Update()
+        
+        private void CheckLight()
         {
-            // TEMP FIX: 
-            // every 1 second, check to update the global light based on enemy count in room
-            // This is a temp fix for the issue where the global light does not update when enemies are killed via environmental hazards
-            // we also dont want to do this while the player is actively falling into a pit
-            if (Time.frameCount % 60 == 0 && !_bTransitioning && !_bFallingInPit) // assuming 60 FPS, this is roughly every second
-            {
-                // get the current room the player is in
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player == null) { return; }
+            if (_bTransitioning || _bFallingInPit) return;
 
-                Room currentRoom = DungeonController.Instance.GetCurrentRoom();
-                if (currentRoom == null) { return; }
-                int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(currentRoom);
-                if (enemyCount == 0)
-                {
-                    _bTransitioning = true;
-                    SetGlobalLightIntensity(1.0f, globalLightTransitionDuration);
-                    
-                }
-                else
-                {
-                    _bTransitioning = true;
-                    SetGlobalLightIntensity(0f, playerLightTransitionDuration);
-                }
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null) return;
+
+            Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+            if (currentRoom == null) return;
+
+            int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(currentRoom);
+            _bTransitioning = true;
+
+            if (enemyCount == 0) {
+                SetGlobalLightIntensity(1.0f, globalLightTransitionDuration); 
+            } else {
+                SetGlobalLightIntensity(0f, playerLightTransitionDuration);
             }
         }
-
-
         private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
         {
-            
-            // get the number of enemies in the room
-            int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(room);
-            // if the number if 0, set global light to max intensity
-            if (enemyCount == 0)
-            {
-                SetGlobalLightIntensity(1.0f);
-            }
-            else
-            {
-                SetGlobalLightIntensity(0f);
-            }
+            CheckLight();
         }
         
         private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
         {
-            // get access to the target room
-            Room targetRoom = DungeonGeneratorManager.Instance.GetDungeonRooms()[targetRoomCoords.row][targetRoomCoords.col];
-            // null check it for saftey
-            if (targetRoom == null) { return; }
-            // get the number of enemies in the room
-            int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(targetRoom);
-            // if the number if 0, set global light to max intensity
-            if (enemyCount == 0)
-            {
-                SetGlobalLightIntensity(1.0f);
-            }
-            else
-            {
-                SetGlobalLightIntensity(0f);
-            }
+            CheckLight();
         }
         
         public void SetGlobalLightIntensity(float intensity, float duration = 0f)
@@ -181,6 +146,7 @@ namespace Managers
         private IEnumerator DimAndRestorePlayerLight(float dimDuration, float waitDelay, float restoreDuration)
         {
             float originalIntensity = playerLight.intensity;
+            float originalGlobalIntensity = globalLight.intensity;
             float elapsed = 0f;
 
             // --- Fade Out ---
@@ -189,10 +155,12 @@ namespace Managers
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / dimDuration);
                 playerLight.intensity = Mathf.Lerp(originalIntensity, 0f, t);
+                globalLight.intensity = Mathf.Lerp(originalGlobalIntensity, 0f, t);
                 yield return null;
             }
 
             playerLight.intensity = 0f;
+            globalLight.intensity = 0f;
 
             // --- Optional pause before fade back ---
             yield return new WaitForSeconds(waitDelay);
@@ -204,10 +172,12 @@ namespace Managers
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / restoreDuration);
                 playerLight.intensity = Mathf.Lerp(0f, originalIntensity, t);
+                globalLight.intensity = Mathf.Lerp(0f, originalGlobalIntensity, t);
                 yield return null;
             }
 
             playerLight.intensity = originalIntensity;
+            globalLight.intensity = originalGlobalIntensity;
             _bFallingInPit = false;
         }
 
