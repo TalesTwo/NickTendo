@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 /*
  * The central hub for controlling all things boss fight
@@ -24,6 +25,8 @@ public class BossController : Singleton<BossController>
         [Header("Rockets")]
         public int rocketCountPerArm;
         public float rocketAttackTime;
+        public int maxRocketLaunchesPerPhase;
+        public float timeBetweenRocketLaunches;
         [Header("Minions")]
         public int numberOfFollowers;
         public int numberOfRanged;
@@ -111,6 +114,13 @@ public class BossController : Singleton<BossController>
     private bool _isShooting = false;
     private float _enemiesTimer = 25f;
     private float _projectilesTimer = 0f;
+    private float _rightArmRandomTimer = 0f;
+    private float _leftArmRandomTimer = 0f;
+    private float _leftArmTimer = 0f;
+    private float _rightArmTimer = 0f;
+    private int _rightArmsLaunchedThisPhase = 0;
+    private int _leftArmsLaunchedThisPhase = 0;
+    private int _armsCurrentlyLaunched = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -120,11 +130,14 @@ public class BossController : Singleton<BossController>
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
         _rocketProjectionsQueue = new Queue<GameObject>();
         _currentStats = attacks[0];
+        
+        SetRandomRocketTimers(true, true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.L) && _leftArmAttached)
         {
             LaunchArm(leftArmController);
@@ -136,7 +149,7 @@ public class BossController : Singleton<BossController>
             LaunchArm(rightArmController);
             _rightArmAttached = false;
         }
-        /*
+        
         if (Input.GetKeyDown(KeyCode.B))
         {
             LaunchProjectile();
@@ -197,8 +210,91 @@ public class BossController : Singleton<BossController>
             battle = BattleState.Shooting;
             LaunchProjectile();
         }
+
+        _rightArmTimer += Time.deltaTime;
+        _leftArmTimer += Time.deltaTime;
+
+        if (_rightArmTimer >= _rightArmRandomTimer && _leftArmTimer >= _leftArmRandomTimer &&
+            battle == BattleState.Idle && _leftArmAttached && _rightArmAttached && 
+            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase && 
+            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+        {
+            // both arms launching at once
+            _rightArmTimer = 0f;
+            _leftArmTimer = 0f;
+            _phases += 2;
+            _armsCurrentlyLaunched += 2;
+            _rightArmsLaunchedThisPhase += 1;
+            _leftArmsLaunchedThisPhase += 1;
+            battle = BattleState.RocketArms;
+            
+            LaunchArm(leftArmController);
+            _leftArmAttached = false;
+            LaunchArm(rightArmController);
+            _rightArmAttached = false;
+            SetRandomRocketTimers(true, true);
+        }
+
+        if (_rightArmTimer >= _rightArmRandomTimer && battle == BattleState.Idle && _rightArmAttached && 
+            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+        {
+            // launching the right arm only
+            _rightArmTimer = 0f;
+            _phases += 1;
+            _armsCurrentlyLaunched += 1;
+            _rightArmsLaunchedThisPhase += 1;
+            battle = BattleState.RocketArms;
+            
+            LaunchArm(rightArmController);
+            _rightArmAttached = false;
+            SetRandomRocketTimers(false, true);
+        }
+
+        if (_leftArmTimer >= _leftArmRandomTimer && battle == BattleState.Idle && _leftArmAttached && 
+            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+        {
+            // launching the left arm only
+            _leftArmTimer = 0f;
+            _phases += 1;
+            _armsCurrentlyLaunched += 1;
+            _leftArmsLaunchedThisPhase += 1;
+            battle = BattleState.RocketArms;
+            
+            LaunchArm(leftArmController);
+            _leftArmAttached = false;
+            SetRandomRocketTimers(true, false);
+        }
         
+        // reset state back to idle after smoothdamptime in the bossArmController (also use an integer to track how many calls must be received for the state to return to idle)
+
+    }
+    
+    // todo add function to turn battle state back to idle after launching an arm
+    public void BackToIdleState()
+    {
+        _armsCurrentlyLaunched -= 1;
+        if (_armsCurrentlyLaunched == 0)
+        {
+            battle = BattleState.Idle;
+        }
+    }
+
+    private void SetRandomRocketTimers(bool isLeft, bool isRight)
+    {
+        Random random = new Random();
+        float min = 10f;
         
+        if (isRight)
+        {
+            float randomValue = (float)random.NextDouble();
+            _rightArmRandomTimer = randomValue * (_currentStats.timeBetweenRocketLaunches - min) + min;
+        }
+
+        if (isLeft)
+        {
+            float randomValue = (float)random.NextDouble();
+            _leftArmRandomTimer = randomValue * (_currentStats.timeBetweenRocketLaunches - min) + min;
+        }
     }
 
     private IEnumerator ExhaustionTimer()
@@ -213,6 +309,9 @@ public class BossController : Singleton<BossController>
         leftArmController.BecomeUntired();
         BossScreenController.Instance.SetIsExhausted(false);
         battle = BattleState.Idle;
+
+        _rightArmsLaunchedThisPhase = 0;
+        _leftArmsLaunchedThisPhase = 0;
     }
 
     public void TakeDamage()
@@ -251,6 +350,10 @@ public class BossController : Singleton<BossController>
                 break;
             }
         }
+
+        _leftArmsLaunchedThisPhase = 0;
+        _rightArmsLaunchedThisPhase = 0;
+        _projectilesTimer = 0f;
     }
 
     private void LaunchArm(BossArmController armController)

@@ -90,12 +90,14 @@ MonoBehaviour:
   attacks:
   - rocketCountPerArm: 1
     rocketAttackTime: 1.5
+    maxRocketLaunchesPerPhase: 5
+    timeBetweenRocketLaunches: 30
     numberOfFollowers: 1
     numberOfRanged: 1
     numberOfChaoticFollowers: 1
     enemiesDifficulty: 5
     timeBetweenEnemies: 0.5
-    timeBetweenEnemyWaves: 30
+    timeBetweenEnemyWaves: 1000
     projectileCount: 5
     projectileSpeed: 4
     projectileDamage: 2
@@ -105,12 +107,14 @@ MonoBehaviour:
     spreadWavesCount: 3
     spreadWaitTime: 1
     spreadAngle: 80
-    timeBetweenProjectileWaves: 10
+    timeBetweenProjectileWaves: 1000
     health: 0
-    exhaustionCounter: 2
+    exhaustionCounter: 4
     exhaustionTime: 10
   - rocketCountPerArm: 3
     rocketAttackTime: 1.2
+    maxRocketLaunchesPerPhase: 0
+    timeBetweenRocketLaunches: 0
     numberOfFollowers: 2
     numberOfRanged: 1
     numberOfChaoticFollowers: 1
@@ -132,6 +136,8 @@ MonoBehaviour:
     exhaustionTime: 9
   - rocketCountPerArm: 3
     rocketAttackTime: 1
+    maxRocketLaunchesPerPhase: 0
+    timeBetweenRocketLaunches: 0
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 1
@@ -153,6 +159,8 @@ MonoBehaviour:
     exhaustionTime: 8
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
+    maxRocketLaunchesPerPhase: 0
+    timeBetweenRocketLaunches: 0
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2
@@ -174,6 +182,8 @@ MonoBehaviour:
     exhaustionTime: 7
   - rocketCountPerArm: 3
     rocketAttackTime: 0.9
+    maxRocketLaunchesPerPhase: 0
+    timeBetweenRocketLaunches: 0
     numberOfFollowers: 2
     numberOfRanged: 2
     numberOfChaoticFollowers: 2

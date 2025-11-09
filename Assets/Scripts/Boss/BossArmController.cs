@@ -165,6 +165,7 @@ public class BossArmController : MonoBehaviour
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), destination) < 1.0f)
             {
                 _rocketReady = true;
+                BossController.Instance.BackToIdleState();
                 break;
             }
             yield return null;
