@@ -27,7 +27,7 @@ namespace Managers
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
             EventBroadcaster.EnemyDeath += OnEnemyDeath;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-            InvokeRepeating(nameof(CheckLight), 0f, 0.25f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room
+            InvokeRepeating(nameof(CheckLight), 0f, 0.15f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room. but i dont feel like it rn
         }
 
         

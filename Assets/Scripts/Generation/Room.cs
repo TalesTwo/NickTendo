@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     [Space(10f)]
     [Header("Room Type")]
     [SerializeField] private Types.RoomType roomType;
+    [SerializeField] public bool isTutorialRoom = false; // is this room a tutorial room?
     
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?

@@ -184,6 +184,7 @@ namespace Managers
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
             if (_IsFirstLoad)
             {
+                GameStateManager.Instance.SetBuddeeDialogState("vertIntroyell");
                 EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
             }
             _IsFirstLoad = false;
