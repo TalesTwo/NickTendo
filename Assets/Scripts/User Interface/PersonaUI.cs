@@ -13,6 +13,9 @@ public class PersonaUI : MonoBehaviour
     [SerializeField] private GameObject personaTemplate;
     [SerializeField] private Transform contentParent; 
     [SerializeField] private GameObject buddeeUI;
+    
+    
+    private Dictionary<Types.Persona, Types.PersonaState> _personas;
 
     public void Start()
     {
@@ -22,6 +25,9 @@ public class PersonaUI : MonoBehaviour
         {
             closeButton.onClick.AddListener(ClosePersonaUI);
         }
+        
+        // read the persona states from the PersonaManager
+        //_personas = PersonaManager.Instance.GeneratePersonaStatesDict();
     }
 
     public void OpenPersonaUI()
@@ -84,10 +90,11 @@ public class PersonaUI : MonoBehaviour
     {
         // get currently active persona
         var activePersona = PersonaManager.Instance.GetPersona();
-        var personas = PersonaManager.Instance.GetAllPersonas();
 
+        _personas = PersonaManager.Instance.GetAllPersonas();
+        
         // Create the same number of UI elements as there are personas
-        foreach (var persona in personas)
+        foreach (var persona in _personas)
         {
 
             var state = persona.Value;

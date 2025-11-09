@@ -40,7 +40,6 @@ namespace Managers
 
         // Getter for all personas and their states
         public Dictionary<Types.Persona, Types.PersonaState> GetAllPersonas() => _personas;
-    
 
         // Initialization flag
         private bool _isInitialized = false;
@@ -240,7 +239,8 @@ namespace Managers
                 PlayerColor     = baseStats.PlayerColor,
                 Description     = baseStats.Description,
                 Email           = email,
-                Username        = username
+                Username        = username,
+                PersonaType     = randomPersona
             };
             
             DebugUtils.Log($"Generated New Persona: {name} ({email}) [{username}] Class: {randomPersona}");
