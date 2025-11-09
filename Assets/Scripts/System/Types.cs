@@ -32,6 +32,16 @@ public static class Types
         TutorialThree
         
     }
+    
+    public enum RoomClassification
+    {
+        Spawn,
+        Normal,
+        Shop,
+        Boss,
+        Treasure,
+        Tutorial
+    }
 
     
     [Serializable]

@@ -21,6 +21,68 @@ public class DungeonController : Singleton<DungeonController>
     private float updateInterval = 0.75f;
 
 
+
+    private void Start()
+    {
+        EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+    }
+    
+    private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+    {
+        // there is a few things we need to look for:
+        /*
+         * check to see one of these conditions:
+         * shop -> non-shop
+         * non-shop -> shop
+         * boss room -> non-boss room
+         * non-boss room -> boss room
+         *
+         * And we need to also note, that a "boss room" is the same as an "non shop" room for the purposes of music
+         */
+        
+        // get access to our current room
+        Room currentRoom = GetCurrentRoom();
+        if (currentRoom == null) { return; }
+        
+        // get the room we are going to
+        (int row, int col) targetCoords = targetRoomCoords;
+        List<List<Room>> dungeonRooms = DungeonGeneratorManager.Instance.GetDungeonRooms();
+        if(dungeonRooms == null) { return; }
+        Room targetRoom = dungeonRooms[targetCoords.row][targetCoords.col];
+        if (targetRoom == null) { return; }
+        // check if we are in a shop room or boss room
+        bool isInShopRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Shop;
+        bool isInBossRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Boss;
+        // check if we are going to a shop room or boss room
+        bool isGoingToShopRoom = targetRoom.GetRoomClassification() == Types.RoomClassification.Shop;
+        bool isGoingToBossRoom = targetRoom.GetRoomClassification() == Types.RoomClassification.Boss;
+        
+        // Case1: shop -> non-shop
+        if (isInShopRoom && !isGoingToShopRoom)
+        {
+            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(false);
+        }
+        // Case2: non-shop -> shop
+        else if (!isInShopRoom && isGoingToShopRoom)
+        {
+            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(true);
+        }
+        // Case3: boss room -> non-boss room
+        else if (isInBossRoom && !isGoingToBossRoom)
+        {
+            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(false);
+        }
+        // Case4: non-boss room -> boss room
+        else if (!isInBossRoom && isGoingToBossRoom)
+        {
+            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(true);
+        }
+        
+        
+        
+
+    }
+    
     public bool IsPlayerInAnyTutorialRoom()
     {
         /*
@@ -29,7 +91,7 @@ public class DungeonController : Singleton<DungeonController>
         Room currentRoom = GetCurrentRoom();
         if (currentRoom != null)
         {
-            return currentRoom.isTutorialRoom;
+            return currentRoom.GetRoomClassification() == Types.RoomClassification.Tutorial;
         }
         return false;
     }
