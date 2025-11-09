@@ -147,6 +147,21 @@ public class EnemyControllerBase : SpawnableObject
        
         
         ApplySeparation();
+        CheckWhichDirectionToFace();
+    }
+
+
+    private void CheckWhichDirectionToFace()
+    {
+        // flip the flip the sprite based on direction
+        if (_direction.x < 0)
+        {
+            _renderer.flipX = true;
+        }
+        else if (_direction.x > 0)
+        {
+            _renderer.flipX = false;
+        }
     }
     
     protected void ApplySeparation()
