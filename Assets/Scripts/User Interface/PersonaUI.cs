@@ -27,7 +27,6 @@ public class PersonaUI : MonoBehaviour
         }
         
         // read the persona states from the PersonaManager
-        //_personas = PersonaManager.Instance.GeneratePersonaStatesDict();
     }
 
     public void OpenPersonaUI()
@@ -86,102 +85,103 @@ public class PersonaUI : MonoBehaviour
 
     }
     
-    private void GenerateContent(int numberOfPersonas = 4)
+    private void GenerateContent(int numberOfPersonas = 3)
+{
+    // Ensure personas are initialized & generated once
+    PersonaManager.Instance.InitializeRandomPersonas();
+
+    // Get persona states dictionary (Available, Locked, Selected, etc.)
+    _personas = PersonaManager.Instance.GetAllPersonas();
+    
+    // "trim" the _personas dictionary to only only include a random selection of personas
+    var trimmedPersonas = PersonaManager.Instance.GetTrimmedPersonas(numberOfPersonas);
+    
+
+    // --- Generate UI elements ---
+    foreach (var kvp in trimmedPersonas)
     {
-        // get currently active persona
-        var activePersona = PersonaManager.Instance.GetPersona();
+        var personaType = kvp.Key;
+        var state = kvp.Value;
 
-        _personas = PersonaManager.Instance.GetAllPersonas();
-        
-        // Create the same number of UI elements as there are personas
-        foreach (var persona in _personas)
+        // skip unusable personas
+        if (personaType == Types.Persona.Normal || personaType == Types.Persona.None)
+            continue;
+
+        if (state == Types.PersonaState.Lost)
+            continue;
+
+        // get generated stats for this persona type
+        var stats = PersonaManager.Instance.GetGeneratedPersona(personaType);
+
+        // create UI element
+        GameObject newPersona = Instantiate(personaTemplate, contentParent);
+
+        // --- Fill in name ---
+        TMP_Text nameText = newPersona.transform.Find("Text_PersonaName")?.GetComponent<TMP_Text>();
+        if (nameText != null)
+            nameText.text = $"{stats.Username}, The {personaType} | ";
+
+        // --- Fill in stats ---
+        TMP_Text statsText = newPersona.transform.Find("Text_PersonaStats")?.GetComponent<TMP_Text>();
+        if (statsText != null)
         {
+            // round to 2 decimal places
+            statsText.text = $"Health: {stats.MaxHealth:F1}  Speed: {stats.MovementSpeed:F1}  " +
+                             $"Attack: {stats.AttackDamage:F1}  DashDamage: {stats.DashDamage:F1}";
 
-            var state = persona.Value;
-            if (state == Types.PersonaState.Lost)
-            {
-                continue; 
-            }
-            // we should not be able to select the "Normal" persona
-            if (persona.Key == Types.Persona.Normal || persona.Key == Types.Persona.None)
-            {
-                continue;
-            }
-                
-            GameObject newPersona = Instantiate(personaTemplate, contentParent);
+        }
 
-            // --- Fill in name ---
-            TMP_Text nameText = newPersona.transform.Find("Text_PersonaName")?.GetComponent<TMP_Text>();
-            if (nameText != null)
-                nameText.text = "The " + persona.Key.ToString();
+        // --- Fill in email ---
+        TMP_Text emailText = newPersona.transform.Find("Text_PersonaEmail")?.GetComponent<TMP_Text>();
+        if (emailText != null)
+            emailText.text = stats.Email;
 
-            // --- Fill in stats ---
-            var stats = PersonaStatsLoader.GetStats(persona.Key);
-            TMP_Text statsText = newPersona.transform.Find("Text_PersonaStats")?.GetComponent<TMP_Text>();
-            if (statsText != null)
-            {
-                statsText.text = $"Health: {stats.MaxHealth}  Speed: {stats.MovementSpeed}  " +
-                                 $"Attack: {stats.AttackDamage}  DashDamage: {stats.DashDamage}";
-            }
-
-            nameText.text += " | " + stats.Email;
-
-            TMP_Text emailText = newPersona.transform.Find("Text_PersonaEmail")?.GetComponent<TMP_Text>();
-            if (emailText != null)
-            {
-                emailText.text = stats.Email;
-            }
-
-            PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
+        // --- Set color ---
+        PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
+        if (pItemUI != null)
             pItemUI.SetColor(stats.PlayerColor);
-            // --- Fill in description ---
 
-            /*TMP_Text descriptionText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
-            if (descriptionText != null)
+        // --- Button logic ---
+        Button button = newPersona.GetComponentInChildren<Button>();
+        if (button == null) continue;
+
+        var capturedPersona = personaType;
+
+        if (state == Types.PersonaState.Selected)
+        {
+            button.interactable = false;
+            if (pItemUI != null) pItemUI.ShowCheckmark();
+
+            var buddee = buddeeUI.GetComponent<BUDDEEUI>();
+            buddee.StopCR();
+            buddee.SetDialogue(stats.Description);
+
+            TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
+            if (btnLabel != null)
+                btnLabel.text = "Selected";
+        }
+        else if (state == Types.PersonaState.Available)
+        {
+            button.interactable = true;
+            button.onClick.AddListener(() =>
             {
-                descriptionText.text = stats.Description;
-            }*/
-
-            // --- Button logic ---
-            Button button = newPersona.GetComponentInChildren<Button>();
-            if (button != null)
-            {
-                var capturedPersona = persona.Key;
-
-                if (state == Types.PersonaState.Selected)
-                {
-                    button.interactable = false;
-                    pItemUI.ShowCheckmark();
-                    buddeeUI.GetComponent<BUDDEEUI>().StopCR();
-                    buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(stats.Description);                                        
-                    TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
-                    if (btnLabel != null)
-                        btnLabel.text = "Selected";
-                }
-                else if (state == Types.PersonaState.Available)
-                {
-                    button.interactable = true;
-                    //pItemUI.HideCheckmark();
-                    button.onClick.AddListener(() =>
-                    {
-                        PersonaManager.Instance.SetPersona(capturedPersona);
-                        AudioManager.Instance.PlayUISelectSound();
-                        UpdatePersonaUI();
-                    });
-                }
-                else if(state == Types.PersonaState.Locked)
-                {
-                    button.interactable = false;
-                    TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
-                    if (btnLabel != null)
-                        btnLabel.text = "Locked";
-                }
-                else
-                {
-                    // locked or lost, disable
-                    button.interactable = false;
-                }
-            }
+                PersonaManager.Instance.SetPersona(capturedPersona);
+                AudioManager.Instance.PlayUISelectSound();
+                UpdatePersonaUI();
+            });
+        }
+        else if (state == Types.PersonaState.Locked)
+        {
+            button.interactable = false;
+            TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
+            if (btnLabel != null)
+                btnLabel.text = "Locked";
+        }
+        else
+        {
+            button.interactable = false;
         }
     }
+}
+
 }

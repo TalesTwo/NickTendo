@@ -30,6 +30,12 @@ namespace Managers
         private TextAsset _personaDetailsCSV;
     
         private Dictionary<Types.Persona, Types.PersonaState> _personas = InitializePersonas();
+        private Dictionary<Types.Persona, Types.PersonaState> _trimmedPersonas;
+        private Dictionary<Types.Persona, PlayerStatsStruct> _generatedPersonas;
+        private bool _personasGenerated = false;
+        private bool _personasTrimmed = false;
+        
+
 
         private static Dictionary<Types.Persona, Types.PersonaState> InitializePersonas()
         {
@@ -80,12 +86,26 @@ namespace Managers
             // Listen for the player death event to reset persona
             EventBroadcaster.PlayerDeath +=  OnPlayerDeath;
             EventBroadcaster.GameRestart += OnGameRestart;
+            EventBroadcaster.OpenPersonaUI += OnPlayerOpenPersonaUI;
         }
 
+        private void OnPlayerOpenPersonaUI()
+        {
+            // when the player opens the UI, we want to generate everything
+            InitializeRandomPersonas();
+            GetTrimmedPersonas(3); // for now, we will just do 3
+            
+        }
+
+        
         private void OnPlayerDeath()
         {
             // take the current persona, and mark it as inactive
             MarkAsLost(GetPersona());
+            // we want to regenerate the personas
+            _personasGenerated = false;
+            _personasTrimmed = false;
+
         }
         private void OnGameRestart()
         {
@@ -96,6 +116,48 @@ namespace Managers
             {
                 _personas[key] = Types.PersonaState.Available;
             }
+            // we want to regenerate the personas
+            _personasGenerated = false;
+            _personasTrimmed = false;
+        }
+        
+        public Dictionary<Types.Persona, Types.PersonaState> GetTrimmedPersonas(int numberOfPersonas)
+        {
+            /*
+             * Returns a dictionary of personas trimmed to the specified number
+             * of available personas, with others set to Locked.
+             */
+            
+            // ensure we havent already generated personas
+            if (_personasTrimmed){
+                return _personas;
+            }
+
+            _personas = InitializePersonas();
+
+            // Get all valid personas (ignore None + Normal)
+            var validPersonas = _personas.Keys
+                .Where(p => p != Types.Persona.None && p != Types.Persona.Normal)
+                .ToList();
+
+            // Shuffle the list
+            validPersonas = validPersonas
+                .OrderBy(_ => Guid.NewGuid())
+                .ToList();
+
+            // Assign states based on how many we want
+            for (int i = 0; i < validPersonas.Count; i++)
+            {
+                var persona = validPersonas[i];
+                bool shouldBeAvailable = i < numberOfPersonas;
+
+                _personas[persona] = shouldBeAvailable
+                    ? Types.PersonaState.Available
+                    : Types.PersonaState.Lost;
+            }
+            
+            _personasTrimmed = true;
+            return _personas;
         }
 
         public int GetNumberOfAvailablePersonas()
@@ -200,52 +262,93 @@ namespace Managers
          * PersonaStatsCSV will be used for the persona bases
          */
 
-        public PlayerStatsStruct GenerateNewPersona()
+        public PlayerStatsStruct GenerateNewPersona(Types.Persona personaType = Types.Persona.None)
         {
+            /*
+             * Generates a new persona with random details and base stats from the CSV
+             * If personaType is None, a random persona type will be selected (excluding Normal and None)
+             */
+
+            // 1. Select random persona type if none provided
+            if (personaType == Types.Persona.None)
+            {
+                var availablePersonas = Enum.GetValues(typeof(Types.Persona))
+                    .Cast<Types.Persona>()
+                    .Where(p => p != Types.Persona.None && p != Types.Persona.Normal)
+                    .ToList();
+
+                int randomIndex = UnityEngine.Random.Range(0, availablePersonas.Count);
+                personaType = availablePersonas[randomIndex];
+            }
+
+            // Safety check
+            if (personaType == Types.Persona.None || personaType == Types.Persona.Normal)
+            {
+                DebugUtils.LogError("Invalid persona type for generation: " + personaType);
+                return default;
+            }
+            
             if (!_isInitialized)
             {
                 DebugUtils.LogError("PersonaManager not initialized!");
                 return default;
             }
 
-            // 1. Pick a random persona class (from PersonaStatsLoader)
-            Array personas = Enum.GetValues(typeof(Types.Persona));
-            Types.Persona randomPersona = (Types.Persona)personas.GetValue(UnityEngine.Random.Range(1, personas.Length-1)); // skip "None" and "Normal"
-
             // 2. Random details (name, email handle, domain)
             string username = PersonaDetailsLoader.GetRandomUsername();
             string emailHandle = PersonaDetailsLoader.GetRandomEmailHandle();
             string domain = PersonaDetailsLoader.GetRandomDomain();
-
-            // 3. Generate full identity
             string email = $"{emailHandle}@{domain}";
 
-            // 4. Get base stats from PersonaStatsLoader and copy into a new struct
-            PlayerStatsStruct baseStats = PersonaStatsLoader.GetStats(randomPersona);
-
+            // 3. Base stats
+            PlayerStatsStruct baseStats = PersonaStatsLoader.GetStats(personaType);
+            int statVariancePercent = 10; // +/- 10% variance
             PlayerStatsStruct stats = new PlayerStatsStruct
             {
                 CurrentHealth   = baseStats.CurrentHealth,
                 MaxHealth       = baseStats.MaxHealth,
-                MovementSpeed   = baseStats.MovementSpeed,
-                DashSpeed       = baseStats.DashSpeed,
-                AttackDamage    = baseStats.AttackDamage,
-                AttackCooldown  = baseStats.AttackCooldown,
-                DashDamage      = baseStats.DashDamage,
-                DashCooldown    = baseStats.DashCooldown,
-                DashDistance    = baseStats.DashDistance,
+                MovementSpeed   = baseStats.MovementSpeed + UnityEngine.Random.Range(-baseStats.MovementSpeed * statVariancePercent / 100f, baseStats.MovementSpeed * statVariancePercent / 100f),
+                DashSpeed       = baseStats.DashSpeed + UnityEngine.Random.Range(-baseStats.DashSpeed * statVariancePercent / 100f, baseStats.DashSpeed * statVariancePercent / 100f),
+                AttackDamage    = baseStats.AttackDamage + UnityEngine.Random.Range(-baseStats.AttackDamage * statVariancePercent / 100f, baseStats.AttackDamage * statVariancePercent / 100f),
+                AttackCooldown  = baseStats.AttackCooldown + UnityEngine.Random.Range(-baseStats.AttackCooldown * statVariancePercent / 100f, baseStats.AttackCooldown * statVariancePercent / 100f),
+                DashDamage      = baseStats.DashDamage + UnityEngine.Random.Range(-baseStats.DashDamage * statVariancePercent / 100f, baseStats.DashDamage * statVariancePercent / 100f),
+                DashCooldown    = baseStats.DashCooldown + UnityEngine.Random.Range(-baseStats.DashCooldown * statVariancePercent / 100f, baseStats.DashCooldown * statVariancePercent / 100f),
+                DashDistance    = baseStats.DashDistance + UnityEngine.Random.Range(-baseStats.DashDistance * statVariancePercent / 100f, baseStats.DashDistance * statVariancePercent / 100f),
                 Keys            = baseStats.Keys,
-                Coins           = baseStats.Coins,
+                Coins           = baseStats.Coins + UnityEngine.Random.Range(-baseStats.Coins * statVariancePercent / 100, baseStats.Coins * statVariancePercent / 100),
                 PlayerColor     = baseStats.PlayerColor,
                 Description     = baseStats.Description,
                 Email           = email,
                 Username        = username,
-                PersonaType     = randomPersona
+                PersonaType     = personaType
             };
-            
-            DebugUtils.Log($"Generated New Persona: {name} ({email}) [{username}] Class: {randomPersona}");
-            DebugUtils.Log($"Stats: Type: {randomPersona}, Health: {stats.MaxHealth}, Speed: {stats.MovementSpeed}, Attack: {stats.AttackDamage}, DashDamage: {stats.DashDamage}");
+
             return stats;
+        }
+
+
+        public void InitializeRandomPersonas()
+        {
+            if (_personasGenerated) return;
+
+            _generatedPersonas = new Dictionary<Types.Persona, PlayerStatsStruct>();
+            foreach (Types.Persona personaType in Enum.GetValues(typeof(Types.Persona)))
+            {
+                if (personaType == Types.Persona.Normal || personaType == Types.Persona.None)
+                    continue;
+
+                _generatedPersonas[personaType] = GenerateNewPersona(personaType);
+            }
+
+            _personasGenerated = true;
+        }
+
+        public PlayerStatsStruct GetGeneratedPersona(Types.Persona personaType)
+        {
+            if (_generatedPersonas != null && _generatedPersonas.ContainsKey(personaType))
+                return _generatedPersonas[personaType];
+
+            return PersonaStatsLoader.GetStats(personaType); // fallback
         }
 
         

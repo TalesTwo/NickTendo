@@ -297,6 +297,8 @@ public class Room : MonoBehaviour
     {
         // disable the room here
         gameObject.SetActive(true);
+        // enable all doors
+        EnableAllDoors();
         StartCoroutine(EnableRoomCoroutine(2f));
         // this is a separate function, incase we need to do more complex logic in the future
 
