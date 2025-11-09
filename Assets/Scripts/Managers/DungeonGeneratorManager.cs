@@ -55,7 +55,24 @@ namespace Managers
         private (int row, int col) CurrentRoomCoords = (-1, -1); public (int row, int col) GetCurrentRoomCoords() { return CurrentRoomCoords; }
         
         private bool _IsFirstLoad = true; public bool IsFirstLoad() { return _IsFirstLoad; }
-        
+
+
+        public void Awake()
+        {
+            // to prepare for the tutorial rooms, we need to make some potential adjustments here
+            // if we ever have only 1 column, we need to force it to be at least 2 columns
+            if (cols < 2)
+            {
+                cols = 2;
+            }
+            // this is because the tutorial rooms will always be to the right of the spawn room, so we need at least 2 columns to fit them in
+            // also, we need to ensure we have atleast 3 rows. since at minimum we need
+            // bottom row -> tutorial room 3 -> spwan room -> boss room (since they are stacked vertically)
+            if (rows < 3)
+            {
+                rows = 3;
+            }
+        }
         public void Start()
         {
             EventBroadcaster.GameStarted += OnGameStarted;
@@ -66,6 +83,41 @@ namespace Managers
         }
 
 
+        // TUTORIAL 
+        private void InitializeTutorialRooms()
+        {
+            // tutorial rooms will always be in the same position every single game. which will be:
+            // Tuturial room one -> Right of spawn
+            // Tutorial room two -> Below tutorial room one
+            // Tutorial room three -> Left of tutorial room two
+            // and then we return to the spawn room
+            
+            // get the tutorial room 1 position, (which is row, col + 1)
+            Vector3 tutorialRoomOnePosition = new Vector3((startPos.y + 1) * RoomOffset, -startPos.x * RoomOffset, 0);
+            Room tutorialRoomOne = GenerateRoomFromType(Types.RoomType.TutorialOne, tutorialRoomOnePosition, startPos.x, startPos.y + 1);
+            dungeonRooms[startPos.x][startPos.y + 1] = tutorialRoomOne;
+            tutorialRoomOne.SetRoomEnabled(false); // disable by default
+            // get tutorial room 2 position, (which is row + 1, col + 1)
+            Vector3 tutorialRoomTwoPosition = new Vector3((startPos.y + 1) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
+            Room tutorialRoomTwo = GenerateRoomFromType(Types.RoomType.TutorialTwo, tutorialRoomTwoPosition, startPos.x + 1, startPos.y + 1);
+            tutorialRoomTwo.SetRoomEnabled(false); // disable by default
+            // Debug print the dungeon
+            DebugPrintDungeonLayout();
+            dungeonRooms[startPos.x + 1][startPos.y + 1] = tutorialRoomTwo;
+            // get tutorial room 3 position, (which is row + 1, col)
+            Vector3 tutorialRoomThreePosition = new Vector3((startPos.y) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
+            Room tutorialRoomThree = GenerateRoomFromType(Types.RoomType.TutorialThree, tutorialRoomThreePosition, startPos.x + 1, startPos.y);
+            dungeonRooms[startPos.x + 1][startPos.y] = tutorialRoomThree;
+            tutorialRoomThree.SetRoomEnabled(false); // disable by default
+        }
+        
+        
+        
+        // -------------
+        
+        
+        
+        
         private void OnGameRestart()
         {
             OnGameStarted();
@@ -187,6 +239,8 @@ namespace Managers
             // these rooms will be in a seperate [SerializeField] private GenerationData generationData;
             // we will simply "replace" existing rooms with special rooms that fit the same door configuration
             GenerateSpecialRooms(dungeonRooms);
+            // load in the tutorial rooms
+            InitializeTutorialRooms();
 
         }
 
@@ -563,13 +617,14 @@ namespace Managers
             // Note: random spawns will always be on the Bottom row
             if (_startPos.x == -1 && _startPos.y == -1)
             {
-                int randomCol = UnityEngine.Random.Range(0, cols);
-                startPos = new Vector2Int(rows - 1, randomCol);
+                int randomCol = UnityEngine.Random.Range(0, cols-1); // -1 to ensure we have space for the tutorial room
+                startPos = new Vector2Int(rows - 2, randomCol);//we remove one, since we need to leave space for the tutorial room to the right of the spawn
             }
 
             Vector3 startPosition = new Vector3(startPos.y * RoomOffset,-startPos.x * RoomOffset, 0);
             Room startRoom = GenerateRoomFromType(Types.RoomType.Spawn, startPosition);
             startRoom.SetRoomDifficulty(0);
+            startRoom.EnableAllDoors();
 
             // Make sure dungeonRooms has been initialized
             if (dungeonRooms[startPos.x][startPos.y] == null)

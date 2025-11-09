@@ -157,6 +157,25 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // we need to do this first, so we can ensure that the room is loaded and active to teleport to
         EventBroadcaster.Broadcast_PlayerChangedRoom(targetRoomCoords);
         Room targetRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
+        
+        // EDGE CASE FOR TUTORIAL:
+        // if the target room is the spawm roon, we want to instead go to
+        //Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
+        // convert targetRoomCoords to Vector2Int for comparison
+        //TODO: Adjust this
+        Vector2Int targetRoomCoordsVec = new Vector2Int(targetRoomCoords.row, targetRoomCoords.col);
+        // get the door classification that would lead to the spawn room
+        
+        if (targetRoomCoordsVec == DungeonGeneratorManager.Instance.GetStartPos() && CurrentDoorPosition == Types.DoorClassification.North)
+        {
+            // make sure we are currently a North connecting door
+            
+            Vector3 spawnRoomPosition = targetRoom.transform.Find("SPAWN_POINT").position;
+            PlayerManager.Instance.TeleportPlayer(spawnRoomPosition);
+            return;
+        }
+        /// ---
+        
         // get the door in the target room that is a south door
         Transform[] doors = targetRoom.GetComponentsInChildren<Transform>();
         foreach (Transform door in doors)
@@ -165,7 +184,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
-                
                 DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
                 break;
             }

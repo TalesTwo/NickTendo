@@ -59,9 +59,18 @@ public class Room : MonoBehaviour
                 {
                     // cast to a Door
                     Door doorComponent = door.GetComponent<Door>();
+
+                    
                     if (doorComponent != null)
                     {
-                        doorComponent.SetDoorState(Door.DoorState.Locked);
+                        // get the door trigger interaction
+                        DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+                        // we only wanna auto lock the north door on the spawn room
+                        if (doorTrigger && doorTrigger.CurrentDoorPosition == Types.DoorClassification.North)
+                        {
+                            doorComponent.SetDoorState(Door.DoorState.Locked);
+                        }
+                        
                     }
                 }
                 
