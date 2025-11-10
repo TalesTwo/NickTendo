@@ -18,7 +18,7 @@ public class DungeonController : Singleton<DungeonController>
 
     private int cachedEnemyCount;
     private bool isUpdating = false;
-    private float updateInterval = 0.75f;
+    private float updateInterval = 0.5f;
     
     private bool _wasInShopRoom = false;
     private bool _wasInBossRoom = false;

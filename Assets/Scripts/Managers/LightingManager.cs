@@ -27,7 +27,7 @@ namespace Managers
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
             EventBroadcaster.EnemyDeath += OnEnemyDeath;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-            InvokeRepeating(nameof(CheckLight), 0f, 0.15f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room. but i dont feel like it rn
+            //InvokeRepeating(nameof(CheckLight), 0f, 0.15f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room. but i dont feel like it rn
         }
 
         
@@ -53,11 +53,13 @@ namespace Managers
         private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
         {
             CheckLight();
+            Invoke(nameof(CheckLight), 0.75f); // slight delay to ensure enemy count is updated
         }
         
         private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
         {
             CheckLight();
+            Invoke(nameof(CheckLight), 0.75f); // slight delay to ensure enemy count is updated
         }
         
         public void SetGlobalLightIntensity(float intensity, float duration = 0f)
@@ -192,7 +194,7 @@ namespace Managers
                 GameObject globalLightObj = new GameObject("Global Light");
                 globalLight = globalLightObj.AddComponent<UnityEngine.Rendering.Universal.Light2D>();
                 globalLight.lightType = UnityEngine.Rendering.Universal.Light2D.LightType.Global;
-                globalLight.intensity = 0f;
+                globalLight.intensity = 1f;
             }
 
             
