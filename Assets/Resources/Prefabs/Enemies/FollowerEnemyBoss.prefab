@@ -357,6 +357,13 @@ MonoBehaviour:
   _separationForce: 2
   _displayHealthBar: 1
   _healthSlider: {fileID: 2121833845605009527}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
 --- !u!50 &5626084319817434467
 Rigidbody2D:
   serializedVersion: 4
@@ -483,6 +490,8 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
     dropChance: 100
   generalDropRate: 30
+  dropForce: 5
+  DropAmount: 1
 --- !u!114 &7403220348359039235
 MonoBehaviour:
   m_ObjectHideFlags: 0
