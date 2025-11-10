@@ -264,7 +264,7 @@ public class BossArmController : MonoBehaviour
             while (true)
             {
                 transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
-                if (rocketcount == 60)
+                if (rocketcount == 120)
                 {
                     Managers.AudioManager.Instance.PlayBUDDEEPunchSound(1, 0);
                     rocketcount = 0;
