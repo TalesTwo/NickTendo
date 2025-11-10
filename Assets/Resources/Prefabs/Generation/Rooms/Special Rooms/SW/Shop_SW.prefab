@@ -3003,6 +3003,7 @@ MonoBehaviour:
   doors: {fileID: 8993192668610205120}
   bRequireFullRoomCleared: 0
   roomType: 10
+  roomClassification: 2
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1

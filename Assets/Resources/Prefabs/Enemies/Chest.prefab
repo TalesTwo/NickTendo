@@ -110,6 +110,17 @@ MonoBehaviour:
   hitEffectDistance: 0
   hitFlashDuration: 0.1
   enemyType: 2
+  _separationRadius: 0.5
+  _separationForce: 2
+  _displayHealthBar: 1
+  _healthSlider: {fileID: 0}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
 --- !u!50 &4538521557190921826
 Rigidbody2D:
   serializedVersion: 4
@@ -244,3 +255,5 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: ff7c7908be21d76409cd182a0e678969, type: 3}
     dropChance: 100
   generalDropRate: 100
+  dropForce: 5
+  DropAmount: 5

@@ -20,6 +20,8 @@ public class Room : MonoBehaviour
     [Space(10f)]
     [Header("Room Type")]
     [SerializeField] private Types.RoomType roomType;
+    [SerializeField] private Types.RoomClassification roomClassification = Types.RoomClassification.Normal;
+    public Types.RoomClassification GetRoomClassification() { return roomClassification; }
     
     public bool bIsFinalized = false; // has the player been in this room before?
     public bool bIsDifficultySet = false; // has the difficulty been set for this room?
@@ -59,9 +61,18 @@ public class Room : MonoBehaviour
                 {
                     // cast to a Door
                     Door doorComponent = door.GetComponent<Door>();
+
+                    
                     if (doorComponent != null)
                     {
-                        doorComponent.SetDoorState(Door.DoorState.Locked);
+                        // get the door trigger interaction
+                        DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+                        // we only wanna auto lock the north door on the spawn room
+                        if (doorTrigger && doorTrigger.CurrentDoorPosition == Types.DoorClassification.North)
+                        {
+                            doorComponent.SetDoorState(Door.DoorState.Locked);
+                        }
+                        
                     }
                 }
                 
@@ -286,6 +297,8 @@ public class Room : MonoBehaviour
     {
         // disable the room here
         gameObject.SetActive(true);
+        // enable all doors
+        EnableAllDoors();
         StartCoroutine(EnableRoomCoroutine(2f));
         // this is a separate function, incase we need to do more complex logic in the future
 

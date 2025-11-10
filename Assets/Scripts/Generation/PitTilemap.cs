@@ -39,7 +39,6 @@ public class PitTilemap : MonoBehaviour
         if(root == null){return;}
         if (root.CompareTag("Player"))
         {
-            DebugUtils.LogError("Player exited pit collider");
             _IsPlayerInPit = false;
         }
     }
@@ -68,7 +67,6 @@ public class PitTilemap : MonoBehaviour
             return;
         if (root.CompareTag("Player"))
         {
-            DebugUtils.LogSuccess("Player entered pit collider");
             _IsPlayerInPit = true;
         }
         

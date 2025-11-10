@@ -18,8 +18,80 @@ public class DungeonController : Singleton<DungeonController>
 
     private int cachedEnemyCount;
     private bool isUpdating = false;
-    private float updateInterval = 0.75f;
+    private float updateInterval = 0.5f;
+    
+    private bool _wasInShopRoom = false;
+    private bool _wasInBossRoom = false;
 
+
+
+    private void Start()
+    {
+        EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+        
+
+    }
+
+    
+    private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+    {
+        // there is a few things we need to look for:
+        /*
+         * check to see one of these conditions:
+         * shop -> non-shop
+         * non-shop -> shop
+         * boss room -> non-boss room
+         * non-boss room -> boss room
+         *
+         * And we need to also note, that a "boss room" is the same as an "non shop" room for the purposes of music
+         */
+        Debug.Log("Player changed room, checking for special room transitions...");
+        
+        // get access to our current room
+        Room currentRoom = GetCurrentRoom();
+        if (currentRoom == null) { return; }
+        
+        // check if we are in a shop room or boss room
+        bool isInShopRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Shop;
+        bool isInBossRoom = currentRoom.GetRoomClassification() == Types.RoomClassification.Boss;
+        
+        
+        
+        // We want to ensure that we only broadcast when there is a change
+        // --- Shop transition detection ---
+        if (isInShopRoom != _wasInShopRoom)
+        {
+            // Only broadcast if we actually changed the shop state
+            EventBroadcaster.Broadcast_PlayerEnteredShopRoom(isInShopRoom);
+            _wasInShopRoom = isInShopRoom;
+        }
+
+        // --- Boss transition detection ---
+        if (isInBossRoom != _wasInBossRoom)
+        {
+            // Only broadcast if we actually changed the boss room state
+            EventBroadcaster.Broadcast_PlayerEnteredBossRoom(isInBossRoom);
+            _wasInBossRoom = isInBossRoom;
+        }
+
+        
+        
+        
+
+    }
+    
+    public bool IsPlayerInAnyTutorialRoom()
+    {
+        /*
+         * This will return true if the player is currently in a tutorial room, which will be done by checking the current room's properties
+         */
+        Room currentRoom = GetCurrentRoom();
+        if (currentRoom != null)
+        {
+            return currentRoom.GetRoomClassification() == Types.RoomClassification.Tutorial;
+        }
+        return false;
+    }
     // this has been changed to have a slight time delay on updating, to avoid it returning too quickly
     public int GetNumberOfEnemiesInCurrentRoom()
     {

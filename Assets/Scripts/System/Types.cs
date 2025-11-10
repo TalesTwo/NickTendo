@@ -27,6 +27,20 @@ public static class Types
         NESW,
         End,
         DEFAULT,
+        TutorialOne,
+        TutorialTwo,
+        TutorialThree
+        
+    }
+    
+    public enum RoomClassification
+    {
+        Spawn,
+        Normal,
+        Shop,
+        Boss,
+        Treasure,
+        Tutorial
     }
 
     

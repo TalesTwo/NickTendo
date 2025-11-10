@@ -84,6 +84,7 @@ public class ChaoticFollowerEnemyController : FollowerEnemyController
         stunTimer = float.Parse(stats[6]);
         _playerHitTimer = float.Parse(stats[7]);
         findPathCooldown = chaosUpdateInterval;
+        base.GetStats(statLine);
     }
 
 }
