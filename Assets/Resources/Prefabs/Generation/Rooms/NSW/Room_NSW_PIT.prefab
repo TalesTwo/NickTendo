@@ -418,6 +418,7 @@ MonoBehaviour:
   doors: {fileID: 7424218361898634310}
   bRequireFullRoomCleared: 1
   roomType: 13
+  roomClassification: 1
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
@@ -23318,6 +23319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4998206854543998204}
     m_Modifications:
+    - target: {fileID: 778864542532171787, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 1756544074199440070, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: m_Name
       value: Door (2)
