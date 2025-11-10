@@ -161,6 +161,7 @@ public class BossController : Singleton<BossController>
             _phases += 1;
             battle = BattleState.Summoning;
             StartCoroutine(SpawnMinions());
+            Managers.AudioManager.Instance.PlaySpawnEnemiesSound(1, 0);
         }
         
         _projectilesTimer += Time.deltaTime;
@@ -282,6 +283,7 @@ public class BossController : Singleton<BossController>
         BossScreenController.Instance.SetIsExhausted(false);
         
         battle = BattleState.Idle;
+        Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
 
         switch (health)
         {
@@ -456,7 +458,7 @@ public class BossController : Singleton<BossController>
         Rigidbody2D projectileRb = newProjectile.GetComponent<Rigidbody2D>();
         projectileRb.velocity = direction * stat.projectileSpeed;
         newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
-        Managers.AudioManager.Instance.PlayEnemyShotSound();
+        Managers.AudioManager.Instance.PlayBUDDEEShootSound();
                             
         // set damage of projectile
         EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();

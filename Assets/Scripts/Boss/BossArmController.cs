@@ -74,7 +74,9 @@ public class BossArmController : MonoBehaviour
     public float startXCoordinateLeft = -30f;
     public float startYCoordinateBottom = -30f;
     public float startYCoordinateTop = 15f;
-    
+
+    private int rocketcount = 0;
+
     private void Start() {
         if (side == Direction.Right)
         {
@@ -262,6 +264,12 @@ public class BossArmController : MonoBehaviour
             while (true)
             {
                 transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
+                if (rocketcount == 120)
+                {
+                    Managers.AudioManager.Instance.PlayBUDDEEPunchSound(1, 0);
+                    rocketcount = 0;
+                }
+                else ++rocketcount;
                 if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 2.0f)
                 {
                     BossController.Instance.RocketFinished();
