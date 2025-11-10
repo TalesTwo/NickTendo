@@ -147,6 +147,17 @@ namespace System
         public delegate void GameUnpauseHandler();
         public static event GameUnpauseHandler GameUnpause;
         public static void Broadcast_GameUnpause() { GameUnpause?.Invoke(); }
+        
+        // Delegate to define when the player enters a Shop room (changes in or out of it)
+        public delegate void PlayerEnteredShopRoomHandler(bool isInShop);
+        public static event PlayerEnteredShopRoomHandler PlayerEnteredShopRoom;
+        public static void Broadcast_PlayerEnteredShopRoom(bool isInShop) { PlayerEnteredShopRoom?.Invoke(isInShop); }
+        
+        // Delegate to define when the player enters the Boss room (changes in or out of it)
+        public delegate void PlayerEnteredBossRoomHandler(bool isInBossRoom);
+
+        public static event PlayerEnteredBossRoomHandler PlayerEnteredBossRoom;
+        public static void Broadcast_PlayerEnteredBossRoom(bool isInBossRoom) { PlayerEnteredBossRoom?.Invoke(isInBossRoom); }
 
         //-------------------------------- End Activity Events --------------------------------//
     }

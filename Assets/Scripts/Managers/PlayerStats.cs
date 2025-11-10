@@ -218,4 +218,6 @@ public struct PlayerStatsStruct
     public Color PlayerColor;
     public string Description;
     public string Email;
+    public string Username;
+    public Types.Persona PersonaType;
 }

@@ -112,6 +112,15 @@ MonoBehaviour:
   enemyType: 3
   _separationRadius: 1
   _separationForce: 2
+  _displayHealthBar: 1
+  _healthSlider: {fileID: 0}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
 --- !u!50 &4538521557190921826
 Rigidbody2D:
   serializedVersion: 4
@@ -238,5 +247,8 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
     dropChance: 100
   - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-    dropChance: 20
+    dropChance: 5
   generalDropRate: 100
+  dropForce: 5
+  minDropAmount: 1
+  maxDropAmount: 1
