@@ -45,17 +45,25 @@ public class PitTilemap : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // If we dont hit specifically the pit collider, skip it
-        if (!other.CompareTag("Pit_Collider"))
-            return;
         
-        // We need to account for if an "item" falls in the pit (as in, when a player dies and it spawns a pickup item)
-        // in this case, we want to just destroy the item without any effects
-        // check if its an instance of BaseItem
+        Debug.Log("PitTilemap detected trigger enter with: " + other.name);
+        // null checks
+        // If its not a pit collider, and not an item, ignore
+        if (!other.CompareTag("Pit_Collider") && !other.GetComponent<BaseItem>()) { return;}
+        // get access to the current room
+        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+        if (currentRoom == null) { return; }
+        // get the RoomGridController
+        RoomGridManager gridManager = currentRoom.GetComponentInChildren<RoomGridManager>();
+        if (gridManager == null) { return; }
+        Vector3 tileCenter;
+        
         BaseItem item = other.GetComponent<BaseItem>();
         if (item != null)
         {
-            Destroy(other.gameObject);
+            // we want the item to "fall" in the same way that enemies and players do
+            tileCenter = gridManager.GetNearestPitToLocation(item.transform.position);
+            item.FellInPit(tileCenter);
             return;
         }
         
@@ -70,27 +78,9 @@ public class PitTilemap : MonoBehaviour
             _IsPlayerInPit = true;
         }
         
-        
-        //Vector3 hitPosition = other.transform.position;
-        //Vector3Int cellPos = tilemap.WorldToCell(hitPosition);
-        //Vector3 tileCenter = tilemap.GetCellCenterWorld(cellPos);
 
-        // get access to the current room
-        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
-        if (currentRoom == null)
-        {
-            DebugUtils.LogError("Current room is null in PitTilemap OnTriggerEnter2D");
-            return;
-        }
-        // get the RoomGridController
-        RoomGridManager gridManager = currentRoom.GetComponentInChildren<RoomGridManager>();
-        if (gridManager == null)
-        {
-            DebugUtils.LogError("RoomGridManager is null in PitTilemap OnTriggerEnter2D");
-            return;
-        }
         // find the nearest pit location to the object that fell in
-        Vector3 tileCenter = gridManager.GetNearestPitToLocation(root.transform.position);
+        tileCenter = gridManager.GetNearestPitToLocation(root.transform.position);
 
         // Broadcast event with the correct pit center
         EventBroadcaster.Broadcast_ObjectFellInPit(root, tileCenter);

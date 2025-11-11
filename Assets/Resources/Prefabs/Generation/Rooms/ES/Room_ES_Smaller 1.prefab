@@ -77,6 +77,7 @@ MonoBehaviour:
   doors: {fileID: 1442070534476960983}
   bRequireFullRoomCleared: 1
   roomType: 8
+  roomClassification: 1
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
