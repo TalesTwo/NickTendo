@@ -116,6 +116,13 @@ MonoBehaviour:
   _separationForce: 2
   _displayHealthBar: 1
   _healthSlider: {fileID: 2632250528595855013}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
   projectile: {fileID: 2064634610991927975, guid: 2c450041c0744594197e81c49e1ea195, type: 3}
   doNotHit:
     serializedVersion: 2
@@ -244,19 +251,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
-  - drop: {fileID: 2502751402912625270, guid: 9a2f5140fd125844684788192c20793a, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: 2cf8bf55fa0e5ec49b485b57a54681c7, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: ddf2b60cd09f00046a96c721f61ec4a6, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: ff7c7908be21d76409cd182a0e678969, type: 3}
-    dropChance: 100
   - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
     dropChance: 100
-  generalDropRate: 30
+  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
+    dropChance: 10
+  generalDropRate: 75
+  dropForce: 5
+  DropAmount: 1
 --- !u!114 &5152000528352275147
 MonoBehaviour:
   m_ObjectHideFlags: 0
