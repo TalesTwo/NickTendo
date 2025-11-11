@@ -28,9 +28,8 @@ public class DungeonController : Singleton<DungeonController>
     private void Start()
     {
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
-        
-
     }
+
 
     
     private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
