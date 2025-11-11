@@ -1413,6 +1413,7 @@ MonoBehaviour:
   doors: {fileID: 6712016374607613121}
   bRequireFullRoomCleared: 0
   roomType: 1
+  roomClassification: 1
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
