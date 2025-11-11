@@ -48,7 +48,7 @@ MonoBehaviour:
   Name: Attack Cooldown Shop Item
   shrinkDuration: 0.5
   itemValue: 25
-  buffValue: -0.25
+  buffValue: -0.025
   buffType: 7
   flavorText: 
 --- !u!212 &7787435678194780221
