@@ -20,6 +20,7 @@ public class LootDropsController : MonoBehaviour
     [Range(0f, 100f)]
     public float generalDropRate;
     public float dropForce = 5f;
+    public float dropDrag = 4f;
     public int DropAmount = 1;
 
     private float _totalDropWeight = 0f;
@@ -88,7 +89,7 @@ public class LootDropsController : MonoBehaviour
             // disable gravity (otherwise we "fall" to the bottom of the tilemap)
             itemRb.gravityScale = 0f;
             // we need to add a "drag" so it slows down over time otherwise it flies away lol
-            itemRb.drag = 2f;
+            itemRb.drag = dropDrag;
         }
 
         // Get player position
@@ -101,7 +102,6 @@ public class LootDropsController : MonoBehaviour
         Vector2 randomDir = Quaternion.Euler(0, 0, randomAngle) * awayFromPlayer;
 
         // Apply the force
-        float dropForce = 5f; // adjust as needed
         itemRb.AddForce(randomDir * dropForce, ForceMode2D.Impulse);
         DebugUtils.Log($"Dropped item: {lootDrop.drop.name} from enemy: {gameObject.name}");
         _numberOfDrops += 1;
