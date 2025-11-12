@@ -45,6 +45,13 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<AnimatedPlayer>();
         _sr = GetComponent<SpriteRenderer>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
+        EventBroadcaster.OpenPersonaUI += OnPersonaUIOpened;
+    }
+    
+    private void OnPersonaUIOpened()
+    {
+        // reset the player to still
+        _isWalking = false;
     }
     
     private void Update()
@@ -265,6 +272,7 @@ public class PlayerController : MonoBehaviour
     {
         _isWalking = false;
         _isDead = true;
+        
     }
 
     // function to set player as alive again

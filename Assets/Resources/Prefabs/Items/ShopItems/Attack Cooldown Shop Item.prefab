@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Attack Cooldown Shop Item
+  shrinkDuration: 0.5
   itemValue: 25
-  buffValue: -2
+  buffValue: -0.025
   buffType: 7
   flavorText: 
 --- !u!212 &7787435678194780221

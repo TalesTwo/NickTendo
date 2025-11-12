@@ -190,11 +190,19 @@ namespace Managers
             // create an instance of the global light
             if (globalLight == null)
             {
-                // create a new global light object from the prefab
-                GameObject globalLightObj = new GameObject("Global Light");
-                globalLight = globalLightObj.AddComponent<UnityEngine.Rendering.Universal.Light2D>();
-                globalLight.lightType = UnityEngine.Rendering.Universal.Light2D.LightType.Global;
-                globalLight.intensity = 1f;
+                GameObject foundLight = GameObject.Find("Global Light");
+                if (foundLight != null)
+                {
+                    globalLight = foundLight.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+                    if (globalLight == null)
+                    {
+                        Debug.LogWarning("[LightingManager] 'Global Light' found but no Light2D component attached!");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[LightingManager] No object named 'Global Light' found in scene!");
+                }
             }
 
             

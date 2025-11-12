@@ -158,6 +158,11 @@ namespace System
 
         public static event PlayerEnteredBossRoomHandler PlayerEnteredBossRoom;
         public static void Broadcast_PlayerEnteredBossRoom(bool isInBossRoom) { PlayerEnteredBossRoom?.Invoke(isInBossRoom); }
+        
+        // Delegate to "freeze" or "unfreeze" the game world (primarily used for enemies to pause movement without setting timescale to 0)
+        public delegate void SetWorldFrozenHandler(bool isFrozen);
+        public static event SetWorldFrozenHandler SetWorldFrozen;
+        public static void Broadcast_SetWorldFrozen(bool isFrozen) { SetWorldFrozen?.Invoke(isFrozen); }
 
         //-------------------------------- End Activity Events --------------------------------//
     }

@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Dash Cooldown Shop Item
+  shrinkDuration: 0.5
   itemValue: 40
-  buffValue: -0.5
+  buffValue: -0.25
   buffType: 6
   flavorText: 
 --- !u!212 &7787435678194780221

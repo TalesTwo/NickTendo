@@ -351,7 +351,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 1301278337192169457, guid: 5984f4bee371a0449a497488d31e695b, type: 3}
-  m_Color: {r: 0.9528302, g: 0.30113026, b: 0.30113026, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -487,6 +487,8 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
     dropChance: 100
   generalDropRate: 30
+  dropForce: 5
+  DropAmount: 1
 --- !u!114 &7403220348359039235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +535,13 @@ MonoBehaviour:
   _separationForce: 2
   _displayHealthBar: 1
   _healthSlider: {fileID: 7519206472548093420}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
   chaosRadius: 2
   chaosUpdateInterval: 1.5
 --- !u!1 &5071912513139754306
