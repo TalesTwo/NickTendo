@@ -20,6 +20,30 @@ public class PlayerStats : Singleton<PlayerStats>
     private int _coins = 0;
     private int _carryOverCoins = 0;
     
+    /*
+     * Carry over stats (these are permanent upgrades that persist between runs)
+     */
+    private float _carryOverMaxHealth = 0; public float GetCarryOverMaxHealth() { return _carryOverMaxHealth; } public void SetCarryOverMaxHealth(float value) { _carryOverMaxHealth = value; }
+    private float _carryOverMovementSpeed = 0; public float GetCarryOverMovementSpeed() { return _carryOverMovementSpeed; } public void SetCarryOverMovementSpeed(float value) { _carryOverMovementSpeed = value; }
+    private float _carryOverAttackDamage = 0; public float GetCarryOverAttackDamage() { return _carryOverAttackDamage; } public void SetCarryOverAttackDamage(float value) { _carryOverAttackDamage = value; }
+    private float _carryOverAttackCooldown = 0; public float GetCarryOverAttackCooldown() { return _carryOverAttackCooldown; } public void SetCarryOverAttackCooldown(float value) { _carryOverAttackCooldown = value; }
+    private float _carryOverDashDamage = 0; public float GetCarryOverDashDamage() { return _carryOverDashDamage; } public void SetCarryOverDashDamage(float value) { _carryOverDashDamage = value; }
+    private float _carryOverDashCooldown = 0; public float GetCarryOverDashCooldown() { return _carryOverDashCooldown; } public void SetCarryOverDashCooldown(float value) { _carryOverDashCooldown = value; }
+    
+    // This function will be used anytime the persona is selected, as it will apply the carry over stats to the current stats
+    public void ApplyCarryOverStats()
+    {
+        UpdateMaxHealth(_carryOverMaxHealth);
+        // we also need to update the currnt health to match the new max health
+        UpdateCurrentHealth(_carryOverMaxHealth, true);
+        UpdateMovementSpeed(_carryOverMovementSpeed);
+        UpdateAttackDamage(_carryOverAttackDamage);
+        UpdateAttackCooldown(-_carryOverAttackCooldown); // cooldown reduction
+        UpdateDashDamage(_carryOverDashDamage);
+        UpdateDashCooldown(-_carryOverDashCooldown); // cooldown reduction
+    }
+    
+    
     public string GetPlayerName() { return _playerName; }
     
     public float GetCurrentHealth() { return _currentHealth; }
@@ -49,12 +73,15 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
     public void SetCarryOverCoins(int NewCarryOverCoins) { _carryOverCoins = NewCarryOverCoins; }
 
-    public void UpdateCurrentHealth(float UpdateValue)
+    public void UpdateCurrentHealth(float UpdateValue, bool IgnoreEvents = false)
     {
         _currentHealth += UpdateValue;
         //DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
-        EventBroadcaster.Broadcast_PlayerDamaged();
-
+        if (!IgnoreEvents)
+        {
+            EventBroadcaster.Broadcast_PlayerDamaged();
+        }
+        
         if (_currentHealth > _maxHealth)
         {
             _currentHealth = _maxHealth;
@@ -64,9 +91,9 @@ public class PlayerStats : Singleton<PlayerStats>
             _currentHealth = 0;
         }
 
-        if (UpdateValue < 0 && _currentHealth != 0) AudioManager.Instance.PlayPlayerDamagedSound();
+        if (UpdateValue < 0 && _currentHealth != 0 && !IgnoreEvents) AudioManager.Instance.PlayPlayerDamagedSound();
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0  && !IgnoreEvents)
         {
             AudioManager.Instance.PlayPlayerDeathSound(1, 0);
             EventBroadcaster.Broadcast_PlayerDeath();
@@ -197,7 +224,14 @@ public enum PlayerStatsEnum
     Attack_Cooldown,
     Dash_Distance,
     Keys,
-    Coins
+    Coins,
+    // Carry over stats
+    CarryOver_Max_Health,
+    CarryOver_Movement_Speed,
+    CarryOver_Attack_Damage,
+    CarryOver_Attack_Cooldown,
+    CarryOver_Dash_Damage,
+    CarryOver_Dash_Cooldown
 }
 
 // create a struct to hold all of the player stats, which can be used to initialize the player stats

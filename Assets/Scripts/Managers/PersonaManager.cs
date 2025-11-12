@@ -219,6 +219,8 @@ namespace Managers
             }
 
             // Broadcast after stats are applied
+            // Apply any carry over stats that we may have
+            PlayerStats.Instance.ApplyCarryOverStats();
             EventBroadcaster.Broadcast_PersonaChanged(newPersona);
         }
 
