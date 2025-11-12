@@ -676,6 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3135156553318689503}
   - component: {fileID: 4215527618522539114}
+  - component: {fileID: 4485071854575376986}
   m_Layer: 0
   m_Name: HITBOX
   m_TagString: Untagged
@@ -744,6 +745,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 7.89}
   m_EdgeRadius: 0
+--- !u!114 &4485071854575376986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929394684801627818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30d4adb513235649a3a6b79c67fcee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueStateOnEnter: Tutorial1
+  speakerName: BUDDEE
+  onlyTriggerOnce: 1
+  shouldFreezeWorld: 1
 --- !u!1 &5650296428194092281
 GameObject:
   m_ObjectHideFlags: 0
