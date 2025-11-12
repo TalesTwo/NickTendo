@@ -157,7 +157,10 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // we need to do this first, so we can ensure that the room is loaded and active to teleport to
         EventBroadcaster.Broadcast_PlayerChangedRoom(targetRoomCoords);
         Room targetRoom = dungeonLayout[targetRoomCoords.row][targetRoomCoords.col];
-        
+        if (targetRoom)
+        {
+            targetRoom.EnableAllDoors();
+        }
         // EDGE CASE FOR TUTORIAL:
         // if the target room is the spawm roon, we want to instead go to
         //Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;

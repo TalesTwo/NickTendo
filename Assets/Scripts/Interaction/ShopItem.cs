@@ -13,7 +13,6 @@ public class ShopItem : BaseItem
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
     public string flavorText;
-
     // Just returns the desctiption for the item
     public string GetTooltipText()
     {

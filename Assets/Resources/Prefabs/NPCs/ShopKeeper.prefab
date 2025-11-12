@@ -191,7 +191,7 @@ MonoBehaviour:
   - {fileID: 416556503316473623}
   - {fileID: 6272180023483800315}
   - {fileID: 5066208716830120850}
-  ItemDescriptions: []
+  ItemTooltipText: []
   ItemFlavorText: []
   ItemSpotlights:
   - {fileID: 1834315872961808800}
@@ -199,7 +199,7 @@ MonoBehaviour:
   - {fileID: 87132615351766574}
   CloseButton: {fileID: 5526280263771755052}
   RerollButton: {fileID: 332910665871093198}
-  RerollCost: 50
+  RerollCost: 30
   Tooltip: {fileID: 3947671657723476071}
   BuddeeUI: {fileID: 6286628315411902962}
   IsInShop: 0

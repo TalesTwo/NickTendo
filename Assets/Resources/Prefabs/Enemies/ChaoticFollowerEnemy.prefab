@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7403220348359039235}
   - component: {fileID: 6631985905808627754}
   m_Layer: 2
-  m_Name: ChaoticFollowerEnemy 1
+  m_Name: ChaoticFollowerEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 1301278337192169457, guid: 5984f4bee371a0449a497488d31e695b, type: 3}
-  m_Color: {r: 0.9528302, g: 0.30113026, b: 0.30113026, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -457,19 +457,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
-  - drop: {fileID: 2502751402912625270, guid: 9a2f5140fd125844684788192c20793a, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: 2cf8bf55fa0e5ec49b485b57a54681c7, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: ddf2b60cd09f00046a96c721f61ec4a6, type: 3}
-    dropChance: 100
-  - drop: {fileID: 2502751402912625270, guid: ff7c7908be21d76409cd182a0e678969, type: 3}
-    dropChance: 100
   - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
     dropChance: 100
-  generalDropRate: 20
+  - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
+    dropChance: 10
+  generalDropRate: 75
+  dropForce: 5
+  DropAmount: 2
 --- !u!114 &7403220348359039235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +510,13 @@ MonoBehaviour:
   _separationForce: 2
   _displayHealthBar: 1
   _healthSlider: {fileID: 6453516549086105474}
+  Override_health: -1
+  Override_speed: -1
+  Override_knockBackSpeed: -1
+  Override_knockBackTime: -1
+  Override_damage: -1
+  Override_stunTimer: -1
+  Override_knockbackForce: -1
   chaosRadius: 2
   chaosUpdateInterval: 1.5
 --- !u!1 &5806575776797550848

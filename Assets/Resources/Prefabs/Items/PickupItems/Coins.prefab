@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2719054816464069916}
   - component: {fileID: 4091901693953286788}
   - component: {fileID: 6816367349617998974}
+  - component: {fileID: 5280403828838677209}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Coins
+  shrinkDuration: 0.5
   CanAutoPickup: 1
   BuffType: 10
   BuffValue: 5
@@ -177,3 +179,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.06}
   m_Radius: 0.3
+--- !u!114 &5280403828838677209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502751402912625270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aafcb17c197555747a457dc0b309853c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: -1750681182074488878, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 7282177243460389180, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 676383333637899404, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 7101066548704743396, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: -7059390947707244463, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  Framerate: 4
+  SpriteRenderer: {fileID: 5061567238082683430}
+  index: 0

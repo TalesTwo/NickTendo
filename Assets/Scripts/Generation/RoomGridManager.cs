@@ -239,6 +239,7 @@ public class RoomGridManager : MonoBehaviour
         temp.transform.SetParent(transform);
         Destroy(temp, 0.5f);
 
+        // Draw a debug sphere at the spawn location
         return temp.transform;
     }
 
@@ -358,19 +359,23 @@ public class RoomGridManager : MonoBehaviour
     }
     
     // useful for debugging and finding legal and illegal spots, as well as current path for entity.
-    
+    /*
     private void OnDrawGizmos()
     {
+        
+        // choose which grid to show
+        var gridToShow = _walkGrid;
+        
         // Draw the boundary of the grid
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(_bottomLeft + (Vector2)gridRoomSize / 2, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
 
-        if (_walkGrid != null)
+        if (gridToShow != null)
         {
             // Match whatever multiplier you used when generating the grid
             float scaledRadius = nodeRadius / resolutionMultiplier;
 
-            foreach (Node n in _walkGrid)
+            foreach (Node n in gridToShow)
             {
                 // Default color based on walkability
                 Gizmos.color = n.walkable ? Color.white : Color.red;
@@ -387,7 +392,32 @@ public class RoomGridManager : MonoBehaviour
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (scaledRadius * 2 - 0.05f));
             }
         }
+        
+    
     }
+    */
+    private void OnDrawGizmos()
+    {
+        // Safety check
+        if (_spawnableNodes == null || _spawnableNodes.Count == 0)
+            return;
+
+        // Optional: draw overall grid boundary
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(_bottomLeft + (Vector2)gridRoomSize / 2, new Vector3(gridRoomSize.x, gridRoomSize.y, 1));
+
+        // Each spawnable node is drawn as a small sphere
+        Gizmos.color = Color.cyan;
+        float scaledRadius = nodeRadius / resolutionMultiplier;
+
+        foreach (Node n in _spawnableNodes)
+        {
+            Gizmos.DrawSphere(n.worldPosition, scaledRadius);
+        }
+
+
+    }
+
     
     
 }
