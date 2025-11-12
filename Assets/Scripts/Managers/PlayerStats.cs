@@ -197,6 +197,11 @@ public class PlayerStats : Singleton<PlayerStats>
         else if (BuffType == PlayerStatsEnum.Coins)
         {
             UpdateCoins((int)BuffValue);
+            // edge case: if we ever "remove" coins, we want to also remove from carry_over coins
+            if (BuffValue < 0)
+            {
+                SetCarryOverCoins(Mathf.Max(0, GetCarryOverCoins() + (int)BuffValue));
+            }
             AudioManager.Instance.PlayCoinGetSound(1f, 0f);
         }
         // Now we get to the carry over stats
