@@ -2771,8 +2771,8 @@ MonoBehaviour:
   - spawnType: 0
     Spawnables:
     - enemyPrefab: {fileID: 6451576646126675803, guid: 1ee3121e2c657e5419d2788ee2a2614f, type: 3}
-      minSpawnCount: 20
-      maxSpawnCount: 20
+      minSpawnCount: 4
+      maxSpawnCount: 10
       spawnChance: 1
   minRoomDifficulty: 1
   maxRoomDifficulty: 20
