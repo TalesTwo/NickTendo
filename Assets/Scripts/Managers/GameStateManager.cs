@@ -9,7 +9,7 @@ public class GameStateManager : Singleton<GameStateManager>
      * this class is designed to track the current state of the game.
      */
 
-    public string buddeeDialogState = "vertIntroyell";
+    public string buddeeDialogState = "Introyell";
     private int _playerDeathCount = 0;
     
     // getting and setting BUDDEE state
@@ -28,11 +28,11 @@ public class GameStateManager : Singleton<GameStateManager>
         _playerDeathCount++;
         if (_playerDeathCount == 1)
         {
-            buddeeDialogState = "vertDeath1";
+            buddeeDialogState = "Run2";
         }
         if (_playerDeathCount == 2)
         {
-            buddeeDialogState = "vertDeath2";
+            buddeeDialogState = "run3";
         }
         
     }
@@ -41,19 +41,18 @@ public class GameStateManager : Singleton<GameStateManager>
     {
         if (npcName == "BUDDEE")
         {
-            if (buddeeDialogState == "vertIntroyell")
+            if (buddeeDialogState == "Introyell")
             {
-                buddeeDialogState = "VertIntro";
-            } else if (buddeeDialogState == "VertIntro")
-            {
-                buddeeDialogState = "vertIntroinfo";
-            } else if (buddeeDialogState == "vertIntroinfo")
+                buddeeDialogState = "TutorialIntro";
+            }
+            else if (buddeeDialogState == "TutorialIntro")
             {
                 buddeeDialogState = "HubRandom";
-            } else if (buddeeDialogState == "Vertwin")
+            }
+            else if (buddeeDialogState == "Vertwin")
             {
                 CreditsManager.Instance.BeginCredits();
-            } 
+            }
             else
             {
                 buddeeDialogState = "HubRandom";
@@ -64,7 +63,7 @@ public class GameStateManager : Singleton<GameStateManager>
 
     public void SetEndGameFlag()
     {
-        buddeeDialogState = "Vertwin";
+        buddeeDialogState = "End";
     }
 
     public void Start()
@@ -73,7 +72,7 @@ public class GameStateManager : Singleton<GameStateManager>
     }
     private void OnGameRestart()
     {
-        buddeeDialogState = "vertIntroyell";
+        buddeeDialogState = "Introyell";
         _playerDeathCount = 0;
     }
 }
