@@ -125,38 +125,47 @@ vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
 vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
 ,,,,
-Introyell,immediate dialogue when you enter,BUDDEE,surprise,Wow! Hi! Welcome to the dungeons of friendship! The friend-making MMO!
+Introyell,immediate dialogue when you enter,BUDDEE,surprise,Hi! Welcome to the Friend Finders Online! The world's most popular dungeon-crawling friendship-forming MMO!
+Introyell,,BUDDEE,smile,My name's BUDDEE! I'll be your digital assistant!
 Introyell,,BUDDEE,smile,Why don'y you <color=purple>[WASD]</color> on over here to get started?
 ,,,,
-TutorialIntro,first dialogue after yell,BUDDEE,Smile,"In Dungeons of Friendship you'll pick a character to journey into dark dungeons, finding friends along the way!"
+TutorialIntro,first dialogue after yell,BUDDEE,Smile,In Friend Finders Online you'll pick a character to journey into dark dungeons finding friends along the way!
 ,,BUDDEE,unsure,Or well that's the idea anyways..
 ,,BUDDEE,sad,I'm gonna be honest with you we haven't had any updates in a long time and things aren't going too well...
-,,BUDDEE,unsure,Our security went on the fritz a while ago. most people left. Now we have bots infesting the dungeons…
-,,BUDDEE,smile,But fear not! There's one more player online and you have my word as a chatbot that you will find them!
+,,BUDDEE,unsure,Our security went on the fritz a while ago. Most people left. Now we have bots infesting the dungeons…
+,,BUDDEE,smile,But fear not! There's one other player left unfriended and I promise you'll reach them! But you have to learn first
 ,,BUDDEE,smile,Head out that door and I'll teach you the ropes on how to defend yourself!
 ,,,,
-Tutorial1,first tutorial room,BUDDEE,smile,You can <color=purple>click [M1}</color> in the direction of enemies to slash at them!
-Tutorial1,,,,Not only can it harm the bots. It can reflect their attacks. Try it out!
+Tutorial1,first tutorial room,BUDDEE,smile,Click <color=purple>click [M1}</color> in the direction of enemies or obstacles to attack them!
+Tutorial1,,BUDDEE,smile,"Your cursor can destroy enemies, pots or even chests! Try these ones I set up for practice!"
+Tutorial1,,BUDDEE,smile,"The dungeons are on lockdown since the attacks, so you'll have to clear out any enemies before leaving a room."
 ,,,,
-Tutorial2,second tutorial room,BUDDEE,smile,With <color=purple>[M2]</color> you can dash through the air and damage anything in your path!
-Tutorial2,,BUDDEE,smile,You can also use it to cross the pits in the dungeon but use it wisely because you need to wait for it to restore.
+Tutorial2,second tutorial room,BUDDEE,smile,With <color=purple>[M2]</color> you can dash through the air damaging anything in your path!
+Tutorial2,,BUDDEE,smile,Here you'll need to use it to <b>clear the gap</b>. But watch out! You can only dash once before recharging!
 ,,,,
-Tutorial3,third tutorial room,BUDDEE,smile,Notice all the data those bots left behind? I can use that data to strengthen your character!
-Tutorial3,,BUDDEE,smile,Normally players pay $4.99 per upgrade but I'm feeling nice.
-Tutorial3,,BUDDEE,unsure,I'll figure out a way to meet you in the dungeon. Say hi!
+Tutorial3,third tutorial room,BUDDEE,unsure,Some flying enemies can hide across pits too wide to cross.
+Tutorial3,,BUDDEE,smile,Luckilly you can use your <color=purple>click [M1}</color> attack to reflect their attacks!
+Tutorial3,,BUDDEE,unsure,"Once you've mastered this, you should be all set to brave the dungeon!"
 ,,,,
-Tutorial random,random dialogue for tutorial,,smile,"If you ever need a reminder on how to play, just press <color=purple>[Escape]</color>"
+Tutorial4,last tutorial in starting room,BUDDEE,smile,Before you can leave there's one more thing. You need to select a character.
+Tutorial4,,BUDDEE,unsure,Normally players would make their own but that system isn't working right now.
+Tutorial4,,BUDDEE,smile,So I've taken the liberty of commandeering some defunct characters for you to choose from!
+Tutorial4,,BUDDEE,unsure,Hopefully the old players won't mind…
+Tutorial4,,BUDDEE,smile,Just press <color=purple>[P]</color> to bring up some options and head out the north door whe you're ready!
+Tutorial4,,BUDDEE,smile,I believe in you pal!
 ,,,,
-Run1,before first character run,BUDDEE,unsure,Oh there's one last thing I need to mention..
-Run1,,BUDDEE,unsure,"Since the servers are so borked, we can't create any new characters. However!"
-Run1,,BUDDEE,smile,I've gathered a bunch of defunct player characters for you to pick from!
-Run1,,BUDDEE,smile,"And one last thing, those bots are more than capable of compromising the character, if they get to you we won't be able to get it back."
-Run1,,BUDDEE,smile,I belive in you pal! Get out there!
+Tutorial random,random dialogue for tutorial,,smile,"If you ever need a reminder on how to play, just press <color=purple>[Escape]</color>!"
 ,,,,
-,,,,
-Run2,before second run,BUDDEE,surprise,"Dang, they got you huh?"
-Run2,,BUDDEE,unsure,Those bots are really tough but since the devs abandoned this place I guess we can't do much.
+Run2,Afer first death,BUDDEE,surprise,Ouch! It looks like your character was compromised!
+Run2,,BUDDEE,unsure,With the devs having abandoned us there's nothing we can do..
 Run2,,BUDDEE,smile,"Luckilly those former players left plenty of characters behind, so we should be alright!"
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
 ,,,,
 End,after you find Nick,BUDDEE,surprise,Oh no!
 End,,BUDDEE,unsure,I wonder where they went?
@@ -166,17 +175,19 @@ End,,BUDDEE,angry,Don't look at me like that.
 End,,BUDDEE,angry,You don't know what it's like being stuck in here okay?
 End,,BUDDEE,sad,Everything crumbling around you.
 End,,BUDDEE,sad,Everyone leaving you.
-End,,BUDDEE,angry,You'd do the same!
-End,,BUDDEE,angry,"I can't let you take them, you two are all I have left."
-End,,BUDDEE,angry,You're staying with me!
+End,,BUDDEE,angry,You'd want some company too!
+End,,BUDDEE,angry,"If no one's left online, no one's going to log in."
+End,,BUDDEE,smile,But if I can keep a few players then maybe people will rejoin!
+End,,BUDDEE,angry,So I'm sure you'll understand that I can't let you leave.
 ,,,,
 Shop1,first shop find,BUDDEE,sketchy,Welcome traveller to my humble-
 Shop1,,BUDDEE,Smile,Oh it's you! I'm disguised as an NPC! Could you tell?
 Shop1,,BUDDEE,smile,It's my way of tricking the bots into not attacking me!
-Shop1,,BUDDEE,unsure,Might not work as well for you though.
-Shop1,,BUDDEE,smile,"Good job finding me, and I see you've got some data! Let's hop to trading."
+Shop1,,BUDDEE,smile,Have you noticed all the coins those bots have been dropping! That's the currency that the bots stole from our players!
+Shop1,,BUDDEE,smile,I can trade those for upgrades but be aware they're tied to your character. You'll lose them if the character is compromised.
+Shop1,,BUDDEE,smile,Let's see what's avaliable shall we?
 ,,,,
 Shop2,second shop found,BUDDEE,sketchy,Welc-
 Shop2,,BUDDEE,smile,Oh! You again!
-Shop2,,BUDDEE,unsure,Not that that's surprising or anything.
-Shop2,,BUDDEE,smile,I've got more paid upgrades to trade! First come first serve!
+Shop2,,BUDDEE,unsure,Not that that's surprising or anything…
+Shop2,,BUDDEE,smile,Keep in mind if you're unhappy with my selection you can always pay to <b>reroll</b> your options!
