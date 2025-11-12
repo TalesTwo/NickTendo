@@ -18821,7 +18821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197960586502552733, guid: 2642759b201917948a506645585a9ce7, type: 3}
       propertyPath: Override_health
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7206158782251651554, guid: 2642759b201917948a506645585a9ce7, type: 3}
       propertyPath: lootTable.Array.size
@@ -19173,7 +19173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197960586502552733, guid: 2642759b201917948a506645585a9ce7, type: 3}
       propertyPath: Override_health
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7206158782251651554, guid: 2642759b201917948a506645585a9ce7, type: 3}
       propertyPath: lootTable.Array.size
