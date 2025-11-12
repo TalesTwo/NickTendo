@@ -51,6 +51,8 @@ public class RoomSpawnController : MonoBehaviour
     private void Initialize()
     {
         
+        // regenerate the grid before attempting to spawn anything
+        _roomGridManager.RegenerateGrids();
         // Get access to the Room
         Transform SpawnLocation = _roomGridManager.FindValidSpawnableCell();
         
