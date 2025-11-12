@@ -54,6 +54,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         EventBroadcaster.PlayerOpenMenu += HandlePlayerOpenMenu;
         EventBroadcaster.PlayerCloseMenu += HandlePlayerCloseMenu;
         EventBroadcaster.GameUnpause += ResetPauseBool;
+        EventBroadcaster.PlayerStatsChanged += OnPlayerStatChanged;
 
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -71,6 +72,13 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         SetHealth();
     }
 
+    private void OnPlayerStatChanged(PlayerStatsEnum stat, float Value)
+    {
+        if (stat == PlayerStatsEnum.Max_Health || stat == PlayerStatsEnum.Current_Health)
+        {
+            SetHealth();
+        }
+    }
     private void Update()
     {
         //SetHealth();

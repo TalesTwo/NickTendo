@@ -33,6 +33,7 @@ public class PlayerStats : Singleton<PlayerStats>
     // This function will be used anytime the persona is selected, as it will apply the carry over stats to the current stats
     public void ApplyCarryOverStats()
     {
+        UpdateCoins(_carryOverCoins);
         UpdateMaxHealth(_carryOverMaxHealth);
         // we also need to update the currnt health to match the new max health
         UpdateCurrentHealth(_carryOverMaxHealth, true);
@@ -99,7 +100,14 @@ public class PlayerStats : Singleton<PlayerStats>
             EventBroadcaster.Broadcast_PlayerDeath();
         }
     }
-    public void UpdateMaxHealth(float UpdateValue) { _maxHealth += UpdateValue; }
+
+    public void UpdateMaxHealth(float UpdateValue)
+    {
+        DebugUtils.Log("Updating Max Health by: " + UpdateValue);
+        DebugUtils.Log("Old Max Health: " + _maxHealth);
+        _maxHealth += UpdateValue;
+        DebugUtils.Log("New Max Health: " + _maxHealth);
+    }
     public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }
     public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }
     public void UpdateAttackDamage(float UpdateValue) { _attackDamage += UpdateValue; }
@@ -191,6 +199,49 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateCoins((int)BuffValue);
             AudioManager.Instance.PlayCoinGetSound(1f, 0f);
         }
+        // Now we get to the carry over stats
+        // these have a bit more involved
+        else if (BuffType == PlayerStatsEnum.CarryOver_Max_Health)
+        {
+            DebugUtils.Log("Applying Carry Over Max Health Buff: " + BuffValue);
+            SetCarryOverMaxHealth(GetCarryOverMaxHealth() + BuffValue);
+            // now we want to immediately apply this to the current stats as well
+            UpdateMaxHealth(BuffValue);
+            UpdateCurrentHealth(BuffValue, true);
+            // we need to specifically tell the UI that we updated the max health
+            // (as by default, we only update the CarryOver)
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Max_Health, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Movement_Speed)
+        {
+            SetCarryOverMovementSpeed(GetCarryOverMovementSpeed() + BuffValue);
+            UpdateMovementSpeed(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Movement_Speed, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Damage)
+        {
+            SetCarryOverAttackDamage(GetCarryOverAttackDamage() + BuffValue);
+            UpdateAttackDamage(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Cooldown)
+        {
+            SetCarryOverAttackCooldown(GetCarryOverAttackCooldown() + BuffValue);
+            UpdateAttackCooldown(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Cooldown, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Damage)
+        {
+            SetCarryOverDashDamage(GetCarryOverDashDamage() + BuffValue);
+            UpdateDashDamage(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Damage, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Cooldown)
+        {
+            SetCarryOverDashCooldown(GetCarryOverDashCooldown() + BuffValue);
+            UpdateDashCooldown(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Cooldown, BuffValue);
+        }
         EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
     }
     
@@ -207,7 +258,7 @@ public class PlayerStats : Singleton<PlayerStats>
         SetDashCooldown(stats.DashCooldown);
         SetDashDistance(stats.DashDistance);
         SetKeys(stats.Keys);
-        SetCoins(stats.Coins + GetCarryOverCoins());
+        SetCoins(stats.Coins);
     }
     
 }
