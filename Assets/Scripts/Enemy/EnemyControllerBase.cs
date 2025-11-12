@@ -16,6 +16,7 @@ public class EnemyControllerBase : SpawnableObject
     [Header("stats")]
     protected float health = 10;
     protected float speed = 2;
+    private float _cachedSpeed;
     protected float knockBackSpeed = 10;
     protected float knockBackTime = 0.15f;
     protected float damage = 1f;
@@ -111,7 +112,26 @@ public class EnemyControllerBase : SpawnableObject
             }
         }
         
+        // hook up to the freeze event
+        EventBroadcaster.SetWorldFrozen += OnWorldFrozen;
+        
     }
+    
+    
+    private void OnWorldFrozen(bool isFrozen)
+    {
+        // if frozen, store the speed of the enemy and then set the speed to 0
+        if (isFrozen)
+        {
+            _cachedSpeed = speed;
+            speed = 0;
+        }
+        else
+        {
+            speed = _cachedSpeed;
+        }
+    }
+    
     private void SetSeed(int seed)
     {
         UnityEngine.Random.InitState(seed);

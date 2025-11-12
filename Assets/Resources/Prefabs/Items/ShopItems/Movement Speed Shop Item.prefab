@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Movement Speed Shop Item
+  shrinkDuration: 0.5
   itemValue: 50
-  buffValue: 1
+  buffValue: 0.5
   buffType: 2
   flavorText: 
 --- !u!212 &7787435678194780221
