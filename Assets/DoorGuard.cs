@@ -17,7 +17,7 @@ public class DoorGuard : MonoBehaviour
             if (spawnLocation != null)
             {
                 other.transform.position = spawnLocation.position;
-                other.transform.rotation = spawnLocation.rotation;
+                //other.transform.rotation = spawnLocation.rotation;
             }
         }
     }
