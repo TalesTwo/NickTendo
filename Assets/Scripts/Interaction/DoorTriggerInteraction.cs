@@ -17,20 +17,22 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     // get a reference to the door scripy
     private Door _doorScript;
-
-    private float _nextAllowedInteractTime = 0f;
-    private const float InteractCooldown = .25f;
+    
     public override void Interact()
     {
         
-        // Prevent interaction if not ready
-        if (Time.time < _nextAllowedInteractTime)
-            return;
-
-        // Update the next allowed time 
-        _nextAllowedInteractTime = Time.time + InteractCooldown;
-        if(!_allowedToInteract){ return; }
         base.Interact();
+        
+        // Ask the player if they can interact
+        if (!_playerController.CanInteract())
+        {
+            DebugUtils.Log("Player cannot interact right now, still on cooldown.");
+            return;
+        }
+
+        // Start the player's cooldown timer
+        _playerController.StartCooldown();
+        
         // log the current door state 
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
