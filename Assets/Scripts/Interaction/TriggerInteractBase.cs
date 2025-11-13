@@ -22,6 +22,11 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     private bool _isAllowedToInteract = true;
     protected bool _currentlyInOverlap = false;
+    
+    // reference to the player controller
+    protected PlayerController _playerController;
+
+
 
 
     public void SetInteractAllowedToInteract(bool isActive)
@@ -39,14 +44,16 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
     public virtual void Interact()
     {
-        // Play our interaction sound
-        if (!_isAllowedToInteract) { return; }
+        // we are attempting to interact, the players interaction is on cooldown?
+        DebugUtils.Log("The players cooldown state is " + _playerController.CanInteract());
+        
+        if (!_isAllowedToInteract) return;
 
         AnimationOverrideOnInteract();
-        // When the player interacts with something, we should default set them back to their idle animation
         AudioManager.Instance.PlayPlayerInteractSound(0.15f, 0.1f);
-        
     }
+
+    
     
     protected virtual void AnimationOverrideOnInteract()
     {
@@ -79,6 +86,8 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
             interactPromptInstance.SetActive(false);
         }
+        
+        _playerController = Player.GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -87,6 +96,8 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
         // if we press our Interact key, we will interact with the object
         if (Input.GetKeyDown(KeyCode.E))
         {
+            // check to ensure we are allowed to interact (not on cooldown)
+            // check the timer
             Interact();
         }
     }
