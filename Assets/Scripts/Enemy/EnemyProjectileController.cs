@@ -60,7 +60,12 @@ public class EnemyProjectileController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerAttack"))
         {
-            //Debug.Log(other.gameObject.name);
+            // we also want to ensure that what we re deflecting is also a projectile
+            // as in, a projectile should not deflect another projectile.
+            if (other.gameObject.GetComponent<EnemyProjectileController>())
+            {
+                return;
+            }
             _isPlayerAttack = true;
             Managers.AudioManager.Instance.PlayDeflectSound(1, 0.25f);
             Deflect();
