@@ -75,6 +75,7 @@ public class ShopUIManager : MonoBehaviour
             EventBroadcaster.Broadcast_StartStopAction();
             IsInShop = true;
             BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Hover over the items to learn more!");
+            Managers.AudioManager.Instance.PlayShopMenuSound(1, 0);
         }
     }
 
@@ -104,6 +105,7 @@ public class ShopUIManager : MonoBehaviour
         ItemSpotlights[Index].gameObject.SetActive(true);
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
         BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue(ItemFlavorText[Index]);
+        Managers.AudioManager.Instance.PlayUIHoverSound(1, 0);
     }
 
     public void MouseLeftItem(int Index)

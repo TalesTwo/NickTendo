@@ -108,6 +108,10 @@ MonoBehaviour:
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
   dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
+  pauseMenu: {fileID: 8300000, guid: a194842c1fe558c48be5212a18a06203, type: 3}
+  personaMenuOpen: {fileID: 8300000, guid: e5c2ef863ff24e94db93f9bc96447728, type: 3}
+  personaMenuClose: {fileID: 8300000, guid: 8aa9c6ad661d26a45925224909de558c, type: 3}
+  shopMenu: {fileID: 8300000, guid: b0daff1a024023048a5ba2a7f2c67487, type: 3}
   Overworld: {fileID: 8300000, guid: d42fef7fff9afdb4399b630ddbf71682, type: 3}
   Boss: {fileID: 8300000, guid: b18b613831cf7f94f9b7c5713dc1f325, type: 3}
   Shop: {fileID: 0}
