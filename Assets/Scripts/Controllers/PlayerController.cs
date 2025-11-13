@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking = false;
     private float _walktimer = 0;
     public bool InteractionCooldown { get; private set; }
-    [SerializeField] private float interactionCooldownDuration = 0.5f;
+    [SerializeField] private float interactionCooldownDuration = 0.6f;
     
     
     // Start is called before the first frame update

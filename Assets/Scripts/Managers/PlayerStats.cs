@@ -103,10 +103,7 @@ public class PlayerStats : Singleton<PlayerStats>
 
     public void UpdateMaxHealth(float UpdateValue)
     {
-        DebugUtils.Log("Updating Max Health by: " + UpdateValue);
-        DebugUtils.Log("Old Max Health: " + _maxHealth);
         _maxHealth += UpdateValue;
-        DebugUtils.Log("New Max Health: " + _maxHealth);
     }
     public void UpdateMovementSpeed(float UpdateValue) { _movementSpeed += UpdateValue; }
     public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }
