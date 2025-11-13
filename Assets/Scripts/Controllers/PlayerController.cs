@@ -37,7 +37,10 @@ public class PlayerController : MonoBehaviour
     private bool _isDead = false;
     private bool _isWalking = false;
     private float _walktimer = 0;
-
+    public bool InteractionCooldown { get; private set; }
+    [SerializeField] private float interactionCooldownDuration = 0.5f;
+    
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -54,11 +57,29 @@ public class PlayerController : MonoBehaviour
         _isWalking = false;
     }
     
+    public bool CanInteract()
+    {
+        return !InteractionCooldown;
+    }
+
+    public void StartCooldown()
+    {
+        InteractionCooldown = true;
+        Invoke(nameof(Cooldown), interactionCooldownDuration);
+    }
+
+    private void Cooldown()
+    {
+        InteractionCooldown = false;
+    }
+    
     private void Update()
     {
         // get WASD input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        
+        // debug if we are on cooldown or not
         
         if (_isActive && !_isDead)
         {
