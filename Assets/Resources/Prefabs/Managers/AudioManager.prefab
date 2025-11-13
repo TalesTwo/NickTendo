@@ -114,7 +114,7 @@ MonoBehaviour:
   shopMenu: {fileID: 8300000, guid: b0daff1a024023048a5ba2a7f2c67487, type: 3}
   Overworld: {fileID: 8300000, guid: d42fef7fff9afdb4399b630ddbf71682, type: 3}
   Boss: {fileID: 8300000, guid: b18b613831cf7f94f9b7c5713dc1f325, type: 3}
-  Shop: {fileID: 0}
-  Credits: {fileID: 0}
+  Shop: {fileID: 8300000, guid: 6c9b310d50779174c896ac67ff650a39, type: 3}
+  Credits: {fileID: 8300000, guid: e72cb71ce28e4a84887bb95e96a328a0, type: 3}
   TitleTheme: {fileID: 8300000, guid: 8a2fac04bd243da43bad2a372218a25d, type: 3}
   Musicsource: {fileID: 0}
