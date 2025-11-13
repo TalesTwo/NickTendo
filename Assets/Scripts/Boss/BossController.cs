@@ -526,40 +526,24 @@ public class BossController : Singleton<BossController>
     // the boss will pulse red when he is vulnerable
     private IEnumerator VulnerablePulse(Color original, SpriteRenderer spriteRenderer)
     {
-        /*
+        float t = 0f;
         while (battle == BattleState.Tired)
         {
-        */
-            float t = 0f;
-            while (battle == BattleState.Tired)
-            {
-                t += Time.deltaTime;
+            t += Time.deltaTime;
 
-                float pulse = Mathf.PingPong(t, 1);
+            float pulse = Mathf.PingPong(t, 1);
                 
-                float intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
-                Color current = Color.Lerp(original, hurtPulseColor, pulse);;
+            float intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
+            Color current = Color.Lerp(original, hurtPulseColor, pulse);;
                 
-                current.r *= intensity;
-                current.g *= intensity;
-                current.b *= intensity;
+            current.r *= intensity;
+            current.g *= intensity;
+            current.b *= intensity;
                 
-                spriteRenderer.color = current;
-                
-                yield return null;
-            }
-/*
-            while (t > 0f && battle == BattleState.Tired)
-            {
-                t -= Time.deltaTime;
-                Color current = Color.Lerp(hurtPulseColor, original, Mathf.PingPong(t, 1));
-                spriteRenderer.material.color = current * Mathf.Lerp(maxIntensity, minIntensity, Mathf.PingPong(t, 1));
-                yield return null;
-            }
-            
-            
+            spriteRenderer.color = current; 
+            yield return null;
         }
-        */
+
         spriteRenderer.material.color = original;
     }
 }
