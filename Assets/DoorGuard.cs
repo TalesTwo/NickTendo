@@ -6,7 +6,7 @@ public class DoorGuard : MonoBehaviour
 {
 
     // create an overlap function that teleports the player back to the "Spawn_location" if they try to go through the door
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
