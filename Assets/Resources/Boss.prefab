@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6457432782451709770
 Transform:
   m_ObjectHideFlags: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
   - {fileID: -3033110742230556116, guid: bc3f6522e4c97c548b7d27d90b272e1a, type: 3}
-  Framerate: 8
+  Framerate: 6
   SpriteRenderer: {fileID: 9121887209284123073}
   index: 0
   idleFrames:

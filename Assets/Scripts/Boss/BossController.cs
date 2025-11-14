@@ -185,6 +185,7 @@ public class BossController : Singleton<BossController>
             battle = BattleState.Summoning;
             StartCoroutine(SpawnMinions());
             Managers.AudioManager.Instance.PlaySpawnEnemiesSound(1, 0);
+            expressionsAnimator.SetLoadingMinionsAnimation();
         }
         
         _projectilesTimer += Time.deltaTime;

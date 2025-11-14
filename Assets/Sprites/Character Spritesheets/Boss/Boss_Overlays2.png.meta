@@ -449,8 +449,8 @@ TextureImporter:
       name: BOSS_summoning_1
       rect:
         serializedVersion: 2
-        x: 633
-        y: 1089
+        x: 634
+        y: 1092
         width: 80
         height: 37
       alignment: 0
@@ -470,8 +470,8 @@ TextureImporter:
       name: BOSS_summoning_2
       rect:
         serializedVersion: 2
-        x: 1083
-        y: 1090
+        x: 1084
+        y: 1092
         width: 80
         height: 37
       alignment: 0
@@ -491,7 +491,7 @@ TextureImporter:
       name: BOSS_summoning_3
       rect:
         serializedVersion: 2
-        x: 1533
+        x: 1534
         y: 1092
         width: 80
         height: 37
@@ -512,8 +512,8 @@ TextureImporter:
       name: BOSS_summoning_4
       rect:
         serializedVersion: 2
-        x: 183
-        y: 786
+        x: 184
+        y: 790
         width: 80
         height: 37
       alignment: 0
@@ -533,8 +533,8 @@ TextureImporter:
       name: BOSS_summoning_5
       rect:
         serializedVersion: 2
-        x: 640
-        y: 785
+        x: 634
+        y: 790
         width: 80
         height: 37
       alignment: 0
@@ -554,8 +554,8 @@ TextureImporter:
       name: BOSS_summoning_6
       rect:
         serializedVersion: 2
-        x: 1083
-        y: 786
+        x: 1084
+        y: 792
         width: 80
         height: 37
       alignment: 0
@@ -575,8 +575,8 @@ TextureImporter:
       name: BOSS_summoning_7
       rect:
         serializedVersion: 2
-        x: 1533
-        y: 785
+        x: 1534
+        y: 792
         width: 80
         height: 37
       alignment: 0
@@ -596,8 +596,8 @@ TextureImporter:
       name: BOSS_summoning_8
       rect:
         serializedVersion: 2
-        x: 183
-        y: 482
+        x: 184
+        y: 485
         width: 80
         height: 37
       alignment: 0
@@ -617,8 +617,8 @@ TextureImporter:
       name: BOSS_summoning_9
       rect:
         serializedVersion: 2
-        x: 633
-        y: 481
+        x: 634
+        y: 486
         width: 80
         height: 37
       alignment: 0
@@ -638,8 +638,8 @@ TextureImporter:
       name: BOSS_summoning_10
       rect:
         serializedVersion: 2
-        x: 1082
-        y: 483
+        x: 1084
+        y: 486
         width: 80
         height: 37
       alignment: 0
@@ -659,8 +659,8 @@ TextureImporter:
       name: BOSS_summoning_11
       rect:
         serializedVersion: 2
-        x: 1533
-        y: 481
+        x: 1534
+        y: 486
         width: 80
         height: 37
       alignment: 0
@@ -680,8 +680,8 @@ TextureImporter:
       name: BOSS_summoning_12
       rect:
         serializedVersion: 2
-        x: 183
-        y: 181
+        x: 184
+        y: 182
         width: 80
         height: 37
       alignment: 0
@@ -701,8 +701,8 @@ TextureImporter:
       name: BOSS_summoning_13
       rect:
         serializedVersion: 2
-        x: 633
-        y: 177
+        x: 634
+        y: 182
         width: 80
         height: 37
       alignment: 0
