@@ -763,6 +763,8 @@ MonoBehaviour:
   Framerate: 8
   SpriteRenderer: {fileID: 9121887209284123073}
   index: 0
+  idleFrames:
+  - {fileID: -3033110742230556116, guid: bc3f6522e4c97c548b7d27d90b272e1a, type: 3}
   exhaustedFrames:
   - {fileID: 666126556, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
   - {fileID: -1415313989, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}

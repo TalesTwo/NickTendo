@@ -306,7 +306,7 @@ public class BossController : Singleton<BossController>
         
         BossScreenController.Instance.SetIsExhausted(false);
         expressionsAnimator.SetHurtAnimation();
-        Invoke(nameof(SetIdleAnimation), 0.2f);
+        Invoke(nameof(SetIdleAnimation), 0.3f);
         
         battle = BattleState.Idle;
         Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
