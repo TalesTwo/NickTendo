@@ -7,14 +7,21 @@ public class CameraController : MonoBehaviour
 {
     private Transform _playerTransform;
     public float cameraSpeed = 0.05f;
+    public float BossCameraSize = 10f;
     private CameraShake _cameraShake;
+    
+    private Camera _camera;
+    private float _originalCameraSize;
     
     // Start is called before the first frame update
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _cameraShake = GetComponent<CameraShake>();
+        _camera = GetComponent<Camera>();
+        _originalCameraSize = _camera.orthographicSize;
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
+        EventBroadcaster.PlayerEnteredBossRoom += BossCameraToggle;
     }
 
     private void OnPlayerDamaged()
@@ -47,15 +54,36 @@ public class CameraController : MonoBehaviour
         {
         
             Vector2 movement = Vector2.MoveTowards(gameObject.transform.position, _playerTransform.position, Time.deltaTime * cameraSpeed * distance);
-          */  
+          */
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            BossCameraToggle(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            BossCameraToggle(false);
+        }
         
-            Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
-            gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
+        Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
+        gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
             /*
         }
         */
             // apply the shake offset after moving
-            if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
+        if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
 
+    }
+
+    public void BossCameraToggle(bool inBossRoom)
+    {
+        if (inBossRoom)
+        {
+            _camera.orthographicSize = BossCameraSize;
+        }
+        else
+        {
+            _camera.orthographicSize = _originalCameraSize;
+        }
     }
 }
