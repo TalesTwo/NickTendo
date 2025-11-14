@@ -17,14 +17,22 @@ public class DialogueHitbox : MonoBehaviour
     [Header("Trigger Settings")]
     [SerializeField] private bool onlyTriggerOnce = false;
     [SerializeField] private bool shouldFreezeWorld = false;
+    [SerializeField] private bool triggerAfterTutorial = false;
 
     
     public void Start()
     {
         // hook up to the dialogue end event to unfreeze the world
         EventBroadcaster.StopDialogue += OnDialogueEnd;
+        EventBroadcaster.EndTutorial += AfterTutorial;
 
     }
+
+    private void AfterTutorial()
+    {
+        triggerAfterTutorial = false;
+    }
+    
     private void OnDialogueEnd()
     {
         if (shouldFreezeWorld)
@@ -41,6 +49,7 @@ public class DialogueHitbox : MonoBehaviour
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
         if (onlyTriggerOnce && _hasTriggered) { return; }
+        if (triggerAfterTutorial) { return;}
         if (root.CompareTag("Player"))
         {
             // Store the previous dialogue state
@@ -55,6 +64,11 @@ public class DialogueHitbox : MonoBehaviour
             {
                 EventBroadcaster.Broadcast_SetWorldFrozen(true);
             }
+
+            if (dialogueStateOnEnter == "Tutorial3")
+            {
+                EventBroadcaster.Broadcast_EndTutorial();
+            }
         }
     }
     
@@ -64,6 +78,7 @@ public class DialogueHitbox : MonoBehaviour
         if(other == null || other.transform.parent == null){return;}
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
+        if (triggerAfterTutorial) {return;}
         if (root.CompareTag("Player"))
         {
             // Restore the previous dialogue state
