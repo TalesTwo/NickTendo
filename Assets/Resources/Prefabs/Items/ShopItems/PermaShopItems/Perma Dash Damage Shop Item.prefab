@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6678887121655184090}
   - component: {fileID: 7787435678194780221}
   m_Layer: 0
-  m_Name: Max Health Shop Item
+  m_Name: Perma Dash Damage Shop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Max Health Shop Item
+  Name: Dash Damage Shop Item
   shrinkDuration: 0.5
-  itemValue: 100
-  buffValue: 2
-  buffType: 1
+  itemValue: 10
+  buffValue: 0.05
+  buffType: 15
   flavorText: 
 --- !u!212 &7787435678194780221
 SpriteRenderer:
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5630502616292227134, guid: 309ed1be14799a04ea276d163b2546de, type: 3}
+  m_Sprite: {fileID: 4579562183234738631, guid: 9becbfafe486c6f4cb09dab32781994d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
