@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6678887121655184090}
   - component: {fileID: 7787435678194780221}
   m_Layer: 0
-  m_Name: Max Health Shop Item
+  m_Name: Perma Max Health Shop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4748280286669562259, guid: 700fc24b78d5db045926d068b039314b, type: 3}
-  m_Color: {r: 1, g: 0.83413935, b: 0, a: 1}
+  m_Sprite: {fileID: -5533207786293027461, guid: 9becbfafe486c6f4cb09dab32781994d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

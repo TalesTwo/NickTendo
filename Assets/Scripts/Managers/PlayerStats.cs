@@ -30,6 +30,7 @@ public class PlayerStats : Singleton<PlayerStats>
     private float _carryOverDashDamage = 0; public float GetCarryOverDashDamage() { return _carryOverDashDamage; } public void SetCarryOverDashDamage(float value) { _carryOverDashDamage = value; }
     private float _carryOverDashCooldown = 0; public float GetCarryOverDashCooldown() { return _carryOverDashCooldown; } public void SetCarryOverDashCooldown(float value) { _carryOverDashCooldown = value; }
     
+    private float _carryOverDashSpeed = 0; public float GetCarryOverDashSpeed() { return _carryOverDashSpeed; } public void SetCarryOverDashSpeed(float value) { _carryOverDashSpeed = value; }
     // This function will be used anytime the persona is selected, as it will apply the carry over stats to the current stats
     public void ApplyCarryOverStats()
     {
@@ -39,9 +40,11 @@ public class PlayerStats : Singleton<PlayerStats>
         UpdateCurrentHealth(_carryOverMaxHealth, true);
         UpdateMovementSpeed(_carryOverMovementSpeed);
         UpdateAttackDamage(_carryOverAttackDamage);
+        //EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, _carryOverAttackDamage);
         UpdateAttackCooldown(-_carryOverAttackCooldown); // cooldown reduction
         UpdateDashDamage(_carryOverDashDamage);
         UpdateDashCooldown(-_carryOverDashCooldown); // cooldown reduction
+        UpdateDashSpeed(_carryOverDashSpeed);
     }
     
     
@@ -244,6 +247,12 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateDashCooldown(BuffValue);
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Cooldown, BuffValue);
         }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Speed)
+        {
+            SetCarryOverDashSpeed(GetCarryOverDashSpeed() + BuffValue);
+            UpdateDashSpeed(BuffValue);
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Speed, BuffValue);
+        }
         EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
     }
     
@@ -284,7 +293,8 @@ public enum PlayerStatsEnum
     CarryOver_Attack_Damage,
     CarryOver_Attack_Cooldown,
     CarryOver_Dash_Damage,
-    CarryOver_Dash_Cooldown
+    CarryOver_Dash_Cooldown,
+    CarryOver_Dash_Speed
 }
 
 // create a struct to hold all of the player stats, which can be used to initialize the player stats
