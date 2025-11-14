@@ -57,6 +57,9 @@ public class BossController : Singleton<BossController>
     public GameObject leftArm;
     public BossArmController leftArmController;
     public GameObject face;
+    public SpriteRenderer faceRenderer;
+    public GameObject screen;
+    public SpriteRenderer screenRenderer;
 
     public enum HealthState
     {
@@ -89,6 +92,14 @@ public class BossController : Singleton<BossController>
     public ProjectileState projectile;
     private Stats _currentStats;
     private RoomGridManager _roomGridManager;
+    
+    [Header("Vulnerable State")]
+    public Color hurtPulseColor = Color.red;
+    public float pulseSpeed = 2f;
+    public float minIntensity = 0.5f;
+    public float maxIntensity = 1f;
+    private Color _originalColorFace;
+    private Color _originalColorScreen;
     
     [Header("Player Reference")]
     private PlayerController _playerController;
@@ -131,6 +142,9 @@ public class BossController : Singleton<BossController>
         _rocketProjectionsQueue = new Queue<GameObject>();
         _currentStats = attacks[0];
         
+        _originalColorFace = faceRenderer.color;
+        _originalColorScreen = screenRenderer.color;
+        
         SetRandomRocketTimers(true, true);
     }
 
@@ -149,6 +163,8 @@ public class BossController : Singleton<BossController>
             battle = BattleState.Tired;
             _phases = 0;
             StartCoroutine(ExhaustionTimer());
+            StartCoroutine(VulnerablePulse(_originalColorFace, faceRenderer));
+            StartCoroutine(VulnerablePulse(_originalColorScreen, screenRenderer));
         }
         
         _enemiesTimer += Time.deltaTime;
@@ -505,5 +521,29 @@ public class BossController : Singleton<BossController>
         
         _isSpawningEnemies = false;
         battle = BattleState.Idle;
+    }
+
+    // the boss will pulse red when he is vulnerable
+    private IEnumerator VulnerablePulse(Color original, SpriteRenderer spriteRenderer)
+    {
+        float t = 0f;
+        while (battle == BattleState.Tired)
+        {
+            t += Time.deltaTime;
+
+            float pulse = Mathf.PingPong(t, 1);
+                
+            float intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
+            Color current = Color.Lerp(original, hurtPulseColor, pulse);;
+                
+            current.r *= intensity;
+            current.g *= intensity;
+            current.b *= intensity;
+                
+            spriteRenderer.color = current; 
+            yield return null;
+        }
+
+        spriteRenderer.material.color = original;
     }
 }

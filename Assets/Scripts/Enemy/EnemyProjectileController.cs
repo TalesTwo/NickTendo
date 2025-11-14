@@ -40,7 +40,7 @@ public class EnemyProjectileController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!gameObject.CompareTag("PlayerAttack"))
+            if (!gameObject.CompareTag("PlayerAttack") && !_playerController.IsDashing())
             {
                 Managers.AudioManager.Instance.PlayEnemyShotHitSound(1f, 0.2f);
                 DoDamage();
