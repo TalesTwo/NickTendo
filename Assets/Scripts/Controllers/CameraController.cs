@@ -7,7 +7,11 @@ public class CameraController : MonoBehaviour
 {
     private Transform _playerTransform;
     public float cameraSpeed = 0.05f;
+    public float normalCameraSize = 5f;
     public float BossCameraSize = 10f;
+    public float BossCameraTransitionTime;
+    private bool _inBossFight = false;
+    private float _cameraVelocity;
     private CameraShake _cameraShake;
     
     private Camera _camera;
@@ -21,7 +25,8 @@ public class CameraController : MonoBehaviour
         _camera = GetComponent<Camera>();
         _originalCameraSize = _camera.orthographicSize;
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
-        EventBroadcaster.PlayerEnteredBossRoom += BossCameraToggle;
+        EventBroadcaster.StartBossFight += BossFightStarting;
+        EventBroadcaster.PlayerDeath += BossFightEnding;
     }
 
     private void OnPlayerDamaged()
@@ -38,38 +43,49 @@ public class CameraController : MonoBehaviour
     void OnDestroy()
     {
         EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
+        EventBroadcaster.StartBossFight -= BossFightStarting;
+        EventBroadcaster.PlayerDeath -= BossFightEnding;
     }
     
     // Update is called once per frame
     void LateUpdate()
     {
-        
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            BossCameraToggle(true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            BossCameraToggle(false);
-        }
-        
         Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
         gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
 
         if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
-
     }
 
-    public void BossCameraToggle(bool inBossRoom)
+    private void BossFightStarting()
     {
-        if (inBossRoom)
+        StartCoroutine(ToBossCamera());
+        _inBossFight = true;
+    }
+
+    private void BossFightEnding()
+    {
+        StartCoroutine(ToNormalCamera());
+        _inBossFight = false;
+    }
+
+    private IEnumerator ToBossCamera()
+    {
+        while (_camera.orthographicSize - BossCameraSize < 0f)
         {
-            _camera.orthographicSize = BossCameraSize;
+            _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, BossCameraSize + 0.2f, ref _cameraVelocity,
+                BossCameraTransitionTime);
+            yield return null;
         }
-        else
+    }
+
+    private IEnumerator ToNormalCamera()
+    {
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        while (_camera.orthographicSize - normalCameraSize > 0f)
         {
-            _camera.orthographicSize = _originalCameraSize;
+            _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, normalCameraSize - 0.2f, ref _cameraVelocity,
+                BossCameraTransitionTime);
+            yield return null;
         }
     }
 }

@@ -37,6 +37,8 @@ public class BossDialogueHitbox : MonoBehaviour
         
         boss.SetActive(true);
         buddee.SetActive(false);
+        
+        EventBroadcaster.Broadcast_StartBossFight();
     }
     
     // create the on trigger enter method
