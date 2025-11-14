@@ -24,12 +24,19 @@ public class PlayerStats : Singleton<PlayerStats>
      * Carry over stats (these are permanent upgrades that persist between runs)
      */
     private float _carryOverMaxHealth = 0; public float GetCarryOverMaxHealth() { return _carryOverMaxHealth; } public void SetCarryOverMaxHealth(float value) { _carryOverMaxHealth = value; }
+    public int numberOfCarryOverHealthUpgrades = 0;
     private float _carryOverMovementSpeed = 0; public float GetCarryOverMovementSpeed() { return _carryOverMovementSpeed; } public void SetCarryOverMovementSpeed(float value) { _carryOverMovementSpeed = value; }
+    public int numberOfCarryOverMovementSpeedUpgrades = 0;
     private float _carryOverAttackDamage = 0; public float GetCarryOverAttackDamage() { return _carryOverAttackDamage; } public void SetCarryOverAttackDamage(float value) { _carryOverAttackDamage = value; }
+    public int numberOfCarryOverAttackDamageUpgrades = 0;
     private float _carryOverAttackCooldown = 0; public float GetCarryOverAttackCooldown() { return _carryOverAttackCooldown; } public void SetCarryOverAttackCooldown(float value) { _carryOverAttackCooldown = value; }
+    public int numberOfCarryOverAttackCooldownUpgrades = 0;
     private float _carryOverDashDamage = 0; public float GetCarryOverDashDamage() { return _carryOverDashDamage; } public void SetCarryOverDashDamage(float value) { _carryOverDashDamage = value; }
+    public int numberOfCarryOverDashDamageUpgrades = 0;
     private float _carryOverDashCooldown = 0; public float GetCarryOverDashCooldown() { return _carryOverDashCooldown; } public void SetCarryOverDashCooldown(float value) { _carryOverDashCooldown = value; }
-    
+    public int numberOfCarryOverDashCooldownUpgrades = 0;
+    private float _carryOverDashSpeed = 0; public float GetCarryOverDashSpeed() { return _carryOverDashSpeed; } public void SetCarryOverDashSpeed(float value) { _carryOverDashSpeed = value; }
+    public int numberOfCarryOverDashSpeedUpgrades = 0;
     // This function will be used anytime the persona is selected, as it will apply the carry over stats to the current stats
     public void ApplyCarryOverStats()
     {
@@ -39,9 +46,11 @@ public class PlayerStats : Singleton<PlayerStats>
         UpdateCurrentHealth(_carryOverMaxHealth, true);
         UpdateMovementSpeed(_carryOverMovementSpeed);
         UpdateAttackDamage(_carryOverAttackDamage);
+        //EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, _carryOverAttackDamage);
         UpdateAttackCooldown(-_carryOverAttackCooldown); // cooldown reduction
         UpdateDashDamage(_carryOverDashDamage);
         UpdateDashCooldown(-_carryOverDashCooldown); // cooldown reduction
+        UpdateDashSpeed(_carryOverDashSpeed);
     }
     
     
@@ -212,37 +221,50 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateCurrentHealth(BuffValue, true);
             // we need to specifically tell the UI that we updated the max health
             // (as by default, we only update the CarryOver)
+            numberOfCarryOverHealthUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Max_Health, BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Movement_Speed)
         {
             SetCarryOverMovementSpeed(GetCarryOverMovementSpeed() + BuffValue);
             UpdateMovementSpeed(BuffValue);
+            numberOfCarryOverMovementSpeedUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Movement_Speed, BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Damage)
         {
             SetCarryOverAttackDamage(GetCarryOverAttackDamage() + BuffValue);
             UpdateAttackDamage(BuffValue);
+            numberOfCarryOverAttackDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Cooldown)
         {
             SetCarryOverAttackCooldown(GetCarryOverAttackCooldown() + BuffValue);
             UpdateAttackCooldown(BuffValue);
+            numberOfCarryOverAttackCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Cooldown, BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Damage)
         {
             SetCarryOverDashDamage(GetCarryOverDashDamage() + BuffValue);
             UpdateDashDamage(BuffValue);
+            numberOfCarryOverDashDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Damage, BuffValue);
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Cooldown)
         {
             SetCarryOverDashCooldown(GetCarryOverDashCooldown() + BuffValue);
             UpdateDashCooldown(BuffValue);
+            numberOfCarryOverDashCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Cooldown, BuffValue);
+        }
+        else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Speed)
+        {
+            SetCarryOverDashSpeed(GetCarryOverDashSpeed() + BuffValue);
+            UpdateDashSpeed(BuffValue);
+            numberOfCarryOverDashSpeedUpgrades += 1;
+            EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Speed, BuffValue);
         }
         EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
     }
@@ -284,7 +306,8 @@ public enum PlayerStatsEnum
     CarryOver_Attack_Damage,
     CarryOver_Attack_Cooldown,
     CarryOver_Dash_Damage,
-    CarryOver_Dash_Cooldown
+    CarryOver_Dash_Cooldown,
+    CarryOver_Dash_Speed
 }
 
 // create a struct to hold all of the player stats, which can be used to initialize the player stats

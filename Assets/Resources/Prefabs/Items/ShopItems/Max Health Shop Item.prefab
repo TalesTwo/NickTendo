@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Max Health Shop Item
+  shrinkDuration: 0.5
   itemValue: 100
   buffValue: 2
   buffType: 1
@@ -93,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4748280286669562259, guid: 700fc24b78d5db045926d068b039314b, type: 3}
+  m_Sprite: {fileID: 5630502616292227134, guid: 309ed1be14799a04ea276d163b2546de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

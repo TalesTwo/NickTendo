@@ -31,7 +31,7 @@ public class CreditsManager : Singleton<CreditsManager>
         //EventBroadcaster.Broadcast_StartStopAction();
 
         // play title screen music
-        AudioManager.Instance.PlayTitleTrack(1f, true, 0.1f, true, 0.1f);
+        AudioManager.Instance.PlayCreditsTrack(1f, true, 0.1f, true, 0.1f);
 
         // start scrolling
         _isScrolling = true;

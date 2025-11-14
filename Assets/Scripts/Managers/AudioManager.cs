@@ -80,6 +80,7 @@ namespace Managers
         public AudioClip Shop;
         public AudioClip Credits;
         public AudioClip TitleTheme;
+        private AudioClip NullClip = null;
 
 
 
@@ -469,6 +470,10 @@ namespace Managers
         public void PlayCreditsTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
         {
             PlayBackgroundSoundtrack(Credits, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
+        }
+        public void StopTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(NullClip, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
         }
 
         private AudioSource GetFreeSource()
