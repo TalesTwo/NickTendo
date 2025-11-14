@@ -151,7 +151,7 @@ MonoBehaviour:
   probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.15
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
   generationDataSPECIAL: {fileID: 11400000, guid: 977e8ba1ccc873d4fa7c93e126a52ada, type: 2}
-  numberOfSpecialRoomsToGenerate: 4
+  numberOfSpecialRoomsToGenerate: 10
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
   Seed: 0
