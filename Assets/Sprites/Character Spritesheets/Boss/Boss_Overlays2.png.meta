@@ -1,0 +1,828 @@
+fileFormatVersion: 2
+guid: ae5b0486e23d18e42b5cd80762a57831
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1246400738257994976
+    second: BossScreenOverlays2_0
+  - first:
+      213: -6177718040230490378
+    second: BossScreenOverlays2_1
+  - first:
+      213: 6816303453758560639
+    second: BossScreenOverlays2_2
+  - first:
+      213: -5906194649414789808
+    second: BossScreenOverlays2_3
+  - first:
+      213: 6873725378075762096
+    second: BossScreenOverlays2_4
+  - first:
+      213: 2062738066102670552
+    second: BossScreenOverlays2_5
+  - first:
+      213: -7771647015434861657
+    second: BossScreenOverlays2_6
+  - first:
+      213: -2808306933851403233
+    second: BossScreenOverlays2_7
+  - first:
+      213: -3171434857549086810
+    second: BossScreenOverlays2_8
+  - first:
+      213: 1745569386566044347
+    second: BossScreenOverlays2_9
+  - first:
+      213: 8937555696592211924
+    second: BossScreenOverlays2_10
+  - first:
+      213: -8764302058544854957
+    second: BossScreenOverlays2_11
+  - first:
+      213: 8452447411850908882
+    second: BossScreenOverlays2_12
+  - first:
+      213: -3658956534847232523
+    second: BossScreenOverlays2_13
+  - first:
+      213: -8556483211596560321
+    second: BossScreenOverlays2_14
+  - first:
+      213: -592495534920642270
+    second: BossScreenOverlays2_15
+  - first:
+      213: -8719252942662299578
+    second: BossScreenOverlays2_16
+  - first:
+      213: 918215146744857619
+    second: BossScreenOverlays2_17
+  - first:
+      213: 9136749452306117461
+    second: BossScreenOverlays2_18
+  - first:
+      213: -3487947602462189774
+    second: BossScreenOverlays2_19
+  - first:
+      213: 5823776310073565728
+    second: BossScreenOverlays2_20
+  - first:
+      213: 109955240966164890
+    second: BossScreenOverlays2_21
+  - first:
+      213: -8973250142170435225
+    second: BossScreenOverlays2_22
+  - first:
+      213: -1243066525300185401
+    second: BossScreenOverlays2_23
+  - first:
+      213: 2154092026603086844
+    second: BossScreenOverlays2_24
+  - first:
+      213: -6633558447460898855
+    second: BossScreenOverlays2_25
+  - first:
+      213: -97302385011470175
+    second: BossScreenOverlays2_26
+  - first:
+      213: 2002572049025059276
+    second: BossScreenOverlays2_27
+  - first:
+      213: -5678533642497878544
+    second: BossScreenOverlays2_28
+  - first:
+      213: -7611922457142390214
+    second: BossScreenOverlays2_29
+  - first:
+      213: 1131418298422481808
+    second: BossScreenOverlays2_30
+  - first:
+      213: 3051294216625400661
+    second: BossScreenOverlays2_31
+  - first:
+      213: -4395666434360349114
+    second: BossScreenOverlays2_32
+  - first:
+      213: 3123186211569926184
+    second: BossScreenOverlays2_33
+  - first:
+      213: -5965719850936881739
+    second: BossScreenOverlays2_34
+  - first:
+      213: -4344092293801525351
+    second: BossScreenOverlays2_35
+  - first:
+      213: -2078019011356234051
+    second: BossScreenOverlays2_36
+  - first:
+      213: -2123375232530494378
+    second: BossScreenOverlays2_37
+  - first:
+      213: -7985888904596811261
+    second: BossScreenOverlays2_38
+  - first:
+      213: 7233634112427727744
+    second: BossScreenOverlays2_39
+  - first:
+      213: 3786462852473933147
+    second: BossScreenOverlays2_40
+  - first:
+      213: 6758527256785739109
+    second: BossScreenOverlays2_41
+  - first:
+      213: -3136766236929091915
+    second: BossScreenOverlays2_42
+  - first:
+      213: 8768742590789074937
+    second: BossScreenOverlays2_43
+  - first:
+      213: -8030475149937242520
+    second: BossScreenOverlays2_44
+  - first:
+      213: -9079442285173463181
+    second: BossScreenOverlays2_45
+  - first:
+      213: -6115110004422454509
+    second: BossScreenOverlays2_46
+  - first:
+      213: 6246095888354261953
+    second: BossScreenOverlays2_47
+  - first:
+      213: 2278474643016340182
+    second: BossScreenOverlays2_48
+  - first:
+      213: -3008846690330689644
+    second: BossScreenOverlays2_49
+  - first:
+      213: -6927120267195928779
+    second: BossScreenOverlays2_50
+  - first:
+      213: -824307985525698219
+    second: BossScreenOverlays2_51
+  - first:
+      213: -3966739281305271066
+    second: BossScreenOverlays2_52
+  - first:
+      213: -5996626024699281777
+    second: BossScreenOverlays2_53
+  - first:
+      213: -1982232106325373855
+    second: BossScreenOverlays2_54
+  - first:
+      213: 2066648153073695940
+    second: BossScreenOverlays2_55
+  - first:
+      213: 6352395938621614309
+    second: BossScreenOverlays2_56
+  - first:
+      213: 1425519607294911618
+    second: BossScreenOverlays2_57
+  - first:
+      213: 4461311058169711647
+    second: BossScreenOverlays2_58
+  - first:
+      213: 3801306037272383510
+    second: BossScreenOverlays2_59
+  - first:
+      213: -9063139301324625326
+    second: BossScreenOverlays2_60
+  - first:
+      213: 583776962490119999
+    second: BossScreenOverlays2_61
+  - first:
+      213: -3683344783669225167
+    second: BossScreenOverlays2_62
+  - first:
+      213: -2500143872390458277
+    second: BossScreenOverlays2_63
+  - first:
+      213: 3645448347674315788
+    second: BossScreenOverlays2_64
+  - first:
+      213: 7659298424525283493
+    second: BossScreenOverlays2_65
+  - first:
+      213: 2286090525952507934
+    second: BossScreenOverlays2_66
+  - first:
+      213: 918337778470280266
+    second: BossScreenOverlays2_67
+  - first:
+      213: 2631797060925323967
+    second: BossScreenOverlays2_68
+  - first:
+      213: 6515133057958322109
+    second: BossScreenOverlays2_69
+  - first:
+      213: 6138964039648477655
+    second: BossScreenOverlays2_70
+  - first:
+      213: -1652841655322010445
+    second: BossScreenOverlays2_71
+  - first:
+      213: -1806088155177064985
+    second: BossScreenOverlays2_72
+  - first:
+      213: 1321185106548190520
+    second: BossScreenOverlays2_73
+  - first:
+      213: 8277483233107747067
+    second: BossScreenOverlays2_74
+  - first:
+      213: 7127607486578908704
+    second: BossScreenOverlays2_75
+  - first:
+      213: 2454121218492265571
+    second: BossScreenOverlays2_76
+  - first:
+      213: 2045126413336276474
+    second: BossScreenOverlays2_77
+  - first:
+      213: 5090486790187541448
+    second: BossScreenOverlays2_78
+  - first:
+      213: 5867091746527986971
+    second: BossScreenOverlays2_79
+  - first:
+      213: 7297941054144660916
+    second: BossScreenOverlays2_80
+  - first:
+      213: 8056278463130184537
+    second: BossScreenOverlays2_81
+  - first:
+      213: -2819308647601008397
+    second: BossScreenOverlays2_82
+  - first:
+      213: 1855300265296657775
+    second: BossScreenOverlays2_83
+  - first:
+      213: 8453490656912878571
+    second: BossScreenOverlays2_84
+  - first:
+      213: -8648081835568542550
+    second: BossScreenOverlays2_85
+  - first:
+      213: 183673325142600275
+    second: BossScreenOverlays2_86
+  - first:
+      213: -1557727553471805340
+    second: BossScreenOverlays2_87
+  - first:
+      213: 645988887740078949
+    second: BossScreenOverlays2_88
+  - first:
+      213: 6937179905960024271
+    second: BossScreenOverlays2_89
+  - first:
+      213: -8430829806273158064
+    second: BossScreenOverlays2_90
+  - first:
+      213: -8402899410511426835
+    second: BossScreenOverlays2_91
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BOSS_summoning_0
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1092
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02bf85cd125e3bee0800000000000000
+      internalID: -1246400738257994976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_1
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 1089
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fe0a816c26544aa0800000000000000
+      internalID: -6177718040230490378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_2
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 1090
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f791c8a70ef589e50800000000000000
+      internalID: 6816303453758560639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_3
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 1092
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbac011db12893810800000000000000
+      internalID: 1745569386566044347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_4
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 786
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 761353bb98c987380800000000000000
+      internalID: -8973250142170435225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 785
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a32953cdad40d5690800000000000000
+      internalID: -7611922457142390214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_6
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 786
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09359d9a2fa93bf00800000000000000
+      internalID: 1131418298422481808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_7
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 785
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c4824e9714882e0800000000000000
+      internalID: -2123375232530494378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_8
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 482
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fa06581dceddf90800000000000000
+      internalID: -6927120267195928779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_9
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 481
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284ea25b78678c310800000000000000
+      internalID: 1425519607294911618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_10
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 483
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c4ab635c2c9ed30800000000000000
+      internalID: 4461311058169711647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_11
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 481
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a0e98e165b4b4a60800000000000000
+      internalID: 7659298424525283493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_12
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 181
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c362fed3ca05a640800000000000000
+      internalID: 5090486790187541448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_summoning_13
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 177
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaccd6ad367dbf780800000000000000
+      internalID: -8648081835568542550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 2a22e29374282214e94aff5c9a164fce
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BOSS_summoning_0: -1246400738257994976
+      BOSS_summoning_1: -6177718040230490378
+      BOSS_summoning_10: 4461311058169711647
+      BOSS_summoning_11: 7659298424525283493
+      BOSS_summoning_12: 5090486790187541448
+      BOSS_summoning_13: -8648081835568542550
+      BOSS_summoning_2: 6816303453758560639
+      BOSS_summoning_3: 1745569386566044347
+      BOSS_summoning_4: -8973250142170435225
+      BOSS_summoning_5: -7611922457142390214
+      BOSS_summoning_6: 1131418298422481808
+      BOSS_summoning_7: -2123375232530494378
+      BOSS_summoning_8: -6927120267195928779
+      BOSS_summoning_9: 1425519607294911618
+      BossScreenOverlays2_10: 8937555696592211924
+      BossScreenOverlays2_11: -8764302058544854957
+      BossScreenOverlays2_12: 8452447411850908882
+      BossScreenOverlays2_13: -3658956534847232523
+      BossScreenOverlays2_14: -8556483211596560321
+      BossScreenOverlays2_15: -592495534920642270
+      BossScreenOverlays2_16: -8719252942662299578
+      BossScreenOverlays2_17: 918215146744857619
+      BossScreenOverlays2_18: 9136749452306117461
+      BossScreenOverlays2_19: -3487947602462189774
+      BossScreenOverlays2_20: 5823776310073565728
+      BossScreenOverlays2_21: 109955240966164890
+      BossScreenOverlays2_23: -1243066525300185401
+      BossScreenOverlays2_24: 2154092026603086844
+      BossScreenOverlays2_25: -6633558447460898855
+      BossScreenOverlays2_26: -97302385011470175
+      BossScreenOverlays2_27: 2002572049025059276
+      BossScreenOverlays2_28: -5678533642497878544
+      BossScreenOverlays2_3: -5906194649414789808
+      BossScreenOverlays2_31: 3051294216625400661
+      BossScreenOverlays2_32: -4395666434360349114
+      BossScreenOverlays2_33: 3123186211569926184
+      BossScreenOverlays2_34: -5965719850936881739
+      BossScreenOverlays2_35: -4344092293801525351
+      BossScreenOverlays2_36: -2078019011356234051
+      BossScreenOverlays2_38: -7985888904596811261
+      BossScreenOverlays2_39: 7233634112427727744
+      BossScreenOverlays2_4: 6873725378075762096
+      BossScreenOverlays2_40: 3786462852473933147
+      BossScreenOverlays2_41: 6758527256785739109
+      BossScreenOverlays2_42: -3136766236929091915
+      BossScreenOverlays2_43: 8768742590789074937
+      BossScreenOverlays2_44: -8030475149937242520
+      BossScreenOverlays2_45: -9079442285173463181
+      BossScreenOverlays2_46: -6115110004422454509
+      BossScreenOverlays2_47: 6246095888354261953
+      BossScreenOverlays2_48: 2278474643016340182
+      BossScreenOverlays2_49: -3008846690330689644
+      BossScreenOverlays2_5: 2062738066102670552
+      BossScreenOverlays2_51: -824307985525698219
+      BossScreenOverlays2_52: -3966739281305271066
+      BossScreenOverlays2_53: -5996626024699281777
+      BossScreenOverlays2_54: -1982232106325373855
+      BossScreenOverlays2_55: 2066648153073695940
+      BossScreenOverlays2_56: 6352395938621614309
+      BossScreenOverlays2_59: 3801306037272383510
+      BossScreenOverlays2_6: -7771647015434861657
+      BossScreenOverlays2_60: -9063139301324625326
+      BossScreenOverlays2_61: 583776962490119999
+      BossScreenOverlays2_62: -3683344783669225167
+      BossScreenOverlays2_63: -2500143872390458277
+      BossScreenOverlays2_64: 3645448347674315788
+      BossScreenOverlays2_66: 2286090525952507934
+      BossScreenOverlays2_67: 918337778470280266
+      BossScreenOverlays2_68: 2631797060925323967
+      BossScreenOverlays2_69: 6515133057958322109
+      BossScreenOverlays2_7: -2808306933851403233
+      BossScreenOverlays2_70: 6138964039648477655
+      BossScreenOverlays2_71: -1652841655322010445
+      BossScreenOverlays2_72: -1806088155177064985
+      BossScreenOverlays2_73: 1321185106548190520
+      BossScreenOverlays2_74: 8277483233107747067
+      BossScreenOverlays2_75: 7127607486578908704
+      BossScreenOverlays2_76: 2454121218492265571
+      BossScreenOverlays2_77: 2045126413336276474
+      BossScreenOverlays2_79: 5867091746527986971
+      BossScreenOverlays2_8: -3171434857549086810
+      BossScreenOverlays2_80: 7297941054144660916
+      BossScreenOverlays2_81: 8056278463130184537
+      BossScreenOverlays2_82: -2819308647601008397
+      BossScreenOverlays2_83: 1855300265296657775
+      BossScreenOverlays2_84: 8453490656912878571
+      BossScreenOverlays2_86: 183673325142600275
+      BossScreenOverlays2_87: -1557727553471805340
+      BossScreenOverlays2_88: 645988887740078949
+      BossScreenOverlays2_89: 6937179905960024271
+      BossScreenOverlays2_90: -8430829806273158064
+      BossScreenOverlays2_91: -8402899410511426835
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
