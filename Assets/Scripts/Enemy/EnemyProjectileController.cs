@@ -40,7 +40,7 @@ public class EnemyProjectileController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!gameObject.CompareTag("PlayerAttack"))
+            if (!gameObject.CompareTag("PlayerAttack") && !_playerController.IsDashing())
             {
                 Managers.AudioManager.Instance.PlayEnemyShotHitSound(1f, 0.2f);
                 DoDamage();
@@ -58,9 +58,9 @@ public class EnemyProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerAttack"))
+        // make sure that what we hit is a player attack, and that we are NOT a player attack
+        if (other.gameObject.CompareTag("PlayerAttack") && !gameObject.CompareTag("PlayerAttack"))
         {
-            //Debug.Log(other.gameObject.name);
             _isPlayerAttack = true;
             Managers.AudioManager.Instance.PlayDeflectSound(1, 0.25f);
             Deflect();
@@ -84,6 +84,7 @@ public class EnemyProjectileController : MonoBehaviour
     // deflect the enemy projectile and turn it into a player attack
     private void Deflect()
     {
+        Debug.Log("Deflecting projectile!");
         // turn into player attack
         gameObject.tag = "PlayerAttack";
         

@@ -69,6 +69,10 @@ namespace Managers
         public AudioClip cursorSelect;
         public AudioClip buyItem;
         public AudioClip dialogueClick;
+        public AudioClip pauseMenu;
+        public AudioClip personaMenuOpen;
+        public AudioClip personaMenuClose;
+        public AudioClip shopMenu;
 
         [Header("Soundtracks")]
         public AudioClip Overworld;
@@ -76,6 +80,7 @@ namespace Managers
         public AudioClip Shop;
         public AudioClip Credits;
         public AudioClip TitleTheme;
+        private AudioClip NullClip = null;
 
 
 
@@ -112,6 +117,25 @@ namespace Managers
         /// If a GameObject is provided, sound plays from its world position (3D).  
         /// </summary>
         /// 
+
+        private void Start()
+        {
+            EventBroadcaster.PlayerEnteredBossRoom += OnPlayerEnteredBossRoom;
+            EventBroadcaster.PlayerEnteredShopRoom += OnPlayerEnteredShopRoom;
+        }
+
+        private void OnPlayerEnteredBossRoom(bool bIsInRoom)
+        {
+            if (bIsInRoom) PlayBossTrack();
+            if (!bIsInRoom) PlayOverworldTrack();
+
+        }
+
+        private void OnPlayerEnteredShopRoom(bool IsInRoom)
+        {
+            if (IsInRoom) PlayShopTrack();
+            if (!IsInRoom) PlayOverworldTrack();
+        }
 
         private void Update()
         {
@@ -185,6 +209,7 @@ namespace Managers
             for(float tempvolume = src.volume; tempvolume >= 0; tempvolume -= 0.01f * oldvolume * fadeoutspeed)
             {
                 if (tempvolume < 0) tempvolume = 0;
+                if (muteMusic) tempvolume = 0;
                 src.volume = tempvolume;
                 yield return null;
             }
@@ -196,6 +221,7 @@ namespace Managers
             }
             else
             {
+                if (muteMusic) volume = 0;
                 src.volume = volume;
                 src.Play();
             }
@@ -207,6 +233,7 @@ namespace Managers
             for(float volume = 0; volume <= oldvolume; volume+=0.01f * oldvolume * fadeinspeed)
             {
                 if (volume > oldvolume) volume = oldvolume;
+                if (muteMusic) volume = 0;
                 src.volume = volume;
                 yield return null;
             }
@@ -405,6 +432,22 @@ namespace Managers
         {
             PlaySFX(buyItem, volume, deviation);
         }
+        public void PlayPauseMenuSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(pauseMenu, volume, deviation);
+        }
+        public void PlayPersonaMenuOpenSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(personaMenuOpen, volume, deviation);
+        }
+        public void PlayPersonaMenuCloseSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(personaMenuClose, volume, deviation);
+        }
+        public void PlayShopMenuSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(shopMenu, volume, deviation);
+        }
 
 
         //Soundtrack Functions
@@ -427,6 +470,10 @@ namespace Managers
         public void PlayCreditsTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
         {
             PlayBackgroundSoundtrack(Credits, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
+        }
+        public void StopTrack(float volume = 1, bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)
+        {
+            PlayBackgroundSoundtrack(NullClip, volume, fadeout, fadeoutspeed, fadein, fadeinspeed);
         }
 
         private AudioSource GetFreeSource()

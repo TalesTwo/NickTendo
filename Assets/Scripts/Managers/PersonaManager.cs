@@ -94,6 +94,7 @@ namespace Managers
             // when the player opens the UI, we want to generate everything
             InitializeRandomPersonas();
             GetTrimmedPersonas(3); // for now, we will just do 3
+            Managers.AudioManager.Instance.PlayPersonaMenuOpenSound(1, 0);
             
         }
 
@@ -219,6 +220,8 @@ namespace Managers
             }
 
             // Broadcast after stats are applied
+            // Apply any carry over stats that we may have
+            PlayerStats.Instance.ApplyCarryOverStats();
             EventBroadcaster.Broadcast_PersonaChanged(newPersona);
         }
 

@@ -64,6 +64,7 @@ public class PauseMenuManager : MonoBehaviour
         _sfxToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteSFX);
         _musicToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteMusic);
         Time.timeScale = 0;
+        Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
     private void ClosePauseMenu()
@@ -72,6 +73,7 @@ public class PauseMenuManager : MonoBehaviour
         EventBroadcaster.Broadcast_GameUnpause();
         gameObject.SetActive(false);
         Time.timeScale = 1;
+        Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
     private void ToggleSFX()
