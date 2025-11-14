@@ -47,6 +47,7 @@ public class BossController : Singleton<BossController>
         public float timeBetweenProjectileWaves;
         [Header("Battle State")]
         public HealthState health;
+        public Sprite cracksOverlay;
         public int exhaustionCounter;
         public float exhaustionTime;
     }
@@ -60,6 +61,8 @@ public class BossController : Singleton<BossController>
     public SpriteRenderer faceRenderer;
     public GameObject screen;
     public SpriteRenderer screenRenderer;
+    public GameObject cracks;
+    public SpriteRenderer cracksRenderer;
 
     public enum HealthState
     {
@@ -325,6 +328,7 @@ public class BossController : Singleton<BossController>
             if (stat.health == health)
             {
                 _currentStats = stat;
+                UpdateScreen();
                 break;
             }
         }
@@ -332,6 +336,11 @@ public class BossController : Singleton<BossController>
         _leftArmsLaunchedThisPhase = 0;
         _rightArmsLaunchedThisPhase = 0;
         _projectilesTimer = 0f;
+    }
+
+    private void UpdateScreen()
+    {
+        cracksRenderer.sprite = _currentStats.cracksOverlay;
     }
 
     private void LaunchArm(BossArmController armController)

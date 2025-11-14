@@ -87,6 +87,8 @@ MonoBehaviour:
   faceRenderer: {fileID: 7886599588515294861}
   screen: {fileID: 5138876290651350562}
   screenRenderer: {fileID: 3861473411174172541}
+  cracks: {fileID: 3897931632771371189}
+  cracksRenderer: {fileID: 2424017885979502293}
   health: 0
   battle: 0
   projectile: 1
@@ -116,6 +118,7 @@ MonoBehaviour:
     spreadAngle: 80
     timeBetweenProjectileWaves: 10
     health: 0
+    cracksOverlay: {fileID: -2002351106, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
     exhaustionCounter: 5
     exhaustionTime: 10
   - rocketCountPerArm: 2
@@ -139,6 +142,7 @@ MonoBehaviour:
     spreadAngle: 85
     timeBetweenProjectileWaves: 10
     health: 1
+    cracksOverlay: {fileID: 539197535, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
     exhaustionCounter: 7
     exhaustionTime: 9
   - rocketCountPerArm: 2
@@ -162,6 +166,7 @@ MonoBehaviour:
     spreadAngle: 90
     timeBetweenProjectileWaves: 8
     health: 2
+    cracksOverlay: {fileID: -1045809985, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
     exhaustionCounter: 9
     exhaustionTime: 8
   - rocketCountPerArm: 3
@@ -185,6 +190,7 @@ MonoBehaviour:
     spreadAngle: 95
     timeBetweenProjectileWaves: 8
     health: 3
+    cracksOverlay: {fileID: -2033826006, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
     exhaustionCounter: 11
     exhaustionTime: 7
   - rocketCountPerArm: 3
@@ -208,6 +214,7 @@ MonoBehaviour:
     spreadAngle: 95
     timeBetweenProjectileWaves: 7
     health: 4
+    cracksOverlay: {fileID: -3418913312482388228, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
     exhaustionCounter: 13
     exhaustionTime: 6
   bossProjectile: {fileID: 2064634610991927975, guid: 357c115083bef4e498316be1a90bc41d, type: 3}
