@@ -44,17 +44,6 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         
-        /*
-        float distance = Vector3.Distance(_playerTransform.position, gameObject.transform.position);
-        if (distance > 50f)
-        {
-            gameObject.transform.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y, -1);
-        }
-        else if (distance > 1.5f)
-        {
-        
-            Vector2 movement = Vector2.MoveTowards(gameObject.transform.position, _playerTransform.position, Time.deltaTime * cameraSpeed * distance);
-          */
         if (Input.GetKeyDown(KeyCode.C))
         {
             BossCameraToggle(true);
@@ -67,10 +56,7 @@ public class CameraController : MonoBehaviour
         
         Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
         gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
-            /*
-        }
-        */
-            // apply the shake offset after moving
+
         if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
 
     }
