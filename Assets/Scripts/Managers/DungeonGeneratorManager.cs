@@ -100,7 +100,7 @@ namespace Managers
             if (tempRoom != null)
             {
                 // we need to destroy the existing room
-                //DestroyImmediate(tempRoom.gameObject);
+                tempRoom.SetRoomEnabled(false);
             }
             dungeonRooms[startPos.x][startPos.y + 1] = tutorialRoomOne;
             tutorialRoomOne.SetRoomEnabled(false); // disable by default
@@ -111,7 +111,7 @@ namespace Managers
             if (tempRoom != null)
             {
                 // we need to destroy the existing room
-                //DestroyImmediate(tempRoom.gameObject);
+                tempRoom.SetRoomEnabled(false);
             }
             tutorialRoomTwo.SetRoomEnabled(false); // disable by default
             dungeonRooms[startPos.x + 1][startPos.y + 1] = tutorialRoomTwo;
@@ -123,7 +123,7 @@ namespace Managers
             if (tempRoom != null)
             {
                 // we need to destroy the existing room
-                //DestroyImmediate(tempRoom.gameObject);
+                tempRoom.SetRoomEnabled(false);
             }
             tutorialRoomThree.SetRoomEnabled(false); // disable by default
         }
@@ -182,14 +182,10 @@ namespace Managers
             // and then after a small delay, disable all other rooms
             CurrentRoomCoords = newRoomCoords;
             
-            StartCoroutine(DisableOtherRoomsCoroutine(newRoomCoords));
+            Invoke(nameof(DisableAllRoomsExceptCurrent), 0.75f);
         }
         
-        private IEnumerator DisableOtherRoomsCoroutine((int row, int col) currentRoomCoords)
-        {
-            yield return new WaitForSeconds(0.5f); // wait half a second before disabling other rooms
-            DisableAllRoomsExceptCurrent(currentRoomCoords);
-        }
+
         
         
         
@@ -210,7 +206,7 @@ namespace Managers
             // teleport the player into the dungeon
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
-            DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
+            DisableAllRoomsExceptCurrent((startPos.x, startPos.y));
             if (_IsFirstLoad)
             {
                 //GameStateManager.Instance.SetBuddeeDialogState("Introyell");
