@@ -6,23 +6,39 @@ using UnityEngine;
 
 public class PickupItem : BaseItem
 {
+    [Header("Item Stats")]
     private GameObject Player;
     public bool CanAutoPickup = true;
     private bool CanInteract;
     public PlayerStatsEnum BuffType;
     public float BuffValue = 1;
 
+    [Header("Animation")]
+    public Sprite[] Animation;
+    public float FrameRate = 12;
+
+    private SpriteRenderer SpriteRenderer;
+    private float AnimationTimer;
+    private float AnimationTimerMax;
+    public int Index; 
+
+
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        SpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         CanInteract = false;
+        AnimationTimer = 0;
+        AnimationTimerMax = 1/FrameRate;
+        Index = 0;
     }
 
     // Update is called once per frame
     void Update()
-    {    
+    {
+        ItemAnimation();
         if (!CanInteract) { return; }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -57,6 +73,21 @@ public class PickupItem : BaseItem
         Destroy(GetComponent<SpriteRenderer>());
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject);
+    }
+
+    private void ItemAnimation()
+    {
+        AnimationTimer += Time.deltaTime;
+        if (AnimationTimer > AnimationTimerMax)
+        {
+            AnimationTimer = 0;
+            Index++;
+            if (Index >= Animation.Length)
+            {
+                Index = 0;
+            }
+            SpriteRenderer.sprite = Animation[Index];
+        }
     }
 
     private void DeleteItem()
