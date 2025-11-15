@@ -10,6 +10,7 @@ namespace Managers
     {
         [SerializeField] private SceneField _initialGameScene;
         [SerializeField] private GameObject _subTitle;
+        [SerializeField] private Button _startButton;
 
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
@@ -46,6 +47,8 @@ namespace Managers
                 //_subTitle.GetComponent<ScaleEffectsUI>().StopBreathe();
                 _subTitle.GetComponent<ScaleEffectsUI>().StartBreathe();
             }
+
+            _startButton.onClick.AddListener(StartGameButton);
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
@@ -91,6 +94,13 @@ namespace Managers
                 _errorMessageTextShadow.gameObject.SetActive(false);
                 StartGame();
             }
+        }
+
+        private void StartGameButton()
+        {
+            AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
+            PlayerStats.Instance.SetPlayerName("Player");
+            StartGame();
         }
 
         private void StartGame()
