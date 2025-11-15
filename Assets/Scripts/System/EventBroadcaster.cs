@@ -163,6 +163,11 @@ namespace System
         public static event EndTutorialHandler EndTutorial;
         public static void Broadcast_EndTutorial() { EndTutorial?.Invoke(); }
         
+        // broadcaster for when the boss fight will start
+        public delegate void StartBossFightHandler();
+        public static event StartBossFightHandler StartBossFight;
+        public static void Broadcast_StartBossFight() { StartBossFight?.Invoke(); }
+        
         // Delegate to "freeze" or "unfreeze" the game world (primarily used for enemies to pause movement without setting timescale to 0)
         public delegate void SetWorldFrozenHandler(bool isFrozen);
         public static event SetWorldFrozenHandler SetWorldFrozen;
