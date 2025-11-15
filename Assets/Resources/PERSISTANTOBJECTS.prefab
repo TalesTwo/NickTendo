@@ -628,6 +628,7 @@ MonoBehaviour:
   BossCameraSize: 10
   BossCameraTransitionTime: 1
   BossCameraOffsetY: -7
+  BossCameraLeanPercentage: 0.3
 --- !u!50 &6754654709526225878
 Rigidbody2D:
   serializedVersion: 4

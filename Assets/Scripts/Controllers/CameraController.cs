@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     public float BossCameraSize = 10f;
     public float BossCameraTransitionTime;
     public float BossCameraOffsetY;
+    public float BossCameraLeanPercentage;
     private Vector3 _bossCameraAnchorPoint;
     private bool _inBossFight = false;
     
@@ -59,6 +60,16 @@ public class CameraController : MonoBehaviour
         {
             Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
             gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
+        }
+        else
+        {
+            Vector3 anchorToPlayer = _playerTransform.position - _bossCameraAnchorPoint;
+            Vector3 leanOffset = anchorToPlayer.normalized * BossCameraLeanPercentage;
+            Vector3 targetPosition = _bossCameraAnchorPoint + leanOffset;
+            targetPosition.z = gameObject.transform.position.z;
+            
+            transform.position = Vector3.Lerp(transform.position, targetPosition, cameraSpeed*Time.deltaTime);
+            Debug.Log(transform.position);
         }
         
 
