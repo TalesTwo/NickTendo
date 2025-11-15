@@ -172,6 +172,7 @@ namespace System
         public delegate void SetWorldFrozenHandler(bool isFrozen);
         public static event SetWorldFrozenHandler SetWorldFrozen;
         public static void Broadcast_SetWorldFrozen(bool isFrozen) { SetWorldFrozen?.Invoke(isFrozen); }
+        
 
         //-------------------------------- End Activity Events --------------------------------//
     }
