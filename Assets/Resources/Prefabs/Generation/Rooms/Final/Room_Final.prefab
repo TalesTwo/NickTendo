@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4732110602238283189}
   - component: {fileID: 4914908223631390677}
   - component: {fileID: -8150375908159500775}
-  - component: {fileID: 7559902415946890259}
   m_Layer: 0
   m_Name: Room_Final
   m_TagString: Untagged
@@ -99,22 +98,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   nodeRadius: 0.5
---- !u!114 &7559902415946890259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821669949457351542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0848d56fe912245bbad02188ae749e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnableMap: []
-  minRoomDifficulty: 1
-  maxRoomDifficulty: 20
-  spawnVariance: 1
 --- !u!1 &2190034576026368647
 GameObject:
   m_ObjectHideFlags: 0

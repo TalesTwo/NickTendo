@@ -95,19 +95,36 @@ namespace Managers
             // get the tutorial room 1 position, (which is row, col + 1)
             Vector3 tutorialRoomOnePosition = new Vector3((startPos.y + 1) * RoomOffset, -startPos.x * RoomOffset, 0);
             Room tutorialRoomOne = GenerateRoomFromType(Types.RoomType.TutorialOne, tutorialRoomOnePosition, startPos.x, startPos.y + 1);
+            // get the current dungeon room at that position
+            Room tempRoom = dungeonRooms[startPos.x][startPos.y + 1];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                //DestroyImmediate(tempRoom.gameObject);
+            }
             dungeonRooms[startPos.x][startPos.y + 1] = tutorialRoomOne;
             tutorialRoomOne.SetRoomEnabled(false); // disable by default
             // get tutorial room 2 position, (which is row + 1, col + 1)
             Vector3 tutorialRoomTwoPosition = new Vector3((startPos.y + 1) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
             Room tutorialRoomTwo = GenerateRoomFromType(Types.RoomType.TutorialTwo, tutorialRoomTwoPosition, startPos.x + 1, startPos.y + 1);
+            tempRoom = dungeonRooms[startPos.x + 1][startPos.y + 1];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                //DestroyImmediate(tempRoom.gameObject);
+            }
             tutorialRoomTwo.SetRoomEnabled(false); // disable by default
-            // Debug print the dungeon
-            DebugPrintDungeonLayout();
             dungeonRooms[startPos.x + 1][startPos.y + 1] = tutorialRoomTwo;
             // get tutorial room 3 position, (which is row + 1, col)
             Vector3 tutorialRoomThreePosition = new Vector3((startPos.y) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
             Room tutorialRoomThree = GenerateRoomFromType(Types.RoomType.TutorialThree, tutorialRoomThreePosition, startPos.x + 1, startPos.y);
             dungeonRooms[startPos.x + 1][startPos.y] = tutorialRoomThree;
+            tempRoom = dungeonRooms[startPos.x + 1][startPos.y];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                //DestroyImmediate(tempRoom.gameObject);
+            }
             tutorialRoomThree.SetRoomEnabled(false); // disable by default
         }
 
@@ -256,7 +273,7 @@ namespace Managers
             InitializeTutorialRooms();
             
             // load the final room
-            InitializeFinalRoom();
+            //InitializeFinalRoom();
 
         }
 
@@ -652,7 +669,7 @@ namespace Managers
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 // End room will be on the second to top row
-                endPos = new Vector2Int(1, randomCol);
+                endPos = new Vector2Int(0, randomCol);
             }
             Vector3 endPosition = new Vector3(endPos.y * RoomOffset,-endPos.x * RoomOffset, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
@@ -663,7 +680,9 @@ namespace Managers
             {
                 dungeonRooms[endPos.x][endPos.y] = endRoom;
             }
-
+            
+            // Initialize the special rooms here, before the rest of the generation
+            //InitializeFinalRoom();
         }
 
 
