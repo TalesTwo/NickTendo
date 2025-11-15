@@ -1,0 +1,407 @@
+fileFormatVersion: 2
+guid: e7eeeb8e3e28c014db0b583038a104fb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -856768578628441261
+    second: BossScreenOverlays_0
+  - first:
+      213: 4629141777193958878
+    second: BossScreenOverlays_1
+  - first:
+      213: 8645420255757062339
+    second: BossScreenOverlays_2
+  - first:
+      213: -2812228973597169272
+    second: BossScreenOverlays_3
+  - first:
+      213: -1056657650547069612
+    second: BossScreenOverlays_4
+  - first:
+      213: 6091400564056338288
+    second: BossScreenOverlays_5
+  - first:
+      213: 13543560204464607
+    second: BossScreenOverlays_6
+  - first:
+      213: 5056033386882949319
+    second: BossScreenOverlays_7
+  - first:
+      213: -6540175069400968346
+    second: BossScreenOverlays_8
+  - first:
+      213: -9180693310700038701
+    second: BossScreenOverlays_9
+  - first:
+      213: 4014017458412985042
+    second: BossScreenOverlays_10
+  - first:
+      213: -3418913312482388228
+    second: BossScreenOverlays_11
+  - first:
+      213: 4465755284470516810
+    second: BossScreenOverlays_12
+  - first:
+      213: -6153460976526082590
+    second: BossScreenOverlays_13
+  - first:
+      213: -4731268590294239598
+    second: BossScreenOverlays_14
+  - first:
+      213: 3782135089324335401
+    second: BossScreenOverlays_15
+  - first:
+      213: -5673140194172581045
+    second: BossScreenOverlays_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BOSS_cracks_4
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 484
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf612abd4749d80d0800000000000000
+      internalID: -3418913312482388228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossScreenOverlays_15
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 180
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 921a7bb33d7dc7430800000000000000
+      internalID: 3782135089324335401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossScreenOverlays_16
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 180
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b4a5d0d05f441b0800000000000000
+      internalID: -5673140194172581045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_cracks_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 790
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb34fe2929fc4d45a2670bd332fed15
+      internalID: 539197535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_cracks_2
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 788
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a46dcf508d99b5645a4586ac4b0c9742
+      internalID: -1045809985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_cracks_3
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 788
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f3ffbb3b39df284291382a3bfd6e95e
+      internalID: -2033826006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_Hurt
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 482
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e9fe2492728e647a3a5e5b8a0cbc0e
+      internalID: -2128430680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_cracks_0
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 477
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b63d3c68a3b0b74baa846e853f41c7f
+      internalID: -2002351106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a00f78b6b063a194b9b5e34bc21b2718
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BOSS_Hurt: -2128430680
+      BOSS_cracks_0: -2002351106
+      BOSS_cracks_1: 539197535
+      BOSS_cracks_2: -1045809985
+      BOSS_cracks_3: -2033826006
+      BOSS_cracks_4: -3418913312482388228
+      BossScreenOverlays_0: -856768578628441261
+      BossScreenOverlays_1: 4629141777193958878
+      BossScreenOverlays_10: 4014017458412985042
+      BossScreenOverlays_12: 4465755284470516810
+      BossScreenOverlays_13: -6153460976526082590
+      BossScreenOverlays_14: -4731268590294239598
+      BossScreenOverlays_15: 3782135089324335401
+      BossScreenOverlays_16: -5673140194172581045
+      BossScreenOverlays_2: 8645420255757062339
+      BossScreenOverlays_3: -2812228973597169272
+      BossScreenOverlays_4: -1056657650547069612
+      BossScreenOverlays_5: 6091400564056338288
+      BossScreenOverlays_6: 13543560204464607
+      BossScreenOverlays_7: 5056033386882949319
+      BossScreenOverlays_8: -6540175069400968346
+      BossScreenOverlays_9: -9180693310700038701
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
