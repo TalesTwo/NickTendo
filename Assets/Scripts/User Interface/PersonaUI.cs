@@ -55,7 +55,7 @@ public class PersonaUI : MonoBehaviour
     }
     public void ClosePersonaUI()
     {
-        AudioManager.Instance.PlayUISelectSound();
+        AudioManager.Instance.PlayPersonaMenuCloseSound();
         gameObject.SetActive(false);
         // cleanup
         foreach (Transform child in contentParent)
