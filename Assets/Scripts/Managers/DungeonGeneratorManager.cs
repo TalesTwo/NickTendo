@@ -110,6 +110,18 @@ namespace Managers
             dungeonRooms[startPos.x + 1][startPos.y] = tutorialRoomThree;
             tutorialRoomThree.SetRoomEnabled(false); // disable by default
         }
+
+        private void InitializeFinalRoom()
+        {
+            /*
+             * This will be the game ending.. "final" room which will be placed right above the boss room, and will contain the ending (credits)
+             */
+            // get the final room position, which is (endPos.x - 1, endPos.y)
+            Vector3 finalRoomPosition = new Vector3(endPos.y * RoomOffset, -(endPos.x - 1) * RoomOffset, 0);
+            Room finalRoom = GenerateRoomFromType(Types.RoomType.Final, finalRoomPosition, endPos.x - 1, endPos.y);
+            dungeonRooms[endPos.x - 1][endPos.y] = finalRoom;
+            finalRoom.SetRoomEnabled(false); // disable by default
+        }
         
         
         
@@ -242,6 +254,9 @@ namespace Managers
             GenerateSpecialRooms(dungeonRooms);
             // load in the tutorial rooms
             InitializeTutorialRooms();
+            
+            // load the final room
+            InitializeFinalRoom();
 
         }
 
@@ -636,7 +651,8 @@ namespace Managers
             if (_endPos.x == -1 && _endPos.y == -1)
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
-                endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
+                // End room will be on the second to top row
+                endPos = new Vector2Int(1, randomCol);
             }
             Vector3 endPosition = new Vector3(endPos.y * RoomOffset,-endPos.x * RoomOffset, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);

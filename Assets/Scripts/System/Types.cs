@@ -29,7 +29,8 @@ public static class Types
         DEFAULT,
         TutorialOne,
         TutorialTwo,
-        TutorialThree
+        TutorialThree,
+        Final
         
     }
     
