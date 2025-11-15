@@ -111,8 +111,10 @@ namespace Managers
             player.transform.position = pitCenter;
 
             // Apply damage or death logic
-            // we want to only do this, if we ARE NOT in a tutorial room
-            if (DungeonController.Instance.IsPlayerInAnyTutorialRoom() == false)
+            // we want to only do this, if we ARE NOT in a tutorial room or in a shop
+            Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+            
+            if (DungeonController.Instance.IsPlayerInAnyTutorialRoom() == false && currentRoom.GetRoomClassification() != Types.RoomClassification.Shop)
             {
                 PlayerStats.Instance.UpdateCurrentHealth(-1);
             }
