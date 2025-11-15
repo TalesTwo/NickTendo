@@ -9,6 +9,8 @@ namespace Managers
     public class MainMenuManager : MonoBehaviour
     {
         [SerializeField] private SceneField _initialGameScene;
+        [SerializeField] private GameObject _subTitle;
+
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
         
@@ -39,6 +41,11 @@ namespace Managers
                 _errorMessageTextShadow.gameObject.SetActive(false);
             }
             
+            if(_subTitle != null)
+            {
+                //_subTitle.GetComponent<ScaleEffectsUI>().StopBreathe();
+                _subTitle.GetComponent<ScaleEffectsUI>().StartBreathe();
+            }
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
