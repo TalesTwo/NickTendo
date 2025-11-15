@@ -44,7 +44,7 @@ namespace Managers
             int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(currentRoom);
             _bTransitioning = true;
 
-            if (enemyCount == 0) {
+            if (enemyCount == 0 || currentRoom.GetRoomClassification() == Types.RoomClassification.Shop || currentRoom.GetRoomClassification() == Types.RoomClassification.Boss) {
                 SetGlobalLightIntensity(1.0f, globalLightTransitionDuration); 
             } else {
                 SetGlobalLightIntensity(0f, playerLightTransitionDuration);
