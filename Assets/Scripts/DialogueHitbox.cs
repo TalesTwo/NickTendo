@@ -44,7 +44,6 @@ public class DialogueHitbox : MonoBehaviour
     // create the on trigger enter method
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("DialogueHitbox detected trigger enter with: " + other.name);
         if(other == null || other.transform.parent == null){return;}
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
