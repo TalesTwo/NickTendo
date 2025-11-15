@@ -1,6 +1,5 @@
 using System;
 using Managers;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerStats : Singleton<PlayerStats>
