@@ -11,6 +11,8 @@ namespace Managers
         [SerializeField] private SceneField _initialGameScene;
         [SerializeField] private GameObject _subTitle;
         [SerializeField] private Button _startButton;
+        [SerializeField] private Button _settingsButton;
+        [SerializeField] private GameObject _settingsMenu;
 
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
@@ -48,7 +50,9 @@ namespace Managers
                 _subTitle.GetComponent<ScaleEffectsUI>().StartBreathe();
             }
 
+            _settingsMenu.SetActive(false);
             _startButton.onClick.AddListener(StartGameButton);
+            _settingsButton.onClick.AddListener(OpenSettings);
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
@@ -103,6 +107,10 @@ namespace Managers
             StartGame();
         }
 
+        private void OpenSettings()
+        {
+            _settingsMenu.SetActive(true);
+        }
         private void StartGame()
         {
             foreach (var obj in _objectsToHideWhenLoading)
