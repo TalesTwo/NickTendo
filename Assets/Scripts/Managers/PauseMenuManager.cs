@@ -122,7 +122,7 @@ public class PauseMenuManager : MonoBehaviour
         EventBroadcaster.Broadcast_StartStopAction(); 
         EventBroadcaster.Broadcast_GameUnpause();
         SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
-        Invoke(nameof(UnmuteStuff), 0.9f);
+        Invoke(nameof(UnmuteStuff), 0.98f);
     }
 
     private void UnmuteStuff()
