@@ -22,6 +22,9 @@ public class FollowerEnemyController : EnemyControllerBase
     private Vector3 pitTarget;
     private bool _hasFallenInPit = false;
     
+    private float _storedFindPathCooldown = 0f;
+    private bool _pathfindingPaused = false;
+    
     // invoke player damage and freeze to avoid chaining the player
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -42,6 +45,10 @@ public class FollowerEnemyController : EnemyControllerBase
         // Step 1: set start and end nodes
         Node startNode = _gridManager.NodeFromWorldPoint(start, false);
         Node endNode = _gridManager.NodeFromWorldPoint(end, false);
+        
+        // we will now do a check, if we cannot reach the player, we will instead just pick a random nearby node to walk to
+        // (this is the case where the player is seperated via a pit or obstacle)
+        
         
         // Tick logs make me crash out LOL
         //Debug.Log(endNode.walkable);
@@ -96,7 +103,34 @@ public class FollowerEnemyController : EnemyControllerBase
                     }
                 }
             }
+            _pathfindingPaused = false;
         }
+        
+        
+        // NO PATH FOUND (probably due to a pit) move to random nearby walkable node)
+        if (!_pathfindingPaused)
+        {
+            _storedFindPathCooldown = findPathCooldown;
+            _pathfindingPaused = true;
+        }
+
+        findPathCooldown = 3f; // slow down pathfinding attempts while stuck
+        
+        List<Node> fallbackNodes = _gridManager.GetNeighbours(startNode, false);
+
+        List<Node> validFallbacks = new List<Node>();
+        foreach (Node n in fallbackNodes)
+        {
+            if (n.walkable)
+                validFallbacks.Add(n);
+        }
+
+        if (validFallbacks.Count > 0)
+        {
+            Node fallback = validFallbacks[UnityEngine.Random.Range(0, validFallbacks.Count)];
+            RetracePath(startNode, fallback);
+        }
+        return;
     }
 
     // take the discovered most efficient path and reverse it so enemy can travel to the player
