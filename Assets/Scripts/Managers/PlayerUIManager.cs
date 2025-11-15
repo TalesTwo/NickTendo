@@ -100,7 +100,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _enemyCounter.SetActive(false); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
         {
             if (!_isPlayerInMenu && !_isInPauseMenu)
             {
