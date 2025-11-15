@@ -1739,9 +1739,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configuration:
     NorthDoorActive: 0
-    EastDoorActive: 0
+    EastDoorActive: 1
     SouthDoorActive: 0
-    WestDoorActive: 1
+    WestDoorActive: 0
   doors: {fileID: 3619242623764736616}
   bRequireFullRoomCleared: 0
   roomType: 2
