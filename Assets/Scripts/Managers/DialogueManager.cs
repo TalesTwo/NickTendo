@@ -26,9 +26,22 @@ namespace Managers
         public TextAsset csv;
 
         [Header("Dialogue Sprites")]
-        public Sprite buddeeSmileSprite;
-        public Sprite buddeeSurpriseSprite;
-        public Sprite buddeeDefaultSprite;
+        [SerializeField] private Sprite buddee_sheepish;
+        [SerializeField] private Sprite buddee_smug;
+        [SerializeField] private Sprite buddee_bothered;
+        [SerializeField] private Sprite buddee_speechless;
+        [SerializeField] private Sprite buddee_confused;
+        [SerializeField] private Sprite buddee_gremlin;
+        [SerializeField] private Sprite buddee_basic1;
+        [SerializeField] private Sprite buddee_basic2;
+        [SerializeField] private Sprite buddee_basic3;
+        [SerializeField] private Sprite buddee_worried;
+        [SerializeField] private Sprite buddee_pity;
+        [SerializeField] private Sprite buddee_crestfallen;
+        [SerializeField] private Sprite buddee_sniffle;
+        [SerializeField] private Sprite buddee_angry;
+        [SerializeField] private Sprite buddee_threatening;
+        [SerializeField] private Sprite buddee_pissed;
         public Sprite playerSmileSprite;
         public Sprite capeSprite;
         
@@ -84,9 +97,23 @@ namespace Managers
             _playerSprites = new Dictionary<string, Sprite>();
             _systemSprites = new Dictionary<string, Sprite>();
 
-            _buddeeSprites["surprise"] = buddeeSurpriseSprite;
-            _buddeeSprites["smile"] = buddeeSmileSprite;
-            _buddeeSprites["default"] = buddeeDefaultSprite;
+            _buddeeSprites["default"] = buddee_basic1; // we will just use basic1 as the default for now
+            _buddeeSprites["sheepish"] = buddee_sheepish;
+            _buddeeSprites["smug"] = buddee_smug;
+            _buddeeSprites["bothered"] = buddee_bothered;
+            _buddeeSprites["speechless"] = buddee_speechless;
+            _buddeeSprites["confused"] = buddee_confused;
+            _buddeeSprites["gremlin"] = buddee_gremlin;
+            _buddeeSprites["basic1"] = buddee_basic1;
+            _buddeeSprites["basic2"] = buddee_basic2;
+            _buddeeSprites["basic3"] = buddee_basic3;
+            _buddeeSprites["worried"] = buddee_worried;
+            _buddeeSprites["pity"] = buddee_pity;
+            _buddeeSprites["crestfallen"] = buddee_crestfallen;
+            _buddeeSprites["sniffle"] = buddee_sniffle;
+            _buddeeSprites["angry"] = buddee_angry;
+            _buddeeSprites["threatening"] = buddee_threatening;
+            _buddeeSprites["pissed"] = buddee_pissed;
             
             _playerSprites["smile"] = playerSmileSprite;
             
@@ -204,7 +231,21 @@ namespace Managers
             
             if (_dialogue[_index][0] == _characterName)
             {
-                NPCSprite.sprite = _npcSprites[_dialogue[_index][1]];
+                
+                //NPCSprite.sprite = _npcSprites[_dialogue[_index][1]];
+                
+                // adding edge case to avoid crashes (adding lower check to be safe lol)
+                string key = _dialogue[_index][1].ToLower();
+
+                if (_npcSprites.ContainsKey(key))
+                {
+                    NPCSprite.sprite = _npcSprites[key];
+                }
+                else
+                {
+                    DebugUtils.LogError($"Sprite key '{key}' not found, using default instead.");
+                    NPCSprite.sprite = _npcSprites["default"];
+                }
                 
                 NPCNameText.gameObject.SetActive(true);
                 playerNameText.gameObject.SetActive(false);

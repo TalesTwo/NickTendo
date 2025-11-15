@@ -209,9 +209,16 @@ public class EnemyControllerBase : SpawnableObject
         // iterate through all other enemies
         if (_allEnemies == null)
             return;
+        
         foreach (EnemyControllerBase other in _allEnemies)
         {
-            if (other == this || other == null || other._transform == null)
+            if (other == this || other == null || other._transform == null){continue;}
+
+            
+
+            
+            // Ignore pot or chest enemies
+            if (other.enemyType == Types.EnemyType.PotEnemy || other.enemyType == Types.EnemyType.ChestEnemy)
                 continue;
 
 
