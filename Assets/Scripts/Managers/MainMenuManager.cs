@@ -117,5 +117,10 @@ namespace Managers
             }
             SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
         }
+
+        public void IconNoise()
+        {
+            AudioManager.Instance.PlayUISelectSound(1, 0);
+        }
     }
 }
