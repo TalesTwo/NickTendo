@@ -2958,8 +2958,8 @@ MonoBehaviour:
   configuration:
     NorthDoorActive: 0
     EastDoorActive: 0
-    SouthDoorActive: 1
-    WestDoorActive: 0
+    SouthDoorActive: 0
+    WestDoorActive: 1
   doors: {fileID: 8993192668610205120}
   bRequireFullRoomCleared: 0
   roomType: 4
