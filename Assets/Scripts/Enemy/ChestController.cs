@@ -12,7 +12,6 @@ public class ChestController : EnemyControllerBase
     
     protected override void Deactivate() 
     {
-        base.Deactivate();
         // specific to ranged enemy deactivation logic can go here
         if(enemyType == Types.EnemyType.ChestEnemy)
         {
@@ -24,8 +23,8 @@ public class ChestController : EnemyControllerBase
             // pot logic here
             Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
         }
-        
         EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
-        
+        base.Deactivate();
+        Destroy(gameObject);
     }
 }
