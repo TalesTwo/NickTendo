@@ -624,8 +624,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSpeed: 4
+  normalCameraSize: 5
   BossCameraSize: 10
   BossCameraTransitionTime: 1
+  BossCameraOffsetY: -7
 --- !u!50 &6754654709526225878
 Rigidbody2D:
   serializedVersion: 4
