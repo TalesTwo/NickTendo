@@ -19,7 +19,7 @@ public class LootDropsController : MonoBehaviour
     public List<LootDrop> lootTable;
     [Range(0f, 100f)]
     public float generalDropRate;
-    public float dropForce = 5f;
+    public float dropForce = 0.5f;
     public float dropDrag = 5f;
     public int DropAmount = 1;
 
