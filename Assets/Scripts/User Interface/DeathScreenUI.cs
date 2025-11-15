@@ -29,6 +29,7 @@ public class DeathScreenUI : MonoBehaviour
         // we can just hookup to when the persona changes, cause it always does at death
         EventBroadcaster.PersonaChanged += OnPersonaChanged;
     }
+
     
     private void OnPersonaChanged(Types.Persona newPersona)
     {
@@ -46,6 +47,7 @@ public class DeathScreenUI : MonoBehaviour
         gameObject.SetActive(false);
         // unhook from the event
         EventBroadcaster.PersonaChanged -= OnPersonaChanged;
+        Managers.AudioManager.Instance.PlayOverworldTrack(1, true, 1, true, 1);
     }
 
     private void SetGameOverScreen()
