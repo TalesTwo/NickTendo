@@ -462,7 +462,7 @@ namespace Managers
                 case "orange": return new Color(1f, 0.5f, 0f);
                 case "cyan": return Color.cyan;
                 case "magenta": return Color.magenta;
-                case "pink": return new Color(1f, 0.75f, 0.8f);
+                case "pink": return Color.magenta;
                 case "gray":
                 case "grey": return Color.gray;
                 default:

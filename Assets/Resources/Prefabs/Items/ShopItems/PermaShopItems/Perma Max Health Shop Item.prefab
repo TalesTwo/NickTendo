@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Perma Max Health Upgrade
   shrinkDuration: 0.5
-  itemValue: 10
-  buffValue: 5
+  itemValue: 75
+  buffValue: 1
   buffType: 11
   flavorText: 
 --- !u!212 &7787435678194780221

@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     
     public bool CanInteract()
     {
-        return !InteractionCooldown;
+        return !InteractionCooldown && !_isDead;
     }
 
     public void StartCooldown()

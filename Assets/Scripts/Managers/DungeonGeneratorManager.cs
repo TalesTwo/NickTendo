@@ -154,6 +154,7 @@ namespace Managers
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
+            DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
@@ -174,6 +175,32 @@ namespace Managers
                 }
             }
         }
+        
+        
+        private void DisableAllRoomsExceptCurrent()
+        {
+            DebugUtils.Log("Disabling all rooms except current room at: " + CurrentRoomCoords);
+            for (int r = 0; r < dungeonRooms.Count; r++)
+            {
+                for (int c = 0; c < dungeonRooms[r].Count; c++)
+                {
+                    Room currentRoom = dungeonRooms[r][c];
+                    if (currentRoom != null)
+                    {
+                        if (r == CurrentRoomCoords.row && c == CurrentRoomCoords.col)
+                        {
+                            currentRoom.SetRoomEnabled(true);
+                            CurrentRoomCoords = (r, c);
+                        }
+                        else
+                        {
+                            currentRoom.SetRoomEnabled(false);
+                        }
+                    }
+                }
+            }
+        }
+        
         private void OnPlayerChangedRoom((int row, int col) newRoomCoords)
         {
             // enable the new rooms corns
