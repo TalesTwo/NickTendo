@@ -108,6 +108,7 @@ public class FollowerEnemyController : EnemyControllerBase
         
         
         // NO PATH FOUND (probably due to a pit) move to random nearby walkable node)
+        /*
         if (!_pathfindingPaused)
         {
             _storedFindPathCooldown = findPathCooldown;
@@ -131,6 +132,7 @@ public class FollowerEnemyController : EnemyControllerBase
             RetracePath(startNode, fallback);
         }
         return;
+        */
     }
 
     // take the discovered most efficient path and reverse it so enemy can travel to the player
@@ -228,10 +230,13 @@ public class FollowerEnemyController : EnemyControllerBase
     
     protected override void Deactivate() 
     {
-        base.Deactivate();
+        
         EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         // specific to ranged enemy deactivation logic can go here
         Managers.AudioManager.Instance.PlayEnemyDeathSound();
+        
+        base.Deactivate();
+        Destroy(gameObject);
         
     }
     

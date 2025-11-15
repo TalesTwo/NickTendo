@@ -144,8 +144,8 @@ public class EnemyControllerBase : SpawnableObject
 
     protected virtual void Deactivate() 
     {
-        
-        Destroy(gameObject);
+        // remove the destroy function
+        //Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
         EventBroadcaster.ObjectFellInPit -= OnFellInPit;
