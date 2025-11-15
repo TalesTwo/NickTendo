@@ -13,6 +13,8 @@ public class ShopTriggerInteraction : TriggerInteractBase
     private bool _waitingForShopDialogueToFinish = false;
 
     private string _oldBuddeeState = "";
+    
+    private bool _allowInteractons = true;
     protected override void Start()
     {
         base.Start();
@@ -27,12 +29,14 @@ public class ShopTriggerInteraction : TriggerInteractBase
         if (!_waitingForShopDialogueToFinish){return;}
         _waitingForShopDialogueToFinish = false;
         GameStateManager.Instance.SetBuddeeDialogState(_oldBuddeeState);
+        _allowInteractons = true;
         OpenShop();
     }
 
     
     public override void Interact()
     {
+        if (!_allowInteractons){return;}
         // track whether we've talked to this shop before
         List<ShopTriggerInteraction> talkedToShops = GameStateManager.Instance.GetShopKeepersTalkedTo();
 
@@ -52,6 +56,7 @@ public class ShopTriggerInteraction : TriggerInteractBase
         if (count == 1)
         {
             _waitingForShopDialogueToFinish = true;
+            _allowInteractons = false;
             _oldBuddeeState = GameStateManager.Instance.GetBuddeeDialogState();
             GameStateManager.Instance.SetBuddeeDialogState("Shop1");
             EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
@@ -61,6 +66,7 @@ public class ShopTriggerInteraction : TriggerInteractBase
         else if (count == 2)
         {
             _waitingForShopDialogueToFinish = true;
+            _allowInteractons = false;
             _oldBuddeeState = GameStateManager.Instance.GetBuddeeDialogState();
             GameStateManager.Instance.SetBuddeeDialogState("Shop2");
             EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
