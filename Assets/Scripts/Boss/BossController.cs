@@ -47,6 +47,7 @@ public class BossController : Singleton<BossController>
         public float timeBetweenProjectileWaves;
         [Header("Battle State")]
         public HealthState health;
+        public Sprite cracksOverlay;
         public int exhaustionCounter;
         public float exhaustionTime;
     }
@@ -60,6 +61,11 @@ public class BossController : Singleton<BossController>
     public SpriteRenderer faceRenderer;
     public GameObject screen;
     public SpriteRenderer screenRenderer;
+    public GameObject cracks;
+    public SpriteRenderer cracksRenderer;
+    public GameObject expressions;
+    public SpriteRenderer expressionsRenderer;
+    public AnimatedBossFace expressionsAnimator;
 
     public enum HealthState
     {
@@ -159,6 +165,7 @@ public class BossController : Singleton<BossController>
             leftArmController.BecomeTired();
             
             BossScreenController.Instance.SetIsExhausted(true);
+            expressionsAnimator.SetExhuastedAnimation();
 
             battle = BattleState.Tired;
             _phases = 0;
@@ -178,6 +185,7 @@ public class BossController : Singleton<BossController>
             battle = BattleState.Summoning;
             StartCoroutine(SpawnMinions());
             Managers.AudioManager.Instance.PlaySpawnEnemiesSound(1, 0);
+            expressionsAnimator.SetLoadingMinionsAnimation();
         }
         
         _projectilesTimer += Time.deltaTime;
@@ -285,6 +293,7 @@ public class BossController : Singleton<BossController>
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
         BossScreenController.Instance.SetIsExhausted(false);
+        expressionsAnimator.SetIdleAnimation();
         battle = BattleState.Idle;
 
         _rightArmsLaunchedThisPhase = 0;
@@ -297,6 +306,8 @@ public class BossController : Singleton<BossController>
         leftArmController.BecomeUntired();
         
         BossScreenController.Instance.SetIsExhausted(false);
+        expressionsAnimator.SetHurtAnimation();
+        Invoke(nameof(SetIdleAnimation), 0.3f);
         
         battle = BattleState.Idle;
         Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
@@ -325,6 +336,7 @@ public class BossController : Singleton<BossController>
             if (stat.health == health)
             {
                 _currentStats = stat;
+                UpdateScreen();
                 break;
             }
         }
@@ -332,6 +344,16 @@ public class BossController : Singleton<BossController>
         _leftArmsLaunchedThisPhase = 0;
         _rightArmsLaunchedThisPhase = 0;
         _projectilesTimer = 0f;
+    }
+
+    private void SetIdleAnimation()
+    {
+        expressionsAnimator.SetIdleAnimation();
+    }
+
+    private void UpdateScreen()
+    {
+        cracksRenderer.sprite = _currentStats.cracksOverlay;
     }
 
     private void LaunchArm(BossArmController armController)

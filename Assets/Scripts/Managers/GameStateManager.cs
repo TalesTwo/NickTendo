@@ -32,7 +32,7 @@ public class GameStateManager : Singleton<GameStateManager>
         }
         if (_playerDeathCount == 2)
         {
-            buddeeDialogState = "run3";
+            buddeeDialogState = "Run3";
         }
         
     }
@@ -69,10 +69,18 @@ public class GameStateManager : Singleton<GameStateManager>
     public void Start()
     {
         EventBroadcaster.GameRestart += OnGameRestart;
+        EventBroadcaster.GameStarted += OnGameStarted;
     }
     private void OnGameRestart()
     {
         buddeeDialogState = "Introyell";
         _playerDeathCount = 0;
+    }
+
+    private void OnGameStarted()
+    {
+        buddeeDialogState = "Introyell";
+        _playerDeathCount = 0;
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
     }
 }

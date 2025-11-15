@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
-public class DialogueHitbox : MonoBehaviour
+public class BossDialogueHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     // Hold a reference to what the dialogue state was before entering the hitbox
@@ -17,20 +17,15 @@ public class DialogueHitbox : MonoBehaviour
     [Header("Trigger Settings")]
     [SerializeField] private bool onlyTriggerOnce = false;
     [SerializeField] private bool shouldFreezeWorld = false;
-    [SerializeField] private bool triggerAfterTutorial = false;
+
+    public GameObject boss;
+    public GameObject buddee;
 
     
     public void Start()
     {
         // hook up to the dialogue end event to unfreeze the world
         EventBroadcaster.StopDialogue += OnDialogueEnd;
-        EventBroadcaster.EndTutorial += AfterTutorial;
-
-    }
-
-    private void AfterTutorial()
-    {
-        triggerAfterTutorial = false;
     }
     
     private void OnDialogueEnd()
@@ -39,6 +34,13 @@ public class DialogueHitbox : MonoBehaviour
         {
             EventBroadcaster.Broadcast_SetWorldFrozen(false);
         }
+        
+        boss.SetActive(true);
+        buddee.SetActive(false);
+        
+        EventBroadcaster.Broadcast_StartBossFight();
+        
+        Destroy(this.gameObject);
     }
     
     // create the on trigger enter method
@@ -49,7 +51,6 @@ public class DialogueHitbox : MonoBehaviour
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
         if (onlyTriggerOnce && _hasTriggered) { return; }
-        if (triggerAfterTutorial) { return;}
         if (root.CompareTag("Player"))
         {
             // Store the previous dialogue state
@@ -78,7 +79,6 @@ public class DialogueHitbox : MonoBehaviour
         if(other == null || other.transform.parent == null){return;}
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
-        if (triggerAfterTutorial) {return;}
         if (root.CompareTag("Player"))
         {
             // Restore the previous dialogue state

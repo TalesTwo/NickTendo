@@ -20602,6 +20602,103 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &5130394689491587022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3416624711166163841}
+  - component: {fileID: 5662245387550501901}
+  - component: {fileID: 8054558716268543207}
+  m_Layer: 0
+  m_Name: HITBOX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3416624711166163841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130394689491587022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 2.33, y: -21.83, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8716677568359441952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!61 &5662245387550501901
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130394689491587022}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &8054558716268543207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130394689491587022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dccd6037b8cee64fa4dbac844ba32d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueStateOnEnter: End
+  speakerName: BUDDEE
+  onlyTriggerOnce: 1
+  shouldFreezeWorld: 0
+  boss: {fileID: 2854559098903984847}
+  buddee: {fileID: 535227531209567412}
 --- !u!1 &6283103365883034483
 GameObject:
   m_ObjectHideFlags: 0
@@ -20932,6 +21029,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3416624711166163841}
   - {fileID: 8855834539945143144}
   - {fileID: 6907398265134517331}
   - {fileID: 1810978845444923139}
@@ -23793,7 +23891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2262425917105696889, guid: dfb8259541ab39249b850299e0a53b3b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7430475512040792004, guid: dfb8259541ab39249b850299e0a53b3b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23840,6 +23938,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb8259541ab39249b850299e0a53b3b, type: 3}
+--- !u!1 &535227531209567412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2262425917105696889, guid: dfb8259541ab39249b850299e0a53b3b, type: 3}
+  m_PrefabInstance: {fileID: 1731707693543562445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9157534263981605641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7430475512040792004, guid: dfb8259541ab39249b850299e0a53b3b, type: 3}
@@ -23902,6 +24005,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+--- !u!1 &2854559098903984847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 860249048055277067, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+  m_PrefabInstance: {fileID: 3201313401635871940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8498346874385402766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6457432782451709770, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}

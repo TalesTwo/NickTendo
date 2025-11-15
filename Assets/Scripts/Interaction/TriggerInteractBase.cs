@@ -26,7 +26,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     // reference to the player controller
     protected PlayerController _playerController;
 
-
+    private bool _isGamePaused = false;
 
 
     public void SetInteractAllowedToInteract(bool isActive)
@@ -88,11 +88,16 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
         }
         
         _playerController = Player.GetComponent<PlayerController>();
+        _isGamePaused = false;
+
+        EventBroadcaster.GamePause += HandleGamePaused;
+        EventBroadcaster.GameUnpause += HandleGameUnpaused;
     }
 
     private void Update()
     {
         if (!CanInteract) { return; }
+        if (_isGamePaused) { return; }
         // if we press our Interact key, we will interact with the object
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -131,7 +136,14 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
             }
         }
     }
-    
+
+    void HandleGamePaused()
+    {
+        _isGamePaused = true;
+    }
+
+    void HandleGameUnpaused()
+    {
+        _isGamePaused = false;
+    }    
 }
-
-

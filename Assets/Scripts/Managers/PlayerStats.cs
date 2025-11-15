@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerStats : Singleton<PlayerStats>
@@ -118,8 +119,16 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateDashSpeed(float UpdateValue) { _dashSpeed += UpdateValue; }
     public void UpdateAttackDamage(float UpdateValue) { _attackDamage += UpdateValue; }
     public void UpdateDashDamage(float UpdateValue) { _dashDamage += UpdateValue; }
-    public void UpdateDashCooldown(float UpdateValue) { _dashCooldown += UpdateValue; }
-    public void UpdateAttackCooldown(float UpdateValue) {_attackCooldown += UpdateValue; }
+    public void UpdateDashCooldown(float UpdateValue) 
+    { 
+        _dashCooldown += UpdateValue; 
+        if(_dashCooldown <= 0) { _dashCooldown = 0.1f; }
+    }
+    public void UpdateAttackCooldown(float UpdateValue) 
+    {
+        _attackCooldown += UpdateValue; 
+        if(_attackCooldown <= 0) { _attackCooldown = 0.1f; }
+    }
     public void UpdateDashDistance(float UpdateValue) { _dashDistance += UpdateValue; }
     public void UpdateKeys(int UpdateValue) { _keys += UpdateValue; }
     public void UpdateCoins(int UpdateValue) { _coins += UpdateValue; }
