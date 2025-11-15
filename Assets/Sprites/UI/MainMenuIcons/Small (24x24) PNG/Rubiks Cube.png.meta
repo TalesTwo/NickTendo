@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rubiks Cube_0: -4463377035027984842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

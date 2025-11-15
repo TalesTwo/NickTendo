@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Microsoft Launcher_0: 2351881096117702308
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

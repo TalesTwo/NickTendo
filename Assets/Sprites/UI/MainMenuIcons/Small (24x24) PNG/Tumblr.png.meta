@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tumblr_0: -120768736546857995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

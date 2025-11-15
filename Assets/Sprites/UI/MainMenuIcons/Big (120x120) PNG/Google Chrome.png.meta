@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Chrome_0: -2299976754832880638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PayPal_0: -864757202714616415
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

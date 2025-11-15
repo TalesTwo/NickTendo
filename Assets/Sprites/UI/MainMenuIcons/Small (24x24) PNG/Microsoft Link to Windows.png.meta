@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Microsoft Link to Windows_0: 878174114061860944
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

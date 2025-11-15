@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Safari_0: -9049713690659386658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

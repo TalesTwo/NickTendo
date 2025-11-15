@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Photos_0: 2239944808559124083
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

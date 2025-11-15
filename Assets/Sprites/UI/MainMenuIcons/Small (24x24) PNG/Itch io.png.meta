@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Itch io_0: 1139708908493558597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

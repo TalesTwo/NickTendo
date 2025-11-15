@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snapchat_0: -7973363630214224625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

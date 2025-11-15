@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Slack v2_0: -8884262125475999068
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

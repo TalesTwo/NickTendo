@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      London Offline Map_0: -7566219699814390228
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

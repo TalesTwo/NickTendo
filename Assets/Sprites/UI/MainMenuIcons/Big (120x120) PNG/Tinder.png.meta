@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tinder_0: -8010567370275301544
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

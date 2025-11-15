@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Sheets_0: -3779557566904856073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

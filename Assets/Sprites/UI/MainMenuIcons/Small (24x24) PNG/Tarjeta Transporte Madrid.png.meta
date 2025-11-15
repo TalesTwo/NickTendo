@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tarjeta Transporte Madrid_0: 3942230442590827721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

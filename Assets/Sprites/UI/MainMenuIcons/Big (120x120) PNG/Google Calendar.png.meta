@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Calendar_0: 3038034014099757456
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Trello v2_0: 3419203363657269104
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

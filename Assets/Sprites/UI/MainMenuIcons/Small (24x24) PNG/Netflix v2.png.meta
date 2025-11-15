@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Netflix v2_0: 415234255264699444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

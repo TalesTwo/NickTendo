@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Letterboxd_0: -7487162593092804245
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

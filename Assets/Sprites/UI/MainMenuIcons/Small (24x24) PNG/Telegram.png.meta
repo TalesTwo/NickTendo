@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Telegram_0: -8368838956647661436
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

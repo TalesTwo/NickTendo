@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TikTok_0: -6929181023911718642
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

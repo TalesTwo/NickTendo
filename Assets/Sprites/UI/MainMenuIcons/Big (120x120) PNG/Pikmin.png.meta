@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pikmin_0: 7874402315603723389
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

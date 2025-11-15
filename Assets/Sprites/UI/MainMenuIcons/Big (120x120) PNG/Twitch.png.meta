@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Twitch_0: -1708869075180579263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

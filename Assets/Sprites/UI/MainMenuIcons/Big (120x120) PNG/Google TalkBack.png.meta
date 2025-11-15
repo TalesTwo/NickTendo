@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google TalkBack_0: -4820264960340661904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

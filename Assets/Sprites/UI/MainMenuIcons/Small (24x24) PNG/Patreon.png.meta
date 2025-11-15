@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Patreon_0: -3969669836435063573
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

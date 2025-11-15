@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Microsoft OneDrive_0: -1647593030811566225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

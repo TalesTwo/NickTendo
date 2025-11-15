@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Wallet_0: 7844961074132466855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

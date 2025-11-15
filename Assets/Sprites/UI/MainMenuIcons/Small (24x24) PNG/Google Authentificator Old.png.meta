@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Authentificator Old_0: 3942603535697194657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

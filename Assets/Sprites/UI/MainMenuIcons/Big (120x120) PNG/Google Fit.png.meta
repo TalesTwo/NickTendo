@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Google Fit_0: 9124171988332608397
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
