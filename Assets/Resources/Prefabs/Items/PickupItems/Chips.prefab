@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce83f5223a9a7147b50f148658598da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Coins
+  Name: Chip
   shrinkDuration: 0.5
   CanAutoPickup: 1
   BuffType: 9

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public GameObject[] ItemList;
-    //public GameObject[] PermaItemList;
+    public GameObject[] PermaItemList;
 
     private GameObject[] ShopList;
     private ShopUIManager ShopUIM;
@@ -28,7 +28,7 @@ public class ShopManager : MonoBehaviour
 
     public void GetRandomShopList()
     {
-        ShopList = new GameObject[3];
+        ShopList = new GameObject[4];
 
         int[] numbers = new int[ItemList.Length];
         for (int i =0; i<ItemList.Length; i++)
@@ -48,15 +48,16 @@ public class ShopManager : MonoBehaviour
         ShopList[0] = ItemList[numbers[0]];
         ShopList[1] = ItemList[numbers[1]];
         ShopList[2] = ItemList[numbers[2]];
+        //ShopList[3] = ItemList[numbers[3]];
 
 
-        /*int RandomInt = UnityEngine.Random.Range(0, PermaItemList.Length);
-        ShopList[3] = PermaItemList[RandomInt];*/
+        int RandomInt = UnityEngine.Random.Range(0, PermaItemList.Length);
+        ShopList[3] = PermaItemList[RandomInt];
     }
 
     public void SetItems()
     {
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i <= 3; i++)
         {
             ShopUIM.ItemSlots[i].SetActive(true);
             ShopUIM.ItemSpotlights[i].gameObject.SetActive(false);
@@ -71,16 +72,33 @@ public class ShopManager : MonoBehaviour
     public void AttemptBuy(int Index)
     {
         ShopItem AttemptItem = ShopList[Index].GetComponent<ShopItem>();
-        if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
+        if (Index != 3)
         {
-            Managers.AudioManager.Instance.PlayItemBuySound(1, 0);
-            PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -AttemptItem.itemValue);
-            PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
-            ShopUIM.RemoveItemFromShop(Index);
+            if (PlayerStats.Instance.GetCoins() >= AttemptItem.itemValue)
+            {
+                Managers.AudioManager.Instance.PlayItemBuySound(1, 0);
+                PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -AttemptItem.itemValue);
+                PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
+                ShopUIM.RemoveItemFromShop(Index);
+            }
+            else
+            {
+                ShopUIM.NotEnoughMoney();
+            }
         }
         else
         {
-            ShopUIM.NotEnoughMoney();
+            if (PlayerStats.Instance.GetChips() >= AttemptItem.itemValue)
+            {
+                Managers.AudioManager.Instance.PlayItemBuySound(1, 0);
+                PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Chips, -AttemptItem.itemValue);
+                PlayerStats.Instance.ApplyItemBuffs(AttemptItem.buffType, AttemptItem.buffValue);
+                ShopUIM.RemoveItemFromShop(Index);
+            }
+            else
+            {
+                ShopUIM.NotEnoughChips();
+            }
         }
     }
 }

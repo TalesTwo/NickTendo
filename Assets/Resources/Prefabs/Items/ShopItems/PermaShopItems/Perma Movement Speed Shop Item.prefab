@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6678887121655184090}
   - component: {fileID: 7787435678194780221}
   m_Layer: 0
-  m_Name: Movement Speed Shop Item
+  m_Name: Perma Movement Speed Shop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Movement Speed Shop Item
   shrinkDuration: 0.5
-  itemValue: 50
+  itemValue: 1
   buffValue: 0.1
   buffType: 12
   flavorText: 
