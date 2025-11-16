@@ -35,9 +35,15 @@ public class GameStateManager : Singleton<GameStateManager>
         {
             buddeeDialogState = "Run3";
         }
-        
+        if (_playerDeathCount == 3)
+        {
+            buddeeDialogState = "Run4";
+        }
+        if (_playerDeathCount == 4)
+        {
+            buddeeDialogState = "Run5";
+        }
 
-        
     }
 
     public void Dialogue(string npcName)
