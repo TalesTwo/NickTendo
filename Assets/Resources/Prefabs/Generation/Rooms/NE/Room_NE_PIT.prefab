@@ -717,9 +717,9 @@ MonoBehaviour:
     SouthDoorActive: 0
     WestDoorActive: 0
   doors: {fileID: 4514494738008003055}
-  bRequireFullRoomCleared: 1
-  roomType: 0
-  roomClassification: 0
+  bRequireFullRoomCleared: 0
+  roomType: 5
+  roomClassification: 1
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1

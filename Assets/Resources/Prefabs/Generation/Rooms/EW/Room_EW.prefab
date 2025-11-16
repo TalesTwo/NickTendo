@@ -16365,8 +16365,8 @@ MonoBehaviour:
     WestDoorActive: 1
   doors: {fileID: 2697525321047861189}
   bRequireFullRoomCleared: 1
-  roomType: 0
-  roomClassification: 0
+  roomType: 9
+  roomClassification: 1
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
