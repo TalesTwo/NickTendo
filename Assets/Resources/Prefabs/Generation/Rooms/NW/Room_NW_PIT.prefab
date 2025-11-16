@@ -25625,7 +25625,7 @@ MonoBehaviour:
       maxSpawnCount: 4
       spawnChance: 0.75
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 0
 --- !u!1 &7741326084954529894
 GameObject:
