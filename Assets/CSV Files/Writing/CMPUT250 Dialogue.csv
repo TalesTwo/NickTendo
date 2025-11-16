@@ -200,7 +200,7 @@ noreturn,player tries to return to spawn,BUDDEE,speechless,. . .
 noreturn,,BUDDEE,basic3,Oh hey!
 noreturn,,BUDDEE,confused,Why are you trying to leave?
 noreturn,,BUDDEE,angry,I went through all this effort to get you to this point.
-noreturn,,BUDDEE,threataning,Don't you dare leave already.
+noreturn,,BUDDEE,threatening,Don't you dare leave already.
 ,,,,
 Run4,before 4th run,BUDDEE,confused,Am I annoying? Be honest.
 Run4,,BUDDEE,speechless,. . .
