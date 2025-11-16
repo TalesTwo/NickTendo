@@ -133,7 +133,7 @@ MonoBehaviour:
   - spawnType: 1
     Spawnables: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 0
 --- !u!1 &580180919557100743
 GameObject:

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using Random = System.Random;
 
@@ -28,6 +29,7 @@ public class LootDropsController : MonoBehaviour
     
     private int _numberOfDrops = 0;
 
+    private GameObject player;
     // establish the weight of the full pool
     private void Start()
     {
@@ -35,6 +37,8 @@ public class LootDropsController : MonoBehaviour
         {
             _totalDropWeight += lootDrop.dropChance;
         }
+        
+ 
     }
 
     // when the enemy is defeated, they will drop an item with set odds
@@ -73,48 +77,42 @@ public class LootDropsController : MonoBehaviour
                 if (currentDropWeight >= itemDrop)
                 {
                     GameObject spawnedItem = Instantiate(lootDrop.drop, transform.position, Quaternion.identity);
-                    AddForceToItem(spawnedItem, lootDrop);
+                    // temp remove
+                    //AddForceToItem(spawnedItem);
+                    _numberOfDrops += 1;
                     break;
                 }
             }
         }
     }
     
-    private void AddForceToItem(GameObject item, LootDrop lootDrop)
+    private void AddForceToItem(GameObject item)
     {
+        Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
+
+        rb.gravityScale = 0f;
+        rb.drag = dropDrag;
+        rb.freezeRotation = true;
+
+        // get the player
+        GameObject playerObj = PlayerManager.Instance.GetPlayer();
+        if (playerObj == null) return;
+
+        item.GetComponent<BaseItem>().TemporarilyDisableCollision(0.25f);
+
         
-        // Ensure it has a Rigidbody2D
-        Rigidbody2D itemRb = item.GetComponent<Rigidbody2D>();
-        if (itemRb == null)
-        {
-            itemRb = item.AddComponent<Rigidbody2D>();
-            // disable gravity (otherwise we "fall" to the bottom of the tilemap)
-            itemRb.gravityScale = 0f;
-            // we need to add a "drag" so it slows down over time otherwise it flies away lol
-            itemRb.drag = dropDrag;
-            itemRb.freezeRotation = true;
 
-        }
-        else
-        {
-            itemRb.gravityScale = 0f;
-            itemRb.drag = dropDrag;
-            itemRb.freezeRotation = true;
+        // direction FROM player TO the loot drop
+        Vector2 baseDirection = (item.transform.position - playerObj.transform.position).normalized;
 
-        }
+        // apply a random ±45° variation
+        float randomAngle = UnityEngine.Random.Range(-45f, 45f);
 
-        // Get player position
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) { return; }
-        Vector2 awayFromPlayer = (item.transform.position - player.transform.position).normalized;
+        Vector2 finalDirection = Quaternion.Euler(0, 0, randomAngle) * baseDirection;
 
-        // Rotate that vector by a random angle (±range around the opposite direction)
-        float randomAngle = UnityEngine.Random.Range(-45f, 45f); 
-        Vector2 randomDir = Quaternion.Euler(0, 0, randomAngle) * awayFromPlayer;
-
-        // Apply the force
-        itemRb.AddForce(randomDir * dropForce, ForceMode2D.Impulse);
-        _numberOfDrops += 1;
-
+        // apply scattering velocity
+        rb.velocity = finalDirection * dropForce;
     }
+
+
 }
