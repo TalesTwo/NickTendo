@@ -125,22 +125,23 @@ vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
 vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
 ,,,,
-Introyell,immediate dialogue when you enter,BUDDEE,smile,Hi! Welcome to the Friend Finders Online! The world's most popular dungeon-crawling friendship-forming MMO!
-Introyell,,BUDDEE,smile,My name's BUDDEE! I'll be your digital assistant!
-Introyell,,BUDDEE,smile,Why don'y you <color=purple>[WASD]</color> on over here to get started?
+Introyell,immediate dialogue when you enter,BUDDEE,basic2,Hello and welcome to the Friend Finders Online! 
+Introyell,,BUDDEE,basic3,My name's BUDDEE! I'll be your digital assistant!
+Introyell,,BUDDEE,basic1,Why don'y you <color=purple>[WASD]</color> on over here to get started?
 ,,,,
-TutorialIntro,first dialogue after yell,BUDDEE,smile,Welcome to Friend Finders Online! The perfect MMO for building new friendships!
-TutorialIntro,,BUDDEE,smile,Or well that's the idea anyways..
-TutorialIntro,,BUDDEE,smile,Let's be honest you probably noticed that the servers are mostly empty.
-TutorialIntro,,BUDDEE,smile,Our security went on the fritz a while ago and since then most people left.
-TutorialIntro,,BUDDEE,smile,Now we have bots infesting the dungeons and our last player is trapped! But..
-TutorialIntro,,BUDDEE,smile,Maybe you can help!
-TutorialIntro,,BUDDEE,smile,If you can find the last player then maybe we could wipe the servers clean and patch this!
-TutorialIntro,,BUDDEE,smile,Come through here and I'll teach you the ropes on how to fight through the dungeon!
+TutorialIntro,first dialogue after yell,BUDDEE,basic1,Welcome to Friend Finders Online! The perfect MMO for building new friendships!
+TutorialIntro,,BUDDEE,bothered,Or well that's the idea anyways..
+TutorialIntro,,BUDDEE,sheepish,Let's be honest you probably noticed that the servers are mostly empty.
+TutorialIntro,,BUDDEE,sniffle,Our security went on the fritz a while ago and since then most people left.
+TutorialIntro,,BUDDEE,worried,Now we have bots infesting the dungeons and our last player is trapped! But..
+TutorialIntro,,BUDDEE,basic2,Maybe you can help!
+TutorialIntro,,BUDDEE,basic1,If you can find the last player then maybe we could wipe the servers clean and patch this!
+TutorialIntro,,BUDDEE,gremlin,Come through this door on the right and I'll teach you to be a bot destroying machine!
 ,,,,
-Tutorial1,first tutorial room,BUDDEE,smile,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
-Tutorial1,,BUDDEE,smile,Your cursor can destroy enemies as well as pots and chests! Try these ones I set up for practice!
-Tutorial1,,BUDDEE,smile,The dungeons are on lockdown so you'll have to clear out any enemies before leaving a room.
+Tutorial1,first tutorial room,BUDDEE,basic1,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
+Tutorial1,,BUDDEE,basic3,Your cursor can destroy enemies as well as pots and chests! Try these ones I set up for practice!
+Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to clear out any enemies before leaving a room.
+Tutorial1,,BUDDEE,smug,And don't worry about getting attacked. I've wrangled these ones so they can't hurt you!
 ,,,,
 Tutorial2,second tutorial room,BUDDEE,smile,With <color=purple>[Right Click]</color> you can dash through the air damaging anything in your path!
 Tutorial2,,BUDDEE,smile,Here you'll need to use it to <b>clear the gap</b>. But watch out! You can only dash once before recharging!
@@ -178,17 +179,15 @@ End,,BUDDEE,smile,But if I can keep a few players then maybe people will see and
 End,,BUDDEE,smile,So I'm sure you'll understand that I can't let you leave.
 End,,BUDDEE,smile,You're staying here. <b><color=maroon>Whether you like it or not.</color></b>
 ,,,,
-Shop1,first shop find,BUDDEE,smile,Welcome traveller to my humble-
-Shop1,,BUDDEE,smile,Oh it's you! I'm disguised as an NPC! Could you tell?
-Shop1,,BUDDEE,smile,It's my way of tricking the bots into not attacking me!
-Shop1,,BUDDEE,smile,Have you noticed all the coins those bots have been dropping! That's the currency that the bots stole from our players!
+,,,,
+,,,,
+Shop1,first shop find,BUDDEE,smile,Oh hi pal! Great job making it this far!
+Shop1,,BUDDEE,smile,Have you noticed all the coins those bots have been dropping? That's the currency that the bots stole from our players.
 Shop1,,BUDDEE,smile,I can trade those for upgrades but be aware they're tied to your character. You'll lose them if the character is compromised.
 Shop1,,BUDDEE,smile,Let's see what's avaliable shall we?
 ,,,,
-Shop2,second shop found,BUDDEE,smile,Welc-
-Shop2,,BUDDEE,smile,Oh! You again!
+Shop2,second shop found,BUDDEE,smile,Oh! You again!
 Shop2,,BUDDEE,smile,Not that that's surprising or anything..
-Shop2,,BUDDEE,smile,Great job making it this far! You're really doing us a great service!
 Shop2,,BUDDEE,smile,I have more upgrades for you! And a helpful tip!
 Shop2,,BUDDEE,smile,You can click the <b>reroll</b> button and pay to bring in a new set of items!
 Shop2,,BUDDEE,smile,I hope you can find what you're looking for!
