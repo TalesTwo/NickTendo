@@ -298,10 +298,6 @@ namespace Managers
         {
             PlaySFX(BUDDEESlam, volume, deviation);
         }
-        public void PlayBUDDEEChargingSound(float volume = 1, float deviation = 0)
-        {
-            PlaySFX(Charge, volume, deviation);
-        }
         public void PlayBUDDEEShootSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(BUDDEEShoot, volume, deviation);
