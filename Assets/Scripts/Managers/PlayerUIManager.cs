@@ -23,6 +23,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private Image _healthIcon;
     [SerializeField]
+    private GameObject _chipCounter;
+    [SerializeField]
     private GameObject _enemyCounter;
     [SerializeField]
     private Slider _dashSlider;
@@ -70,6 +72,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         _isInPauseMenu = false;
 
         SetHealth();
+        SetChips();
     }
 
     private void OnPlayerStatChanged(PlayerStatsEnum stat, float Value)
@@ -77,6 +80,10 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         if (stat == PlayerStatsEnum.Max_Health || stat == PlayerStatsEnum.Current_Health)
         {
             SetHealth();
+        }
+        if (stat == PlayerStatsEnum.Chips)
+        {
+            SetChips();
         }
     }
     private void Update()
@@ -122,6 +129,11 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         health.sizeDelta = new Vector2(_healthWidth, healthBarHeight);
     }
 
+    private void SetChips()
+    {
+        _chipCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(PlayerStats.Instance.GetChips().ToString());
+    }
+
     public void ToggleHUD()
     {
         if(_isHUDActive)
@@ -140,6 +152,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     void HandlePersonaChanged(Types.Persona P)
     {
         SetHealth();
+        SetChips();
     }
 
     void HandleDashSlider()

@@ -65,7 +65,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public float GetDashCooldown() { return _dashCooldown; }
     public float GetAttackCooldown() { return _attackCooldown; }
     public float GetDashDistance() { return _dashDistance; }
-    public int GetChipss() { return _chips; } 
+    public int GetChips() { return _chips; } 
     public int GetCoins() { return _coins; }
     public int GetCarryOverCoins() { return _carryOverCoins; }
 
@@ -206,17 +206,18 @@ public class PlayerStats : Singleton<PlayerStats>
         }
         else if (BuffType == PlayerStatsEnum.Chips)
         {
+            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
             UpdateChips(((int)BuffValue));
         }
         else if (BuffType == PlayerStatsEnum.Coins)
         {
+            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
             UpdateCoins((int)BuffValue);
             // edge case: if we ever "remove" coins, we want to also remove from carry_over coins
             if (BuffValue < 0)
             {
                 SetCarryOverCoins(Mathf.Max(0, GetCarryOverCoins() + (int)BuffValue));
             }
-            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
         }
         // Now we get to the carry over stats
         // these have a bit more involved
