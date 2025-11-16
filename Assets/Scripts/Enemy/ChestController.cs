@@ -7,24 +7,25 @@ public class ChestController : EnemyControllerBase
 {
     protected override void GetStats(string statLine)
     {
-        health = float.Parse(statLine);
+        health = 1; //float.Parse(statLine);
+        // provide it some default stats, like knockback
+        //knockBackSpeed = 1500f;
+        //knockBackTime = 0.2f;
+        //knockbackForce = 500f;
+        //stunTimer = 0.5f;
     }
-    
-    protected override void Deactivate() 
+    protected override void Deactivate()
     {
-        // specific to ranged enemy deactivation logic can go here
-        if(enemyType == Types.EnemyType.ChestEnemy)
-        {
-            // chest logic here
-            Managers.AudioManager.Instance.PlayCrateBreakSound(1,0.1f);
-        }
-        if(enemyType == Types.EnemyType.PotEnemy)
-        {
-            // pot logic here
-            Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
-        }
-        EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
-        base.Deactivate();
+        StartCoroutine(DelayedDestroy());
+    }
+    private IEnumerator DelayedDestroy()
+    {
+        // Optional: play pot break sound here
+        Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
+
+        yield return null;  // waits EXACTLY one frame
+        EventBroadcaster.PlayerDeath -= Deactivate;
+        EventBroadcaster.ObjectFellInPit -= OnFellInPit;
         Destroy(gameObject);
     }
 }

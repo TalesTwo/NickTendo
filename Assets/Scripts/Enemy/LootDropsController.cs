@@ -85,23 +85,10 @@ public class LootDropsController : MonoBehaviour
         
         // Ensure it has a Rigidbody2D
         Rigidbody2D itemRb = item.GetComponent<Rigidbody2D>();
-        if (itemRb == null)
-        {
-            itemRb = item.AddComponent<Rigidbody2D>();
-            // disable gravity (otherwise we "fall" to the bottom of the tilemap)
-            itemRb.gravityScale = 0f;
-            // we need to add a "drag" so it slows down over time otherwise it flies away lol
-            itemRb.drag = dropDrag;
-            itemRb.freezeRotation = true;
+        itemRb.gravityScale = 0f;
+        itemRb.drag = dropDrag;
+        itemRb.freezeRotation = true;
 
-        }
-        else
-        {
-            itemRb.gravityScale = 0f;
-            itemRb.drag = dropDrag;
-            itemRb.freezeRotation = true;
-
-        }
 
         // Get player position
         GameObject player = GameObject.FindGameObjectWithTag("Player");

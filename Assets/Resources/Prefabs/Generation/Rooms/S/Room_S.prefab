@@ -73,8 +73,8 @@ MonoBehaviour:
     WestDoorActive: 0
   doors: {fileID: 3427349559604713638}
   bRequireFullRoomCleared: 0
-  roomType: 3
-  roomClassification: 1
+  roomType: 0
+  roomClassification: 0
   bIsFinalized: 0
   bIsDifficultySet: 0
   roomDifficulty: 1
@@ -120,7 +120,7 @@ MonoBehaviour:
       maxSpawnCount: 6
       spawnChance: 0
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1 &2190034576026368647
 GameObject:
