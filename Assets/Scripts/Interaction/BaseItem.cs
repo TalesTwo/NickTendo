@@ -59,4 +59,19 @@ public class BaseItem : SpawnableObject
         startPos = transform.position;
         pitTarget = pitCenter;
     }
+    public void TemporarilyDisableCollision(float delay)
+    {
+        int lootLayer = gameObject.layer;
+        int defaultLayer = LayerMask.NameToLayer("Default");
+
+        Physics2D.IgnoreLayerCollision(lootLayer, defaultLayer, true);
+        StartCoroutine(Reenable(lootLayer, defaultLayer, delay));
+    }
+
+    private IEnumerator Reenable(int layer1, int layer2, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Physics2D.IgnoreLayerCollision(layer1, layer2, false);
+    }
+
 }

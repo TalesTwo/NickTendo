@@ -98,6 +98,10 @@ public class LootDropsController : MonoBehaviour
         GameObject playerObj = PlayerManager.Instance.GetPlayer();
         if (playerObj == null) return;
 
+        item.GetComponent<BaseItem>().TemporarilyDisableCollision(0.25f);
+
+        
+
         // direction FROM player TO the loot drop
         Vector2 baseDirection = (item.transform.position - playerObj.transform.position).normalized;
 

@@ -16,7 +16,10 @@ public class ChestController : EnemyControllerBase
     }
     protected override void Deactivate()
     {
-        StartCoroutine(DelayedDestroy());
+        //StartCoroutine(DelayedDestroy());
+        Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
+        base.Deactivate();
+        Destroy(gameObject);
     }
     private IEnumerator DelayedDestroy()
     {
