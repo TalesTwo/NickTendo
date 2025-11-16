@@ -127,7 +127,7 @@ public class Room : MonoBehaviour
     }
     public void UpdateLockedDoors(bool forceLocked = false)
     {
-        
+        EnableAllDoors();
         if (roomSpawnController)
         {
             int enemyCount = roomSpawnController.GetEnemiesInRoom().Count;
@@ -186,6 +186,7 @@ public class Room : MonoBehaviour
         // Register the pits in this room
         PitManager.Instance.RegisterPitsInRoom(this);
         initial_number_of_enemies_in_room = roomSpawnController != null ? roomSpawnController.GetEnemiesInRoom().Count : 0;
+        EnableAllDoors();
     }
 
     public void EnableAllDoors()
