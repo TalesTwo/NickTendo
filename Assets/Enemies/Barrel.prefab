@@ -110,8 +110,6 @@ MonoBehaviour:
   hitEffectDistance: 0
   hitFlashDuration: 0.1
   enemyType: 3
-  _separationRadius: 1
-  _separationForce: 2
   _displayHealthBar: 1
   _healthSlider: {fileID: 0}
   Override_health: -1
@@ -250,5 +248,5 @@ MonoBehaviour:
     dropChance: 5
   generalDropRate: 100
   dropForce: 5
-  minDropAmount: 1
-  maxDropAmount: 1
+  dropDrag: 4
+  DropAmount: 1

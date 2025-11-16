@@ -9,6 +9,8 @@ public class PauseMenuManager : MonoBehaviour
 {
     [Header("Scenes")]
     [SerializeField]
+    private bool _isPauseMenu = true;
+    [SerializeField]
     private SceneField _mainMenuScene;
 
     [Header("Main Window")]
@@ -33,15 +35,18 @@ public class PauseMenuManager : MonoBehaviour
 
     private void Start()
     {
-        _window.SetActive(false);
 
         _closeButton.onClick.AddListener(ClosePauseMenu);
         _sfxToggle.onClick.AddListener(ToggleSFX);
         _musicToggle.onClick.AddListener(ToggleMusic);  
         _continueButton.onClick.AddListener(ClosePauseMenu);
-        _mainMenuButton.onClick.AddListener(EnableConfirmationWindow);
-        _yesButton.onClick.AddListener(ConfirmYes);
-        _noButton.onClick.AddListener(ConfirmNo);
+        if (_isPauseMenu)
+        {
+            _window.SetActive(false);
+            _mainMenuButton.onClick.AddListener(EnableConfirmationWindow);
+            _yesButton.onClick.AddListener(ConfirmYes);
+            _noButton.onClick.AddListener(ConfirmNo);
+        }
     }
 
     private void Update()
@@ -57,22 +62,28 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OpenPauseMenu()
     {
-        EventBroadcaster.Broadcast_StartStopAction();
-        EventBroadcaster.Broadcast_GamePause();
         gameObject.SetActive(true);
 
         _sfxToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteSFX);
         _musicToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteMusic);
-        Time.timeScale = 0;
+        if (_isPauseMenu)
+        {
+            EventBroadcaster.Broadcast_StartStopAction();
+            EventBroadcaster.Broadcast_GamePause();
+            Time.timeScale = 0;
+        }
         Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
     private void ClosePauseMenu()
     {
-        EventBroadcaster.Broadcast_StartStopAction();
-        EventBroadcaster.Broadcast_GameUnpause();
         gameObject.SetActive(false);
-        Time.timeScale = 1;
+        if (_isPauseMenu)
+        {
+            EventBroadcaster.Broadcast_StartStopAction();
+            EventBroadcaster.Broadcast_GameUnpause();
+            Time.timeScale = 1;
+        }
         Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
@@ -111,8 +122,14 @@ public class PauseMenuManager : MonoBehaviour
         EventBroadcaster.Broadcast_StartStopAction(); 
         EventBroadcaster.Broadcast_GameUnpause();
         SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
+        Invoke(nameof(UnmuteStuff), 0.98f);
     }
 
+    private void UnmuteStuff()
+    {
+        AudioManager.Instance.muteMusic = false;
+        AudioManager.Instance.muteSFX = false;
+    }
     private void ConfirmNo()
     {
         _window.SetActive(false);
@@ -127,4 +144,6 @@ public class PauseMenuManager : MonoBehaviour
     {
         AudioManager.Instance.PlayUISelectSound();
     }
+
+    
 }

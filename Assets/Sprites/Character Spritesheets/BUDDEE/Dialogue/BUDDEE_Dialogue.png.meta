@@ -1,0 +1,564 @@
+fileFormatVersion: 2
+guid: 6549789b0852c7a4a9bf408c144f9e2d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1428723256143030655
+    second: BUDDEE_Dialogue_0
+  - first:
+      213: -3972503572524190017
+    second: BUDDEE_Dialogue_1
+  - first:
+      213: 2386264649811279521
+    second: BUDDEE_Dialogue_2
+  - first:
+      213: 6302665510683823624
+    second: BUDDEE_Dialogue_3
+  - first:
+      213: -7864823663093212268
+    second: BUDDEE_Dialogue_4
+  - first:
+      213: 6092692976185201032
+    second: BUDDEE_Dialogue_5
+  - first:
+      213: -6845038566944201709
+    second: BUDDEE_Dialogue_6
+  - first:
+      213: -3084513864775488552
+    second: BUDDEE_Dialogue_7
+  - first:
+      213: -5032012865524358882
+    second: BUDDEE_Dialogue_8
+  - first:
+      213: 4163674188890322657
+    second: BUDDEE_Dialogue_9
+  - first:
+      213: 5245823943739528323
+    second: BUDDEE_Dialogue_10
+  - first:
+      213: -8304582564733601944
+    second: BUDDEE_Dialogue_11
+  - first:
+      213: 3644168230970345473
+    second: BUDDEE_Dialogue_12
+  - first:
+      213: -2200540869742523592
+    second: BUDDEE_Dialogue_13
+  - first:
+      213: -6036903940762002824
+    second: BUDDEE_Dialogue_14
+  - first:
+      213: 1242246401783679328
+    second: BUDDEE_Dialogue_15
+  - first:
+      213: -4770749683561393187
+    second: BUDDEE_Dialogue_16
+  - first:
+      213: -8425626351668545746
+    second: BUDDEE_Dialogue_17
+  - first:
+      213: 1716077400252765425
+    second: BUDDEE_Dialogue_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BUDDEE_sheepish
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 423
+        width: 30
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5816995, y: 0.49299622}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186514ba4c72c2ce0800000000000000
+      internalID: -1428723256143030655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_smug
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 423
+        width: 34
+        height: 42
+      alignment: 9
+      pivot: {x: 0.57997715, y: 0.50202215}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aeb2185e07bd1120800000000000000
+      internalID: 2386264649811279521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_bothered
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 423
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e4a6693e0977750800000000000000
+      internalID: 6302665510683823624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_speechless
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 423
+        width: 35
+        height: 42
+      alignment: 9
+      pivot: {x: 0.62146086, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 881590b3bf79d8450800000000000000
+      internalID: 6092692976185201032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_confused
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 295
+        width: 31
+        height: 42
+      alignment: 9
+      pivot: {x: 0.428366, y: 0.50278294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 314217f90b98101a0800000000000000
+      internalID: -6845038566944201709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_gremlin
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 295
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e11a935a5f2ba2ab0800000000000000
+      internalID: -5032012865524358882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_basic1
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 295
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e6354d5d9758c930800000000000000
+      internalID: 4163674188890322657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_basic2
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 295
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38455d05519ecc840800000000000000
+      internalID: 5245823943739528323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_basic3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 167
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 867b62d282230cc80800000000000000
+      internalID: -8304582564733601944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_worried
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 167
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10840ccc2bfa29230800000000000000
+      internalID: 3644168230970345473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_pity
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 167
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b8449ecbb1671e0800000000000000
+      internalID: -2200540869742523592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_Dialogue_crestfallen
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 167
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a99bbc9db983ca0800000000000000
+      internalID: -6036903940762002824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_sniffle
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 39
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 069c2dd45885d3110800000000000000
+      internalID: 1242246401783679328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_angry
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 39
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd314077074eacdb0800000000000000
+      internalID: -4770749683561393187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_threatening
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 40
+        width: 26
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2730aa5979221b80800000000000000
+      internalID: -8425626351668545746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUDDEE_pissed
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 40
+        width: 26
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f45429ad4bb0d710800000000000000
+      internalID: 1716077400252765425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b113299dbe1e2de4c9e7aef062ba6aa7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BUDDEE_Dialogue_4: -7864823663093212268
+      BUDDEE_Dialogue_7: -3084513864775488552
+      BUDDEE_Dialogue_crestfallen: -6036903940762002824
+      BUDDEE_angry: -4770749683561393187
+      BUDDEE_basic1: 4163674188890322657
+      BUDDEE_basic2: 5245823943739528323
+      BUDDEE_basic3: -8304582564733601944
+      BUDDEE_bothered: 6302665510683823624
+      BUDDEE_confused: -6845038566944201709
+      BUDDEE_gremlin: -5032012865524358882
+      BUDDEE_pissed: 1716077400252765425
+      BUDDEE_pity: -2200540869742523592
+      BUDDEE_sheepish: -1428723256143030655
+      BUDDEE_smug: 2386264649811279521
+      BUDDEE_sniffle: 1242246401783679328
+      BUDDEE_speechless: 6092692976185201032
+      BUDDEE_threatening: -8425626351668545746
+      BUDDEE_worried: 3644168230970345473
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

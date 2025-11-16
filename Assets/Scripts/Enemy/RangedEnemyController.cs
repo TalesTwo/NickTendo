@@ -170,9 +170,12 @@ public class RangedEnemyController : EnemyControllerBase
     
     protected override void Deactivate() 
     {
-        base.Deactivate();
+        
         EventBroadcaster.Broadcast_EnemyDeath(this, GetComponentInParent<Room>());
         // specific to ranged enemy deactivation logic can go here
         Managers.AudioManager.Instance.PlayEnemyDeathSound();
+        
+        base.Deactivate();
+        Destroy(gameObject);
     }
 }

@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2fee122be8f044882e6414baf8624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 10
-  cols: 10
-  probabilityToAddOptionalDoor_OneRequiredDoor: 0.3
+  rows: 7
+  cols: 7
+  probabilityToAddOptionalDoor_OneRequiredDoor: 0.4
   probabilityToAddOptionalDoor_TwoRequiredDoors: 0.2
   probabilityToAddOptionalDoor_ThreeRequiredDoors: 0.15
   generationData: {fileID: 11400000, guid: 9be7b9f3c009d5b42988d1a48f6d3b0e, type: 2}
@@ -155,7 +155,7 @@ MonoBehaviour:
   _startPos: {x: -1, y: -1}
   _endPos: {x: -1, y: -1}
   Seed: 0
-  RoomOffset: 60
+  RoomOffset: 100
 --- !u!114 &4155621867649481536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,9 +915,73 @@ PrefabInstance:
       value: Dialogue_Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_pity
+      value: 
+      objectReference: {fileID: -2200540869742523592, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_smug
+      value: 
+      objectReference: {fileID: 2386264649811279521, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_angry
+      value: 
+      objectReference: {fileID: -4770749683561393187, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_basic1
+      value: 
+      objectReference: {fileID: 4163674188890322657, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_basic2
+      value: 
+      objectReference: {fileID: 5245823943739528323, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_basic3
+      value: 
+      objectReference: {fileID: -8304582564733601944, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_pissed
+      value: 
+      objectReference: {fileID: 1716077400252765425, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_gremlin
+      value: 
+      objectReference: {fileID: -5032012865524358882, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_sniffle
+      value: 
+      objectReference: {fileID: 1242246401783679328, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_worried
+      value: 
+      objectReference: {fileID: 3644168230970345473, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: interactPrompt
       value: 
       objectReference: {fileID: 5973309152076792836, guid: 3bdb0f025ff9e1645bf6954517e99148, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_bothered
+      value: 
+      objectReference: {fileID: 6302665510683823624, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_confused
+      value: 
+      objectReference: {fileID: -6845038566944201709, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_sheepish
+      value: 
+      objectReference: {fileID: -1428723256143030655, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_speechless
+      value: 
+      objectReference: {fileID: 6092692976185201032, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_crestfallen
+      value: 
+      objectReference: {fileID: -6036903940762002824, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: buddee_threatening
+      value: 
+      objectReference: {fileID: -8425626351668545746, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
     - target: {fileID: 2951199323520035091, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0

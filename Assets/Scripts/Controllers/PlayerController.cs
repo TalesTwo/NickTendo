@@ -55,11 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         // reset the player to still
         _isWalking = false;
+        // set the player to the idle animation
+        _playerAnimator.SetStill();
     }
     
     public bool CanInteract()
     {
-        return !InteractionCooldown;
+        return !InteractionCooldown && !_isDead;
     }
 
     public void StartCooldown()

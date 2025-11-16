@@ -10,6 +10,9 @@ namespace Managers
     {
         [SerializeField] private SceneField _initialGameScene;
         [SerializeField] private GameObject _subTitle;
+        [SerializeField] private Button _startButton;
+        [SerializeField] private Button _settingsButton;
+        [SerializeField] private GameObject _settingsMenu;
 
         [SerializeField] private GameObject[] _objectsToHideWhenLoading;
         [SerializeField] private TMP_InputField _usernameInputField;
@@ -46,6 +49,10 @@ namespace Managers
                 //_subTitle.GetComponent<ScaleEffectsUI>().StopBreathe();
                 _subTitle.GetComponent<ScaleEffectsUI>().StartBreathe();
             }
+
+            _settingsMenu.SetActive(false);
+            _startButton.onClick.AddListener(StartGameButton);
+            _settingsButton.onClick.AddListener(OpenSettings);
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
@@ -93,6 +100,17 @@ namespace Managers
             }
         }
 
+        private void StartGameButton()
+        {
+            AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
+            PlayerStats.Instance.SetPlayerName("Player");
+            StartGame();
+        }
+
+        private void OpenSettings()
+        {
+            _settingsMenu.SetActive(true);
+        }
         private void StartGame()
         {
             foreach (var obj in _objectsToHideWhenLoading)
@@ -106,6 +124,11 @@ namespace Managers
                 playerController.enabled = true;
             }
             SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
+        }
+
+        public void IconNoise()
+        {
+            AudioManager.Instance.PlayUISelectSound(1, 0);
         }
     }
 }

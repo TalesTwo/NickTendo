@@ -39,7 +39,7 @@ public class PersonaUI : MonoBehaviour
         }
         else
         {
-            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the accounts to learn more!!!");
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the accounts to learn more!");
         }
 
         // disable player movement
@@ -55,7 +55,7 @@ public class PersonaUI : MonoBehaviour
     }
     public void ClosePersonaUI()
     {
-        AudioManager.Instance.PlayUISelectSound();
+        AudioManager.Instance.PlayPersonaMenuCloseSound();
         gameObject.SetActive(false);
         // cleanup
         foreach (Transform child in contentParent)

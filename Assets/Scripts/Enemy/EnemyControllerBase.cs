@@ -55,8 +55,8 @@ public class EnemyControllerBase : SpawnableObject
     
     
     // IMPROVING PATHING LOGIC
-    [SerializeField] private float _separationRadius = 0.5f;    // how close enemies can get before repelling
-    [SerializeField] private float _separationForce = 2.0f;     // how strong the push is
+    private float _separationRadius = 0.5f;    // how close enemies can get before repelling
+    private float _separationForce = 1.0f;     // how strong the push is
     private List<EnemyControllerBase> _allEnemies;
 
     [Header("Health Bar")]
@@ -144,8 +144,8 @@ public class EnemyControllerBase : SpawnableObject
 
     protected virtual void Deactivate() 
     {
-        
-        Destroy(gameObject);
+        // remove the destroy function
+        //Destroy(gameObject);
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
         EventBroadcaster.ObjectFellInPit -= OnFellInPit;
@@ -209,9 +209,16 @@ public class EnemyControllerBase : SpawnableObject
         // iterate through all other enemies
         if (_allEnemies == null)
             return;
+        
         foreach (EnemyControllerBase other in _allEnemies)
         {
-            if (other == this || other == null || other._transform == null)
+            if (other == this || other == null || other._transform == null){continue;}
+
+            
+
+            
+            // Ignore pot or chest enemies
+            if (other.enemyType == Types.EnemyType.PotEnemy || other.enemyType == Types.EnemyType.ChestEnemy)
                 continue;
 
 

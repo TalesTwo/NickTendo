@@ -95,20 +95,49 @@ namespace Managers
             // get the tutorial room 1 position, (which is row, col + 1)
             Vector3 tutorialRoomOnePosition = new Vector3((startPos.y + 1) * RoomOffset, -startPos.x * RoomOffset, 0);
             Room tutorialRoomOne = GenerateRoomFromType(Types.RoomType.TutorialOne, tutorialRoomOnePosition, startPos.x, startPos.y + 1);
+            // get the current dungeon room at that position
+            Room tempRoom = dungeonRooms[startPos.x][startPos.y + 1];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                tempRoom.SetRoomEnabled(false);
+            }
             dungeonRooms[startPos.x][startPos.y + 1] = tutorialRoomOne;
             tutorialRoomOne.SetRoomEnabled(false); // disable by default
             // get tutorial room 2 position, (which is row + 1, col + 1)
             Vector3 tutorialRoomTwoPosition = new Vector3((startPos.y + 1) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
             Room tutorialRoomTwo = GenerateRoomFromType(Types.RoomType.TutorialTwo, tutorialRoomTwoPosition, startPos.x + 1, startPos.y + 1);
+            tempRoom = dungeonRooms[startPos.x + 1][startPos.y + 1];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                tempRoom.SetRoomEnabled(false);
+            }
             tutorialRoomTwo.SetRoomEnabled(false); // disable by default
-            // Debug print the dungeon
-            DebugPrintDungeonLayout();
             dungeonRooms[startPos.x + 1][startPos.y + 1] = tutorialRoomTwo;
             // get tutorial room 3 position, (which is row + 1, col)
             Vector3 tutorialRoomThreePosition = new Vector3((startPos.y) * RoomOffset, -(startPos.x + 1) * RoomOffset, 0);
             Room tutorialRoomThree = GenerateRoomFromType(Types.RoomType.TutorialThree, tutorialRoomThreePosition, startPos.x + 1, startPos.y);
             dungeonRooms[startPos.x + 1][startPos.y] = tutorialRoomThree;
+            tempRoom = dungeonRooms[startPos.x + 1][startPos.y];
+            if (tempRoom != null)
+            {
+                // we need to destroy the existing room
+                tempRoom.SetRoomEnabled(false);
+            }
             tutorialRoomThree.SetRoomEnabled(false); // disable by default
+        }
+
+        private void InitializeFinalRoom()
+        {
+            /*
+             * This will be the game ending.. "final" room which will be placed right above the boss room, and will contain the ending (credits)
+             */
+            // get the final room position, which is (endPos.x - 1, endPos.y)
+            Vector3 finalRoomPosition = new Vector3(endPos.y * RoomOffset, -(endPos.x - 1) * RoomOffset, 0);
+            Room finalRoom = GenerateRoomFromType(Types.RoomType.Final, finalRoomPosition, endPos.x - 1, endPos.y);
+            dungeonRooms[endPos.x - 1][endPos.y] = finalRoom;
+            finalRoom.SetRoomEnabled(false); // disable by default
         }
         
         
@@ -125,6 +154,7 @@ namespace Managers
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
+            DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
@@ -145,6 +175,32 @@ namespace Managers
                 }
             }
         }
+        
+        
+        private void DisableAllRoomsExceptCurrent()
+        {
+            DebugUtils.Log("Disabling all rooms except current room at: " + CurrentRoomCoords);
+            for (int r = 0; r < dungeonRooms.Count; r++)
+            {
+                for (int c = 0; c < dungeonRooms[r].Count; c++)
+                {
+                    Room currentRoom = dungeonRooms[r][c];
+                    if (currentRoom != null)
+                    {
+                        if (r == CurrentRoomCoords.row && c == CurrentRoomCoords.col)
+                        {
+                            currentRoom.SetRoomEnabled(true);
+                            CurrentRoomCoords = (r, c);
+                        }
+                        else
+                        {
+                            currentRoom.SetRoomEnabled(false);
+                        }
+                    }
+                }
+            }
+        }
+        
         private void OnPlayerChangedRoom((int row, int col) newRoomCoords)
         {
             // enable the new rooms corns
@@ -153,14 +209,10 @@ namespace Managers
             // and then after a small delay, disable all other rooms
             CurrentRoomCoords = newRoomCoords;
             
-            StartCoroutine(DisableOtherRoomsCoroutine(newRoomCoords));
+            Invoke(nameof(DisableAllRoomsExceptCurrent), 0.75f);
         }
         
-        private IEnumerator DisableOtherRoomsCoroutine((int row, int col) currentRoomCoords)
-        {
-            yield return new WaitForSeconds(0.5f); // wait half a second before disabling other rooms
-            DisableAllRoomsExceptCurrent(currentRoomCoords);
-        }
+
         
         
         
@@ -181,7 +233,7 @@ namespace Managers
             // teleport the player into the dungeon
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
-            DisableAllRoomsExceptCurrent((startPos.x, startPos.y)); // disable all rooms except spawn on default
+            DisableAllRoomsExceptCurrent((startPos.x, startPos.y));
             if (_IsFirstLoad)
             {
                 //GameStateManager.Instance.SetBuddeeDialogState("Introyell");
@@ -242,6 +294,9 @@ namespace Managers
             GenerateSpecialRooms(dungeonRooms);
             // load in the tutorial rooms
             InitializeTutorialRooms();
+            
+            // load the final room
+            //InitializeFinalRoom();
 
         }
 
@@ -636,7 +691,8 @@ namespace Managers
             if (_endPos.x == -1 && _endPos.y == -1)
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
-                endPos = new Vector2Int(0, randomCol); // End room will always be on the top row
+                // End room will be on the second to top row
+                endPos = new Vector2Int(0, randomCol);
             }
             Vector3 endPosition = new Vector3(endPos.y * RoomOffset,-endPos.x * RoomOffset, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
@@ -647,7 +703,9 @@ namespace Managers
             {
                 dungeonRooms[endPos.x][endPos.y] = endRoom;
             }
-
+            
+            // Initialize the special rooms here, before the rest of the generation
+            //InitializeFinalRoom();
         }
 
 

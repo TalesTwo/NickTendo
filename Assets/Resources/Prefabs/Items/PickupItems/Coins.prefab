@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2719054816464069916}
   - component: {fileID: 4091901693953286788}
   - component: {fileID: 6816367349617998974}
-  - component: {fileID: 5280403828838677209}
+  - component: {fileID: 2577777430795314365}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_GameObject: {fileID: 2502751402912625270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.59, y: 4.03, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 3.59, y: 4.084, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: 1469656256, guid: 202cf5b012dafa04894455fbc5ea94b7, type: 3}
+  m_Sprite: {fileID: -1750681182074488878, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,8 +124,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.06}
-  m_Radius: 0.45
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.35
 --- !u!114 &4091901693953286788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +143,14 @@ MonoBehaviour:
   CanAutoPickup: 1
   BuffType: 10
   BuffValue: 5
+  Animation:
+  - {fileID: -1750681182074488878, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 7282177243460389180, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 676383333637899404, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: 7101066548704743396, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  - {fileID: -7059390947707244463, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
+  FrameRate: 8
+  Index: 0
 --- !u!58 &6816367349617998974
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,26 +185,32 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.06}
-  m_Radius: 0.3
---- !u!114 &5280403828838677209
-MonoBehaviour:
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.25
+--- !u!50 &2577777430795314365
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502751402912625270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aafcb17c197555747a457dc0b309853c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultAnimationCycle:
-  - {fileID: -1750681182074488878, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
-  - {fileID: 7282177243460389180, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
-  - {fileID: 676383333637899404, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
-  - {fileID: 7101066548704743396, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
-  - {fileID: -7059390947707244463, guid: d950f00d5b07f1b44a4400d3c67fc9d3, type: 3}
-  Framerate: 4
-  SpriteRenderer: {fileID: 5061567238082683430}
-  index: 0
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

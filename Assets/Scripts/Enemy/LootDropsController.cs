@@ -19,8 +19,8 @@ public class LootDropsController : MonoBehaviour
     public List<LootDrop> lootTable;
     [Range(0f, 100f)]
     public float generalDropRate;
-    public float dropForce = 5f;
-    public float dropDrag = 4f;
+    public float dropForce = 0.5f;
+    public float dropDrag = 5f;
     public int DropAmount = 1;
 
     private float _totalDropWeight = 0f;
@@ -40,6 +40,8 @@ public class LootDropsController : MonoBehaviour
     // when the enemy is defeated, they will drop an item with set odds
     private void OnDestroy()
     {
+        if (!gameObject.scene.isLoaded || !Application.isPlaying) {return;}
+        
         for (int i = 0; i < DropAmount; i++)
         {
             AttemptDrop();
@@ -90,6 +92,15 @@ public class LootDropsController : MonoBehaviour
             itemRb.gravityScale = 0f;
             // we need to add a "drag" so it slows down over time otherwise it flies away lol
             itemRb.drag = dropDrag;
+            itemRb.freezeRotation = true;
+
+        }
+        else
+        {
+            itemRb.gravityScale = 0f;
+            itemRb.drag = dropDrag;
+            itemRb.freezeRotation = true;
+
         }
 
         // Get player position
@@ -103,9 +114,7 @@ public class LootDropsController : MonoBehaviour
 
         // Apply the force
         itemRb.AddForce(randomDir * dropForce, ForceMode2D.Impulse);
-        DebugUtils.Log($"Dropped item: {lootDrop.drop.name} from enemy: {gameObject.name}");
         _numberOfDrops += 1;
-        DebugUtils.Log($"Total drops so far: {_numberOfDrops}");
 
     }
 }

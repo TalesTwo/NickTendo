@@ -78,7 +78,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -166,7 +166,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coins_Hearts_0
+      name: Coins_0
       rect:
         serializedVersion: 2
         x: 41
@@ -174,7 +174,7 @@ TextureImporter:
         width: 12
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -187,7 +187,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_1
+      name: Coins_1
       rect:
         serializedVersion: 2
         x: 138
@@ -195,7 +195,7 @@ TextureImporter:
         width: 9
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -208,7 +208,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_2
+      name: Coins_2
       rect:
         serializedVersion: 2
         x: 237
@@ -216,7 +216,7 @@ TextureImporter:
         width: 4
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -229,7 +229,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_3
+      name: Coins_3
       rect:
         serializedVersion: 2
         x: 330
@@ -237,7 +237,7 @@ TextureImporter:
         width: 9
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -250,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_4
+      name: Coins_4
       rect:
         serializedVersion: 2
         x: 42
@@ -258,7 +258,7 @@ TextureImporter:
         width: 10
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -271,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_5
+      name: Hearts_0
       rect:
         serializedVersion: 2
         x: 135
@@ -279,7 +279,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -292,7 +292,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_6
+      name: Hearts_1
       rect:
         serializedVersion: 2
         x: 233
@@ -300,7 +300,7 @@ TextureImporter:
         width: 12
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -313,7 +313,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_7
+      name: Hearts_2
       rect:
         serializedVersion: 2
         x: 330
@@ -321,7 +321,7 @@ TextureImporter:
         width: 10
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -334,7 +334,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_8
+      name: Hearts_3
       rect:
         serializedVersion: 2
         x: 41
@@ -342,7 +342,7 @@ TextureImporter:
         width: 12
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -355,7 +355,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coins_Hearts_9
+      name: Hearts_4
       rect:
         serializedVersion: 2
         x: 136
@@ -363,7 +363,7 @@ TextureImporter:
         width: 15
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,16 +386,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Coins_Hearts_0: -1750681182074488878
-      Coins_Hearts_1: 7282177243460389180
-      Coins_Hearts_2: 676383333637899404
-      Coins_Hearts_3: 7101066548704743396
-      Coins_Hearts_4: -7059390947707244463
-      Coins_Hearts_5: 2363823204005635026
-      Coins_Hearts_6: 1541802550822108430
-      Coins_Hearts_7: 4815021640204488249
-      Coins_Hearts_8: -1809096436172548682
-      Coins_Hearts_9: -8356829789803020790
+      Coins_0: -1750681182074488878
+      Coins_1: 7282177243460389180
+      Coins_2: 676383333637899404
+      Coins_3: 7101066548704743396
+      Coins_4: -7059390947707244463
+      Hearts_0: 2363823204005635026
+      Hearts_1: 1541802550822108430
+      Hearts_2: 4815021640204488249
+      Hearts_3: -1809096436172548682
+      Hearts_4: -8356829789803020790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
