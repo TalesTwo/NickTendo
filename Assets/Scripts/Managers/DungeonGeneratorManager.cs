@@ -135,8 +135,8 @@ namespace Managers
              */
             // get the final room position, which is (endPos.x - 1, endPos.y)
             Vector3 finalRoomPosition = new Vector3(endPos.y * RoomOffset, -(endPos.x - 1) * RoomOffset, 0);
-            Room finalRoom = GenerateRoomFromType(Types.RoomType.Final, finalRoomPosition, endPos.x - 1, endPos.y);
-            dungeonRooms[endPos.x - 1][endPos.y] = finalRoom;
+            Room finalRoom = GenerateRoomFromType(Types.RoomType.Final, finalRoomPosition, 0, endPos.y);
+            dungeonRooms[0][endPos.y] = finalRoom;
             finalRoom.SetRoomEnabled(false); // disable by default
         }
         
@@ -570,7 +570,7 @@ namespace Managers
             int currentRow = startPos.x-1;
             int currentCol = startPos.y;
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
-            while (currentRow > 1)
+            while (currentRow > 2)
             {
                 Types.DoorConfiguration AdditionalConnections = new Types.DoorConfiguration(false, false, false, false);
                 // determine the possible directions we can move
@@ -692,7 +692,7 @@ namespace Managers
             {
                 int randomCol = UnityEngine.Random.Range(0, cols);
                 // End room will be on the second to top row
-                endPos = new Vector2Int(0, randomCol);
+                endPos = new Vector2Int(1, randomCol);
             }
             Vector3 endPosition = new Vector3(endPos.y * RoomOffset,-endPos.x * RoomOffset, 0);
             Room endRoom = GenerateRoomFromType(Types.RoomType.End, endPosition);
@@ -705,7 +705,7 @@ namespace Managers
             }
             
             // Initialize the special rooms here, before the rest of the generation
-            //InitializeFinalRoom();
+            InitializeFinalRoom();
         }
 
 
