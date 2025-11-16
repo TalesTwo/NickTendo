@@ -35,10 +35,11 @@ namespace Managers
         public AudioClip BUDEEDeath;
         public AudioClip RocketArm;
         public AudioClip BUDDEESlam;
-        public AudioClip Charge;
+        public AudioClip Dizzy;
         public AudioClip BUDDEEShoot;
         public AudioClip BUDDEEDamaged;
         public AudioClip SpawningEnemies;
+        public AudioSource DizzySource;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
@@ -325,6 +326,17 @@ namespace Managers
             AudioClip tone = BUDEETalkingTones[tonenumber];
             PlaySFX(tone, volume);
         }
+        public void PlayBUDDEEDizzy(float volume = 1, float deviation = 0)
+        {
+            DizzySource.clip = Dizzy;
+            DizzySource.loop = true;
+            DizzySource.Play();
+        }
+        public void StopBUDDEEDizzy()
+        {
+            DizzySource.Stop();
+        }
+
 
 
         //General Sounds
