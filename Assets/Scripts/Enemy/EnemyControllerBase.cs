@@ -74,6 +74,8 @@ public class EnemyControllerBase : SpawnableObject
     [SerializeField] private float Override_stunTimer = -1;
     [SerializeField] private float Override_knockbackForce =-1;
     // Start is called before the first frame update
+    
+    private bool _isFrozen = false;
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -130,6 +132,9 @@ public class EnemyControllerBase : SpawnableObject
         {
             speed = _cachedSpeed;
         }
+        
+        _isFrozen = isFrozen;
+        
     }
     
     private void SetSeed(int seed)
@@ -161,6 +166,7 @@ public class EnemyControllerBase : SpawnableObject
     // Update is called once per frame
     protected virtual void Update()
     {
+        if(_isFrozen) { return; }
         // step 1: check death condition
         CheckForDeath();
         

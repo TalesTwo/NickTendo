@@ -24,8 +24,7 @@ public class ChestController : EnemyControllerBase
         Managers.AudioManager.Instance.PlayCrateBreakSound(1, 0.1f);
 
         yield return null;  // waits EXACTLY one frame
-        EventBroadcaster.PlayerDeath -= Deactivate;
-        EventBroadcaster.ObjectFellInPit -= OnFellInPit;
+        base.Deactivate();
         Destroy(gameObject);
     }
 }
