@@ -840,7 +840,7 @@ MonoBehaviour:
     WestDoorActive: 1
   doors: {fileID: 6171403738809331492}
   bRequireFullRoomCleared: 0
-  roomType: 10
+  roomType: 18
   roomClassification: 5
   bIsFinalized: 0
   bIsDifficultySet: 0
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnableMap: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1 &6171403738809331492
 GameObject:
@@ -16940,7 +16940,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 7, y: -23, z: 0}
     second:
       serializedVersion: 2
@@ -17320,7 +17320,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: -5, y: -20, z: 0}
     second:
       serializedVersion: 2

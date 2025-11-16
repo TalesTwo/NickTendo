@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6979029636735630900}
-  - component: {fileID: 5497313280381876055}
+  - component: {fileID: 4025803006192023711}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5497313280381876055
+--- !u!114 &4025803006192023711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1502459016479553166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a303d10c7c3f045af31a9bbc759735, type: 3}
+  m_Script: {fileID: 11500000, guid: 50acb98204b92be43a558a1807569109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolSize: 30
+  _poolSize: 40
   muteSFX: 0
   muteMusic: 0
   swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
@@ -72,34 +72,32 @@ MonoBehaviour:
   Interact: {fileID: 8300000, guid: 5beda05f69bd83c4e850470ba7908896, type: 3}
   Deflect: {fileID: 8300000, guid: 285daadac6381d3408096b36774925fc, type: 3}
   HittingWall: {fileID: 0}
-  BUDEETalkingTones:
-  - {fileID: 8300000, guid: e209121515be805469fc7a532da6a1a8, type: 3}
-  - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
-  - {fileID: 8300000, guid: 863d09d0a12b2b54d829573a87b16f8a, type: 3}
+  BUDEETalkingTones: []
   BUDDEEToneCount: 3
   BUDEEDeath: {fileID: 0}
   RocketArm: {fileID: 8300000, guid: 753f817f9007bad478373fce6dbfffc3, type: 3}
   BUDDEESlam: {fileID: 8300000, guid: adca48e5f9e857f46808d95180c65b75, type: 3}
-  Charge: {fileID: 0}
+  Dizzy: {fileID: 8300000, guid: edff1c1f8de3ada448c92d467e321416, type: 3}
   BUDDEEShoot: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
   BUDDEEDamaged: {fileID: 8300000, guid: 28c47947f82139246a82962183a6587e, type: 3}
   SpawningEnemies: {fileID: 8300000, guid: 30c1df636c9f0fd46bf675c47684b728, type: 3}
+  DizzySource: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shooterMovement: {fileID: 8300000, guid: 22e03fc8260cacf43b6de319d2269c59, type: 3}
   shot: {fileID: 8300000, guid: a65652c7b8bcb9848a834dfe51f2cd2e, type: 3}
   shotHit: {fileID: 8300000, guid: cdc285cddf7e0264cb918df383fba6d5, type: 3}
-  shotMiss: {fileID: 8300000, guid: 95b1f05bae54fa945b01e528de4ed16b, type: 3}
+  shotMiss: {fileID: 8300000, guid: 1e589d347eb813849bf37568a60f5e19, type: 3}
   followerHit: {fileID: 8300000, guid: 096f06bfe20ee804480ca29b61e515b9, type: 3}
   followerMovement: {fileID: 8300000, guid: 983a0da4887c3364596153d97d169813, type: 3}
-  transitionearly: {fileID: 8300000, guid: 9cfb84511d160354384d862384f4e948, type: 3}
-  transitionend: {fileID: 8300000, guid: a671494502fa31d48b79e877d73836c0, type: 3}
+  transitionearly: {fileID: 8300000, guid: 0a2db085042a3a346a1f0addfcba16f4, type: 3}
+  transitionend: {fileID: 8300000, guid: 9ce7158fd8aae0744a74eb7950b0242a, type: 3}
   Keyget: {fileID: 8300000, guid: e85bb4868c4a1e74085c3cdf4a2c35b2, type: 3}
   Coinget: {fileID: 8300000, guid: ca9a62b5c26f1f341b717e778a548212, type: 3}
   ItemGet: {fileID: 8300000, guid: 73638757d5c0b254bbfc037c69547592, type: 3}
   openDoor: {fileID: 8300000, guid: 66a09fbb8c4dcbf4ba38dc57e25bc84b, type: 3}
   unlockDoor: {fileID: 8300000, guid: 2f4b4bf7d4235454fbabefcbbbd1d7ca, type: 3}
-  explosion: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
+  explosion: {fileID: 0}
   crateBreak: {fileID: 8300000, guid: 4a3017bbb8441314b8c5bca9b9bcb56c, type: 3}
   Heal: {fileID: 8300000, guid: c32dc8e26873a5c4b870a127640b1826, type: 3}
   Pitfall: {fileID: 8300000, guid: ac8f7da83233b954dab8c810b6e4cb30, type: 3}

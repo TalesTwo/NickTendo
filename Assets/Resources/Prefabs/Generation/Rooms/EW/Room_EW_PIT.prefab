@@ -184,7 +184,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 2, y: -25, z: 0}
     second:
       serializedVersion: 2
@@ -564,7 +564,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 0, y: -23, z: 0}
     second:
       serializedVersion: 2
@@ -694,7 +694,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 13, y: -23, z: 0}
     second:
       serializedVersion: 2
@@ -744,7 +744,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: -6, y: -22, z: 0}
     second:
       serializedVersion: 2
@@ -20512,7 +20512,7 @@ MonoBehaviour:
   - spawnType: 0
     Spawnables: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1001 &1641381273012374302
 PrefabInstance:

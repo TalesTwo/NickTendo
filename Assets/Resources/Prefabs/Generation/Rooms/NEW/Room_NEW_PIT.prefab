@@ -17727,7 +17727,7 @@ MonoBehaviour:
       maxSpawnCount: 5
       spawnChance: 1
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 0
 --- !u!1 &1475025480799882865
 GameObject:
@@ -19986,7 +19986,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 4, y: -22, z: 0}
     second:
       serializedVersion: 2
@@ -20146,7 +20146,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 3, y: -21, z: 0}
     second:
       serializedVersion: 2
@@ -20306,7 +20306,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 2, y: -20, z: 0}
     second:
       serializedVersion: 2
@@ -20466,7 +20466,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 1, y: -19, z: 0}
     second:
       serializedVersion: 2
@@ -20616,7 +20616,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 1073741826
   - first: {x: 0, y: -18, z: 0}
     second:
       serializedVersion: 2

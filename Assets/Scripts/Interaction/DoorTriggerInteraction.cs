@@ -97,6 +97,8 @@ public class DoorTriggerInteraction : TriggerInteractBase
             {
                 _doorScript.SetDoorState(Door.DoorState.Locked);
                 AudioManager.Instance.PlayOpenDoorSound(1, 0);
+                // broadcast a message telling the player they cant go this way
+                DialogueManager.Instance.RunSingleDialogue("BUDDEE", "noreturn", true);
             }
             break;
         }

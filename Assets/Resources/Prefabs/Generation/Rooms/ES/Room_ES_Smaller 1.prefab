@@ -133,7 +133,7 @@ MonoBehaviour:
   - spawnType: 1
     Spawnables: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 0
 --- !u!1 &580180919557100743
 GameObject:
@@ -20097,7 +20097,7 @@ TilemapCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5296338453237465617}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
