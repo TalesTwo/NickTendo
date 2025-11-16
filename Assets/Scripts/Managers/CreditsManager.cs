@@ -30,7 +30,7 @@ public class CreditsManager : Singleton<CreditsManager>
         // disable player controls
         //EventBroadcaster.Broadcast_StartStopAction();
 
-        // play title screen music
+        // play credits music
         AudioManager.Instance.PlayCreditsTrack(1f, true, 0.1f, true, 0.1f);
 
         // start scrolling

@@ -285,11 +285,13 @@ public class BossController : Singleton<BossController>
     private IEnumerator ExhaustionTimer()
     {
         float timer = 0f;
+        Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
         while (timer < _currentStats.exhaustionTime)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+        Managers.AudioManager.Instance.StopBUDDEEDizzy();
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
         BossScreenController.Instance.SetIsExhausted(false);
@@ -304,7 +306,8 @@ public class BossController : Singleton<BossController>
     {
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
-        
+
+        Managers.AudioManager.Instance.StopBUDDEEDizzy();
         BossScreenController.Instance.SetIsExhausted(false);
         expressionsAnimator.SetHurtAnimation();
         Invoke(nameof(SetIdleAnimation), 0.3f);
