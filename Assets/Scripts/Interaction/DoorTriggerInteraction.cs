@@ -216,17 +216,21 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 break;
             }
         }
-        // On the edge case there is no valid doors at all, also just spawn to a random walkable cell
-        RoomGridManager targetGridManager = targetRoom.GetComponent<RoomGridManager>();
-        if (targetGridManager == null)
+        if (doors.Length == 0)
         {
-            DebugUtils.LogError("DoorTriggerInteraction: No RoomGridManager found on target room.");
-            return;
+            // On the edge case there is no valid doors at all, also just spawn to a random walkable cell
+            RoomGridManager targetGridManager = targetRoom.GetComponent<RoomGridManager>();
+            if (targetGridManager == null)
+            {
+                DebugUtils.LogError("DoorTriggerInteraction: No RoomGridManager found on target room.");
+                return;
+            }
+            Transform fallbackSpawnPos = targetGridManager.FindValidSpawnableCell();
+            // convert to world position
+            Vector3 fallbackPos = fallbackSpawnPos.position;
+            PlayerManager.Instance.TeleportPlayer(fallbackPos);
         }
-        Transform fallbackSpawnPos = targetGridManager.FindValidSpawnableCell();
-        // convert to world position
-        Vector3 fallbackPos = fallbackSpawnPos.position;
-        PlayerManager.Instance.TeleportPlayer(fallbackPos);
+
     }
     private static IEnumerator OpenDoorWhenReady(Room targetRoom, Types.DoorClassification direction)
     {
