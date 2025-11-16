@@ -4713,9 +4713,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3297904774350979408}
     m_Modifications:
+    - target: {fileID: 330884920356281933, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
+      propertyPath: m_text
+      value: Diabolos
+      objectReference: {fileID: 0}
+    - target: {fileID: 330884920356281933, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1807521366951568907, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
       propertyPath: m_Name
-      value: Server (1)
+      value: Diabolos
       objectReference: {fileID: 0}
     - target: {fileID: 3317575953363702431, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
       propertyPath: m_Pivot.x

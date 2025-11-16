@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public GameObject[] ItemList;
+    //public GameObject[] PermaItemList;
 
     private GameObject[] ShopList;
     private ShopUIManager ShopUIM;
@@ -47,6 +48,10 @@ public class ShopManager : MonoBehaviour
         ShopList[0] = ItemList[numbers[0]];
         ShopList[1] = ItemList[numbers[1]];
         ShopList[2] = ItemList[numbers[2]];
+
+
+        /*int RandomInt = UnityEngine.Random.Range(0, PermaItemList.Length);
+        ShopList[3] = PermaItemList[RandomInt];*/
     }
 
     public void SetItems()

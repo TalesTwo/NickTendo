@@ -98,6 +98,7 @@ public class ShopUIManager : MonoBehaviour
         // Removes all the info for a bought item
         ItemSlots[Index].SetActive(false);
         Tooltip.GetComponent<TooltipUI>().HideTooltip();
+        SoldOut();
     }
 
     public void MouseOverItem(int Index)
@@ -174,5 +175,14 @@ public class ShopUIManager : MonoBehaviour
     {
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
         BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough money...");
+    }
+
+    void SoldOut()
+    {
+        if (!ItemSlots[0].activeInHierarchy &&  !ItemSlots[1].activeInHierarchy && !ItemSlots[2].activeInHierarchy)
+        {
+            BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+            BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Shop's out of stock. Press the Reroll button to get more items!");
+        }
     }
 }
