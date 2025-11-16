@@ -126,6 +126,10 @@ namespace Managers
         }
         
 
+        public GameObject GetPlayer()
+        {
+            return player;
+        }
         private void RespawnPlayerInCurrentRoom()
         {
             
