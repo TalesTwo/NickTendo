@@ -44,7 +44,7 @@ public class DungeonController : Singleton<DungeonController>
          *
          * And we need to also note, that a "boss room" is the same as an "non shop" room for the purposes of music
          */
-        Debug.Log("Player changed room, checking for special room transitions...");
+        //Debug.Log("Player changed room, checking for special room transitions...");
         
         // get access to our current room
         Room currentRoom = GetCurrentRoom();

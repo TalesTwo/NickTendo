@@ -21071,7 +21071,7 @@ MonoBehaviour:
     WestDoorActive: 0
   doors: {fileID: 2443761274619201443}
   bRequireFullRoomCleared: 1
-  roomType: 16
+  roomType: 6
   roomClassification: 3
   bIsFinalized: 0
   bIsDifficultySet: 0
@@ -21112,7 +21112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnableMap: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1 &8346677693329219746
 GameObject:

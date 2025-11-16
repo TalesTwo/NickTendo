@@ -23500,7 +23500,7 @@ MonoBehaviour:
       maxSpawnCount: 4
       spawnChance: 0.75
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1001 &3665282670372120388
 PrefabInstance:

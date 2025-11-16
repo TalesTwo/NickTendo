@@ -61,6 +61,8 @@ namespace Managers
         private Dictionary<string, List<string[]>> _lines;
         
         [SerializeField] private GameObject interactPrompt;
+        
+        private string _previousDialogueState;
     
         // optional wordspeed for if we want the text to display at a certain speed
         public float wordSpeed;
@@ -334,5 +336,24 @@ namespace Managers
         }
         
         public GameObject GetInteractPrompt => interactPrompt;
+
+
+        public void RunSingleDialogue(string speaker, string state, bool freezeWorld = false)
+        {
+            /*
+             * this will run a one time dialogue line for a given speaker and dialogue state (will save the current dialogue state and restore it after)
+             */
+            if (freezeWorld)
+            {
+                // Im lazy, and allowing the hitbox to handle turning this off lol
+                EventBroadcaster.Broadcast_SetWorldFrozen(true);
+            }
+            _previousDialogueState = GameStateManager.Instance.GetBuddeeDialogState();
+            GameStateManager.Instance.SetBuddeeDialogState(state);
+            ActivateDialogue(speaker);
+            // set the dialogue state back 
+            GameStateManager.Instance.SetBuddeeDialogState(_previousDialogueState);
+            
+        }
     }
 }

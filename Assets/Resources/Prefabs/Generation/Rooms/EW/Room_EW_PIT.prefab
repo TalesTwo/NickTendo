@@ -20512,7 +20512,7 @@ MonoBehaviour:
   - spawnType: 0
     Spawnables: []
   minRoomDifficulty: 1
-  maxRoomDifficulty: 20
+  maxRoomDifficulty: 35
   spawnVariance: 1
 --- !u!1001 &1641381273012374302
 PrefabInstance:
