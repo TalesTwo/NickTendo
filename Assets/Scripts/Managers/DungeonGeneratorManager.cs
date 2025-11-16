@@ -355,7 +355,16 @@ namespace Managers
                     {
                         if (room != null && room.GetRoomDifficulty() >= segmentStart && room.GetRoomDifficulty() <= segmentEnd)
                         {
-                            possibleRooms.Add(room);
+                            // check the classification to ensure we arent replacing special rooms with other special rooms
+                            if (room.GetRoomClassification() != Types.RoomClassification.Shop &&
+                                room.GetRoomClassification() != Types.RoomClassification.Treasure &&
+                                room.GetRoomClassification() != Types.RoomClassification.Boss &&
+                                room.GetRoomClassification() != Types.RoomClassification.Tutorial)
+                            {
+                                possibleRooms.Add(room);
+                            }
+                            
+                            
                         }
                     }
                 }
