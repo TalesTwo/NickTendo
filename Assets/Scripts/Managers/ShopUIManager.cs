@@ -38,8 +38,8 @@ public class ShopUIManager : MonoBehaviour
 
     private void Awake()
     {
-        ItemTooltipText = new string[3];
-        ItemFlavorText = new string[3];
+        ItemTooltipText = new string[4];
+        ItemFlavorText = new string[4];
     }
 
     // Start is called before the first frame update
@@ -51,6 +51,7 @@ public class ShopUIManager : MonoBehaviour
         ItemButtons[0].onClick.AddListener(delegate { AttemptBuyItem(0); });
         ItemButtons[1].onClick.AddListener(delegate { AttemptBuyItem(1); });
         ItemButtons[2].onClick.AddListener(delegate { AttemptBuyItem(2); });
+        ItemButtons[3].onClick.AddListener(delegate { AttemptBuyItem(3); });
 
         IsInShop = false;
         IsRerollButton = false;
@@ -98,6 +99,7 @@ public class ShopUIManager : MonoBehaviour
         // Removes all the info for a bought item
         ItemSlots[Index].SetActive(false);
         Tooltip.GetComponent<TooltipUI>().HideTooltip();
+        SoldOut();
     }
 
     public void MouseOverItem(int Index)
@@ -130,7 +132,14 @@ public class ShopUIManager : MonoBehaviour
             }
             else
             {
-                Tooltip.GetComponent<TooltipUI>().ResetPadding();
+                if(TooltipIndex != 0)
+                {
+                    Tooltip.GetComponent<TooltipUI>().ResetPadding();
+                }
+                else 
+                {
+                    Tooltip.GetComponent<TooltipUI>().SetXYPadding(75, -50);
+                }
                 Tooltip.GetComponent<TooltipUI>().ShowTooltip(ItemTooltipText[TooltipIndex]);
             }
         }
@@ -163,6 +172,8 @@ public class ShopUIManager : MonoBehaviour
             if(!DontCareAboutMoney) PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins,-RerollCost);
             ShopM.GetRandomShopList();
             ShopM.SetItems();
+            BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+            BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Hover over the items to learn more!");
         }
         else
         {
@@ -173,6 +184,21 @@ public class ShopUIManager : MonoBehaviour
     public void NotEnoughMoney()
     {
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
-        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough money...");
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough coins...");
+    }
+
+    public void NotEnoughChips()
+    {
+        BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough chips...");
+    }
+
+    void SoldOut()
+    {
+        if (!ItemSlots[0].activeInHierarchy &&  !ItemSlots[1].activeInHierarchy && !ItemSlots[2].activeInHierarchy)
+        {
+            BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+            BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Shop's out of stock. Press the Reroll button to get more items!");
+        }
     }
 }

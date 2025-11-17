@@ -49,7 +49,7 @@ MonoBehaviour:
   shrinkDuration: 0.5
   itemValue: 50
   buffValue: -0.05
-  buffType: 16
+  buffType: 0
   flavorText: 
 --- !u!212 &7787435678194780221
 SpriteRenderer:

@@ -16,7 +16,7 @@ public class PlayerStats : Singleton<PlayerStats>
     private float _dashDamage = 5f; 
     private float _dashCooldown = 5f; 
     private float _dashDistance = 0.5f; 
-    private int _keys = 0;
+    private int _chips = 0;
     private int _coins = 0;
     private int _carryOverCoins = 0;
     
@@ -65,7 +65,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public float GetDashCooldown() { return _dashCooldown; }
     public float GetAttackCooldown() { return _attackCooldown; }
     public float GetDashDistance() { return _dashDistance; }
-    public int GetKeys() { return _keys; } 
+    public int GetChips() { return _chips; } 
     public int GetCoins() { return _coins; }
     public int GetCarryOverCoins() { return _carryOverCoins; }
 
@@ -79,7 +79,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetDashCooldown(float NewDashCooldown) { _dashCooldown = NewDashCooldown; }
     public void SetAttackCooldown(float NewAttackCooldown) { _attackCooldown = NewAttackCooldown; }
     public void SetDashDistance(float NewDashDistance) { _dashDistance = NewDashDistance; }
-    public void SetKeys(int NewKeys) { _keys = NewKeys; }
+    public void SetChips(int NewChips) { _chips = NewChips; }
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
     public void SetCarryOverCoins(int NewCarryOverCoins) { _carryOverCoins = NewCarryOverCoins; }
 
@@ -129,7 +129,7 @@ public class PlayerStats : Singleton<PlayerStats>
         if(_attackCooldown <= 0) { _attackCooldown = 0.1f; }
     }
     public void UpdateDashDistance(float UpdateValue) { _dashDistance += UpdateValue; }
-    public void UpdateKeys(int UpdateValue) { _keys += UpdateValue; }
+    public void UpdateChips(int UpdateValue) { _chips += UpdateValue; }
     public void UpdateCoins(int UpdateValue) { _coins += UpdateValue; }
 
     public void DisplayAllStats()
@@ -145,7 +145,7 @@ public class PlayerStats : Singleton<PlayerStats>
             "\nDash Damage: " + _dashDamage +
             "\nDash Cooldown: " + _dashCooldown +
             "\nDash Distance: " + _dashDistance +
-            "\nKeys: " + _keys +
+            "\nChips: " + _chips +
             "\nCoins: " + _coins
         );     
     }
@@ -204,19 +204,20 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateCurrentHealth(Heal);
             Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
-        else if (BuffType == PlayerStatsEnum.Keys)
+        else if (BuffType == PlayerStatsEnum.Chips)
         {
-            UpdateKeys(((int)BuffValue));
+            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
+            UpdateChips(((int)BuffValue));
         }
         else if (BuffType == PlayerStatsEnum.Coins)
         {
+            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
             UpdateCoins((int)BuffValue);
             // edge case: if we ever "remove" coins, we want to also remove from carry_over coins
             if (BuffValue < 0)
             {
                 SetCarryOverCoins(Mathf.Max(0, GetCarryOverCoins() + (int)BuffValue));
             }
-            AudioManager.Instance.PlayCoinGetSound(1f, 0f);
         }
         // Now we get to the carry over stats
         // these have a bit more involved
@@ -289,10 +290,9 @@ public class PlayerStats : Singleton<PlayerStats>
         SetDashDamage(stats.DashDamage);
         SetDashCooldown(stats.DashCooldown);
         SetDashDistance(stats.DashDistance);
-        SetKeys(stats.Keys);
+        SetChips(stats.Chips);
         SetCoins(stats.Coins);
     }
-    
 }
 
 public enum PlayerStatsEnum
@@ -306,7 +306,7 @@ public enum PlayerStatsEnum
     Dash_Cooldown,
     Attack_Cooldown,
     Dash_Distance,
-    Keys,
+    Chips,
     Coins,
     // Carry over stats
     CarryOver_Max_Health,
@@ -331,7 +331,7 @@ public struct PlayerStatsStruct
     public float DashDamage;
     public float DashCooldown;
     public float DashDistance;
-    public int Keys;
+    public int Chips;
     public int Coins;
     public Color PlayerColor;
     public string Description;

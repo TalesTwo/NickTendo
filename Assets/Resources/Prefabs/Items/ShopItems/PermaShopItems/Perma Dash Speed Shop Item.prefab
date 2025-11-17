@@ -47,10 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dash Speed Shop Item
   shrinkDuration: 0.5
-  itemValue: 50
+  itemValue: 1
   buffValue: 0.1
   buffType: 17
-  flavorText: 
+  flavorText: "Holy canoly! You\u2019ll be marginally faster!"
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0
