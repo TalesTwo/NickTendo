@@ -53,6 +53,8 @@ namespace Managers
             _settingsMenu.SetActive(false);
             _startButton.onClick.AddListener(StartGameButton);
             _settingsButton.onClick.AddListener(OpenSettings);
+            // disable the button to prevent multiple clicks
+            _loginButton.interactable = true;
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
