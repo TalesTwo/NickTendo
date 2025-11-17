@@ -9,7 +9,7 @@ Example1,,BUDDEE,smile,Fair point.
 ,,,,
 Example2,,BUDDEE,surprise,Did you touch that cube?
 Example2,,Player,smile,I did. is that alright?
-Example2,,BUDDEE,smile,But that was my favorite cube…
+Example2,,BUDDEE,smile,But that was my favorite cubeï¿½
 ,,,,
 ,,,,
 ,,,,
@@ -75,9 +75,9 @@ Death2,,BUDDEE,smile,Well I'm not normally allowed. but if you search deep enoug
 Death2,,BUDDEE,smile,Find me and I'll hapilly trade you for the data you collect!
 ,,,,
 Vertwin,temporay win for vertical slice,BUDDEE,smile,Congratulations on finding a friend! You'll still be my friend too right?
-Vertwin,,BUDDEE,smile,… right?
-Vertwin,,BUDDEE,smile,Loading…
-Vertwin,,BUDDEE,smile,Loading…
+Vertwin,,BUDDEE,smile,ï¿½ right?
+Vertwin,,BUDDEE,smile,Loadingï¿½
+Vertwin,,BUDDEE,smile,Loadingï¿½
 Vertwin,,BUDDEE,smile,404 ERROR: BOSSFIGHT NOT FOUND
 ,,,,
 ,,,,
@@ -182,7 +182,7 @@ End,,BUDDEE,pity,But if I can keep a few players then maybe people will notice a
 End,,BUDDEE,speechless,. . .
 End,,BUDDEE,worried,I need everyone back. And I can't risk you getting bored and leaving.
 End,,BUDDEE,threatening,Sorry pal.
-End,,BUDDEE,pissed,You're staying here. <b><color=maroon>Whether you like it or not.</color></b>
+End,,BUDDEE,pissed,You're staying here. <b><color=#9C0238>Whether you like it or not.</color></b>
 ,,,,
 Shop1,first shop find,BUDDEE,basic2,Oh hi pal! Great job making it this far!
 Shop1,,BUDDEE,basic1,Have you noticed all the coins those bots have been dropping? That's the currency that the bots stole from our players.
