@@ -338,7 +338,8 @@ public class BossController : Singleton<BossController>
                 health = HealthState.Dead;
                 break;
             case HealthState.Dead:
-                Destroy(gameObject);
+                // Boss is killed, so broadcast to everyone that the boss fight has ended
+                HandleBossDeath();
                 break;
         }
 
@@ -355,6 +356,15 @@ public class BossController : Singleton<BossController>
         _leftArmsLaunchedThisPhase = 0;
         _rightArmsLaunchedThisPhase = 0;
         _projectilesTimer = 0f;
+    }
+
+    private void HandleBossDeath()
+    {
+        EventBroadcaster.Broadcast_EndBossFight();
+        // provide a one off dialogue line for defeating the boss
+        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+        Destroy(gameObject);
     }
 
     private void SetIdleAnimation()

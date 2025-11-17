@@ -29,7 +29,7 @@ namespace Interaction
         {
             // Start the dialogue with Nick!
             _waitingForDialogueToEnd = true;
-            GameStateManager.Instance.SetBuddeeDialogState("Example2");
+            GameStateManager.Instance.SetBuddeeDialogState("Final");
             EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
             
         }

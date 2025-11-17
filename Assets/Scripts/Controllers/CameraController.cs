@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
         EventBroadcaster.StartBossFight += BossFightStarting;
         EventBroadcaster.PlayerDeath += BossFightEnding;
+        EventBroadcaster.EndBossFight += BossFightEnding;
     }
 
     private void OnPlayerDamaged()
@@ -51,6 +52,8 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
         EventBroadcaster.StartBossFight -= BossFightStarting;
         EventBroadcaster.PlayerDeath -= BossFightEnding;
+        EventBroadcaster.EndBossFight -= BossFightEnding;
+        
     }
     
     // Update is called once per frame
