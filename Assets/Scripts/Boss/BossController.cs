@@ -338,6 +338,7 @@ public class BossController : Singleton<BossController>
                 health = HealthState.Dead;
                 break;
             case HealthState.Dead:
+                Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
                 Destroy(gameObject);
                 break;
         }
@@ -449,7 +450,7 @@ public class BossController : Singleton<BossController>
         {
             // set direction of the projectile
             Vector2 direction = (_player.transform.position - transform.position).normalized;
-            
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
             SpawnProjectile(stat, direction);
             
             // wait time for next projectile
@@ -490,7 +491,9 @@ public class BossController : Singleton<BossController>
                     launch = true;
                 }
             }
-            
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
+
             yield return new WaitForSeconds(stat.spreadWaitTime);
         }
         battle = BattleState.Idle;
@@ -507,7 +510,6 @@ public class BossController : Singleton<BossController>
         Rigidbody2D projectileRb = newProjectile.GetComponent<Rigidbody2D>();
         projectileRb.velocity = direction * stat.projectileSpeed;
         newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
-        Managers.AudioManager.Instance.PlayBUDDEEShootSound();
                             
         // set damage of projectile
         EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();
