@@ -50,7 +50,7 @@ MonoBehaviour:
   itemValue: 40
   buffValue: 0.25
   buffType: 5
-  flavorText: 
+  flavorText: "Lord knows the damage I\u2019d do with this puppy."
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

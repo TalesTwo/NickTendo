@@ -172,6 +172,8 @@ public class ShopUIManager : MonoBehaviour
             if(!DontCareAboutMoney) PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins,-RerollCost);
             ShopM.GetRandomShopList();
             ShopM.SetItems();
+            BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+            BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Hover over the items to learn more!");
         }
         else
         {

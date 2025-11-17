@@ -50,7 +50,7 @@ MonoBehaviour:
   itemValue: 40
   buffValue: -0.25
   buffType: 6
-  flavorText: 
+  flavorText: "What\u2019s the rush?"
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

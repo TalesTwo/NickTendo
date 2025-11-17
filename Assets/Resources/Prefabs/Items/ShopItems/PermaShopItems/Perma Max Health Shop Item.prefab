@@ -50,7 +50,8 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 1
   buffType: 11
-  flavorText: 
+  flavorText: "I\u2019d be able to swing a home run with the size of this health
+    bar length! If I had arms, anyway."
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -33,6 +33,8 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField]
     private Button _noButton;
 
+    private bool _hasClickedButton;
+
     private void Start()
     {
 
@@ -47,6 +49,8 @@ public class PauseMenuManager : MonoBehaviour
             _yesButton.onClick.AddListener(ConfirmYes);
             _noButton.onClick.AddListener(ConfirmNo);
         }
+
+        _hasClickedButton = false;
     }
 
     private void Update()
@@ -121,7 +125,12 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1;
         EventBroadcaster.Broadcast_StartStopAction(); 
         EventBroadcaster.Broadcast_GameUnpause();
-        SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
+        if (!_hasClickedButton)
+        {
+            _hasClickedButton = true;
+            SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
+            Invoke(nameof(ResetBool), 0.99f);
+        }
         Invoke(nameof(UnmuteStuff), 0.98f);
     }
 
@@ -145,5 +154,8 @@ public class PauseMenuManager : MonoBehaviour
         AudioManager.Instance.PlayUISelectSound();
     }
 
-    
+    private void ResetBool()
+    {
+        _hasClickedButton = false;
+    }
 }
