@@ -39,7 +39,6 @@ namespace Managers
         public AudioClip BUDDEEShoot;
         public AudioClip BUDDEEDamaged;
         public AudioClip SpawningEnemies;
-        public AudioSource DizzySource;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
