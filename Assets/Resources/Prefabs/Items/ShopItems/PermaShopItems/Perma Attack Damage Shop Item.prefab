@@ -52,6 +52,7 @@ MonoBehaviour:
   buffType: 13
   flavorText: "With the power of violence! Yeah, that\u2019s how that phrase goes.
     probably."
+  isPermaUpgrade: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0
