@@ -263,6 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasTransform: {fileID: 0}
   _background: {fileID: 7675647087593194859}
+  _backgroundImage: {fileID: 1703656157066436543}
   _text: {fileID: 5918528010788285512}
   _xPadding: 40
   _yPadding: 0

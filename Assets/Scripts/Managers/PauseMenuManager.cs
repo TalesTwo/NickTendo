@@ -71,8 +71,8 @@ public class PauseMenuManager : MonoBehaviour
             EventBroadcaster.Broadcast_StartStopAction();
             EventBroadcaster.Broadcast_GamePause();
             Time.timeScale = 0;
+            Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
         }
-        Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
     private void ClosePauseMenu()
@@ -83,8 +83,8 @@ public class PauseMenuManager : MonoBehaviour
             EventBroadcaster.Broadcast_StartStopAction();
             EventBroadcaster.Broadcast_GameUnpause();
             Time.timeScale = 1;
+            Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
         }
-        Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
     }
 
     private void ToggleSFX()
