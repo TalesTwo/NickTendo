@@ -74,7 +74,7 @@ MonoBehaviour:
   HittingWall: {fileID: 0}
   BUDEETalkingTones: []
   BUDDEEToneCount: 3
-  BUDEEDeath: {fileID: 0}
+  BUDEEDeath: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
   RocketArm: {fileID: 8300000, guid: 753f817f9007bad478373fce6dbfffc3, type: 3}
   BUDDEESlam: {fileID: 8300000, guid: adca48e5f9e857f46808d95180c65b75, type: 3}
   Dizzy: {fileID: 8300000, guid: edff1c1f8de3ada448c92d467e321416, type: 3}
