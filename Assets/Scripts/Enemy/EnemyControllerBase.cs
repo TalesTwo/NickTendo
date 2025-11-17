@@ -116,6 +116,7 @@ public class EnemyControllerBase : SpawnableObject
         
         // hook up to the freeze event
         EventBroadcaster.SetWorldFrozen += OnWorldFrozen;
+        EventBroadcaster.EndBossFight += Deactivate;
         
     }
     
@@ -154,6 +155,8 @@ public class EnemyControllerBase : SpawnableObject
         // unsubscribe from event (added this line)
         EventBroadcaster.PlayerDeath -= Deactivate;
         EventBroadcaster.ObjectFellInPit -= OnFellInPit;
+        EventBroadcaster.SetWorldFrozen -= OnWorldFrozen;
+        EventBroadcaster.EndBossFight -= Deactivate;
     }
     
     public void Initialize(int roomDifficulty)
