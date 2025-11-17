@@ -50,7 +50,8 @@ MonoBehaviour:
   itemValue: 25
   buffValue: -0.025
   buffType: 7
-  flavorText: 
+  flavorText: "You shouldn\u2019t rely on powerups too much\u2026 What if you start
+    sprouting arms to swing faster? Not that that\u2019d happen. Ha."
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

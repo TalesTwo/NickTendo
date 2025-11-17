@@ -22,6 +22,7 @@ public class StatDisplayUI : MonoBehaviour
     private float _statDisplayNumber;
     private Dictionary<PlayerStatsEnum, float[]> _statDictionary;
     private bool _isViewing;
+    private bool _isInMenu;
 
     private void Start()
     {
@@ -31,10 +32,13 @@ public class StatDisplayUI : MonoBehaviour
         SetBaseStats();
         _statDisplayNumber = 0;
         _isViewing = false;
+        _isInMenu = false;
 
         EventBroadcaster.PersonaChanged += HandlePersonaChanged;
         EventBroadcaster.PlayerStatsChanged += HandleStatChanged;
         EventBroadcaster.PlayerDeath += HandleDeath;
+        EventBroadcaster.PlayerOpenMenu += OpenMenu;
+        EventBroadcaster.PlayerCloseMenu += CloseMenu;
 
         gameObject.SetActive(false);
     }
@@ -96,7 +100,7 @@ public class StatDisplayUI : MonoBehaviour
             gameObject.SetActive(true);
             _statDisplayText.SetText(_statDisplayNumber.ToString());
             _statDisplayTextBG.SetText(_statDisplayNumber.ToString());
-            if (_statDisplayNumber > 1)
+            if (_statDisplayNumber > 1 && !_isInMenu)
             {
                 gameObject.GetComponent<ScaleEffectsUI>().IncreaseSize();
                 gameObject.GetComponent<ScaleEffectsUI>().DecreaseSize();
@@ -175,5 +179,15 @@ public class StatDisplayUI : MonoBehaviour
         SetStatDict();
         SetBaseStats();
         _statDisplayNumber = 0;
+    }
+
+    void OpenMenu()
+    {
+        _isInMenu = true;
+    }
+
+    void CloseMenu()
+    {
+        _isInMenu = false;
     }
 }
