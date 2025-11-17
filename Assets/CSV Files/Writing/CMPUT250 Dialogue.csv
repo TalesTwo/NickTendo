@@ -198,6 +198,8 @@ Shop2,,BUDDEE,basic2,I have more upgrades for you! And a helpful tip!
 Shop2,,BUDDEE,basic1,You can click the <b>reroll</b> button and pay to bring in a new set of items!
 Shop2,,BUDDEE,smug,Not that I have anything not worth buying.
 ,,,,
+Shop3,,BUDDEE,basic2,shop dialogue explain chips and perma upgrades
+,,,,
 noreturn,player tries to return to spawn,BUDDEE,speechless,. . .
 noreturn,,BUDDEE,basic3,Oh hey!
 noreturn,,BUDDEE,confused,Why are you trying to leave?
