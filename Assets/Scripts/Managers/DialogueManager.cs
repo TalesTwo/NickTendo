@@ -1,8 +1,9 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -20,7 +21,8 @@ namespace Managers
         private Image _npcTransparency;
         public Text playerNameText;
         public Text NPCNameText;
-        public Text dialogueText;
+        public TextMeshProUGUI dialogueText;
+        public GameObject animatedEButton;
 
         [Header("Dialogue CSV")] 
         public TextAsset csv;
@@ -90,6 +92,8 @@ namespace Managers
             _npcTransparency = NPCSprite.gameObject.GetComponent<Image>();
             FillSpriteDictionary();
             ParseDialogue();
+            animatedEButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(2.5f, -2.5f);
+            animatedEButton.SetActive(false);
         }
 
         // not the best way to do it, but it is the most convenient
@@ -291,9 +295,12 @@ namespace Managers
             int talkingtonetimer = 0;
             //Debug.Log(_dialogue[_index][2]);
             _spokenLine = _dialogue[_index][2].Replace("{player_name}", _playerName);
+            dialogueText.text = _spokenLine;
+            dialogueText.maxVisibleCharacters = 0;
+            animatedEButton.SetActive(false);
             foreach (char letter in _spokenLine)
             {
-                dialogueText.text += letter;
+                dialogueText.maxVisibleCharacters++;
                 ++talkingtonetimer;
                 if (talkingtonetimer == 10)
                 {
@@ -308,6 +315,7 @@ namespace Managers
                     yield return new WaitForSeconds(wordSpeed);
                 }
             }
+            animatedEButton.SetActive(true);
             _isTyping = false;
             _skipToEnd = false;
             talkingtonetimer = 0;

@@ -95,12 +95,34 @@ public class Room : MonoBehaviour
             
         }
 
+        // End is the boss room, so once we enter, we wanna permananetly lock the south door
         if (roomType == Types.RoomType.End)
         {
+            // Find the south door and lock it
+            foreach (Transform door in doors.transform)
+            {
+                // cast to a Door
+                Door doorComponent = door.GetComponent<Door>();
+                if (doorComponent != null)
+                {
+                    // get the door trigger interaction
+                    DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+                    if (doorTrigger && doorTrigger.CurrentDoorPosition == Types.DoorClassification.South)
+                    {
+                        doorComponent.SetDoorState(Door.DoorState.Locked);
+                    }
+                }
+            }
+            
+        }
+        if (roomType == Types.RoomType.Final)
+        {
+            
             if (GameStateManager.Instance.GetBuddeeDialogState() != "Vertwin")
             {
                 GameStateManager.Instance.SetEndGameFlag();
             }
+            
         }
         
     }
@@ -108,7 +130,7 @@ public class Room : MonoBehaviour
     public void Update()
     {
         // only run this logic if we are the spawn room
-        if (roomType == Types.RoomType.Spawn || roomType == Types.RoomType.End)
+        if (roomType == Types.RoomType.Spawn || roomType == Types.RoomType.End || roomType == Types.RoomType.End)
         {
             SpecialRoomLogic();
         }

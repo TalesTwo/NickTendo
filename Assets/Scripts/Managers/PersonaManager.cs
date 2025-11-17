@@ -232,6 +232,7 @@ namespace Managers
             //TODO: we need to handle what is gonna carry over between deaths
             int numberOfCoins = PlayerStats.Instance.GetCoins();
             PlayerStats.Instance.SetCarryOverCoins(numberOfCoins/2); // Carry over half the coins
+            PlayerStats.Instance.SetCarryOverChips(PlayerStats.Instance.GetChips()); // Carry over all the chips
             
             if (_personas.ContainsKey(persona))
             {

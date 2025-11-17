@@ -19,6 +19,9 @@ public class PlayerStats : Singleton<PlayerStats>
     private int _chips = 0;
     private int _coins = 0;
     private int _carryOverCoins = 0;
+    private int _carryOverChips = 0;
+
+    private PlayerController _player;
     
     /*
      * Carry over stats (these are permanent upgrades that persist between runs)
@@ -41,6 +44,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public void ApplyCarryOverStats()
     {
         UpdateCoins(_carryOverCoins);
+        UpdateChips(_carryOverChips);
         UpdateMaxHealth(_carryOverMaxHealth);
         // we also need to update the currnt health to match the new max health
         UpdateCurrentHealth(_carryOverMaxHealth, true);
@@ -51,6 +55,12 @@ public class PlayerStats : Singleton<PlayerStats>
         UpdateDashDamage(_carryOverDashDamage);
         UpdateDashCooldown(-_carryOverDashCooldown); // cooldown reduction
         UpdateDashSpeed(_carryOverDashSpeed);
+    }
+    
+    public void Start()
+    {
+        // if the player is already dead, we dont want to allow further health updates
+        _player = PlayerManager.Instance.GetPlayer().GetComponent<PlayerController>();
     }
     
     
@@ -68,6 +78,7 @@ public class PlayerStats : Singleton<PlayerStats>
     public int GetChips() { return _chips; } 
     public int GetCoins() { return _coins; }
     public int GetCarryOverCoins() { return _carryOverCoins; }
+    public int GetCarryOverChips() { return _carryOverChips; }
 
     public void SetPlayerName(string NewName) { _playerName = NewName; }
     public void SetCurrentHealth(float NewHealth) { _currentHealth = NewHealth; }
@@ -82,9 +93,26 @@ public class PlayerStats : Singleton<PlayerStats>
     public void SetChips(int NewChips) { _chips = NewChips; }
     public void SetCoins(int NewCoins) { _coins = NewCoins; }
     public void SetCarryOverCoins(int NewCarryOverCoins) { _carryOverCoins = NewCarryOverCoins; }
+    public void SetCarryOverChips(int NewCarryOverChips) { _carryOverChips = NewCarryOverChips; }
 
     public void UpdateCurrentHealth(float UpdateValue, bool IgnoreEvents = false)
     {
+        if (_player == null)
+        {
+            GameObject player = PlayerManager.Instance.GetPlayer();
+            if (player != null)
+            {
+                _player = player.GetComponent<PlayerController>();
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        
+        if (_player.GetIsDeadFlag()) {return;}
+        
         _currentHealth += UpdateValue;
         //DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
         if (!IgnoreEvents)
@@ -207,7 +235,12 @@ public class PlayerStats : Singleton<PlayerStats>
         else if (BuffType == PlayerStatsEnum.Chips)
         {
             AudioManager.Instance.PlayCoinGetSound(1f, 0f);
-            UpdateChips(((int)BuffValue));
+            UpdateChips((int)BuffValue);
+            if (BuffValue < 0)
+            {
+                SetCarryOverChips(Mathf.Max(0, GetCarryOverChips() + (int)BuffValue));
+            }
+
         }
         else if (BuffType == PlayerStatsEnum.Coins)
         {
