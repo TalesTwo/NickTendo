@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
@@ -37,7 +38,6 @@ public class PauseMenuManager : MonoBehaviour
 
     private void Start()
     {
-
         _closeButton.onClick.AddListener(ClosePauseMenu);
         _sfxToggle.onClick.AddListener(ToggleSFX);
         _musicToggle.onClick.AddListener(ToggleMusic);  
@@ -49,17 +49,19 @@ public class PauseMenuManager : MonoBehaviour
             _yesButton.onClick.AddListener(ConfirmYes);
             _noButton.onClick.AddListener(ConfirmNo);
         }
-
         _hasClickedButton = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (gameObject.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
             {
-                ClosePauseMenu();
+                if (gameObject.activeInHierarchy)
+                {
+                    ClosePauseMenu();
+                }
             }
         }
     }

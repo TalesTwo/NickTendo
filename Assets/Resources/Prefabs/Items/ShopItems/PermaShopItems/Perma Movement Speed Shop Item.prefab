@@ -52,6 +52,7 @@ MonoBehaviour:
   buffType: 12
   flavorText: 'Reminds me of a quote I said (first) in my formative years: The problem
     of being faster than light is that you only live in darkness...'
+  isPermaUpgrade: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

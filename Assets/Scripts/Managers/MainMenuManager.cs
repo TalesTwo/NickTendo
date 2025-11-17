@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -50,6 +52,9 @@ namespace Managers
             // disable the button to prevent multiple clicks
             _loginButton.interactable = true;
             _hasClickedButton = false;
+            
+            DebugUtils.Log(SceneManager.GetActiveScene().name);
+                
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)

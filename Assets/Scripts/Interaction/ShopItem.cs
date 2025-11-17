@@ -13,13 +13,21 @@ public class ShopItem : BaseItem
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
     public string flavorText;
+    public bool isPermaUpgrade = false;
     // Just returns the desctiption for the item
     public string GetTooltipText()
     {
         string itemDescription = "";
         itemDescription += "Stat: " + AddSpace(buffType) + "\n";
         itemDescription += BuffText();
-        itemDescription += "Cost: " + itemValue + "\n";
+        if (isPermaUpgrade)
+        {
+            itemDescription += "Cost: " + itemValue + " chip\n";
+        }
+        else
+        {
+            itemDescription += "Cost: " + itemValue + " coins\n";
+        }
         itemDescription += "Click to buy!\n\n";
         return itemDescription;
     }
