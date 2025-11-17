@@ -34,13 +34,18 @@ public class BossDialogueHitbox : MonoBehaviour
         {
             EventBroadcaster.Broadcast_SetWorldFrozen(false);
         }
+        if (boss != null){boss.SetActive(true);}
+        if (buddee != null){buddee.SetActive(false);}
         
-        boss.SetActive(true);
-        buddee.SetActive(false);
         
         EventBroadcaster.Broadcast_StartBossFight();
         
         Destroy(this.gameObject);
+    }
+    
+    public void OnDestroy()
+    {
+        EventBroadcaster.StopDialogue -= OnDialogueEnd;
     }
     
     // create the on trigger enter method
