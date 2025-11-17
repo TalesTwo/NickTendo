@@ -69,7 +69,7 @@ public class CameraController : MonoBehaviour
             targetPosition.z = gameObject.transform.position.z;
             
             transform.position = Vector3.Lerp(transform.position, targetPosition, cameraSpeed*Time.deltaTime);
-            Debug.Log(transform.position);
+            //Debug.Log(transform.position);
         }
         
 
@@ -78,12 +78,14 @@ public class CameraController : MonoBehaviour
 
     private void BossFightStarting()
     {
+        Debug.Log("Boss fight starting, switching to boss camera");
         StartCoroutine(ToBossCamera());
         _inBossFight = true;
     }
 
     private void BossFightEnding()
     {
+        Debug.Log("Boss fight ending, returning to normal camera");
         StartCoroutine(ToNormalCamera());
         _inBossFight = false;
     }

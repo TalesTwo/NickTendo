@@ -19,6 +19,8 @@ public class PlayerStats : Singleton<PlayerStats>
     private int _chips = 0;
     private int _coins = 0;
     private int _carryOverCoins = 0;
+
+    private PlayerController _player;
     
     /*
      * Carry over stats (these are permanent upgrades that persist between runs)
@@ -53,6 +55,12 @@ public class PlayerStats : Singleton<PlayerStats>
         UpdateDashSpeed(_carryOverDashSpeed);
     }
     
+    public void Start()
+    {
+        // if the player is already dead, we dont want to allow further health updates
+        _player = PlayerManager.Instance.GetPlayer().GetComponent<PlayerController>();
+    }
+    
     
     public string GetPlayerName() { return _playerName; }
     
@@ -85,6 +93,22 @@ public class PlayerStats : Singleton<PlayerStats>
 
     public void UpdateCurrentHealth(float UpdateValue, bool IgnoreEvents = false)
     {
+        if (_player == null)
+        {
+            GameObject player = PlayerManager.Instance.GetPlayer();
+            if (player != null)
+            {
+                _player = player.GetComponent<PlayerController>();
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        
+        if (_player.GetIsDeadFlag()) {return;}
+        
         _currentHealth += UpdateValue;
         //DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());
         if (!IgnoreEvents)
