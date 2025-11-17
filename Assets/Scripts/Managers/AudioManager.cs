@@ -324,14 +324,8 @@ namespace Managers
         }
         public void PlayBUDDEEDizzy(float volume = 1, float deviation = 0)
         {
-            AudioSource src = DizzySource;
-            src.clip = Dizzy;
-            src.loop = true;
-            src.Play();
-        }
-        public void StopBUDDEEDizzy()
-        {
-            DizzySource.Stop();
+            PlaySFX(Dizzy, volume, deviation);
+
         }
 
 

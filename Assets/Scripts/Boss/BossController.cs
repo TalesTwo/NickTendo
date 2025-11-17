@@ -138,6 +138,7 @@ public class BossController : Singleton<BossController>
     private int _rightArmsLaunchedThisPhase = 0;
     private int _leftArmsLaunchedThisPhase = 0;
     private int _armsCurrentlyLaunched = 0;
+    private bool _istired = false;
     
     // Start is called before the first frame update
     void Start()
@@ -285,13 +286,20 @@ public class BossController : Singleton<BossController>
     private IEnumerator ExhaustionTimer()
     {
         float timer = 0f;
+        _istired = true;
+        float dizzytimer = 0f;
         Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
         while (timer < _currentStats.exhaustionTime)
         {
+            dizzytimer += Time.deltaTime;
+            if(dizzytimer >= 0.5f && _istired)
+            {
+                Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
+                dizzytimer = 0;
+            }
             timer += Time.deltaTime;
             yield return null;
         }
-        Managers.AudioManager.Instance.StopBUDDEEDizzy();
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
         BossScreenController.Instance.SetIsExhausted(false);
@@ -306,8 +314,8 @@ public class BossController : Singleton<BossController>
     {
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
+        _istired = false;
 
-        Managers.AudioManager.Instance.StopBUDDEEDizzy();
         BossScreenController.Instance.SetIsExhausted(false);
         expressionsAnimator.SetHurtAnimation();
         Invoke(nameof(SetIdleAnimation), 0.3f);
