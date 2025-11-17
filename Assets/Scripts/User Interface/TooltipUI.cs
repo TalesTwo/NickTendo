@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TooltipUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class TooltipUI : MonoBehaviour
     private RectTransform _canvasTransform;
     [SerializeField]
     private RectTransform _background;
+    [SerializeField]
+    private Image _backgroundImage;
     [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
@@ -28,12 +31,19 @@ public class TooltipUI : MonoBehaviour
     private float _baseYPosPadding;
     private bool _hasSetXYBeenCalled;
 
+    private Color _defaultTextColor;
+    private Color _defaultBackgroundColor;
+
     private void Awake()
     {
         _tooltipTransform = GetComponent<RectTransform>();
         _baseXPosPadding = _xPositionPadding;
         _baseYPosPadding = _yPositionPadding;
         _hasSetXYBeenCalled = false;
+
+        _defaultTextColor = _text.color;
+        _defaultBackgroundColor = _backgroundImage.color;
+        HideTooltip();
     }
 
     private void SetTooltipText(string TooltipText)
@@ -49,13 +59,17 @@ public class TooltipUI : MonoBehaviour
 
     public void ShowTooltip(string TooltipText)
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        _text.color = _defaultTextColor;
+        _backgroundImage.color = _defaultBackgroundColor;
         SetTooltipText(TooltipText);
     }
 
     public void HideTooltip()
     {
-        gameObject.SetActive(false);
+        _text.color = Color.clear;
+        _backgroundImage.color = Color.clear;
+        //gameObject.SetActive(false);
     }
     
     private void Update()
