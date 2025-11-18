@@ -127,10 +127,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 82165364541249530, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Zenith
+      objectReference: {fileID: 0}
+    - target: {fileID: 92631472758583040, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Blackgate
+      objectReference: {fileID: 0}
+    - target: {fileID: 396014052240985930, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: '[PVP] Friend Hater'
+      objectReference: {fileID: 0}
+    - target: {fileID: 542324033427407930, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: decidueye
+      objectReference: {fileID: 0}
     - target: {fileID: 722564886055871594, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: _settingsMenu
       value: 
       objectReference: {fileID: 1643214928}
+    - target: {fileID: 1404278465021766140, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800592819504428812, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: '[PVP] Friend Hater'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063204952223739836, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: Zenith
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074759590440261446, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: blackgate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433487962199575938, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Little Men Crew
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663567770605664832, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Bazelgeuse
+      objectReference: {fileID: 0}
     - target: {fileID: 3369862297659264321, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -211,9 +251,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4140204204325863942, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: Bazelgeuse
+      objectReference: {fileID: 0}
+    - target: {fileID: 4343560655347217860, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: Little Men Crew
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032933806710659210, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: rain
+      objectReference: {fileID: 0}
     - target: {fileID: 5812353169745137729, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366545807080300748, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Rain
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630186636341209352, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -317
       objectReference: {fileID: 0}
     - target: {fileID: 7219185593161030145, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_Name
@@ -222,6 +282,18 @@ PrefabInstance:
     - target: {fileID: 7219185593161030145, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227912928595888677, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Server Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718282755190316444, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Name
+      value: Big Men Crew
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547489364985865690, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: Big Men Crew
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

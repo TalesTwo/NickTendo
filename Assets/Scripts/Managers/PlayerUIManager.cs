@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerUIManager : Singleton<PlayerUIManager>
@@ -100,15 +101,18 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _enemyCounter.SetActive(false); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (!_isPlayerInMenu && !_isInPauseMenu)
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
             {
-                GameObject _pauseMenuInstace = Instantiate(_pauseMenu);
-                _pauseMenuInstace.GetComponent<PauseMenuManager>()?.OpenPauseMenu();
-                _isInPauseMenu = true;
+                if (!_isPlayerInMenu && !_isInPauseMenu)
+                {
+                    GameObject _pauseMenuInstace = Instantiate(_pauseMenu);
+                    _pauseMenuInstace.GetComponent<PauseMenuManager>()?.OpenPauseMenu();
+                    _isInPauseMenu = true;
+                }
             }
-        }
+        }        
     }
 
     public void SetHealth()
@@ -133,8 +137,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         {
             gameObject.SetActive(true);
             _isHUDActive = true;
-        }
-        
+        }        
     }
 
     void HandlePersonaChanged(Types.Persona P)

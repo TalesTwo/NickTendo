@@ -3,13 +3,14 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
     public class MainMenuManager : MonoBehaviour
     {
         [SerializeField] private SceneField _initialGameScene;
-        [SerializeField] private GameObject _subTitle;
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private GameObject _settingsMenu;
@@ -22,6 +23,7 @@ namespace Managers
         [SerializeField] private Text _errorMessageTextShadow;
         
         private Button _loginButton;
+        private bool _hasClickedButton;
 
         public void Start()
         {
@@ -43,16 +45,16 @@ namespace Managers
                 _errorMessageText.gameObject.SetActive(false);
                 _errorMessageTextShadow.gameObject.SetActive(false);
             }
-            
-            if(_subTitle != null)
-            {
-                //_subTitle.GetComponent<ScaleEffectsUI>().StopBreathe();
-                _subTitle.GetComponent<ScaleEffectsUI>().StartBreathe();
-            }
 
             _settingsMenu.SetActive(false);
             _startButton.onClick.AddListener(StartGameButton);
             _settingsButton.onClick.AddListener(OpenSettings);
+            // disable the button to prevent multiple clicks
+            _loginButton.interactable = true;
+            _hasClickedButton = false;
+            
+            DebugUtils.Log(SceneManager.GetActiveScene().name);
+                
         }
 
         private IEnumerator ShowErrorMessage(string message, float displayTime)
@@ -104,7 +106,12 @@ namespace Managers
         {
             AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
             PlayerStats.Instance.SetPlayerName("Player");
-            StartGame();
+            if (!_hasClickedButton)
+            {
+                _hasClickedButton = true;
+                Invoke(nameof(ResetBool), 1.1f);
+                StartGame();
+            }
         }
 
         private void OpenSettings()
@@ -113,11 +120,11 @@ namespace Managers
         }
         private void StartGame()
         {
-            foreach (var obj in _objectsToHideWhenLoading)
+            /*foreach (var obj in _objectsToHideWhenLoading)
             {
                 if (obj != null)
                     obj.SetActive(false);
-            }
+            }*/
             var playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
             if (playerController != null)
             {
@@ -125,6 +132,12 @@ namespace Managers
             }
             SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
         }
+
+        private void ResetBool()
+        {
+            _hasClickedButton = false;
+        }
+
 
         public void IconNoise()
         {

@@ -47,10 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dash Cooldown Shop Item
   shrinkDuration: 0.5
-  itemValue: 50
+  itemValue: 1
   buffValue: -0.05
   buffType: 16
-  flavorText: 
+  flavorText: "What\u2019s the rush?"
+  isPermaUpgrade: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

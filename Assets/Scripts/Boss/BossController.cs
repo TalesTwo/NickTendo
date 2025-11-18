@@ -138,6 +138,7 @@ public class BossController : Singleton<BossController>
     private int _rightArmsLaunchedThisPhase = 0;
     private int _leftArmsLaunchedThisPhase = 0;
     private int _armsCurrentlyLaunched = 0;
+    private bool _istired = false;
     
     // Start is called before the first frame update
     void Start()
@@ -285,8 +286,17 @@ public class BossController : Singleton<BossController>
     private IEnumerator ExhaustionTimer()
     {
         float timer = 0f;
+        _istired = true;
+        float dizzytimer = 0f;
+        Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
         while (timer < _currentStats.exhaustionTime)
         {
+            dizzytimer += Time.deltaTime;
+            if(dizzytimer >= 0.5f && _istired)
+            {
+                Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
+                dizzytimer = 0;
+            }
             timer += Time.deltaTime;
             yield return null;
         }
@@ -304,7 +314,8 @@ public class BossController : Singleton<BossController>
     {
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
-        
+        _istired = false;
+
         BossScreenController.Instance.SetIsExhausted(false);
         expressionsAnimator.SetHurtAnimation();
         Invoke(nameof(SetIdleAnimation), 0.3f);
@@ -316,6 +327,7 @@ public class BossController : Singleton<BossController>
         {
             case HealthState.Healthy:
                 health = HealthState.Light;
+
                 break;
             case HealthState.Light:
                 health = HealthState.Medium;
@@ -327,7 +339,8 @@ public class BossController : Singleton<BossController>
                 health = HealthState.Dead;
                 break;
             case HealthState.Dead:
-                Destroy(gameObject);
+                // Boss is killed, so broadcast to everyone that the boss fight has ended
+                HandleBossDeath();
                 break;
         }
 
@@ -344,6 +357,16 @@ public class BossController : Singleton<BossController>
         _leftArmsLaunchedThisPhase = 0;
         _rightArmsLaunchedThisPhase = 0;
         _projectilesTimer = 0f;
+    }
+
+    private void HandleBossDeath()
+    {
+        Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
+        EventBroadcaster.Broadcast_EndBossFight();
+        // provide a one off dialogue line for defeating the boss
+        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+        Destroy(gameObject);
     }
 
     private void SetIdleAnimation()
@@ -438,7 +461,7 @@ public class BossController : Singleton<BossController>
         {
             // set direction of the projectile
             Vector2 direction = (_player.transform.position - transform.position).normalized;
-            
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
             SpawnProjectile(stat, direction);
             
             // wait time for next projectile
@@ -479,7 +502,9 @@ public class BossController : Singleton<BossController>
                     launch = true;
                 }
             }
-            
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
+            Managers.AudioManager.Instance.PlayBUDDEEShootSound();
+
             yield return new WaitForSeconds(stat.spreadWaitTime);
         }
         battle = BattleState.Idle;
@@ -496,7 +521,6 @@ public class BossController : Singleton<BossController>
         Rigidbody2D projectileRb = newProjectile.GetComponent<Rigidbody2D>();
         projectileRb.velocity = direction * stat.projectileSpeed;
         newProjectile.GetComponent<EnemyProjectileController>().SetAngle(direction);
-        Managers.AudioManager.Instance.PlayBUDDEEShootSound();
                             
         // set damage of projectile
         EnemyProjectileController controller = newProjectile.GetComponent<EnemyProjectileController>();

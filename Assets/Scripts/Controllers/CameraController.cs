@@ -5,112 +5,176 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private Transform _playerTransform;
-    public float cameraSpeed = 0.05f;
-    public float normalCameraSize = 5f;
-    
+    [Header("Follow")]
+    public float followSpeed = 5f;
+    private Transform player;
+
+    [Header("Normal Camera")]
+    public float normalSize = 5f;
+
     [Header("Boss Camera")]
-    public float BossCameraSize = 10f;
-    public float BossCameraTransitionTime;
-    public float BossCameraOffsetY;
-    public float BossCameraLeanPercentage;
-    private Vector3 _bossCameraAnchorPoint;
-    private bool _inBossFight = false;
+    public float bossSize = 10f;
+    public float bossTransitionTime = 1.5f;
+    public float bossOffsetY = -5f;
+    public float leanPercent = 0.15f;
+    private Vector3 bossAnchor;
+
+    private Camera cam;
+    private CameraShake cameraShake;
+
+    private Coroutine zoomRoutine;
+    private bool inBossFight = false;
+    private bool transitioning = false;
     
-    
-    private float _cameraVelocity;
-    private Vector3 _cameraVelocity2;
-    private CameraShake _cameraShake;
-    
-    private Camera _camera;
-    
-    // Start is called before the first frame update
-    void Start()
+    private bool forceSnap = false;
+
+
+    private void Start()
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        _cameraShake = GetComponent<CameraShake>();
-        _camera = GetComponent<Camera>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        cam = GetComponent<Camera>();
+        cameraShake = GetComponent<CameraShake>();
+
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
-        EventBroadcaster.StartBossFight += BossFightStarting;
-        EventBroadcaster.PlayerDeath += BossFightEnding;
+        EventBroadcaster.StartBossFight += OnBossStart;
+        EventBroadcaster.PlayerDeath += OnBossEnd;
+        EventBroadcaster.GameStarted += ResetCamera;
+        EventBroadcaster.GameRestart += ResetCamera;
+        EventBroadcaster.EndBossFight += OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete += ResetCamera;
+    }
+
+    private void OnDestroy()
+    {
+        EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
+        EventBroadcaster.StartBossFight -= OnBossStart;
+        EventBroadcaster.PlayerDeath -= OnBossEnd;
+        EventBroadcaster.GameStarted -= ResetCamera;
+        EventBroadcaster.GameRestart -= ResetCamera;
+        EventBroadcaster.EndBossFight -= OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete -= ResetCamera;
+    }
+
+    public void ResetCamera()
+    {
+        DebugUtils.LogSuccess("Camera Reset");
+
+        if (player != null)
+        {
+            forceSnap = true;  // Tell FixedUpdate to snap next frame
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
+        if (forceSnap)
+        {
+            // Hard snap one more time so camera shake doesn't move it
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+            forceSnap = false;
+            // Skip following logic for 1 frame
+            return;
+        }
+        
+        if (!transitioning) 
+        {
+            if (!inBossFight)
+            {
+                FollowPlayer();
+            }
+            else
+            {
+                FollowBossAnchor();
+            }
+        }
+
+        // Add camera shake offset
+        if (cameraShake != null)
+            transform.position += cameraShake.CurrentOffset;
+    }
+
+    private void FollowPlayer()
+    {
+        Vector3 target = new Vector3(player.position.x, player.position.y, -1f);
+        transform.position = Vector3.Lerp(transform.position, target, followSpeed * Time.deltaTime);
+    }
+
+    private void FollowBossAnchor()
+    {
+        // Lean toward the player slightly
+        Vector3 toPlayer = (player.position - bossAnchor).normalized * leanPercent;
+        Vector3 target = bossAnchor + toPlayer;
+        target.z = -1f;
+
+        transform.position = Vector3.Lerp(transform.position, target, followSpeed * Time.deltaTime);
     }
 
     private void OnPlayerDamaged()
     {
-        // Call the camera shake effect
-        ShakeCamera(0.15f, 0.3f);
-    }
-    
-    public void ShakeCamera(float duration, float magnitude)
-    {
-        _cameraShake?.ShakeOnce(duration, magnitude);
-    }
-    
-    void OnDestroy()
-    {
-        EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
-        EventBroadcaster.StartBossFight -= BossFightStarting;
-        EventBroadcaster.PlayerDeath -= BossFightEnding;
-    }
-    
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        if (!_inBossFight)
-        {
-            Vector2 movement = Vector2.Lerp(_playerTransform.position, gameObject.transform.position, cameraSpeed*Time.deltaTime);
-            gameObject.transform.position = new Vector3(movement.x, movement.y, -1);
-        }
-        else
-        {
-            Vector3 anchorToPlayer = _playerTransform.position - _bossCameraAnchorPoint;
-            Vector3 leanOffset = anchorToPlayer.normalized * BossCameraLeanPercentage;
-            Vector3 targetPosition = _bossCameraAnchorPoint + leanOffset;
-            targetPosition.z = gameObject.transform.position.z;
-            
-            transform.position = Vector3.Lerp(transform.position, targetPosition, cameraSpeed*Time.deltaTime);
-            Debug.Log(transform.position);
-        }
-        
-
-        if (_cameraShake != null) { transform.position += _cameraShake.CurrentOffset; }
+        cameraShake?.ShakeOnce(0.15f, 0.3f);
     }
 
-    private void BossFightStarting()
-    {
-        StartCoroutine(ToBossCamera());
-        _inBossFight = true;
-    }
+    // -------------------------
+    //        BOSS EVENTS
+    // -------------------------
 
-    private void BossFightEnding()
-    {
-        StartCoroutine(ToNormalCamera());
-        _inBossFight = false;
-    }
-
-    private IEnumerator ToBossCamera()
+    private void OnBossStart()
     {
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
-        _bossCameraAnchorPoint = new Vector2(boss.gameObject.transform.position.x, boss.gameObject.transform.position.y + BossCameraOffsetY);
-        while (_camera.orthographicSize - BossCameraSize < 0f || Vector3.Distance(_bossCameraAnchorPoint, gameObject.transform.position) > 0.1f)
-        {
-            _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, BossCameraSize + 0.2f, ref _cameraVelocity,
-                BossCameraTransitionTime);
-            Vector3 movement = Vector3.SmoothDamp(gameObject.transform.position, _bossCameraAnchorPoint,
-                ref _cameraVelocity2, BossCameraTransitionTime);
-            movement.z = gameObject.transform.position.z;
-            gameObject.transform.position = movement;
-            yield return null;
-        }
+        bossAnchor = boss.transform.position + new Vector3(0, bossOffsetY, 0);
+
+        StartZoom(bossSize, bossAnchor);
+        inBossFight = true;
     }
 
-    private IEnumerator ToNormalCamera()
+    private void OnBossEnd()
     {
-        while (_camera.orthographicSize - normalCameraSize > 0f)
+        StartZoom(normalSize, player.position);
+        inBossFight = false;
+    }
+
+    // -------------------------
+    //          ZOOM
+    // -------------------------
+
+    private void StartZoom(float targetSize, Vector3 targetPos)
+    {
+        if (zoomRoutine != null)
+            StopCoroutine(zoomRoutine);
+
+        zoomRoutine = StartCoroutine(ZoomRoutine(targetSize, targetPos));
+    }
+
+    private IEnumerator ZoomRoutine(float targetSize, Vector3 targetPos)
+    {
+        transitioning = true;
+
+        float startSize = cam.orthographicSize;
+        Vector3 startPos = transform.position;
+
+        float time = 0f;
+
+        while (time < bossTransitionTime)
         {
-            _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, normalCameraSize - 0.2f, ref _cameraVelocity,
-                BossCameraTransitionTime);
+            time += Time.deltaTime;
+            float t = time / bossTransitionTime;
+
+            // Smooth ease
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            cam.orthographicSize = Mathf.Lerp(startSize, targetSize, t);
+
+            // Only move toward the target anchor during transition
+            Vector3 pos = Vector3.Lerp(startPos, new Vector3(targetPos.x, targetPos.y, -1f), t);
+            transform.position = pos;
+
             yield return null;
         }
+
+        cam.orthographicSize = targetSize;
+        transitioning = false;
     }
 }
+

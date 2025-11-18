@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Dash Damage Shop Item
+  Name: Dash Damage
   shrinkDuration: 0.5
   itemValue: 40
   buffValue: 0.25
   buffType: 5
-  flavorText: 
+  flavorText: "Lord knows the damage I\u2019d do with this puppy."
+  isPermaUpgrade: 0
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

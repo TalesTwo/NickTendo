@@ -45,12 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Attack Cooldown Shop Item
+  Name: Attack Cooldown
   shrinkDuration: 0.5
   itemValue: 25
   buffValue: -0.025
   buffType: 7
-  flavorText: 
+  flavorText: "You shouldn\u2019t rely on powerups too much\u2026 What if you start
+    sprouting arms to swing faster? Not that that\u2019d happen. Ha."
+  isPermaUpgrade: 0
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

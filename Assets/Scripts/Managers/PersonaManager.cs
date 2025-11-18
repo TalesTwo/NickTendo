@@ -232,6 +232,7 @@ namespace Managers
             //TODO: we need to handle what is gonna carry over between deaths
             int numberOfCoins = PlayerStats.Instance.GetCoins();
             PlayerStats.Instance.SetCarryOverCoins(numberOfCoins/2); // Carry over half the coins
+            PlayerStats.Instance.SetCarryOverChips(PlayerStats.Instance.GetChips()); // Carry over all the chips
             
             if (_personas.ContainsKey(persona))
             {
@@ -317,7 +318,7 @@ namespace Managers
                 DashDamage      = baseStats.DashDamage + UnityEngine.Random.Range(-baseStats.DashDamage * statVariancePercent / 100f, baseStats.DashDamage * statVariancePercent / 100f),
                 DashCooldown    = baseStats.DashCooldown + UnityEngine.Random.Range(-baseStats.DashCooldown * statVariancePercent / 100f, baseStats.DashCooldown * statVariancePercent / 100f),
                 DashDistance    = baseStats.DashDistance + UnityEngine.Random.Range(-baseStats.DashDistance * statVariancePercent / 100f, baseStats.DashDistance * statVariancePercent / 100f),
-                Keys            = baseStats.Keys,
+                Chips            = baseStats.Chips,
                 Coins           = baseStats.Coins + UnityEngine.Random.Range(-baseStats.Coins * statVariancePercent / 100, baseStats.Coins * statVariancePercent / 100),
                 PlayerColor     = baseStats.PlayerColor,
                 Description     = baseStats.Description,
@@ -401,7 +402,7 @@ namespace Managers
                         DashDamage      = float.Parse(values[7]),
                         DashCooldown    = float.Parse(values[8]),
                         DashDistance    = float.Parse(values[9]),
-                        Keys            = int.Parse(values[10]),
+                        Chips            = int.Parse(values[10]),
                         Coins           = int.Parse(values[11]),
                         PlayerColor     = ParseColor(values[12]),
                         Description     = values[13],

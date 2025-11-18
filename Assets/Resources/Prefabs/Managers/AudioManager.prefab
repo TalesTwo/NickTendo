@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50acb98204b92be43a558a1807569109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolSize: 10
+  _poolSize: 40
   muteSFX: 0
   muteMusic: 0
   swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
@@ -74,13 +74,14 @@ MonoBehaviour:
   HittingWall: {fileID: 0}
   BUDEETalkingTones: []
   BUDDEEToneCount: 3
-  BUDEEDeath: {fileID: 0}
+  BUDEEDeath: {fileID: 8300000, guid: 8cfb62c6172275d4ea11c50c731e58d8, type: 3}
   RocketArm: {fileID: 8300000, guid: 753f817f9007bad478373fce6dbfffc3, type: 3}
   BUDDEESlam: {fileID: 8300000, guid: adca48e5f9e857f46808d95180c65b75, type: 3}
-  Charge: {fileID: 0}
+  Dizzy: {fileID: 8300000, guid: edff1c1f8de3ada448c92d467e321416, type: 3}
   BUDDEEShoot: {fileID: 8300000, guid: c01c7d353a633db44b7726b8963699b1, type: 3}
   BUDDEEDamaged: {fileID: 8300000, guid: 28c47947f82139246a82962183a6587e, type: 3}
   SpawningEnemies: {fileID: 8300000, guid: 30c1df636c9f0fd46bf675c47684b728, type: 3}
+  DizzySource: {fileID: 0}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shooterMovement: {fileID: 8300000, guid: 22e03fc8260cacf43b6de319d2269c59, type: 3}

@@ -45,12 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Perma Max Health Upgrade
+  Name: Perma Max Health
   shrinkDuration: 0.5
-  itemValue: 75
+  itemValue: 1
   buffValue: 1
   buffType: 11
-  flavorText: 
+  flavorText: "I\u2019d be able to swing a home run with the size of this health
+    bar length! If I had arms, anyway."
+  isPermaUpgrade: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

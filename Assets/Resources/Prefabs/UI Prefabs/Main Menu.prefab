@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9431, y: 0.0000038146973}
+  m_AnchoredPosition: {x: -1.9431, y: 0}
   m_SizeDelta: {x: 127.89, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6738645788190336670
@@ -1328,11 +1328,11 @@ RectTransform:
   - {fileID: 4653945638726868243}
   m_Father: {fileID: 3369862297659264321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27, y: -15}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 27, y: 463}
   m_SizeDelta: {x: 124, y: 124}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &2158631584579245419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,7 +2982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'friend finder: online'
+  m_text: 'friend finders: online'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
   m_sharedMaterial: {fileID: 3873898717485562902, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
@@ -3162,11 +3162,11 @@ RectTransform:
   - {fileID: 8839744548898862276}
   m_Father: {fileID: 3369862297659264321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27, y: -195}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 27, y: 283}
   m_SizeDelta: {x: 124, y: 124}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &7219185593161030145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,7 +3296,6 @@ MonoBehaviour:
   _initialGameScene:
     _sceneAsset: {fileID: 102900000, guid: 0b08ca05f63ff5c4c82bbd89b739ebdf, type: 3}
     _sceneName: Gameplay
-  _subTitle: {fileID: 0}
   _startButton: {fileID: 7423781212069573754}
   _settingsButton: {fileID: 6236287327479292482}
   _settingsMenu: {fileID: 7906050388649151631, guid: c95c0df90aa6fc649863a445df014170, type: 3}
@@ -3369,7 +3368,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'friend finder: online'
+  m_text: 'friend finders: online'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
   m_sharedMaterial: {fileID: 3873898717485562902, guid: 697559bf2dbff114fa72c97c5d57e806, type: 2}
@@ -3896,11 +3895,11 @@ RectTransform:
   - {fileID: 995414456632442620}
   m_Father: {fileID: 3369862297659264321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27, y: -375}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 27, y: 103}
   m_SizeDelta: {x: 124, y: 124}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &8369419779272422467
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,16 +4171,16 @@ RectTransform:
   m_GameObject: {fileID: 8711802032404188676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3369862297659264321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &6284705602383461630
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4391,11 +4390,11 @@ RectTransform:
   - {fileID: 5798424306614591119}
   m_Father: {fileID: 3369862297659264321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27, y: -555}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 27, y: -77}
   m_SizeDelta: {x: 124, y: 124}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &9119180051142881058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4713,9 +4712,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3297904774350979408}
     m_Modifications:
+    - target: {fileID: 330884920356281933, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
+      propertyPath: m_text
+      value: Diabolos
+      objectReference: {fileID: 0}
+    - target: {fileID: 330884920356281933, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1807521366951568907, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
       propertyPath: m_Name
-      value: Server (1)
+      value: Diabolos
       objectReference: {fileID: 0}
     - target: {fileID: 3317575953363702431, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
       propertyPath: m_Pivot.x
@@ -5795,6 +5802,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3297904774350979408}
     m_Modifications:
+    - target: {fileID: 330884920356281933, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
+      propertyPath: m_text
+      value: Siren
+      objectReference: {fileID: 0}
     - target: {fileID: 1807521366951568907, guid: 8b30029c2bb289c4080e6766c7b71955, type: 3}
       propertyPath: m_Name
       value: Server

@@ -35,7 +35,7 @@ namespace Managers
         public AudioClip BUDEEDeath;
         public AudioClip RocketArm;
         public AudioClip BUDDEESlam;
-        public AudioClip Charge;
+        public AudioClip Dizzy;
         public AudioClip BUDDEEShoot;
         public AudioClip BUDDEEDamaged;
         public AudioClip SpawningEnemies;
@@ -297,10 +297,6 @@ namespace Managers
         {
             PlaySFX(BUDDEESlam, volume, deviation);
         }
-        public void PlayBUDDEEChargingSound(float volume = 1, float deviation = 0)
-        {
-            PlaySFX(Charge, volume, deviation);
-        }
         public void PlayBUDDEEShootSound(float volume = 1, float deviation = 0)
         {
             PlaySFX(BUDDEEShoot, volume, deviation);
@@ -325,6 +321,12 @@ namespace Managers
             AudioClip tone = BUDEETalkingTones[tonenumber];
             PlaySFX(tone, volume);
         }
+        public void PlayBUDDEEDizzy(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Dizzy, volume, deviation);
+
+        }
+
 
 
         //General Sounds
