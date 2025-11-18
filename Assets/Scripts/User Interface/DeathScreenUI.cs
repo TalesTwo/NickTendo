@@ -42,6 +42,8 @@ public class DeathScreenUI : MonoBehaviour
     
     public void Login()
     {
+        // brooooo, why is this not the game restart event???
+        // this was driving me insane
         DungeonGeneratorManager.Instance.LoadIntoDungeon();
         PlayerManager.Instance.PlayerAlive();
         gameObject.SetActive(false);

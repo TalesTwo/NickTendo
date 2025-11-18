@@ -220,13 +220,23 @@ namespace Managers
             }
             else
             {
+                //ResetCamera();
                 player.transform.position = newPosition;
             }
         }
 
-        /// <summary>
-        /// Handles fade out → teleport → fade in using SceneFadeManager
-        /// </summary>
+
+        // This function will be used to call the cameras reset function
+        private void ResetCamera()
+        {
+            // Get the camera controller and call its reset function
+            CameraController cameraController = camera.GetComponent<CameraController>();
+            if (cameraController != null)
+            {
+                cameraController.ResetCamera();
+            }
+        }
+        
         private IEnumerator FadeTeleportRoutine(Vector3 newPosition, float fadeDuration, float delay)
         {
             SceneFadeManager fadeManager = SceneFadeManager.Instance;
@@ -235,9 +245,11 @@ namespace Managers
             
             player.transform.position = newPosition;
             camera.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
+            //ResetCamera();
             
             if (delay > 0f)
                 yield return new WaitForSeconds(delay);
+            
             
             yield return fadeManager.FadeIn(fadeDuration);
         }
