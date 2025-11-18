@@ -25,6 +25,9 @@ public class CameraController : MonoBehaviour
     private Coroutine zoomRoutine;
     private bool inBossFight = false;
     private bool transitioning = false;
+    
+    private bool forceSnap = false;
+
 
     private void Start()
     {
@@ -38,6 +41,7 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.GameStarted += ResetCamera;
         EventBroadcaster.GameRestart += ResetCamera;
         EventBroadcaster.EndBossFight += OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete += ResetCamera;
     }
 
     private void OnDestroy()
@@ -48,18 +52,32 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.GameStarted -= ResetCamera;
         EventBroadcaster.GameRestart -= ResetCamera;
         EventBroadcaster.EndBossFight -= OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete -= ResetCamera;
     }
 
     public void ResetCamera()
     {
-        // this will be used on game start, to snap the camera to the player
+        DebugUtils.LogSuccess("Camera Reset");
+
         if (player != null)
         {
+            forceSnap = true;  // Tell FixedUpdate to snap next frame
             transform.position = new Vector3(player.position.x, player.position.y, -1f);
         }
     }
+
     private void FixedUpdate()
     {
+        
+        if (forceSnap)
+        {
+            // Hard snap one more time so camera shake doesn't move it
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+            forceSnap = false;
+            // Skip following logic for 1 frame
+            return;
+        }
+        
         if (!transitioning) 
         {
             if (!inBossFight)
