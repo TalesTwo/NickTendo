@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Perma Attack Damage Upgrade
+  Name: Perma Attack Damage
   shrinkDuration: 0.5
   itemValue: 1
-  buffValue: 0.05
+  buffValue: 0.25
   buffType: 13
   flavorText: "With the power of violence! Yeah, that\u2019s how that phrase goes.
     probably."
