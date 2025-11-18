@@ -35,6 +35,8 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
         EventBroadcaster.StartBossFight += OnBossStart;
         EventBroadcaster.PlayerDeath += OnBossEnd;
+        EventBroadcaster.GameStarted += ResetCamera;
+        EventBroadcaster.GameRestart += ResetCamera;
     }
 
     private void OnDestroy()
@@ -42,8 +44,18 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
         EventBroadcaster.StartBossFight -= OnBossStart;
         EventBroadcaster.PlayerDeath -= OnBossEnd;
+        EventBroadcaster.GameStarted -= ResetCamera;
+        EventBroadcaster.GameRestart -= ResetCamera;
     }
 
+    public void ResetCamera()
+    {
+        // this will be used on game start, to snap the camera to the player
+        if (player != null)
+        {
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+        }
+    }
     private void FixedUpdate()
     {
         if (!transitioning) 
