@@ -125,7 +125,7 @@ vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
 vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
 ,,,,
-Introyell,immediate dialogue when you enter,BUDDEE,basic2,Hello and welcome to the <color=#646AAD><b>Friend Finders: Online</b></color>! 
+Introyell,immediate dialogue when you enter,BUDDEE,basic2,Hello and welcome to <color=#646AAD><b>Friend Finders: Online</b></color>! 
 Introyell,,BUDDEE,basic3,My name's <color=#005773>BUDDEE</color>! I'll be your digital assistant!
 Introyell,,BUDDEE,basic1,Why don't you <color=purple>[WASD]</color> on over here to get started?
 ,,,,
@@ -198,7 +198,7 @@ Shop2,,BUDDEE,basic2,I have more upgrades for you! And a helpful tip!
 Shop2,,BUDDEE,basic1,You can click the <b>reroll</b> button and pay to bring in a new set of items!
 Shop2,,BUDDEE,smug,Not that I have anything not worth buying.
 ,,,,
-Shop3,,BUDDEE,basic2,shop dialogue explain chips and perma upgrades
+,,,,
 ,,,,
 noreturn,player tries to return to spawn,BUDDEE,speechless,. . .
 noreturn,,BUDDEE,basic3,Oh hey!
@@ -221,3 +221,9 @@ Run5,,BUDDEE,bothered,Hopefully.
 PostBossDefeat,,BUDDEE,sniffle,I. . . .  Did not meant to be so mean. I just want to keep my game from shutting down. . . . .
 ,,,,
 Final,,BUDDEE,basic3,Let me introduce you to our other player Nick!
+,,,,
+,,,,
+Shop3,,BUDDEE,confused,Ohhhh! Have you found some of those <color=#3BB143>data chips</color>?
+Shop3,,BUDDEE,gremlin, <color=#3BB143>Data</color> is far more valuable than coins. It's not on your character so there's no risk of losing it!
+Shop3,,BUDDEE,smug,I'm not exactly supposed to but if you give me some I could upgrade your account permanently.
+Shop3,,BUDDEE,gremlin,Sound like a deal?
