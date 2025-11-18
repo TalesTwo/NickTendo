@@ -37,6 +37,7 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDeath += OnBossEnd;
         EventBroadcaster.GameStarted += ResetCamera;
         EventBroadcaster.GameRestart += ResetCamera;
+        EventBroadcaster.EndBossFight += OnBossEnd;
     }
 
     private void OnDestroy()
@@ -46,6 +47,7 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDeath -= OnBossEnd;
         EventBroadcaster.GameStarted -= ResetCamera;
         EventBroadcaster.GameRestart -= ResetCamera;
+        EventBroadcaster.EndBossFight -= OnBossEnd;
     }
 
     public void ResetCamera()

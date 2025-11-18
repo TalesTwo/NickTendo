@@ -218,12 +218,17 @@ Run5,,BUDDEE,smug,Well when you clear the servers they'll come back.
 Run5,,BUDDEE,bothered,Hopefully.
 ,,,,
 ,,,,
-PostBossDefeat,,BUDDEE,sniffle,I. . . .  Did not meant to be so mean. I just want to keep my game from shutting down. . . . .
+PostBossDefeat,,BUDDEE,sniffle,I. . . .  did not meant to be so mean. I just want to keep my game from shutting down. . . . .
+PostBossDefeat,,BUDDEE,sniffle,If you just go out the door at the top of this room. . . . That is were I locked him up. . .
 ,,,,
-Final,,BUDDEE,basic3,Let me introduce you to our other player Nick!
 ,,,,
 ,,,,
 Shop3,,BUDDEE,confused,Ohhhh! Have you found some of those <color=#3BB143>data chips</color>?
 Shop3,,BUDDEE,gremlin, <color=#3BB143>Data</color> is far more valuable than coins. It's not on your character so there's no risk of losing it!
 Shop3,,BUDDEE,smug,I'm not exactly supposed to but if you give me some I could upgrade your account permanently.
 Shop3,,BUDDEE,gremlin,Sound like a deal?
+,,,,
+,,,,
+,,,,
+,,,,
+Final,,BUDDEE,basic3,This is Nick. He is the last active player of this game and you're new friend!
