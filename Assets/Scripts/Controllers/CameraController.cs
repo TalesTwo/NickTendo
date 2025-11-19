@@ -28,7 +28,9 @@ public class CameraController : MonoBehaviour
     
     private bool forceSnap = false;
 
-
+    // CAMERA BUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!! <-----------
+    //TODO: Essentially the player lags behind the player, but if the player respawns after the "snap" that happens at deathm ot works correctly
+    // if the player respawns before allowing that snap to happen, the camera legs behind
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
