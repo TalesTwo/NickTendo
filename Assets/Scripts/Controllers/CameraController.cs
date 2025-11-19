@@ -25,7 +25,12 @@ public class CameraController : MonoBehaviour
     private Coroutine zoomRoutine;
     private bool inBossFight = false;
     private bool transitioning = false;
+    
+    private bool forceSnap = false;
 
+    // CAMERA BUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!! <-----------
+    //TODO: Essentially the player lags behind the player, but if the player respawns after the "snap" that happens at deathm ot works correctly
+    // if the player respawns before allowing that snap to happen, the camera legs behind
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -35,6 +40,10 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged += OnPlayerDamaged;
         EventBroadcaster.StartBossFight += OnBossStart;
         EventBroadcaster.PlayerDeath += OnBossEnd;
+        EventBroadcaster.GameStarted += ResetCamera;
+        EventBroadcaster.GameRestart += ResetCamera;
+        EventBroadcaster.EndBossFight += OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete += ResetCamera;
     }
 
     private void OnDestroy()
@@ -42,10 +51,35 @@ public class CameraController : MonoBehaviour
         EventBroadcaster.PlayerDamaged -= OnPlayerDamaged;
         EventBroadcaster.StartBossFight -= OnBossStart;
         EventBroadcaster.PlayerDeath -= OnBossEnd;
+        EventBroadcaster.GameStarted -= ResetCamera;
+        EventBroadcaster.GameRestart -= ResetCamera;
+        EventBroadcaster.EndBossFight -= OnBossEnd;
+        EventBroadcaster.DungeonGenerationComplete -= ResetCamera;
+    }
+
+    public void ResetCamera()
+    {
+        DebugUtils.LogSuccess("Camera Reset");
+
+        if (player != null)
+        {
+            forceSnap = true;  // Tell FixedUpdate to snap next frame
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+        }
     }
 
     private void FixedUpdate()
     {
+        
+        if (forceSnap)
+        {
+            // Hard snap one more time so camera shake doesn't move it
+            transform.position = new Vector3(player.position.x, player.position.y, -1f);
+            forceSnap = false;
+            // Skip following logic for 1 frame
+            return;
+        }
+        
         if (!transitioning) 
         {
             if (!inBossFight)

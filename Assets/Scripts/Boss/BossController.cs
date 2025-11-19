@@ -327,6 +327,7 @@ public class BossController : Singleton<BossController>
         {
             case HealthState.Healthy:
                 health = HealthState.Light;
+
                 break;
             case HealthState.Light:
                 health = HealthState.Medium;
@@ -340,7 +341,6 @@ public class BossController : Singleton<BossController>
             case HealthState.Dead:
                 // Boss is killed, so broadcast to everyone that the boss fight has ended
                 HandleBossDeath();
-                Destroy(gameObject);
                 break;
         }
 

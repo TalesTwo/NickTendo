@@ -73,6 +73,16 @@ public class ShopTriggerInteraction : TriggerInteractBase
             GameStateManager.Instance.SetBuddeeDialogState(_oldBuddeeState);
             GameStateManager.Instance.UpdateNumberOfTimesTalkedToShopkeeper();
         }
+        else if (count == 3)
+        {
+            _waitingForShopDialogueToFinish = true;
+            _allowInteractons = false;
+            _oldBuddeeState = GameStateManager.Instance.GetBuddeeDialogState();
+            GameStateManager.Instance.SetBuddeeDialogState("Shop3");
+            EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+            GameStateManager.Instance.SetBuddeeDialogState(_oldBuddeeState);
+            GameStateManager.Instance.UpdateNumberOfTimesTalkedToShopkeeper();
+        }
         else
         {
             OpenShop();

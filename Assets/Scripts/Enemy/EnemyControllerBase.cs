@@ -382,8 +382,6 @@ public class EnemyControllerBase : SpawnableObject
         if (Override_damage != -1) { damage = Override_damage; }
         if (Override_stunTimer != -1) { stunTimer = Override_stunTimer; }
         if (Override_knockbackForce != -1) { knockbackForce = Override_knockbackForce; }
-        
-        
         return;
     }
 

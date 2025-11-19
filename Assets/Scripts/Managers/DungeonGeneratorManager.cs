@@ -229,10 +229,11 @@ namespace Managers
             InitializeDungeonGrid(rows, cols);
             // generate the dungeon
             DungeonGeneration();
-            
+            EventBroadcaster.Broadcast_DungeonGenerationComplete();
             // teleport the player into the dungeon
             Vector3 spawnRoomPosition = dungeonRooms[startPos.x][startPos.y].transform.Find("SPAWN_POINT").position;
             PlayerManager.Instance.TeleportPlayer(spawnRoomPosition, false);
+            // Force Snap the camera to the player position
             DisableAllRoomsExceptCurrent((startPos.x, startPos.y));
             if (_IsFirstLoad)
             {
@@ -240,6 +241,8 @@ namespace Managers
                 //EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
             }
             _IsFirstLoad = false;
+            
+            
             
         }
         

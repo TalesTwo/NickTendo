@@ -51,6 +51,7 @@ MonoBehaviour:
   buffValue: 0.1
   buffType: 17
   flavorText: "Holy canoly! You\u2019ll be marginally faster!"
+  isPermaUpgrade: 1
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

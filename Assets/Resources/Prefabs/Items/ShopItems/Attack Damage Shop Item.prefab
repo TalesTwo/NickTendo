@@ -45,13 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Attack Damage Shop Item
+  Name: Attack Damage
   shrinkDuration: 0.5
   itemValue: 30
-  buffValue: 0.25
+  buffValue: 0.5
   buffType: 4
   flavorText: "With the power of violence! Yeah, that\u2019s how that phrase goes.
     probably."
+  isPermaUpgrade: 0
 --- !u!212 &7787435678194780221
 SpriteRenderer:
   m_ObjectHideFlags: 0

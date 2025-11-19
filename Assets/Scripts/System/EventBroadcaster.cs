@@ -178,6 +178,11 @@ namespace System
         public static event SetWorldFrozenHandler SetWorldFrozen;
         public static void Broadcast_SetWorldFrozen(bool isFrozen) { SetWorldFrozen?.Invoke(isFrozen); }
         
+        // Delegate for when the dungeon finishes generating
+        public delegate void DungeonGenerationCompleteHandler();
+        public static event DungeonGenerationCompleteHandler DungeonGenerationComplete;
+        public static void Broadcast_DungeonGenerationComplete() { DungeonGenerationComplete?.Invoke(); }
+        
 
         //-------------------------------- End Activity Events --------------------------------//
     }
