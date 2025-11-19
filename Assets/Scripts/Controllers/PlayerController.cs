@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         
         //debug the horizontal and vertical input
-        DebugUtils.LogSuccess($"Horizontal Input: {horizontalInput}, Vertical Input: {verticalInput}");
+        //DebugUtils.LogSuccess($"Horizontal Input: {horizontalInput}, Vertical Input: {verticalInput}");
         
         // debug if we are on cooldown or not
         
