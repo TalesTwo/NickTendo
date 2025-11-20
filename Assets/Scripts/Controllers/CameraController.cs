@@ -61,13 +61,23 @@ public class CameraController : MonoBehaviour
     {
         DebugUtils.LogSuccess("Camera Reset");
 
+        // Cancel transition/zoom
+        if (zoomRoutine != null)
+        {
+            StopCoroutine(zoomRoutine);
+            zoomRoutine = null;
+        }
+        transitioning = false;
+        inBossFight = false;
+
         if (player != null)
         {
-            forceSnap = true;  // Tell FixedUpdate to snap next frame
+            forceSnap = true;
+            cam.orthographicSize = normalSize; // ensure correct zoom
             transform.position = new Vector3(player.position.x, player.position.y, -1f);
         }
     }
-
+    
     private void FixedUpdate()
     {
         
