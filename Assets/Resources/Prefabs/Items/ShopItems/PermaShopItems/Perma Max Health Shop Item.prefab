@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca1b12113286544a156dc584e577bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Perma Max Health Upgrade
+  Name: Perma Max Health
   shrinkDuration: 0.5
   itemValue: 1
   buffValue: 1
