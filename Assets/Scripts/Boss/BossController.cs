@@ -97,6 +97,7 @@ public class BossController : Singleton<BossController>
     public BattleState battle;
     public ProjectileState projectile;
     private Stats _currentStats;
+    private CameraShake _cameraShake;
     private RoomGridManager _roomGridManager;
     
     [Header("Vulnerable State")]
@@ -104,6 +105,7 @@ public class BossController : Singleton<BossController>
     public float pulseSpeed = 2f;
     public float minIntensity = 0.5f;
     public float maxIntensity = 1f;
+    public float hitFlashDuration = 0.1f;
     private Color _originalColorFace;
     private Color _originalColorScreen;
     
@@ -139,6 +141,7 @@ public class BossController : Singleton<BossController>
     private int _leftArmsLaunchedThisPhase = 0;
     private int _armsCurrentlyLaunched = 0;
     private bool _istired = false;
+    private bool _playerAlive = true;
     
     // Start is called before the first frame update
     void Start()
@@ -146,18 +149,28 @@ public class BossController : Singleton<BossController>
         _player = GameObject.Find("Player");
         _playerController = _player.GetComponent<PlayerController>();
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
+        _cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
         _rocketProjectionsQueue = new Queue<GameObject>();
         _currentStats = attacks[0];
         
         _originalColorFace = faceRenderer.color;
         _originalColorScreen = screenRenderer.color;
+
+        EventBroadcaster.PlayerDeath += Stop;
         
         SetRandomRocketTimers(true, true);
+    }
+
+    private void Stop()
+    {
+        StopAllCoroutines();
+        _playerAlive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_playerAlive) return;
         
         if (_phases >= _currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
             _rightArmAttached)
@@ -255,7 +268,6 @@ public class BossController : Singleton<BossController>
         }
     }
     
-    // todo add function to turn battle state back to idle after launching an arm
     public void BackToIdleState()
     {
         _armsCurrentlyLaunched -= 1;
@@ -322,6 +334,7 @@ public class BossController : Singleton<BossController>
         
         battle = BattleState.Idle;
         Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
+        _cameraShake.ShakeOnce(0.2f, 0.6f);
 
         switch (health)
         {
@@ -590,6 +603,18 @@ public class BossController : Singleton<BossController>
             yield return null;
         }
 
-        spriteRenderer.material.color = original;
+        spriteRenderer.color = hurtPulseColor;
+        StartCoroutine(EndHitFlash(original, spriteRenderer));
+    }
+    
+    private IEnumerator EndHitFlash(Color original, SpriteRenderer spriteRenderer)
+    {
+        float time = 0f;
+        while (time < hitFlashDuration)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.color = original;
     }
 }
