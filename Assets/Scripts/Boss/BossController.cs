@@ -105,6 +105,7 @@ public class BossController : Singleton<BossController>
     public float pulseSpeed = 2f;
     public float minIntensity = 0.5f;
     public float maxIntensity = 1f;
+    public float hitFlashDuration = 0.1f;
     private Color _originalColorFace;
     private Color _originalColorScreen;
     
@@ -334,7 +335,6 @@ public class BossController : Singleton<BossController>
         battle = BattleState.Idle;
         Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
         _cameraShake.ShakeOnce(0.2f, 0.6f);
-        
 
         switch (health)
         {
@@ -603,6 +603,18 @@ public class BossController : Singleton<BossController>
             yield return null;
         }
 
+        spriteRenderer.color = hurtPulseColor;
+        StartCoroutine(EndHitFlash(original, spriteRenderer));
+    }
+    
+    private IEnumerator EndHitFlash(Color original, SpriteRenderer spriteRenderer)
+    {
+        float time = 0f;
+        while (time < hitFlashDuration)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
         spriteRenderer.color = original;
     }
 }
