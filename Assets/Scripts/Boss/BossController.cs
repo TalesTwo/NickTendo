@@ -139,6 +139,7 @@ public class BossController : Singleton<BossController>
     private int _leftArmsLaunchedThisPhase = 0;
     private int _armsCurrentlyLaunched = 0;
     private bool _istired = false;
+    private bool _playerAlive = true;
     
     // Start is called before the first frame update
     void Start()
@@ -151,13 +152,22 @@ public class BossController : Singleton<BossController>
         
         _originalColorFace = faceRenderer.color;
         _originalColorScreen = screenRenderer.color;
+
+        EventBroadcaster.PlayerDeath += Stop;
         
         SetRandomRocketTimers(true, true);
+    }
+
+    private void Stop()
+    {
+        StopAllCoroutines();
+        _playerAlive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_playerAlive) return;
         
         if (_phases >= _currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&
             _rightArmAttached)
