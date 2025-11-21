@@ -61,8 +61,6 @@ public class BossArmController : MonoBehaviour
     public float targetForearmAngle;
     private float _originalArmAngle;
     private float _originalForearmAngle;
-    private float _armVelocity = 0f;
-    private float _forearmVelocity = 0f;
     
     private bool _rocketReady = false;
     [Header("Arm Bounds")]
@@ -147,15 +145,25 @@ public class BossArmController : MonoBehaviour
         
         SetExhaustedBools(true);
 
-        while (Mathf.Abs(arm.transform.eulerAngles.z - targetArmAngle) > 0.5 ||
-               Mathf.Abs(forearm.transform.eulerAngles.z - targetForearmAngle) > 0.5)
+        float time = 0f;
+        
+        Quaternion startArmRot = arm.transform.rotation;
+        Quaternion startForearmRot = forearm.transform.rotation;
+        
+        Quaternion endArmRot = Quaternion.Euler(0, 0, targetArmAngle);
+        Quaternion endForearmRot = Quaternion.Euler(0, 0, targetForearmAngle);
+        
+        while (time < angleDampTime)
         {
-            float armAngle = Mathf.SmoothDampAngle(arm.transform.eulerAngles.z, targetArmAngle, ref _armVelocity, angleDampTime);
-            float forearmAngle = Mathf.SmoothDampAngle(forearm.transform.eulerAngles.z, targetForearmAngle, ref _forearmVelocity, angleDampTime);
-
-            arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
-            forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
+            float t = time / angleDampTime;
             
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            arm.transform.rotation = Quaternion.Lerp(startArmRot, endArmRot, t);
+            forearm.transform.rotation = Quaternion.Lerp(startForearmRot, endForearmRot, t);
+            
+            time += Time.deltaTime;
+
             yield return null;
         }
     }
@@ -171,17 +179,26 @@ public class BossArmController : MonoBehaviour
 
     private IEnumerator MoveArmOffScreen(Vector2 destination)
     {
-        while (true)
+        
+        float time = 0f;
+
+        Vector2 startPos = transform.position;
+        Vector2 endPos = destination;
+        
+        while (time < smoothDampTime)
         {
-            transform.position = Vector2.SmoothDamp(transform.position, destination, ref _velocity, smoothDampTime);
-            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), destination) < 1.0f)
-            {
-                _rocketReady = true;
-                BossController.Instance.BackToIdleState();
-                break;
-            }
+            float t = time / smoothDampTime;
+            
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            transform.position = Vector2.Lerp(startPos, endPos, t);
+            
+            time += Time.deltaTime;
+
             yield return null;
         }
+        _rocketReady = true;
+        BossController.Instance.BackToIdleState();
     }
 
     private IEnumerator RocktAttack(int numberOfRockets, float rocketAttackTime)
