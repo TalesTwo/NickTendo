@@ -314,6 +314,10 @@ namespace Managers
                 {
                     yield return new WaitForSeconds(wordSpeed);
                 }
+                else if (_skipToEnd)
+                {
+                    talkingtonetimer = 0;
+                }
             }
             animatedEButton.SetActive(true);
             _isTyping = false;
