@@ -97,6 +97,7 @@ public class BossController : Singleton<BossController>
     public BattleState battle;
     public ProjectileState projectile;
     private Stats _currentStats;
+    private CameraShake _cameraShake;
     private RoomGridManager _roomGridManager;
     
     [Header("Vulnerable State")]
@@ -147,6 +148,7 @@ public class BossController : Singleton<BossController>
         _player = GameObject.Find("Player");
         _playerController = _player.GetComponent<PlayerController>();
         _roomGridManager = transform.parent.GetComponent<RoomGridManager>();
+        _cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
         _rocketProjectionsQueue = new Queue<GameObject>();
         _currentStats = attacks[0];
         
@@ -265,7 +267,6 @@ public class BossController : Singleton<BossController>
         }
     }
     
-    // todo add function to turn battle state back to idle after launching an arm
     public void BackToIdleState()
     {
         _armsCurrentlyLaunched -= 1;
@@ -332,6 +333,8 @@ public class BossController : Singleton<BossController>
         
         battle = BattleState.Idle;
         Managers.AudioManager.Instance.PlayBUDDEEDamagedSound(1, 0);
+        _cameraShake.ShakeOnce(0.2f, 0.6f);
+        
 
         switch (health)
         {
