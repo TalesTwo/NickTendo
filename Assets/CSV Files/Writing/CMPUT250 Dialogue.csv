@@ -125,7 +125,7 @@ vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you
 vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
 vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
 ,,,,
-Introyell,immediate dialogue when you enter,BUDDEE,basic2,Hello and welcome to <color=#646AAD><b>Friend Finders: Online</b></color>! 
+Introyell,immediate dialogue when you enter,BUDDEE,basic2,"""Hello, and welcome to <color=#646AAD><b>Friend Finders: Online</b></color>!"""
 Introyell,,BUDDEE,basic3,My name's <color=#005773>BUDDEE</color>! I'll be your digital assistant!
 Introyell,,BUDDEE,basic1,Why don't you <color=purple>[WASD]</color> on over here to get started?
 ,,,,
