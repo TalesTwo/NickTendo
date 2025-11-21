@@ -603,6 +603,6 @@ public class BossController : Singleton<BossController>
             yield return null;
         }
 
-        spriteRenderer.material.color = original;
+        spriteRenderer.color = original;
     }
 }
