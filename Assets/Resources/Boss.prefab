@@ -99,6 +99,7 @@ MonoBehaviour:
   pulseSpeed: 2
   minIntensity: 0.5
   maxIntensity: 1
+  hitFlashDuration: 0.1
   attacks:
   - rocketCountPerArm: 1
     rocketAttackTime: 1.5

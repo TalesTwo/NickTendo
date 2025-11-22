@@ -61,8 +61,6 @@ public class BossArmController : MonoBehaviour
     public float targetForearmAngle;
     private float _originalArmAngle;
     private float _originalForearmAngle;
-    private float _armVelocity = 0f;
-    private float _forearmVelocity = 0f;
     
     private bool _rocketReady = false;
     [Header("Arm Bounds")]
@@ -115,14 +113,24 @@ public class BossArmController : MonoBehaviour
 
     private IEnumerator MoveToUntiredPosition()
     {
-        while (Mathf.Abs(arm.transform.eulerAngles.z - _originalArmAngle) > 0.1 ||
-               Mathf.Abs(forearm.transform.eulerAngles.z - _originalForearmAngle) > 0.1)
-        {
-            float armAngle = Mathf.SmoothDampAngle(arm.transform.eulerAngles.z, _originalArmAngle, ref _armVelocity, returnAngleDampTime);
-            float forearmAngle = Mathf.SmoothDampAngle(forearm.transform.eulerAngles.z, _originalForearmAngle, ref _forearmVelocity, returnAngleDampTime);
+        float time = 0f;
 
-            arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
-            forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
+        Quaternion startArmRot = arm.transform.rotation;
+        Quaternion startForearmRot = forearm.transform.rotation;
+
+        Quaternion endArmRot = Quaternion.Euler(0, 0, _originalArmAngle);
+        Quaternion endForearmRot = Quaternion.Euler(0, 0, _originalForearmAngle);
+        
+        while (time < returnAngleDampTime)
+        {
+            float t = time / returnAngleDampTime;
+            
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            arm.transform.rotation = Quaternion.Lerp(startArmRot, endArmRot, t);
+            forearm.transform.rotation = Quaternion.Lerp(startForearmRot, endForearmRot, t);
+            
+            time += Time.deltaTime;
             
             yield return null;
         }
@@ -137,15 +145,25 @@ public class BossArmController : MonoBehaviour
         
         SetExhaustedBools(true);
 
-        while (Mathf.Abs(arm.transform.eulerAngles.z - targetArmAngle) > 0.5 ||
-               Mathf.Abs(forearm.transform.eulerAngles.z - targetForearmAngle) > 0.5)
+        float time = 0f;
+        
+        Quaternion startArmRot = arm.transform.rotation;
+        Quaternion startForearmRot = forearm.transform.rotation;
+        
+        Quaternion endArmRot = Quaternion.Euler(0, 0, targetArmAngle);
+        Quaternion endForearmRot = Quaternion.Euler(0, 0, targetForearmAngle);
+        
+        while (time < angleDampTime)
         {
-            float armAngle = Mathf.SmoothDampAngle(arm.transform.eulerAngles.z, targetArmAngle, ref _armVelocity, angleDampTime);
-            float forearmAngle = Mathf.SmoothDampAngle(forearm.transform.eulerAngles.z, targetForearmAngle, ref _forearmVelocity, angleDampTime);
-
-            arm.transform.rotation = Quaternion.Euler(arm.transform.eulerAngles.x, arm.transform.eulerAngles.y, armAngle);
-            forearm.transform.rotation = Quaternion.Euler(forearm.transform.eulerAngles.x, forearm.transform.eulerAngles.y, forearmAngle);
+            float t = time / angleDampTime;
             
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            arm.transform.rotation = Quaternion.Lerp(startArmRot, endArmRot, t);
+            forearm.transform.rotation = Quaternion.Lerp(startForearmRot, endForearmRot, t);
+            
+            time += Time.deltaTime;
+
             yield return null;
         }
     }
@@ -161,17 +179,26 @@ public class BossArmController : MonoBehaviour
 
     private IEnumerator MoveArmOffScreen(Vector2 destination)
     {
-        while (true)
+        
+        float time = 0f;
+
+        Vector2 startPos = transform.position;
+        Vector2 endPos = destination;
+        
+        while (time < smoothDampTime)
         {
-            transform.position = Vector2.SmoothDamp(transform.position, destination, ref _velocity, smoothDampTime);
-            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), destination) < 1.0f)
-            {
-                _rocketReady = true;
-                BossController.Instance.BackToIdleState();
-                break;
-            }
+            float t = time / smoothDampTime;
+            
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            transform.position = Vector2.Lerp(startPos, endPos, t);
+            
+            time += Time.deltaTime;
+
             yield return null;
         }
+        _rocketReady = true;
+        BossController.Instance.BackToIdleState();
     }
 
     private IEnumerator RocktAttack(int numberOfRockets, float rocketAttackTime)
@@ -259,24 +286,31 @@ public class BossArmController : MonoBehaviour
             
             transform.localPosition = start;
             yield return null;
+
+            float time = 0f;
+            
+            Vector2 startPos = transform.localPosition;
             
             // Step 4: fly across the screen until max coordinate is reached
-            while (true)
+            while (time < rocketAttackTime)
             {
-                transform.localPosition = Vector2.SmoothDamp(transform.localPosition, destination, ref _velocity, rocketAttackTime);
+                float t = time / rocketAttackTime;
+                
+                t = Mathf.SmoothStep(0f, 1f, t);
+                
+                transform.localPosition = Vector3.Lerp(startPos, destination, t);
+                
                 if (rocketcount == 120)
                 {
                     Managers.AudioManager.Instance.PlayBUDDEEPunchSound(1, 0);
                     rocketcount = 0;
                 }
                 else ++rocketcount;
-                if (Vector2.Distance(new Vector2(transform.localPosition.x, transform.localPosition.y), destination) < 2.0f)
-                {
-                    BossController.Instance.RocketFinished();
-                    break;
-                }
+
+                time += Time.deltaTime;
                 yield return null;
-            }            
+            }
+            BossController.Instance.RocketFinished();
         }
         
         // step 5: after all cycles, return to the head
@@ -288,24 +322,31 @@ public class BossArmController : MonoBehaviour
         hand.transform.rotation = handRotation;
 
         transform.position = _offScreenPos;
+
+        float time2 = 0f;
         
-        while (true)
+        Vector2 startPos2 = transform.position;
+        Vector2 endPos2 = _startPos;
+        
+        while (time2 < smoothDampTime)
         {
-            transform.position = Vector2.SmoothDamp(transform.position, _startPos, ref _velocity, smoothDampTime);
-            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), _startPos) < 0.01f)
-            {
-                if (side == Direction.Left)
-                {
-                    BossController.Instance.LeftArmReturned();
-                } else if (side == Direction.Right)
-                {
-                    BossController.Instance.RightArmReturned();
-                }
-                break;
-            }
+            float t = time2 / smoothDampTime;
+            
+            t = Mathf.SmoothStep(0f, 1f, t);
+            
+            transform.position = Vector3.Lerp(startPos2, endPos2, t);
+            
+            time2 += Time.deltaTime;
             yield return null;
-        }    
+        }
         
+        if (side == Direction.Left)
+        {
+            BossController.Instance.LeftArmReturned();
+        } else if (side == Direction.Right)
+        {
+            BossController.Instance.RightArmReturned();
+        }
 
     }
 }
