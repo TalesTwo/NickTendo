@@ -1,44 +1,71 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretEnemy : RangedEnemyController
 {
-    [Header("Safe Distance from Player")]
-    private float _minDistanceToPlayer;
-    private float _maxDistanceToPlayer;
+    private Transform _spawnPoint;
+
+    private bool _isFiring = false;
+    private float fireDuration = 3f;
+    private float waitDuration = 3f;
     
-    [Header("Attack")]
-    public GameObject projectile;
-    public LayerMask doNotHit;
-    public float attackSpawnDistance;
-    private float _attackCooldownMax;
-    private float _attackCooldownMin;
-    private float _attackCooldown;
-    private float _attackTimer = 0;
-    private float _projectileSpeed;
-    
-    
-    protected override void GetStats(string statLine)
+    private Vector3 _smoothedDirection;
+
+
+    protected override void Start()
     {
-        string[] stats = statLine.Split(',');
-        health = float.Parse(stats[0]);
-        speed = float.Parse(stats[1]);
-        damage = float.Parse(stats[2]);
-        knockBackSpeed = float.Parse(stats[3]);
-        knockBackTime = float.Parse(stats[4]);
-        _minDistanceToPlayer = float.Parse(stats[5]);
-        _maxDistanceToPlayer = float.Parse(stats[6]);
-        _attackCooldownMin = float.Parse(stats[7]);
-        _attackCooldownMax = float.Parse(stats[8]);
-        _projectileSpeed = float.Parse(stats[9]);
-        knockbackForce =  float.Parse(stats[10]);
-        stunTimer = float.Parse(stats[11]);
-        _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
-        findPathCooldown = 1f / (speed*2);
-        base.GetStats(statLine);
+        base.Start();
+
+        // find SPAWN_LOCATION child
+        _spawnPoint = transform.Find("Laser_Origin");
+        if (_spawnPoint == null)
+        {
+            Debug.LogError("TurretEnemy: No SPAWN_LOCATION child found!");
+        }
+
+        // begin shooting loop
+        StartCoroutine(FiringLoop());
+        _smoothedDirection = Vector3.right; // arbitrary initial direction
+
     }
 
-    protected override void FindPath() { return; }
-    protected override IEnumerator Follow() { return null; }
+    protected override void FindPath() { }
+    protected override IEnumerator Follow() { yield break; }
+
+    protected override void Attack()
+    {
+        DebugUtils.Log("TurretEnemy: Attack called");
+        // DO NOT use ranged enemy shooting system yet
+        // For now only draw debug lines
+        if (_spawnPoint == null) return;
+
+        Vector3 start = _spawnPoint.position;
+        Vector3 dir = _direction.normalized;
+
+        if (_isFiring)
+        {
+            // red = firing
+            Debug.DrawLine(start, start + dir * 10f, Color.red);
+        }
+        else
+        {
+            // green = idle
+            Debug.DrawLine(start, start + dir * 10f, Color.green);
+        }
+    }
+
+    private IEnumerator FiringLoop()
+    {
+        while (true)
+        {
+            // 🔥 FIRE for 3 seconds
+            _isFiring = true;
+            yield return new WaitForSeconds(fireDuration);
+
+            // 💤 REST for 3 seconds
+            _isFiring = false;
+            yield return new WaitForSeconds(waitDuration);
+        }
+    }
 }

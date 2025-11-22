@@ -61,6 +61,8 @@ public class BaseItem : SpawnableObject
     }
     public void TemporarilyDisableCollision(float delay)
     {
+        ///TODO: temp fix for items not being able to be picked up
+        return;
         int lootLayer = gameObject.layer;
         int defaultLayer = LayerMask.NameToLayer("Default");
 
