@@ -7,7 +7,7 @@ public class TurretEnemy : RangedEnemyController
     private Transform _spawnPoint;
 
     private bool _isFiring = false;
-    private float fireDuration = 3f;
+    private float fireDuration = 7f;
     private float waitDuration = 3f;
     [SerializeField] private float maxBeamLength = 100f;
 
