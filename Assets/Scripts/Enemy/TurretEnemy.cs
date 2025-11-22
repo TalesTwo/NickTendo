@@ -87,14 +87,24 @@ public class TurretEnemy : RangedEnemyController
             }
             
             // ---------- Enable the prefab of the laser ---------- //
-            if (_laserBeam != null && _laserBeam.activeSelf){ _laserBeam.SetActive(true);}
-            
-            // we need to scale up the laser beam so that the total length matches the raycast length
-            float beamLength = (hit.collider != null) ? Vector3.Distance(start, hit.point) : maxBeamLength;
-            _laserBeam.transform.position = start + dir * (beamLength / 2f);
-            _laserBeam.transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
-            _laserBeam.transform.localScale = new Vector3(_laserBeam.transform.localScale.x, beamLength / 2f, _laserBeam.transform.localScale.z);
-        // ---------- DAMAGE PLAYER IF HIT ---------- //
+
+            if (!_laserBeam.activeSelf)
+                _laserBeam.SetActive(true);
+
+            Transform beamT = _laserBeam.transform;
+
+            // root the beam at origin
+            beamT.position = _spawnPoint.position;
+
+            // rotate to face direction
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            beamT.rotation = Quaternion.Euler(0, 0, angle);
+
+            // determine length: real hit or max
+            float currentBeamLength = hit.collider != null ? hit.distance : maxBeamLength;
+
+            // apply scaling (sprite pivot MUST be left-aligned)
+            beamT.localScale = new Vector3(currentBeamLength, beamT.localScale.y, 1);
             
         }
     }
