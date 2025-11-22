@@ -132,8 +132,16 @@ namespace Managers
             string[] lines = csv.text.Split('\n');
             foreach (string line in lines)
             {
-                string[] cells = line.Split(',');
-                string[] remaining = cells.Skip(2).ToArray();
+                List<string> cells = SplitCSVLine(line);
+                string[] remaining;
+                if (cells.Count == 5)
+                {
+                    remaining = new string[3] { cells[2], cells[3], cells[4] };
+                }
+                else
+                {
+                    remaining = Array.Empty<string>();
+                }
                 if (!_lines.ContainsKey(cells[0]))
                 {
                     _lines[cells[0]] = new List<string[]>();
@@ -141,6 +149,34 @@ namespace Managers
                 _lines[cells[0]].Add(remaining);
             }
         }
+        
+        private List<string> SplitCSVLine(string line)
+        {
+            List<string> result = new List<string>();
+            bool insideQuotes = false;
+            string current = "";
+
+            foreach (char c in line)
+            {
+                if (c == '"')
+                {
+                    insideQuotes = !insideQuotes;
+                }
+                else if (c == ',' && !insideQuotes)
+                {
+                    result.Add(current);
+                    current = "";
+                }
+                else
+                {
+                    current += c;
+                }
+            }
+
+            result.Add(current);
+            return result;
+        }
+
 
         // Update is called once per frame
         IEnumerator CheckInput()
@@ -302,6 +338,11 @@ namespace Managers
             {
                 dialogueText.maxVisibleCharacters++;
                 ++talkingtonetimer;
+                if (_skipToEnd)
+                {
+                    talkingtonetimer = 0;
+                    AudioManager.Instance.muteSFX = true;
+                }
                 if (talkingtonetimer == 10)
                 {
                     talkingtonetimer = 0;
@@ -319,6 +360,7 @@ namespace Managers
             _isTyping = false;
             _skipToEnd = false;
             talkingtonetimer = 0;
+            AudioManager.Instance.muteSFX = false;
         }
     
         // advances to next line of dialogue
