@@ -18,7 +18,7 @@ public class RangedEnemyController : EnemyControllerBase
     private float _attackCooldownMin;
     private float _attackCooldown;
     private float _attackTimer = 0;
-    private float _projectileSpeed;
+    protected float _projectileSpeed;
 
     // this method handles ranged enemies combat attacks
     protected override void Attack()
@@ -74,6 +74,8 @@ public class RangedEnemyController : EnemyControllerBase
         float farthestDistance = float.MinValue;
         Node strafeNode = null;
         float strafeDistance = _maxDistanceToPlayer;
+        float bestStrafeScore = float.MaxValue;
+        Vector2 toPlayer = (playerPos - currentNode.worldPosition).normalized;
         
         // check all neighbors for three pathing options
         foreach (Node neighbor in neighbors)
@@ -91,11 +93,19 @@ public class RangedEnemyController : EnemyControllerBase
                     farthestDistance = neighborDistance;
                     farthestNode = neighbor;
                 } 
-                if (neighborDistance < strafeDistance && neighborDistance > _minDistanceToPlayer)
+                if (neighborDistance < _maxDistanceToPlayer && neighborDistance > _minDistanceToPlayer)
                 {
-                    strafeDistance = neighborDistance;
-                    strafeNode = neighbor;
-                }                
+                    Vector2 toNeighbor = (neighbor.worldPosition - currentNode.worldPosition).normalized;
+
+                    // dot = 0 means perfectly sideways
+                    float dot = Mathf.Abs(Vector2.Dot(toNeighbor, toPlayer));
+
+                    if (dot < bestStrafeScore)
+                    {
+                        bestStrafeScore = dot;
+                        strafeNode = neighbor;
+                    }
+                }               
             }
         }
         
