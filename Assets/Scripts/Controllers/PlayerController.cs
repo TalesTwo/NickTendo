@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking = false;
     private float _walktimer = 0;
     public bool InteractionCooldown { get; private set; }
+    private bool _interactionOverride = false;
     [SerializeField] private float interactionCooldownDuration = 0.6f;
     
     
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         EventBroadcaster.StartStopAction += ToggleStartStop;
         EventBroadcaster.OpenPersonaUI += OnPersonaUIOpened;
+        EventBroadcaster.ClosePersonaUI += OnPersonaUIClosed;
     }
     
     private void OnPersonaUIOpened()
@@ -57,11 +59,18 @@ public class PlayerController : MonoBehaviour
         _isWalking = false;
         // set the player to the idle animation
         _playerAnimator.SetStill();
+        // disable the players ability to interact
+        _interactionOverride = true;
+    }
+    private void OnPersonaUIClosed()
+    {
+        // enable the players ability to interact
+        _interactionOverride = false;
     }
     
     public bool CanInteract()
     {
-        return !InteractionCooldown && !_isDead;
+        return !InteractionCooldown && !_isDead && !_interactionOverride;
     }
 
     public void StartCooldown()
