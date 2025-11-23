@@ -100,6 +100,50 @@ public class RoomGridManager : MonoBehaviour
         CreateGrids();
         RemoveOverlappingWithChestsAndPots();
     }
+    
+    public Node GetNextNodeToward(Node current, Node target, bool useFlying)
+    {
+        List<Node> neighbors = GetNeighbours(current, useFlying);
+
+        Node best = null;
+        float bestDist = float.MaxValue;
+
+        foreach (Node n in neighbors)
+        {
+            float d = Vector2.Distance(n.worldPosition, target.worldPosition);
+            if (d < bestDist)
+            {
+                best = n;
+                bestDist = d;
+            }
+        }
+        return best;
+    }
+
+    
+    public Node GetClosestWalkableGroundNode(Node fromNode)
+    {
+        List<Node> groundNeighbors = GetNeighbours(fromNode, false);
+
+        Node best = null;
+        float bestDist = float.MaxValue;
+
+        foreach (Node n in groundNeighbors)
+        {
+            if (n.walkable)
+            {
+                float dist = Vector2.Distance(fromNode.worldPosition, n.worldPosition);
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    best = n;
+                }
+            }
+        }
+        return best;
+    }
+
+
 
     private void RemoveOverlappingWithChestsAndPots()
     {
