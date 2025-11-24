@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -83,7 +84,9 @@ namespace Managers
 
         // this dialog is random, and only one line will play at a time
         private bool _dialogIsRandom = false;
-    
+
+        private int _visibleChar = 0;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -92,7 +95,7 @@ namespace Managers
             _npcTransparency = NPCSprite.gameObject.GetComponent<Image>();
             FillSpriteDictionary();
             ParseDialogue();
-            animatedEButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(2.5f, -2.5f);
+            animatedEButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-4, 4);
             animatedEButton.SetActive(false);
         }
 
@@ -191,16 +194,19 @@ namespace Managers
                         NextLine();
                     }
                     else if (_isTyping)
-                    {
+                    {                        
                         _skipToEnd = true;
                     }
                     
                 }
 
                 // checking if current line of dialogue is finished
-                if (dialogueText.text == _spokenLine)
+                if (_spokenLine != null)
                 {
-                    _canContinue = true;
+                    if (_visibleChar == _spokenLine.Length)
+                    {
+                        _canContinue = true;
+                    }
                 }
 
                 yield return null;            
@@ -261,7 +267,8 @@ namespace Managers
         IEnumerator Typing()
         {
             _isTyping = true;
-            
+            _visibleChar = 0;
+
             if (_dialogIsRandom)
             {
                 Random random = new Random();
@@ -336,13 +343,18 @@ namespace Managers
             animatedEButton.SetActive(false);
             foreach (char letter in _spokenLine)
             {
-                dialogueText.maxVisibleCharacters++;
-                ++talkingtonetimer;
                 if (_skipToEnd)
                 {
-                    talkingtonetimer = 0;
-                    AudioManager.Instance.muteSFX = true;
+                    dialogueText.maxVisibleCharacters = _spokenLine.Length;
+                    _skipToEnd = false;
+                    _isTyping = false;
+                    _canContinue = true;
+                    animatedEButton.SetActive(true);
+                    yield return null;
                 }
+                dialogueText.maxVisibleCharacters++;
+                _visibleChar++;
+                ++talkingtonetimer;
                 if (talkingtonetimer == 10)
                 {
                     talkingtonetimer = 0;
@@ -360,7 +372,6 @@ namespace Managers
             _isTyping = false;
             _skipToEnd = false;
             talkingtonetimer = 0;
-            AudioManager.Instance.muteSFX = false;
         }
     
         // advances to next line of dialogue

@@ -424,7 +424,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BUDDEE_Dialogue_crestfallen
+      name: BUDDEE_crestfallen
       rect:
         serializedVersion: 2
         x: 416
@@ -541,13 +541,13 @@ TextureImporter:
     nameFileIdTable:
       BUDDEE_Dialogue_4: -7864823663093212268
       BUDDEE_Dialogue_7: -3084513864775488552
-      BUDDEE_Dialogue_crestfallen: -6036903940762002824
       BUDDEE_angry: -4770749683561393187
       BUDDEE_basic1: 4163674188890322657
       BUDDEE_basic2: 5245823943739528323
       BUDDEE_basic3: -8304582564733601944
       BUDDEE_bothered: 6302665510683823624
       BUDDEE_confused: -6845038566944201709
+      BUDDEE_crestfallen: -6036903940762002824
       BUDDEE_gremlin: -5032012865524358882
       BUDDEE_pissed: 1716077400252765425
       BUDDEE_pity: -2200540869742523592
