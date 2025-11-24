@@ -1831,6 +1831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203d00e1c107d424b8dc6ddfee42b92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immuneHitEffect: {fileID: 3602918855131159277, guid: c2e8d7d196cc5554a9bdf9158a1d04f5, type: 3}
   stunTimer: 0.1
   knockBackForce: 500
 --- !u!1 &4500754400095974572

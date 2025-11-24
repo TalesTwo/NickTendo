@@ -7,6 +7,7 @@ public class BossScreenController : Singleton<BossScreenController>
 {
     private PlayerController _playerController;
     private GameObject _player;
+    public GameObject immuneHitEffect;
 
     public float stunTimer = 0.1f;
     public float knockBackForce = 500;
@@ -26,6 +27,9 @@ public class BossScreenController : Singleton<BossScreenController>
             if (!_isExhausted)
             {
                 PushPlayer();
+                Vector3 position = collision.ClosestPoint(transform.position);
+                Quaternion angle = GetAngle(position);
+                HitEffect(immuneHitEffect, position, angle);
             }
             else if (_isExhausted)
             {
@@ -43,7 +47,24 @@ public class BossScreenController : Singleton<BossScreenController>
     {
         Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
         _playerController.KnockBack(knockBackForce, direction, stunTimer, true);
-        // todo add new particle hit effect when the boss is false hit
+    }
+
+    private void HitEffect(GameObject hit, Vector3 position, Quaternion angle)
+    {
+        GameObject particle = Instantiate(hit, position, angle);
+        ParticleSystem particleS = particle.GetComponent<ParticleSystem>();
+        Destroy(particle, particleS.main.duration);
+    }
+
+    private Quaternion GetAngle(Vector3 position)
+    {
+        Vector3 direction = position - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+
+        return Quaternion.Euler(0f, 0f, angle);
     }
     
 }
