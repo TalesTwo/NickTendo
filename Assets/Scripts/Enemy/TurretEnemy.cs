@@ -1,44 +1,126 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretEnemy : RangedEnemyController
 {
-    [Header("Safe Distance from Player")]
-    private float _minDistanceToPlayer;
-    private float _maxDistanceToPlayer;
+    private Transform _spawnPoint;
+
+    private bool _isFiring = false;
+    private float fireDuration = 7f;
+    private float waitDuration = 3f;
+    [SerializeField] private float maxBeamLength = 100f;
+    private Vector3 _smoothDir;
+
     
-    [Header("Attack")]
-    public GameObject projectile;
-    public LayerMask doNotHit;
-    public float attackSpawnDistance;
-    private float _attackCooldownMax;
-    private float _attackCooldownMin;
-    private float _attackCooldown;
-    private float _attackTimer = 0;
-    private float _projectileSpeed;
+    private Vector3 _smoothedDirection;
     
-    
-    protected override void GetStats(string statLine)
+    [SerializeField] GameObject _laserBeam;
+
+
+    protected override void Start()
     {
-        string[] stats = statLine.Split(',');
-        health = float.Parse(stats[0]);
-        speed = float.Parse(stats[1]);
-        damage = float.Parse(stats[2]);
-        knockBackSpeed = float.Parse(stats[3]);
-        knockBackTime = float.Parse(stats[4]);
-        _minDistanceToPlayer = float.Parse(stats[5]);
-        _maxDistanceToPlayer = float.Parse(stats[6]);
-        _attackCooldownMin = float.Parse(stats[7]);
-        _attackCooldownMax = float.Parse(stats[8]);
-        _projectileSpeed = float.Parse(stats[9]);
-        knockbackForce =  float.Parse(stats[10]);
-        stunTimer = float.Parse(stats[11]);
-        _attackCooldown = Random.Range(_attackCooldownMin, _attackCooldownMax);
-        findPathCooldown = 1f / (speed*2);
-        base.GetStats(statLine);
+        base.Start();
+
+        // find SPAWN_LOCATION child
+        _spawnPoint = transform.Find("Laser_Origin");
+        if (_spawnPoint == null)
+        {
+            Debug.LogError("TurretEnemy: No SPAWN_LOCATION child found!");
+        }
+
+        // begin shooting loop
+        StartCoroutine(FiringLoop());
+        _smoothedDirection = Vector3.right; // arbitrary initial direction
+        
+        // laser effect is hidden initially
+        if (_laserBeam != null)
+        {
+            _laserBeam.SetActive(false);
+        } else
+        {
+            Debug.LogWarning("TurretEnemy: No laserEffectPrefab assigned!");
+        }
+
     }
 
-    protected override void FindPath() { return; }
-    protected override IEnumerator Follow() { return null; }
+    protected override void FindPath() { }
+    protected override IEnumerator Follow() { yield break; }
+
+    protected override void Attack()
+{
+    if (_spawnPoint == null) return;
+
+    Vector3 start = _spawnPoint.position;
+
+    // ----------- LASER "LAG" TRACKING ----------- //
+    Vector3 targetDir = (_playerTransform.position - _spawnPoint.position).normalized;
+    _smoothDir = Vector3.Lerp(_smoothDir, targetDir, 0.08f);   // tweak this 0.08f
+    Vector3 dir = _smoothDir;
+    // --------------------------------------------- //
+
+    if (_isFiring)
+    {
+        int finalMask = doNotHit | LayerMask.GetMask("Pits") |
+                        LayerMask.GetMask("Spawning") |
+                        LayerMask.GetMask("Loot") |
+                        LayerMask.GetMask("Ignore Raycast") |
+                        LayerMask.GetMask("Default");
+
+        RaycastHit2D hit = Physics2D.Raycast(start, dir, maxBeamLength, ~finalMask);
+
+        if (_laserBeam != null)
+        {
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                Debug.DrawLine(start, hit.point, Color.red);
+            }
+            else if (hit.collider != null && hit.collider.gameObject != null)
+            {
+                Debug.DrawLine(start, hit.point, Color.yellow);
+            }
+            else
+            {
+                Debug.DrawRay(start, dir * maxBeamLength, Color.cyan);
+            }
+
+            if (!_laserBeam.activeSelf)
+                _laserBeam.SetActive(true);
+
+            Transform beamT = _laserBeam.transform;
+
+            // position laser at spawn
+            beamT.position = _spawnPoint.position;
+
+            // rotate
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            beamT.rotation = Quaternion.Euler(0, 0, angle);
+
+            // scale to ray length
+            float currentBeamLength = hit.collider != null ? hit.distance : maxBeamLength;
+            beamT.localScale = new Vector3(currentBeamLength, beamT.localScale.y, 1);
+        }
+    }
+    else
+    {
+        if (_laserBeam != null && _laserBeam.activeSelf)
+            _laserBeam.SetActive(false);
+    }
+}
+
+
+
+    private IEnumerator FiringLoop()
+    {
+        while (true)
+        {
+            // 🔥 FIRE for 3 seconds
+            _isFiring = true;
+            yield return new WaitForSeconds(fireDuration);
+
+            // 💤 REST for 3 seconds
+            _isFiring = false;
+            yield return new WaitForSeconds(waitDuration);
+        }
+    }
 }

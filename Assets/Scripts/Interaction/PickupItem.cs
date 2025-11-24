@@ -21,6 +21,8 @@ public class PickupItem : BaseItem
     private float AnimationTimer;
     private float AnimationTimerMax;
     public int Index; 
+    
+    private Collider2D _triggerCollider;
 
 
     // Start is called before the first frame update
@@ -33,6 +35,16 @@ public class PickupItem : BaseItem
         AnimationTimer = 0;
         AnimationTimerMax = 1/FrameRate;
         Index = 0;
+        
+        // Find the trigger collider
+        foreach (var c in GetComponents<Collider2D>())
+        {
+            if (c.isTrigger)
+            {
+                _triggerCollider = c;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -63,6 +75,8 @@ public class PickupItem : BaseItem
     }
     private void Pickup()
     {
+        if (!_triggerCollider.enabled){ return; }
+        
         //DebugUtils.Log("Picked up " + Name);
         if (!Player.GetComponent<PlayerController>().GetIsDead())
         {

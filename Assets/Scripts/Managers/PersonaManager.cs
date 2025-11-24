@@ -178,18 +178,7 @@ namespace Managers
 
             return count;
         }
-
-        private void Update()
-        {
-            /*
-             * For testing purposes, we can cycle through personas with the P key
-             */
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                // Generate a new persona
-                PlayerStatsStruct PS = GenerateNewPersona();
-            }
-        }
+        
     
         // --------------------------------------------------
         public void SetPersona(Types.Persona newPersona)

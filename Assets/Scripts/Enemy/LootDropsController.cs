@@ -78,6 +78,7 @@ public class LootDropsController : MonoBehaviour
                 {
                     GameObject spawnedItem = Instantiate(lootDrop.drop, transform.position, Quaternion.identity);
                     // temp remove
+                    spawnedItem.GetComponent<BaseItem>().TemporarilyDisableCollision(0.25f);
                     AddForceToItem(spawnedItem);
                     _numberOfDrops += 1;
                     break;
@@ -97,10 +98,6 @@ public class LootDropsController : MonoBehaviour
         // get the player
         GameObject playerObj = PlayerManager.Instance.GetPlayer();
         if (playerObj == null) return;
-
-        item.GetComponent<BaseItem>().TemporarilyDisableCollision(0.25f);
-
-        
 
         // direction FROM player TO the loot drop
         Vector2 baseDirection = (item.transform.position - playerObj.transform.position).normalized;
