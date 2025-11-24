@@ -156,7 +156,7 @@ Tutorial4,last tutorial in starting room,BUDDEE,basic3,"""Before you can leave t
 Tutorial4,,BUDDEE,bothered,"""Normally players would make their own, but that system isn't working right now."""
 Tutorial4,,BUDDEE,basic2,So I've taken the liberty of grabbing some defunct accounts for you to choose from!
 Tutorial4,,BUDDEE,sheepish,Hopefully the old players won't mind..
-Tutorial4,,BUDDEE,basic1,Just <b>press <color=purple>[P]</color></b> to bring up some options and head out the north door when you're ready!
+Tutorial4,,BUDDEE,basic1,Just head to the north door when you're ready to go!
 Tutorial4,,BUDDEE,basic2,I believe in you pal!
 ,,,,
 Tutorial random,random dialogue for tutorial,,basic1,If you ever need a reminder on how to play just press <color=purple>[Escape]</color> or <color=purple>[Tab]</color>!
@@ -208,7 +208,7 @@ Shop3,,BUDDEE,gremlin,Sound like a deal?
 Run2,Afer first death,BUDDEE,Crestfallen,Ouch! It looks like your character's been compromised!
 Run2,,BUDDEE,worried,Without the devs there's nothing we can do..
 Run2,,BUDDEE,basic2,Luckily those former players left plenty of characters behind so we should be alright!
-Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> to select a new accont.
+Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> or try to leave and you can select another accont!
 ,,,,
 Run3,,BUDDEE,worried,Do you think this is my fault?
 Run3,,BUDDEE,crestfallen,"""I mean, me being added was supposed to be the big update that brought in new players!"""
