@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8cc4ae3995e204696ceb4e4f1ae480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugging: 0
   rightArm: {fileID: 3398844250087538318}
   rightArmController: {fileID: 543200897592807649}
   leftArm: {fileID: 5746805199241599897}
@@ -1831,9 +1832,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203d00e1c107d424b8dc6ddfee42b92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immuneHitEffect: {fileID: 3602918855131159277, guid: c2e8d7d196cc5554a9bdf9158a1d04f5, type: 3}
+  immuneHitEffect: {fileID: 2560593414228584792, guid: c2e8d7d196cc5554a9bdf9158a1d04f5, type: 3}
+  immuneParticleAngleEdit: 90
+  damageHitEffect: {fileID: 2560593414228584792, guid: a0d5120879c57584ba4c529f9924562d, type: 3}
+  damageParticleAngleEdit: 0
   stunTimer: 0.1
   knockBackForce: 500
+  _isExhausted: 0
 --- !u!1 &4500754400095974572
 GameObject:
   m_ObjectHideFlags: 0

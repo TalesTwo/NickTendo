@@ -8,11 +8,14 @@ public class BossScreenController : Singleton<BossScreenController>
     private PlayerController _playerController;
     private GameObject _player;
     public GameObject immuneHitEffect;
+    public float immuneParticleAngleEdit;
+    public GameObject damageHitEffect;
+    public float damageParticleAngleEdit;
 
     public float stunTimer = 0.1f;
     public float knockBackForce = 500;
     
-    private bool _isExhausted = false;
+    public bool _isExhausted = false;
     
     private void Start()
     {
@@ -28,12 +31,15 @@ public class BossScreenController : Singleton<BossScreenController>
             {
                 PushPlayer();
                 Vector3 position = collision.ClosestPoint(transform.position);
-                Quaternion angle = GetAngle(position);
+                Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
                 HitEffect(immuneHitEffect, position, angle);
             }
             else if (_isExhausted)
             {
                 BossController.Instance.TakeDamage();
+                Vector3 position = collision.ClosestPoint(transform.position);
+                Quaternion angle = GetAngle(position, damageParticleAngleEdit);
+                HitEffect(damageHitEffect, position, angle);
             }
         }
     }
@@ -56,13 +62,13 @@ public class BossScreenController : Singleton<BossScreenController>
         Destroy(particle, particleS.main.duration);
     }
 
-    private Quaternion GetAngle(Vector3 position)
+    private Quaternion GetAngle(Vector3 position, float edit)
     {
         Vector3 direction = position - transform.position;
         direction.z = 0f;
         direction.Normalize();
         
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + edit;
 
         return Quaternion.Euler(0f, 0f, angle);
     }
