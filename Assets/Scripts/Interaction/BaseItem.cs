@@ -49,7 +49,7 @@ public class BaseItem : SpawnableObject
 
     public void FellInPit(Vector3 pitCenter)
     {
-        //Destroy(gameObject); ops im calling this twice
+        Destroy(gameObject);
         if (hasFallenInPit)
             return;
         Debug.Log("Item " + Name + " has fallen in pit.");

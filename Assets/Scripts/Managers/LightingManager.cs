@@ -26,11 +26,16 @@ namespace Managers
             EventBroadcaster.GameRestart += InitializeWorldLight;
             EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
             EventBroadcaster.EnemyDeath += OnEnemyDeath;
+            EventBroadcaster.PlayerDeath += OnPlayerDied;
             playerLight = GameObject.Find("Player").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
             //InvokeRepeating(nameof(CheckLight), 0f, 0.15f); // run every few seconds. //TODO: set this up to only run when enemies die or player changes room. but i dont feel like it rn
         }
 
-        
+        private void OnPlayerDied()
+        {
+            // Fade the lighting back to full brightness on player death
+            SetGlobalLightIntensity(1.0f, globalLightTransitionDuration);
+        }
         private void CheckLight()
         {
             if (_bTransitioning || _bFallingInPit) return;
