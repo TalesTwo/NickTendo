@@ -23,7 +23,7 @@ public class ShopUIManager : MonoBehaviour
     public TextMeshProUGUI[] ItemNames;
     public Image[] ItemSpotlights;
     public string[] ItemTooltipText;
-    public string[] ItemFlavorText;
+    public TextMeshProUGUI[] ItemFlavorText;
     public BUDDEEEmotes[] ItemEmotes;
 
     [Header("Shop Info")]
@@ -42,7 +42,7 @@ public class ShopUIManager : MonoBehaviour
     private void Awake()
     {
         ItemTooltipText = new string[4];
-        ItemFlavorText = new string[4];
+        ItemFlavorText = new TextMeshProUGUI[4];
         ItemEmotes = new BUDDEEEmotes[4];
     }
 
@@ -110,7 +110,7 @@ public class ShopUIManager : MonoBehaviour
     {
         ItemSpotlights[Index].gameObject.SetActive(true);
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
-        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue(ItemFlavorText[Index], ItemEmotes[Index]);
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue(ItemFlavorText[Index].text, ItemEmotes[Index]);
         Managers.AudioManager.Instance.PlayUIHoverSound(1, 0);
     }
 

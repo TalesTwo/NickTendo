@@ -2159,6 +2159,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9125203309246260239}
     m_Modifications:
+    - target: {fileID: 5325583245337353886, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5848584687767706741, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2251,6 +2255,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6049514497108387897, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5245823943739528323, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
     - target: {fileID: 6358160961990753527, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_Name
       value: BUDDEE UI
@@ -2281,7 +2289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 736.0237
+      value: 677
       objectReference: {fileID: 0}
     - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2517,7 +2525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618752700651520194, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -738.713
+      value: -774.12726
       objectReference: {fileID: 0}
     - target: {fileID: 2618752700651520194, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3010,7 +3018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618752700651520194, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -738.713
+      value: -774.12726
       objectReference: {fileID: 0}
     - target: {fileID: 2618752700651520194, guid: 623007ec910588e45bbbec057562f1f9, type: 3}
       propertyPath: m_AnchoredPosition.y

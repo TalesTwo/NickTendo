@@ -65,7 +65,8 @@ public class ShopManager : MonoBehaviour
             ShopUIM.ItemImages[i].sprite = ShopList[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             ShopUIM.ItemNames[i].text = ShopList[i].GetComponent<ShopItem>().Name;
             ShopUIM.ItemTooltipText[i] = ShopList[i].GetComponent<ShopItem>().GetTooltipText();
-            ShopUIM.ItemFlavorText[i] = ShopList[i].GetComponent<ShopItem>().flavorText;
+            //ShopUIM.ItemFlavorText[i] = ShopList[i].GetComponent<ShopItem>().flavorText;
+            ShopUIM.ItemFlavorText[i] = ShopList[i].GetComponent<ShopItem>().flavorTextUUGUI;
             ShopUIM.ItemEmotes[i] = ShopList[i].GetOrAddComponent<ShopItem>().emote;
         }
     }

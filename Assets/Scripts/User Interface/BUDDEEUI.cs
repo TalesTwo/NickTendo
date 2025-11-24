@@ -12,7 +12,7 @@ public class BUDDEEUI : MonoBehaviour
     [Header("Dialogue Info")]
     [SerializeField] private TextMeshProUGUI _buddeeDialogue;
     [SerializeField] private float _wordSpeed;
-    [SerializeField] private Image _BUDDEE;
+    [SerializeField] private GameObject _BUDDEE;
 
     [Header("BUDDEE Emotes")]
     [SerializeField] private Sprite _angry;
@@ -68,7 +68,8 @@ public class BUDDEEUI : MonoBehaviour
 
     private void ChangeBUDDEEEmote(BUDDEEEmotes _emote)
     {
-        _BUDDEE.sprite = _BuddeEmoteDict[_emote];
+        _BUDDEE.GetComponent<Image>().sprite = _BuddeEmoteDict[_emote];
+        _BUDDEE.GetComponent<RectTransform>().sizeDelta = new Vector2 (_BuddeEmoteDict[_emote].rect.width, _BuddeEmoteDict[_emote].rect.height);
     }
 
     public void SetDialogue(string _dialogue, BUDDEEEmotes _emote = BUDDEEEmotes.basic2)
