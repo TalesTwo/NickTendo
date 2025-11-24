@@ -24,6 +24,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private Image _healthIcon;
     [SerializeField]
+    private Image _enemyIcon;
+    [SerializeField]
     private GameObject _enemyCounter;
     [SerializeField]
     private Slider _dashSlider;
@@ -46,6 +48,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private bool _isPlayerInMenu;
     private bool _didSkipCR;
     private bool _isInPauseMenu;
+    private int _currentEnemyCount;
+    private int _updateEnemyCount;
 
     private void Start()
     {
@@ -69,6 +73,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         _isPlayerInMenu = false;
         _didSkipCR = false;
         _isInPauseMenu = false;
+        _currentEnemyCount = 0;
+        _updateEnemyCount = 0;
 
         SetHealth();
     }
@@ -91,14 +97,29 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             Invoke(nameof(ResetSlide), PlayerStats.Instance.GetDashCooldown());
         }
 
-        if (DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom() > 0)
+        _currentEnemyCount = DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom();
+        if (_currentEnemyCount > 0)
         {
-            _enemyCounter.SetActive(true);
-            _enemyCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(DungeonController.Instance.GetNumberOfEnemiesInCurrentRoom().ToString());
+            if (!_enemyCounter.activeInHierarchy)
+            {
+                _enemyCounter.SetActive(true);
+                _updateEnemyCount = _currentEnemyCount;
+            }
+            _enemyCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(_currentEnemyCount.ToString());
+            
+            if (_updateEnemyCount > _currentEnemyCount)
+            {
+                _updateEnemyCount = _currentEnemyCount;
+                if (!_isPlayerInMenu)
+                {
+                    _enemyIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+                    _enemyIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+                }
+            }
         }
-        else 
+        else if (_currentEnemyCount == 0 && _enemyCounter.activeInHierarchy) 
         { 
-            _enemyCounter.SetActive(false); 
+            _enemyCounter.SetActive(false);
         }
 
         if (SceneManager.GetActiveScene().name != "MainMenu")
