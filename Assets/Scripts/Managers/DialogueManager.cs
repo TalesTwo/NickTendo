@@ -348,8 +348,8 @@ namespace Managers
                     dialogueText.maxVisibleCharacters = _spokenLine.Length;
                     _skipToEnd = false;
                     _isTyping = false;
-                    animatedEButton.SetActive(true);
                     _canContinue = true;
+                    animatedEButton.SetActive(true);
                     yield return null;
                 }
                 dialogueText.maxVisibleCharacters++;
