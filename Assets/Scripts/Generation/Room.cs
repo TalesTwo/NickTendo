@@ -70,7 +70,31 @@ public class Room : MonoBehaviour
                         // we only wanna auto lock the north door on the spawn room
                         if (doorTrigger && doorTrigger.CurrentDoorPosition == Types.DoorClassification.North)
                         {
-                            doorComponent.SetDoorState(Door.DoorState.Locked);
+                            //TODO: this is where we need to somehow do persona logic
+                            /*
+                             * This system will check to see if we are atleast on the second run (since the first needs to be P pressed to unlock the north door)
+                             * This ensures the tutorial is relevant
+                             *
+                             * But once the persona menu is opened, we need to watch to see if they change their persona,
+                             * and if they do, then we close the menu and launch them into the game)
+                             */
+                            //doorComponent.SetDoorState(Door.DoorState.Locked);
+                            // STEP 1: Check if we are on the second run or higher
+                            if (GameStateManager.Instance.GetPlayerDeathCount() <= 0)
+                            {
+                                doorComponent.SetDoorState(Door.DoorState.Locked);
+                                return;
+                            }
+                            
+                            //Step 2: Allow the door to open the persona menu
+                            if(doorTrigger.IsSpawnDoor() == false){ return; }
+
+                            if (PersonaManager.Instance.GetPersona() != Types.Persona.Normal)
+                            {
+                                doorTrigger.SetReadyToOpenMenu(false);
+                                return;
+                            }
+                            doorTrigger.SetReadyToOpenMenu(true);
                         }
                         
                     }

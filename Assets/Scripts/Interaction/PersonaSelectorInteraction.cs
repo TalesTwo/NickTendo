@@ -11,7 +11,13 @@ public class PersonaTriggerInteraction : TriggerInteractBase
     
     public override void Interact()
     {
-        if(personaSelectionUI) personaSelectionUI.GetComponent<PersonaUI>()?.OpenPersonaUI();
+        if (personaSelectionUI)
+        {
+            Debug.Log("UI about to open");
+            personaSelectionUI.GetComponent<PersonaUI>()?.OpenPersonaUI();
+        } else {
+            Debug.Log("No UI assigned to PersonaTriggerInteraction");
+        }
     }
 
     protected override void Start()
@@ -27,16 +33,24 @@ public class PersonaTriggerInteraction : TriggerInteractBase
         // when the player presses P, we will "interact" with this object (assuming its on scree in some way)
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (!_isPersonaUIOpen || personaSelectionUI == null)
-            {
-                Interact();
-                _isPersonaUIOpen = true;
-            }
-            else
-            {
-                if(personaSelectionUI) personaSelectionUI.GetComponent<PersonaUI>()?.ClosePersonaUI();
-                _isPersonaUIOpen = false;
-            }
+            HandlePersonaUI();
+        }
+    }
+
+
+    public void HandlePersonaUI()
+    {
+        Debug.Log($"HandlePersonaUI -> isOpen={_isPersonaUIOpen}");
+        
+        if (!_isPersonaUIOpen || personaSelectionUI == null)
+        {
+            Interact();
+            _isPersonaUIOpen = true;
+        }
+        else
+        {
+            if(personaSelectionUI) personaSelectionUI.GetComponent<PersonaUI>()?.ClosePersonaUI();
+            _isPersonaUIOpen = false;
         }
     }
     

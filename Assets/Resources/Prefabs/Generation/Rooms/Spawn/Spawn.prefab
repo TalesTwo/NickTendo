@@ -21706,6 +21706,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
+      propertyPath: _isSpawnDoor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495961825788109008, guid: cb4fba0d83d932e49bfbd8ace78c1c40, type: 3}
       propertyPath: attachedPromptToObject
       value: 1
       objectReference: {fileID: 0}
@@ -21952,34 +21956,10 @@ PrefabInstance:
     - {fileID: 3485153876946687482, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
     - {fileID: 3700940678952434846, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2194296138259440080, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4909765406757256940}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
 --- !u!4 &1573093367599492645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7352177829756391021, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
   m_PrefabInstance: {fileID: 8348810442502283336}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7903635287448519064 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2194296138259440080, guid: 02a4e418f7509bf4aa7deb7f0ccccec0, type: 3}
-  m_PrefabInstance: {fileID: 8348810442502283336}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4909765406757256940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7903635287448519064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed968bf5bd0f544285b3945c722111d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasInteractPrompt: 1
-  interactPromptOffset: {x: 0, y: 1, z: 0}
-  attachedPromptToObject: 0
-  personaSelectionUI: {fileID: 0}
