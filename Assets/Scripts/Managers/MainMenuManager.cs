@@ -18,7 +18,6 @@ namespace Managers
         [SerializeField] private GameObject _launcher;
         
         private bool _hasClickedButton;
-        private bool _hasOpenedLauncher;
 
         public void Start()
         {
@@ -34,9 +33,15 @@ namespace Managers
             _startButton.onClick.AddListener(StartGameButton);
             _settingsButton.onClick.AddListener(OpenSettings);
             _gameButton.onClick.AddListener(OpenLauncher);
-            _hasClickedButton = false;             
-            _hasOpenedLauncher = false;
-            _launcher.SetActive(false);
+            _hasClickedButton = false;
+            if (GameStateManager.Instance.hasOpenedLauncher)
+            {
+                _launcher.SetActive(true);
+            }
+            else
+            {
+                _launcher.SetActive(false);
+            }
         }
 
         private void StartGameButton()
@@ -53,7 +58,7 @@ namespace Managers
 
         private void OpenSettings()
         {
-            _settingsMenu.SetActive(true);
+            _settingsMenu.GetComponent<PauseMenuManager>().OpenPauseMenu();
         }
         private void StartGame()
         {
@@ -67,9 +72,9 @@ namespace Managers
 
         private void OpenLauncher()
         {
-            if(!_hasOpenedLauncher)
+            if(!GameStateManager.Instance.hasOpenedLauncher)
             {
-                _hasOpenedLauncher = true;
+                GameStateManager.Instance.hasOpenedLauncher = true;
                 _launcher.SetActive(true);
             }
         }

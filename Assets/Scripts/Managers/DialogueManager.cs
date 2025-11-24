@@ -338,11 +338,6 @@ namespace Managers
             {
                 dialogueText.maxVisibleCharacters++;
                 ++talkingtonetimer;
-                if (_skipToEnd)
-                {
-                    talkingtonetimer = 0;
-                    AudioManager.Instance.muteSFX = true;
-                }
                 if (talkingtonetimer == 10)
                 {
                     talkingtonetimer = 0;
@@ -360,7 +355,6 @@ namespace Managers
             _isTyping = false;
             _skipToEnd = false;
             talkingtonetimer = 0;
-            AudioManager.Instance.muteSFX = false;
         }
     
         // advances to next line of dialogue
