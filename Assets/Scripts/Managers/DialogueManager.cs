@@ -92,7 +92,7 @@ namespace Managers
             _npcTransparency = NPCSprite.gameObject.GetComponent<Image>();
             FillSpriteDictionary();
             ParseDialogue();
-            animatedEButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(2.5f, -2.5f);
+            animatedEButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
             animatedEButton.SetActive(false);
         }
 
