@@ -40,13 +40,13 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
                 interactPromptInstance.SetActive(false);
             }
         }
+        
     }
 
     public virtual void Interact()
     {
         // we are attempting to interact, the players interaction is on cooldown?
         //DebugUtils.Log("The players cooldown state is " + _playerController.CanInteract());
-        
         if (!_isAllowedToInteract) return;
 
         AnimationOverrideOnInteract();

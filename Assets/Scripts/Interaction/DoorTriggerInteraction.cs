@@ -11,7 +11,9 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     [Header("Door Settings")]
     [SerializeField] public Types.DoorClassification CurrentDoorPosition = Types.DoorClassification.None;
-    
+    [SerializeField] private bool _isSpawnDoor = false; public bool IsSpawnDoor() { return _isSpawnDoor; }
+    [SerializeField] private bool _readyToOpenMenu = false; public void SetReadyToOpenMenu(bool val) { _readyToOpenMenu = val; }
+    [SerializeField] private bool _waitingForPersonaChange = false;
     private bool _allowedToInteract = true;
     
     
@@ -36,12 +38,38 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // log the current door state 
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
-            // play a "locked door" sound
             return;
         }
         // if we successfuly interacted with a door, and its closed, we can open it
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Closed)
         {
+
+            if (_isSpawnDoor && _readyToOpenMenu)
+            {
+                Debug.Log("Opening Persona Menu from Spawn Room Logic");
+
+                // find the PersonaSelectorInteraction in the scene
+                // find all of the persona selector interactions in the scene
+                var personaSelectors = FindObjectsOfType<PersonaTriggerInteraction>();
+                PersonaTriggerInteraction personaSelector = personaSelectors.FirstOrDefault();
+                // debug print the number of persona selectors found
+                Debug.Log("Found " + personaSelectors.Length + " PersonaSelectorInteractions in the scene.");
+                
+                if (personaSelector == null){ return; }
+
+                if (PersonaManager.Instance.GetPersona() != Types.Persona.Normal)
+                {
+                    Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
+                    LoadIntoNorthRoom();
+                    return;
+                }
+                _waitingForPersonaChange = true;
+                // open the persona menu
+                Debug.Log("Opening the UI");
+                personaSelector.HandlePersonaUI();
+                return;
+            }
+            
             Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
             _doorScript.SetDoorState(Door.DoorState.Open);
             //return; We no longer ant to have to interact twice
@@ -286,6 +314,41 @@ public class DoorTriggerInteraction : TriggerInteractBase
             OnTriggerEnter2D(Player.GetComponent<Collider2D>());
         }
         
+        // If the persona changed and we are waiting for a persona change to happen:
+        // we want to close the persona menu and load the next room
+        if (_waitingForPersonaChange)
+        {
+            _waitingForPersonaChange = false;
+            // close the persona menu
+            PersonaTriggerInteraction personaSelector = FindAnyObjectByType<PersonaTriggerInteraction>();
+            if (personaSelector == null){ return; }
+            personaSelector.HandlePersonaUI();
+            Managers.AudioManager.Instance.PlayOpenDoorSound(1, 0);
+            // Now we need to teleport the player to the next room
+            Invoke(nameof(LoadIntoNorthRoom), 0.15f);
+            return;
+        }
+        
     }
     
+    private void LoadIntoNorthRoom()
+    {
+        Room currentRoom = GetComponentInParent<Room>();
+
+        // get access to the room manager, to get the dungeon layout
+        List<List<Room>> dungeonLayout = DungeonGeneratorManager.Instance.GetDungeonRooms();
+        // now, we can get the rooms coordinates
+        (int row, int col) currentRoomCoords = currentRoom.GetRoomCoords();
+
+        // Now depending on what type of door we are, we will adjust the coordinates accordingly
+        (int row, int col) targetRoomCoords = currentRoomCoords;
+        // Open north door of current room
+        TryOpenDoor(currentRoom, Types.DoorClassification.North);
+
+        // Move to the room north of the current one
+        targetRoomCoords.row -= 1;
+        
+        // Teleport handling
+        HandleDoorTeleport(dungeonLayout, targetRoomCoords, Types.DoorClassification.South);
+    }
 }
