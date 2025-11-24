@@ -15,7 +15,8 @@ public class BossScreenController : Singleton<BossScreenController>
     public float stunTimer = 0.1f;
     public float knockBackForce = 500;
     
-    public bool _isExhausted = false;
+    private bool _isExhausted = false;
+    private bool _hitParticleCooldown = false;
     
     private void Start()
     {
@@ -25,7 +26,7 @@ public class BossScreenController : Singleton<BossScreenController>
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PlayerAttack"))
+        if (collision.gameObject.CompareTag("PlayerAttack") && !_hitParticleCooldown)
         {
             if (!_isExhausted)
             {
@@ -60,6 +61,13 @@ public class BossScreenController : Singleton<BossScreenController>
         GameObject particle = Instantiate(hit, position, angle);
         ParticleSystem particleS = particle.GetComponent<ParticleSystem>();
         Destroy(particle, particleS.main.duration);
+        _hitParticleCooldown = true;
+        Invoke(nameof(ResetHitParticle), 0.05f);
+    }
+
+    private void ResetHitParticle()
+    {
+        _hitParticleCooldown = false;
     }
 
     private Quaternion GetAngle(Vector3 position, float edit)
