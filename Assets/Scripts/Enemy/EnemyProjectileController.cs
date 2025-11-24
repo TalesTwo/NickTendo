@@ -27,6 +27,11 @@ public class EnemyProjectileController : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody2D>();
         EventBroadcaster.PlayerDeath += DestroySelf;
         Invoke(nameof(DestroySelf), lifeDuration);
+        
+        // Fix to stop the projectiles from colliding with pickups
+        int projectileLayer = LayerMask.NameToLayer("Projectile");
+        int lootLayer = LayerMask.NameToLayer("Loot");
+        Physics2D.IgnoreLayerCollision(projectileLayer, lootLayer, true);
     }
     
     // on collision, destroy
@@ -95,6 +100,8 @@ public class EnemyProjectileController : MonoBehaviour
         SetAngle(mouseDirection);
         float projectileSpeed = _rb.velocity.magnitude;
         _rb.velocity= mouseDirection * projectileSpeed;
+        // if we have been deflected, increase damage
+        projectileDamage *= 1.5f;
     }
 
     // do damage to the player

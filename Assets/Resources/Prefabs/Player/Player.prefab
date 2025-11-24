@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1159407919802056874}
   - component: {fileID: 1425615707043847234}
   - component: {fileID: 9160741386850893878}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -111,6 +111,7 @@ MonoBehaviour:
   dashAnimation: {fileID: 223078568798008408, guid: f34d64407862b8f4580da16d58dcccbc, type: 3}
   hitEffect: {fileID: 2560593414228584792, guid: 859f9514e29dfcd49a67c085abee479d, type: 3}
   hitEffectDistance: 0.3
+  interactionCooldownDuration: 0.6
 --- !u!50 &6926609328043849505
 Rigidbody2D:
   serializedVersion: 4
@@ -282,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5785280577527253562}
   - component: {fileID: 6100831883116620808}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +368,7 @@ GameObject:
   - component: {fileID: 483319028019086636}
   - component: {fileID: 7951738456750231846}
   - component: {fileID: 2536297671579432612}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: PitCollider
   m_TagString: Pit_Collider
   m_Icon: {fileID: 0}

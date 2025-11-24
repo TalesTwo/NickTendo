@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,17 +62,47 @@ public class BaseItem : SpawnableObject
     }
     public void TemporarilyDisableCollision(float delay)
     {
-        int lootLayer = gameObject.layer;
-        int defaultLayer = LayerMask.NameToLayer("Default");
-
-        Physics2D.IgnoreLayerCollision(lootLayer, defaultLayer, true);
-        StartCoroutine(Reenable(lootLayer, defaultLayer, delay));
+        StartCoroutine(DisableTriggerForDelay(delay));
     }
 
-    private IEnumerator Reenable(int layer1, int layer2, float delay)
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(delay);
-        Physics2D.IgnoreLayerCollision(layer1, layer2, false);
+        // when this item gets enabled, we want to make sure its collider is enabled (incase we left and returned)
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (var c in colliders)
+        {
+            if (c.isTrigger)
+            {
+                c.enabled = true;
+                break;
+            }
+        }
     }
+
+    private IEnumerator DisableTriggerForDelay(float delay)
+    {
+        // Find the trigger collider (since we will have two
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        Collider2D triggerCol = null;
+
+        foreach (var c in colliders)
+        {
+            if (c.isTrigger)
+            {
+                triggerCol = c;
+                break;
+            }
+        }
+
+        if (triggerCol == null) {yield break;}
+
+        triggerCol.enabled = false;
+        Debug.Log("Temporarily disabling item collider for " + delay + " seconds.");
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Re-enabling item collider.");
+        triggerCol.enabled = true;
+    }
+
+
 
 }

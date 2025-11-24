@@ -1,7 +1,8 @@
-Persona,CurrentHealth,MaxHealth,MovementSpeed,DashSpeed,AttackDamage,AttackCooldown,DashDamage,DashCooldown,DashDistance,Chips,Coins,Color,Description,Email,Username
+Persona,CurrentHealth,MaxHealth,MovementSpeed,DashSpeed,AttackDamage,AttackCooldown,DashDamage,DashCooldown,DashDistance,Keys,Coins,Color,Description,Email,Username
 Normal,3,3,5,10,1,0.5,5,5,0.5,0,0,White,Just be yourself,,
-Warrior,3,3,5,10,2,0.5,3,3,0.5,0,0,Yellow,Everyone likes a funnyman! With the power of comedy everyone will want to talk to you! ,,
-Speedster,2,2,7,10,4,0.5,5,7,0.5,0,0,Blue,Your life is so tragic! People online are sure to sympathize and give you all the support you could want!,,
-Charmer,3,3,5,10,2,0.5,5,5,0.5,0,0,Pink,Makeup tutorials and fancy cars! When you pop up on someone's feed you're sure to earn their loyalty!,,
-Tank,6,6,4,10,1,0.5,5,5,0.5,0,0,Orange,Unfazed and cynical. Your professional attitude is sure to earn you respect from every nihilist you come across!,,
-Assassin,4,4,5,10,1,0.5,7,5,0.5,0,0,Black,Hiding may not be great at drawing attention. But you'll be even more special to the ones you choose to talk too!,,
+Warrior,3,3,5,10,2,0.5,3,3,0.5,0,0,Yellow,Looks like a well rounded character. A great choice!,,
+Speedster,2,2,7,10,4,0.5,5,7,0.5,0,0,Blue,"Speedy, strong and squishy! A  true glass cannon.",,
+Charmer,3,3,5,10,2,0.5,5,5,0.5,0,0,Pink,Well rounded. This character was a true charisma build.,,
+Tank,6,6,4,10,1,0.5,5,5,0.5,0,0,Orange,Talk about Tanky! Hope you don't plan on getting anywhere fast though.,,
+Assassin,4,4,5,10,1,0.5,7,5,0.5,0,0,Black,Weak attacks but excellent dashes. This was a real min/maxer!,,
+Druid,1,5,6,10,1,0.35,4,8,0.5,0,0,Green,They have more max health than they start with. I wonder what hidden stats they have to make up for this?,,

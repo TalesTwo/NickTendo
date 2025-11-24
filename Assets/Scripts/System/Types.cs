@@ -108,6 +108,7 @@ public static class Types
         Charmer,
         Tank,
         Assassin,
+        Druid,
         None
     }
 
