@@ -81,12 +81,12 @@ Vertwin,,BUDDEE,smile,Loading�
 Vertwin,,BUDDEE,smile,404 ERROR: BOSSFIGHT NOT FOUND
 ,,,,
 ,,,,
-HubRandom,ramdon BUDDEE dialogue in the hub room,BUDDEE,basic2,Don't forget to pick your account before leaving!
-HubRandom,,BUDDEE,bothered,I hope our security gets fixed soon..
-HubRandom,,BUDDEE,basic2,Friend Finder is the world's leading completely platonic friend-making MMO!
-HubRandom,,BUDDEE,basic1,I can't wait for this place to be cleaned out.
-HubRandom,,BUDDEE,basic2,Good luck finding that last player!
-HubRandom,,BUDDEE,basic3, Just press <color=purple>[P]</color> to enter the account manager!
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
 ,,,,
 VertIntro,First dialogue after login in vertical slice,BUDDEE,smile,Greetings <b>{player_name}</b>! And welcome to friend finder! The most popular app for finding that special (non-romantic) someone! I'm your personal assistant <color=blue>BUDDEE</color>!
 VertIntro,,Player,smile,Woah this website is immersive as hell!
@@ -114,71 +114,63 @@ vertDeath2,,Player,smile,How am I supposed to make a real friend if I don't show
 vertDeath2,,BUDDEE,smile,I really can't recommend it but I believe in you {player_name}. I hope you find your friend.
 vertDeath2,,Player,smile,Thanks <color=blue>BUDDEE</color>. See you soon.
 ,,,,
-vertIntroyell,BUDDEE yell after login,BUDDEE,smile,Oh a new user! Come over here!
 ,,,,
-vertIntroinfo,mechanic explanation available after intro dialogue,BUDDEE,smile,You wanna hear more about how to fight? No problem!
-vertIntroinfo,,BUDDEE,smile,You can use <b>[WASD]</b> to move around. but you know that.
-vertIntroinfo,,BUDDEE,smile,Pressing <b>[M1]</b> will swing your weapon in the direction of your cursor!
-vertIntroinfo,,BUDDEE,smile,Not only can it hurt foes. it can reflect enemy attacks. and even break some objects!
-vertIntroinfo,,BUDDEE,smile,If you press <b>[M2]</b> you'll do a dash. dealing damage and throwing you in the direction of your cursor.
-vertIntroinfo,,BUDDEE,smile,Watch out though. You'll have to recharge before you can dash again. so use it wisely!
-vertIntroinfo,,BUDDEE,smile,You should be able to find ways to get stronger while exploring. so make sure to check everywhere! I believe in you <b>{player_name}</b>!
-vertIntroinfo,,BUDDEE,smile, <color=red>Just press <b>[P]</b> to enter the account manager!</color> Then you will good to go!
+,,,,
+,,,,
+HubRandom,ramdon BUDDEE dialogue in the hub room,BUDDEE,basic2,Don't forget to pick your account before leaving!
+HubRandom,,BUDDEE,bothered,I hope our security gets fixed soon..
+HubRandom,,BUDDEE,basic2, <color=#646AAD><b>Friend Finders: Online</b></color> is the world's leading completely platonic friend-making MMO!
+HubRandom,,BUDDEE,basic1,I can't wait for this place to be cleaned out.
+HubRandom,,BUDDEE,basic2,Good luck finding that last player!
+HubRandom,,BUDDEE,basic3, Just press <color=purple>[P]</color> to enter the account manager!
+HubRandom,,BUDDEE,basic1,"""The bots are kinda like family, I almost feel bad for them. Almost."""
 ,,,,
 Introyell,immediate dialogue when you enter,BUDDEE,basic2,"""Hello, and welcome to <color=#646AAD><b>Friend Finders: Online</b></color>!"""
 Introyell,,BUDDEE,basic3,My name's <color=#005773>BUDDEE</color>! I'll be your digital assistant!
 Introyell,,BUDDEE,basic1,Why don't you <color=purple>[WASD]</color> on over here to get started?
 ,,,,
 TutorialIntro,first dialogue after yell,BUDDEE,basic1,Welcome to <color=#646AAD><b>Friend Finders: Online</b></color>! The perfect MMO for building new friendships!
-TutorialIntro,,BUDDEE,bothered,Or well that's the idea anyways..
-TutorialIntro,,BUDDEE,sheepish,Let's be honest you probably noticed that the servers are mostly empty.
+TutorialIntro,,BUDDEE,bothered,"""Or well, that's the idea anyways.."""
+TutorialIntro,,BUDDEE,sheepish,"""Let's be honest, you probably noticed that the servers are mostly empty."""
 TutorialIntro,,BUDDEE,sniffle,Our security went on the fritz a while ago and since then most people left.
 TutorialIntro,,BUDDEE,worried,Now we have bots infesting the dungeons and our last player is trapped! But..
 TutorialIntro,,BUDDEE,basic2,Maybe you can help!
-TutorialIntro,,BUDDEE,basic1,If you can find the last player then maybe we could wipe the servers clean and patch this!
+TutorialIntro,,BUDDEE,basic1,If you can <b>find the last player</b> then we could wipe the servers clean and patch this!
 TutorialIntro,,BUDDEE,gremlin,Come through this door to the <b>east</b> and I'll teach you to be a bot destroying machine!
 ,,,,
 Tutorial1,first tutorial room,BUDDEE,basic1,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
-Tutorial1,,BUDDEE,basic3,Your cursor can destroy enemies! Along with pots and chests! Try these ones I set up for practice!
-Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to clear out any enemies before leaving a room.
-Tutorial1,,BUDDEE,smug,And don't worry about getting attacked. I've modified these ones so they can't hurt you!
+Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, pots and chests! Try these ones I set up for practice!"""
+Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to <b>clear out any enemies</b> before leaving a room.
+Tutorial1,,BUDDEE,smug,"""And don't worry about getting attacked, I've modified these ones so they can't hurt you!"""
 ,,,,
 Tutorial2,second tutorial room,BUDDEE,basic1,With <color=purple>[Right Click]</color> you can dash through the air damaging anything in your path!
-Tutorial2,,BUDDEE,basic3,Here you'll need to use it to <b>clear the gap</b>. But watch out! You can only dash once before recharging!
+Tutorial2,,BUDDEE,basic3,Here you'll need to use it to <b>clear the gap</b>. But watch out! You can only dash once before recharging.
 ,,,,
-Tutorial3,third tutorial room,BUDDEE,basic3,Some flying enemies can hide over pits too wide to cross.
+Tutorial3,third tutorial room,BUDDEE,basic3,Some flying enemies can hide over pits to wide to dash across.
 Tutorial3,,BUDDEE,basic1,Luckily you can use your <color=purple>[Left Click]</color> attack to parry projectiles!
-Tutorial3,,BUDDEE,basic2,The projectile will fly in the direction of your cursor.
-Tutorial3,,BUDDEE,basic2,One you've mastered this you'll know everything you need too!
+Tutorial3,,BUDDEE,basic2,"Aim where you want to want to send the attack with your cursor, then time your attack to send it back!"
+Tutorial3,,BUDDEE,basic2,One you've mastered this you'll have everything you need to clear the dungeon!
 Tutorial3,,BUDDEE,gremlin,Those bots won't know what hit 'em!
 ,,,,
-Tutorial4,last tutorial in starting room,BUDDEE,basic3,Before you can leave there's one more thing. You need to select an account.
-Tutorial4,,BUDDEE,bothered,Normally players would make their own but that system isn't working right now.
-Tutorial4,,BUDDEE,basic2,So I've taken the liberty of commandeering some defunct accounts for you to choose from!
+Tutorial4,last tutorial in starting room,BUDDEE,basic3,"""Before you can leave there's one more thing, you need to select an account."""
+Tutorial4,,BUDDEE,bothered,"""Normally players would make their own, but that system isn't working right now."""
+Tutorial4,,BUDDEE,basic2,So I've taken the liberty of grabbing some defunct accounts for you to choose from!
 Tutorial4,,BUDDEE,sheepish,Hopefully the old players won't mind..
-Tutorial4,,BUDDEE,basic1,Just press <color=purple>[P]</color> to bring up some options and head out the north door when you're ready!
+Tutorial4,,BUDDEE,basic1,Just <b>press <color=purple>[P]</color></b> to bring up some options and head out the north door when you're ready!
 Tutorial4,,BUDDEE,basic2,I believe in you pal!
 ,,,,
 Tutorial random,random dialogue for tutorial,,basic1,If you ever need a reminder on how to play just press <color=purple>[Escape]</color> or <color=purple>[Tab]</color>!
 ,,,,
-Run2,Afer first death,BUDDEE,Crestfallen,Ouch! It looks like your character's been compromised!
-Run2,,BUDDEE,worried,Without the devs there's nothing we can do..
-Run2,,BUDDEE,basic2,Luckily those former players left plenty of characters behind so we should be alright!
-Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> to select a new accont.
-,,,,
-Run3,after second death,BUDDEE ,basic1,I know those bots are tough but it'll be worth it! 
-Run3,,BUDDEE ,basic2,Once the servers are fixed <color=#646AAD><b>Friend Finders: Online</b></color> will go back to being a massive community!
-,,,,
-End,after you find Nick,BUDDEE,Crestfallen,Oh no!
+End,after you find Nick,BUDDEE,Crestfallen,Oh no! The last player was just here!
 End,,BUDDEE,confused,I wonder where they went?
-End,,BUDDEE,basic3,Well it's not a problem! They'll turn up again. Just gotta keep looking!
+End,,BUDDEE,basic3,"""Well it's not a problem! They'll turn up again, we just gotta keep looking!"""
 End,,BUDDEE,speechless,. . . . .
 End,,BUDDEE,worried,Don't look at me like that.
 End,,BUDDEE,sniffle,You don't know what it's like being stuck in here.
-End,,BUDDEE,Pity,I lied okay? The devs have abandoned this game. They aren't going to fix the servers.
-end,,BUDDEE,Crestfallen,I'm sorry. You're my friend and that was wrong.
+End,,BUDDEE,Pity,I lied okay? The devs abandoned this place. They aren't going to fix the servers.
+end,,BUDDEE,Crestfallen,You're my friend! I'm sorry for trying to trick you.
 End,,BUDDEE,worried,But look at this place! Someone has to fix it!
-End,,BUDDEE,sheepish,No one wants to join an MMO with no players..
+End,,BUDDEE,sheepish,No one wants to join an MMO with no players.
 End,,BUDDEE,sniffle,And if the last server closes I won't have any more friends.
 End,,BUDDEE,pity,But if I can keep a few players then maybe people will notice and want to rejoin!
 End,,BUDDEE,speechless,. . .
@@ -186,9 +178,19 @@ End,,BUDDEE,worried,I need everyone back. And I can't risk you getting bored and
 End,,BUDDEE,threatening,Sorry pal.
 End,,BUDDEE,pissed,You're staying here. <b><color=#9C0238>Whether you like it or not.</color></b>
 ,,,,
+noreturn,player tries to return to spawn,BUDDEE,speechless,. . .
+noreturn,,BUDDEE,basic3,Oh hey!
+noreturn,,BUDDEE,confused,Why are you trying to leave?
+noreturn,,BUDDEE,angry,I went through all this effort to get you to this point.
+noreturn,,BUDDEE,threatening,Don't you dare leave already.
+,,,,
+PostBossDefeat,,BUDDEE,sniffle,Go on. . . They're in the next room. . .
+PostBossDefeat,,BUDDEE,sniffle,Thank you. . . for joining. . Friend Finder. . . .
+PostBossDefeat,,BUDDEE,sniffle,Please. . . rate. . . 5. . . . Stars. . . .
+,,,,
 Shop1,first shop find,BUDDEE,basic2,Oh hi pal! Great job making it this far!
 Shop1,,BUDDEE,basic1,Have you noticed all the <color=orange>coins</color> those bots have been dropping? That's the currency that the bots stole from our players.
-Shop1,,BUDDEE,basic3,I can trade those for upgrades but be aware they're tied to your account. You'll lose them if the account is compromised.
+Shop1,,BUDDEE,basic3,"""I can trade those for upgrades, but be aware they're tied to your account. You'll lose them if the account is compromised."""
 Shop1,,BUDDEE,smug,Oh and don't worry. I've locked this room down. Your account is safe for now.
 Shop1,,BUDDEE,basic3,Let's see what's available shall we?
 ,,,,
@@ -198,17 +200,28 @@ Shop2,,BUDDEE,basic2,I have more upgrades for you! And a helpful tip!
 Shop2,,BUDDEE,basic1,You can click the <b>reroll</b> button and pay to bring in a new set of items!
 Shop2,,BUDDEE,smug,Not that I have anything not worth buying.
 ,,,,
+Shop3,,BUDDEE,confused,Ohhhh! Have you found some of those <color=#3BB143>data chips</color>?
+Shop3,,BUDDEE,gremlin, <color=#3BB143>Data</color> is far more valuable than coins. It's not on your character so there's no risk of losing it!
+Shop3,,BUDDEE,smug,I'm not exactly supposed to but if you give me some I could upgrade your account permanently.
+Shop3,,BUDDEE,gremlin,Sound like a deal?
 ,,,,
+Run2,Afer first death,BUDDEE,Crestfallen,Ouch! It looks like your character's been compromised!
+Run2,,BUDDEE,worried,Without the devs there's nothing we can do..
+Run2,,BUDDEE,basic2,Luckily those former players left plenty of characters behind so we should be alright!
+Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> to select a new accont.
 ,,,,
-noreturn,player tries to return to spawn,BUDDEE,speechless,. . .
-noreturn,,BUDDEE,basic3,Oh hey!
-noreturn,,BUDDEE,confused,Why are you trying to leave?
-noreturn,,BUDDEE,angry,I went through all this effort to get you to this point.
-noreturn,,BUDDEE,threatening,Don't you dare leave already.
+Run3,,BUDDEE,worried,Do you think this is my fault?
+Run3,,BUDDEE,crestfallen,"""I mean, me being added was supposed to be the big update that brought in new players!"""
+Run3,,BUDDEE,sniffle,I was going to teach them exploration and how to make friends! It was gonna be fun!
+Run3,,BUDDEE,bothered,But as soon as I showed up all the bots came flooding in.
+Run3,,BUDDEE,pity,You don't think that's because of me do you?
+Run3,,BUDDEE,speechless,. . .
+Run3,,BUDDEE,sheepish,Oh. You can't talk. Right.
+Run3,,BUDDEE,basic2,"""Well, that just makes you a good listener!"""
 ,,,,
 Run4,before 4th run,BUDDEE,confused,Am I annoying? Be honest.
 Run4,,BUDDEE,speechless,. . .
-Run4,,BUDDEE,sheepish,Oh right you don't talk.
+Run4,,BUDDEE,sheepish,Oh right you still can't talk.
 Run4,,BUDDEE,smug,In that case I'll take it as a no!
 Run4,,BUDDEE,basic2,We're such great friends.
 ,,,,
@@ -217,18 +230,14 @@ Run5,,BUDDEE,worried,People still like our game right?
 Run5,,BUDDEE,smug,Well when you clear the servers they'll come back.
 Run5,,BUDDEE,bothered,Hopefully.
 ,,,,
-,,,,
-PostBossDefeat,,BUDDEE,sniffle,Go on. . . They're in the next room. . .
-PostBossDefeat,,BUDDEE,sniffle,Thank you. . . for joining. . Friend Finder. . . .
-PostBossDefeat,,BUDDEE,sniffle,Please. . . rate. . . 5. . . . Stars. . . .
-,,,,
-,,,,
-Shop3,,BUDDEE,confused,Ohhhh! Have you found some of those <color=#3BB143>data chips</color>?
-Shop3,,BUDDEE,gremlin, <color=#3BB143>Data</color> is far more valuable than coins. It's not on your character so there's no risk of losing it!
-Shop3,,BUDDEE,smug,I'm not exactly supposed to but if you give me some I could upgrade your account permanently.
-Shop3,,BUDDEE,gremlin,Sound like a deal?
-,,,,
-,,,,
-,,,,
+Run6,,BUDDEE ,basic1,"""I know those bots are tough, but it'll be worth it!"""
+Run6,,BUDDEE ,basic2,"""Once the servers are fixed, <color=#646AAD><b>Friend Finders: Online</b></color> will go back to being a massive community!"""
 ,,,,
 Final,,BUDDEE,basic3,This is Nick. He is the last active player of this game and you're new friend!
+,,,,
+BossLoss1,what BUDDEE says in hub if player dies to boss,BUDDEE,bothered,Well. . .
+BossLoss1,,BUDDEE,sheepish,This is awkward. . .
+BossLoss1,,BUDDEE,basic2,How about this? Let's just forget that ever happened huh?
+BossLoss1,,BUDDEE,speechless,<color=red><b>MEMORY DELETING. . . .</b></color>
+BossLoss1,,BUDDEE,basic2,Oh hey pal! You're back! How'd it go?
+BossLoss1,,BUDDEE,confused,. . . You okay? You look confused.

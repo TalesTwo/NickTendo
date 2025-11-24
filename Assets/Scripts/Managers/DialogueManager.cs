@@ -270,7 +270,7 @@ namespace Managers
             
             playerSprite.sprite = _playerSprites["smile"];
             NPCSprite.sprite = _npcSprites["default"];
-            
+
             if (_dialogue[_index][0] == _characterName)
             {
                 
