@@ -50,6 +50,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: -0.015
   buffType: 14
+  emote: 9
   flavorText: "You shouldn\u2019t rely on powerups too much\u2026 What if you start
     sprouting arms to swing faster? Not that that\u2019d happen. Ha."
   isPermaUpgrade: 1

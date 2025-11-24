@@ -50,6 +50,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 1
   buffType: 11
+  emote: 11
   flavorText: "I\u2019d be able to swing a home run with the size of this health
     bar length! If I had arms, anyway."
   isPermaUpgrade: 1

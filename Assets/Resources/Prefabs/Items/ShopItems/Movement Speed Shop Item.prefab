@@ -50,6 +50,7 @@ MonoBehaviour:
   itemValue: 50
   buffValue: 0.5
   buffType: 2
+  emote: 9
   flavorText: 'Reminds me of a quote I said (first) in my formative years: The problem
     of being faster than light is that you only live in darkness...'
   isPermaUpgrade: 0

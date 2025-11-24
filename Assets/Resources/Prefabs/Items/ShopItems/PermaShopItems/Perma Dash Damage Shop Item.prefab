@@ -50,6 +50,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 0.05
   buffType: 15
+  emote: 11
   flavorText: "Lord knows the damage I\u2019d do with this puppy."
   isPermaUpgrade: 1
 --- !u!212 &7787435678194780221

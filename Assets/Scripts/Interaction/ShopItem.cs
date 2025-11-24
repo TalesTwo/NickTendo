@@ -12,6 +12,7 @@ public class ShopItem : BaseItem
     public int itemValue = 100;
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
+    public BUDDEEEmotes emote;
     public string flavorText;
     public bool isPermaUpgrade = false;
     // Just returns the desctiption for the item

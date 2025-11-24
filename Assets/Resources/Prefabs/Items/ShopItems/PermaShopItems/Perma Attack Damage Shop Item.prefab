@@ -50,6 +50,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 0.25
   buffType: 13
+  emote: 7
   flavorText: "With the power of violence! Yeah, that\u2019s how that phrase goes.
     probably."
   isPermaUpgrade: 1
