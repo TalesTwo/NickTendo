@@ -240,7 +240,7 @@ RectTransform:
   m_GameObject: {fileID: 4985763176169221310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 32.66848}
-  m_LocalScale: {x: 2.333333, y: 2.3333335, z: 4.666667}
+  m_LocalScale: {x: 15.5, y: 15.5, z: 4.666667}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5848584687767706741}
@@ -248,7 +248,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 1170, y: -251.9}
-  m_SizeDelta: {x: 180, y: 270}
+  m_SizeDelta: {x: 27, y: 42}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7472361040383579335
 CanvasRenderer:
@@ -340,3 +340,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buddeeDialogue: {fileID: 8306533757770245607}
   _wordSpeed: 0.01
+  _BUDDEE: {fileID: 4985763176169221310}
+  _angry: {fileID: -4770749683561393187, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _basic1: {fileID: 4163674188890322657, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _basic2: {fileID: 5245823943739528323, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _basic3: {fileID: -8304582564733601944, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _bothered: {fileID: 6302665510683823624, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _confused: {fileID: 2097583610480303948, guid: 364a19a23fa1b2c4bbfabaca479946e4, type: 3}
+  _crestfallen: {fileID: -6036903940762002824, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _gremlin: {fileID: -5032012865524358882, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _pissed: {fileID: 1716077400252765425, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _pity: {fileID: -2200540869742523592, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _sheepish: {fileID: -1428723256143030655, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _smug: {fileID: 2386264649811279521, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _sniffle: {fileID: 1242246401783679328, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _speechless: {fileID: 6092692976185201032, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _threatening: {fileID: -8425626351668545746, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+  _worried: {fileID: 3644168230970345473, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}

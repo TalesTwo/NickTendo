@@ -16,14 +16,17 @@ public class ShopUIManager : MonoBehaviour
 
     // Lists that store all the UI elements that have need functionality
     // (maybe change from public to serialized field)
+    [Header("Item Data")]
     public GameObject[] ItemSlots;
     public Image[] ItemImages;
     public Button[] ItemButtons;
     public TextMeshProUGUI[] ItemNames;
-    public string[] ItemTooltipText;
-    public string[] ItemFlavorText;
     public Image[] ItemSpotlights;
+    public string[] ItemTooltipText;
+    public TextMeshProUGUI[] ItemFlavorText;
+    public BUDDEEEmotes[] ItemEmotes;
 
+    [Header("Shop Info")]
     public Button CloseButton;
     public Button RerollButton;
     public int RerollCost = 50;
@@ -39,7 +42,8 @@ public class ShopUIManager : MonoBehaviour
     private void Awake()
     {
         ItemTooltipText = new string[4];
-        ItemFlavorText = new string[4];
+        ItemFlavorText = new TextMeshProUGUI[4];
+        ItemEmotes = new BUDDEEEmotes[4];
     }
 
     // Start is called before the first frame update
@@ -106,7 +110,7 @@ public class ShopUIManager : MonoBehaviour
     {
         ItemSpotlights[Index].gameObject.SetActive(true);
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
-        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue(ItemFlavorText[Index]);
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue(ItemFlavorText[Index].text, ItemEmotes[Index]);
         Managers.AudioManager.Instance.PlayUIHoverSound(1, 0);
     }
 
