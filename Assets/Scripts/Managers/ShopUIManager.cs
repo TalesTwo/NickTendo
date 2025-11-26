@@ -29,7 +29,8 @@ public class ShopUIManager : MonoBehaviour
     [Header("Shop Info")]
     public Button CloseButton;
     public Button RerollButton;
-    public int RerollCost = 30;
+    public int RerollCostCoins = 30;
+    public int RerollCostChips = 0;
     public GameObject Tooltip;
     public GameObject BuddeeUI;
     public bool IsInShop;
@@ -132,7 +133,7 @@ public class ShopUIManager : MonoBehaviour
             if (IsRerollButton)
             {
                 Tooltip.GetComponent<TooltipUI>().SetXYPadding(75, -50);
-                Tooltip.GetComponent<TooltipUI>().ShowTooltip("Click to reroll shop items!\nCost: " + RerollCost + "\n\n");
+                UpdateRerollToolTip();
             }
             else
             {
@@ -171,9 +172,15 @@ public class ShopUIManager : MonoBehaviour
 
     void RerollItems(bool DontCareAboutMoney)
     {   
-        if (DontCareAboutMoney || PlayerStats.Instance.GetCoins() >= RerollCost)
+        if (DontCareAboutMoney || (PlayerStats.Instance.GetCoins() >= RerollCostCoins && PlayerStats.Instance.GetChips() >= RerollCostChips))
         {
-            if(!DontCareAboutMoney) PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins,-RerollCost);
+            if (!DontCareAboutMoney)
+            {
+                PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Coins, -RerollCostCoins);
+                PlayerStats.Instance.ApplyItemBuffs(PlayerStatsEnum.Chips, -RerollCostChips);
+                RerollCostIncrease();
+                UpdateRerollToolTip();
+            }
             ShopM.GetRandomShopList();
             ShopM.SetItems();
             BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
@@ -181,20 +188,28 @@ public class ShopUIManager : MonoBehaviour
         }
         else
         {
-            NotEnoughMoney();
+            if (RerollCostChips == 0)
+            {
+                NotEnoughMoney();
+            }
+            else
+            {
+                BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
+                BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough coins or chips...", BUDDEEEmotes.confused);
+            }
         }        
     }
 
     public void NotEnoughMoney()
     {
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
-        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough coins...");
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough coins...", BUDDEEEmotes.confused);
     }
 
     public void NotEnoughChips()
     {
         BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
-        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough chips...");
+        BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like you don't have enough chips...", BUDDEEEmotes.confused);
     }
 
     void SoldOut()
@@ -208,6 +223,27 @@ public class ShopUIManager : MonoBehaviour
 
     void RerollCostIncrease()
     {
+        RerollCostCoins += 10;
+        if (RerollCostCoins > 50)
+        {
+            RerollCostCoins = 30;
+            RerollCostChips += 1;
+        }
+    }
 
+    void UpdateRerollToolTip()
+    {
+        if (RerollCostChips == 0)
+        {
+            Tooltip.GetComponent<TooltipUI>().ShowTooltip($"Click to reroll shop items!\nCost: {RerollCostCoins} coins\n\n");
+        }
+        else if (RerollCostChips == 1)
+        {
+            Tooltip.GetComponent<TooltipUI>().ShowTooltip($"Click to reroll shop items!\nCost: {RerollCostCoins} coins and 1 chip\n\n");
+        }
+        else if (RerollCostChips > 1)
+        {
+            Tooltip.GetComponent<TooltipUI>().ShowTooltip($"Click to reroll shop items!\nCost: {RerollCostCoins} coins and {RerollCostChips} chips\n\n");
+        }
     }
 }
