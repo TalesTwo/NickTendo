@@ -412,7 +412,7 @@ namespace Managers
                     // get the door configuration
                     Types.DoorConfiguration doorConfig = roomToReplace.configuration;
 
-                    // generate a special room of the same door configuration (special = shop)
+                    // generate a special room of the same door configuration
                     Types.RoomType specialRoomType = GenerateRoomTypeFromConfiguration(doorConfig);
                     Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position,
                                                             coords.row, coords.col, true);
