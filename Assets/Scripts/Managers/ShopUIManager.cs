@@ -29,7 +29,7 @@ public class ShopUIManager : MonoBehaviour
     [Header("Shop Info")]
     public Button CloseButton;
     public Button RerollButton;
-    public int RerollCost = 50;
+    public int RerollCost = 30;
     public GameObject Tooltip;
     public GameObject BuddeeUI;
     public bool IsInShop;
@@ -204,5 +204,10 @@ public class ShopUIManager : MonoBehaviour
             BuddeeUI.GetComponent<BUDDEEUI>().StopCR();
             BuddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Shop's out of stock. Press the Reroll button to get more items!");
         }
+    }
+
+    void RerollCostIncrease()
+    {
+
     }
 }

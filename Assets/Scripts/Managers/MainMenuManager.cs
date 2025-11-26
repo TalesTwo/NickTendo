@@ -11,11 +11,18 @@ namespace Managers
     public class MainMenuManager : MonoBehaviour
     {
         [SerializeField] private SceneField _initialGameScene;
+
+        [Header("Buttons and other stuff")]
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _gameButton;
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _launcher;
+
+        [Header("Pop-up stuff")]
+        [SerializeField] private GameObject _popUP;
+        [SerializeField] private Vector2 _topLeftBound;
+        [SerializeField] private Vector2 _bottomRightBound;
         
         private bool _hasClickedButton;
 
@@ -30,6 +37,7 @@ namespace Managers
             }
 
             _settingsMenu.SetActive(false);
+            _popUP.SetActive(false);
             _startButton.onClick.AddListener(StartGameButton);
             _settingsButton.onClick.AddListener(OpenSettings);
             _gameButton.onClick.AddListener(OpenLauncher);
@@ -72,6 +80,11 @@ namespace Managers
 
         private void OpenLauncher()
         {
+            AudioManager.Instance.PlayUISelectSound(1, 0);
+            if (_popUP.activeInHierarchy)
+            {
+                _popUP.SetActive(false);
+            }
             if(!GameStateManager.Instance.hasOpenedLauncher)
             {
                 GameStateManager.Instance.hasOpenedLauncher = true;
@@ -83,9 +96,23 @@ namespace Managers
         {
             _hasClickedButton = false;
         }
-        public void IconNoise()
+        public void IconClick()
         {
-            AudioManager.Instance.PlayUISelectSound(1, 0);
+            AudioManager.Instance.PlayUIInvalidClick(1, 0);
+            if (!_popUP.activeInHierarchy && !GameStateManager.Instance.hasOpenedLauncher)
+            {
+                _popUP.SetActive(true);
+            }
+            _popUP.GetComponent<RectTransform>().localPosition = RandomLocation();
+        }
+
+        private Vector2 RandomLocation()
+        {
+            float _randX = UnityEngine.Random.Range(_topLeftBound.x, _bottomRightBound.x);
+            float _randY = UnityEngine.Random.Range(_bottomRightBound.y, _topLeftBound.y);
+
+            Vector2 _randLoc = new Vector2(_randX, _randY);
+            return _randLoc;
         }
     }
 }
