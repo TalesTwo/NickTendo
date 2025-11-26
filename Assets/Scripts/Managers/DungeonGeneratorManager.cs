@@ -322,6 +322,10 @@ namespace Managers
              * where one random room in each "difficulty" range will be replaced with the matching roomType from the special generation data
              */
             
+            // Holder to tell what difficulties we have already used
+            List<int> usedShopDifficulties = new List<int>();
+
+            
             // Determine the difficulty range(s)
             // this should realistically just be the final room, but we will do this for safety
             int maxDifficulty = 0;
@@ -373,31 +377,67 @@ namespace Managers
                 }
                 if (possibleRooms.Count > 0)
                 {
-                    int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
-                    Room roomToReplace = possibleRooms[randomIndex];
+                    Room roomToReplace = null;
+                    int difficulty = -1;
+                    int attempts = 0;
+
+                    // keep picking until we get a valid shop placement
+                    while (true)
+                    {
+                        int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
+                        roomToReplace = possibleRooms[randomIndex];
+                        difficulty = roomToReplace.GetRoomDifficulty();
+
+                        // never place a shop at difficulty == 1 (right outside spawn)
+                        if (difficulty == 1) {continue;}
+
+                        // never place shops with difficulty difference == 1 or 2, for better pacing
+                        bool invalid = false;
+                        foreach (int used in usedShopDifficulties)
+                        {
+                            if (Mathf.Abs(used - difficulty) == 1 || Mathf.Abs(used - difficulty) == 2)
+                            {
+                                invalid = true;
+                                break;
+                            }
+                        }
+                        if (invalid) {continue;}
+
+                        // valid location found
+                        break;
+                    }
+
                     // get the room coordinates
                     (int row, int col) coords = roomToReplace.GetRoomCoords();
                     // get the door configuration
                     Types.DoorConfiguration doorConfig = roomToReplace.configuration;
-                    // generate a special room of the same door configuration
+
+                    // generate a special room of the same door configuration (special = shop)
                     Types.RoomType specialRoomType = GenerateRoomTypeFromConfiguration(doorConfig);
-                    Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position, coords.row, coords.col, true);
-                    specialRoom.SetRoomDifficulty(roomToReplace.GetRoomDifficulty());
+                    Room specialRoom = GenerateRoomFromType(specialRoomType, roomToReplace.transform.position,
+                                                            coords.row, coords.col, true);
+
+                    specialRoom.SetRoomDifficulty(difficulty);
+
+                    // record this shop placement
+                    usedShopDifficulties.Add(difficulty);
+
                     // attempt to get the room grid manager to regenerate grids
                     RoomGridManager roomGridManager = specialRoom.GetComponent<RoomGridManager>();
                     if (roomGridManager != null)
                     {
                         roomGridManager.RegenerateGrids();
                     }
+
                     specialRoom.EnableAllDoors();
                     specialRoom.SetRoomEnabled(false); // disable the room by default
+
                     if (specialRoom != null)
                     {
                         HandleRoomReplacement(dungeonMap, roomToReplace, specialRoom, coords.row, coords.col);
                     }
                 }
             }
-            
         }
 
         private void HandleRoomReplacement(List<List<Room>> dungeonMap, Room currentRoom, Room newRoom, int currentRow, int currentCol)
