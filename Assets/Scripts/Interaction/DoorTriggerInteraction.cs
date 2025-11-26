@@ -216,6 +216,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         foreach (Transform door in doors)
         {
             DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+            targetRoom.EnableAllDoors();
             if (doorTrigger != null && doorTrigger.CurrentDoorPosition == doorToSpawnTo)
             {
                 // enable all doors in the target room
