@@ -144,7 +144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "You shouldn't rely on powerups too much\u2026 What if you start sprouting
-    arms to swing faster? Not that that\u2019d happen. Ha."
+    arms to swing faster? Not that that'd happen. Ha."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
