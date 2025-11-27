@@ -24,7 +24,7 @@ public class MiniMapUI : MonoBehaviour
         EventBroadcaster.PlayerDeath += OnPlayerDeath;
         EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
         DebugUtils.LogSuccess("MiniMapUI connection complete");
-        ForceInitialize();
+        Invoke(nameof(ForceInitialize), 1f);
         _connectedToBroadcaster = true;
     }
     private void ForceInitialize()
@@ -53,8 +53,8 @@ public class MiniMapUI : MonoBehaviour
         OnEnable();
         
         // Get the players current room to update the minimap
-        var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
-        OnPlayerChangedRoom((current_cords.row, current_cords.col));
+        //var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
+        //OnPlayerChangedRoom((current_cords.row, current_cords.col));
     }
     
 
