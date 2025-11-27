@@ -107,6 +107,7 @@ public class MiniMapUI : MonoBehaviour
     private void RefreshMiniMap(int playerRow, int playerCol)
     {
         var dungeon = DungeonGeneratorManager.Instance.GetDungeonRooms();
+        if(dungeon == null) return;
 
         for (int r = 0; r < grid.Count; r++)
         {
