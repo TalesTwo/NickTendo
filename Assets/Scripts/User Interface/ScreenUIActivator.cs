@@ -23,5 +23,10 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     {
         MiniMap.SetActive(isActive);
     }
+    
+    public void ToggleMiniMap()
+    {
+        MiniMap.SetActive(!MiniMap.activeSelf);
+    }
 
 }
