@@ -330,6 +330,8 @@ public class BossController : Singleton<BossController>
 
     public void TakeDamage()
     {
+        StopCoroutine(nameof(ExhaustionTimer));
+        
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
         _istired = false;
