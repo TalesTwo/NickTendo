@@ -59,7 +59,7 @@ public class BossController : Singleton<BossController>
     [System.Serializable]
     public class SmokeParticles
     {
-        [Header("Smoke")]
+        [Header("Smoke or sparks")]
         public GameObject smoke;
         public HealthState health;
     }
