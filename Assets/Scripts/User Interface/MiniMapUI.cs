@@ -41,6 +41,14 @@ public class MiniMapUI : MonoBehaviour
         int cols = DungeonGeneratorManager.Instance.GetCols();
         int rows = DungeonGeneratorManager.Instance.GetRows();
         discovered = new bool[rows, cols];
+        // Hide all cells
+        foreach (var row in grid)
+        {
+            foreach (var cell in row)
+            {
+                cell.SetActive(false);
+            }
+        }
     }
     
     private void GameStartedHandler()
