@@ -30296,39 +30296,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[0].exhaustionTime
-      value: 12
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
+      propertyPath: attacks.Array.data[1].exhaustionTime
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[2].exhaustionTime
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[3].exhaustionTime
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[4].exhaustionTime
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[0].exhaustionCounter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[1].exhaustionCounter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[2].exhaustionCounter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[3].exhaustionCounter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2034208427708374011, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: attacks.Array.data[4].exhaustionCounter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6457432782451709770, guid: 8bace3b6a85f3944eba9039c265c2753, type: 3}
       propertyPath: m_LocalPosition.x

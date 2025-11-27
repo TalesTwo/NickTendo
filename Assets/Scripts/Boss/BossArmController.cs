@@ -24,6 +24,8 @@ public class BossArmController : MonoBehaviour
     public GameObject forearm;
     public GameObject hand;
 
+    public GameObject particles;
+
     private BossColliderController _shoulder;
     private BossColliderController _arm;
     private BossColliderController _elbow;
@@ -179,6 +181,7 @@ public class BossArmController : MonoBehaviour
 
     private IEnumerator MoveArmOffScreen(Vector2 destination)
     {
+        particles.gameObject.SetActive(true);
         
         float time = 0f;
 
@@ -217,15 +220,18 @@ public class BossArmController : MonoBehaviour
         Quaternion armRotation = arm.transform.rotation;
         Quaternion forearmRotation = forearm.transform.rotation;
         Quaternion handRotation = hand.transform.rotation;
+        Quaternion particleRotation = particles.transform.rotation;
         
         // Step 2: adjust piece rotations
 
         if (side == Direction.Right)
         {
             shoulder.transform.rotation = Quaternion.Euler(0, 0, -90);
+            particles.transform.rotation = Quaternion.Euler(0, 0, -90);
         } else if (side == Direction.Left)
         {
             shoulder.transform.rotation = Quaternion.Euler(0, 0, 90);
+            particles.transform.rotation = Quaternion.Euler(0, 0, 90);
         }
         arm.transform.rotation = Quaternion.Euler(0, 0, 0);
         forearm.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -320,7 +326,8 @@ public class BossArmController : MonoBehaviour
         arm.transform.rotation = armRotation;
         forearm.transform.rotation = forearmRotation;
         hand.transform.rotation = handRotation;
-
+        particles.transform.rotation = particleRotation;
+        
         transform.position = _offScreenPos;
 
         float time2 = 0f;
@@ -347,6 +354,8 @@ public class BossArmController : MonoBehaviour
         {
             BossController.Instance.RightArmReturned();
         }
+        
+        particles.gameObject.SetActive(false);
 
     }
 }
