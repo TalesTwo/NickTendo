@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    [Header("Scenes")]
+    [Header("Menu Stuff")]
     [SerializeField]
     private bool _isPauseMenu = true;
     [SerializeField]
@@ -72,6 +72,7 @@ public class PauseMenuManager : MonoBehaviour
 
         _sfxToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteSFX);
         _musicToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteMusic);
+        DebugUtils.Log($"SFX State: {AudioManager.Instance.muteSFX}, Music State: {AudioManager.Instance.muteMusic}");
         if (_isPauseMenu)
         {
             EventBroadcaster.Broadcast_StartStopAction();
@@ -115,6 +116,7 @@ public class PauseMenuManager : MonoBehaviour
         {
             AudioManager.Instance.muteMusic = false;
         }
+        DebugUtils.Log($"Current Music State {AudioManager.Instance.muteMusic}");
     }
 
     private void EnableConfirmationWindow()
@@ -133,7 +135,7 @@ public class PauseMenuManager : MonoBehaviour
             SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
             Invoke(nameof(ResetBool), 0.99f);
         }
-        Invoke(nameof(UnmuteStuff), 0.98f);
+        //Invoke(nameof(UnmuteStuff), 0.99f);
     }
 
     private void UnmuteStuff()

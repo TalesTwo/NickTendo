@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: b27c7799f944e4e4a91c7e259be237c8
+guid: 364a19a23fa1b2c4bbfabaca479946e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1658927225162452868
-    second: Discord_0
+      213: 2097583610480303948
+    second: leaning_expression_0
+  - first:
+      213: -8538676652552926022
+    second: leaning_expression_1
+  - first:
+      213: -3820319427479538533
+    second: leaning_expression_2
+  - first:
+      213: -5532092490285313597
+    second: leaning_expression_3
+  - first:
+      213: 980400019745044519
+    second: leaning_expression_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,19 +96,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -110,20 +109,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -139,22 +125,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Discord_0
+      name: leaning_expression_confused
       rect:
         serializedVersion: 2
-        x: 4
-        y: 4
-        width: 112
-        height: 112
+        x: 33
+        y: 167
+        width: 31
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c70b7f36a7e4af8e0800000000000000
-      internalID: -1658927225162452868
+      spriteID: c4f1c552e2d1c1d10800000000000000
+      internalID: 2097583610480303948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leaning_expression_gremlin
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 167
+        width: 30
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b94fe8cb8bf7bfac0800000000000000
+      internalID: -3820319427479538533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pity
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 39
+        width: 30
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c110fbb03f0a33b0800000000000000
+      internalID: -5532092490285313597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leaning_expression_basic2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 39
+        width: 30
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72870b2af941b9d00800000000000000
+      internalID: 980400019745044519
       vertices: []
       indices: 
       edges: []
@@ -162,7 +211,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8cf2424d2c1cb0245a6e33657f6c9e1e
     internalID: 0
     vertices: []
     indices: 
@@ -170,7 +219,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Discord_0: -1658927225162452868
+      leaning_expression_1: -8538676652552926022
+      leaning_expression_basic2: 980400019745044519
+      leaning_expression_confused: 2097583610480303948
+      leaning_expression_gremlin: -3820319427479538533
+      pity: -5532092490285313597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

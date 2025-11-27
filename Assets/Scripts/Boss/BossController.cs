@@ -19,6 +19,9 @@ using Random = System.Random;
  */
 public class BossController : Singleton<BossController>
 {
+    [Header("debugging")]
+    public bool debugging = false;
+    
     [System.Serializable]
     public class Stats
     {
@@ -170,6 +173,8 @@ public class BossController : Singleton<BossController>
     // Update is called once per frame
     void Update()
     {
+        if (debugging) return;
+        
         if (!_playerAlive) return;
         
         if (_phases >= _currentStats.exhaustionCounter && battle == BattleState.Idle && _leftArmAttached &&

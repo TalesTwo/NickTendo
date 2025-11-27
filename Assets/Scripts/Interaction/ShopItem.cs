@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,10 @@ public class ShopItem : BaseItem
     public int itemValue = 100;
     public float buffValue = 10;
     public PlayerStatsEnum buffType;
+    public BUDDEEEmotes emote;
     public string flavorText;
     public bool isPermaUpgrade = false;
+    public TextMeshProUGUI flavorTextUUGUI;
     // Just returns the desctiption for the item
     public string GetTooltipText()
     {

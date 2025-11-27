@@ -13,6 +13,9 @@ public class GameStateManager : Singleton<GameStateManager>
     private int _playerDeathCount = 0; public int GetPlayerDeathCount() { return _playerDeathCount; }
     private int _timesTalkedToShopkeeper = 0; public void UpdateNumberOfTimesTalkedToShopkeeper() { _timesTalkedToShopkeeper++; } public int GetNumberOfTimesTalkedToShopkeeper() { return _timesTalkedToShopkeeper; }
     private List<ShopTriggerInteraction> _ShopKeepersTalkedTo = new List<ShopTriggerInteraction>(); public void AddShopKeeperTalkedTo(ShopTriggerInteraction shopKeeper) { if (!_ShopKeepersTalkedTo.Contains(shopKeeper)) { _ShopKeepersTalkedTo.Add(shopKeeper); UpdateNumberOfTimesTalkedToShopkeeper(); } } public List<ShopTriggerInteraction> GetShopKeepersTalkedTo() { return _ShopKeepersTalkedTo; }
+
+    public bool hasOpenedLauncher;
+
     // getting and setting BUDDEE state
     public string GetBuddeeDialogState()
     {
@@ -79,6 +82,7 @@ public class GameStateManager : Singleton<GameStateManager>
     {
         EventBroadcaster.GameRestart += OnGameRestart;
         EventBroadcaster.GameStarted += OnGameStarted;
+        hasOpenedLauncher = false;
     }
     private void OnGameRestart()
     {

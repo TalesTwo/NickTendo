@@ -351,6 +351,27 @@ public enum PlayerStatsEnum
     CarryOver_Dash_Speed
 }
 
+
+public enum BUDDEEEmotes
+{
+    angry,
+    basic1,
+    basic2,
+    basic3,
+    bothered,
+    confused,
+    crestfallen,
+    gremlin,
+    pissed,
+    pity,
+    sheepish,
+    smug,
+    sniffle,
+    speechless,
+    threatening,
+    worried
+}
+
 // create a struct to hold all of the player stats, which can be used to initialize the player stats
 [Serializable]
 public struct PlayerStatsStruct
