@@ -8,6 +8,7 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
 
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject MiniMap;
     
 
     public void SetDeathScreen()
@@ -17,6 +18,10 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     public void SetWinScreen()
     {
         winScreen.SetActive(true);
+    }
+    public void SetMiniMapActive(bool isActive)
+    {
+        MiniMap.SetActive(isActive);
     }
 
 }

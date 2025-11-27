@@ -153,6 +153,17 @@ public class PlayerController : MonoBehaviour
             }            
         }
         
+        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            // for testing purposes, press K to kill the player
+            ScreenUIActivator.Instance.SetMiniMapActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            // for testing purposes, press K to kill the player
+            ScreenUIActivator.Instance.SetMiniMapActive(false);
+        }
     }
 
 
