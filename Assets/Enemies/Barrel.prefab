@@ -245,7 +245,7 @@ MonoBehaviour:
   - drop: {fileID: 2502751402912625270, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
     dropChance: 100
   - drop: {fileID: 2502751402912625270, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-    dropChance: 5
+    dropChance: 10
   generalDropRate: 100
   dropForce: 5
   dropDrag: 4

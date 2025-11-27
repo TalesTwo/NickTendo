@@ -78,8 +78,8 @@ Tilemap:
   - first: {x: -1, y: -31, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -88,8 +88,8 @@ Tilemap:
   - first: {x: 0, y: -31, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -98,8 +98,8 @@ Tilemap:
   - first: {x: 1, y: -31, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -117,10 +117,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 6
-    m_Data: {fileID: 11400000, guid: 216824c4ce2142541acc870302af23fe, type: 2}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: 02916686c74b7f847a445b0feeb7d163, type: 2}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: dc91587d7ee77ae41a6a96a5d6f8293c, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -132,10 +132,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 6
-    m_Data: {fileID: 9162271583308437803, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
+  - m_RefCount: 3
+    m_Data: {fileID: 21300000, guid: ab4e22349111a9d4888c51c99a8d682f, type: 3}
+  - m_RefCount: 3
+    m_Data: {fileID: 21300000, guid: ed095dcfe24457543a6362a854690fd9, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 6
     m_Data:
@@ -226,7 +226,7 @@ TilemapRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.0031446815, y: 0.0031446815, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -290,7 +290,7 @@ TilemapCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
