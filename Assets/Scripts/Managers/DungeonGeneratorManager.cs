@@ -380,31 +380,88 @@ namespace Managers
                     Room roomToReplace = null;
                     int difficulty = -1;
                     int attempts = 0;
+                    int phase = 0; 
 
                     // keep picking until we get a valid shop placement
                     while (true)
                     {
+                        attempts++;
+
                         int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
                         roomToReplace = possibleRooms[randomIndex];
                         difficulty = roomToReplace.GetRoomDifficulty();
 
                         // never place a shop at difficulty == 1 (right outside spawn)
-                        if (difficulty == 1) {continue;}
-
-                        // never place shops with difficulty difference == 1 or 2, for better pacing
-                        bool invalid = false;
-                        foreach (int used in usedShopDifficulties)
+                        if (difficulty == 1)
                         {
-                            if (Mathf.Abs(used - difficulty) == 1 || Mathf.Abs(used - difficulty) == 2)
+                            // skip no matter the phase
+                            if (attempts > 500) 
                             {
-                                invalid = true;
+                                // safety break to make sure the game dosent crash fr style lol
                                 break;
                             }
+                            continue;
                         }
-                        if (invalid) {continue;}
 
-                        // valid location found
-                        break;
+                        bool invalid = false;
+
+                        // PHASE 0,  check everything
+                        // PHASE 1, skip first rule
+                        if (phase == 0)
+                        {
+                            // never place shops with difficulty difference == 1 or 2, for better pacing
+                            foreach (int used in usedShopDifficulties)
+                            {
+                                if (Mathf.Abs(used - difficulty) == 1 || Mathf.Abs(used - difficulty) == 2)
+                                {
+                                    invalid = true;
+                                    break;
+                                }
+                            }
+                        }
+                        // PHASE 1, only check for difficulty difference == 1
+                        else if (phase == 1)
+                        {
+                            // only check for difficulty difference == 1
+                            foreach (int used in usedShopDifficulties)
+                            {
+                                if (Mathf.Abs(used - difficulty) == 1)
+                                {
+                                    invalid = true;
+                                    break;
+                                }
+                            }
+                        }
+                        // phase 2, dont check anything
+                        
+                        
+
+                        if (!invalid)
+                            break; // valid location found
+
+                        // -----------------------------------
+                        // Fallback logic after X attempts
+                        // -----------------------------------
+                        if (attempts == 50)
+                        {
+                            // after 50 attempts, loosen rule
+                            phase = 1;
+                            // Debug.Log("Shop fallback: Loosening rules (phase 1)");
+                        }
+
+                        if (attempts == 100)
+                        {
+                            // after 100 attempts, loosen even more
+                            phase = 2;
+                            // Debug.Log("Shop fallback: Removing spacing rules (phase 2)");
+                        }
+
+                        // after 150 attempts, just take anything except difficulty==1
+                        if (attempts > 150)
+                        {
+                            // Debug.LogWarning("Shop fallback: Forcing placement");
+                            break;
+                        }
                     }
 
                     // get the room coordinates
