@@ -41,14 +41,6 @@ public class MiniMapUI : MonoBehaviour
         int cols = DungeonGeneratorManager.Instance.GetCols();
         int rows = DungeonGeneratorManager.Instance.GetRows();
         discovered = new bool[rows, cols];
-        // now empty the minimap
-        if (grid != null)
-        {
-            foreach (var row in grid)
-            foreach (var cell in row)
-                Destroy(cell);
-        }
-        
     }
     
     private void GameStartedHandler()
