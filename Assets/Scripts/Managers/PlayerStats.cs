@@ -61,9 +61,24 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         // if the player is already dead, we dont want to allow further health updates
         _player = PlayerManager.Instance.GetPlayer().GetComponent<PlayerController>();
+        // bind the the main menu delegate
+        EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
     }
-    
-    
+
+    private void OnReturnToMainMenu()
+    {
+        // Reset all carry over stats
+        _carryOverMaxHealth = 0;
+        _carryOverMovementSpeed = 0;
+        _carryOverAttackDamage = 0;
+        _carryOverAttackCooldown = 0;
+        _carryOverDashDamage = 0;
+        _carryOverDashCooldown = 0;
+        _carryOverDashSpeed = 0;
+        _carryOverChips = 0;
+        _carryOverCoins = 0;
+        
+    }
     public string GetPlayerName() { return _playerName; }
     
     public float GetCurrentHealth() { return _currentHealth; }
@@ -112,6 +127,7 @@ public class PlayerStats : Singleton<PlayerStats>
         
         
         if (_player.GetIsDeadFlag()) {return;}
+        if (_player.GetIsKnockback()){return;}
         
         _currentHealth += UpdateValue;
         //DebugUtils.Log("H: " + GetCurrentHealth() + " M: " + GetMaxHealth());

@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool _isDashMoving = false;
     private bool _isAttacking = false;
     private bool _isActive = true;        // blocks all player inputs when false (call broadcaster to toggle)
-    private bool _isKnockback = false;
+    private bool _isKnockback = false; public bool GetIsKnockback() { return _isKnockback; }
     private bool _isDead = false; public bool GetIsDeadFlag() { return _isDead; }
     private bool _isWalking = false;
     private float _walktimer = 0;
