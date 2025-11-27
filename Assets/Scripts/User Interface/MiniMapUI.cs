@@ -93,6 +93,31 @@ public class MiniMapUI : MonoBehaviour
                 Image img = cell.GetComponent<Image>();
                 Room room = dungeon[r][c];
                 Types.RoomClassification rc = room.GetRoomClassification();
+                // Get the Active doors for the room
+                room.GetRoomClassification();
+                // now enable the (North, East, South, West) doors based on the room's active doors
+                var roomConfig = room.configuration;
+                if (roomConfig.NorthDoorActive){
+                    cell.transform.Find("North").gameObject.SetActive(true);
+                } else {
+                    cell.transform.Find("North").gameObject.SetActive(false);
+                }
+                if (roomConfig.EastDoorActive){
+                    cell.transform.Find("East").gameObject.SetActive(true);
+                } else {
+                    cell.transform.Find("East").gameObject.SetActive(false);
+                }
+                if (roomConfig.SouthDoorActive){
+                    cell.transform.Find("South").gameObject.SetActive(true);
+                } else {
+                    cell.transform.Find("South").gameObject.SetActive(false);
+                }
+                if (roomConfig.WestDoorActive){
+                    cell.transform.Find("West").gameObject.SetActive(true);
+                } else {
+                    cell.transform.Find("West").gameObject.SetActive(false);
+                }
+                
 
                 // Player location always overrides
                 if (r == playerRow && c == playerCol)

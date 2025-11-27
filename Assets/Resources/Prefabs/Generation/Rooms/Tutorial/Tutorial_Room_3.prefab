@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration:
-    NorthDoorActive: 1
+    NorthDoorActive: 0
     EastDoorActive: 1
     SouthDoorActive: 0
     WestDoorActive: 0
