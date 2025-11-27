@@ -13,15 +13,30 @@ public class MiniMapUI : MonoBehaviour
     private List<List<GameObject>> grid;
     private bool[,] discovered;          // tracks visited rooms
     private bool _isInitialized = false;
-
-    private void Start()
+    
+    private bool _connectedToBroadcaster = false;
+    public void ConnectToBroadcaster()
     {
+        if (_connectedToBroadcaster) { return;}
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
         EventBroadcaster.GameStarted += GameStartedHandler;
         EventBroadcaster.GameRestart += GameStartedHandler;
         EventBroadcaster.PlayerDeath += OnPlayerDeath;
+        EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
+        DebugUtils.LogSuccess("MiniMapUI connection complete");
+        ForceInitialize();
+        _connectedToBroadcaster = true;
     }
+    private void ForceInitialize()
+    {
+        if (_isInitialized) return;
 
+        int cols = DungeonGeneratorManager.Instance.GetCols();
+        int rows = DungeonGeneratorManager.Instance.GetRows();
+
+        discovered = new bool[rows, cols];
+        InitializeMiniMap(rows, cols);
+    }
     private void OnEnable()
     {
         if (!_isInitialized)
@@ -32,6 +47,14 @@ public class MiniMapUI : MonoBehaviour
             discovered = new bool[rows, cols];
             InitializeMiniMap(rows, cols);
         }
+    }
+    public void OnDungeonGenerationComplete()
+    {
+        OnEnable();
+        
+        // Get the players current room to update the minimap
+        var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
+        OnPlayerChangedRoom((current_cords.row, current_cords.col));
     }
     
 
@@ -56,16 +79,23 @@ public class MiniMapUI : MonoBehaviour
         _isInitialized = false;
     }
 
-    // ----------------------------------------------------------------------
+    
     // Called whenever the player enters a new room
-    // ----------------------------------------------------------------------
     private void OnPlayerChangedRoom((int newRow, int newCol) obj)
     {
         int row = obj.newRow;
         int col = obj.newCol;
 
         // mark as discovered forever
-        discovered[row, col] = true;
+        try
+        {
+            discovered[row, col] = true;
+        } catch (IndexOutOfRangeException e)
+        {
+            Debug.LogError($"MiniMapUI: OnPlayerChangedRoom - Index out of range for row {row}, col {col}. Exception: {e}. Map isnt initialized");
+            return;
+        }
+        
 
         // update all cell visuals
         RefreshMiniMap(row, col);
@@ -138,6 +168,9 @@ public class MiniMapUI : MonoBehaviour
                     case Types.RoomClassification.Shop:
                         img.color = Color.yellow;
                         break;
+                    case Types.RoomClassification.Tutorial:
+                        img.color = Color.gray;
+                        break;
                     default:
                         img.color = Color.white;
                         break;
@@ -145,12 +178,11 @@ public class MiniMapUI : MonoBehaviour
             }
         }
     }
-
-    // ----------------------------------------------------------------------
+    
     // Build the minimap grid
-    // ----------------------------------------------------------------------
-    public void InitializeMiniMap(int rows, int cols)
+    private void InitializeMiniMap(int rows, int cols)
     {
+        Debug.Log("Initializing MiniMap");
         if (grid != null)
         {
             foreach (var row in grid)

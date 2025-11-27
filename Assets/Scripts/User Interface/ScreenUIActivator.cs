@@ -10,6 +10,12 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject MiniMap;
     
+    
+    public void Start()
+    {
+        EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
+    }
+    
 
     public void SetDeathScreen()
     {
@@ -19,9 +25,17 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     {
         winScreen.SetActive(true);
     }
-    public void SetMiniMapActive(bool isActive)
+    
+    
+    // MINIMAP FUNCTIONS
+    
+    private void OnDungeonGenerationComplete()
     {
-        MiniMap.SetActive(isActive);
+        MiniMapUI miniMapUI = MiniMap.GetComponent<MiniMapUI>();
+        if (miniMapUI != null)
+        {
+            miniMapUI.ConnectToBroadcaster();
+        }
     }
     
     public void ToggleMiniMap()

@@ -213,6 +213,10 @@ public class DungeonController : Singleton<DungeonController>
 
     }
     
+    public (int row, int col) GetCurrentRoomCoords()
+    {
+        return DungeonGeneratorManager.Instance.GetCurrentRoomCoords();
+    }
     public void Update()
     {
      if(Input.GetKeyDown(KeyCode.K))   
