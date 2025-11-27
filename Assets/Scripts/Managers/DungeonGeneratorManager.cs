@@ -438,6 +438,21 @@ namespace Managers
                     }
                 }
             }
+            
+            // for the sake of testing, I want to replace the room one above the spawn, with a North config shop
+            /*
+            Room testRoom = dungeonMap[startPos.x - 1][startPos.y];
+            if (testRoom != null)
+            {
+                Types.DoorConfiguration testConfig = new Types.DoorConfiguration(true, false, false, false);
+                Room specialRoom = GenerateRoomFromType(Types.RoomType.N, testRoom.transform.position,
+                    startPos.x - 1, startPos.y, true);
+                specialRoom.SetRoomDifficulty(testRoom.GetRoomDifficulty());
+                specialRoom.EnableAllDoors();
+                specialRoom.SetRoomEnabled(false); // disable the room by default
+                HandleRoomReplacement(dungeonMap, testRoom, specialRoom, startPos.x - 1, startPos.y);
+            }
+            */
         }
 
         private void HandleRoomReplacement(List<List<Room>> dungeonMap, Room currentRoom, Room newRoom, int currentRow, int currentCol)
