@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using TMPro.EditorUtilities;
+//using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -277,7 +277,7 @@ namespace Managers
             
             playerSprite.sprite = _playerSprites["smile"];
             NPCSprite.sprite = _npcSprites["default"];
-            
+
             if (_dialogue[_index][0] == _characterName)
             {
                 
@@ -371,6 +371,7 @@ namespace Managers
             animatedEButton.SetActive(true);
             _isTyping = false;
             _skipToEnd = false;
+            _canContinue = true;
             talkingtonetimer = 0;
         }
     
@@ -389,6 +390,7 @@ namespace Managers
             {
                 _isReading = false;
                 _dialogIsRandom = false;
+                _canContinue = true;
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
                 GameStateManager.Instance.Dialogue("BUDDEE");
                 EventBroadcaster.Broadcast_StopDialogue();

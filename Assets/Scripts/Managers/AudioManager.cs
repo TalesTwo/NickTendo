@@ -74,6 +74,7 @@ namespace Managers
         public AudioClip personaMenuOpen;
         public AudioClip personaMenuClose;
         public AudioClip shopMenu;
+        public AudioClip uiInvalidClick;
 
         [Header("Soundtracks")]
         public AudioClip Overworld;
@@ -456,6 +457,10 @@ namespace Managers
             PlaySFX(shopMenu, volume, deviation);
         }
 
+        public void PlayUIInvalidClick(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(uiInvalidClick, volume, deviation);
+        }
 
         //Soundtrack Functions
         public void PlayOverworldTrack(float volume = 1,bool fadeout = false, float fadeoutspeed = 1f, bool fadein = false, float fadeinspeed = 1f)

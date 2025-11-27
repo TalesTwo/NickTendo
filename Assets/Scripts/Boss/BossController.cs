@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using Random = System.Random;
 
@@ -208,7 +209,7 @@ public class BossController : Singleton<BossController>
         }
         
         _projectilesTimer += Time.deltaTime;
-
+        
         if (_projectilesTimer >= _currentStats.timeBetweenProjectileWaves && battle == BattleState.Idle && !_isShooting)
         {
             _isShooting = true;
@@ -345,7 +346,6 @@ public class BossController : Singleton<BossController>
         {
             case HealthState.Healthy:
                 health = HealthState.Light;
-
                 break;
             case HealthState.Light:
                 health = HealthState.Medium;

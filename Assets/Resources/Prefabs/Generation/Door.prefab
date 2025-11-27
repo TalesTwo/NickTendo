@@ -99,6 +99,9 @@ MonoBehaviour:
   interactPromptOffset: {x: 0, y: 1, z: 0}
   attachedPromptToObject: 1
   CurrentDoorPosition: 1
+  _isSpawnDoor: 0
+  _readyToOpenMenu: 0
+  _waitingForPersonaChange: 0
 --- !u!114 &367663911029244894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &778864542532171787
 Transform:
   m_ObjectHideFlags: 0

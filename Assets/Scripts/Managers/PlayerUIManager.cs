@@ -48,6 +48,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private bool _isPlayerInMenu;
     private bool _didSkipCR;
     private bool _isInPauseMenu;
+    private bool _isInDialogue;
     private int _currentEnemyCount;
     private int _updateEnemyCount;
 
@@ -60,6 +61,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         EventBroadcaster.PlayerCloseMenu += HandlePlayerCloseMenu;
         EventBroadcaster.GameUnpause += ResetPauseBool;
         EventBroadcaster.PlayerStatsChanged += OnPlayerStatChanged;
+        EventBroadcaster.StartDialogue += StartDialogue;
+        EventBroadcaster.StopDialogue += StopDialogue;
 
         _enemyCounter.SetActive(false);
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -240,4 +243,14 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     {
         _isInPauseMenu = false;
     }
-}
+
+    void StartDialogue(string m)
+    {
+        _isPlayerInMenu = true;
+    }
+
+    void StopDialogue()
+    {
+        _isPlayerInMenu = false;
+    }
+ }

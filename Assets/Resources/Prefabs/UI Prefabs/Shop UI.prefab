@@ -2272,6 +2272,12 @@ PrefabInstance:
       value: 179.7183
       objectReference: {fileID: 0}
     - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
+      propertyPath: m_text
+      value: this is just a test to see how long of a text this box can fit this
+        sure does keep going huh more stuff can be written on here a bit more imo
+        wow still more huh this is prob
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306533757770245607, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_fontSize
       value: 58
       objectReference: {fileID: 0}
