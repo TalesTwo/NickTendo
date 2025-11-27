@@ -55,6 +55,14 @@ public class BossController : Singleton<BossController>
         public int exhaustionCounter;
         public float exhaustionTime;
     }
+
+    [System.Serializable]
+    public class SmokeParticles
+    {
+        [Header("Smoke")]
+        public GameObject smoke;
+        public HealthState health;
+    }
     
     [Header("body parts")]
     public GameObject rightArm;
@@ -95,6 +103,9 @@ public class BossController : Singleton<BossController>
         Spread,
         Follow
     }
+    
+    [Header("particles")] 
+    public List<SmokeParticles> smokeList;
     
     [Header("State of the Fight")]
     public HealthState health;
@@ -371,6 +382,14 @@ public class BossController : Singleton<BossController>
                 _currentStats = stat;
                 UpdateScreen();
                 break;
+            }
+        }
+
+        foreach (SmokeParticles particles in smokeList)
+        {
+            if (particles.health == _currentStats.health)
+            {
+                particles.smoke.gameObject.SetActive(true);
             }
         }
 
