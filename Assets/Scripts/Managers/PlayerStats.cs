@@ -51,9 +51,9 @@ public class PlayerStats : Singleton<PlayerStats>
         UpdateMovementSpeed(_carryOverMovementSpeed);
         UpdateAttackDamage(_carryOverAttackDamage);
         //EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, _carryOverAttackDamage);
-        UpdateAttackCooldown(-_carryOverAttackCooldown); // cooldown reduction
+        UpdateAttackCooldown(_carryOverAttackCooldown); // cooldown reduction
         UpdateDashDamage(_carryOverDashDamage);
-        UpdateDashCooldown(-_carryOverDashCooldown); // cooldown reduction
+        UpdateDashCooldown(_carryOverDashCooldown); // cooldown reduction
         UpdateDashSpeed(_carryOverDashSpeed);
     }
     
@@ -165,12 +165,12 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateDashCooldown(float UpdateValue) 
     { 
         _dashCooldown += UpdateValue; 
-        if(_dashCooldown <= 0) { _dashCooldown = 0.1f; }
+        if(_dashCooldown <= 0) { _dashCooldown = 0.01f; }
     }
     public void UpdateAttackCooldown(float UpdateValue) 
     {
         _attackCooldown += UpdateValue; 
-        if(_attackCooldown <= 0) { _attackCooldown = 0.1f; }
+        if(_attackCooldown <= 0) { _attackCooldown = 0.01f; }
     }
     public void UpdateDashDistance(float UpdateValue) { _dashDistance += UpdateValue; }
     public void UpdateChips(int UpdateValue) { _chips += UpdateValue; }
@@ -298,6 +298,7 @@ public class PlayerStats : Singleton<PlayerStats>
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Cooldown)
         {
+            DebugUtils.Log("Applying Carry Over Attack Cooldown Buff: " + BuffValue);
             SetCarryOverAttackCooldown(GetCarryOverAttackCooldown() + BuffValue);
             UpdateAttackCooldown(BuffValue);
             numberOfCarryOverAttackCooldownUpgrades += 1;
