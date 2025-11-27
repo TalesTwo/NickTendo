@@ -133,6 +133,8 @@ public class PauseMenuManager : MonoBehaviour
         {
             _hasClickedButton = true;
             SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
+            // Handle resetting all stats
+            EventBroadcaster.Broadcast_ReturnToMainMenu();
             Invoke(nameof(ResetBool), 0.99f);
         }
         //Invoke(nameof(UnmuteStuff), 0.99f);

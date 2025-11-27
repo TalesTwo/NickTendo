@@ -183,6 +183,11 @@ namespace System
         public static event DungeonGenerationCompleteHandler DungeonGenerationComplete;
         public static void Broadcast_DungeonGenerationComplete() { DungeonGenerationComplete?.Invoke(); }
         
+        // Broadcast for when we return to main menu
+        public delegate void ReturnToMainMenuHandler();
+        public static event ReturnToMainMenuHandler ReturnToMainMenu;
+        public static void Broadcast_ReturnToMainMenu() { ReturnToMainMenu?.Invoke(); }
+        
 
         //-------------------------------- End Activity Events --------------------------------//
     }

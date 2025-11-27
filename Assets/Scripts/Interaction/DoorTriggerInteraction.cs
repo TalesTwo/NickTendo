@@ -242,23 +242,26 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 
                 PlayerManager.Instance.TeleportPlayer(doorTrigger.transform.Find("Spawn_Location").position);
                 DungeonGeneratorManager.Instance.StartCoroutine(OpenDoorWhenReady(targetRoom, doorToSpawnTo));
-                break;
-            }
-        }
-        if (doors.Length == 0)
-        {
-            // On the edge case there is no valid doors at all, also just spawn to a random walkable cell
-            RoomGridManager targetGridManager = targetRoom.GetComponent<RoomGridManager>();
-            if (targetGridManager == null)
-            {
-                DebugUtils.LogError("DoorTriggerInteraction: No RoomGridManager found on target room.");
                 return;
+
             }
-            Transform fallbackSpawnPos = targetGridManager.FindValidSpawnableCell();
-            // convert to world position
-            Vector3 fallbackPos = fallbackSpawnPos.position;
-            PlayerManager.Instance.TeleportPlayer(fallbackPos);
         }
+        
+        // EDGE CASE SHADOW REALM HANDLING:
+        // On the edge case there is no valid doors at all, also just spawn to a random walkable cell
+        RoomGridManager targetGridManager = targetRoom.GetComponent<RoomGridManager>();
+        if (targetGridManager == null)
+        {
+            DebugUtils.LogError("DoorTriggerInteraction: No RoomGridManager found on target room.");
+            return;
+        }
+        Transform fallbackSpawnPos = targetGridManager.FindValidSpawnableCell();
+        // convert to world position
+        Vector3 fallbackPos = fallbackSpawnPos.position;
+        PlayerManager.Instance.TeleportPlayer(fallbackPos);
+        
+        
+        
 
     }
     private static IEnumerator OpenDoorWhenReady(Room targetRoom, Types.DoorClassification direction)
