@@ -377,5 +377,11 @@ public class BossArmController : MonoBehaviour
         _forearm.TurnOffCollider();
         _hand.TurnOffCollider();
         _elbow.TurnOffCollider();
+        Invoke(nameof(SelfDestruct), 10f);
+    }
+
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }
