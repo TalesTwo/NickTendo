@@ -304,6 +304,8 @@ public class BossController : Singleton<BossController>
 
     private IEnumerator Explode()
     {
+        EventBroadcaster.Broadcast_StartBossFightDeathSequence();
+        
         float time = 0f;
         float waitTime = maxTimeBetweenExplosions;
 
