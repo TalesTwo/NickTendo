@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 0.1
   buffType: 17
-  emote: 2
+  emote: 1
   flavorText: "Lord knows the damage I\u2019d do with this puppy."
   isPermaUpgrade: 1
   flavorTextUUGUI: {fileID: 5917523137127899098}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Holy canoly! You'll be marginally faster!
+  m_text: Anyone who says they don't want to go faster is a liar.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

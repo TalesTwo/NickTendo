@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 40
   buffValue: 0.25
   buffType: 5
-  emote: 11
+  emote: 7
   flavorText: "Lord knows the damage I\u2019d do with this puppy."
   isPermaUpgrade: 0
   flavorTextUUGUI: {fileID: 7503723264496975280}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lord knows the damage I'd do with this puppy.
+  m_text: Dash! Bash! Smash! Crash! Put those bots back in the trash!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

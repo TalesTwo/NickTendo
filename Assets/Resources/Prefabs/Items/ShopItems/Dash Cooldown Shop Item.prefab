@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 40
   buffValue: -0.25
   buffType: 6
-  emote: 5
+  emote: 2
   flavorText: "What\u2019s the rush?"
   isPermaUpgrade: 0
   flavorTextUUGUI: {fileID: 3774528335670659347}
@@ -142,7 +142,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: What's the rush?
+  m_text: The real problem with dashing is you can't do it all the time. Luckilly
+    I have the fix!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

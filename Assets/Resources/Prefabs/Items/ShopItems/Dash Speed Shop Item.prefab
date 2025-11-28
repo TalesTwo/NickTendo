@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 60
   buffValue: 0.5
   buffType: 3
-  emote: 2
+  emote: 1
   flavorText: "Holy canoly! You\u2019ll be marginally faster!"
   isPermaUpgrade: 0
   flavorTextUUGUI: {fileID: 769604212868318768}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Holy canoly! You'll be marginally faster!
+  m_text: Anyone who says they don't want to go faster is a liar.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
