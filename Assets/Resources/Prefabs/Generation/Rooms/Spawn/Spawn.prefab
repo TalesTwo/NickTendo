@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configuration:
     NorthDoorActive: 1
-    EastDoorActive: 0
+    EastDoorActive: 1
     SouthDoorActive: 0
     WestDoorActive: 0
   doors: {fileID: 6171403738809331492}
@@ -19763,7 +19763,7 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 216824c4ce2142541acc870302af23fe, type: 2}
   - m_RefCount: 2
-    m_Data: {fileID: 11400000, guid: eea4c9b2ca2e57d4db9225bfded86591, type: 2}
+    m_Data: {fileID: 11400000, guid: 77618dac30d8fe54b94011888dcc2c58, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 7e3c754418c98454f9aec9e6edcd66c4, type: 2}
   - m_RefCount: 1
@@ -19802,7 +19802,7 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 9162271583308437803, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
   - m_RefCount: 2
-    m_Data: {fileID: 1264227906, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
+    m_Data: {fileID: 7431025291239157667, guid: dda85c981dee9374b8668b24917ced27, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1561379436, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
   - m_RefCount: 1
