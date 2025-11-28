@@ -28,7 +28,6 @@ public class DialogueHitbox : MonoBehaviour
         EventBroadcaster.EndTutorial += AfterTutorial;
         //TODO: find the right broadcast
         EventBroadcaster.StartBossFight += AfterBossEncounterOne;
-
     }
 
     private void AfterTutorial()
