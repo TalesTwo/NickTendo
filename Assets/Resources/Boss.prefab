@@ -250,6 +250,18 @@ MonoBehaviour:
   rocketProjectionVertical: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
   verticalProjectionOffsetRight: {x: 0.4, y: -8.98}
   verticalProjectionOffsetLeft: {x: -0.4, y: -8.98}
+  finalExplosionParticles:
+  - {fileID: 6647614939767541994}
+  - {fileID: 7878663663044021921}
+  smallExplosionParticles: {fileID: 2560593414228584792, guid: b5b21ee27ba13794786dede0dfdbded1, type: 3}
+  explosionMinY: -1.7
+  explosionMaxY: 1.7
+  explosionMinX: -3
+  explosionMaxX: 3
+  explosionLengthTime: 6
+  maxTimeBetweenExplosions: 0.2
+  minTimeBetweenExplosions: 0.02
+  timeBetweenExplosionsChange: 0.02
 --- !u!1 &1328521562464880001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3222,6 +3234,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6352931996566810276, guid: 6fb59fa5298d10f4483e257e4b137a77, type: 3}
   m_PrefabInstance: {fileID: 5683451466145654777}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7878663663044021921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2560593414228584792, guid: 6fb59fa5298d10f4483e257e4b137a77, type: 3}
+  m_PrefabInstance: {fileID: 5683451466145654777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8958016973101856950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3361,5 +3378,10 @@ PrefabInstance:
 --- !u!4 &2873922494366209814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6352931996566810276, guid: 6fb59fa5298d10f4483e257e4b137a77, type: 3}
+  m_PrefabInstance: {fileID: 9207641005986167218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6647614939767541994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2560593414228584792, guid: 6fb59fa5298d10f4483e257e4b137a77, type: 3}
   m_PrefabInstance: {fileID: 9207641005986167218}
   m_PrefabAsset: {fileID: 0}

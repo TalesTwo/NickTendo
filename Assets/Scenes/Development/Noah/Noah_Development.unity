@@ -737,10 +737,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5034481193986098893, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8026720527007712852, guid: c0d1227d50bb9264e847ee2bc19987f7, type: 3}
       propertyPath: m_Name
       value: Room_BOSS

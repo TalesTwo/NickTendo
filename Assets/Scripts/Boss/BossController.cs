@@ -169,6 +169,7 @@ public class BossController : Singleton<BossController>
     private int _armsCurrentlyLaunched = 0;
     private bool _istired = false;
     private bool _playerAlive = true;
+    private bool _isDying = false;
     
     // Start is called before the first frame update
     void Start()
@@ -198,6 +199,8 @@ public class BossController : Singleton<BossController>
     void Update()
     {
         if (debugging) return;
+
+        if (_isDying) return;
         
         if (!_playerAlive) return;
         
@@ -305,6 +308,7 @@ public class BossController : Singleton<BossController>
         while (time <= explosionLengthTime)
         {
             time += Time.deltaTime;
+            time += waitTime;
             float explosionX = RandomNumber(explosionMinX, explosionMaxX);
             float explosionY = RandomNumber(explosionMinY, explosionMaxY);
             Vector3 pos = new Vector3(transform.position.x + explosionX, transform.position.y + explosionY,
@@ -326,6 +330,18 @@ public class BossController : Singleton<BossController>
         {
             explosion.gameObject.SetActive(true);
         }
+        
+        EventBroadcaster.Broadcast_EndBossFight();
+        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+        foreach (SmokeParticles smoke in smokeList)
+        {
+            smoke.smoke.gameObject.SetActive(false);
+        }
+        face.gameObject.SetActive(false);
+        screen.gameObject.SetActive(false);
+        expressions.gameObject.SetActive(false);
+        cracks.gameObject.SetActive(false);
     }
 
     private float RandomNumber(float min, float max)
@@ -449,11 +465,13 @@ public class BossController : Singleton<BossController>
     private void HandleBossDeath()
     {
         Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
-        EventBroadcaster.Broadcast_EndBossFight();
+        _isDying = true;
+        StartCoroutine(nameof(Explode));
+        //EventBroadcaster.Broadcast_EndBossFight();
         // provide a one off dialogue line for defeating the boss
-        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
-        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
-        Destroy(gameObject);
+        //GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        //EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+        //Destroy(gameObject);
     }
 
     private void SetIdleAnimation()
