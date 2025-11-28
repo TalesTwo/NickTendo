@@ -26,6 +26,7 @@ public class EnemyProjectileController : MonoBehaviour
         _playerController = _player.GetComponent<PlayerController>();
         _rb = gameObject.GetComponent<Rigidbody2D>();
         EventBroadcaster.PlayerDeath += DestroySelf;
+        EventBroadcaster.StartBossFightDeathSequence += DestroySelf;
         Invoke(nameof(DestroySelf), lifeDuration);
         
         // Fix to stop the projectiles from colliding with pickups
@@ -82,6 +83,7 @@ public class EnemyProjectileController : MonoBehaviour
     private void DestroySelf()
     {
         EventBroadcaster.PlayerDeath -= DestroySelf;
+        EventBroadcaster.StartBossFightDeathSequence -= DestroySelf;
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
