@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 1
   buffType: 11
-  emote: 11
+  emote: 3
   flavorText: "I\u2019d be able to swing a home run with the size of this health
     bar length! If I had arms, anyway."
   isPermaUpgrade: 1
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I'd be able to swing a home run with the size of this health bar length!
-    If I had arms, anyway.
+  m_text: 'Nothing strikes fear into the hearts of your enemies quite like a giant
+    red healthbar! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
