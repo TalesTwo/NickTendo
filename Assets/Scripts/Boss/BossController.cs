@@ -341,6 +341,9 @@ public class BossController : Singleton<BossController>
         screen.gameObject.SetActive(false);
         expressions.gameObject.SetActive(false);
         cracks.gameObject.SetActive(false);
+        
+        rightArmController.BossIsDeadArms();
+        leftArmController.BossIsDeadArms();
 
         yield return new WaitForSeconds(waitTimeAfterDeath);
         EventBroadcaster.Broadcast_EndBossFight();

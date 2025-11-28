@@ -43,4 +43,10 @@ public class BossColliderController : MonoBehaviour
     {
         _isTired = isTired;
     }
+
+    public void TurnOffCollider()
+    {
+        Collider2D collission = GetComponent<Collider2D>();
+        collission.enabled = false;
+    }
 }
