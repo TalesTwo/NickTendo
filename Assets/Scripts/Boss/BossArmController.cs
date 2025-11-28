@@ -31,6 +31,7 @@ public class BossArmController : MonoBehaviour
     private BossColliderController _elbow;
     private BossColliderController _forearm;
     private BossColliderController _hand;
+    private Rigidbody2D _rb;
     
     public enum Direction
     {
@@ -87,6 +88,7 @@ public class BossArmController : MonoBehaviour
             DirectionModifier = -1;
         }
         
+        _rb = GetComponent<Rigidbody2D>();
         _shoulder = shoulder.GetComponent<BossColliderController>();
         _arm = arm.GetComponent<BossColliderController>();
         _elbow = elbow.GetComponent<BossColliderController>();
@@ -357,5 +359,29 @@ public class BossArmController : MonoBehaviour
         
         particles.gameObject.SetActive(false);
 
+    }
+
+    public void BossIsDeadArms()
+    {
+        _rb.gravityScale = 1f;
+        _rb.constraints = RigidbodyConstraints2D.None;
+        if (side == Direction.Left)
+        {
+            _rb.AddForce(new Vector2(-5, 1), ForceMode2D.Impulse);
+        } else if (side == Direction.Right)
+        {
+            _rb.AddForce(new Vector2(5, 1), ForceMode2D.Impulse);
+        }
+        _shoulder.TurnOffCollider();
+        _arm.TurnOffCollider();
+        _forearm.TurnOffCollider();
+        _hand.TurnOffCollider();
+        _elbow.TurnOffCollider();
+        Invoke(nameof(SelfDestruct), 10f);
+    }
+
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }
