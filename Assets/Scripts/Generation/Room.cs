@@ -31,6 +31,9 @@ public class Room : MonoBehaviour
     
     private int initial_number_of_enemies_in_room = 0;
     
+    private bool _HasPlayerVisitedMe = false; public bool HasPlayerVisitedMe() { return _HasPlayerVisitedMe; } void SetHasPlayerVisitedMe(bool visited) { _HasPlayerVisitedMe = visited; }
+
+    
     
     
     
@@ -346,6 +349,7 @@ public class Room : MonoBehaviour
         gameObject.SetActive(true);
         // enable all doors
         EnableAllDoors();
+        SetHasPlayerVisitedMe(true);
         StartCoroutine(EnableRoomCoroutine(2f));
         // this is a separate function, incase we need to do more complex logic in the future
 
