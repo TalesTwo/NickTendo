@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 15
   buffValue: 2
   buffType: 0
-  emote: 3
+  emote: 9
   flavorText: You should avoid attacks more! See, the point of the game is to not
     get hit.
   isPermaUpgrade: 0
@@ -143,8 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You should avoid attacks more! See, the point of the game is to not get
-    hit.
+  m_text: Just, try not getting hit next time. Okay pal?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

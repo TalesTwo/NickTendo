@@ -56,7 +56,7 @@ MonoBehaviour:
   itemValue: 1
   buffValue: 0.25
   buffType: 12
-  emote: 9
+  emote: 7
   flavorText: 'Reminds me of a quote I said (first) in my formative years: The problem
     of being faster than light is that you only live in darkness...'
   isPermaUpgrade: 1
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Reminds me of a quote I said (first) in my formative years: The problem
-    of being faster than light is that you only live in darkness...'
+  m_text: Running around at the speed of sound. Got places to go gotta find-a that
+    friend-o!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
