@@ -151,6 +151,7 @@ public class BossController : Singleton<BossController>
     public float maxTimeBetweenExplosions;
     public float minTimeBetweenExplosions;
     public float timeBetweenExplosionsChange;
+    public float waitTimeAfterDeath;
 
     [Header("Battle State Bools")] 
     private int _phases = 0;
@@ -170,6 +171,7 @@ public class BossController : Singleton<BossController>
     private bool _istired = false;
     private bool _playerAlive = true;
     private bool _isDying = false;
+    private bool _damageTaken = false;
     
     // Start is called before the first frame update
     void Start()
@@ -331,9 +333,6 @@ public class BossController : Singleton<BossController>
             explosion.gameObject.SetActive(true);
         }
         
-        EventBroadcaster.Broadcast_EndBossFight();
-        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
-        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
         foreach (SmokeParticles smoke in smokeList)
         {
             smoke.smoke.gameObject.SetActive(false);
@@ -342,6 +341,11 @@ public class BossController : Singleton<BossController>
         screen.gameObject.SetActive(false);
         expressions.gameObject.SetActive(false);
         cracks.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(waitTimeAfterDeath);
+        EventBroadcaster.Broadcast_EndBossFight();
+        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
     }
 
     private float RandomNumber(float min, float max)
@@ -382,7 +386,7 @@ public class BossController : Singleton<BossController>
         _istired = true;
         float dizzytimer = 0f;
         Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
-        while (timer < _currentStats.exhaustionTime)
+        while (timer < _currentStats.exhaustionTime && !_damageTaken)
         {
             dizzytimer += Time.deltaTime;
             if(dizzytimer >= 0.5f && _istired)
@@ -393,19 +397,30 @@ public class BossController : Singleton<BossController>
             timer += Time.deltaTime;
             yield return null;
         }
-        rightArmController.BecomeUntired();
-        leftArmController.BecomeUntired();
-        BossScreenController.Instance.SetIsExhausted(false);
-        expressionsAnimator.SetIdleAnimation();
-        battle = BattleState.Idle;
 
-        _rightArmsLaunchedThisPhase = 0;
-        _leftArmsLaunchedThisPhase = 0;
+        if (!_damageTaken)
+        {
+            rightArmController.BecomeUntired();
+            leftArmController.BecomeUntired();
+            BossScreenController.Instance.SetIsExhausted(false);
+            expressionsAnimator.SetIdleAnimation();
+            battle = BattleState.Idle;
+            
+            _rightArmsLaunchedThisPhase = 0;
+            _leftArmsLaunchedThisPhase = 0;
+        }
+
     }
 
+    private void UnsetDamageTaken()
+    {
+        _damageTaken = false;
+    }
+    
     public void TakeDamage()
     {
-        StopCoroutine(nameof(ExhaustionTimer));
+        _damageTaken = true;
+        Invoke(nameof(UnsetDamageTaken), 1f);
         
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();

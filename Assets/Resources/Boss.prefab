@@ -262,6 +262,7 @@ MonoBehaviour:
   maxTimeBetweenExplosions: 0.2
   minTimeBetweenExplosions: 0.02
   timeBetweenExplosionsChange: 0.02
+  waitTimeAfterDeath: 2
 --- !u!1 &1328521562464880001
 GameObject:
   m_ObjectHideFlags: 0
