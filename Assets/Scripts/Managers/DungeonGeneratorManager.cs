@@ -29,8 +29,8 @@ namespace Managers
         }
         
         [Header("Generation Data")]
-        [SerializeField] private  int rows = 5;
-        [SerializeField] private  int cols = 5;
+        [SerializeField] private  int rows = 5; public int GetRows() { return rows; }
+        [SerializeField] private  int cols = 5; public int GetCols() { return cols; }
         [SerializeField] private float probabilityToAddOptionalDoor_OneRequiredDoor = 0.75f;
         [SerializeField] private float probabilityToAddOptionalDoor_TwoRequiredDoors = 0.5f;
         [SerializeField] private float probabilityToAddOptionalDoor_ThreeRequiredDoors = 0.25f;
