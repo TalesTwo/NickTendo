@@ -56,9 +56,8 @@ MonoBehaviour:
   itemValue: 1
   buffValue: -0.015
   buffType: 14
-  emote: 9
-  flavorText: "You shouldn\u2019t rely on powerups too much\u2026 What if you start
-    sprouting arms to swing faster? Not that that\u2019d happen. Ha."
+  emote: 11
+  flavorText: You know what's better than hitting bots? Hitting them even harder!
   isPermaUpgrade: 1
   flavorTextUUGUI: {fileID: 4064616630164092121}
 --- !u!212 &7787435678194780221
@@ -143,8 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You shouldn't rely on powerups too much\u2026 What if you start sprouting
-    arms to swing faster? Not that that'd happen. Ha."
+  m_text: More sword swings = More fun. It's simple math.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

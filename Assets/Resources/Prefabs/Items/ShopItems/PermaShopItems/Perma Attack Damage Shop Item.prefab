@@ -57,8 +57,7 @@ MonoBehaviour:
   buffValue: 0.25
   buffType: 13
   emote: 7
-  flavorText: "With the power of violence! Yeah, that\u2019s how that phrase goes.
-    probably."
+  flavorText: With the power of violence! Yeah, that's how that phrase goes. probably.
   isPermaUpgrade: 1
   flavorTextUUGUI: {fileID: 1113965542035529471}
 --- !u!212 &7787435678194780221
@@ -143,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: With the power of violence! Yeah, that's how that phrase goes. probably.
+  m_text: You know what's better than hitting bots? Hitting them even harder!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
