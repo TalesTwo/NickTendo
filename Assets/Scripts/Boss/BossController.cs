@@ -140,6 +140,18 @@ public class BossController : Singleton<BossController>
     public Vector2 verticalProjectionOffsetLeft;
     private Queue<GameObject> _rocketProjectionsQueue;
 
+    [Header("Death Sequence")] 
+    public List<GameObject> finalExplosionParticles;
+    public GameObject smallExplosionParticles;
+    public float explosionMinY;
+    public float explosionMaxY;
+    public float explosionMinX;
+    public float explosionMaxX;
+    public float explosionLengthTime;
+    public float maxTimeBetweenExplosions;
+    public float minTimeBetweenExplosions;
+    public float timeBetweenExplosionsChange;
+
     [Header("Battle State Bools")] 
     private int _phases = 0;
     private bool _rightArmAttached = true;
@@ -283,6 +295,42 @@ public class BossController : Singleton<BossController>
             _leftArmAttached = false;
             SetRandomRocketTimers(true, false);
         }
+    }
+
+    private IEnumerator Explode()
+    {
+        float time = 0f;
+        float waitTime = maxTimeBetweenExplosions;
+
+        while (time <= explosionLengthTime)
+        {
+            time += Time.deltaTime;
+            float explosionX = RandomNumber(explosionMinX, explosionMaxX);
+            float explosionY = RandomNumber(explosionMinY, explosionMaxY);
+            Vector3 pos = new Vector3(transform.position.x + explosionX, transform.position.y + explosionY,
+                transform.position.z);
+            Instantiate(smallExplosionParticles, pos, Quaternion.identity);
+
+            if (waitTime <= minTimeBetweenExplosions)
+            {
+                waitTime = minTimeBetweenExplosions;
+            }
+            else
+            {
+                waitTime -= timeBetweenExplosionsChange;
+            }
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        foreach (GameObject explosion in finalExplosionParticles)
+        {
+            explosion.gameObject.SetActive(true);
+        }
+    }
+
+    private float RandomNumber(float min, float max)
+    {
+        return UnityEngine.Random.Range(min, max);
     }
     
     public void BackToIdleState()
