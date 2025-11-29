@@ -762,6 +762,7 @@ MonoBehaviour:
   onlyTriggerOnce: 1
   shouldFreezeWorld: 1
   triggerAfterTutorial: 0
+  triggerAfterBossEncounterOne: 0
 --- !u!1 &5650296428194092281
 GameObject:
   m_ObjectHideFlags: 0
