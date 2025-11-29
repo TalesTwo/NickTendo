@@ -23,10 +23,24 @@ public class MiniMapUI : MonoBehaviour
         EventBroadcaster.GameRestart += GameStartedHandler;
         EventBroadcaster.PlayerDeath += OnPlayerDeath;
         EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
-        DebugUtils.LogSuccess("MiniMapUI connection complete");
-        Invoke(nameof(ForceInitialize), 1f);
+        //DebugUtils.LogSuccess("MiniMapUI connection complete");
+        Invoke(nameof(ForceInitialize), 0.25f);
         _connectedToBroadcaster = true;
+        Invoke(nameof(InitializeSpawnRoomInMap), 0.5f);
     }
+
+    private void InitializeSpawnRoomInMap()
+    {
+        bool _isCurrentlyEnabled = this.gameObject.activeSelf;
+        this.gameObject.SetActive(true);
+        // Get the players current room to update the minimap
+        var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
+        //DebugUtils.LogWarning($"MiniMapUI: OnDungeonGenerationComplete - Player starting at row {current_cords.row}, col {current_cords.col}");
+        OnPlayerChangedRoom((current_cords.row, current_cords.col));
+        this.gameObject.SetActive(_isCurrentlyEnabled);
+        
+    }
+    
     private void ForceInitialize()
     {
         if (_isInitialized) return;
@@ -51,10 +65,8 @@ public class MiniMapUI : MonoBehaviour
     public void OnDungeonGenerationComplete()
     {
         OnEnable();
-        
-        // Get the players current room to update the minimap
-        //var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
-        //OnPlayerChangedRoom((current_cords.row, current_cords.col));
+        Invoke(nameof(InitializeSpawnRoomInMap), 0.5f);
+
     }
     
 
@@ -183,7 +195,7 @@ public class MiniMapUI : MonoBehaviour
     // Build the minimap grid
     private void InitializeMiniMap(int rows, int cols)
     {
-        Debug.Log("Initializing MiniMap");
+        //Debug.Log("Initializing MiniMap");
         if (grid != null)
         {
             foreach (var row in grid)
@@ -221,7 +233,7 @@ public class MiniMapUI : MonoBehaviour
                 cellRT.anchoredPosition = new Vector2(c * 100, 0);
 
                 // start hidden until discovered
-                cell.SetActive(false);
+                cell.SetActive(true);
 
                 rowList.Add(cell);
             }

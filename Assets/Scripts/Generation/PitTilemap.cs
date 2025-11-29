@@ -46,7 +46,7 @@ public class PitTilemap : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        Debug.Log("PitTilemap detected trigger enter with: " + other.name);
+        //Debug.Log("PitTilemap detected trigger enter with: " + other.name);
         // null checks
         // If its not a pit collider, and not an item, ignore
         if (!other.CompareTag("Pit_Collider") && !other.GetComponent<BaseItem>()) { return;}

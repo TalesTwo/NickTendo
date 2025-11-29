@@ -154,7 +154,7 @@ namespace Managers
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
-            DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
+            //DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
