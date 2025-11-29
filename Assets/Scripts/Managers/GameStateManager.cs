@@ -22,7 +22,7 @@ public class GameStateManager : Singleton<GameStateManager>
     {
         return buddeeDialogState;
     }
-
+    
     public void SetBuddeeDialogState(string newState)
     {
         buddeeDialogState = newState;
