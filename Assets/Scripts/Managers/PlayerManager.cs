@@ -134,6 +134,8 @@ namespace Managers
         {
             
             Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+            // Check the classification of the room, as we will have special logic in the boss room
+            Types.RoomClassification roomClass = currentRoom.GetRoomClassification();
             // Find the nearest door to the player's current position
             var Doors = currentRoom.GetComponentsInChildren<Door>();
             Door nearestDoor = null;
@@ -145,6 +147,21 @@ namespace Managers
                 {
                     nearestDistance = distance;
                     nearestDoor = door;
+                }
+                // check the room classification for special handling
+                if (roomClass == Types.RoomClassification.Boss)
+                {
+                    // always spawn at a south door if in boss room
+                    DoorTriggerInteraction doorTrigger = door.GetComponent<DoorTriggerInteraction>();
+                    if(doorTrigger)
+                    {
+                        if (doorTrigger.CurrentDoorPosition == Types.DoorClassification.South)
+                        {
+                            nearestDoor = door;
+                            break;
+                        }
+                    }
+
                 }
             }
             if (nearestDoor != null)

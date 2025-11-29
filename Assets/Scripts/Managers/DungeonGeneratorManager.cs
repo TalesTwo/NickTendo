@@ -256,6 +256,8 @@ namespace Managers
             }
             
             InitializeStartAndEndRoom();
+            // load in the tutorial rooms
+            InitializeTutorialRooms();
             
             GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
@@ -295,8 +297,7 @@ namespace Managers
             // these rooms will be in a seperate [SerializeField] private GenerationData generationData;
             // we will simply "replace" existing rooms with special rooms that fit the same door configuration
             GenerateSpecialRooms(dungeonRooms);
-            // load in the tutorial rooms
-            InitializeTutorialRooms();
+
             
             // load the final room
             //InitializeFinalRoom();

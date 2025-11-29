@@ -26,20 +26,13 @@ public class DialogueHitbox : MonoBehaviour
         // hook up to the dialogue end event to unfreeze the world
         EventBroadcaster.StopDialogue += OnDialogueEnd;
         EventBroadcaster.EndTutorial += AfterTutorial;
-        //TODO: find the right broadcast
-        EventBroadcaster.StartBossFight += AfterBossEncounterOne;
-
     }
 
     private void AfterTutorial()
     {
         triggerAfterTutorial = false;
     }
-
-    private void AfterBossEncounterOne()
-    {
-        triggerAfterBossEncounterOne = false;
-    }
+    
     
     private void OnDialogueEnd()
     {
@@ -57,7 +50,7 @@ public class DialogueHitbox : MonoBehaviour
         if(root == null){return;}
         if (onlyTriggerOnce && _hasTriggered) { return; }
         if (triggerAfterTutorial) { return;}
-        if (triggerAfterBossEncounterOne) { return;}
+        if (triggerAfterBossEncounterOne && GameStateManager.Instance.GetNumberOfTimesBossFought() != 1) { return;}
         if (root.CompareTag("Player"))
         {
             // Store the previous dialogue state
