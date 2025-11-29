@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 791756159065352283}
   - component: {fileID: 3728346900174557495}
   - component: {fileID: 4809871677769237194}
+  - component: {fileID: 1088699789781679337}
   m_Layer: 8
   m_Name: Right Shoulder
   m_TagString: Untagged
@@ -342,7 +343,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 21
-  m_Sprite: {fileID: -4394171973319931371, guid: 4b62cb845c92de7498ced3d2e8a33e44, type: 3}
+  m_Sprite: {fileID: -8691250809609158377, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -405,6 +406,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &1088699789781679337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328521562464880001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: -8691250809609158377, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -7099422896840443269, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -2779535937570730862, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -1038348273880684564, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 8078120495415238799, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 791756159065352283}
+  index: 0
 --- !u!1 &1374766132670660063
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +439,7 @@ GameObject:
   - component: {fileID: 5386518345004921319}
   - component: {fileID: 4690181050676041951}
   - component: {fileID: 5938479292797403667}
+  - component: {fileID: 6767675030622042896}
   m_Layer: 8
   m_Name: Left Shoulder
   m_TagString: Untagged
@@ -484,7 +507,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 21
-  m_Sprite: {fileID: -4394171973319931371, guid: 4b62cb845c92de7498ced3d2e8a33e44, type: 3}
+  m_Sprite: {fileID: -8691250809609158377, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -547,6 +570,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &6767675030622042896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374766132670660063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: -8691250809609158377, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -7099422896840443269, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -2779535937570730862, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -1038348273880684564, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 8078120495415238799, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 5386518345004921319}
+  index: 0
 --- !u!1 &1994174248312641029
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,6 +603,7 @@ GameObject:
   - component: {fileID: 3114333140402452001}
   - component: {fileID: 4575827740278708729}
   - component: {fileID: 7911408026913967881}
+  - component: {fileID: 6976821378477788722}
   m_Layer: 8
   m_Name: Right Forearm
   m_TagString: Untagged
@@ -697,6 +742,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &6976821378477788722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994174248312641029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 1151360803, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 1373194791, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -780588248, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -1212967866, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 1545491972, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 3114333140402452001}
+  index: 0
 --- !u!1 &2508172785364716279
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,8 +838,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
-  m_SortingOrder: 23
-  m_Sprite: {fileID: -3033110742230556116, guid: bc3f6522e4c97c548b7d27d90b272e1a, type: 3}
+  m_SortingOrder: 25
+  m_Sprite: {fileID: -446801966, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -797,12 +863,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAnimationCycle:
-  - {fileID: -3033110742230556116, guid: bc3f6522e4c97c548b7d27d90b272e1a, type: 3}
+  - {fileID: -446801966, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 934752787, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -825821007, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 460646416, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 2120917800, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   Framerate: 6
   SpriteRenderer: {fileID: 9121887209284123073}
   index: 0
   idleFrames:
-  - {fileID: -3033110742230556116, guid: bc3f6522e4c97c548b7d27d90b272e1a, type: 3}
+  - {fileID: -446801966, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 934752787, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -825821007, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 460646416, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 2120917800, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   exhaustedFrames:
   - {fileID: 666126556, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
   - {fileID: -1415313989, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
@@ -834,6 +908,7 @@ GameObject:
   - component: {fileID: 5324857193716202470}
   - component: {fileID: 1346683434062280508}
   - component: {fileID: 2604638418550352830}
+  - component: {fileID: 1399294755007880319}
   m_Layer: 8
   m_Name: Right Arm
   m_TagString: Untagged
@@ -972,6 +1047,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &1399294755007880319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581792321881471862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 2979754198534919622, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -48459709882756176, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 4408949331725103437, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 4957137359986896754, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 7723345414743987869, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 5324857193716202470}
+  index: 0
 --- !u!1 &2775061349326095776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,7 +1581,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
-  m_SortingOrder: 23
+  m_SortingOrder: 26
   m_Sprite: {fileID: -2002351106, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1509,6 +1605,7 @@ GameObject:
   - component: {fileID: 8734075007353885119}
   - component: {fileID: 256492306830220240}
   - component: {fileID: 3461587529492039635}
+  - component: {fileID: 2452715438593661620}
   m_Layer: 8
   m_Name: Left Arm
   m_TagString: Untagged
@@ -1647,6 +1744,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &2452715438593661620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120618212871296092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 2979754198534919622, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -48459709882756176, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 4408949331725103437, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 4957137359986896754, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 7723345414743987869, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 8734075007353885119}
+  index: 0
 --- !u!1 &4485938005947340060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,7 +2349,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
-  m_SortingOrder: 21
+  m_SortingOrder: 24
   m_Sprite: {fileID: -3201829619885253171, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2350,6 +2468,7 @@ GameObject:
   - component: {fileID: 4037103897263662846}
   - component: {fileID: 5474872182482336830}
   - component: {fileID: 2804026952635284637}
+  - component: {fileID: 8285979714886180404}
   m_Layer: 8
   m_Name: Left Forearm
   m_TagString: Untagged
@@ -2488,6 +2607,27 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &8285979714886180404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606136446495967308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 1151360803, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 1373194791, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -780588248, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: -1212967866, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  - {fileID: 1545491972, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 4037103897263662846}
+  index: 0
 --- !u!1 &7049683774913877760
 GameObject:
   m_ObjectHideFlags: 0
