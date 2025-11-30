@@ -260,7 +260,6 @@ namespace Managers
             InitializeTutorialRooms();
             
             GeneratePhaseOne();
-            GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
