@@ -43,6 +43,8 @@ public class Room : MonoBehaviour
     private (int row, int col) RoomCoords = (-1, -1);
     //Signals whether the door unlock sound has to be played or not.
     bool openSoundHasPlayed = false;
+    
+    private bool _bossFightStarted = false;
 
 
     // Special logic for the spawn room
@@ -123,7 +125,8 @@ public class Room : MonoBehaviour
         }
 
         // End is the boss room, so once we enter, we wanna permananetly lock the south door
-        if (roomType == Types.RoomType.End)
+        // we also only want to do this once the fight has actually started
+        if (roomType == Types.RoomType.End && _bossFightStarted)
         {
             // Find the south door and lock it
             foreach (Transform door in doors.transform)
@@ -232,10 +235,15 @@ public class Room : MonoBehaviour
         // hook up to the enemy death event to check if we need to unlock doors
         EventBroadcaster.EnemyDeath += OnEnemyDeath;
         EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+        EventBroadcaster.StartBossFight += BossFightStarted;
         // Register the pits in this room
         PitManager.Instance.RegisterPitsInRoom(this);
         initial_number_of_enemies_in_room = roomSpawnController != null ? roomSpawnController.GetEnemiesInRoom().Count : 0;
         EnableAllDoors();
+    }
+    private void BossFightStarted()
+    {
+        _bossFightStarted = true;
     }
 
     public void EnableAllDoors()
