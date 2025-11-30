@@ -34,6 +34,7 @@ namespace Managers
         [SerializeField] private float probabilityToAddOptionalDoor_OneRequiredDoor = 0.75f;
         [SerializeField] private float probabilityToAddOptionalDoor_TwoRequiredDoors = 0.5f;
         [SerializeField] private float probabilityToAddOptionalDoor_ThreeRequiredDoors = 0.25f;
+        [SerializeField] private  int AllowedUpwardMovesInARow = 3;
         [SerializeField] private GenerationData generationData;
         [Space(10f)]
         [Header("Special Room Settings")]
@@ -694,6 +695,10 @@ namespace Managers
             
             int currentRow = startPos.x-1;
             int currentCol = startPos.y;
+            
+            // Never allow an Up action twice in a row, to prevent vertical lines
+            int numberOfConsecutiveUpMoves = 0;
+            
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 2)
             {
@@ -701,8 +706,10 @@ namespace Managers
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
                 // we can always move up
-
-                possibleDirections.Add("Up");
+                if (numberOfConsecutiveUpMoves < AllowedUpwardMovesInARow)
+                {
+                    possibleDirections.Add("Up");
+                }
                 
                 // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
                 if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null)
@@ -726,12 +733,15 @@ namespace Managers
                 {
                     case "Up":
                         AdditionalConnections.NorthDoorActive = true;
+                        numberOfConsecutiveUpMoves ++;
                         break;
                     case "Left":
-                        AdditionalConnections.WestDoorActive = true; 
+                        AdditionalConnections.WestDoorActive = true;
+                        numberOfConsecutiveUpMoves = 0;
                         break;
                     case "Right":
                         AdditionalConnections.EastDoorActive = true;
+                        numberOfConsecutiveUpMoves = 0;
                         break;
                 }
                 // Now build the room at the new position if it doesn't already exist

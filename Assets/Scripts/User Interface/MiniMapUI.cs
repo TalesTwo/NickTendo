@@ -233,7 +233,7 @@ public class MiniMapUI : MonoBehaviour
                 cellRT.anchoredPosition = new Vector2(c * 100, 0);
 
                 // start hidden until discovered
-                cell.SetActive(true);
+                cell.SetActive(false);
 
                 rowList.Add(cell);
             }
