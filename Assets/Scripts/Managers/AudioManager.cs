@@ -10,6 +10,10 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
+        public float sfxvolumeslider;
+
+        public float musicvolumeslider = 1;
+
         [Header("Mutes")]
         public bool muteSFX = false;
         public bool muteMusic = false;
@@ -141,6 +145,9 @@ namespace Managers
 
         private void Update()
         {
+
+            if(Musicsource.volume != musicvolumeslider)Musicsource.volume = musicvolumeslider;
+
             if (muteMusic && !muted)
             {
                 Musicsource.volume = 0;
@@ -164,7 +171,7 @@ namespace Managers
             src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
 
             src.spatialBlend = fromObject ? 1f : 0f;
-            src.volume = volume;
+            src.volume = volume * sfxvolumeslider;
             src.clip = clip;
             src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();
@@ -188,19 +195,19 @@ namespace Managers
             StopAllCoroutines();
             if (fadeout && src.isPlaying && !muteMusic)
             {
-                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume));
+                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume*musicvolumeslider));
             }
             else if (fadein && !muteMusic)
             {
                 src.Stop();
                 src.clip = clip;
                 src.volume = 0;
-                StartCoroutine(Fadein(src, fadeinspeed, volume));
+                StartCoroutine(Fadein(src, fadeinspeed, volume*musicvolumeslider));
             }
             else
             {
                 src.clip = clip;
-                if(!muteMusic)src.volume = volume;
+                if(!muteMusic)src.volume = volume*musicvolumeslider;
                 src.Play();
             }
         } 
