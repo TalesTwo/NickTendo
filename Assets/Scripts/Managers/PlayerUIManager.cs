@@ -233,6 +233,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void HandlePersonaChanged(Types.Persona P)
     {
+        PlayerStats.Instance.SetCurrentHealth(PlayerStats.Instance.GetMaxHealth());
         SetHealth();
     }
 
