@@ -87,6 +87,8 @@ namespace Managers
 
         //variables for the soundtrack
         public AudioSource Musicsource;
+        public float sfxValue = 1;
+        public float musicValue = 1;
 
         private bool muted = false;
 
@@ -123,6 +125,8 @@ namespace Managers
         {
             EventBroadcaster.PlayerEnteredBossRoom += OnPlayerEnteredBossRoom;
             EventBroadcaster.PlayerEnteredShopRoom += OnPlayerEnteredShopRoom;
+            sfxValue = 1;
+            musicValue = 1;
         }
 
         private void OnPlayerEnteredBossRoom(bool bIsInRoom)
@@ -150,6 +154,8 @@ namespace Managers
                 Musicsource.volume = 1;
                 muted = false;
             }
+
+            Musicsource.volume = musicValue;
         }
 
         public void PlaySFX(AudioClip clip, float volume = 1f, float deviation = 0f, GameObject fromObject = null)
@@ -163,7 +169,7 @@ namespace Managers
             src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
 
             src.spatialBlend = fromObject ? 1f : 0f;
-            src.volume = volume;
+            src.volume = (volume * sfxValue);
             src.clip = clip;
             src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();

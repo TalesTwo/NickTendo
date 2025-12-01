@@ -15,6 +15,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     public float healthBarHeight = 20;
     public float backgroundHeight = 29.1f;
 
+    [SerializeField]
+    private Canvas _mainCanvas;
     [SerializeField] 
     private RectTransform health;
     [SerializeField]
@@ -34,6 +36,20 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     [SerializeField]
     private Image _dashIcon;
 
+    [Header("Arcade Text")]
+    [SerializeField]
+    private GameObject _arcadeText;
+    [SerializeField]
+    private float _xPos = 0;
+    [SerializeField]
+    private float _yPos = 360;
+    [SerializeField]
+    private float _xScale = 2;
+    [SerializeField]
+    private float _yScale = 2;
+    [SerializeField]
+    private float _duration = 1;
+
     [Header("Pause Menu")]
     [SerializeField] private GameObject _pauseMenu;
 
@@ -51,6 +67,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
     private bool _isInDialogue;
     private int _currentEnemyCount;
     private int _updateEnemyCount;
+    private RectTransform _arcadeTextRectTrans;
+    private TextMeshProUGUI _arcadeTextMeshPro;
 
     private void Start()
     {
@@ -88,7 +106,56 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         {
             SetHealth();
         }
+        if (gameObject.activeInHierarchy)
+        {
+            ArcadeText(stat);
+        }
     }
+
+    void ArcadeText(PlayerStatsEnum stat)
+    {        
+        GameObject _arcadeTextInstance = Instantiate(_arcadeText);
+        _arcadeTextInstance.transform.SetParent(_mainCanvas.transform);
+        _arcadeTextRectTrans = _arcadeTextInstance.GetComponent<RectTransform>();
+        _arcadeTextRectTrans.localPosition = new Vector2(_xPos, _yPos);
+        _arcadeTextRectTrans.localScale = new Vector2(_xScale, _yScale);
+        string _textToSet = "";
+        if (stat == PlayerStatsEnum.Current_Health)
+        {
+            _textToSet = "Health get!!!";
+        }
+        else if (stat == PlayerStatsEnum.Chips)
+        {
+            _textToSet = "Chip get!!!";
+        }
+        _arcadeTextMeshPro = _arcadeTextInstance.GetComponent<TextMeshProUGUI>();
+        _arcadeTextMeshPro.text = _textToSet;
+        StartCoroutine(ArcadeTextEffect(_arcadeTextRectTrans, _arcadeTextMeshPro, _duration));
+    }
+
+    IEnumerator ArcadeTextEffect(RectTransform transform, TextMeshProUGUI textmesh, float duration)
+    {
+        float _effectTime = 0;
+        float _newYPos = _yPos;
+        Color _newColor = textmesh.color;
+        while (_effectTime < duration)
+        {
+            _effectTime += Time.deltaTime;
+            transform.localPosition = new Vector2 (_xPos, _newYPos);
+            _newYPos += 0.25f;
+            if (_newColor.a - 0.01f < 0)
+            {
+                _newColor.a = 0;
+            }
+            else
+            {
+                _newColor.a -= 0.01f;
+            }
+            textmesh.color = _newColor;
+            yield return null;
+        }
+    }
+
     private void Update()
     {
         //SetHealth();
@@ -136,7 +203,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
                     _isInPauseMenu = true;
                 }
             }
-        }        
+        }      
     }
 
     public void SetHealth()
@@ -166,6 +233,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
 
     void HandlePersonaChanged(Types.Persona P)
     {
+        PlayerStats.Instance.SetCurrentHealth(PlayerStats.Instance.GetMaxHealth());
         SetHealth();
     }
 

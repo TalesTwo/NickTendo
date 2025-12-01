@@ -18,9 +18,9 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField]
     private Button _closeButton;
     [SerializeField]
-    private Button _sfxToggle;
+    private Slider _sfxSlider;
     [SerializeField]
-    private Button _musicToggle;
+    private Slider _musicSlider;
     [SerializeField]
     private Button _continueButton;
     [SerializeField]
@@ -39,8 +39,6 @@ public class PauseMenuManager : MonoBehaviour
     private void Start()
     {
         _closeButton.onClick.AddListener(ClosePauseMenu);
-        _sfxToggle.onClick.AddListener(ToggleSFX);
-        _musicToggle.onClick.AddListener(ToggleMusic);  
         _continueButton.onClick.AddListener(ClosePauseMenu);
         if (_isPauseMenu)
         {
@@ -66,12 +64,22 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    public void SfxSlider()
+    {
+        AudioManager.Instance.sfxValue = _sfxSlider.value;
+    }
+
+    public void MusicSlider()
+    {
+        AudioManager.Instance.musicValue = _musicSlider.value;
+    }
+
     public void OpenPauseMenu()
     {
         gameObject.SetActive(true);
 
-        _sfxToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteSFX);
-        _musicToggle.GetComponent<ToggleButtonUI>().SetIsToggledOn(!AudioManager.Instance.muteMusic);
+        _sfxSlider.value = AudioManager.Instance.sfxValue;
+        _musicSlider.value = AudioManager.Instance.musicValue;
         DebugUtils.Log($"SFX State: {AudioManager.Instance.muteSFX}, Music State: {AudioManager.Instance.muteMusic}");
         if (_isPauseMenu)
         {
@@ -92,31 +100,6 @@ public class PauseMenuManager : MonoBehaviour
             Time.timeScale = 1;
             Managers.AudioManager.Instance.PlayPauseMenuSound(1, 0);
         }
-    }
-
-    private void ToggleSFX()
-    {
-        if (_sfxToggle.GetComponent<ToggleButtonUI>().GetIsToggledOn())
-        {
-            AudioManager.Instance.muteSFX = true;
-        }
-        else
-        {
-            AudioManager.Instance.muteSFX = false;
-        }
-    }
-
-    private void ToggleMusic()
-    {
-        if (_musicToggle.GetComponent<ToggleButtonUI>().GetIsToggledOn())
-        {
-            AudioManager.Instance.muteMusic = true;
-        }
-        else
-        {
-            AudioManager.Instance.muteMusic = false;
-        }
-        DebugUtils.Log($"Current Music State {AudioManager.Instance.muteMusic}");
     }
 
     private void EnableConfirmationWindow()
