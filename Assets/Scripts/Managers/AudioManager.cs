@@ -10,7 +10,7 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
-        public float sfxvolumeslider;
+        //public float sfxvolumeslider = 1;
 
         public float musicvolumeslider = 1;
 
@@ -171,7 +171,7 @@ namespace Managers
             src.transform.position = fromObject ? fromObject.transform.position : Camera.main ? Camera.main.transform.position : Vector3.zero;
 
             src.spatialBlend = fromObject ? 1f : 0f;
-            src.volume = volume * sfxvolumeslider;
+            src.volume = volume;
             src.clip = clip;
             src.pitch = UnityEngine.Random.Range(1 - deviation, 1 + deviation);
             src.Play();
