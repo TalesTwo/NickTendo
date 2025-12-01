@@ -111,6 +111,13 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
+            // we shouldnt be able to see the interact prompt or interact if we arent allowed to
+            if (!_isAllowedToInteract)
+            {
+                CanInteract = false;  
+                return;               
+            }
+            
             _currentlyInOverlap = true;
             //DebugUtils.Log("Player in range to interact with " + gameObject.name);
             CanInteract = true;
