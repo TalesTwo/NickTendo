@@ -196,6 +196,7 @@ public class PlayerStats : Singleton<PlayerStats>
 
     public void ApplyItemBuffs(PlayerStatsEnum BuffType, float BuffValue)
     {
+        bool _hasCarryoverBroadcasted = false;
         if (BuffType == PlayerStatsEnum.Max_Health)
         {
             Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
@@ -281,6 +282,7 @@ public class PlayerStats : Singleton<PlayerStats>
             // (as by default, we only update the CarryOver)
             numberOfCarryOverHealthUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Max_Health, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Movement_Speed)
         {
@@ -288,6 +290,7 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateMovementSpeed(BuffValue);
             numberOfCarryOverMovementSpeedUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Movement_Speed, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Damage)
         {
@@ -295,6 +298,7 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateAttackDamage(BuffValue);
             numberOfCarryOverAttackDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Attack_Cooldown)
         {
@@ -303,6 +307,7 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateAttackCooldown(BuffValue);
             numberOfCarryOverAttackCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Cooldown, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Damage)
         {
@@ -310,6 +315,7 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateDashDamage(BuffValue);
             numberOfCarryOverDashDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Damage, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Cooldown)
         {
@@ -317,6 +323,7 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateDashCooldown(BuffValue);
             numberOfCarryOverDashCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Cooldown, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
         else if (BuffType == PlayerStatsEnum.CarryOver_Dash_Speed)
         {
@@ -324,8 +331,12 @@ public class PlayerStats : Singleton<PlayerStats>
             UpdateDashSpeed(BuffValue);
             numberOfCarryOverDashSpeedUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Speed, BuffValue);
+            _hasCarryoverBroadcasted = true;
         }
-        EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
+        if (!_hasCarryoverBroadcasted)
+        {
+            EventBroadcaster.Broadcast_PlayerStatsChanged(BuffType, BuffValue);
+        }
     }
     
     // function to initialize All of the player stats, based on a struct
