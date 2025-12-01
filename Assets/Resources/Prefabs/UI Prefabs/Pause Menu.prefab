@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9882353, g: 0.63529414, b: 0.23529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3323775822408471348, guid: c488d8c9b910a214ca37ae5231259032, type: 3}
+  m_Sprite: {fileID: 4360001681445653699, guid: b6e042bf6c3c6c246bec820e9456f514, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3323775822408471348, guid: c488d8c9b910a214ca37ae5231259032, type: 3}
+  m_Sprite: {fileID: 4360001681445653699, guid: b6e042bf6c3c6c246bec820e9456f514, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2011,9 +2011,7 @@ MonoBehaviour:
     _sceneAsset: {fileID: 102900000, guid: 2b681577d48ebc74185e173e68142b79, type: 3}
     _sceneName: MainMenu
   _closeButton: {fileID: 1589171829879246115}
-  _sfxToggle: {fileID: 0}
   _sfxSlider: {fileID: 4444526207954600874}
-  _musicToggle: {fileID: 0}
   _musicSlider: {fileID: 8062841458037429958}
   _continueButton: {fileID: 2386525132461134873}
   _mainMenuButton: {fileID: 5037684562913502680}
@@ -2443,7 +2441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9882353, g: 0.63529414, b: 0.23529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

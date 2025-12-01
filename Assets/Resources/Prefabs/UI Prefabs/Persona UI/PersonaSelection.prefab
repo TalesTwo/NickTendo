@@ -555,10 +555,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 250
-    m_Bottom: 60
+    m_Top: 200
+    m_Bottom: 100
   m_ChildAlignment: 4
-  m_Spacing: -100
+  m_Spacing: -150
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -602,7 +602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 1556.9612, y: 871.3076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4899246208581061945
@@ -1615,7 +1615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 133.0877
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 9192275596849701664, guid: f8891ba0ae988c64f89056aaeacb7514, type: 3}
       propertyPath: m_AnchoredPosition.x
