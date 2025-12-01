@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
 
     public void ResetCamera()
     {
-        DebugUtils.LogSuccess("Camera Reset");
+        //DebugUtils.LogSuccess("Camera Reset");
 
         // Cancel transition/zoom
         if (zoomRoutine != null)

@@ -80,6 +80,7 @@ public class DialogueHitbox : MonoBehaviour
         GameObject root = other.transform.parent.gameObject;
         if(root == null){return;}
         if (triggerAfterTutorial) {return;}
+        if (triggerAfterBossEncounterOne && GameStateManager.Instance.GetNumberOfTimesBossFought() != 1) { return;}
         if (root.CompareTag("Player"))
         {
             // Restore the previous dialogue state

@@ -9,6 +9,7 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject MiniMap;
+    [SerializeField] private GameObject MiniMap_Corner;
     
     
     public void Start()
@@ -36,11 +37,18 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
         {
             miniMapUI.ConnectToBroadcaster();
         }
+        
+        MiniMapUI miniMapUI_Corner = MiniMap_Corner.GetComponent<MiniMapUI>();
+        if (miniMapUI_Corner != null)
+        {
+            miniMapUI_Corner.ConnectToBroadcaster();
+        }
     }
     
     public void ToggleMiniMap()
     {
         MiniMap.SetActive(!MiniMap.activeSelf);
+        MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
     }
 
 }

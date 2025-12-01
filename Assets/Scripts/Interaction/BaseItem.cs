@@ -97,9 +97,9 @@ public class BaseItem : SpawnableObject
         if (triggerCol == null) {yield break;}
 
         triggerCol.enabled = false;
-        Debug.Log("Temporarily disabling item collider for " + delay + " seconds.");
+        //Debug.Log("Temporarily disabling item collider for " + delay + " seconds.");
         yield return new WaitForSeconds(delay);
-        Debug.Log("Re-enabling item collider.");
+       // Debug.Log("Re-enabling item collider.");
         triggerCol.enabled = true;
     }
 
