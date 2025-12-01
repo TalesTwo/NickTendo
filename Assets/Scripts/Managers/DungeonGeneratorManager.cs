@@ -29,11 +29,12 @@ namespace Managers
         }
         
         [Header("Generation Data")]
-        [SerializeField] private  int rows = 5;
-        [SerializeField] private  int cols = 5;
+        [SerializeField] private  int rows = 5; public int GetRows() { return rows; }
+        [SerializeField] private  int cols = 5; public int GetCols() { return cols; }
         [SerializeField] private float probabilityToAddOptionalDoor_OneRequiredDoor = 0.75f;
         [SerializeField] private float probabilityToAddOptionalDoor_TwoRequiredDoors = 0.5f;
         [SerializeField] private float probabilityToAddOptionalDoor_ThreeRequiredDoors = 0.25f;
+        [SerializeField] private  int AllowedUpwardMovesInARow = 3;
         [SerializeField] private GenerationData generationData;
         [Space(10f)]
         [Header("Special Room Settings")]
@@ -154,7 +155,7 @@ namespace Managers
         
         private void DisableAllRoomsExceptCurrent((int row, int col) currentRoomCoords)
         {
-            DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
+            //DebugUtils.Log("Disabling all rooms except current room at: " + currentRoomCoords);
             for (int r = 0; r < dungeonRooms.Count; r++)
             {
                 for (int c = 0; c < dungeonRooms[r].Count; c++)
@@ -256,6 +257,8 @@ namespace Managers
             }
             
             InitializeStartAndEndRoom();
+            // load in the tutorial rooms
+            InitializeTutorialRooms();
             
             GeneratePhaseOne();
             // maybe instead, we just loop through every room in the dungeon, and PCG from there, as long as it aint null
@@ -295,8 +298,7 @@ namespace Managers
             // these rooms will be in a seperate [SerializeField] private GenerationData generationData;
             // we will simply "replace" existing rooms with special rooms that fit the same door configuration
             GenerateSpecialRooms(dungeonRooms);
-            // load in the tutorial rooms
-            InitializeTutorialRooms();
+
             
             // load the final room
             //InitializeFinalRoom();
@@ -380,31 +382,88 @@ namespace Managers
                     Room roomToReplace = null;
                     int difficulty = -1;
                     int attempts = 0;
+                    int phase = 0; 
 
                     // keep picking until we get a valid shop placement
                     while (true)
                     {
+                        attempts++;
+
                         int randomIndex = UnityEngine.Random.Range(0, possibleRooms.Count);
                         roomToReplace = possibleRooms[randomIndex];
                         difficulty = roomToReplace.GetRoomDifficulty();
 
                         // never place a shop at difficulty == 1 (right outside spawn)
-                        if (difficulty == 1) {continue;}
-
-                        // never place shops with difficulty difference == 1 or 2, for better pacing
-                        bool invalid = false;
-                        foreach (int used in usedShopDifficulties)
+                        if (difficulty == 1)
                         {
-                            if (Mathf.Abs(used - difficulty) == 1 || Mathf.Abs(used - difficulty) == 2)
+                            // skip no matter the phase
+                            if (attempts > 500) 
                             {
-                                invalid = true;
+                                // safety break to make sure the game dosent crash fr style lol
                                 break;
                             }
+                            continue;
                         }
-                        if (invalid) {continue;}
 
-                        // valid location found
-                        break;
+                        bool invalid = false;
+
+                        // PHASE 0,  check everything
+                        // PHASE 1, skip first rule
+                        if (phase == 0)
+                        {
+                            // never place shops with difficulty difference == 1 or 2, for better pacing
+                            foreach (int used in usedShopDifficulties)
+                            {
+                                if (Mathf.Abs(used - difficulty) == 1 || Mathf.Abs(used - difficulty) == 2)
+                                {
+                                    invalid = true;
+                                    break;
+                                }
+                            }
+                        }
+                        // PHASE 1, only check for difficulty difference == 1
+                        else if (phase == 1)
+                        {
+                            // only check for difficulty difference == 1
+                            foreach (int used in usedShopDifficulties)
+                            {
+                                if (Mathf.Abs(used - difficulty) == 1)
+                                {
+                                    invalid = true;
+                                    break;
+                                }
+                            }
+                        }
+                        // phase 2, dont check anything
+                        
+                        
+
+                        if (!invalid)
+                            break; // valid location found
+
+                        // -----------------------------------
+                        // Fallback logic after X attempts
+                        // -----------------------------------
+                        if (attempts == 50)
+                        {
+                            // after 50 attempts, loosen rule
+                            phase = 1;
+                            // Debug.Log("Shop fallback: Loosening rules (phase 1)");
+                        }
+
+                        if (attempts == 100)
+                        {
+                            // after 100 attempts, loosen even more
+                            phase = 2;
+                            // Debug.Log("Shop fallback: Removing spacing rules (phase 2)");
+                        }
+
+                        // after 150 attempts, just take anything except difficulty==1
+                        if (attempts > 150)
+                        {
+                            // Debug.LogWarning("Shop fallback: Forcing placement");
+                            break;
+                        }
                     }
 
                     // get the room coordinates
@@ -438,6 +497,21 @@ namespace Managers
                     }
                 }
             }
+            
+            // for the sake of testing, I want to replace the room one above the spawn, with a North config shop
+            /*
+            Room testRoom = dungeonMap[startPos.x - 1][startPos.y];
+            if (testRoom != null)
+            {
+                Types.DoorConfiguration testConfig = new Types.DoorConfiguration(true, false, false, false);
+                Room specialRoom = GenerateRoomFromType(Types.RoomType.N, testRoom.transform.position,
+                    startPos.x - 1, startPos.y, true);
+                specialRoom.SetRoomDifficulty(testRoom.GetRoomDifficulty());
+                specialRoom.EnableAllDoors();
+                specialRoom.SetRoomEnabled(false); // disable the room by default
+                HandleRoomReplacement(dungeonMap, testRoom, specialRoom, startPos.x - 1, startPos.y);
+            }
+            */
         }
 
         private void HandleRoomReplacement(List<List<Room>> dungeonMap, Room currentRoom, Room newRoom, int currentRow, int currentCol)
@@ -621,6 +695,10 @@ namespace Managers
             
             int currentRow = startPos.x-1;
             int currentCol = startPos.y;
+            
+            // Never allow an Up action twice in a row, to prevent vertical lines
+            int numberOfConsecutiveUpMoves = 0;
+            
             // we want to break out of this loop when we reach row 1, since then we build across that row to the end room
             while (currentRow > 2)
             {
@@ -628,8 +706,10 @@ namespace Managers
                 // determine the possible directions we can move
                 List<string> possibleDirections = new List<string>();
                 // we can always move up
-
-                possibleDirections.Add("Up");
+                if (numberOfConsecutiveUpMoves < AllowedUpwardMovesInARow)
+                {
+                    possibleDirections.Add("Up");
+                }
                 
                 // we can move left if we are not in the first column and the room to the left is empty AND we have a door pointing in that direction
                 if (currentCol > 0 && dungeonRooms[currentRow][currentCol - 1] == null)
@@ -653,12 +733,15 @@ namespace Managers
                 {
                     case "Up":
                         AdditionalConnections.NorthDoorActive = true;
+                        numberOfConsecutiveUpMoves ++;
                         break;
                     case "Left":
-                        AdditionalConnections.WestDoorActive = true; 
+                        AdditionalConnections.WestDoorActive = true;
+                        numberOfConsecutiveUpMoves = 0;
                         break;
                     case "Right":
                         AdditionalConnections.EastDoorActive = true;
+                        numberOfConsecutiveUpMoves = 0;
                         break;
                 }
                 // Now build the room at the new position if it doesn't already exist

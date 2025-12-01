@@ -87,8 +87,18 @@ namespace Managers
             EventBroadcaster.PlayerDeath +=  OnPlayerDeath;
             EventBroadcaster.GameRestart += OnGameRestart;
             EventBroadcaster.OpenPersonaUI += OnPlayerOpenPersonaUI;
+            EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
         }
 
+        private void OnReturnToMainMenu()
+        {
+            // Reset everything
+            _personasGenerated = false;
+            _personasTrimmed = false;
+            _personas = InitializePersonas();
+            SetPersona(Types.Persona.Normal);
+        }
+        
         private void OnPlayerOpenPersonaUI()
         {
             // when the player opens the UI, we want to generate everything
@@ -503,7 +513,7 @@ namespace Managers
 
             _isLoaded = true;
 
-            DebugUtils.LogSuccess($"Loaded {_Usernames.Count} names, {_emails.Count} handles, {_domains.Count} domains.");
+            //DebugUtils.LogSuccess($"Loaded {_Usernames.Count} names, {_emails.Count} handles, {_domains.Count} domains.");
         }
 
 

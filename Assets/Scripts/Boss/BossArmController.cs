@@ -24,11 +24,14 @@ public class BossArmController : MonoBehaviour
     public GameObject forearm;
     public GameObject hand;
 
+    public GameObject particles;
+
     private BossColliderController _shoulder;
     private BossColliderController _arm;
     private BossColliderController _elbow;
     private BossColliderController _forearm;
     private BossColliderController _hand;
+    private Rigidbody2D _rb;
     
     public enum Direction
     {
@@ -85,6 +88,7 @@ public class BossArmController : MonoBehaviour
             DirectionModifier = -1;
         }
         
+        _rb = GetComponent<Rigidbody2D>();
         _shoulder = shoulder.GetComponent<BossColliderController>();
         _arm = arm.GetComponent<BossColliderController>();
         _elbow = elbow.GetComponent<BossColliderController>();
@@ -179,6 +183,7 @@ public class BossArmController : MonoBehaviour
 
     private IEnumerator MoveArmOffScreen(Vector2 destination)
     {
+        particles.gameObject.SetActive(true);
         
         float time = 0f;
 
@@ -217,15 +222,18 @@ public class BossArmController : MonoBehaviour
         Quaternion armRotation = arm.transform.rotation;
         Quaternion forearmRotation = forearm.transform.rotation;
         Quaternion handRotation = hand.transform.rotation;
+        Quaternion particleRotation = particles.transform.rotation;
         
         // Step 2: adjust piece rotations
 
         if (side == Direction.Right)
         {
             shoulder.transform.rotation = Quaternion.Euler(0, 0, -90);
+            particles.transform.rotation = Quaternion.Euler(0, 0, -90);
         } else if (side == Direction.Left)
         {
             shoulder.transform.rotation = Quaternion.Euler(0, 0, 90);
+            particles.transform.rotation = Quaternion.Euler(0, 0, 90);
         }
         arm.transform.rotation = Quaternion.Euler(0, 0, 0);
         forearm.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -320,7 +328,8 @@ public class BossArmController : MonoBehaviour
         arm.transform.rotation = armRotation;
         forearm.transform.rotation = forearmRotation;
         hand.transform.rotation = handRotation;
-
+        particles.transform.rotation = particleRotation;
+        
         transform.position = _offScreenPos;
 
         float time2 = 0f;
@@ -347,6 +356,32 @@ public class BossArmController : MonoBehaviour
         {
             BossController.Instance.RightArmReturned();
         }
+        
+        particles.gameObject.SetActive(false);
 
+    }
+
+    public void BossIsDeadArms()
+    {
+        _rb.gravityScale = 1f;
+        _rb.constraints = RigidbodyConstraints2D.None;
+        if (side == Direction.Left)
+        {
+            _rb.AddForce(new Vector2(-5, 1), ForceMode2D.Impulse);
+        } else if (side == Direction.Right)
+        {
+            _rb.AddForce(new Vector2(5, 1), ForceMode2D.Impulse);
+        }
+        _shoulder.TurnOffCollider();
+        _arm.TurnOffCollider();
+        _forearm.TurnOffCollider();
+        _hand.TurnOffCollider();
+        _elbow.TurnOffCollider();
+        Invoke(nameof(SelfDestruct), 10f);
+    }
+
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }

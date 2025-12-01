@@ -51,6 +51,9 @@ public class EnemyControllerBase : SpawnableObject
     protected float pathingTimer = 0;
     [Header("Type")]
     public Types.EnemyType enemyType;
+    [Header("Dynamic Speed Adjustment")]
+    [SerializeField] private float maxDistance = 16f;
+    [SerializeField] private float minDistance = 4f;
 
     
     
@@ -75,6 +78,8 @@ public class EnemyControllerBase : SpawnableObject
     [SerializeField] private float Override_knockbackForce =-1;
     // Start is called before the first frame update
     
+    private float baseSpeed;
+
     private bool _isFrozen = false;
     protected virtual void Start()
     {
@@ -117,7 +122,9 @@ public class EnemyControllerBase : SpawnableObject
         // hook up to the freeze event
         EventBroadcaster.SetWorldFrozen += OnWorldFrozen;
         EventBroadcaster.EndBossFight += Deactivate;
+        EventBroadcaster.StartBossFightDeathSequence += Deactivate;
         
+        baseSpeed = speed;
     }
     
     
@@ -157,6 +164,7 @@ public class EnemyControllerBase : SpawnableObject
         EventBroadcaster.ObjectFellInPit -= OnFellInPit;
         EventBroadcaster.SetWorldFrozen -= OnWorldFrozen;
         EventBroadcaster.EndBossFight -= Deactivate;
+        EventBroadcaster.StartBossFightDeathSequence -= Deactivate;
     }
     
     public void Initialize(int roomDifficulty)
@@ -193,6 +201,19 @@ public class EnemyControllerBase : SpawnableObject
         
         ApplySeparation();
         CheckWhichDirectionToFace();
+        
+        // New system, which the player is far away, we want to move slower
+        // we will have a max distance and a min distance
+        // each frame just get a normalized value between the two distances and multiply speed by that value
+        float distanceToPlayer = Vector2.Distance(_transform.position, _playerTransform.position);
+
+
+        // Normalize, then invert so close = fast, far = slow
+        float distanceFactor = 1f - Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
+
+        float newSpeed = baseSpeed * distanceFactor;
+        speed = newSpeed;
+        // move towards player
     }
 
 

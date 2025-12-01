@@ -1,0 +1,672 @@
+fileFormatVersion: 2
+guid: b356ace8f066ce441831c0f860ce9641
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2979754198534919622
+    second: bossanimated_0
+  - first:
+      213: -48459709882756176
+    second: bossanimated_1
+  - first:
+      213: 4408949331725103437
+    second: bossanimated_2
+  - first:
+      213: 4957137359986896754
+    second: bossanimated_3
+  - first:
+      213: 7723345414743987869
+    second: bossanimated_4
+  - first:
+      213: -8691250809609158377
+    second: bossanimated_5
+  - first:
+      213: -7099422896840443269
+    second: bossanimated_6
+  - first:
+      213: -2779535937570730862
+    second: bossanimated_7
+  - first:
+      213: -1038348273880684564
+    second: bossanimated_8
+  - first:
+      213: 8078120495415238799
+    second: bossanimated_9
+  - first:
+      213: 8640867600463658424
+    second: bossanimated_10
+  - first:
+      213: -2731151967553708893
+    second: bossanimated_11
+  - first:
+      213: -1560464677041258545
+    second: bossanimated_12
+  - first:
+      213: 1115754985586253263
+    second: bossanimated_13
+  - first:
+      213: -3542334585228155958
+    second: bossanimated_14
+  - first:
+      213: -3387557256201566701
+    second: bossanimated_15
+  - first:
+      213: 1952295745986402372
+    second: bossanimated_16
+  - first:
+      213: -770107059962466383
+    second: bossanimated_17
+  - first:
+      213: 2000929427219915507
+    second: bossanimated_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BOSS_ARM_0
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.88}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c517a9f7a63a5920800000000000000
+      internalID: 2979754198534919622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_ARM_1
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.88}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b3158e8626d35ff0800000000000000
+      internalID: -48459709882756176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_ARM_2
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 1070
+        width: 15
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.88}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41bb2ebe0cbf2d30800000000000000
+      internalID: 4408949331725103437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_ARM_3
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 1070
+        width: 15
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.88}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27f26d43a2a4bc440800000000000000
+      internalID: 4957137359986896754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_ARM_4
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 766
+        width: 15
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.88}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9615731cb5de2b60800000000000000
+      internalID: 7723345414743987869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_SHOULDER_0
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 799
+        width: 13
+        height: 24
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7118b67df69726780800000000000000
+      internalID: -8691250809609158377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_SHOULDER_1
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 799
+        width: 13
+        height: 24
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7afc8b5d78c97d90800000000000000
+      internalID: -7099422896840443269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_SHOULDER_2
+      rect:
+        serializedVersion: 2
+        x: 1514
+        y: 799
+        width: 13
+        height: 24
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29c0aa89aca1d69d0800000000000000
+      internalID: -2779535937570730862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_SHOULDER_3
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 495
+        width: 13
+        height: 24
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce7a33e0fbb0791f0800000000000000
+      internalID: -1038348273880684564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_SHOULDER_4
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 495
+        width: 13
+        height: 24
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8027067acf3b1070800000000000000
+      internalID: 8078120495415238799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FACE_IDLE_0
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 482
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4301494e7c71a48a21028e8a226930
+      internalID: -446801966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FACE_IDLE_1
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 482
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9147ef7e1f88794caf390fa8be28ea9
+      internalID: 934752787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FACE_IDLE_3
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 177
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491f93f9e4cdb4b46ac0d43e480be997
+      internalID: 460646416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FACE_IDLE_2
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 177
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b645f55e46c8eb42b7cf4a4baf4cf27
+      internalID: -825821007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FACE_IDLE_4
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 177
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3aabc634ed27eb4c8af5638675d528b
+      internalID: 2120917800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FOREARM_0
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4edf94ccd2464ec4b8ed77d95b34da6b
+      internalID: 1151360803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FOREARM_1
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b738fd9e2868344b3e620e16624e56
+      internalID: 1373194791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FOREARM_2
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0c10660c8183146899039064462cb4
+      internalID: -780588248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FOREARM_3
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 1069
+        width: 15
+        height: 48
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc84aea6a42d31d47989b8d23387a568
+      internalID: -1212967866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BOSS_FOREARM_4
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 766
+        width: 15
+        height: 48
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb03175ed2c5ad540a6e0d667ede1bf7
+      internalID: 1545491972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: eaa38ee9ca56a2c4c9a85e9b976d6fab
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BOSS_ARM_0: 2979754198534919622
+      BOSS_ARM_1: -48459709882756176
+      BOSS_ARM_2: 4408949331725103437
+      BOSS_ARM_3: 4957137359986896754
+      BOSS_ARM_4: 7723345414743987869
+      BOSS_FACE_IDLE_0: -446801966
+      BOSS_FACE_IDLE_1: 934752787
+      BOSS_FACE_IDLE_2: -825821007
+      BOSS_FACE_IDLE_3: 460646416
+      BOSS_FACE_IDLE_4: 2120917800
+      BOSS_FOREARM_0: 1151360803
+      BOSS_FOREARM_1: 1373194791
+      BOSS_FOREARM_2: -780588248
+      BOSS_FOREARM_3: -1212967866
+      BOSS_FOREARM_4: 1545491972
+      BOSS_SHOULDER_0: -8691250809609158377
+      BOSS_SHOULDER_1: -7099422896840443269
+      BOSS_SHOULDER_2: -2779535937570730862
+      BOSS_SHOULDER_3: -1038348273880684564
+      BOSS_SHOULDER_4: 8078120495415238799
+      bossanimated_10: 8640867600463658424
+      bossanimated_11: -2731151967553708893
+      bossanimated_12: -1560464677041258545
+      bossanimated_13: 1115754985586253263
+      bossanimated_14: -3542334585228155958
+      bossanimated_15: -3387557256201566701
+      bossanimated_16: 1952295745986402372
+      bossanimated_17: -770107059962466383
+      bossanimated_18: 2000929427219915507
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

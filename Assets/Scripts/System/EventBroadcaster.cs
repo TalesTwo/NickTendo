@@ -173,6 +173,11 @@ namespace System
         public static event EndBossFightHandler EndBossFight;
         public static void Broadcast_EndBossFight() { EndBossFight?.Invoke(); }
         
+        // Broadcaster for the start of the boss Death Sequence
+        public delegate void StartBossFightDeathSequenceHandler();
+        public static event StartBossFightDeathSequenceHandler StartBossFightDeathSequence;
+        public static void Broadcast_StartBossFightDeathSequence() { StartBossFightDeathSequence?.Invoke(); }
+        
         // Delegate to "freeze" or "unfreeze" the game world (primarily used for enemies to pause movement without setting timescale to 0)
         public delegate void SetWorldFrozenHandler(bool isFrozen);
         public static event SetWorldFrozenHandler SetWorldFrozen;
@@ -182,6 +187,11 @@ namespace System
         public delegate void DungeonGenerationCompleteHandler();
         public static event DungeonGenerationCompleteHandler DungeonGenerationComplete;
         public static void Broadcast_DungeonGenerationComplete() { DungeonGenerationComplete?.Invoke(); }
+        
+        // Broadcast for when we return to main menu
+        public delegate void ReturnToMainMenuHandler();
+        public static event ReturnToMainMenuHandler ReturnToMainMenu;
+        public static void Broadcast_ReturnToMainMenu() { ReturnToMainMenu?.Invoke(); }
         
 
         //-------------------------------- End Activity Events --------------------------------//

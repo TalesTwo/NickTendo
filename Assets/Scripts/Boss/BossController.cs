@@ -55,6 +55,14 @@ public class BossController : Singleton<BossController>
         public int exhaustionCounter;
         public float exhaustionTime;
     }
+
+    [System.Serializable]
+    public class SmokeParticles
+    {
+        [Header("Smoke or sparks")]
+        public GameObject smoke;
+        public HealthState health;
+    }
     
     [Header("body parts")]
     public GameObject rightArm;
@@ -96,6 +104,9 @@ public class BossController : Singleton<BossController>
         Follow
     }
     
+    [Header("particles")] 
+    public List<SmokeParticles> smokeList;
+    
     [Header("State of the Fight")]
     public HealthState health;
     public BattleState battle;
@@ -129,6 +140,19 @@ public class BossController : Singleton<BossController>
     public Vector2 verticalProjectionOffsetLeft;
     private Queue<GameObject> _rocketProjectionsQueue;
 
+    [Header("Death Sequence")] 
+    public List<GameObject> finalExplosionParticles;
+    public GameObject smallExplosionParticles;
+    public float explosionMinY;
+    public float explosionMaxY;
+    public float explosionMinX;
+    public float explosionMaxX;
+    public float explosionLengthTime;
+    public float maxTimeBetweenExplosions;
+    public float minTimeBetweenExplosions;
+    public float timeBetweenExplosionsChange;
+    public float waitTimeAfterDeath;
+
     [Header("Battle State Bools")] 
     private int _phases = 0;
     private bool _rightArmAttached = true;
@@ -146,6 +170,8 @@ public class BossController : Singleton<BossController>
     private int _armsCurrentlyLaunched = 0;
     private bool _istired = false;
     private bool _playerAlive = true;
+    private bool _isDying = false;
+    private bool _damageTaken = false;
     
     // Start is called before the first frame update
     void Start()
@@ -175,6 +201,8 @@ public class BossController : Singleton<BossController>
     void Update()
     {
         if (debugging) return;
+
+        if (_isDying) return;
         
         if (!_playerAlive) return;
         
@@ -273,6 +301,62 @@ public class BossController : Singleton<BossController>
             SetRandomRocketTimers(true, false);
         }
     }
+
+    private IEnumerator Explode()
+    {
+        EventBroadcaster.Broadcast_StartBossFightDeathSequence();
+        
+        float time = 0f;
+        float waitTime = maxTimeBetweenExplosions;
+
+        while (time <= explosionLengthTime)
+        {
+            time += Time.deltaTime;
+            time += waitTime;
+            float explosionX = RandomNumber(explosionMinX, explosionMaxX);
+            float explosionY = RandomNumber(explosionMinY, explosionMaxY);
+            Vector3 pos = new Vector3(transform.position.x + explosionX, transform.position.y + explosionY,
+                transform.position.z);
+            Instantiate(smallExplosionParticles, pos, Quaternion.identity);
+
+            if (waitTime <= minTimeBetweenExplosions)
+            {
+                waitTime = minTimeBetweenExplosions;
+            }
+            else
+            {
+                waitTime -= timeBetweenExplosionsChange;
+            }
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        foreach (GameObject explosion in finalExplosionParticles)
+        {
+            explosion.gameObject.SetActive(true);
+        }
+        
+        foreach (SmokeParticles smoke in smokeList)
+        {
+            smoke.smoke.gameObject.SetActive(false);
+        }
+        face.gameObject.SetActive(false);
+        screen.gameObject.SetActive(false);
+        expressions.gameObject.SetActive(false);
+        cracks.gameObject.SetActive(false);
+        
+        rightArmController.BossIsDeadArms();
+        leftArmController.BossIsDeadArms();
+
+        yield return new WaitForSeconds(waitTimeAfterDeath);
+        EventBroadcaster.Broadcast_EndBossFight();
+        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+    }
+
+    private float RandomNumber(float min, float max)
+    {
+        return UnityEngine.Random.Range(min, max);
+    }
     
     public void BackToIdleState()
     {
@@ -307,7 +391,7 @@ public class BossController : Singleton<BossController>
         _istired = true;
         float dizzytimer = 0f;
         Managers.AudioManager.Instance.PlayBUDDEEDizzy(1, 0);
-        while (timer < _currentStats.exhaustionTime)
+        while (timer < _currentStats.exhaustionTime && !_damageTaken)
         {
             dizzytimer += Time.deltaTime;
             if(dizzytimer >= 0.5f && _istired)
@@ -318,18 +402,31 @@ public class BossController : Singleton<BossController>
             timer += Time.deltaTime;
             yield return null;
         }
-        rightArmController.BecomeUntired();
-        leftArmController.BecomeUntired();
-        BossScreenController.Instance.SetIsExhausted(false);
-        expressionsAnimator.SetIdleAnimation();
-        battle = BattleState.Idle;
 
-        _rightArmsLaunchedThisPhase = 0;
-        _leftArmsLaunchedThisPhase = 0;
+        if (!_damageTaken)
+        {
+            rightArmController.BecomeUntired();
+            leftArmController.BecomeUntired();
+            BossScreenController.Instance.SetIsExhausted(false);
+            expressionsAnimator.SetIdleAnimation();
+            battle = BattleState.Idle;
+            
+            _rightArmsLaunchedThisPhase = 0;
+            _leftArmsLaunchedThisPhase = 0;
+        }
+
     }
 
+    private void UnsetDamageTaken()
+    {
+        _damageTaken = false;
+    }
+    
     public void TakeDamage()
     {
+        _damageTaken = true;
+        Invoke(nameof(UnsetDamageTaken), 1f);
+        
         rightArmController.BecomeUntired();
         leftArmController.BecomeUntired();
         _istired = false;
@@ -372,6 +469,14 @@ public class BossController : Singleton<BossController>
             }
         }
 
+        foreach (SmokeParticles particles in smokeList)
+        {
+            if (particles.health == _currentStats.health)
+            {
+                particles.smoke.gameObject.SetActive(true);
+            }
+        }
+
         _leftArmsLaunchedThisPhase = 0;
         _rightArmsLaunchedThisPhase = 0;
         _projectilesTimer = 0f;
@@ -380,11 +485,13 @@ public class BossController : Singleton<BossController>
     private void HandleBossDeath()
     {
         Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
-        EventBroadcaster.Broadcast_EndBossFight();
+        _isDying = true;
+        StartCoroutine(nameof(Explode));
+        //EventBroadcaster.Broadcast_EndBossFight();
         // provide a one off dialogue line for defeating the boss
-        GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
-        EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
-        Destroy(gameObject);
+        //GameStateManager.Instance.SetBuddeeDialogState("PostBossDefeat");
+        //EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+        //Destroy(gameObject);
     }
 
     private void SetIdleAnimation()
