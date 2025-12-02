@@ -13,8 +13,12 @@ public class PersonaUI : MonoBehaviour
     [SerializeField] private GameObject personaTemplate;
     [SerializeField] private Transform contentParent; 
     [SerializeField] private GameObject buddeeUI;
-    
-    
+    [SerializeField] private TextMeshProUGUI permaHealth;
+    [SerializeField] private TextMeshProUGUI permaSpeed;
+    [SerializeField] private TextMeshProUGUI permaAttack;
+    [SerializeField] private TextMeshProUGUI permaDash;
+
+
     private Dictionary<Types.Persona, Types.PersonaState> _personas;
 
     public void Start()
@@ -33,6 +37,12 @@ public class PersonaUI : MonoBehaviour
     {
         GenerateContent();
         gameObject.SetActive(true);
+
+        permaHealth.text = $"health: {PlayerStats.Instance.GetCarryOverMaxHealth()}";
+        permaSpeed.text = $"speed: {PlayerStats.Instance.GetCarryOverMovementSpeed()}";
+        permaAttack.text = $"attack: {PlayerStats.Instance.GetCarryOverAttackDamage()}";
+        permaDash.text = $"dash: {PlayerStats.Instance.GetCarryOverDashDamage()}";
+
         if (PersonaManager.Instance.GetNumberOfAvailablePersonas() == 1)
         {
             buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like we ran out of all available accounts...");
