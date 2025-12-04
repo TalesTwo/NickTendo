@@ -246,7 +246,7 @@ public class PlayerStats : Singleton<PlayerStats>
                 SetCurrentHealth(GetMaxHealth());
                 Heal = 0;
             }
-            UpdateCurrentHealth(Heal);
+            UpdateCurrentHealth(Heal, true);
             Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
         else if (BuffType == PlayerStatsEnum.Chips)
