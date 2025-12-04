@@ -15,6 +15,8 @@ public class AnimatedBossFace : AnimatedEntity
     public List<Sprite> blockedFrames;
     public float blockScreenTime;
     
+    private int _redScreenCounter;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -45,12 +47,17 @@ public class AnimatedBossFace : AnimatedEntity
 
     public void RemoveRedScreen()
     {
-        screen.sprite = blueScreen;
+        _redScreenCounter--;
+        if (_redScreenCounter == 0)
+        {
+            screen.sprite = blueScreen;
+        }
     }
 
     public void SetRedScreen(float time)
     {
         screen.sprite = redScreen;
+        _redScreenCounter++;
         Invoke(nameof(RemoveRedScreen), time);
     }
 
