@@ -191,6 +191,11 @@ public class BossController : Singleton<BossController>
         SetRandomRocketTimers(true, true);
     }
 
+    void OnDestroy()
+    {
+        EventBroadcaster.PlayerDeath -= Stop;
+    }
+
     private void Stop()
     {
         StopAllCoroutines();
