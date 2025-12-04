@@ -35,7 +35,6 @@ public class MiniMapUI : MonoBehaviour
         this.gameObject.SetActive(true);
         // Get the players current room to update the minimap
         var current_cords = DungeonController.Instance.GetCurrentRoomCoords();
-        //DebugUtils.LogWarning($"MiniMapUI: OnDungeonGenerationComplete - Player starting at row {current_cords.row}, col {current_cords.col}");
         OnPlayerChangedRoom((current_cords.row, current_cords.col));
         this.gameObject.SetActive(_isCurrentlyEnabled);
         
