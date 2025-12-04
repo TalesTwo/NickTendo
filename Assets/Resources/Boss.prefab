@@ -900,6 +900,10 @@ MonoBehaviour:
   - {fileID: -8648081835568542550, guid: ae5b0486e23d18e42b5cd80762a57831, type: 3}
   hurtFrames:
   - {fileID: -2128430680, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
+  blockedFrames:
+  - {fileID: -2036948551323603965, guid: d5c79adb8fbde1741a70a500029e0661, type: 3}
+  - {fileID: -2099688985010048610, guid: d5c79adb8fbde1741a70a500029e0661, type: 3}
+  blockScreenTime: 0.5
 --- !u!1 &2581792321881471862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +1999,7 @@ MonoBehaviour:
   immuneParticleAngleEdit: 90
   damageHitEffect: {fileID: 2560593414228584792, guid: a0d5120879c57584ba4c529f9924562d, type: 3}
   damageParticleAngleEdit: 0
+  animatedBossFace: {fileID: 6411662832934445818}
   stunTimer: 0.1
   knockBackForce: 500
 --- !u!1 &4500754400095974572

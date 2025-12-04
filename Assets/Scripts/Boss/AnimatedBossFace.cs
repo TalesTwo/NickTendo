@@ -12,6 +12,8 @@ public class AnimatedBossFace : AnimatedEntity
     public List<Sprite> exhaustedFrames;
     public List<Sprite> loadingMinionsFrames;
     public List<Sprite> hurtFrames;
+    public List<Sprite> blockedFrames;
+    public float blockScreenTime;
     
     // Start is called before the first frame update
     void Start()
@@ -38,8 +40,7 @@ public class AnimatedBossFace : AnimatedEntity
     public void SetLoadingMinionsAnimation()
     {
         Interrupt(loadingMinionsFrames);
-        screen.sprite = redScreen;
-        Invoke(nameof(RemoveRedScreen), redScreenTime);
+        SetRedScreen(redScreenTime);
     }
 
     public void RemoveRedScreen()
@@ -47,8 +48,21 @@ public class AnimatedBossFace : AnimatedEntity
         screen.sprite = blueScreen;
     }
 
+    public void SetRedScreen(float time)
+    {
+        screen.sprite = redScreen;
+        Invoke(nameof(RemoveRedScreen), time);
+    }
+
     public void SetHurtAnimation()
     {
         DefaultAnimationCycle = hurtFrames;
+    }
+
+    public void SetBlockedAnimation()
+    {
+        DefaultAnimationCycle = blockedFrames;
+        SetRedScreen(blockScreenTime);
+        Invoke(nameof(SetIdleAnimation), blockScreenTime);
     }
 }
