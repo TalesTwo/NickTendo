@@ -248,8 +248,8 @@ MonoBehaviour:
   rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
   horizontalProjectionOffset: {x: 0, y: 0}
   rocketProjectionVertical: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
-  verticalProjectionOffsetRight: {x: 0.4, y: -8.98}
-  verticalProjectionOffsetLeft: {x: -0.4, y: -8.98}
+  verticalProjectionOffsetRight: {x: 0, y: -8.98}
+  verticalProjectionOffsetLeft: {x: 0, y: -8.98}
   finalExplosionParticles:
   - {fileID: 6647614939767541994}
   - {fileID: 7878663663044021921}
