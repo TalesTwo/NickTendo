@@ -1152,6 +1152,7 @@ GameObject:
   - component: {fileID: 7188645626432729059}
   - component: {fileID: 1944668200816082054}
   - component: {fileID: 4801194323608321996}
+  - component: {fileID: 2144922336415474860}
   m_Layer: 8
   m_Name: Left Elbow
   m_TagString: Untagged
@@ -1280,6 +1281,26 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &2144922336415474860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142498558334894884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 7038982589363207543, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 7608702245327613506, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 4526746997725128646, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 6024212730596693938, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 7188645626432729059}
+  index: 0
 --- !u!1 &3265533470236457020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,6 +2175,7 @@ GameObject:
   - component: {fileID: 2925496476543875780}
   - component: {fileID: 494907487818905641}
   - component: {fileID: 6150886929686185264}
+  - component: {fileID: 5958333307223567596}
   m_Layer: 8
   m_Name: Right Elbow
   m_TagString: Untagged
@@ -2282,6 +2304,26 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &5958333307223567596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558792653738263640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 7038982589363207543, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 7608702245327613506, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 4526746997725128646, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 6024212730596693938, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 2925496476543875780}
+  index: 0
 --- !u!1 &5138876290651350562
 GameObject:
   m_ObjectHideFlags: 0
