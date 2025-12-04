@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class AnimatedBossFace : AnimatedEntity
 {
+    public SpriteRenderer screen;
+    public Sprite redScreen;
+    public Sprite blueScreen;
+    public float redScreenTime;
     public List<Sprite> idleFrames;
     public List<Sprite> exhaustedFrames;
     public List<Sprite> loadingMinionsFrames;
     public List<Sprite> hurtFrames;
+    public List<Sprite> blockedFrames;
+    public float blockScreenTime;
+    
+    private int _redScreenCounter;
     
     // Start is called before the first frame update
     void Start()
@@ -34,10 +42,34 @@ public class AnimatedBossFace : AnimatedEntity
     public void SetLoadingMinionsAnimation()
     {
         Interrupt(loadingMinionsFrames);
+        SetRedScreen(redScreenTime);
+    }
+
+    public void RemoveRedScreen()
+    {
+        _redScreenCounter--;
+        if (_redScreenCounter == 0)
+        {
+            screen.sprite = blueScreen;
+        }
+    }
+
+    public void SetRedScreen(float time)
+    {
+        screen.sprite = redScreen;
+        _redScreenCounter++;
+        Invoke(nameof(RemoveRedScreen), time);
     }
 
     public void SetHurtAnimation()
     {
         DefaultAnimationCycle = hurtFrames;
+    }
+
+    public void SetBlockedAnimation()
+    {
+        DefaultAnimationCycle = blockedFrames;
+        SetRedScreen(blockScreenTime);
+        Invoke(nameof(SetIdleAnimation), blockScreenTime);
     }
 }

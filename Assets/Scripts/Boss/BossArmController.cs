@@ -174,7 +174,7 @@ public class BossArmController : MonoBehaviour
     
     public void LaunchAttack(int numberOfRockets, float rocketAttackTime)
     {
-        Vector2 destination = new Vector2(offScreenXCoordinate * DirectionModifier, transform.position.y);
+        Vector2 destination = new Vector2(transform.position.x + (offScreenXCoordinate * DirectionModifier), transform.position.y);
         _offScreenPos = destination;
         _startPos = transform.position;
         StartCoroutine(MoveArmOffScreen(destination));

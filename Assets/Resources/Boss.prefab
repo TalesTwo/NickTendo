@@ -124,7 +124,7 @@ MonoBehaviour:
   hitFlashDuration: 0.1
   attacks:
   - rocketCountPerArm: 1
-    rocketAttackTime: 1.5
+    rocketAttackTime: 2
     maxRocketLaunchesPerPhase: 3
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
     exhaustionCounter: 5
     exhaustionTime: 10
   - rocketCountPerArm: 2
-    rocketAttackTime: 1.2
+    rocketAttackTime: 1.8
     maxRocketLaunchesPerPhase: 3
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -172,7 +172,7 @@ MonoBehaviour:
     exhaustionCounter: 7
     exhaustionTime: 9
   - rocketCountPerArm: 2
-    rocketAttackTime: 1
+    rocketAttackTime: 1.6
     maxRocketLaunchesPerPhase: 4
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -196,7 +196,7 @@ MonoBehaviour:
     exhaustionCounter: 9
     exhaustionTime: 8
   - rocketCountPerArm: 3
-    rocketAttackTime: 0.9
+    rocketAttackTime: 1.4
     maxRocketLaunchesPerPhase: 5
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -220,7 +220,7 @@ MonoBehaviour:
     exhaustionCounter: 11
     exhaustionTime: 7
   - rocketCountPerArm: 3
-    rocketAttackTime: 0.9
+    rocketAttackTime: 1.4
     maxRocketLaunchesPerPhase: 6
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -248,8 +248,8 @@ MonoBehaviour:
   rocketProjectionHorizontal: {fileID: 3393252219941071817, guid: f430be0bd0580f14f8aa168519a38bc2, type: 3}
   horizontalProjectionOffset: {x: 0, y: 0}
   rocketProjectionVertical: {fileID: 2236777989822629413, guid: 04bb241a1bc90714b91fb20b18b51fc3, type: 3}
-  verticalProjectionOffsetRight: {x: 0.4, y: -8.98}
-  verticalProjectionOffsetLeft: {x: -0.4, y: -8.98}
+  verticalProjectionOffsetRight: {x: 0, y: -8.98}
+  verticalProjectionOffsetLeft: {x: 0, y: -8.98}
   finalExplosionParticles:
   - {fileID: 6647614939767541994}
   - {fileID: 7878663663044021921}
@@ -871,6 +871,10 @@ MonoBehaviour:
   Framerate: 6
   SpriteRenderer: {fileID: 9121887209284123073}
   index: 0
+  screen: {fileID: 3861473411174172541}
+  redScreen: {fileID: -1246400738257994976, guid: ae5b0486e23d18e42b5cd80762a57831, type: 3}
+  blueScreen: {fileID: -3201829619885253171, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
+  redScreenTime: 2.4
   idleFrames:
   - {fileID: -446801966, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   - {fileID: 934752787, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
@@ -896,6 +900,10 @@ MonoBehaviour:
   - {fileID: -8648081835568542550, guid: ae5b0486e23d18e42b5cd80762a57831, type: 3}
   hurtFrames:
   - {fileID: -2128430680, guid: e7eeeb8e3e28c014db0b583038a104fb, type: 3}
+  blockedFrames:
+  - {fileID: -2036948551323603965, guid: d5c79adb8fbde1741a70a500029e0661, type: 3}
+  - {fileID: -2099688985010048610, guid: d5c79adb8fbde1741a70a500029e0661, type: 3}
+  blockScreenTime: 0.5
 --- !u!1 &2581792321881471862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1152,7 @@ GameObject:
   - component: {fileID: 7188645626432729059}
   - component: {fileID: 1944668200816082054}
   - component: {fileID: 4801194323608321996}
+  - component: {fileID: 2144922336415474860}
   m_Layer: 8
   m_Name: Left Elbow
   m_TagString: Untagged
@@ -1272,6 +1281,26 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &2144922336415474860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142498558334894884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 7038982589363207543, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 7608702245327613506, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 4526746997725128646, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 6024212730596693938, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 7188645626432729059}
+  index: 0
 --- !u!1 &3265533470236457020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1991,6 +2020,7 @@ MonoBehaviour:
   immuneParticleAngleEdit: 90
   damageHitEffect: {fileID: 2560593414228584792, guid: a0d5120879c57584ba4c529f9924562d, type: 3}
   damageParticleAngleEdit: 0
+  animatedBossFace: {fileID: 6411662832934445818}
   stunTimer: 0.1
   knockBackForce: 500
 --- !u!1 &4500754400095974572
@@ -2145,6 +2175,7 @@ GameObject:
   - component: {fileID: 2925496476543875780}
   - component: {fileID: 494907487818905641}
   - component: {fileID: 6150886929686185264}
+  - component: {fileID: 5958333307223567596}
   m_Layer: 8
   m_Name: Right Elbow
   m_TagString: Untagged
@@ -2273,6 +2304,26 @@ MonoBehaviour:
   damage: 2
   stunTimer: 0.5
   knockBackForce: 500
+--- !u!114 &5958333307223567596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558792653738263640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa1b40cac798148acd8e92448aa6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAnimationCycle:
+  - {fileID: 7038982589363207543, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 7608702245327613506, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 4526746997725128646, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  - {fileID: 6024212730596693938, guid: a5b6b11f7c4c59d449e1315e8a029186, type: 3}
+  Framerate: 6
+  SpriteRenderer: {fileID: 2925496476543875780}
+  index: 0
 --- !u!1 &5138876290651350562
 GameObject:
   m_ObjectHideFlags: 0
