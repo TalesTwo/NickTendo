@@ -124,7 +124,7 @@ MonoBehaviour:
   hitFlashDuration: 0.1
   attacks:
   - rocketCountPerArm: 1
-    rocketAttackTime: 1.5
+    rocketAttackTime: 2
     maxRocketLaunchesPerPhase: 3
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
     exhaustionCounter: 5
     exhaustionTime: 10
   - rocketCountPerArm: 2
-    rocketAttackTime: 1.2
+    rocketAttackTime: 1.8
     maxRocketLaunchesPerPhase: 3
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -172,7 +172,7 @@ MonoBehaviour:
     exhaustionCounter: 7
     exhaustionTime: 9
   - rocketCountPerArm: 2
-    rocketAttackTime: 1
+    rocketAttackTime: 1.6
     maxRocketLaunchesPerPhase: 4
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -196,7 +196,7 @@ MonoBehaviour:
     exhaustionCounter: 9
     exhaustionTime: 8
   - rocketCountPerArm: 3
-    rocketAttackTime: 0.9
+    rocketAttackTime: 1.4
     maxRocketLaunchesPerPhase: 5
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -220,7 +220,7 @@ MonoBehaviour:
     exhaustionCounter: 11
     exhaustionTime: 7
   - rocketCountPerArm: 3
-    rocketAttackTime: 0.9
+    rocketAttackTime: 1.4
     maxRocketLaunchesPerPhase: 6
     timeBetweenRocketLaunches: 40
     numberOfFollowers: 2
@@ -871,6 +871,10 @@ MonoBehaviour:
   Framerate: 6
   SpriteRenderer: {fileID: 9121887209284123073}
   index: 0
+  screen: {fileID: 3861473411174172541}
+  redScreen: {fileID: -1246400738257994976, guid: ae5b0486e23d18e42b5cd80762a57831, type: 3}
+  blueScreen: {fileID: -3201829619885253171, guid: ea7c89d3306b7b04fa4f05f04b860951, type: 3}
+  redScreenTime: 2.4
   idleFrames:
   - {fileID: -446801966, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
   - {fileID: 934752787, guid: b356ace8f066ce441831c0f860ce9641, type: 3}
