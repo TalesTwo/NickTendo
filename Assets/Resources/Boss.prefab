@@ -1520,6 +1520,7 @@ MonoBehaviour:
   forearm: {fileID: 1994174248312641029}
   hand: {fileID: 4500754400095974572}
   particles: {fileID: 3922804175903391981}
+  boss: {fileID: 860249048055277067}
   side: 0
   DirectionModifier: 0
   offScreenXCoordinate: 30
@@ -2491,6 +2492,7 @@ MonoBehaviour:
   forearm: {fileID: 6606136446495967308}
   hand: {fileID: 3265533470236457020}
   particles: {fileID: 121540048619030673}
+  boss: {fileID: 860249048055277067}
   side: 1
   DirectionModifier: 0
   offScreenXCoordinate: 30
