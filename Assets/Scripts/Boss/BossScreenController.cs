@@ -37,6 +37,8 @@ public class BossScreenController : Singleton<BossScreenController>
                 Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
                 HitEffect(immuneHitEffect, position, angle);
                 animatedBossFace.SetBlockedAnimation();
+                Managers.AudioManager.Instance.PlayBUDDEENope();
+                Managers.AudioManager.Instance.PlayBUDDEELaughSound();
             }
             else if (_isExhausted)
             {
