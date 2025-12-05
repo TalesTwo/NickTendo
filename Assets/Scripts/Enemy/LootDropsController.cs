@@ -78,7 +78,7 @@ public class LootDropsController : MonoBehaviour
                 {
                     GameObject spawnedItem = Instantiate(lootDrop.drop, transform.position, Quaternion.identity);
                     // temp remove
-                    spawnedItem.GetComponent<BaseItem>().TemporarilyDisableCollision(0.25f);
+                    spawnedItem.GetComponent<BaseItem>().TemporarilyDisableCollision(0.15f);
                     AddForceToItem(spawnedItem);
                     _numberOfDrops += 1;
                     break;

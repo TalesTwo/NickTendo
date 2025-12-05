@@ -303,6 +303,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         _allowedToInteract = true;
         if (_currentlyInOverlap)
         {
+            Debug.Log("DoorTriggerInteraction: Persona UI closed while overlapping door, rechecking overlap.");
             // recall the overlap function
             OnTriggerEnter2D(Player.GetComponent<Collider2D>());
         }
