@@ -22,9 +22,9 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     public override void Interact()
     {
-        
+        Debug.Log("XXX");
         base.Interact();
-        
+        Debug.Log("YYY");
         // Ask the player if they can interact
         if (!_playerController.CanInteract())
         {
@@ -38,6 +38,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // log the current door state 
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
+            AudioManager.Instance.PlayLockedDoorSound();
             return;
         }
         // if we successfuly interacted with a door, and its closed, we can open it
