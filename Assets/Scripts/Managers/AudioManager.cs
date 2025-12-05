@@ -81,6 +81,8 @@ namespace Managers
         public AudioClip personaMenuClose;
         public AudioClip shopMenu;
         public AudioClip uiInvalidClick;
+        public AudioClip DeleteApp;
+        public AudioClip Notification;
 
         [Header("Soundtracks")]
         public AudioClip Overworld;
@@ -499,6 +501,14 @@ namespace Managers
         public void PlayUIInvalidClick(float volume = 1, float deviation = 0)
         {
             PlaySFX(uiInvalidClick, volume, deviation);
+        }
+        public void PlayDeleteAppSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(DeleteApp, volume, deviation);
+        }        
+        public void PlayNotificationSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Notification, volume, deviation);
         }
 
         //Soundtrack Functions

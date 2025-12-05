@@ -83,6 +83,7 @@ MonoBehaviour:
   BUDDEEDamaged: {fileID: 8300000, guid: 28c47947f82139246a82962183a6587e, type: 3}
   SpawningEnemies: {fileID: 8300000, guid: 30c1df636c9f0fd46bf675c47684b728, type: 3}
   Nope: {fileID: 8300000, guid: c70c0a917f11fcd49a7f448501e6d6ce, type: 3}
+  SmugAssRobot: {fileID: 8300000, guid: 98a96a6f74665cb418794c6d782db44c, type: 3}
   enemyDamaged: {fileID: 8300000, guid: 4920954a0cb441845b606962eec27ecb, type: 3}
   enemyDeath: {fileID: 8300000, guid: c2a72844c1a4c1a4296d7e424d342147, type: 3}
   shooterMovement: {fileID: 8300000, guid: 22e03fc8260cacf43b6de319d2269c59, type: 3}
@@ -113,6 +114,8 @@ MonoBehaviour:
   personaMenuClose: {fileID: 8300000, guid: 8aa9c6ad661d26a45925224909de558c, type: 3}
   shopMenu: {fileID: 8300000, guid: b0daff1a024023048a5ba2a7f2c67487, type: 3}
   uiInvalidClick: {fileID: 0}
+  DeleteApp: {fileID: 0}
+  Notification: {fileID: 8300000, guid: b33d36592f044c646a2c4d1176b64424, type: 3}
   Overworld: {fileID: 8300000, guid: d42fef7fff9afdb4399b630ddbf71682, type: 3}
   Boss: {fileID: 8300000, guid: b18b613831cf7f94f9b7c5713dc1f325, type: 3}
   Shop: {fileID: 8300000, guid: 6c9b310d50779174c896ac67ff650a39, type: 3}
