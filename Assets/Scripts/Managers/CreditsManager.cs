@@ -38,7 +38,7 @@ public class CreditsManager : Singleton<CreditsManager>
         // Disable player actions
         PlayerManager.Instance.DeactivatePlayer();
         // restart the game after a delay
-        StartCoroutine(RestartGameAfterDelay(55f));
+        StartCoroutine(RestartGameAfterDelay(70f));
     }
 
     private IEnumerator RestartGameAfterDelay(float delay)
