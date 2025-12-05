@@ -354,6 +354,7 @@ public class BossController : Singleton<BossController>
         
         rightArmController.BossIsDeadArms();
         leftArmController.BossIsDeadArms();
+        Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
 
         yield return new WaitForSeconds(waitTimeAfterDeath);
         EventBroadcaster.Broadcast_EndBossFight();

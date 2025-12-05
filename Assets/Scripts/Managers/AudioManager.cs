@@ -44,6 +44,7 @@ namespace Managers
         public AudioClip BUDDEEDamaged;
         public AudioClip SpawningEnemies;
         public AudioClip Nope;
+        public AudioClip SmugAssRobot;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
@@ -68,6 +69,7 @@ namespace Managers
         public AudioClip Heal;
         public AudioClip Pitfall;
         public AudioClip WallSlam;
+        public AudioClip LockedDoor;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -128,15 +130,30 @@ namespace Managers
 
         private void Start()
         {
+            EventBroadcaster.EndBossFight += BossIsDead;
+            EventBroadcaster.PlayerDeath += PlayerHasDied;
+            EventBroadcaster.StartBossFight += BossFightStarted;
             EventBroadcaster.PlayerEnteredBossRoom += OnPlayerEnteredBossRoom;
             EventBroadcaster.PlayerEnteredShopRoom += OnPlayerEnteredShopRoom;
             sfxValue = 1;
             musicValue = 1;
         }
+        private void BossIsDead()
+        {
+            PlayOverworldTrack();
+        }
+        private void PlayerHasDied()
+        {
+            StopTrack();
+        }
 
+        private void BossFightStarted()
+        {
+            PlayBossTrack();
+        }
         private void OnPlayerEnteredBossRoom(bool bIsInRoom)
         {
-            if (bIsInRoom) PlayBossTrack();
+            if (bIsInRoom) StopTrack();
             if (!bIsInRoom) PlayOverworldTrack();
 
         }
@@ -346,6 +363,10 @@ namespace Managers
             PlaySFX(Nope, volume, deviation);
 
         }
+        public void PlayBUDDEELaughSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(SmugAssRobot, volume, deviation);
+        }
 
 
         //General Sounds
@@ -401,6 +422,11 @@ namespace Managers
         {
             PlaySFX(WallSlam, volume, deviation);
         }
+        public void PlayLockedDoorSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(LockedDoor, volume, deviation);
+        }
+
 
         //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
