@@ -277,7 +277,7 @@ public class BossController : Singleton<BossController>
         }
 
         if (_rightArmTimer >= _rightArmRandomTimer && battle == BattleState.Idle && _rightArmAttached && 
-            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase && health != HealthState.Dead)
         {
             // launching the right arm only
             _rightArmTimer = 0f;
@@ -292,7 +292,7 @@ public class BossController : Singleton<BossController>
         }
 
         if (_leftArmTimer >= _leftArmRandomTimer && battle == BattleState.Idle && _leftArmAttached && 
-            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase && health != HealthState.Dead)
         {
             // launching the left arm only
             _leftArmTimer = 0f;
