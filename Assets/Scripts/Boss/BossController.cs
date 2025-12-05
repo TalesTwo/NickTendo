@@ -307,6 +307,7 @@ public class BossController : Singleton<BossController>
         }
     }
 
+    private int explosioncounter = 0;
     private IEnumerator Explode()
     {
         EventBroadcaster.Broadcast_StartBossFightDeathSequence();
@@ -323,6 +324,13 @@ public class BossController : Singleton<BossController>
             Vector3 pos = new Vector3(transform.position.x + explosionX, transform.position.y + explosionY,
                 transform.position.z);
             Instantiate(smallExplosionParticles, pos, Quaternion.identity);
+            ++explosioncounter;
+            if(explosioncounter == 2)
+            {
+                Managers.AudioManager.Instance.PlayEnemyDeathSound(1, 0);
+                explosioncounter = 0;
+            }
+            
 
             if (waitTime <= minTimeBetweenExplosions)
             {
@@ -351,6 +359,7 @@ public class BossController : Singleton<BossController>
         
         rightArmController.BossIsDeadArms();
         leftArmController.BossIsDeadArms();
+        Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
 
         yield return new WaitForSeconds(waitTimeAfterDeath);
         EventBroadcaster.Broadcast_EndBossFight();
