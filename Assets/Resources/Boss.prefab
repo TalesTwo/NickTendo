@@ -1520,10 +1520,13 @@ MonoBehaviour:
   forearm: {fileID: 1994174248312641029}
   hand: {fileID: 4500754400095974572}
   particles: {fileID: 3922804175903391981}
+  boss: {fileID: 860249048055277067}
   side: 0
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
+  cameraShakeTime: 0.5
+  cameraShakeMagnitude: 0.1
   angleDampTime: 0.15
   returnAngleDampTime: 0.4
   targetArmAngle: 0
@@ -1536,6 +1539,10 @@ MonoBehaviour:
   startXCoordinateLeft: -30
   startYCoordinateBottom: -30
   startYCoordinateTop: 15
+  maxXCoordinateFromPlayer: 1.5
+  minXCoordinateFromPlayer: -1.5
+  maxYCoordinateFromPlayer: 1.5
+  minYCoordinateFromPlayer: -1.5
 --- !u!1 &3897931632771371189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,10 +2498,13 @@ MonoBehaviour:
   forearm: {fileID: 6606136446495967308}
   hand: {fileID: 3265533470236457020}
   particles: {fileID: 121540048619030673}
+  boss: {fileID: 860249048055277067}
   side: 1
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
+  cameraShakeTime: 0.5
+  cameraShakeMagnitude: 0.1
   angleDampTime: 0.15
   returnAngleDampTime: 0.4
   targetArmAngle: 0
@@ -2507,6 +2517,10 @@ MonoBehaviour:
   startXCoordinateLeft: -30
   startYCoordinateBottom: -30
   startYCoordinateTop: 15
+  maxXCoordinateFromPlayer: 1.5
+  minXCoordinateFromPlayer: -1.5
+  maxYCoordinateFromPlayer: 1.5
+  minYCoordinateFromPlayer: -1.5
 --- !u!1 &6606136446495967308
 GameObject:
   m_ObjectHideFlags: 0
