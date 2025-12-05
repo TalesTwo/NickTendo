@@ -34,6 +34,7 @@ public class BossArmController : MonoBehaviour
     private BossColliderController _hand;
     private Rigidbody2D _rb;
     private GameObject _player;
+    private CameraShake _cameraShake;
     public GameObject boss;
     
     public enum Direction
@@ -59,6 +60,8 @@ public class BossArmController : MonoBehaviour
     public float smoothDampTime = 0.2f;
     private Vector2 _offScreenPos;
     private Vector2 _startPos;
+    public float cameraShakeTime = 0.5f;
+    public float cameraShakeMagnitude = 0.4f;
 
     [Header("Exhausted Phase")] 
     public float angleDampTime = 0.2f;
@@ -103,6 +106,7 @@ public class BossArmController : MonoBehaviour
         _forearm = forearm.GetComponent<BossColliderController>();
         _hand = hand.GetComponent<BossColliderController>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
     }
 
     public void BecomeTired()
@@ -201,6 +205,8 @@ public class BossArmController : MonoBehaviour
         
         while (time < smoothDampTime)
         {
+            _cameraShake.ShakeOnce(cameraShakeTime, cameraShakeMagnitude);
+            
             float t = time / smoothDampTime;
             
             t = Mathf.SmoothStep(0f, 1f, t);
@@ -343,6 +349,8 @@ public class BossArmController : MonoBehaviour
             // Step 4: fly across the screen until max coordinate is reached
             while (time < rocketAttackTime)
             {
+                _cameraShake.ShakeOnce(cameraShakeTime, cameraShakeMagnitude);
+                
                 float t = time / rocketAttackTime;
                 
                 t = Mathf.SmoothStep(0f, 1f, t);

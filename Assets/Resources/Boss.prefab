@@ -1525,6 +1525,8 @@ MonoBehaviour:
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
+  cameraShakeTime: 0.5
+  cameraShakeMagnitude: 0.1
   angleDampTime: 0.15
   returnAngleDampTime: 0.4
   targetArmAngle: 0
@@ -1537,6 +1539,10 @@ MonoBehaviour:
   startXCoordinateLeft: -30
   startYCoordinateBottom: -30
   startYCoordinateTop: 15
+  maxXCoordinateFromPlayer: 1.5
+  minXCoordinateFromPlayer: -1.5
+  maxYCoordinateFromPlayer: 1.5
+  minYCoordinateFromPlayer: -1.5
 --- !u!1 &3897931632771371189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,6 +2503,8 @@ MonoBehaviour:
   DirectionModifier: 0
   offScreenXCoordinate: 30
   smoothDampTime: 1
+  cameraShakeTime: 0.5
+  cameraShakeMagnitude: 0.1
   angleDampTime: 0.15
   returnAngleDampTime: 0.4
   targetArmAngle: 0
@@ -2509,6 +2517,10 @@ MonoBehaviour:
   startXCoordinateLeft: -30
   startYCoordinateBottom: -30
   startYCoordinateTop: 15
+  maxXCoordinateFromPlayer: 1.5
+  minXCoordinateFromPlayer: -1.5
+  maxYCoordinateFromPlayer: 1.5
+  minYCoordinateFromPlayer: -1.5
 --- !u!1 &6606136446495967308
 GameObject:
   m_ObjectHideFlags: 0
