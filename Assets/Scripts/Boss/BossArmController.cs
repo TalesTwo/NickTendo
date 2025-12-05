@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using Random = System.Random;
 
@@ -32,6 +33,9 @@ public class BossArmController : MonoBehaviour
     private BossColliderController _forearm;
     private BossColliderController _hand;
     private Rigidbody2D _rb;
+    private GameObject _player;
+    private CameraShake _cameraShake;
+    public GameObject boss;
     
     public enum Direction
     {
@@ -56,6 +60,8 @@ public class BossArmController : MonoBehaviour
     public float smoothDampTime = 0.2f;
     private Vector2 _offScreenPos;
     private Vector2 _startPos;
+    public float cameraShakeTime = 0.5f;
+    public float cameraShakeMagnitude = 0.4f;
 
     [Header("Exhausted Phase")] 
     public float angleDampTime = 0.2f;
@@ -75,6 +81,11 @@ public class BossArmController : MonoBehaviour
     public float startXCoordinateLeft = -30f;
     public float startYCoordinateBottom = -30f;
     public float startYCoordinateTop = 15f;
+    [Header("Bounds from Player")] 
+    public float maxXCoordinateFromPlayer = 1.5f;
+    public float minXCoordinateFromPlayer = -1.5f;
+    public float maxYCoordinateFromPlayer = 1.5f;
+    public float minYCoordinateFromPlayer = -1.5f;
 
     private int rocketcount = 0;
 
@@ -94,6 +105,8 @@ public class BossArmController : MonoBehaviour
         _elbow = elbow.GetComponent<BossColliderController>();
         _forearm = forearm.GetComponent<BossColliderController>();
         _hand = hand.GetComponent<BossColliderController>();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
     }
 
     public void BecomeTired()
@@ -174,7 +187,7 @@ public class BossArmController : MonoBehaviour
     
     public void LaunchAttack(int numberOfRockets, float rocketAttackTime)
     {
-        Vector2 destination = new Vector2(offScreenXCoordinate * DirectionModifier, transform.position.y);
+        Vector2 destination = new Vector2(transform.position.x + (offScreenXCoordinate * DirectionModifier), transform.position.y);
         _offScreenPos = destination;
         _startPos = transform.position;
         StartCoroutine(MoveArmOffScreen(destination));
@@ -192,6 +205,8 @@ public class BossArmController : MonoBehaviour
         
         while (time < smoothDampTime)
         {
+            _cameraShake.ShakeOnce(cameraShakeTime, cameraShakeMagnitude);
+            
             float t = time / smoothDampTime;
             
             t = Mathf.SmoothStep(0f, 1f, t);
@@ -206,10 +221,32 @@ public class BossArmController : MonoBehaviour
         BossController.Instance.BackToIdleState();
     }
 
+    private float GetPlayerEdit(bool _isVertical)
+    {
+        if (_isVertical)
+        {
+            return _player.transform.position.x - boss.transform.position.x;
+        }
+        return _player.transform.position.y - boss.transform.position.y;
+    }
+
+    private float CheckForBounds(float x, float max, float min)
+    {
+        if (x > max)
+        {
+            return max;
+        } 
+        if (x < min)
+        {
+            return min;
+        }
+        return x;
+    }
+
     private IEnumerator RocktAttack(int numberOfRockets, float rocketAttackTime)
     {
         Vector2 start = Vector2.zero;
-        
+        Debug.Log(transform.localPosition);
         // Step 1: waiting for arm to get in position
         while (!_rocketReady)
         {
@@ -247,13 +284,17 @@ public class BossArmController : MonoBehaviour
             int randomIndex = random.Next(directions.Length);
             RocketDirection direction = directions[randomIndex];
 
+            // find x or y relation to the player
+            float playerEdit;
             float x;
             float y;
             Vector2 destination = Vector2.zero;
             switch (direction)
             {
                 case RocketDirection.Up:
-                    x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
+                    playerEdit = GetPlayerEdit(true);
+                    x = (float) (minXCoordinateFromPlayer + (random.NextDouble() * (maxXCoordinateFromPlayer - minXCoordinateFromPlayer))) + playerEdit;
+                    x = CheckForBounds(x, maxXCoordinate, minXCoordinate);
                     start = new Vector2(x, startYCoordinateBottom);
                     transform.rotation = Quaternion.Euler(0, 0, 180);
                     Debug.Log("Up");
@@ -262,7 +303,9 @@ public class BossArmController : MonoBehaviour
                     BossController.Instance.ArmProjections(false, x, side);
                     break;
                 case RocketDirection.Down:
-                    x = (float) (minXCoordinate + (random.NextDouble() * (maxXCoordinate - minXCoordinate)));
+                    playerEdit = GetPlayerEdit(true);
+                    x = (float) (minXCoordinateFromPlayer + (random.NextDouble() * (maxXCoordinateFromPlayer - minXCoordinateFromPlayer))) + playerEdit;
+                    x = CheckForBounds(x, maxXCoordinate, minXCoordinate);
                     start = new Vector2(x, startYCoordinateTop);
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     Debug.Log("Down");
@@ -271,7 +314,9 @@ public class BossArmController : MonoBehaviour
                     BossController.Instance.ArmProjections(false, x, side);
                     break;
                 case RocketDirection.Left:
-                    y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
+                    playerEdit = GetPlayerEdit(false);
+                    y = (float) (minYCoordinateFromPlayer + (random.NextDouble() * (maxYCoordinateFromPlayer - minYCoordinateFromPlayer))) + playerEdit;
+                    y = CheckForBounds(y, maxYCoordinate, minYCoordinate);
                     start = new Vector2(startXCoordinateRight, y);
                     transform.rotation = Quaternion.Euler(0, 0, -90);
                     Debug.Log("Left");
@@ -280,7 +325,9 @@ public class BossArmController : MonoBehaviour
                     BossController.Instance.ArmProjections(true, y, side);
                     break;
                 case RocketDirection.Right:
-                    y = (float) (minYCoordinate + (random.NextDouble() * (maxYCoordinate - minYCoordinate)));
+                    playerEdit = GetPlayerEdit(false);
+                    y = (float) (minYCoordinateFromPlayer + (random.NextDouble() * (maxYCoordinateFromPlayer - minYCoordinateFromPlayer))) + playerEdit;
+                    y = CheckForBounds(y, maxYCoordinate, minYCoordinate);
                     start = new Vector2(startXCoordinateLeft, y);
                     transform.rotation = Quaternion.Euler(0, 0, 90);
                     Debug.Log("Right");
@@ -302,6 +349,8 @@ public class BossArmController : MonoBehaviour
             // Step 4: fly across the screen until max coordinate is reached
             while (time < rocketAttackTime)
             {
+                _cameraShake.ShakeOnce(cameraShakeTime, cameraShakeMagnitude);
+                
                 float t = time / rocketAttackTime;
                 
                 t = Mathf.SmoothStep(0f, 1f, t);

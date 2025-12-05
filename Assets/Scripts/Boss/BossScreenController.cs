@@ -11,6 +11,8 @@ public class BossScreenController : Singleton<BossScreenController>
     public float immuneParticleAngleEdit;
     public GameObject damageHitEffect;
     public float damageParticleAngleEdit;
+    
+    public AnimatedBossFace animatedBossFace;
 
     public float stunTimer = 0.1f;
     public float knockBackForce = 500;
@@ -34,6 +36,7 @@ public class BossScreenController : Singleton<BossScreenController>
                 Vector3 position = collision.ClosestPoint(transform.position);
                 Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
                 HitEffect(immuneHitEffect, position, angle);
+                animatedBossFace.SetBlockedAnimation();
             }
             else if (_isExhausted)
             {

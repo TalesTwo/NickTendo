@@ -41,6 +41,18 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
             }
         }
         
+        // refresh the prompt if we are currently in overlap
+        // so that we dont have to leave and re-enter to update
+        if (_currentlyInOverlap && isActive)
+        {
+            CanInteract = true;
+            if (interactPromptInstance != null)
+            {
+                interactPromptInstance.SetActive(true);
+            }
+        }
+        
+        
     }
 
     public virtual void Interact()
@@ -112,7 +124,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
         if (collision.gameObject == Player)
         {
             // we shouldnt be able to see the interact prompt or interact if we arent allowed to
-            if (!_isAllowedToInteract)
+            if (!_isAllowedToInteract) 
             {
                 CanInteract = false;  
                 return;               
