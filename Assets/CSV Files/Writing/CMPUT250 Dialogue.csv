@@ -130,7 +130,7 @@ Introyell,,BUDDEE,basic3,My name's <color=#005773>BUDDEE</color>! I'll be your d
 Introyell,,BUDDEE,basic1,Why don't you <color=purple>[WASD]</color> on over here to get started pal?
 ,,,,
 TutorialIntro,first dialogue after yell,BUDDEE,basic1,Welcome to <color=#646AAD><b>Friend Finders: Online</b></color>! The perfect MMO for building new friendships!
-TutorialIntro,,BUDDEE,bothered,"""Or well, that's the idea anyways.."""
+TutorialIntro,,BUDDEE,bothered,"""Or well, that's the idea anyways. ."""
 TutorialIntro,,BUDDEE,sheepish,"""Let's be honest, you probably noticed that the servers are mostly empty."""
 TutorialIntro,,BUDDEE,sniffle,Our security went on the fritz a while ago and since then most people left.
 TutorialIntro,,BUDDEE,worried,Now we have bots infesting the dungeons and our last player is trapped! But..
@@ -140,7 +140,7 @@ TutorialIntro,,BUDDEE,gremlin,Come through this door to the <b>east</b> and I'll
 ,,,,
 Tutorial1,first tutorial room,BUDDEE,basic1,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
 Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, pots and chests! Try these ones I set up for practice!"""
-Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to <b>defeat all the bots</b> before leaving a room.
+Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to <b>defeat all the bots</b> before you can progress.
 Tutorial1,,BUDDEE,smug,"""And don't worry about getting attacked, I've modified these ones so they can't hurt you!"""
 ,,,,
 Tutorial2,second tutorial room,BUDDEE,basic1,With <color=purple>[Right Click]</color> you can dash through the air damaging anything in your path!
