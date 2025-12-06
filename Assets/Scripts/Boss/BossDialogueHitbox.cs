@@ -21,6 +21,7 @@ public class BossDialogueHitbox : MonoBehaviour
     public GameObject boss;
     public GameObject buddee;
 
+    private bool _isWaitingForDialogueEnd = false;
     
     public void Start()
     {
@@ -30,6 +31,7 @@ public class BossDialogueHitbox : MonoBehaviour
     
     private void OnDialogueEnd()
     {
+        if (!_isWaitingForDialogueEnd) { return;}
         if (shouldFreezeWorld)
         {
             EventBroadcaster.Broadcast_SetWorldFrozen(false);
@@ -39,7 +41,7 @@ public class BossDialogueHitbox : MonoBehaviour
         
         
         EventBroadcaster.Broadcast_StartBossFight();
-        
+        _isWaitingForDialogueEnd = false;
         Destroy(this.gameObject);
     }
     
@@ -58,6 +60,7 @@ public class BossDialogueHitbox : MonoBehaviour
         if (onlyTriggerOnce && _hasTriggered) { return; }
         if (root.CompareTag("Player"))
         {
+            _isWaitingForDialogueEnd = true;
             // Store the previous dialogue state
             _previousDialogueState = GameStateManager.Instance.GetBuddeeDialogState();
             // Set the dialogue state to the new state
