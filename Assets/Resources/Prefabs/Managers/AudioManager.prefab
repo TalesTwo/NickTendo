@@ -52,12 +52,12 @@ MonoBehaviour:
   walkingSound: {fileID: 8300000, guid: ed46d945428c3ea4fb37b24d843975c1, type: 3}
   dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
   playerTalkingTones:
-  - {fileID: 8300000, guid: ce5c5cae05d5f994f87b53ef9ac418d6, type: 3}
-  - {fileID: 8300000, guid: e209121515be805469fc7a532da6a1a8, type: 3}
-  - {fileID: 8300000, guid: 863d09d0a12b2b54d829573a87b16f8a, type: 3}
-  - {fileID: 8300000, guid: de99ab94ae2bd374d9d2d8b3e0a20232, type: 3}
-  - {fileID: 8300000, guid: 5feb3f0faa8cd0c4180cf83f135a57f6, type: 3}
-  - {fileID: 8300000, guid: 70f5cea0d639505499eaa1b3826513df, type: 3}
+  - {fileID: 8300000, guid: 5457befe6f9d39644b3a241024ae7c67, type: 3}
+  - {fileID: 8300000, guid: 16287e66781e21b439dce955d3e64301, type: 3}
+  - {fileID: 8300000, guid: aef1fb542d18efc4da3dea3a27b44734, type: 3}
+  - {fileID: 8300000, guid: 0c11fed78881cfa46b4d080330fe0a4b, type: 3}
+  - {fileID: 8300000, guid: d173ffc21e3a23e47b840056a286ee3e, type: 3}
+  - {fileID: 8300000, guid: dfc43e7bd3b49a544b31e7a4ef0b941a, type: 3}
   amtOfTones: 6
   playerTalkingTypes:
   - {fileID: 8300000, guid: 03b01d04b55518449bf471c736f55269, type: 3}
