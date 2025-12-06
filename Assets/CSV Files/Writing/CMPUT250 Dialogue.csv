@@ -208,8 +208,8 @@ Shop3,,BUDDEE,gremlin,Sound like a deal?
 Run2,Afer first death,BUDDEE,Crestfallen,Oh no! It looks like your character's data has been compromised!
 Run2,,BUDDEE,worried,Without the devs there's nothing we can do..
 Run2,,BUDDEE,basic2,Luckily those former players left plenty of characters behind so we're fine!
-Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> or try to leave and you can select another accont!
-Run2,,BUDDEE,basic2,"""Oh and in case you're having touble finding your way, you can press <color=purple>[M]</color> to open your map!"""
+Run2,,BUDDEE,basic1,Just press <color=purple>[P]</color> or try to leave and you can select another account!
+Run2,,BUDDEE,basic2,"""Oh and in case you're having trouble finding your way, you can press <color=purple>[M]</color> to open your map!"""
 ,,,,
 Run3,,BUDDEE,worried,Do you think this is my fault?
 Run3,,BUDDEE,crestfallen,"""I mean, me being added was supposed to be the big update that brought in new players!"""
