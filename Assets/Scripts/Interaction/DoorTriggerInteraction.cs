@@ -22,15 +22,16 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     public override void Interact()
     {
-        Debug.Log("XXX");
         base.Interact();
-        Debug.Log("YYY");
         // Ask the player if they can interact
         if (!_playerController.CanInteract())
         {
             DebugUtils.Log("Player cannot interact right now, still on cooldown.");
             return;
         }
+        
+        // debug print if dialogue is active
+        DebugUtils.LogWarning("Dialogue Active: " + DialogueManager.Instance.GetIsDialogueActive);
 
         // Start the player's cooldown timer
         _playerController.StartCooldown();
@@ -38,7 +39,13 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // log the current door state 
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
-            AudioManager.Instance.PlayLockedDoorSound();
+            // Edge case!
+            // if we are actively in dialogue, we should not be able to interact with anything else
+            if (!DialogueManager.Instance.GetIsDialogueActive)
+            {
+                AudioManager.Instance.PlayLockedDoorSound();
+            }
+            
             return;
         }
         // if we successfuly interacted with a door, and its closed, we can open it

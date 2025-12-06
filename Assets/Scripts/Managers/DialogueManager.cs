@@ -87,6 +87,8 @@ namespace Managers
 
         private int _visibleChar = 0;
 
+        private bool _isDialogueActive = false; public bool GetIsDialogueActive => _isReading;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -216,6 +218,7 @@ namespace Managers
 
         private void ActivateDialogue(string npcName)
         {
+            _isDialogueActive = true;
             EventBroadcaster.Broadcast_StartStopAction(); // stop player inputs
             
             ZeroText();
@@ -394,6 +397,7 @@ namespace Managers
                 EventBroadcaster.Broadcast_StartStopAction(); // start player inputs
                 GameStateManager.Instance.Dialogue("BUDDEE");
                 EventBroadcaster.Broadcast_StopDialogue();
+                _isDialogueActive = false;
                 ZeroText();
             }
         }
