@@ -48,8 +48,8 @@ MonoBehaviour:
   musicvolumeslider: 1
   muteSFX: 0
   muteMusic: 0
-  swordSwing: {fileID: 8300000, guid: 8b2b912aaa0616547b217fa65a52da72, type: 3}
-  walkingSound: {fileID: 8300000, guid: ed46d945428c3ea4fb37b24d843975c1, type: 3}
+  swordSwing: {fileID: 8300000, guid: 488bcfb51e075af4b9433cb975db1056, type: 3}
+  walkingSound: {fileID: 8300000, guid: ee0d6df8f3f3ae14992323d039129da8, type: 3}
   dashSound: {fileID: 8300000, guid: d70c4718654c34c4f92d339b5322f507, type: 3}
   playerTalkingTones:
   - {fileID: 8300000, guid: 5457befe6f9d39644b3a241024ae7c67, type: 3}
@@ -60,12 +60,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dfc43e7bd3b49a544b31e7a4ef0b941a, type: 3}
   amtOfTones: 6
   playerTalkingTypes:
-  - {fileID: 8300000, guid: 03b01d04b55518449bf471c736f55269, type: 3}
-  - {fileID: 8300000, guid: dfeb6e6fa26a6fd4fb9e670c17276670, type: 3}
-  - {fileID: 8300000, guid: afe1f6380dd0c3c46b1d6a15aabaaf4a, type: 3}
-  - {fileID: 8300000, guid: 5237630d35b818e40aa4534fde750e9a, type: 3}
-  - {fileID: 8300000, guid: 77194674c97865b43b06c7b684c8d6d9, type: 3}
-  - {fileID: 8300000, guid: 90c9bc253af96f142a34421cd68e2eb7, type: 3}
+  - {fileID: 8300000, guid: 5fd32dde3e3f6734c9727c634480a06b, type: 3}
+  - {fileID: 8300000, guid: 1e6346bb846f9ad46824a24ee6478b8e, type: 3}
+  - {fileID: 8300000, guid: 95b025f7ff3eb3248915ceeb80476ebf, type: 3}
+  - {fileID: 8300000, guid: ea29923f9675db344855aa8912a7d637, type: 3}
+  - {fileID: 8300000, guid: 48c5bff95a22fc04d84ec7299937f76e, type: 3}
+  - {fileID: 8300000, guid: 4f40cf062422f8c46adcfa158e8af0d0, type: 3}
   amtOfTypes: 6
   playerDamaged: {fileID: 8300000, guid: 93dd91870457bbc42a55c9cce928986f, type: 3}
   swordHitEffect: {fileID: 8300000, guid: dfeb1241d8bfda14ab469ac4dd51be42, type: 3}
@@ -105,7 +105,7 @@ MonoBehaviour:
   Pitfall: {fileID: 8300000, guid: ac8f7da83233b954dab8c810b6e4cb30, type: 3}
   WallSlam: {fileID: 0}
   LockedDoor: {fileID: 8300000, guid: 4053ddcc0b086c245973972450897d65, type: 3}
-  cursorHover: {fileID: 8300000, guid: 6ce34b95ccbeab2458402d10c386c458, type: 3}
+  cursorHover: {fileID: 8300000, guid: fb3271ee753ccf34a9cccf4000e47e92, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
   dialogueClick: {fileID: 8300000, guid: 82cbc1e55d7712340b3e97d92bd2e2d6, type: 3}
@@ -116,7 +116,7 @@ MonoBehaviour:
   uiInvalidClick: {fileID: 0}
   DeleteApp: {fileID: 0}
   Notification: {fileID: 8300000, guid: b33d36592f044c646a2c4d1176b64424, type: 3}
-  Overworld: {fileID: 8300000, guid: d42fef7fff9afdb4399b630ddbf71682, type: 3}
+  Overworld: {fileID: 8300000, guid: bfc895e069202004796dc4b2a9455228, type: 3}
   Boss: {fileID: 8300000, guid: b18b613831cf7f94f9b7c5713dc1f325, type: 3}
   Shop: {fileID: 8300000, guid: 6c9b310d50779174c896ac67ff650a39, type: 3}
   Credits: {fileID: 8300000, guid: e72cb71ce28e4a84887bb95e96a328a0, type: 3}
