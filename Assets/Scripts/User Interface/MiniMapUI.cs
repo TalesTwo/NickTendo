@@ -158,8 +158,12 @@ public class MiniMapUI : MonoBehaviour
                 if (room == null)
                 {
                     img.color = Color.black; // empty room
+                    // set the imagine to be disabled
+                    // disable all doors
+                    cell.SetActive(false);
                     continue;
                 }
+                
                 
                 
                 Types.RoomClassification rc = room.GetRoomClassification();

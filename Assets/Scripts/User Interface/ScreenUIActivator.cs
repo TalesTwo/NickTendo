@@ -44,12 +44,16 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
         if (miniMapUI != null)
         {
             miniMapUI.ConnectToBroadcaster();
+            // disable it (might need to add a delay?)
+            MiniMap.SetActive(false);
         }
         
         MiniMapUI miniMapUI_Corner = MiniMap_Corner.GetComponent<MiniMapUI>();
         if (miniMapUI_Corner != null)
         {
             miniMapUI_Corner.ConnectToBroadcaster();
+            // enable it
+            MiniMap_Corner.SetActive(true);
         }
         _bHasFlickedMiniMap = false;
     }
