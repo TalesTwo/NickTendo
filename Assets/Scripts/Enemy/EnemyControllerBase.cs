@@ -123,10 +123,15 @@ public class EnemyControllerBase : SpawnableObject
         EventBroadcaster.SetWorldFrozen += OnWorldFrozen;
         EventBroadcaster.EndBossFight += Deactivate;
         EventBroadcaster.StartBossFightDeathSequence += Deactivate;
+        EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
         
         baseSpeed = speed;
     }
     
+    private void OnReturnToMainMenu()
+    {
+        Deactivate();
+    }
     
     private void OnWorldFrozen(bool isFrozen)
     {
@@ -165,6 +170,7 @@ public class EnemyControllerBase : SpawnableObject
         EventBroadcaster.SetWorldFrozen -= OnWorldFrozen;
         EventBroadcaster.EndBossFight -= Deactivate;
         EventBroadcaster.StartBossFightDeathSequence -= Deactivate;
+        EventBroadcaster.ReturnToMainMenu -= OnReturnToMainMenu;
     }
     
     public void Initialize(int roomDifficulty)

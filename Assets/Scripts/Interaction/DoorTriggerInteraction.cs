@@ -31,7 +31,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
         }
         
         // debug print if dialogue is active
-        DebugUtils.LogWarning("Dialogue Active: " + DialogueManager.Instance.GetIsDialogueActive);
 
         // Start the player's cooldown timer
         _playerController.StartCooldown();
@@ -54,14 +53,12 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
             if (_isSpawnDoor && _readyToOpenMenu)
             {
-                Debug.Log("Opening Persona Menu from Spawn Room Logic");
 
                 // find the PersonaSelectorInteraction in the scene
                 // find all of the persona selector interactions in the scene
                 var personaSelectors = FindObjectsOfType<PersonaTriggerInteraction>();
                 PersonaTriggerInteraction personaSelector = personaSelectors.FirstOrDefault();
                 // debug print the number of persona selectors found
-                Debug.Log("Found " + personaSelectors.Length + " PersonaSelectorInteractions in the scene.");
                 
                 if (personaSelector == null){ return; }
 
@@ -73,7 +70,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 }
                 _waitingForPersonaChange = true;
                 // open the persona menu
-                Debug.Log("Opening the UI");
                 personaSelector.HandlePersonaUI();
                 return;
             }

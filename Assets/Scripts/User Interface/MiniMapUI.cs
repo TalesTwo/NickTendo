@@ -23,12 +23,18 @@ public class MiniMapUI : MonoBehaviour
         EventBroadcaster.GameRestart += GameStartedHandler;
         EventBroadcaster.PlayerDeath += OnPlayerDeath;
         EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
+        EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
         //DebugUtils.LogSuccess("MiniMapUI connection complete");
         Invoke(nameof(ForceInitialize), 0.25f);
         _connectedToBroadcaster = true;
         Invoke(nameof(InitializeSpawnRoomInMap), 0.5f);
     }
 
+    private void OnReturnToMainMenu()
+    {
+        // when we return to main menu, we want to reset our minimap
+        _isInitialized = false;
+    }
     private void InitializeSpawnRoomInMap()
     {
         bool _isCurrentlyEnabled = this.gameObject.activeSelf;
