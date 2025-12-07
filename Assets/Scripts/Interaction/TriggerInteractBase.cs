@@ -27,6 +27,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     protected PlayerController _playerController;
 
     private bool _isGamePaused = false;
+    private bool _globalIsInInteractionBox = false;
 
 
     public void SetInteractAllowedToInteract(bool isActive)
@@ -52,9 +53,9 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
             }
         }
         
-        
     }
 
+    
     public virtual void Interact()
     {
         // we are attempting to interact, the players interaction is on cooldown?
@@ -108,7 +109,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if (!CanInteract) { return; }
+        if (!CanInteract && !_globalIsInInteractionBox) { return; }
         if (_isGamePaused) { return; }
         // if we press our Interact key, we will interact with the object
         if (Input.GetKeyDown(KeyCode.E))
@@ -123,6 +124,8 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
+            _globalIsInInteractionBox = true;
+            _currentlyInOverlap = true;
             // we shouldnt be able to see the interact prompt or interact if we arent allowed to
             if (!_isAllowedToInteract) 
             {
@@ -130,7 +133,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
                 return;               
             }
             
-            _currentlyInOverlap = true;
+            //_currentlyInOverlap = true;
             //DebugUtils.Log("Player in range to interact with " + gameObject.name);
             CanInteract = true;
             // enable the interact prompt if we have one
@@ -145,6 +148,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     {
         if (collision.gameObject == Player)
         {
+            _globalIsInInteractionBox = false;
             _currentlyInOverlap = false;
             //DebugUtils.Log("Player out of range to interact with " + gameObject.name);
             CanInteract = false;

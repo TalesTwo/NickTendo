@@ -23,6 +23,13 @@ public class PlayerStats : Singleton<PlayerStats>
 
     private PlayerController _player;
     
+    private float _StoredDashCooldown = -1f;
+    
+    
+    
+    
+    
+    
     /*
      * Carry over stats (these are permanent upgrades that persist between runs)
      */
@@ -63,6 +70,70 @@ public class PlayerStats : Singleton<PlayerStats>
         _player = PlayerManager.Instance.GetPlayer().GetComponent<PlayerController>();
         // bind the the main menu delegate
         EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
+        EventBroadcaster.EnemyDeath += OnEnemyDeath;
+        EventBroadcaster.PlayerDeath += OnPlayerDeath;
+        EventBroadcaster.PlayerChangedRoom += OnPlayerChangedRoom;
+    }
+    
+    private void OnEnemyDeath(EnemyControllerBase enemy, Room room = null)
+    {
+        ForceRefreshDash();
+        // call CheckFastDash to see if we need to update the dash cooldown
+        //we need to delay this slightly to ensure the enemy count is updated
+        Invoke(nameof(CheckFastDash), 0.5f);
+        
+    }
+    private void OnPlayerDeath()
+    {
+        // placeholder for any future functionality we want to add on player death
+        if(!Mathf.Approximately(_StoredDashCooldown, -1f))
+        {
+            SetDashCooldown(_StoredDashCooldown);
+            _StoredDashCooldown = -1f;
+        }
+    }
+    private void OnPlayerChangedRoom((int row, int col) targetRoomCoords)
+    {
+        ForceRefreshDash();
+        Invoke(nameof(CheckFastDash), 0.5f);
+    }
+
+    private void ForceRefreshDash()
+    {
+        // idk how to make this work lol
+    }
+    
+    private void CheckFastDash()
+    {
+        Room currentRoom = DungeonController.Instance.GetCurrentRoom();
+        if (currentRoom == null) return;
+
+        int enemyCount = DungeonController.Instance.GetNumberOfEnemiesInRoom(currentRoom);
+
+        bool isSpecialRoom =
+            currentRoom.GetRoomClassification() == Types.RoomClassification.Spawn ||
+            currentRoom.GetRoomClassification() == Types.RoomClassification.Boss ||
+            currentRoom.GetRoomClassification() == Types.RoomClassification.Tutorial;
+
+        // Room is cleared & is not a special room 
+        if (enemyCount == 0 && !isSpecialRoom)
+        {
+            // store ONCE
+            if (Mathf.Approximately(_StoredDashCooldown, -1f))
+            {
+                _StoredDashCooldown = _dashCooldown;
+                SetDashCooldown(1f);
+            }
+
+            return;
+        }
+
+        // Room is NOT cleared OR is  ---
+        if (!Mathf.Approximately(_StoredDashCooldown, -1f))
+        {
+            SetDashCooldown(_StoredDashCooldown);
+            _StoredDashCooldown = -1f; // reset
+        }
     }
 
     private void OnReturnToMainMenu()

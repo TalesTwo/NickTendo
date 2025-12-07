@@ -16,6 +16,7 @@ namespace Managers
         [SerializeField] private float fadeDuration = 0.15f;
         [SerializeField] private float fadeDelay = 0.15f;
 
+        private bool _bIsTeleporting = false; public bool IsTeleporting() { return _bIsTeleporting; }
         void Start()
         {
             // Get reference to the player
@@ -181,7 +182,6 @@ namespace Managers
         }
         public void PlayerDeath()
         {
-            Debug.Log("Player Death");
             playerController.SetIsDead();
             GameStateManager.Instance.PlayerDeath();
             ScreenUIActivator.Instance.SetDeathScreen();
@@ -233,6 +233,7 @@ namespace Managers
 
             if (bShouldUseScreenFade)
             {
+                _bIsTeleporting = true;
                 StartCoroutine(FadeTeleportRoutine(newPosition, fadeDuration, fadeDelay));
             }
             else
@@ -240,6 +241,8 @@ namespace Managers
                 //ResetCamera();
                 player.transform.position = newPosition;
             }
+            
+            
         }
 
 
@@ -269,6 +272,7 @@ namespace Managers
             
             
             yield return fadeManager.FadeIn(fadeDuration);
+            _bIsTeleporting = false;
         }
     }
 }

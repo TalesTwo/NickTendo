@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1535.2568}
-  m_SizeDelta: {x: 1820, y: 1242.5137}
+  m_AnchoredPosition: {x: 0, y: -3588.0186}
+  m_SizeDelta: {x: 1820, y: 5348.038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2693252707879791565
 CanvasRenderer:
@@ -67,30 +67,112 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 102
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 7
     m_MaxSize: 209
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You made a friend...
-
-    I imagine a future where the credits will be
-    placed here, and they will be soooo good and soooo real, and people will say.
-    Wow, Friend Finder had some SLAY credits. but alas, at this point we dont really
-    have credits, so i guess no one really worked on our game... oh well, one day
-    we will know who made this game!
-
-    UNtill then
-
-
-    Thanks for playing, and
-    we hope you enjoyed'
+  m_Text: "-----------------------------------\nMeet the Nicktendo team!!\n-----------------------------------\n\nExecutive
+    Producer: Selena Chainani\n\nLead Designer: Cohen Calvert\n\nProducer: Noah Vincent\n\nLead
+    Writer: Blythe Morris\n\nVisual Lead: Cole Rocer Isaias\n\nAudio Lead: Peter
+    Van Bussel\n\nProgrammers: Cohen Calvert, Harman Phull, Noah Vincent\n\n---------------------\nSpecial
+    thanks:\n---------------------\n\nDr. Matthew Guzdial \n\nTic-Tac Mcmuffin morris\n\nAll
+    of our wonderful beta testers\n\n------------------\nAttributions:\n------------------\n\nPixel
+    Art App Icons \nby ReffPixels\n\nController & keyboard & mouse prompts \nby MitziTheDev\n\nUser
+    Interface Essential \nby Crusenho, CC 4.0\nhttps://creativecommons.org/licenses/by/4.0/\n\nnature
+    landscapes free pixel art\nby Craftpix.net\n\nFree CC0 Top Down Tileset Template
+    Pixel Art\nby: RGS_Dev CC 0\n\nGum bot sprites\nby:GrafxKid CC 0\n\nRetro, Coin
+    02.wav \nby LilMati CC 0\n\nKeyboard Clicking (Typing) \nby Spencer_Eisenhauer
+    CC 0\n\nbreaking_glass_mirror_Oktava_MK-012.wav \nby gladkiy CC 0\n\nBreaking
+    a door or Cardboard boxes breaking \nby exorsten CC 0\n\nCartoon Fall \nby plasterbrain
+    CC 0\n\nHattab_margaux_20172018 airplane propeller.wav \nby iut_Paris8 CC 0\n\ndesk
+    bell center.mp3 \nby tonmayster CC 0\n\nAlarm 2_1 \nby Joao_Janz CC 0\n\nThaleah
+    Fat\nby Rick Hoppmann\n"
+--- !u!1 &299317528370540959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3011408262583020250}
+  - component: {fileID: 3128331793131508683}
+  - component: {fileID: 667327663346569265}
+  m_Layer: 0
+  m_Name: Thank you
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3011408262583020250
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299317528370540959}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5767697050202106812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035156, y: -6864}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3128331793131508683
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299317528370540959}
+  m_CullTransparentMesh: 1
+--- !u!114 &667327663346569265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299317528370540959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 206
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 209
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Thank you for playing!
 --- !u!1 &1405789040198265357
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1064}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 0, y: -933.057}
+  m_SizeDelta: {x: 1920, y: 868.436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7419992558436197115
 CanvasRenderer:
@@ -158,7 +240,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 206
+    m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -169,7 +251,82 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Friend Finder
+  m_Text: 'Friend Finders: Online'
+--- !u!1 &3303075653941807121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 917696407035181628}
+  - component: {fileID: 4195586272066617834}
+  - component: {fileID: 6150512974551201915}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &917696407035181628
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303075653941807121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5767697050202106812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -7100}
+  m_SizeDelta: {x: 1500, y: 600}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4195586272066617834
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303075653941807121}
+  m_CullTransparentMesh: 1
+--- !u!114 &6150512974551201915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303075653941807121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5835003043182342894, guid: ba12fb825a3ec574dadd440de10d66c5, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3735507502862190979
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +357,8 @@ RectTransform:
   m_Children:
   - {fileID: 1577900445745503635}
   - {fileID: 5226169771225848147}
+  - {fileID: 917696407035181628}
+  - {fileID: 3011408262583020250}
   m_Father: {fileID: 489831830508292737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -253,7 +412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsPanel: {fileID: 3735507502862190979}
-  scrollSpeed: 50
+  canvas: {fileID: 0}
+  scrollSpeed: 100
 --- !u!1 &6773684012926258972
 GameObject:
   m_ObjectHideFlags: 0

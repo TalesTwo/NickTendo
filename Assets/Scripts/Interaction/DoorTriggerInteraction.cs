@@ -22,15 +22,15 @@ public class DoorTriggerInteraction : TriggerInteractBase
     
     public override void Interact()
     {
-        
         base.Interact();
-        
         // Ask the player if they can interact
         if (!_playerController.CanInteract())
         {
             DebugUtils.Log("Player cannot interact right now, still on cooldown.");
             return;
         }
+        
+        // debug print if dialogue is active
 
         // Start the player's cooldown timer
         _playerController.StartCooldown();
@@ -38,6 +38,13 @@ public class DoorTriggerInteraction : TriggerInteractBase
         // log the current door state 
         if (_doorScript != null && _doorScript.GetCurrentState() == Door.DoorState.Locked)
         {
+            // Edge case!
+            // if we are actively in dialogue, we should not be able to interact with anything else
+            if (!DialogueManager.Instance.GetIsDialogueActive)
+            {
+                AudioManager.Instance.PlayLockedDoorSound();
+            }
+            
             return;
         }
         // if we successfuly interacted with a door, and its closed, we can open it
@@ -46,14 +53,12 @@ public class DoorTriggerInteraction : TriggerInteractBase
 
             if (_isSpawnDoor && _readyToOpenMenu)
             {
-                Debug.Log("Opening Persona Menu from Spawn Room Logic");
 
                 // find the PersonaSelectorInteraction in the scene
                 // find all of the persona selector interactions in the scene
                 var personaSelectors = FindObjectsOfType<PersonaTriggerInteraction>();
                 PersonaTriggerInteraction personaSelector = personaSelectors.FirstOrDefault();
                 // debug print the number of persona selectors found
-                Debug.Log("Found " + personaSelectors.Length + " PersonaSelectorInteractions in the scene.");
                 
                 if (personaSelector == null){ return; }
 
@@ -65,7 +70,6 @@ public class DoorTriggerInteraction : TriggerInteractBase
                 }
                 _waitingForPersonaChange = true;
                 // open the persona menu
-                Debug.Log("Opening the UI");
                 personaSelector.HandlePersonaUI();
                 return;
             }

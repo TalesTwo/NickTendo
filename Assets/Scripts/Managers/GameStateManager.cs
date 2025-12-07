@@ -105,4 +105,13 @@ public class GameStateManager : Singleton<GameStateManager>
         _playerDeathCount = 0;
         EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
     }
+
+    public void Update()
+    {
+        // print the game state when the G key is pressed
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log("Current Game State: " + buddeeDialogState);
+        }
+    }
 }

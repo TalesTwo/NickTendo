@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class PersonaTriggerInteraction : TriggerInteractBase
@@ -9,11 +10,12 @@ public class PersonaTriggerInteraction : TriggerInteractBase
 
     private bool _isPersonaUIOpen = false; public void ClosePersonaUI() { _isPersonaUIOpen = false; }
     
+    private bool _isPlayerAllowedToInteract = true; void SetPlayerAllowedToInteract(bool isAllowed) { _isPlayerAllowedToInteract = isAllowed; } public bool IsPlayerAllowedToInteract() { return _isPlayerAllowedToInteract; }
     public override void Interact()
     {
-        if (personaSelectionUI)
+        if (personaSelectionUI && !PlayerManager.Instance.IsTeleporting() )
         {
-            Debug.Log("UI about to open");
+            // edge case, we wanna make sure the player isn
             personaSelectionUI.GetComponent<PersonaUI>()?.OpenPersonaUI();
         } else {
             Debug.Log("No UI assigned to PersonaTriggerInteraction");
@@ -40,7 +42,6 @@ public class PersonaTriggerInteraction : TriggerInteractBase
 
     public void HandlePersonaUI()
     {
-        Debug.Log($"HandlePersonaUI -> isOpen={_isPersonaUIOpen}");
         
         if (!_isPersonaUIOpen || personaSelectionUI == null)
         {

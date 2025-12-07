@@ -191,6 +191,11 @@ public class BossController : Singleton<BossController>
         SetRandomRocketTimers(true, true);
     }
 
+    void OnDestroy()
+    {
+        EventBroadcaster.PlayerDeath -= Stop;
+    }
+
     private void Stop()
     {
         StopAllCoroutines();
@@ -272,7 +277,7 @@ public class BossController : Singleton<BossController>
         }
 
         if (_rightArmTimer >= _rightArmRandomTimer && battle == BattleState.Idle && _rightArmAttached && 
-            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+            _rightArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase && health != HealthState.Dead)
         {
             // launching the right arm only
             _rightArmTimer = 0f;
@@ -287,7 +292,7 @@ public class BossController : Singleton<BossController>
         }
 
         if (_leftArmTimer >= _leftArmRandomTimer && battle == BattleState.Idle && _leftArmAttached && 
-            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase)
+            _leftArmsLaunchedThisPhase < _currentStats.maxRocketLaunchesPerPhase && health != HealthState.Dead)
         {
             // launching the left arm only
             _leftArmTimer = 0f;
@@ -302,6 +307,7 @@ public class BossController : Singleton<BossController>
         }
     }
 
+    private int explosioncounter = 0;
     private IEnumerator Explode()
     {
         EventBroadcaster.Broadcast_StartBossFightDeathSequence();
@@ -318,6 +324,13 @@ public class BossController : Singleton<BossController>
             Vector3 pos = new Vector3(transform.position.x + explosionX, transform.position.y + explosionY,
                 transform.position.z);
             Instantiate(smallExplosionParticles, pos, Quaternion.identity);
+            ++explosioncounter;
+            if(explosioncounter == 5)
+            {
+                Managers.AudioManager.Instance.PlayEnemyDeathSound(1, 0);
+                explosioncounter = 0;
+            }
+            
 
             if (waitTime <= minTimeBetweenExplosions)
             {
@@ -346,6 +359,7 @@ public class BossController : Singleton<BossController>
         
         rightArmController.BossIsDeadArms();
         leftArmController.BossIsDeadArms();
+        Managers.AudioManager.Instance.PlayBUDDEEDyingSound(1, 0);
 
         yield return new WaitForSeconds(waitTimeAfterDeath);
         EventBroadcaster.Broadcast_EndBossFight();

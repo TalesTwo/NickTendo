@@ -10,6 +10,10 @@ namespace Managers
         [SerializeField] private int _poolSize = 10;
         private List<AudioSource> _sources;
 
+        //public float sfxvolumeslider = 1;
+
+        public float musicvolumeslider = 1;
+
         [Header("Mutes")]
         public bool muteSFX = false;
         public bool muteMusic = false;
@@ -39,6 +43,8 @@ namespace Managers
         public AudioClip BUDDEEShoot;
         public AudioClip BUDDEEDamaged;
         public AudioClip SpawningEnemies;
+        public AudioClip Nope;
+        public AudioClip SmugAssRobot;
 
         [Header("Enemy Effects")]
         public AudioClip enemyDamaged;
@@ -63,6 +69,7 @@ namespace Managers
         public AudioClip Heal;
         public AudioClip Pitfall;
         public AudioClip WallSlam;
+        public AudioClip LockedDoor;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -74,6 +81,8 @@ namespace Managers
         public AudioClip personaMenuClose;
         public AudioClip shopMenu;
         public AudioClip uiInvalidClick;
+        public AudioClip DeleteApp;
+        public AudioClip Notification;
 
         [Header("Soundtracks")]
         public AudioClip Overworld;
@@ -123,15 +132,30 @@ namespace Managers
 
         private void Start()
         {
+            EventBroadcaster.EndBossFight += BossIsDead;
+            EventBroadcaster.PlayerDeath += PlayerHasDied;
+            EventBroadcaster.StartBossFight += BossFightStarted;
             EventBroadcaster.PlayerEnteredBossRoom += OnPlayerEnteredBossRoom;
             EventBroadcaster.PlayerEnteredShopRoom += OnPlayerEnteredShopRoom;
             sfxValue = 1;
             musicValue = 1;
         }
+        private void BossIsDead()
+        {
+            PlayOverworldTrack();
+        }
+        private void PlayerHasDied()
+        {
+            StopTrack();
+        }
 
+        private void BossFightStarted()
+        {
+            PlayBossTrack();
+        }
         private void OnPlayerEnteredBossRoom(bool bIsInRoom)
         {
-            if (bIsInRoom) PlayBossTrack();
+            if (bIsInRoom) StopTrack();
             if (!bIsInRoom) PlayOverworldTrack();
 
         }
@@ -144,6 +168,9 @@ namespace Managers
 
         private void Update()
         {
+
+            if(Musicsource.volume != musicvolumeslider)Musicsource.volume = musicvolumeslider;
+
             if (muteMusic && !muted)
             {
                 Musicsource.volume = 0;
@@ -193,19 +220,19 @@ namespace Managers
             StopAllCoroutines();
             if (fadeout && src.isPlaying && !muteMusic)
             {
-                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume));
+                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume*musicvolumeslider));
             }
             else if (fadein && !muteMusic)
             {
                 src.Stop();
                 src.clip = clip;
                 src.volume = 0;
-                StartCoroutine(Fadein(src, fadeinspeed, volume));
+                StartCoroutine(Fadein(src, fadeinspeed, volume*musicvolumeslider));
             }
             else
             {
                 src.clip = clip;
-                if(!muteMusic)src.volume = volume;
+                if(!muteMusic)src.volume = volume*musicvolumeslider;
                 src.Play();
             }
         } 
@@ -333,7 +360,15 @@ namespace Managers
             PlaySFX(Dizzy, volume, deviation);
 
         }
+        public void PlayBUDDEENope(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Nope, volume, deviation);
 
+        }
+        public void PlayBUDDEELaughSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(SmugAssRobot, volume, deviation);
+        }
 
 
         //General Sounds
@@ -389,6 +424,11 @@ namespace Managers
         {
             PlaySFX(WallSlam, volume, deviation);
         }
+        public void PlayLockedDoorSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(LockedDoor, volume, deviation);
+        }
+
 
         //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)
@@ -461,6 +501,14 @@ namespace Managers
         public void PlayUIInvalidClick(float volume = 1, float deviation = 0)
         {
             PlaySFX(uiInvalidClick, volume, deviation);
+        }
+        public void PlayDeleteAppSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(DeleteApp, volume, deviation);
+        }        
+        public void PlayNotificationSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(Notification, volume, deviation);
         }
 
         //Soundtrack Functions
