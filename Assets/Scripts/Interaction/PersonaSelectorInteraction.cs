@@ -15,7 +15,6 @@ public class PersonaTriggerInteraction : TriggerInteractBase
     {
         if (personaSelectionUI && !PlayerManager.Instance.IsTeleporting() )
         {
-            Debug.Log("UI about to open");
             // edge case, we wanna make sure the player isn
             personaSelectionUI.GetComponent<PersonaUI>()?.OpenPersonaUI();
         } else {
@@ -43,7 +42,6 @@ public class PersonaTriggerInteraction : TriggerInteractBase
 
     public void HandlePersonaUI()
     {
-        Debug.Log($"HandlePersonaUI -> isOpen={_isPersonaUIOpen}");
         
         if (!_isPersonaUIOpen || personaSelectionUI == null)
         {

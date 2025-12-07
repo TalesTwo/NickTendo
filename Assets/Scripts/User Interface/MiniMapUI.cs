@@ -23,13 +23,19 @@ public class MiniMapUI : MonoBehaviour
         EventBroadcaster.GameRestart += GameStartedHandler;
         EventBroadcaster.PlayerDeath += OnPlayerDeath;
         EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
+        EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
         //DebugUtils.LogSuccess("MiniMapUI connection complete");
         Invoke(nameof(ForceInitialize), 0.25f);
         _connectedToBroadcaster = true;
         Invoke(nameof(InitializeSpawnRoomInMap), 0.5f);
     }
 
-    private void InitializeSpawnRoomInMap()
+    private void OnReturnToMainMenu()
+    {
+        // when we return to main menu, we want to reset our minimap
+        _isInitialized = false;
+    }
+    public void InitializeSpawnRoomInMap()
     {
         bool _isCurrentlyEnabled = this.gameObject.activeSelf;
         this.gameObject.SetActive(true);
@@ -60,6 +66,12 @@ public class MiniMapUI : MonoBehaviour
             discovered = new bool[rows, cols];
             InitializeMiniMap(rows, cols);
         }
+        else
+        {
+            // check if the current room is a spawn room, if so, mark it as discovered
+            InitializeSpawnRoomInMap();
+        }
+
     }
     public void OnDungeonGenerationComplete()
     {
@@ -133,7 +145,27 @@ public class MiniMapUI : MonoBehaviour
                     continue;
 
                 Image img = cell.GetComponent<Image>();
-                Room room = dungeon[r][c];
+                Room room = null;
+                try
+                {
+                    room = dungeon[r][c];
+                } catch (IndexOutOfRangeException e)
+                {
+                    Debug.LogError($"MiniMapUI: RefreshMiniMap - Index out of range for row {r}, col {c}. Exception: {e}. Map isnt initialized");
+                    return;
+                }
+                
+                if (room == null)
+                {
+                    img.color = Color.black; // empty room
+                    // set the imagine to be disabled
+                    // disable all doors
+                    cell.SetActive(false);
+                    continue;
+                }
+                
+                
+                
                 Types.RoomClassification rc = room.GetRoomClassification();
                 // Get the Active doors for the room
                 room.GetRoomClassification();

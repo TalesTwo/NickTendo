@@ -182,7 +182,6 @@ namespace Managers
         }
         public void PlayerDeath()
         {
-            Debug.Log("Player Death");
             playerController.SetIsDead();
             GameStateManager.Instance.PlayerDeath();
             ScreenUIActivator.Instance.SetDeathScreen();

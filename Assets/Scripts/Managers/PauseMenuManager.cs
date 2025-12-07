@@ -80,7 +80,7 @@ public class PauseMenuManager : MonoBehaviour
 
         _sfxSlider.value = AudioManager.Instance.sfxValue;
         _musicSlider.value = AudioManager.Instance.musicValue;
-        DebugUtils.Log($"SFX State: {AudioManager.Instance.muteSFX}, Music State: {AudioManager.Instance.muteMusic}");
+        //DebugUtils.Log($"SFX State: {AudioManager.Instance.muteSFX}, Music State: {AudioManager.Instance.muteMusic}");
         if (_isPauseMenu)
         {
             EventBroadcaster.Broadcast_StartStopAction();

@@ -52,7 +52,6 @@ public class BaseItem : SpawnableObject
         Destroy(gameObject);
         if (hasFallenInPit)
             return;
-        Debug.Log("Item " + Name + " has fallen in pit.");
         hasFallenInPit = true;
         isShrinking = true;
         shrinkTimer = 0f;
