@@ -325,7 +325,7 @@ public class BossController : Singleton<BossController>
                 transform.position.z);
             Instantiate(smallExplosionParticles, pos, Quaternion.identity);
             ++explosioncounter;
-            if(explosioncounter == 2)
+            if(explosioncounter == 5)
             {
                 Managers.AudioManager.Instance.PlayEnemyDeathSound(1, 0);
                 explosioncounter = 0;
