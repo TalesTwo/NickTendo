@@ -11,6 +11,7 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     [SerializeField] private GameObject MiniMap;
     [SerializeField] private GameObject MiniMap_Corner;
     
+    private bool _bHasFlickedMiniMap = false;
     
     public void Start()
     {
@@ -35,6 +36,7 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
         // put back to default state
         MiniMap.SetActive(false);
         MiniMap_Corner.SetActive(true);
+        _bHasFlickedMiniMap = false;
     }
     private void OnDungeonGenerationComplete()
     {
@@ -49,12 +51,30 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
         {
             miniMapUI_Corner.ConnectToBroadcaster();
         }
+        _bHasFlickedMiniMap = false;
     }
     
     public void ToggleMiniMap()
     {
-        MiniMap.SetActive(!MiniMap.activeSelf);
-        MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
+        //We will check to see if we have flicked yet
+        
+        // lol flicker fix
+        if (!_bHasFlickedMiniMap)
+        {
+            MiniMap.SetActive(!MiniMap.activeSelf);
+            MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
+            MiniMap.SetActive(!MiniMap.activeSelf);
+            MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
+            MiniMap.SetActive(!MiniMap.activeSelf);
+            MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
+            _bHasFlickedMiniMap = true;
+        }
+        else
+        {
+            MiniMap.SetActive(!MiniMap.activeSelf);
+            MiniMap_Corner.SetActive(!MiniMap_Corner.activeSelf);
+        }
+
     }
 
 }

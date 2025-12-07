@@ -35,7 +35,7 @@ public class MiniMapUI : MonoBehaviour
         // when we return to main menu, we want to reset our minimap
         _isInitialized = false;
     }
-    private void InitializeSpawnRoomInMap()
+    public void InitializeSpawnRoomInMap()
     {
         bool _isCurrentlyEnabled = this.gameObject.activeSelf;
         this.gameObject.SetActive(true);
@@ -66,6 +66,12 @@ public class MiniMapUI : MonoBehaviour
             discovered = new bool[rows, cols];
             InitializeMiniMap(rows, cols);
         }
+        else
+        {
+            // check if the current room is a spawn room, if so, mark it as discovered
+            InitializeSpawnRoomInMap();
+        }
+
     }
     public void OnDungeonGenerationComplete()
     {
@@ -139,7 +145,23 @@ public class MiniMapUI : MonoBehaviour
                     continue;
 
                 Image img = cell.GetComponent<Image>();
-                Room room = dungeon[r][c];
+                Room room = null;
+                try
+                {
+                    room = dungeon[r][c];
+                } catch (IndexOutOfRangeException e)
+                {
+                    Debug.LogError($"MiniMapUI: RefreshMiniMap - Index out of range for row {r}, col {c}. Exception: {e}. Map isnt initialized");
+                    return;
+                }
+                
+                if (room == null)
+                {
+                    img.color = Color.black; // empty room
+                    continue;
+                }
+                
+                
                 Types.RoomClassification rc = room.GetRoomClassification();
                 // Get the Active doors for the room
                 room.GetRoomClassification();
