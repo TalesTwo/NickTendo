@@ -42,7 +42,6 @@ public class PersonaTriggerInteraction : TriggerInteractBase
 
     public void HandlePersonaUI()
     {
-        Debug.Log($"HandlePersonaUI -> isOpen={_isPersonaUIOpen}");
         
         if (!_isPersonaUIOpen || personaSelectionUI == null)
         {

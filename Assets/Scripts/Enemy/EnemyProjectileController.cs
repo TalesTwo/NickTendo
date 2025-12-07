@@ -33,6 +33,7 @@ public class EnemyProjectileController : MonoBehaviour
         int projectileLayer = LayerMask.NameToLayer("Projectile");
         int lootLayer = LayerMask.NameToLayer("Loot");
         Physics2D.IgnoreLayerCollision(projectileLayer, lootLayer, true);
+        EventBroadcaster.ReturnToMainMenu += DestroySelf;
     }
     
     // on collision, destroy
@@ -84,6 +85,7 @@ public class EnemyProjectileController : MonoBehaviour
     {
         EventBroadcaster.PlayerDeath -= DestroySelf;
         EventBroadcaster.StartBossFightDeathSequence -= DestroySelf;
+        EventBroadcaster.ReturnToMainMenu -= DestroySelf;
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -91,7 +93,6 @@ public class EnemyProjectileController : MonoBehaviour
     // deflect the enemy projectile and turn it into a player attack
     private void Deflect()
     {
-        Debug.Log("Deflecting projectile!");
         // turn into player attack
         gameObject.tag = "PlayerAttack";
         

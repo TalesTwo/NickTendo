@@ -15,6 +15,7 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     public void Start()
     {
         EventBroadcaster.DungeonGenerationComplete += OnDungeonGenerationComplete;
+        EventBroadcaster.ReturnToMainMenu += OnReturnToMainMenu;
     }
     
 
@@ -29,7 +30,12 @@ public class ScreenUIActivator : Singleton<ScreenUIActivator>
     
     
     // MINIMAP FUNCTIONS
-    
+    private void OnReturnToMainMenu()
+    {
+        // put back to default state
+        MiniMap.SetActive(false);
+        MiniMap_Corner.SetActive(true);
+    }
     private void OnDungeonGenerationComplete()
     {
         MiniMapUI miniMapUI = MiniMap.GetComponent<MiniMapUI>();
