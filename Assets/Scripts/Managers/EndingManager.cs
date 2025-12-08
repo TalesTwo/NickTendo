@@ -45,7 +45,7 @@ public class EndingManager : MonoBehaviour
         AudioManager.Instance.PlayCreditsTrack(1f, true, 0.1f, true, 0.1f);
         _fCursorTransform = _fakeCursor.GetComponent<RectTransform>();
         _fCursorTransform.localPosition = Vector2.zero;
-        Invoke(nameof(Step1), 0.25f);
+        Invoke(nameof(Step1), 4f);
     }
 
     private void ClickSound()

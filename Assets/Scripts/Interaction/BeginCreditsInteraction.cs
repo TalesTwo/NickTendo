@@ -1,13 +1,19 @@
+using Managers;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Interaction
 {
     public class BeginCreditsInteraction : TriggerInteractBase
     {
-        
+        [SerializeField]
+        private SceneField _endingScene;
+        [SerializeField]
+        private Transform _cageMainTransform;
         
         private bool _waitingForDialogueToEnd = false;
+        private bool _hasCalledCinematic = false;
 
         protected override void Start()
         {
@@ -21,7 +27,8 @@ namespace Interaction
             if (_waitingForDialogueToEnd)
             {
                 _waitingForDialogueToEnd = false;
-                CreditsManager.Instance.BeginCredits();
+                //CreditsManager.Instance.BeginCredits();
+                StartCageLift();
             }
             
         }
@@ -32,6 +39,66 @@ namespace Interaction
             GameStateManager.Instance.SetBuddeeDialogState("Final");
             EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
             
+        }
+
+
+        private void StartCageLift()
+        {
+            StartCoroutine(SlowStart());
+        }
+
+        IEnumerator SlowStart()
+        {
+            float moveTime = 0;
+            float startX = _cageMainTransform.localPosition.x;
+            float startY = _cageMainTransform.localPosition.y;
+            float currentY = startY;
+            while (moveTime < 0.35f)
+            {
+                moveTime += Time.deltaTime;
+                _cageMainTransform.localPosition = new Vector2(startX, currentY);
+                float lerpValue = moveTime / 0.35f;
+                currentY = Mathf.Lerp(startY, 6f, lerpValue);
+
+                yield return null;
+            }
+            Invoke(nameof(ContinueCageLift), 1f);
+        }
+
+        private void ContinueCageLift()
+        {
+            StartCoroutine(Continue());
+        }
+
+        IEnumerator Continue()
+        {
+            float moveTime = 0;
+            float startX = _cageMainTransform.localPosition.x;
+            float startY = _cageMainTransform.localPosition.y;
+            float currentY = startY;
+            while (moveTime < 10)
+            {
+                moveTime += Time.deltaTime;
+                _cageMainTransform.localPosition = new Vector2(startX, currentY);
+                float lerpValue = moveTime / 10f;
+                currentY = Mathf.Lerp(startY, 50f, lerpValue);
+
+                if (currentY >= 10)
+                {
+                    StartEndCinematic();
+                    _hasCalledCinematic = true;
+                }
+
+                yield return null;
+            }
+        }
+
+        private void StartEndCinematic()
+        {
+            if (!_hasCalledCinematic)
+            {
+                SceneSwapManager.Instance.SwapScene(_endingScene, 1f, 3f);
+            }
         }
     }
 }

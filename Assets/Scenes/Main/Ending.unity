@@ -786,6 +786,26 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1808166633804607587, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: closed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808166633804607587, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808166633804607587, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808166633804607587, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808166633804607587, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281545711
+      objectReference: {fileID: 0}
     - target: {fileID: 3369862297659264321, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -870,6 +890,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3750957968819580349, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Color.a
+      value: 0.49019608
+      objectReference: {fileID: 0}
     - target: {fileID: 4340133982468481518, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -898,9 +922,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6861172766382502482, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861172766382502482, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861172766382502482, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9372549
+      objectReference: {fileID: 0}
     - target: {fileID: 7219185593161030145, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_Name
-      value: Main Menu
+      value: Desktop
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613958172624435139, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
+      propertyPath: m_text
+      value: 0/1000
       objectReference: {fileID: 0}
     - target: {fileID: 8425523772198274737, guid: d61e112b9b6017b4aa6f764b0e633f02, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

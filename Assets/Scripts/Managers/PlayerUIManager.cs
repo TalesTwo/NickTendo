@@ -154,8 +154,8 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             textmesh.color = _newColor;
             yield return null;
         }
-        _newColor.a = 0;
-            textmesh.color = _newColor;
+
+        Destroy(transform.gameObject);
     }
 
     private void Update()
