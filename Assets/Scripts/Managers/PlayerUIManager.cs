@@ -143,17 +143,19 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _effectTime += Time.deltaTime;
             transform.localPosition = new Vector2 (_xPos, _newYPos);
             _newYPos += 0.25f;
-            if (_newColor.a - 0.01f < 0)
+            if (_newColor.a - 0.005f < 0)
             {
                 _newColor.a = 0;
             }
             else
             {
-                _newColor.a -= 0.01f;
+                _newColor.a -= 0.005f;
             }
             textmesh.color = _newColor;
             yield return null;
         }
+        _newColor.a = 0;
+        textmesh.color = _newColor;
     }
 
     private void Update()
