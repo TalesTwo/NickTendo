@@ -19,6 +19,8 @@ namespace Interaction
         {
             base.Start();
             EventBroadcaster.StopDialogue += OnDialogueEnd;
+
+            interactPrompt.GetComponent<Transform>().localScale = new Vector2(4, 4);
         }
 
         public void OnDialogueEnd()
