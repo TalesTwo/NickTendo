@@ -139,7 +139,7 @@ TutorialIntro,,BUDDEE,basic1,If you can <b>find the last player</b> then we coul
 TutorialIntro,,BUDDEE,gremlin,Come through this door to the <b>east</b> and I'll teach you to be a bot destroying machine!
 ,,,,
 Tutorial1,first tutorial room,BUDDEE,basic1,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
-Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, pots and chests! Try these ones I set up for practice!"""
+Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, debris and chests! Try these ones I set up for practice!"""
 Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to <b>defeat all the bots</b> before you can progress.
 Tutorial1,,BUDDEE,smug,"""And don't worry about getting attacked, I've modified these ones so they can't hurt you!"""
 ,,,,
