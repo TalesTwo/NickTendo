@@ -41,10 +41,13 @@ public class BossScreenController : Singleton<BossScreenController>
         {
             if (!_isExhausted)
             {
-                PushPlayer();
-                Vector3 position = collision.ClosestPoint(transform.position);
-                Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
-                HitEffect(immuneHitEffect, position, angle);
+                if (!collision.gameObject.name.Contains("BossProjectile"))
+                {
+                    PushPlayer();
+                    Vector3 position = collision.ClosestPoint(transform.position);
+                    Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
+                    HitEffect(immuneHitEffect, position, angle);                    
+                }
                 animatedBossFace.SetBlockedAnimation();
                 Managers.AudioManager.Instance.PlayBUDDEENope();
                 Managers.AudioManager.Instance.PlayBUDDEELaughSound();
