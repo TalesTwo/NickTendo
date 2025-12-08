@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 1095038227
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 394579644708852519, guid: bd71093ae0eeb30469723f804ba693de, type: 3}
+  m_Sprite: {fileID: -2733145212746752487, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,6 +110,8 @@ MonoBehaviour:
   hitEffectDistance: 0
   hitFlashDuration: 0.1
   enemyType: 3
+  maxDistance: 16
+  minDistance: 4
   _displayHealthBar: 1
   _healthSlider: {fileID: 0}
   Override_health: -1
@@ -184,7 +186,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0062894, y: 1.0062894}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
