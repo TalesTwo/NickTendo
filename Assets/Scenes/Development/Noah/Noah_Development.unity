@@ -191,38 +191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chips
       objectReference: {fileID: 0}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[0]'
-      value: 
-      objectReference: {fileID: 5266946968690725555, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[1]'
-      value: 
-      objectReference: {fileID: 3183272220265753932, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[2]'
-      value: 
-      objectReference: {fileID: -4896736124197694659, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[3]'
-      value: 
-      objectReference: {fileID: -2696683000322144627, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[4]'
-      value: 
-      objectReference: {fileID: 5481485450385618893, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[5]'
-      value: 
-      objectReference: {fileID: 1260749724303097052, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[6]'
-      value: 
-      objectReference: {fileID: 1019590503170119996, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
-      propertyPath: 'Animation.Array.data[7]'
-      value: 
-      objectReference: {fileID: -4144475438091062499, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
     - target: {fileID: 7432729923615335950, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7
@@ -263,8 +231,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6235741247390893771, guid: 564bfef8b87602e41b1ce9055e1f7fe0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -640,38 +607,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Current Health Item
       objectReference: {fileID: 0}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: Animation.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[0]'
-      value: 
-      objectReference: {fileID: -5298385880390930679, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2819065346648428432, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[2]'
-      value: 
-      objectReference: {fileID: -6592056965953450677, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[3]'
-      value: 
-      objectReference: {fileID: -8322933972218664910, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[4]'
-      value: 
-      objectReference: {fileID: -840397021239254059, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: 'Animation.Array.data[5]'
-      value: 
-      objectReference: {fileID: 9104973767604504628, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 5061567238082683430, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -5298385880390930679, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
     - target: {fileID: 7432729923615335950, guid: 2fe2cdfa8ae5254419e964c2df189627, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.75
@@ -1589,30 +1524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coins
       objectReference: {fileID: 0}
-    - target: {fileID: 4091901693953286788, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: Animation.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4091901693953286788, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: 'Animation.Array.data[0]'
-      value: 
-      objectReference: {fileID: 6586339487621305386, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: 'Animation.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1628840663364402201, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: 'Animation.Array.data[2]'
-      value: 
-      objectReference: {fileID: -6494563699311545943, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 4091901693953286788, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: 'Animation.Array.data[3]'
-      value: 
-      objectReference: {fileID: 6203939002015312657, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
-    - target: {fileID: 5061567238082683430, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6586339487621305386, guid: 9d601cc4abf914c47b5f5d43dd750008, type: 3}
     - target: {fileID: 7432729923615335950, guid: f932e9b96aafe304f80d003cf53057cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.75
