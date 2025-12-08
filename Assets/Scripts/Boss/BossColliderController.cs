@@ -29,7 +29,19 @@ public class BossColliderController : MonoBehaviour
             DoDamage();
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("BossProjectile"))
+        {
+            EnemyProjectileController projectile = collision.GetComponent<EnemyProjectileController>();
+            if (projectile.GetIsPlayerAttack())
+            {
+                projectile.DestroySelf();
+            }
+        }
+    }
+
     private void DoDamage()
     {
         Vector2 direction = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;

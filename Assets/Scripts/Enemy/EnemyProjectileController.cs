@@ -65,6 +65,11 @@ public class EnemyProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Boss") && _isPlayerAttack)
+        {
+            DestroySelf();
+        }
+        
         // make sure that what we hit is a player attack, and that we are NOT a player attack
         if (other.gameObject.CompareTag("PlayerAttack") && !gameObject.CompareTag("PlayerAttack"))
         {
@@ -80,8 +85,13 @@ public class EnemyProjectileController : MonoBehaviour
         }
     }
 
+    public bool GetIsPlayerAttack()
+    {
+        return _isPlayerAttack;
+    }
+
     // destroy with a particle effect
-    private void DestroySelf()
+    public void DestroySelf()
     {
         EventBroadcaster.PlayerDeath -= DestroySelf;
         EventBroadcaster.StartBossFightDeathSequence -= DestroySelf;
