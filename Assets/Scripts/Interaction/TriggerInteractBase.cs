@@ -10,7 +10,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     public bool CanInteract { get; set; }
 
     // optional variable for an interact button prompt
-    private GameObject interactPrompt;
+    public GameObject interactPrompt;
     // bool to handle if we have an interact prompt or not
     [Header("Interact Prompt Settings")]
     [SerializeField] private bool hasInteractPrompt = true;
