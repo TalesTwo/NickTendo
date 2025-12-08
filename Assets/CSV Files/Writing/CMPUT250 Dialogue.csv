@@ -234,7 +234,9 @@ Run5,,BUDDEE,bothered,Hopefully.
 Run6,,BUDDEE ,basic1,"""I know those bots are tough, but it'll be worth it!"""
 Run6,,BUDDEE ,basic2,"""Once the servers are fixed, <color=#646AAD><b>Friend Finders: Online</b></color> will go back to being a massive community!"""
 ,,,,
-Final,,BUDDEE,basic3,This is Nick. He is the last active player of this game and you're new friend!
+Final,,BUDDEE,Nick,Did you get rid of that crazy bot? 
+Final,,BUDDEE,Nick,You did?!
+Final,,BUDDEE,Nick,Well what are we waiting for? Let's get out of here!!!
 ,,,,
 BossLoss1,what BUDDEE says in hub if player dies to boss,BUDDEE,bothered,Well. . .
 BossLoss1,,BUDDEE,sheepish,This is awkward. . .
