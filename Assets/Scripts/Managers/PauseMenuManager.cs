@@ -67,11 +67,13 @@ public class PauseMenuManager : MonoBehaviour
     public void SfxSlider()
     {
         AudioManager.Instance.sfxValue = _sfxSlider.value;
+        DebugUtils.Log("Current sfx value: " + _sfxSlider.value);
     }
 
     public void MusicSlider()
     {
         AudioManager.Instance.musicValue = _musicSlider.value;
+        DebugUtils.Log("Current music value: " + _musicSlider.value);
     }
 
     public void OpenPauseMenu()
@@ -80,7 +82,9 @@ public class PauseMenuManager : MonoBehaviour
 
         _sfxSlider.value = AudioManager.Instance.sfxValue;
         _musicSlider.value = AudioManager.Instance.musicValue;
-        //DebugUtils.Log($"SFX State: {AudioManager.Instance.muteSFX}, Music State: {AudioManager.Instance.muteMusic}");
+
+        DebugUtils.Log($"Current sfx: {AudioManager.Instance.sfxValue} and current music: {AudioManager.Instance.musicValue}");
+
         if (_isPauseMenu)
         {
             EventBroadcaster.Broadcast_StartStopAction();

@@ -101,6 +101,14 @@ public class PlayerStats : Singleton<PlayerStats>
     private void ForceRefreshDash()
     {
         // idk how to make this work lol
+        /*if (GetDashCooldown() == 1)
+        {
+            PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            pc.ResetDash();
+            PlayerUIManager.Instance.ForceResetDash();
+        }*/
+
+        // coroutines are stupid ;-; (visual update problems) 
     }
     
     private void CheckFastDash()
@@ -123,6 +131,7 @@ public class PlayerStats : Singleton<PlayerStats>
             {
                 _StoredDashCooldown = _dashCooldown;
                 SetDashCooldown(1f);
+                ForceRefreshDash();
             }
 
             return;
@@ -317,7 +326,7 @@ public class PlayerStats : Singleton<PlayerStats>
                 SetCurrentHealth(GetMaxHealth());
                 Heal = 0;
             }
-            UpdateCurrentHealth(Heal);
+            UpdateCurrentHealth(Heal, true);
             Managers.AudioManager.Instance.PlayHealSound(1, 0);
         }
         else if (BuffType == PlayerStatsEnum.Chips)

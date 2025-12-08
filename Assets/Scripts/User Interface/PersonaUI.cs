@@ -1,11 +1,12 @@
+using Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Managers;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
+using static BossController;
 
 public class PersonaUI : MonoBehaviour
 {
@@ -13,10 +14,7 @@ public class PersonaUI : MonoBehaviour
     [SerializeField] private GameObject personaTemplate;
     [SerializeField] private Transform contentParent; 
     [SerializeField] private GameObject buddeeUI;
-    [SerializeField] private TextMeshProUGUI permaHealth;
-    [SerializeField] private TextMeshProUGUI permaSpeed;
-    [SerializeField] private TextMeshProUGUI permaAttack;
-    [SerializeField] private TextMeshProUGUI permaDash;
+    [SerializeField] private TextMeshProUGUI permaText;
 
 
     private Dictionary<Types.Persona, Types.PersonaState> _personas;
@@ -29,8 +27,31 @@ public class PersonaUI : MonoBehaviour
         {
             closeButton.onClick.AddListener(ClosePersonaUI);
         }
-        
+
+        EventBroadcaster.PersonaItemStartHover += BuddeePersonaDialogue;
+        EventBroadcaster.PersonaItemEndHover += BuddeeIdleDialogeu;
+
+
         // read the persona states from the PersonaManager
+    }
+
+    public void BuddeePersonaDialogue(string text)
+    {
+        buddeeUI.GetComponent<BUDDEEUI>().StopCR();
+        buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(text);
+    }
+
+    private void BuddeeIdleDialogeu()
+    {
+        buddeeUI.GetComponent<BUDDEEUI>().StopCR();
+        if (PersonaManager.Instance.GetNumberOfAvailablePersonas() == 1)
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like we ran out of all available accounts...");
+        }
+        else
+        {
+            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Hover over the accounts to learn more!\nClose the menu after selecting one!");
+        }
     }
 
     public void OpenPersonaUI()
@@ -38,19 +59,10 @@ public class PersonaUI : MonoBehaviour
         GenerateContent();
         gameObject.SetActive(true);
 
-        permaHealth.text = $"health: {PlayerStats.Instance.GetCarryOverMaxHealth()}";
-        permaSpeed.text = $"speed: {PlayerStats.Instance.GetCarryOverMovementSpeed()}";
-        permaAttack.text = $"attack: {PlayerStats.Instance.GetCarryOverAttackDamage()}";
-        permaDash.text = $"dash: {PlayerStats.Instance.GetCarryOverDashDamage()}";
+        permaText.text = $"health: {PlayerStats.Instance.GetCarryOverMaxHealth()}    speed: {PlayerStats.Instance.GetCarryOverMovementSpeed()}    " +
+            $"attack: {PlayerStats.Instance.GetCarryOverAttackDamage()}    cooldown: {PlayerStats.Instance.GetCarryOverAttackCooldown()}";
 
-        if (PersonaManager.Instance.GetNumberOfAvailablePersonas() == 1)
-        {
-            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Looks like we ran out of all available accounts...");
-        }
-        else
-        {
-            buddeeUI.GetComponent<BUDDEEUI>().SetDialogue("Click on one of the accounts to learn more!\nClose the menu after selecting one!");
-        }
+        BuddeeIdleDialogeu();
 
         // disable player movement
         //TODO: Probably make
@@ -137,14 +149,18 @@ public class PersonaUI : MonoBehaviour
         {
             // round to 2 decimal places
             statsText.text = $"Health: {stats.MaxHealth:F1}  Speed: {stats.MovementSpeed:F1}  " +
-                             $"Attack: {stats.AttackDamage:F1}  DashDamage: {stats.DashDamage:F1}";
+                             $"Attack: {stats.AttackDamage:F1}  Cooldown: {stats.AttackCooldown:F1}";
 
         }
-
+        
         // --- Fill in email ---
         TMP_Text emailText = newPersona.transform.Find("Text_PersonaEmail")?.GetComponent<TMP_Text>();
         if (emailText != null)
             emailText.text = stats.Email;
+
+        TMP_Text descText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
+        if (descText != null) 
+            descText.text = stats.Description;
 
         // --- Set color ---
         PersonaItemUI pItemUI = newPersona.GetComponentInChildren<PersonaItemUI>();
@@ -162,9 +178,9 @@ public class PersonaUI : MonoBehaviour
             button.interactable = false;
             if (pItemUI != null) pItemUI.ShowCheckmark();
 
-            var buddee = buddeeUI.GetComponent<BUDDEEUI>();
+            /*var buddee = buddeeUI.GetComponent<BUDDEEUI>();
             buddee.StopCR();
-            buddee.SetDialogue(stats.Description);
+            buddee.SetDialogue(stats.Description);*/
 
             TMP_Text btnLabel = button.GetComponentInChildren<TMP_Text>();
             if (btnLabel != null)

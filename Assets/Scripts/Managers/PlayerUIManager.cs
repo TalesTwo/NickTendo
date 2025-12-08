@@ -143,17 +143,19 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _effectTime += Time.deltaTime;
             transform.localPosition = new Vector2 (_xPos, _newYPos);
             _newYPos += 0.25f;
-            if (_newColor.a - 0.01f < 0)
+            if (_newColor.a - 0.005f < 0)
             {
                 _newColor.a = 0;
             }
             else
             {
-                _newColor.a -= 0.01f;
+                _newColor.a -= 0.005f;
             }
             textmesh.color = _newColor;
             yield return null;
         }
+
+        Destroy(transform.gameObject);
     }
 
     private void Update()
@@ -254,6 +256,19 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
             yield return null;            
         }
+    }
+
+    public void ForceResetDash()
+    {
+        //StopCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
+        StopAllCoroutines();
+        _dashSlider.value = 1;
+        _hasStartedSlider = false;
+        _dashIcon.color = Color.white;
+        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        AudioManager.Instance.PlayKeyGetSound();
+        _didSkipCR = true;
     }
 
     void ResetSlide()

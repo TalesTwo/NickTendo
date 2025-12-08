@@ -75,7 +75,7 @@ namespace Managers
             {
                 playerController.enabled = true;
             }
-            SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
+            SceneSwapManager.Instance.SwapScene(_initialGameScene, 3f, 3f);
         }
 
         private void OpenLauncher()
