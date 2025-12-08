@@ -28,6 +28,15 @@ public class BossScreenController : Singleton<BossScreenController>
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Contains("BossProjectile"))
+        {
+            EnemyProjectileController projectile = collision.GetComponent<EnemyProjectileController>();
+            if (projectile.GetIsPlayerAttack())
+            {
+                projectile.DestroySelf();
+            }
+        }
+        
         if (collision.gameObject.CompareTag("PlayerAttack") && !_hitParticleCooldown)
         {
             if (!_isExhausted)
