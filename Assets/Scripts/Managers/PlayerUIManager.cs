@@ -155,7 +155,7 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             yield return null;
         }
         _newColor.a = 0;
-        textmesh.color = _newColor;
+            textmesh.color = _newColor;
     }
 
     private void Update()
@@ -256,6 +256,19 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _dashSlider.value = Mathf.Lerp(0, 1, _lerpValue);
             yield return null;            
         }
+    }
+
+    public void ForceResetDash()
+    {
+        //StopCoroutine(FillSlider(PlayerStats.Instance.GetDashCooldown()));
+        StopAllCoroutines();
+        _dashSlider.value = 1;
+        _hasStartedSlider = false;
+        _dashIcon.color = Color.white;
+        _dashIcon.GetComponent<ScaleEffectsUI>().IncreaseSize();
+        _dashIcon.GetComponent<ScaleEffectsUI>().DecreaseSize();
+        AudioManager.Instance.PlayKeyGetSound();
+        _didSkipCR = true;
     }
 
     void ResetSlide()
