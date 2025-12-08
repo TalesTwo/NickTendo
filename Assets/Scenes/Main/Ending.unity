@@ -1178,7 +1178,7 @@ MonoBehaviour:
     TimeToReach: 0.5
   - Name: Discord Notifcation
     Position: {x: -771, y: 472}
-    TimeToReach: 1
+    TimeToReach: 2
   - Name: Accept Request
     Position: {x: -120, y: -170}
     TimeToReach: 1
