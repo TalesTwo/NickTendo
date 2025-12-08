@@ -157,6 +157,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Cage Chain
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 39
+        width: 5
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e39929f014141a4398de73b2163e74f
+      internalID: -1409233328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -169,6 +190,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Cage Base: 1819116676684815114
+      Cage Chain: -1409233328
       Cage Main: -8748604073257499604
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
