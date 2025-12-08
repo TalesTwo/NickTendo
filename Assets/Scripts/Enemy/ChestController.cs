@@ -14,6 +14,21 @@ public class ChestController : EnemyControllerBase
         //knockbackForce = 500f;
         //stunTimer = 0.5f;
     }
+    protected override void CheckWhichDirectionToFace()
+    {
+        // dont flip lol
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        // have a 50% chance to flip the chest sprite for variety
+        if (UnityEngine.Random.value > 0.5f)
+        {
+            GetRenderer().flipX = true;
+        }
+    }
+
     protected override void Deactivate()
     {
         //StartCoroutine(DelayedDestroy());
