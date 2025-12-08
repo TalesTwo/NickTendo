@@ -82,6 +82,7 @@ public class PauseMenuManager : MonoBehaviour
 
         _sfxSlider.value = AudioManager.Instance.sfxValue;
         _musicSlider.value = AudioManager.Instance.musicValue;
+        _hasClickedButton = false;
 
         DebugUtils.Log($"Current sfx: {AudioManager.Instance.sfxValue} and current music: {AudioManager.Instance.musicValue}");
 
@@ -122,7 +123,6 @@ public class PauseMenuManager : MonoBehaviour
             SceneSwapManager.Instance.SwapScene(_mainMenuScene, 1, 3);
             // Handle resetting all stats
             EventBroadcaster.Broadcast_ReturnToMainMenu();
-            Invoke(nameof(ResetBool), 0.99f);
         }
         //Invoke(nameof(UnmuteStuff), 0.99f);
     }
@@ -145,10 +145,5 @@ public class PauseMenuManager : MonoBehaviour
     public void UISelectSound()
     {
         AudioManager.Instance.PlayUISelectSound();
-    }
-
-    private void ResetBool()
-    {
-        _hasClickedButton = false;
     }
 }
