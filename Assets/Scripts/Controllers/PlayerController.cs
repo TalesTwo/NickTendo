@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // reset the dash attack after the cooldown
-    private void ResetDash()
+    public void ResetDash()
     {
         _isDashing = false;
     }

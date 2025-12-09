@@ -27,7 +27,7 @@ public class EnemyControllerBase : SpawnableObject
     private Rigidbody2D _rb;
     protected GameObject _player;
     protected PlayerController _playerController;
-    private SpriteRenderer _renderer;
+    private SpriteRenderer _renderer;  public SpriteRenderer GetRenderer() { return _renderer; }
     private Color _color;
     protected Transform _playerTransform;
     protected Transform _transform;
@@ -223,7 +223,7 @@ public class EnemyControllerBase : SpawnableObject
     }
 
 
-    private void CheckWhichDirectionToFace()
+    protected virtual void CheckWhichDirectionToFace()
     {
         // flip the flip the sprite based on direction
         if (_direction.x < 0)

@@ -28,14 +28,26 @@ public class BossScreenController : Singleton<BossScreenController>
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Contains("BossProjectile"))
+        {
+            EnemyProjectileController projectile = collision.GetComponent<EnemyProjectileController>();
+            if (projectile.GetIsPlayerAttack())
+            {
+                projectile.DestroySelf();
+            }
+        }
+        
         if (collision.gameObject.CompareTag("PlayerAttack") && !_hitParticleCooldown)
         {
             if (!_isExhausted)
             {
-                PushPlayer();
-                Vector3 position = collision.ClosestPoint(transform.position);
-                Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
-                HitEffect(immuneHitEffect, position, angle);
+                if (!collision.gameObject.name.Contains("BossProjectile"))
+                {
+                    PushPlayer();
+                    Vector3 position = collision.ClosestPoint(transform.position);
+                    Quaternion angle = GetAngle(position, immuneParticleAngleEdit);
+                    HitEffect(immuneHitEffect, position, angle);                    
+                }
                 animatedBossFace.SetBlockedAnimation();
                 Managers.AudioManager.Instance.PlayBUDDEENope();
                 Managers.AudioManager.Instance.PlayBUDDEELaughSound();

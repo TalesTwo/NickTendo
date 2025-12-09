@@ -28,7 +28,7 @@ namespace System
     /// </summary>
     public static class EventBroadcaster
     {
-        
+
         /* Template for how to setup a new event
          *
          * public delegate void EventNameHandler(ParameterType parameter);
@@ -44,21 +44,21 @@ namespace System
          * in the class that is going to broadcast the event, do the following:
          * EventBroadcaster.Broadcast_EventName(parameter);
          */
-        
+
         // These are just for show, they will be removed soon
-        
+
         //-------------------------------- Activity Events --------------------------------//
-        
+
         /* Define the delegate for the ActivityStarted event */
         public delegate void PlayerDamagedHandler();
         public static event PlayerDamagedHandler PlayerDamaged;
         public static void Broadcast_PlayerDamaged() { PlayerDamaged?.Invoke(); }
-        
+
         // Start Dialogue Broadcaster
         public delegate void StartDialogueHandler(string name);
         public static event StartDialogueHandler StartDialogue;
         public static void Broadcast_StartDialogue(string name) { StartDialogue?.Invoke(name); }
-        
+
         // end dialogue Broadcaster
         public delegate void StopDialogueHandler();
         public static event StopDialogueHandler StopDialogue;
@@ -68,22 +68,22 @@ namespace System
         public delegate void StartStopActionHandler();
         public static event StartStopActionHandler StartStopAction;
         public static void Broadcast_StartStopAction() { StartStopAction?.Invoke(); }
-        
+
         // Broadcast to set a seed across the game
         public delegate void SetSeedHandler(int seed);
         public static event SetSeedHandler SetSeed;
         public static void Broadcast_SetSeed(int seed) { SetSeed?.Invoke(seed); }
-        
+
         // Broadcast to change the persona of the player
         public delegate void PersonaChangedHandler(Types.Persona newPersona);
         public static event PersonaChangedHandler PersonaChanged;
         public static void Broadcast_PersonaChanged(Types.Persona newPersona) { PersonaChanged?.Invoke(newPersona); }
-        
+
         // Broadcast for when the game is loaded / started
         public delegate void GameStartedHandler();
         public static event GameStartedHandler GameStarted;
         public static void Broadcast_GameStarted() { GameStarted?.Invoke(); }
-        
+
         // Broadcast for when the player dies
         public delegate void PlayerDeathHandler();
         public static event PlayerDeathHandler PlayerDeath;
@@ -98,38 +98,38 @@ namespace System
         public delegate void PlayerStatsChangedHandler(PlayerStatsEnum buffType, float buffValue);
         public static event PlayerStatsChangedHandler PlayerStatsChanged;
         public static void Broadcast_PlayerStatsChanged(PlayerStatsEnum buffType, float buffValue) { PlayerStatsChanged?.Invoke(buffType, buffValue); }
-        
-        
+
+
         // Broadcast for when an enemy dies
         public delegate void EnemyDeathHandler(EnemyControllerBase enemy, Room room = null);
         public static event EnemyDeathHandler EnemyDeath;
         public static void Broadcast_EnemyDeath(EnemyControllerBase enemy, Room room = null) { EnemyDeath?.Invoke(enemy, room); }
-        
+
         // broadcast for closing the persona UI
         public delegate void ClosePersonaUIHandler();
         public static event ClosePersonaUIHandler ClosePersonaUI;
         public static void Broadcast_ClosePersonaUI() { ClosePersonaUI?.Invoke(); }
-        
+
         // boradcast for opening the persona UI
         public delegate void OpenPersonaUIHandler();
         public static event OpenPersonaUIHandler OpenPersonaUI;
         public static void Broadcast_OpenPersonaUI() { OpenPersonaUI?.Invoke(); }
-        
+
         // Broadcast for when the game restarts
         public delegate void GameRestartHandler();
         public static event GameRestartHandler GameRestart;
         public static void Broadcast_GameRestart() { GameRestart?.Invoke(); }
-        
+
 
         // Broadcast when something collides with a Pit
         public delegate void ObjectFellInPitHandler(GameObject obj, Vector3 pitCenter);
         public static event ObjectFellInPitHandler ObjectFellInPit;
         public static void Broadcast_ObjectFellInPit(GameObject obj, Vector3 pitCenter) { ObjectFellInPit?.Invoke(obj, pitCenter); }
-        
+
         // Broadcast for when the player finishes dashing
         public delegate void PlayerFinishedDashingHandler(GameObject obj);
         public static event PlayerFinishedDashingHandler PlayerFinishedDashing;
-       
+
         public static void Broadcast_PlayerFinishedDashing() { PlayerFinishedDashing?.Invoke(GameObject.FindWithTag("Player")); }
 
         public delegate void PlayerOpenMenuHandler();
@@ -147,12 +147,12 @@ namespace System
         public delegate void GameUnpauseHandler();
         public static event GameUnpauseHandler GameUnpause;
         public static void Broadcast_GameUnpause() { GameUnpause?.Invoke(); }
-        
+
         // Delegate to define when the player enters a Shop room (changes in or out of it)
         public delegate void PlayerEnteredShopRoomHandler(bool isInShop);
         public static event PlayerEnteredShopRoomHandler PlayerEnteredShopRoom;
         public static void Broadcast_PlayerEnteredShopRoom(bool isInShop) { PlayerEnteredShopRoom?.Invoke(isInShop); }
-        
+
         // Delegate to define when the player enters the Boss room (changes in or out of it)
         public delegate void PlayerEnteredBossRoomHandler(bool isInBossRoom);
 
@@ -162,37 +162,45 @@ namespace System
         public delegate void EndTutorialHandler();
         public static event EndTutorialHandler EndTutorial;
         public static void Broadcast_EndTutorial() { EndTutorial?.Invoke(); }
-        
+
         // broadcaster for when the boss fight will start
         public delegate void StartBossFightHandler();
         public static event StartBossFightHandler StartBossFight;
         public static void Broadcast_StartBossFight() { StartBossFight?.Invoke(); }
-        
+
         // Broadcaster for when the boss fight ends
         public delegate void EndBossFightHandler();
         public static event EndBossFightHandler EndBossFight;
         public static void Broadcast_EndBossFight() { EndBossFight?.Invoke(); }
-        
+
         // Broadcaster for the start of the boss Death Sequence
         public delegate void StartBossFightDeathSequenceHandler();
         public static event StartBossFightDeathSequenceHandler StartBossFightDeathSequence;
         public static void Broadcast_StartBossFightDeathSequence() { StartBossFightDeathSequence?.Invoke(); }
-        
+
         // Delegate to "freeze" or "unfreeze" the game world (primarily used for enemies to pause movement without setting timescale to 0)
         public delegate void SetWorldFrozenHandler(bool isFrozen);
         public static event SetWorldFrozenHandler SetWorldFrozen;
         public static void Broadcast_SetWorldFrozen(bool isFrozen) { SetWorldFrozen?.Invoke(isFrozen); }
-        
+
         // Delegate for when the dungeon finishes generating
         public delegate void DungeonGenerationCompleteHandler();
         public static event DungeonGenerationCompleteHandler DungeonGenerationComplete;
         public static void Broadcast_DungeonGenerationComplete() { DungeonGenerationComplete?.Invoke(); }
-        
+
         // Broadcast for when we return to main menu
         public delegate void ReturnToMainMenuHandler();
         public static event ReturnToMainMenuHandler ReturnToMainMenu;
         public static void Broadcast_ReturnToMainMenu() { ReturnToMainMenu?.Invoke(); }
-        
+
+        public delegate void PersonaItemHoverStartHandler(string personaDesc);
+        public static event PersonaItemHoverStartHandler PersonaItemStartHover;
+        public static void Broadcast_PersonaItemStartHover(string personaDesc) {PersonaItemStartHover?.Invoke(personaDesc); }
+
+        public delegate void PersonaItemHoverEndHandler();
+        public static event PersonaItemHoverEndHandler PersonaItemEndHover;
+        public static void Broadcast_PersonaItemEndHover() { PersonaItemEndHover?.Invoke(); }
+
 
         //-------------------------------- End Activity Events --------------------------------//
     }

@@ -358,7 +358,7 @@ namespace Managers
                 dialogueText.maxVisibleCharacters++;
                 _visibleChar++;
                 ++talkingtonetimer;
-                if (talkingtonetimer == 10)
+                if (talkingtonetimer == 15)
                 {
                     talkingtonetimer = 0;
                     if (!_skipToEnd)

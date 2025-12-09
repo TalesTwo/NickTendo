@@ -17,6 +17,7 @@ public class EnemyProjectileController : MonoBehaviour
     private GameObject _player;
     private PlayerController _playerController;
     private Rigidbody2D _rb;
+    private CapsuleCollider2D _collider;
 
     private bool _isPlayerAttack = false;
 
@@ -25,6 +26,7 @@ public class EnemyProjectileController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerController = _player.GetComponent<PlayerController>();
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _collider = gameObject.GetComponent<CapsuleCollider2D>();
         EventBroadcaster.PlayerDeath += DestroySelf;
         EventBroadcaster.StartBossFightDeathSequence += DestroySelf;
         Invoke(nameof(DestroySelf), lifeDuration);
@@ -65,6 +67,11 @@ public class EnemyProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Boss") && _isPlayerAttack)
+        {
+            DestroySelf();
+        }
+        
         // make sure that what we hit is a player attack, and that we are NOT a player attack
         if (other.gameObject.CompareTag("PlayerAttack") && !gameObject.CompareTag("PlayerAttack"))
         {
@@ -80,8 +87,13 @@ public class EnemyProjectileController : MonoBehaviour
         }
     }
 
+    public bool GetIsPlayerAttack()
+    {
+        return _isPlayerAttack;
+    }
+
     // destroy with a particle effect
-    private void DestroySelf()
+    public void DestroySelf()
     {
         EventBroadcaster.PlayerDeath -= DestroySelf;
         EventBroadcaster.StartBossFightDeathSequence -= DestroySelf;
@@ -95,6 +107,17 @@ public class EnemyProjectileController : MonoBehaviour
     {
         // turn into player attack
         gameObject.tag = "PlayerAttack";
+        
+        // remove the boss from excluded layers in the rigidbody and colliders
+        int layer = LayerMask.NameToLayer("Boss");
+        if (layer == -1)
+        {
+            Debug.LogError("Layer doesn't exist");
+            return;
+        }
+        int layerBit = 1 << layer;
+        _rb.excludeLayers &= ~layerBit;
+        _collider.excludeLayers &= ~layerBit;
         
         // deflect towards mouse position
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
