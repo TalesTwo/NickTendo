@@ -139,7 +139,7 @@ TutorialIntro,,BUDDEE,basic1,If you can <b>find the last player</b> then we coul
 TutorialIntro,,BUDDEE,gremlin,Come through this door to the <b>east</b> and I'll teach you to be a bot destroying machine!
 ,,,,
 Tutorial1,first tutorial room,BUDDEE,basic1,Use <color=purple>[Left Click]</color> in the direction of enemies or obstacles to attack them!
-Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, pots and chests! Try these ones I set up for practice!"""
+Tutorial1,,BUDDEE,basic3,"""Your cursor can destroy enemies, debris and chests! Try these ones I set up for practice!"""
 Tutorial1,,BUDDEE,basic1,The dungeons are on lockdown so you'll have to <b>defeat all the bots</b> before you can progress.
 Tutorial1,,BUDDEE,smug,"""And don't worry about getting attacked, I've modified these ones so they can't hurt you!"""
 ,,,,
@@ -234,7 +234,9 @@ Run5,,BUDDEE,bothered,Hopefully.
 Run6,,BUDDEE ,basic1,"""I know those bots are tough, but it'll be worth it!"""
 Run6,,BUDDEE ,basic2,"""Once the servers are fixed, <color=#646AAD><b>Friend Finders: Online</b></color> will go back to being a massive community!"""
 ,,,,
-Final,,BUDDEE,basic3,This is Nick. He is the last active player of this game and you're new friend!
+Final,,BUDDEE,Nick,Did you get rid of that crazy bot? 
+Final,,BUDDEE,Nick,You did?!
+Final,,BUDDEE,Nick,Well what are we waiting for? Let's get out of here!!!
 ,,,,
 BossLoss1,what BUDDEE says in hub if player dies to boss,BUDDEE,bothered,Well. . .
 BossLoss1,,BUDDEE,sheepish,This is awkward. . .

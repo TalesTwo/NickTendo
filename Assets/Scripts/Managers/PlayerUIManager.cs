@@ -122,11 +122,11 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
         string _textToSet = "";
         if (stat == PlayerStatsEnum.Current_Health)
         {
-            _textToSet = "Health get!!!";
+            _textToSet = "Health up!!!";
         }
         else if (stat == PlayerStatsEnum.Chips)
         {
-            _textToSet = "Chip get!!!";
+            _textToSet = "+1 chip!!!";
         }
         _arcadeTextMeshPro = _arcadeTextInstance.GetComponent<TextMeshProUGUI>();
         _arcadeTextMeshPro.text = _textToSet;
@@ -143,13 +143,13 @@ public class PlayerUIManager : Singleton<PlayerUIManager>
             _effectTime += Time.deltaTime;
             transform.localPosition = new Vector2 (_xPos, _newYPos);
             _newYPos += 0.25f;
-            if (_newColor.a - 0.005f < 0)
+            if (_newColor.a - 0.01f < 0)
             {
                 _newColor.a = 0;
             }
             else
             {
-                _newColor.a -= 0.005f;
+                _newColor.a -= 0.01f;
             }
             textmesh.color = _newColor;
             yield return null;

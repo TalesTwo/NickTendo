@@ -14,13 +14,14 @@ namespace Interaction
         
         private bool _waitingForDialogueToEnd = false;
         private bool _hasCalledCinematic = false;
+        private bool _hasTalked = false;
 
         protected override void Start()
         {
             base.Start();
             EventBroadcaster.StopDialogue += OnDialogueEnd;
 
-            interactPrompt.GetComponent<Transform>().localScale = new Vector2(4, 4);
+            //interactPrompt.GetComponent<Transform>().localScale = new Vector2(10f, 10);
         }
 
         public void OnDialogueEnd()
@@ -29,18 +30,23 @@ namespace Interaction
             if (_waitingForDialogueToEnd)
             {
                 _waitingForDialogueToEnd = false;
+                SetInteractAllowedToInteract(false);
                 //CreditsManager.Instance.BeginCredits();
+                
                 StartCageLift();
             }
             
         }
         public override void Interact()
         {
-            // Start the dialogue with Nick!
-            _waitingForDialogueToEnd = true;
-            GameStateManager.Instance.SetBuddeeDialogState("Final");
-            EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
-            
+            if(!_hasTalked)
+            {
+                // Start the dialogue with Nick!
+                _waitingForDialogueToEnd = true;
+                GameStateManager.Instance.SetBuddeeDialogState("Final");
+                EventBroadcaster.Broadcast_StartDialogue("BUDDEE");
+                _hasTalked = true;
+            }         
         }
 
 

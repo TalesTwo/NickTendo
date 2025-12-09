@@ -45,8 +45,11 @@ namespace Managers
         [SerializeField] private Sprite buddee_angry;
         [SerializeField] private Sprite buddee_threatening;
         [SerializeField] private Sprite buddee_pissed;
+        [SerializeField] private Sprite nick_dialogue;
+        public Color nickColor;
         public Sprite playerSmileSprite;
         public Sprite capeSprite;
+        public Vector3 originalScale;
         
         [Header("storage dictionaries")]
         private Dictionary<string, Sprite> _buddeeSprites;
@@ -125,6 +128,7 @@ namespace Managers
             _buddeeSprites["angry"] = buddee_angry;
             _buddeeSprites["threatening"] = buddee_threatening;
             _buddeeSprites["pissed"] = buddee_pissed;
+            _buddeeSprites["nick"] = nick_dialogue;
             
             _playerSprites["smile"] = playerSmileSprite;
             
@@ -288,6 +292,17 @@ namespace Managers
                 
                 // adding edge case to avoid crashes (adding lower check to be safe lol)
                 string key = _dialogue[_index][1].ToLower();
+
+                if (key == "nick")
+                { 
+                    NPCSprite.color = nickColor;
+                    NPCNameText.text = "nick";
+                }
+                else
+                {
+                    NPCSprite.color = Color.white;
+                }
+                
 
                 if (_npcSprites.ContainsKey(key))
                 {

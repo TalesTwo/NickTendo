@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 51971820b4d4d844b83acee5590e079b
+guid: 82a1feb4ab04d6e4c91ee6163ee8013d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1819116676684815114
-    second: cage_0
-  - first:
-      213: -8748604073257499604
-    second: cage_1
+      213: -1951909605273874225
+    second: empty image_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -27,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +57,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 7
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -116,64 +113,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cage Base
+      name: empty image_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 25
-        height: 13
+        width: 28
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a0b99c6bafcce3910800000000000000
-      internalID: 1819116676684815114
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cage Main
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 4
-        width: 25
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c2483fc82f6b69680800000000000000
-      internalID: -8748604073257499604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cage Chain
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 34
-        width: 5
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e39929f014141a4398de73b2163e74f
-      internalID: -1409233328
+      spriteID: fc05aff3e8c69e4e0800000000000000
+      internalID: -1951909605273874225
       vertices: []
       indices: 
       edges: []
@@ -181,17 +136,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1b21adf839c5c0143bbe14f7c4c1975b
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Cage Base: 1819116676684815114
-      Cage Chain: -1409233328
-      Cage Main: -8748604073257499604
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

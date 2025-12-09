@@ -35,6 +35,7 @@ namespace Managers
             {
                 playerController.enabled = false;
             }
+            _startButton.interactable = true;
 
             _settingsMenu.SetActive(false);
             _popUP.SetActive(false);
@@ -56,9 +57,9 @@ namespace Managers
         {
             AudioManager.Instance.PlayOverworldTrack(1f, true, 1f, true, 0.1f);
             PlayerStats.Instance.SetPlayerName("Player");
-            if (!_hasClickedButton)
+            if (_startButton.interactable)
             {
-                _hasClickedButton = true;
+                _startButton.interactable = false;
                 Invoke(nameof(ResetBool), 1.1f);
                 StartGame();
             }
@@ -75,7 +76,7 @@ namespace Managers
             {
                 playerController.enabled = true;
             }
-            SceneSwapManager.Instance.SwapScene(_initialGameScene, 3f, 3f);
+            SceneSwapManager.Instance.SwapScene(_initialGameScene, 1f, 3f);
         }
 
         private void OpenLauncher()
