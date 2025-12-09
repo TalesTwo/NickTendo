@@ -38,7 +38,7 @@ public class CreditsManager : Singleton<CreditsManager>
         // Disable player actions
         PlayerManager.Instance.DeactivatePlayer();
         // restart the game after a delay
-        StartCoroutine(RestartGameAfterDelay(100f));
+        StartCoroutine(RestartGameAfterDelay(100f)); //100 seconds
     }
 
     private IEnumerator RestartGameAfterDelay(float delay)
@@ -49,7 +49,7 @@ public class CreditsManager : Singleton<CreditsManager>
 
         // Restart game broadcast
         EventBroadcaster.Broadcast_GameRestart();
-        EventBroadcaster.Broadcast_StartStopAction();
+        //EventBroadcaster.Broadcast_StartStopAction(); I guess we dont need this now?
         PlayerManager.Instance.ActivatePlayer();
         PlayerManager.Instance.PlayerAlive();
     }
