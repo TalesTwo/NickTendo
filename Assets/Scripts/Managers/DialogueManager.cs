@@ -293,6 +293,16 @@ namespace Managers
                 // adding edge case to avoid crashes (adding lower check to be safe lol)
                 string key = _dialogue[_index][1].ToLower();
 
+                if (key == "nick")
+                { 
+                    NPCSprite.color = nickColor; 
+                }
+                else
+                {
+                    NPCSprite.color = Color.white;
+                }
+                
+
                 if (_npcSprites.ContainsKey(key))
                 {
                     NPCSprite.sprite = _npcSprites[key];
