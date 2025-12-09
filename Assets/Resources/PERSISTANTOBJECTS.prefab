@@ -928,6 +928,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2386264649811279521, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: nickColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: nickColor.b
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: nickColor.g
+      value: 0.98039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: nickColor.r
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: buddee_angry
       value: 
       objectReference: {fileID: -4770749683561393187, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
@@ -947,6 +963,10 @@ PrefabInstance:
       propertyPath: buddee_pissed
       value: 
       objectReference: {fileID: 1716077400252765425, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: nick_dialogue
+      value: 
+      objectReference: {fileID: 1331232263431029876, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: buddee_gremlin
       value: 

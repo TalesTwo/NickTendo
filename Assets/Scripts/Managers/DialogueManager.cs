@@ -45,6 +45,8 @@ namespace Managers
         [SerializeField] private Sprite buddee_angry;
         [SerializeField] private Sprite buddee_threatening;
         [SerializeField] private Sprite buddee_pissed;
+        [SerializeField] private Sprite nick_dialogue;
+        public Color nickColor;
         public Sprite playerSmileSprite;
         public Sprite capeSprite;
         
@@ -125,6 +127,7 @@ namespace Managers
             _buddeeSprites["angry"] = buddee_angry;
             _buddeeSprites["threatening"] = buddee_threatening;
             _buddeeSprites["pissed"] = buddee_pissed;
+            _buddeeSprites["nick"] = nick_dialogue;
             
             _playerSprites["smile"] = playerSmileSprite;
             
