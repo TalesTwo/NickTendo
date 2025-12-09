@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
             }
             
             // press RMB to perform a dash attack
-            else if (Input.GetMouseButtonDown(1) && !_isDashing)
+            else if ((Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) && !_isDashing)
             {
                 // start dash
                 StartDash();
