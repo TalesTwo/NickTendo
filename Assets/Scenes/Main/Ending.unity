@@ -1154,6 +1154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ab4c1f9bb564e4c9b2bf1b3b9507a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _emptyImage: {fileID: 2800000, guid: 82a1feb4ab04d6e4c91ee6163ee8013d, type: 3}
   _launcher: {fileID: 2133553831}
   _friendFinderIcon: {fileID: 838209701}
   _deletePopUp: {fileID: 1181642133}

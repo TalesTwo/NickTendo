@@ -1,4 +1,5 @@
 using Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -15,7 +16,8 @@ public class EndingManager : MonoBehaviour
         public float TimeToReach;
     }
 
-
+    [SerializeField]
+    public Texture2D _emptyImage;
     [SerializeField]
     private GameObject _launcher;
     [SerializeField]
@@ -43,8 +45,10 @@ public class EndingManager : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlayCreditsTrack(1f, true, 0.1f, true, 0.1f);
+        Cursor.SetCursor(_emptyImage, Vector2.zero, CursorMode.Auto);
         _fCursorTransform = _fakeCursor.GetComponent<RectTransform>();
         _fCursorTransform.localPosition = Vector2.zero;
+        EventBroadcaster.Broadcast_PlayerOpenMenu();
         Invoke(nameof(Step1), 4f);
     }
 
