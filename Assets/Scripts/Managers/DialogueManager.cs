@@ -295,7 +295,8 @@ namespace Managers
 
                 if (key == "nick")
                 { 
-                    NPCSprite.color = nickColor; 
+                    NPCSprite.color = nickColor;
+                    NPCNameText.text = "nick";
                 }
                 else
                 {
