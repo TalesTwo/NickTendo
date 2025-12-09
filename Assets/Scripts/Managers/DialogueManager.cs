@@ -49,6 +49,7 @@ namespace Managers
         public Color nickColor;
         public Sprite playerSmileSprite;
         public Sprite capeSprite;
+        public Vector3 originalScale;
         
         [Header("storage dictionaries")]
         private Dictionary<string, Sprite> _buddeeSprites;

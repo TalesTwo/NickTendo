@@ -966,7 +966,7 @@ PrefabInstance:
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: nick_dialogue
       value: 
-      objectReference: {fileID: 1331232263431029876, guid: 1b85fae9c45350a4491633c158e7b607, type: 3}
+      objectReference: {fileID: -6000097445068950008, guid: 29b9e6c39d7646a439c859d4e80ce748, type: 3}
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: buddee_gremlin
       value: 
@@ -995,6 +995,18 @@ PrefabInstance:
       propertyPath: buddee_sheepish
       value: 
       objectReference: {fileID: -1428723256143030655, guid: 6549789b0852c7a4a9bf408c144f9e2d, type: 3}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: originalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: originalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
+      propertyPath: originalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2525493820336377388, guid: 1c551f6e23080304aabe325eba097043, type: 3}
       propertyPath: buddee_speechless
       value: 
