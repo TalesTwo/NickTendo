@@ -198,6 +198,7 @@ namespace Managers
         public void ActivatePlayer()
         {
             player.SetActive(true);
+            playerController.ResetFacingDirection(true);
         }
         
         private void OnPersonaChanged(Types.Persona newPersona)
