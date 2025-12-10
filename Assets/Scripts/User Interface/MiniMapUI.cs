@@ -76,6 +76,8 @@ public class MiniMapUI : MonoBehaviour
     public void OnDungeonGenerationComplete()
     {
         OnEnable();
+        // reset the nmap, as a bandaid cause im to lazy to actually fix it
+        OnPlayerDeath();
         Invoke(nameof(InitializeSpawnRoomInMap), 0.5f);
 
     }
