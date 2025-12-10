@@ -36,6 +36,12 @@ namespace Managers
             // Fade the lighting back to full brightness on player death
             SetGlobalLightIntensity(1.0f, globalLightTransitionDuration);
         }
+
+        public void CallCheckLight()
+        {
+            // calls after a delay
+            Invoke(nameof(CheckLight), 1f);
+        }
         private void CheckLight()
         {
             if (_bTransitioning || _bFallingInPit) return;

@@ -74,6 +74,7 @@ namespace Managers
             // add a 1f delay onto the fall to allow the sound to play
             StartCoroutine(HandlePlayerFellInPit(pitCenter));
             
+            
         }
         
         private IEnumerator HandlePlayerFellInPit(Vector3 pitCenter)
@@ -176,9 +177,10 @@ namespace Managers
             
             // reset the player orientation, incase we fell with rotation, or some input
             playerController.ResetFacingDirection(true);
-            
+            // after a delay, attempt to call the check light function (incase we cleared a room as we fell)
+            // after a delay, attempt to call the check light function (incase we cleared a room as we fell)
+            LightingManager.Instance.CallCheckLight();
 
-            
         }
         public void PlayerDeath()
         {

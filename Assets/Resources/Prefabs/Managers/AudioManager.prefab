@@ -105,6 +105,7 @@ MonoBehaviour:
   Pitfall: {fileID: 8300000, guid: e071484106f1bbf4eb2973064ddd9d14, type: 3}
   WallSlam: {fileID: 0}
   LockedDoor: {fileID: 8300000, guid: 4053ddcc0b086c245973972450897d65, type: 3}
+  CageRaising: {fileID: 8300000, guid: 56b3d6aebdd92274ab194bae5dd71bba, type: 3}
   cursorHover: {fileID: 8300000, guid: fb3271ee753ccf34a9cccf4000e47e92, type: 3}
   cursorSelect: {fileID: 8300000, guid: a3bbd30c4ef1b634396140ff6a0d7acd, type: 3}
   buyItem: {fileID: 8300000, guid: 5bd3ff992f8eaae47b5a10358b9b35b8, type: 3}
