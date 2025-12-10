@@ -12,6 +12,7 @@ public class GameStateManager : Singleton<GameStateManager>
     public string buddeeDialogState = "Introyell";
     private int _playerDeathCount = 0; public int GetPlayerDeathCount() { return _playerDeathCount; }
     private int _numberOfTimesBossFought = 0; public void UpdateNumberOfTimesBossFought() { _numberOfTimesBossFought++; } public int GetNumberOfTimesBossFought() { return _numberOfTimesBossFought; }
+    private bool _hasPostBossDialogueOccurred = false; public void SetPostBossDialogueOccurred(bool hasOccurred) { _hasPostBossDialogueOccurred = hasOccurred; } public bool GetPostBossDialogueOccurred() { return _hasPostBossDialogueOccurred; }
     private int _timesTalkedToShopkeeper = 0; public void UpdateNumberOfTimesTalkedToShopkeeper() { _timesTalkedToShopkeeper++; } public int GetNumberOfTimesTalkedToShopkeeper() { return _timesTalkedToShopkeeper; }
     private List<ShopTriggerInteraction> _ShopKeepersTalkedTo = new List<ShopTriggerInteraction>(); public void AddShopKeeperTalkedTo(ShopTriggerInteraction shopKeeper) { if (!_ShopKeepersTalkedTo.Contains(shopKeeper)) { _ShopKeepersTalkedTo.Add(shopKeeper); UpdateNumberOfTimesTalkedToShopkeeper(); } } public List<ShopTriggerInteraction> GetShopKeepersTalkedTo() { return _ShopKeepersTalkedTo; }
 
@@ -92,6 +93,7 @@ public class GameStateManager : Singleton<GameStateManager>
     private void OnStartBossFight()
     {
         _numberOfTimesBossFought += 1;
+        
     }
     private void OnGameRestart()
     {
