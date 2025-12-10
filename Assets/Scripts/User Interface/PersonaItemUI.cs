@@ -4,18 +4,24 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PersonaItemUI : MonoBehaviour
+public class PersonaItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private GameObject _checkmark;
     [SerializeField]
     private Image _personaBackground;
-    [SerializeField]
-    private TextMeshProUGUI _description;
+
+    private TMP_Text _description;
 
     public bool isSelected;
+
+    private void Start()
+    {
+        _description = transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
+    }
 
     public void ShowCheckmark()
     {
@@ -27,11 +33,12 @@ public class PersonaItemUI : MonoBehaviour
         _personaBackground.color = _color;
     }
 
-    public void EnterMouse()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         EventBroadcaster.Broadcast_PersonaItemStartHover(_description.text.ToString());
     }
-    public void ExitMouse()
+
+    public void OnPointerExit(PointerEventData eventData)
     {
         EventBroadcaster.Broadcast_PersonaItemEndHover();
     }
