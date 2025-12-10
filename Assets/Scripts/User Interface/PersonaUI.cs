@@ -16,7 +16,6 @@ public class PersonaUI : MonoBehaviour
     [SerializeField] private GameObject buddeeUI;
     [SerializeField] private TextMeshProUGUI permaText;
 
-
     private Dictionary<Types.Persona, Types.PersonaState> _personas;
 
     public void Start()
@@ -28,14 +27,19 @@ public class PersonaUI : MonoBehaviour
             closeButton.onClick.AddListener(ClosePersonaUI);
         }
 
+        EventBroadcaster.PlayerDeath += HandleDeath;
         EventBroadcaster.PersonaItemStartHover += BuddeePersonaDialogue;
         EventBroadcaster.PersonaItemEndHover += BuddeeIdleDialogeu;
-
-
-        // read the persona states from the PersonaManager
+    }
+    
+    private void HandleDeath()
+    {
+        EventBroadcaster.PlayerDeath -= HandleDeath;
+        EventBroadcaster.PersonaItemStartHover -= BuddeePersonaDialogue;
+        EventBroadcaster.PersonaItemEndHover -= BuddeeIdleDialogeu;
     }
 
-    public void BuddeePersonaDialogue(string text)
+    private void BuddeePersonaDialogue(string text)
     {
         buddeeUI.GetComponent<BUDDEEUI>().StopCR();
         buddeeUI.GetComponent<BUDDEEUI>().SetDialogue(text);
@@ -158,6 +162,7 @@ public class PersonaUI : MonoBehaviour
         if (emailText != null)
             emailText.text = stats.Email;
 
+        // --- Fill in description ---
         TMP_Text descText = newPersona.transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
         if (descText != null) 
             descText.text = stats.Description;
