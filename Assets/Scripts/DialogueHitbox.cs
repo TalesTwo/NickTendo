@@ -51,11 +51,23 @@ public class DialogueHitbox : MonoBehaviour
         if (onlyTriggerOnce && _hasTriggered) { return; }
         if (triggerAfterTutorial) { return;}
         if (triggerAfterBossEncounterOne && GameStateManager.Instance.GetNumberOfTimesBossFought() != 1) { return;}
+        if(triggerAfterBossEncounterOne && GameStateManager.Instance.GetPostBossDialogueOccurred())
+        {
+            Debug.Log("DialogueHitbox: Skipping dialogue because post boss dialogue has already occurred.");
+            return;
+        }
+        
         if (root.CompareTag("Player"))
         {
             // Store the previous dialogue state
             _previousDialogueState = GameStateManager.Instance.GetBuddeeDialogState();
             // Set the dialogue state to the new state
+            Debug.Log("Setting dialogue state to: " + dialogueStateOnEnter);
+            if(dialogueStateOnEnter == "BossLoss1")
+            {
+                Debug.Log("Setting PostBossDialogueOccurred to true");
+                GameStateManager.Instance.SetPostBossDialogueOccurred(true);
+            }
             GameStateManager.Instance.SetBuddeeDialogState(dialogueStateOnEnter);
             // start the dialogue
             EventBroadcaster.Broadcast_StartDialogue(speakerName);
@@ -81,6 +93,12 @@ public class DialogueHitbox : MonoBehaviour
         if(root == null){return;}
         if (triggerAfterTutorial) {return;}
         if (triggerAfterBossEncounterOne && GameStateManager.Instance.GetNumberOfTimesBossFought() != 1) { return;}
+        if(triggerAfterBossEncounterOne && GameStateManager.Instance.GetPostBossDialogueOccurred())
+        {
+            Debug.Log("DialogueHitbox: Skipping dialogue because post boss dialogue has already occurred.");
+            return;
+        }
+        
         if (root.CompareTag("Player"))
         {
             // Restore the previous dialogue state
