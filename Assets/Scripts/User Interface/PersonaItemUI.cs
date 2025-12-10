@@ -23,11 +23,6 @@ public class PersonaItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         _description = transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
     }
 
-    public void AssignDescription()
-    {
-        _description = transform.Find("Text_PersonaDescription")?.GetComponent<TMP_Text>();
-    }
-
     public void ShowCheckmark()
     {
         _checkmark.SetActive(true);
