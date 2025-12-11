@@ -146,7 +146,7 @@ Tutorial1,,BUDDEE,smug,"""And don't worry about getting attacked, I've modified 
 Tutorial2,second tutorial room,BUDDEE,basic1,With <color=purple>[Right Click]</color> you can dash through the air damaging anything in your path!
 Tutorial2,,BUDDEE,basic3,Here you'll need to use it to <b>clear the gap</b>. But watch out! You can only dash once before recharging.
 ,,,,
-Tutorial3,third tutorial room,BUDDEE,basic3,Some flying enemies can hide over pits to wide to dash across.
+Tutorial3,third tutorial room,BUDDEE,basic3,Some flying enemies can hide over pits too wide to dash across.
 Tutorial3,,BUDDEE,basic1,Luckily you can use your <color=purple>[Left Click]</color> attack to parry projectiles!
 Tutorial3,,BUDDEE,basic2,"Aim where you want to want to send the attack with your cursor, then time your attack to send it back!"
 Tutorial3,,BUDDEE,basic2,"""Once you've mastered this, you'll know everything you need to clear the dungeon!"""
@@ -186,7 +186,7 @@ noreturn,,BUDDEE,threatening,Don't you dare leave already.
 ,,,,
 PostBossDefeat,,BUDDEE,sniffle,Go on. . . They're in the next room. . .
 PostBossDefeat,,BUDDEE,sniffle,Thank you. . . for joining. . Friend Finder. . . .
-PostBossDefeat,,BUDDEE,sniffle,Please. . . rate. . . 5. . . . Stars. . . .
+PostBossDefeat,,BUDDEE,sniffle,come. . . back. . . Soon. . .
 ,,,,
 Shop1,first shop find,BUDDEE,basic2,Oh hi pal! Great job making it this far!
 Shop1,,BUDDEE,basic1,Have you noticed all the <color=orange>coins</color> those bots have been dropping? That's the currency that the bots stole from our players.
