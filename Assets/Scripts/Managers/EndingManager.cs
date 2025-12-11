@@ -17,8 +17,6 @@ public class EndingManager : MonoBehaviour
     }
 
     [SerializeField]
-    public Texture2D _emptyImage;
-    [SerializeField]
     private GameObject _launcher;
     [SerializeField]
     private GameObject _friendFinderIcon;
@@ -45,7 +43,7 @@ public class EndingManager : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlayCreditsTrack(1f, true, 0.1f, true, 0.1f);
-        Cursor.SetCursor(_emptyImage, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = false;
         _fCursorTransform = _fakeCursor.GetComponent<RectTransform>();
         _fCursorTransform.localPosition = Vector2.zero;
         EventBroadcaster.Broadcast_PlayerOpenMenu();
@@ -155,7 +153,7 @@ public class EndingManager : MonoBehaviour
 
         Invoke(nameof(ClickSound), 0.1f);
         Invoke(nameof(DeleteFrinedFinder), 0.2f);
-        Invoke(nameof(NotificationSound), 0.5f);
+        Invoke(nameof(NotificationSound), 0.75f);
         Invoke(nameof(Step4), 2);
     }
 

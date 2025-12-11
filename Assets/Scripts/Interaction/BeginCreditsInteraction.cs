@@ -61,6 +61,7 @@ namespace Interaction
             float startX = _cageMainTransform.localPosition.x;
             float startY = _cageMainTransform.localPosition.y;
             float currentY = startY;
+            Managers.AudioManager.Instance.PlayCageRaiseSound();
             while (moveTime < 0.35f)
             {
                 moveTime += Time.deltaTime;
@@ -80,6 +81,7 @@ namespace Interaction
 
         IEnumerator Continue()
         {
+            float soundTime = 0;
             float moveTime = 0;
             float startX = _cageMainTransform.localPosition.x;
             float startY = _cageMainTransform.localPosition.y;
@@ -87,6 +89,13 @@ namespace Interaction
             while (moveTime < 10)
             {
                 moveTime += Time.deltaTime;
+                soundTime += Time.deltaTime;
+                Managers.AudioManager.Instance.PlayCageRaiseSound();
+                if (soundTime >= 1f)
+                {
+                    soundTime = 0;
+                    Managers.AudioManager.Instance.PlayCageRaiseSound();
+                }
                 _cageMainTransform.localPosition = new Vector2(startX, currentY);
                 float lerpValue = moveTime / 10f;
                 currentY = Mathf.Lerp(startY, 50f, lerpValue);

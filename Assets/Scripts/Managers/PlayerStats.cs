@@ -355,6 +355,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             DebugUtils.Log("Applying Carry Over Max Health Buff: " + BuffValue);
             SetCarryOverMaxHealth(GetCarryOverMaxHealth() + BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             // now we want to immediately apply this to the current stats as well
             UpdateMaxHealth(BuffValue);
             UpdateCurrentHealth(BuffValue, true);
@@ -368,6 +369,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             SetCarryOverMovementSpeed(GetCarryOverMovementSpeed() + BuffValue);
             UpdateMovementSpeed(BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             numberOfCarryOverMovementSpeedUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Movement_Speed, BuffValue);
             _hasCarryoverBroadcasted = true;
@@ -376,6 +378,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             SetCarryOverAttackDamage(GetCarryOverAttackDamage() + BuffValue);
             UpdateAttackDamage(BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             numberOfCarryOverAttackDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Damage, BuffValue);
             _hasCarryoverBroadcasted = true;
@@ -384,6 +387,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             DebugUtils.Log("Applying Carry Over Attack Cooldown Buff: " + BuffValue);
             SetCarryOverAttackCooldown(GetCarryOverAttackCooldown() + BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             UpdateAttackCooldown(BuffValue);
             numberOfCarryOverAttackCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Attack_Cooldown, BuffValue);
@@ -393,6 +397,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             SetCarryOverDashDamage(GetCarryOverDashDamage() + BuffValue);
             UpdateDashDamage(BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             numberOfCarryOverDashDamageUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Damage, BuffValue);
             _hasCarryoverBroadcasted = true;
@@ -401,6 +406,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             SetCarryOverDashCooldown(GetCarryOverDashCooldown() + BuffValue);
             UpdateDashCooldown(BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             numberOfCarryOverDashCooldownUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Cooldown, BuffValue);
             _hasCarryoverBroadcasted = true;
@@ -409,6 +415,7 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             SetCarryOverDashSpeed(GetCarryOverDashSpeed() + BuffValue);
             UpdateDashSpeed(BuffValue);
+            Managers.AudioManager.Instance.PlayItemGetSound(1, 0);
             numberOfCarryOverDashSpeedUpgrades += 1;
             EventBroadcaster.Broadcast_PlayerStatsChanged(PlayerStatsEnum.Dash_Speed, BuffValue);
             _hasCarryoverBroadcasted = true;

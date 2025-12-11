@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3588.0186}
-  m_SizeDelta: {x: 1820, y: 5348.038}
+  m_AnchoredPosition: {x: -0.0000076294, y: -4076.4}
+  m_SizeDelta: {x: 1727.321, y: 6547.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2693252707879791565
 CanvasRenderer:
@@ -81,19 +81,31 @@ MonoBehaviour:
   m_Text: "-----------------------------------\nMeet the Nicktendo team!!\n-----------------------------------\n\nExecutive
     Producer: Selena Chainani\n\nLead Designer: Cohen Calvert\n\nProducer: Noah Vincent\n\nLead
     Writer: Blythe Morris\n\nVisual Lead: Cole Rocer Isaias\n\nAudio Lead: Peter
-    Van Bussel\n\nProgrammers: Cohen Calvert, Harman Phull, Noah Vincent\n\n---------------------\nSpecial
+    Van Bussel\n\nProgrammers: Harman Phull, Cohen Calvert, Noah Vincent\n\n---------------------\nSpecial
+    Credits:\n---------------------\n\nSelena Chainani for:\nBeing a bug, the shadow
+    in the corner of my eye, the team fun unc and for \"\"helping\"\"\n\nCohen Calvert
+    for:\nDesigning over 50 rooms, vibe coding an entire minimap at 2am, making ALL
+    PCGs for dungeons and accounts! (hard af), making the doors (somehow harder),
+    freeing the player from the shadow realm and being team dad\n\nNoah Vincent for:
+    \nCreating the boss fight, survery polls (totally not rigged), and so much documentation.
+    Suggesting particles at every opportunity and being team dad #2 \n\nPeter Van
+    Bussel for:\nDozens of unused sound effects, making our entire trailer, his magical
+    ability to find every bug, making our programmers sad and being the team normal
+    kid.\n\nHarman Phull for:\nMaking UI in Unity look good (dear god), creating
+    the ending cinematic, creating capitalism, hating on the minimap and being the
+    team \"normal\" kid\n\nCole Rocer Isaias for: \nSingle handedly birthing and
+    raising Buddee as their own, animating Boss buddee, creating all our items and
+    being team tertiary father figure\n\nBlythe Morris for:\nBeing awesome, making
+    you laugh (hopefully), suggesting pits (sorry not sorry), organizing these credits
+    and being team thot daughter or gay son, depending on the day.\n\n---------------------\nSpecial
     thanks:\n---------------------\n\nDr. Matthew Guzdial \n\nTic-Tac Mcmuffin morris\n\nAll
-    of our wonderful beta testers\n\n------------------\nAttributions:\n------------------\n\nPixel
-    Art App Icons \nby ReffPixels\n\nController & keyboard & mouse prompts \nby MitziTheDev\n\nUser
-    Interface Essential \nby Crusenho, CC 4.0\nhttps://creativecommons.org/licenses/by/4.0/\n\nnature
-    landscapes free pixel art\nby Craftpix.net\n\nFree CC0 Top Down Tileset Template
-    Pixel Art\nby: RGS_Dev CC 0\n\nGum bot sprites\nby:GrafxKid CC 0\n\nRetro, Coin
-    02.wav \nby LilMati CC 0\n\nKeyboard Clicking (Typing) \nby Spencer_Eisenhauer
-    CC 0\n\nbreaking_glass_mirror_Oktava_MK-012.wav \nby gladkiy CC 0\n\nBreaking
-    a door or Cardboard boxes breaking \nby exorsten CC 0\n\nCartoon Fall \nby plasterbrain
-    CC 0\n\nHattab_margaux_20172018 airplane propeller.wav \nby iut_Paris8 CC 0\n\ndesk
-    bell center.mp3 \nby tonmayster CC 0\n\nAlarm 2_1 \nby Joao_Janz CC 0\n\nThaleah
-    Fat\nby Rick Hoppmann\n"
+    of our wonderful beta testers including Alex, Garrett and James\n\nElaina, Kayla
+    and happy pills\n\nSpotify for vibe coding\n\nPudding, turducken, pompompurin,
+    Kagamine Len and Hatsune Miku\n\nPookie! \xA9\n\nMy Almost Wife Savannah\n\r\nMy
+    Slay Girlfriend Taylor\n\r\nMy Awesome Girlfriend Sarah\n\r\nMy #\xA9@\u2020!*
+    ex-girlfriend\n\nSiberian Derpskies for existing\n\nThe big study space in the
+    north education building\n\nPokerogue\n\nThat sprain Harman got right before
+    gold release (nice going)\n"
 --- !u!1 &299317528370540959
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,8 +140,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -6864}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: -0.0000035339, y: -7996.467}
+  m_SizeDelta: {x: 1920, y: 967.067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3128331793131508683
 CanvasRenderer:
@@ -286,7 +298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -7100}
+  m_AnchoredPosition: {x: 0, y: -8180}
   m_SizeDelta: {x: 1500, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4195586272066617834
@@ -413,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creditsPanel: {fileID: 3735507502862190979}
   canvas: {fileID: 0}
-  scrollSpeed: 100
+  scrollSpeed: 80
 --- !u!1 &6773684012926258972
 GameObject:
   m_ObjectHideFlags: 0

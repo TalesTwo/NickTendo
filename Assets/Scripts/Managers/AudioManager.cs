@@ -70,6 +70,7 @@ namespace Managers
         public AudioClip Pitfall;
         public AudioClip WallSlam;
         public AudioClip LockedDoor;
+        public AudioClip CageRaising;
 
         [Header("UI Audio")]
         public AudioClip cursorHover;
@@ -428,7 +429,10 @@ namespace Managers
         {
             PlaySFX(LockedDoor, volume, deviation);
         }
-
+        public void PlayCageRaiseSound(float volume = 1, float deviation = 0)
+        {
+            PlaySFX(CageRaising, volume, deviation);
+        }
 
         //Enemy Sounds
         public void PlayEnemyDamagedSound(float volume = 1, float deviation = 0)

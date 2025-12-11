@@ -51,6 +51,7 @@ namespace Managers
             {
                 _launcher.SetActive(false);
             }
+            Cursor.visible = true;
         }
 
         private void StartGameButton()
