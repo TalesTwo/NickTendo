@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolSize: 40
-  musicvolumeslider: 1
   muteSFX: 0
   muteMusic: 0
   swordSwing: {fileID: 8300000, guid: 488bcfb51e075af4b9433cb975db1056, type: 3}
@@ -125,3 +124,4 @@ MonoBehaviour:
   Musicsource: {fileID: 0}
   sfxValue: 1
   musicValue: 1
+  fadingOut: 0
