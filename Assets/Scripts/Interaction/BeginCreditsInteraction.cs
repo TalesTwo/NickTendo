@@ -88,9 +88,9 @@ namespace Interaction
             float currentY = startY;
             while (moveTime < 10)
             {
+                if (moveTime == 0) Managers.AudioManager.Instance.PlayCageRaiseSound();
                 moveTime += Time.deltaTime;
                 soundTime += Time.deltaTime;
-                Managers.AudioManager.Instance.PlayCageRaiseSound();
                 if (soundTime >= 1f)
                 {
                     soundTime = 0;
