@@ -12,8 +12,6 @@ namespace Managers
 
         //public float sfxvolumeslider = 1;
 
-        public float musicvolumeslider = 1;
-
         [Header("Mutes")]
         public bool muteSFX = false;
         public bool muteMusic = false;
@@ -169,20 +167,6 @@ namespace Managers
 
         private void Update()
         {
-
-            if(Musicsource.volume != musicvolumeslider)Musicsource.volume = musicvolumeslider;
-
-            if (muteMusic && !muted)
-            {
-                Musicsource.volume = 0;
-                muted = true;
-            }
-            if (!muteMusic && muted)
-            {
-                Musicsource.volume = 1;
-                muted = false;
-            }
-
             Musicsource.volume = musicValue;
         }
 
@@ -208,10 +192,6 @@ namespace Managers
 
 
             AudioSource src = Musicsource;
-            if (muteMusic)
-            {
-                Musicsource.volume = 0;
-            }
 
             if (src == null) return;
 
@@ -219,56 +199,42 @@ namespace Managers
 
             src.spatialBlend = fromObject ? 1f : 0f;
             StopAllCoroutines();
-            if (fadeout && src.isPlaying && !muteMusic)
+            if (fadeout && src.isPlaying)
             {
-                StartCoroutine(FadeOutAndIn(src, clip, fadeoutspeed, fadeinspeed, fadein, volume*musicvolumeslider));
+                fadingOut = true;
+                StartCoroutine(FadeOut(src, fadeoutspeed));
             }
-            else if (fadein && !muteMusic)
+            src.Stop();
+            if (fadein)
             {
-                src.Stop();
-                src.clip = clip;
-                src.volume = 0;
-                StartCoroutine(Fadein(src, fadeinspeed, volume*musicvolumeslider));
+                StartCoroutine(Fadein(src, clip, fadeinspeed, volume));
             }
             else
             {
-                src.clip = clip;
-                if(!muteMusic)src.volume = volume*musicvolumeslider;
-                src.Play();
+                StartCoroutine(Fadein(src, clip, 100000, volume));
             }
-        } 
-                
-        private IEnumerator FadeOutAndIn(AudioSource src, AudioClip newClip, float fadeoutspeed = 1f, float fadeinspeed = 1f, bool fadein = false, float volume=1f)
+        }
+        public bool fadingOut = false;        
+        private IEnumerator FadeOut(AudioSource src, float fadeoutspeed = 1f)
         {
             float oldvolume = src.volume;
-            for(float tempvolume = src.volume; tempvolume >= 0; tempvolume -= 0.01f * oldvolume * fadeoutspeed)
+            for(float tempvolume = src.volume; tempvolume > 0; tempvolume -= 0.01f * oldvolume * fadeoutspeed)
             {
                 if (tempvolume < 0) tempvolume = 0;
-                if (muteMusic) tempvolume = 0;
                 src.volume = tempvolume;
                 yield return null;
             }
-            src.Stop();
-            src.clip = newClip;
-            if (fadein)
-            {
-                StartCoroutine(Fadein(src, fadeinspeed, volume));
-            }
-            else
-            {
-                if (muteMusic) volume = 0;
-                src.volume = volume;
-                src.Play();
-            }
+            fadingOut = false;
 
         }
-        private IEnumerator Fadein(AudioSource src, float fadeinspeed = 1f, float oldvolume = 1f)
+        private IEnumerator Fadein(AudioSource src, AudioClip clip, float fadeinspeed = 1f, float oldvolume = 1f)
         {
+            while (fadingOut) yield return null;
+            src.clip = clip;
             src.Play();
-            for(float volume = 0; volume <= oldvolume; volume+=0.01f * oldvolume * fadeinspeed)
+            for(float volume = 0; volume < oldvolume*musicValue; volume+=0.01f * oldvolume * fadeinspeed)
             {
                 if (volume > oldvolume) volume = oldvolume;
-                if (muteMusic) volume = 0;
                 src.volume = volume;
                 yield return null;
             }
