@@ -47,6 +47,7 @@ public class EndingManager : MonoBehaviour
         _fCursorTransform = _fakeCursor.GetComponent<RectTransform>();
         _fCursorTransform.localPosition = Vector2.zero;
         EventBroadcaster.Broadcast_PlayerOpenMenu();
+        PlayerManager.Instance.DeactivatePlayer();
         Invoke(nameof(Step1), 4f);
     }
 
